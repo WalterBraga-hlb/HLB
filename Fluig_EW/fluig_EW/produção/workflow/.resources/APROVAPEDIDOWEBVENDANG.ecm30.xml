@@ -1,0 +1,938 @@
+<list>
+  <ProcessDefinition>
+    <processDefinitionPK>
+      <companyId>1</companyId>
+      <processId>APROVAPEDIDOWEBVENDANG</processId>
+    </processDefinitionPK>
+    <processDescription>Aprovação de Pedido de Venda Web - NovoGen</processDescription>
+    <instruction>Nesse processo, a gerência comercial recebe uma solicitação quando o pedido de venda web solicitado estiver divergente das regras liberadas.&#xd;
+Sendo assim, fica registrado a decisão da gerência sobre a aprovação ou não da excessão.</instruction>
+    <active>true</active>
+    <publicProcess>false</publicProcess>
+    <volumeId>Default</volumeId>
+    <categoryId>Vendas</categoryId>
+    <managerEngineAllocationId>Usuário</managerEngineAllocationId>
+    <managerEngineAllocationConfiguration>&lt;AssignmentController&gt;&lt;User&gt;fluig&lt;/User&gt;&lt;/AssignmentController&gt;</managerEngineAllocationConfiguration>
+    <snapshotFrequency>0</snapshotFrequency>
+    <baseDay>0</baseDay>
+    <baseMonth>0</baseMonth>
+    <periodId>Default</periodId>
+    <uniqueCardVersion>true</uniqueCardVersion>
+    <keyWord></keyWord>
+    <complementsLevel>0</complementsLevel>
+    <notifyRequisitionerComplements>false</notifyRequisitionerComplements>
+    <notifyManagerComplements>false</notifyManagerComplements>
+    <deadlineTime>0</deadlineTime>
+    <warningDeadlineTime>0</warningDeadlineTime>
+    <notifyAuthorityComplements>false</notifyAuthorityComplements>
+  </ProcessDefinition>
+  <ProcessDefinitionVersion>
+    <processDefinitionVersionPK>
+      <companyId>1</companyId>
+      <processId>Aprovação de Pedido de Venda Web - NovoGen</processId>
+      <version>6</version>
+    </processDefinitionVersionPK>
+    <versionDescription></versionDescription>
+    <formId>22288</formId>
+    <editionMode>true</editionMode>
+    <updateAttachmentsVersion>false</updateAttachmentsVersion>
+    <controlsAttachmentsSecurity>false</controlsAttachmentsSecurity>
+    <active>true</active>
+    <blockedVersion>false</blockedVersion>
+    <counterSign>false</counterSign>
+    <openInstances>0</openInstances>
+    <bpmnVersion>2</bpmnVersion>
+    <processStates/>
+    <favorito>false</favorito>
+    <inheritFormSecurity>false</inheritFormSecurity>
+    <mobileReady>true</mobileReady>
+  </ProcessDefinitionVersion>
+  <list>
+    <ProcessState>
+      <processStatePK>
+        <companyId>1</companyId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>1</version>
+        <sequence>4</sequence>
+      </processStatePK>
+      <stateName>Solicitar Aprovação de Pedido de Venda WEB</stateName>
+      <stateDescription>Solicitar Aprovação de Pedido de Venda WEB</stateDescription>
+      <instruction>Nessa atividade o usuário solicita para a gerência comercial a aprovação para o pedido de venda web ser aceito.</instruction>
+      <deadlineTime>0</deadlineTime>
+      <joint>false</joint>
+      <agreementPercentage>0</agreementPercentage>
+      <engineAllocationId>Usuário</engineAllocationId>
+      <engineAllocationConfiguration>&lt;AssignmentController&gt;&lt;User&gt;fluig&lt;/User&gt;&lt;/AssignmentController&gt;</engineAllocationConfiguration>
+      <selectColleague>1</selectColleague>
+      <initialState>true</initialState>
+      <notifyAuthorityDelay>true</notifyAuthorityDelay>
+      <notifyRequisitionerDelay>false</notifyRequisitionerDelay>
+      <allowanceAuthorityTime>3600</allowanceAuthorityTime>
+      <frequenceAuthorityTime>3600</frequenceAuthorityTime>
+      <allowanceRequisitionerTime>0</allowanceRequisitionerTime>
+      <frequenceRequisitionerTime>0</frequenceRequisitionerTime>
+      <transferAttachments>false</transferAttachments>
+      <subProcessId></subProcessId>
+      <formFolder>0</formFolder>
+      <notifyAuthorityFollowUp>false</notifyAuthorityFollowUp>
+      <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
+      <automatic>false</automatic>
+      <positionX>150</positionX>
+      <positionY>82</positionY>
+      <forecastedEffortType>0</forecastedEffortType>
+      <forecastedEffort>0</forecastedEffort>
+      <notifyManagerFollowUp>false</notifyManagerFollowUp>
+      <notifyManagerDelay>false</notifyManagerDelay>
+      <allowanceManagerTime>0</allowanceManagerTime>
+      <frequenceManagerTime>0</frequenceManagerTime>
+      <inhibitTransfer>false</inhibitTransfer>
+      <periodId></periodId>
+      <stateType>0</stateType>
+      <bpmnType>10</bpmnType>
+      <signalId>0</signalId>
+      <counterSign>false</counterSign>
+      <openInstances>0</openInstances>
+      <noticeExpirationAuthorityTime>0</noticeExpirationAuthorityTime>
+      <noticeExpirationRequisitionerTime>0</noticeExpirationRequisitionerTime>
+      <noticeExpirationManagerTime>0</noticeExpirationManagerTime>
+      <destinationStates/>
+      <digitalSignature>false</digitalSignature>
+    </ProcessState>
+    <ProcessState>
+      <processStatePK>
+        <companyId>1</companyId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>1</version>
+        <sequence>5</sequence>
+      </processStatePK>
+      <stateName>Tomada de Decisão sobre a Exceção</stateName>
+      <stateDescription>Tomada de Decisão sobre a Exceção</stateDescription>
+      <instruction>Nessa atividade, o gerente comercial deve tomar a decisão de aprovar ou não a exceção solicitada.</instruction>
+      <deadlineTime>86400</deadlineTime>
+      <deadlineFieldName></deadlineFieldName>
+      <joint>false</joint>
+      <agreementPercentage>0</agreementPercentage>
+      <engineAllocationId>Usuário</engineAllocationId>
+      <engineAllocationConfiguration>&lt;AssignmentController&gt;&lt;User&gt;m49ndb5a6qbf08721538016128491&lt;/User&gt;&lt;/AssignmentController&gt;</engineAllocationConfiguration>
+      <selectColleague>1</selectColleague>
+      <initialState>false</initialState>
+      <notifyAuthorityDelay>true</notifyAuthorityDelay>
+      <notifyRequisitionerDelay>false</notifyRequisitionerDelay>
+      <allowanceAuthorityTime>3600</allowanceAuthorityTime>
+      <frequenceAuthorityTime>3600</frequenceAuthorityTime>
+      <allowanceRequisitionerTime>0</allowanceRequisitionerTime>
+      <frequenceRequisitionerTime>0</frequenceRequisitionerTime>
+      <transferAttachments>false</transferAttachments>
+      <subProcessId></subProcessId>
+      <formFolder>0</formFolder>
+      <notifyAuthorityFollowUp>true</notifyAuthorityFollowUp>
+      <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
+      <automatic>false</automatic>
+      <positionX>260</positionX>
+      <positionY>187</positionY>
+      <forecastedEffortType>0</forecastedEffortType>
+      <forecastedEffort>0</forecastedEffort>
+      <notifyManagerFollowUp>false</notifyManagerFollowUp>
+      <notifyManagerDelay>false</notifyManagerDelay>
+      <allowanceManagerTime>0</allowanceManagerTime>
+      <frequenceManagerTime>0</frequenceManagerTime>
+      <inhibitTransfer>true</inhibitTransfer>
+      <periodId></periodId>
+      <stateType>0</stateType>
+      <bpmnType>80</bpmnType>
+      <signalId>0</signalId>
+      <counterSign>false</counterSign>
+      <openInstances>0</openInstances>
+      <noticeExpirationAuthorityTime>0</noticeExpirationAuthorityTime>
+      <noticeExpirationRequisitionerTime>0</noticeExpirationRequisitionerTime>
+      <noticeExpirationManagerTime>0</noticeExpirationManagerTime>
+      <destinationStates/>
+      <digitalSignature>false</digitalSignature>
+      <executionType>0</executionType>
+    </ProcessState>
+    <ProcessState>
+      <processStatePK>
+        <companyId>1</companyId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>1</version>
+        <sequence>9</sequence>
+      </processStatePK>
+      <stateName>Aprovar Exceção</stateName>
+      <stateDescription>Aprovar Exceção</stateDescription>
+      <instruction>Atividade final do processo</instruction>
+      <deadlineTime>0</deadlineTime>
+      <joint>false</joint>
+      <agreementPercentage>0</agreementPercentage>
+      <engineAllocationId></engineAllocationId>
+      <engineAllocationConfiguration></engineAllocationConfiguration>
+      <selectColleague>0</selectColleague>
+      <initialState>false</initialState>
+      <notifyAuthorityDelay>true</notifyAuthorityDelay>
+      <notifyRequisitionerDelay>false</notifyRequisitionerDelay>
+      <allowanceAuthorityTime>0</allowanceAuthorityTime>
+      <frequenceAuthorityTime>1</frequenceAuthorityTime>
+      <allowanceRequisitionerTime>0</allowanceRequisitionerTime>
+      <frequenceRequisitionerTime>0</frequenceRequisitionerTime>
+      <transferAttachments>false</transferAttachments>
+      <subProcessId></subProcessId>
+      <formFolder>0</formFolder>
+      <notifyAuthorityFollowUp>false</notifyAuthorityFollowUp>
+      <notifyRequisitionerFollowUp>true</notifyRequisitionerFollowUp>
+      <automatic>false</automatic>
+      <positionX>520</positionX>
+      <positionY>170</positionY>
+      <forecastedEffortType>0</forecastedEffortType>
+      <forecastedEffort>0</forecastedEffort>
+      <notifyManagerFollowUp>false</notifyManagerFollowUp>
+      <notifyManagerDelay>false</notifyManagerDelay>
+      <allowanceManagerTime>0</allowanceManagerTime>
+      <frequenceManagerTime>0</frequenceManagerTime>
+      <inhibitTransfer>false</inhibitTransfer>
+      <periodId></periodId>
+      <stateType>6</stateType>
+      <bpmnType>60</bpmnType>
+      <signalId>0</signalId>
+      <counterSign>false</counterSign>
+      <openInstances>0</openInstances>
+      <destinationStates/>
+      <digitalSignature>false</digitalSignature>
+    </ProcessState>
+    <ProcessState>
+      <processStatePK>
+        <companyId>1</companyId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>1</version>
+        <sequence>11</sequence>
+      </processStatePK>
+      <stateName>Reprovar Exceção</stateName>
+      <stateDescription>Reprovar Exceção</stateDescription>
+      <instruction>Atividade final do processo</instruction>
+      <deadlineTime>0</deadlineTime>
+      <joint>false</joint>
+      <agreementPercentage>0</agreementPercentage>
+      <engineAllocationId></engineAllocationId>
+      <engineAllocationConfiguration></engineAllocationConfiguration>
+      <selectColleague>0</selectColleague>
+      <initialState>false</initialState>
+      <notifyAuthorityDelay>true</notifyAuthorityDelay>
+      <notifyRequisitionerDelay>false</notifyRequisitionerDelay>
+      <allowanceAuthorityTime>0</allowanceAuthorityTime>
+      <frequenceAuthorityTime>1</frequenceAuthorityTime>
+      <allowanceRequisitionerTime>0</allowanceRequisitionerTime>
+      <frequenceRequisitionerTime>0</frequenceRequisitionerTime>
+      <transferAttachments>false</transferAttachments>
+      <subProcessId></subProcessId>
+      <formFolder>0</formFolder>
+      <notifyAuthorityFollowUp>false</notifyAuthorityFollowUp>
+      <notifyRequisitionerFollowUp>true</notifyRequisitionerFollowUp>
+      <automatic>false</automatic>
+      <positionX>520</positionX>
+      <positionY>250</positionY>
+      <forecastedEffortType>0</forecastedEffortType>
+      <forecastedEffort>0</forecastedEffort>
+      <notifyManagerFollowUp>false</notifyManagerFollowUp>
+      <notifyManagerDelay>false</notifyManagerDelay>
+      <allowanceManagerTime>0</allowanceManagerTime>
+      <frequenceManagerTime>0</frequenceManagerTime>
+      <inhibitTransfer>false</inhibitTransfer>
+      <periodId></periodId>
+      <stateType>6</stateType>
+      <bpmnType>60</bpmnType>
+      <signalId>0</signalId>
+      <counterSign>false</counterSign>
+      <openInstances>0</openInstances>
+      <destinationStates/>
+      <digitalSignature>false</digitalSignature>
+    </ProcessState>
+  </list>
+  <list/>
+  <list>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>1</version>
+        <linkSequence>6</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>4</initialStateSequence>
+      <finalStateSequence>5</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>1</version>
+        <linkSequence>10</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>5</initialStateSequence>
+      <finalStateSequence>9</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>1</version>
+        <linkSequence>12</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>5</initialStateSequence>
+      <finalStateSequence>11</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+  </list>
+  <list/>
+  <list>
+    <WorkflowProcessEvent>
+      <workflowProcessEventPK>
+        <companyId>1</companyId>
+        <eventId>afterTaskComplete</eventId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>1</version>
+      </workflowProcessEventPK>
+      <eventDescription>function afterTaskComplete(colleagueId,nextSequenceId,userList){&#xd;
+	var atv      = getValue(&quot;WKNumState&quot;);&#xd;
+	var nextAtv  = getValue(&quot;WKNextState&quot;);&#xd;
+	var processo = getValue(&apos;WKNumProces&apos;);&#xd;
+	var comentario = getValue(&quot;WKUserComment&quot;);&#xd;
+	&#xd;
+	if (atv == 5) {&#xd;
+		var status = &apos;Aprovado&apos;;&#xd;
+		if (atv == 5 &amp;&amp; nextAtv == 11) {&#xd;
+			status = &apos;Reprovado&apos;;&#xd;
+		}&#xd;
+		var idPedido = hAPI.getCardValue(&apos;id_web&apos;);&#xd;
+		var msg = &apos;Pedido com a exceção &apos; + hAPI.getCardValue(&apos;tipo_excecao&apos;).replace(&quot;&apos;&quot;,&quot;&quot;);&#xd;
+			+ &apos; &apos; + status + &apos;.&apos;;&#xd;
+		var aprovador = hAPI.getCardValue(&apos;decisor&apos;);&#xd;
+		&#xd;
+		log.info(&quot;Atualizando Status do Pedido de Venda Web ID &quot; + idPedido + &quot; Nº Fluig &quot; + processo);&#xd;
+		&#xd;
+		var dataSource = &quot;/jdbc/HLBAPPDSRO2&quot;;&#xd;
+		var ic = new javax.naming.InitialContext();&#xd;
+		var ds = ic.lookup(dataSource);&#xd;
+		var myQuery = &quot;execute Atualiza_Status_Pedido_Venda_Web &quot; + idPedido + &quot;, &apos;&quot; + status + &quot;&apos;, &quot;&#xd;
+			+ &quot;&apos;&quot; + msg + &quot;&apos;, &apos;&quot; + aprovador + &quot;&apos;, &apos;&quot; + processo + &quot;&apos;, &apos;&quot; + comentario + &quot;&apos; &quot;;&#xd;
+		&#xd;
+		log.info(&quot;Executando Query... \n&quot; + myQuery);&#xd;
+		&#xd;
+		try {&#xd;
+			var conn = ds.getConnection();&#xd;
+			var stmt = conn.createStatement();&#xd;
+			stmt.setQueryTimeout(600);&#xd;
+			var rs = stmt.executeUpdate(myQuery);&#xd;
+		} catch (e) {&#xd;
+			log.error(&quot;ERRO na atualização do Status do Pedido de Venda Web ID &quot; + idPedido + &quot; Nº Fluig &quot; + processo&#xd;
+					+ &quot;: &quot; + e.message);&#xd;
+			// Envia o e-mail&#xd;
+			var descricaoEmail = &apos;Erro ao integrar &apos; + processo &#xd;
+				+&apos; Aprovação de Pedido Web no Fluig: &apos;&#xd;
+				+ e.message;&#xd;
+			&#xd;
+			var destinatarios = new java.util.ArrayList();&#xd;
+			destinatarios.add(&apos;hyline&apos;);&#xd;
+			&#xd;
+	        var parametros = new java.util.HashMap();&#xd;
+	        parametros.put(&quot;RESPONSAVEL&quot;, &apos;Depto. TI&apos;);&#xd;
+	        parametros.put(&quot;DESCRICAO_TAREFAS_ATRASADAS&quot; , &apos;&apos;);&#xd;
+	        parametros.put(&quot;DESCRICAO_FECHAMENTO&quot; , descricaoEmail);&#xd;
+	        parametros.put(&quot;SERVER_URL&quot;, &apos;http://fluig.hyline.com.br:8080&apos;);&#xd;
+	        var link = &apos;http://fluig.hyline.com.br:8080/portal/p/1/pageworkflowview?&apos;&#xd;
+	        	+&apos;app_ecm_workflowview_detailsProcessInstanceID=&apos;&#xd;
+	        	+ processo&#xd;
+	        parametros.put(&quot;LINK&quot;, link);&#xd;
+	        parametros.put(&quot;subject&quot;, &apos;[ERRO] ERRO afterTaskComplete APROVA PEDIDO WEB&apos;);&#xd;
+	        &#xd;
+	        if (destinatarios.size() &gt; 0) {&#xd;
+	        	log.info(&apos;enviou e-mail&apos;);&#xd;
+	            notifier.notify(&quot;hyline&quot;, &quot;TPLPROCESS_FECH_MENSAL_TAR_ATRASADAS&quot;, parametros, &#xd;
+	    	    		destinatarios, &quot;text/html&quot;);&#xd;
+	        }&#xd;
+		} finally {&#xd;
+			if (stmt != null) {&#xd;
+				stmt.close();&#xd;
+			}&#xd;
+			if (conn != null) {&#xd;
+				conn.close();&#xd;
+			}&#xd;
+		}&#xd;
+	}&#xd;
+}</eventDescription>
+    </WorkflowProcessEvent>
+    <WorkflowProcessEvent>
+      <workflowProcessEventPK>
+        <companyId>1</companyId>
+        <eventId>beforeTaskSave</eventId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>1</version>
+      </workflowProcessEventPK>
+      <eventDescription>function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
+	var atividadeAtual = getValue(&apos;WKNumState&apos;);&#xd;
+	var proxAtividade = getValue(&quot;WKNextState&quot;);&#xd;
+	var userFluig = getValue(&quot;WKUser&quot;);&#xd;
+	var nomeUsuario = getUsuario(userFluig,&apos;colleagueName&apos;);&#xd;
+	var comentario = getValue(&quot;WKUserComment&quot;); &#xd;
+	&#xd;
+	if (atividadeAtual == 5 &amp;&amp; proxAtividade == 11){&#xd;
+		if (comentario == &quot;&quot;) {&#xd;
+            throw &quot;Obrigatório informar um motivo ao reprovar! (Aba &apos;Complementos&apos; no Fluig)&quot;&#xd;
+        }&#xd;
+	}&#xd;
+	&#xd;
+	if (atividadeAtual == 5){&#xd;
+		hAPI.setCardValue(&quot;data_decisao&quot;, getNow().substring(0,16));&#xd;
+		hAPI.setCardValue(&quot;decisor&quot;, nomeUsuario);&#xd;
+		hAPI.setCardValue(&quot;usuario_decisor&quot;, userFluig);&#xd;
+		if (proxAtividade == 9) {&#xd;
+			hAPI.setCardValue(&quot;status&quot;, &apos;Aprovada&apos;);&#xd;
+		} else {&#xd;
+			hAPI.setCardValue(&quot;status&quot;, &apos;Reprovada&apos;);&#xd;
+		}&#xd;
+	}&#xd;
+}&#xd;
+&#xd;
+function getNow() {&#xd;
+	var today = new Date();&#xd;
+	var dd = today.getDate();&#xd;
+	var mm = today.getMonth()+1; //January is 0!&#xd;
+	var yyyy = today.getFullYear();&#xd;
+	var hour = today.getHours() &lt; 10 ? &apos;0&apos; + (today.getHours()) : (today.getHours());&#xd;
+	var minutes = today.getMinutes() &lt; 10 ? &apos;0&apos; + today.getMinutes() : today.getMinutes();&#xd;
+  	var seconds = today.getSeconds() &lt; 10 ? &apos;0&apos; + today.getSeconds() : today.getSeconds();&#xd;
+	 if(dd&lt;10){&#xd;
+	        dd=&apos;0&apos;+dd&#xd;
+	    } &#xd;
+	    if(mm&lt;10){&#xd;
+	        mm=&apos;0&apos;+mm&#xd;
+	    } &#xd;
+&#xd;
+	return today = yyyy+&apos;-&apos;+mm+&apos;-&apos;+dd+&apos; &apos;+hour+&apos;:&apos;+minutes+&apos;:&apos;+seconds;&#xd;
+}&#xd;
+&#xd;
+function getUsuario(userFunc, field){&#xd;
+    filter = new java.util.HashMap();&#xd;
+    filter.put(&apos;colleaguePK.colleagueId&apos;,userFunc);&#xd;
+    colaborador = getDatasetValues(&apos;colleague&apos;,filter);&#xd;
+    return colaborador.get(0).get(field);&#xd;
+}function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
+	var atividadeAtual = getValue(&apos;WKNumState&apos;);&#xd;
+	var proxAtividade = getValue(&quot;WKNextState&quot;);&#xd;
+	var userFluig = getValue(&quot;WKUser&quot;);&#xd;
+	var nomeUsuario = getUsuario(userFluig,&apos;colleagueName&apos;);&#xd;
+	var comentario = getValue(&quot;WKUserComment&quot;); &#xd;
+	&#xd;
+	if (atividadeAtual == 5 &amp;&amp; proxAtividade == 11){&#xd;
+		if (comentario == &quot;&quot;) {&#xd;
+            throw &quot;Obrigatório informar um motivo ao reprovar! (Aba &apos;Complementos&apos; no Fluig)&quot;&#xd;
+        }&#xd;
+	}&#xd;
+	&#xd;
+	if (atividadeAtual == 5){&#xd;
+		hAPI.setCardValue(&quot;data_decisao&quot;, getNow().substring(0,16));&#xd;
+		hAPI.setCardValue(&quot;decisor&quot;, nomeUsuario);&#xd;
+		hAPI.setCardValue(&quot;usuario_decisor&quot;, userFluig);&#xd;
+		if (proxAtividade == 9) {&#xd;
+			hAPI.setCardValue(&quot;status&quot;, &apos;Aprovada&apos;);&#xd;
+		} else {&#xd;
+			hAPI.setCardValue(&quot;status&quot;, &apos;Reprovada&apos;);&#xd;
+		}&#xd;
+	}&#xd;
+}&#xd;
+&#xd;
+function getNow() {&#xd;
+	var today = new Date();&#xd;
+	var dd = today.getDate();&#xd;
+	var mm = today.getMonth()+1; //January is 0!&#xd;
+	var yyyy = today.getFullYear();&#xd;
+	var hour = today.getHours() &lt; 10 ? &apos;0&apos; + (today.getHours()) : (today.getHours());&#xd;
+	var minutes = today.getMinutes() &lt; 10 ? &apos;0&apos; + today.getMinutes() : today.getMinutes();&#xd;
+  	var seconds = today.getSeconds() &lt; 10 ? &apos;0&apos; + today.getSeconds() : today.getSeconds();&#xd;
+	 if(dd&lt;10){&#xd;
+	        dd=&apos;0&apos;+dd&#xd;
+	    } &#xd;
+	    if(mm&lt;10){&#xd;
+	        mm=&apos;0&apos;+mm&#xd;
+	    } &#xd;
+&#xd;
+	return today = yyyy+&apos;-&apos;+mm+&apos;-&apos;+dd+&apos; &apos;+hour+&apos;:&apos;+minutes+&apos;:&apos;+seconds;&#xd;
+}&#xd;
+&#xd;
+function getUsuario(userFunc, field){&#xd;
+    filter = new java.util.HashMap();&#xd;
+    filter.put(&apos;colleaguePK.colleagueId&apos;,userFunc);&#xd;
+    colaborador = getDatasetValues(&apos;colleague&apos;,filter);&#xd;
+    return colaborador.get(0).get(field);&#xd;
+}</eventDescription>
+    </WorkflowProcessEvent>
+    <WorkflowProcessEvent>
+      <workflowProcessEventPK>
+        <companyId>1</companyId>
+        <eventId>onNotify</eventId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>1</version>
+      </workflowProcessEventPK>
+      <eventDescription>function onNotify(subject, receivers, template, params){&#xd;
+log.info(&apos;inicio - onNotify - APROVAPEDIDOWEBVENDAHLB - &apos; + template);&#xd;
+	&#xd;
+	if (template == &quot;TPLNEW_TASK&quot; &#xd;
+		|| template == &quot;TPLNEW_TASK_POOL_GROUP&quot;&#xd;
+		|| template == &quot;TPLNEW_TASK_POOL_ROLE&quot;&#xd;
+		|| template == &quot;TPLPROCESS_COMPLETED_TO_REQUESTER&quot;)&#xd;
+    {&#xd;
+		var atividadeAtual = getValue(&quot;WKNumState&quot;);&#xd;
+    	var proximaAtividade = getValue(&quot;WKNextState&quot;);&#xd;
+    	var numeroDaSolicitacao = getValue(&apos;WKNumProces&apos;);&#xd;
+    	var comentario = getValue(&quot;WKUserComment&quot;); &#xd;
+    	&#xd;
+    	log.info(&apos;atividadeAtual: &apos; + atividadeAtual);&#xd;
+    	log.info(&apos;proximaAtividade: &apos; + proximaAtividade);&#xd;
+    	&#xd;
+    	var nomeResponsavelEmail = &apos;&apos;;&#xd;
+        var subject = &apos;&apos;;&#xd;
+        var descricaoEmail = &apos;&apos;;&#xd;
+        var listaDocumentos = &apos;&apos;;&#xd;
+        var destinatarios = new java.util.ArrayList();&#xd;
+        &#xd;
+        // Carrega os dados do formulário&#xd;
+        var solicitante = hAPI.getCardValue(&apos;solicitante&apos;);&#xd;
+    	var excecao = hAPI.getCardValue(&apos;mensagem&apos;);&#xd;
+    	var decisor = hAPI.getCardValue(&apos;decisor&apos;);&#xd;
+    	&#xd;
+    	// Carrega os dados do pedido&#xd;
+        var idPedido = hAPI.getCardValue(&apos;id_web&apos;);&#xd;
+    	var empresa = hAPI.getCardValue(&apos;empresa&apos;);&#xd;
+    	var codigoCliente = hAPI.getCardValue(&apos;codigo_cliente&apos;);&#xd;
+    	var nomeCliente = hAPI.getCardValue(&apos;nome_cliente&apos;);&#xd;
+    	var cidade = hAPI.getCardValue(&apos;cidade&apos;);&#xd;
+    	var uf = hAPI.getCardValue(&apos;uf&apos;);&#xd;
+    	var codigoRepresentante = hAPI.getCardValue(&apos;codigo_representante&apos;);&#xd;
+    	var nomeRepresentante = hAPI.getCardValue(&apos;nome_representante&apos;);&#xd;
+    	var emailRepresentante = hAPI.getCardValue(&apos;email_representante&apos;);&#xd;
+    	&#xd;
+    	var descricaoPedido = &apos;Cliente: &apos; + codigoCliente + &apos; - &apos; &#xd;
+    		+ nomeCliente + &apos; - &apos; + cidade + &apos;-&apos; + uf +&apos;&lt;br /&gt;&apos;&#xd;
+    		+ &apos;Representante: &apos; + codigoRepresentante + &apos; - &apos; + nomeRepresentante + &apos;&lt;br /&gt;&lt;br /&gt;&apos;;&#xd;
+    	&#xd;
+    	// Carrega e-mails de cópia&#xd;
+    	var emailGerencia = &apos;jcarchangelo@hyline.com.br&apos;;&#xd;
+    	var emailProgramacao = &apos;programacao@hyline.com.br&apos;;&#xd;
+    	var emailFinanceiro = &apos;financeiro@hyline.com.br&apos;;&#xd;
+    	if (empresa == &apos;LB&apos;) {&#xd;
+    		emailGerencia = &apos;lklassmann@ltz.com.br&apos;;&#xd;
+        	emailProgramacao = &apos;programacao@ltz.com.br&apos;;&#xd;
+        	emailFinanceiro = &apos;financeiro@ltz.com.br&apos;;&#xd;
+    	} else if (empresa == &apos;HN&apos;) {&#xd;
+    		emailGerencia = &apos;cfracaro@hnavicultura.com.br&apos;;&#xd;
+        	emailProgramacao = &apos;programacao@hnavicultura.com.br&apos;;&#xd;
+        	emailFinanceiro = &apos;financeiro@hnavicultura.com.br&apos;;&#xd;
+    	} else if (empresa == &apos;PL&apos;) {&#xd;
+    		emailGerencia = &apos;ccervelatti@planaltopostura.com.br&apos;;&#xd;
+        	emailProgramacao = &apos;programacao@planaltopostura.com.br&apos;;&#xd;
+        	emailFinanceiro = &apos;financeiro@planaltopostura.com.br&apos;;&#xd;
+    	} else if (empresa == &apos;NG&apos;) {&#xd;
+    		emailGerencia = &apos;garaujo@novogen.com.br&apos;;&#xd;
+        	emailProgramacao = &apos;programacao@novogen.com.br&apos;;&#xd;
+        	emailFinanceiro = &apos;financeiro@novogen.com.br&apos;;&#xd;
+    	}&#xd;
+    	&#xd;
+    	// Carrega os dados dos itens do pedido&#xd;
+    	var qtdeTotal = 0;&#xd;
+    	var valorTotal = 0;&#xd;
+    	var camposItens = hAPI.getCardData(numeroDaSolicitacao);&#xd;
+    	var contadorItens = camposItens.keySet().iterator();&#xd;
+    	var listaItens = &#xd;
+			&apos;&lt;table class=&quot;DescrMsgForum&quot;&gt;&apos;&#xd;
+				+ &apos;&lt;thead&gt;&apos;&#xd;
+    				+ &apos;&lt;tr class=&quot;tableHeadRow&quot;&gt;&apos;&#xd;
+	    				+ &apos;&lt;th class=&quot;tableColumn&quot;&gt;Seq.&lt;/th&gt;&apos;&#xd;
+	    				+ &apos;&lt;th class=&quot;tableColumn&quot;&gt;De&lt;/th&gt;&apos;&#xd;
+	    				+ &apos;&lt;th class=&quot;tableColumn&quot;&gt;A&lt;/th&gt;&apos;&#xd;
+	    				+ &apos;&lt;th class=&quot;tableColumn&quot;&gt;Linha&lt;/th&gt;&apos;&#xd;
+	    				+ &apos;&lt;th class=&quot;tableColumn&quot;&gt;Qt. Líq.&lt;/th&gt;&apos;&#xd;
+	    				+ &apos;&lt;th class=&quot;tableColumn&quot;&gt;% Bon.&lt;/th&gt;&apos;&#xd;
+	    				+ &apos;&lt;th class=&quot;tableColumn&quot;&gt;Qt. Total&lt;/th&gt;&apos;&#xd;
+	    				+ &apos;&lt;th class=&quot;tableColumn&quot;&gt;Pr. Tot.&lt;/th&gt;&apos;&#xd;
+	    				+ &apos;&lt;th class=&quot;tableColumn&quot;&gt;Val. Tot.&lt;/th&gt;&apos;&#xd;
+    				+ &apos;&lt;/tr&gt;&apos;&#xd;
+				+ &apos;&lt;/thead&gt;&apos;&#xd;
+				+ &apos;&lt;tbody&gt;&apos;;&#xd;
+    	&#xd;
+    	while (contadorItens.hasNext()) {&#xd;
+        	var id = contadorItens.next();&#xd;
+        	if (id.match(/sequencia_ipv___/)) { // qualquer campo do Filho&#xd;
+        		var seq = id.split(&quot;___&quot;);&#xd;
+        		var sequenciaIpv = camposItens.get(id);&#xd;
+        		var dataInicialIpv = camposItens.get(&quot;data_inicial_entrega_ipv___&quot; + seq[1]);&#xd;
+        		dataInicialIpv = dataInicialIpv.substring(8,10)+&apos;/&apos;+dataInicialIpv.substring(5,7)+&apos;/&apos;&#xd;
+		    		+dataInicialIpv.substring(0,4);&#xd;
+        		var dataFinalIpv = camposItens.get(&quot;data_final_entrega_ipv___&quot; + seq[1]);&#xd;
+        		dataFinalIpv = dataFinalIpv.substring(8,10)+&apos;/&apos;+dataFinalIpv.substring(5,7)+&apos;/&apos;&#xd;
+	    			+dataFinalIpv.substring(0,4);&#xd;
+        		var linhaIpv = camposItens.get(&quot;linha_ipv___&quot; + seq[1]);&#xd;
+        		var qtdeLiquidaIpv = camposItens.get(&quot;qtde_liquida_ipv___&quot; + seq[1]);&#xd;
+        		var percBonificadaIpv = camposItens.get(&quot;perc_bonificada_ipv___&quot; + seq[1]);&#xd;
+        		var qtdeTotalIpv = camposItens.get(&quot;qtde_total_ipv___&quot; + seq[1]);&#xd;
+        		var precoTotalIpv = camposItens.get(&quot;preco_total_ipv___&quot; + seq[1]);&#xd;
+        		var valorTotalIpv = camposItens.get(&quot;valor_total_ipv___&quot; + seq[1]);&#xd;
+        		&#xd;
+        		listaItens = listaItens&#xd;
+        				+&apos;&lt;tr&gt;&apos;&#xd;
+        					+ &apos;&lt;td&gt;&apos; + sequenciaIpv +&apos;&lt;/td&gt;&apos;&#xd;
+        					+ &apos;&lt;td&gt;&apos; + dataInicialIpv +&apos;&lt;/td&gt;&apos;&#xd;
+        					+ &apos;&lt;td&gt;&apos; + dataFinalIpv +&apos;&lt;/td&gt;&apos;&#xd;
+        					+ &apos;&lt;td&gt;&apos; + linhaIpv +&apos;&lt;/td&gt;&apos;&#xd;
+        					+ &apos;&lt;td&gt;&apos; + qtdeLiquidaIpv +&apos;&lt;/td&gt;&apos;&#xd;
+        					+ &apos;&lt;td&gt;&apos; + percBonificadaIpv +&apos;&lt;/td&gt;&apos;&#xd;
+        					+ &apos;&lt;td&gt;&apos; + qtdeTotalIpv +&apos;&lt;/td&gt;&apos;&#xd;
+        					+ &apos;&lt;td&gt;&apos; + precoTotalIpv +&apos;&lt;/td&gt;&apos;&#xd;
+        					+ &apos;&lt;td&gt;&apos; + valorTotalIpv +&apos;&lt;/td&gt;&apos;&#xd;
+        				+&apos;&lt;/tr&gt;&apos;;&#xd;
+        		&#xd;
+        		qtdeTotal = qtdeTotal &#xd;
+        			+ parseInt(qtdeLiquidaIpv.replace(&apos;.&apos;,&apos;&apos;).replace(&apos;,&apos;,&apos;.&apos;))&#xd;
+        			+ parseInt((parseFloat(percBonificadaIpv.replace(&apos;.&apos;,&apos;&apos;).replace(&apos;,&apos;,&apos;.&apos;)) / 100.0) &#xd;
+        					* parseFloat(qtdeLiquidaIpv.replace(&apos;.&apos;,&apos;&apos;).replace(&apos;,&apos;,&apos;.&apos;)));&#xd;
+        		valorTotal = valorTotal + parseFloat(valorTotalIpv.replace(&apos;.&apos;,&apos;&apos;).replace(&apos;,&apos;,&apos;.&apos;));&#xd;
+        	}&#xd;
+        }&#xd;
+    	&#xd;
+    	listaItens = listaItens&#xd;
+    			+ &apos;&lt;/tbody&gt;&apos;&#xd;
+    		+ &apos;&lt;/table&gt;&apos;&#xd;
+    		+ &apos;&lt;br /&gt;&apos;&#xd;
+    		+ &apos;&lt;b&gt;Qtde. Total do Pedido: &apos; + qtdeTotal + &apos;&lt;/b&gt;&apos;&#xd;
+    		+ &apos;&lt;br /&gt;&apos;&#xd;
+    		+ &apos;&lt;b&gt;Valor. Total do Pedido: R$ &apos; + valorTotal + &apos;&lt;/b&gt;&apos;;&#xd;
+    	&#xd;
+    	if (atividadeAtual == 4) {&#xd;
+    		for (var i = 0; i &lt; receivers.size(); i++) {&#xd;
+	    		destinatarios.add(getFieldColleague(receivers.get(i), &apos;mail&apos;, 1));&#xd;
+	    	}&#xd;
+    		//destinatarios.add(emailGerencia);&#xd;
+    		destinatarios.add(emailProgramacao);&#xd;
+    		destinatarios.add(emailFinanceiro);&#xd;
+	    	//destinatarios.add(&apos;hyline&apos;);&#xd;
+	    	&#xd;
+	    	//Limpa destinatários do e-mail com template padrão&#xd;
+            receivers.clear();&#xd;
+            &#xd;
+            nomeResponsavelEmail = &apos;Aprovador&apos;;&#xd;
+            subject = excecao;&#xd;
+            descricaoEmail = &apos;O usuário &apos; + decisor + &apos; solicitou a aprovação da seguinte exceção: &lt;b&gt;&apos;&#xd;
+            	+ excecao + &apos;&lt;/b&gt;.&apos;&#xd;
+            	+ &apos; Seguem abaixo os dados do pedido:&apos;;&#xd;
+    	} else if (atividadeAtual == 5 &amp;&amp; proximaAtividade == 11) {&#xd;
+    		for (var i = 0; i &lt; receivers.size(); i++) {&#xd;
+	    		destinatarios.add(getFieldColleague(receivers.get(i), &apos;mail&apos;, 1));&#xd;
+	    	}&#xd;
+    		//destinatarios.add(emailGerencia);&#xd;
+    		destinatarios.add(emailProgramacao);&#xd;
+    		destinatarios.add(emailFinanceiro);&#xd;
+    		destinatarios.add(emailRepresentante);&#xd;
+	    	//destinatarios.add(&apos;hyline&apos;);&#xd;
+	    	&#xd;
+	    	//Limpa destinatários do e-mail com template padrão&#xd;
+            receivers.clear();&#xd;
+            &#xd;
+            nomeResponsavelEmail = solicitante;&#xd;
+            subject = excecao + &apos; Reprovada&apos;;&#xd;
+            descricaoEmail = &apos;O usuário &apos; + decisor + &apos; reprovou a exceção a seguir: &lt;b&gt;&apos;&#xd;
+            	+ excecao + &apos;&lt;/b&gt;.&apos;&#xd;
+            	+ &apos;Motivo: &apos; + comentario + &apos;&lt;/b&gt;.&apos;&#xd;
+	        	+ &apos; Seguem abaixo os dados do pedido:&apos;;&#xd;
+    	} else if (atividadeAtual == 5 &amp;&amp; proximaAtividade == 9) {&#xd;
+    		for (var i = 0; i &lt; receivers.size(); i++) {&#xd;
+	    		destinatarios.add(getFieldColleague(receivers.get(i), &apos;mail&apos;, 1));&#xd;
+	    	}&#xd;
+	    	//destinatarios.add(&apos;hyline&apos;);&#xd;
+    		//destinatarios.add(emailGerencia);&#xd;
+    		destinatarios.add(emailProgramacao);&#xd;
+    		destinatarios.add(emailFinanceiro);&#xd;
+    		destinatarios.add(emailRepresentante);&#xd;
+	    	&#xd;
+	    	//Limpa destinatários do e-mail com template padrão&#xd;
+            receivers.clear();&#xd;
+            &#xd;
+            nomeResponsavelEmail = solicitante;&#xd;
+            subject = excecao + &apos; Aprovada&apos;;&#xd;
+            descricaoEmail = &apos;O usuário &apos; + decisor + &apos; aprovou a exceção a seguir: &lt;b&gt;&apos;&#xd;
+	            + excecao + &apos;&lt;/b&gt;.&apos;&#xd;
+	        	+ &apos; Seguem abaixo os dados do pedido:&apos;;&#xd;
+    	}&#xd;
+        &#xd;
+        // Envia o e-mail&#xd;
+        var parametros = new java.util.HashMap();&#xd;
+        parametros.put(&quot;RESPONSAVEL&quot;, nomeResponsavelEmail);&#xd;
+        parametros.put(&quot;DESCRICAO_TAREFAS_ATRASADAS&quot; , descricaoPedido + listaItens);&#xd;
+        parametros.put(&quot;DESCRICAO_FECHAMENTO&quot; , descricaoEmail);&#xd;
+        parametros.put(&quot;SERVER_URL&quot;, &apos;http://fluig.hyline.com.br:8080&apos;);&#xd;
+        var link = hAPI.getUserTaskLink(proximaAtividade);&#xd;
+//        var link = &apos;http://fluigteste.hyline.com.br/portal/p/1/pageworkflowview?&apos;&#xd;
+//        	+&apos;app_ecm_workflowview_detailsProcessInstanceID=&apos;&#xd;
+//        	+ numeroDaSolicitacao&#xd;
+        parametros.put(&quot;LINK&quot;, link);&#xd;
+        parametros.put(&quot;subject&quot;, subject);&#xd;
+        &#xd;
+        if (destinatarios.size() &gt; 0) {&#xd;
+        	log.info(&apos;enviou e-mail&apos;);&#xd;
+            notifier.notify(&quot;hyline&quot;, &quot;TPLPROCESS_FECH_MENSAL_TAR_ATRASADAS&quot;, parametros, &#xd;
+    	    		destinatarios, &quot;text/html&quot;);&#xd;
+        }&#xd;
+    }&#xd;
+}&#xd;
+&#xd;
+function getNow() {&#xd;
+	var today = new Date();&#xd;
+	var dd = today.getDate();&#xd;
+	var mm = today.getMonth()+1; //January is 0!&#xd;
+	var yyyy = today.getFullYear();&#xd;
+	var hour = today.getHours() &lt; 10 ? &apos;0&apos; + (today.getHours()) : (today.getHours());&#xd;
+	var minutes = today.getMinutes() &lt; 10 ? &apos;0&apos; + today.getMinutes() : today.getMinutes();&#xd;
+  	var seconds = today.getSeconds() &lt; 10 ? &apos;0&apos; + today.getSeconds() : today.getSeconds();&#xd;
+	 if(dd&lt;10){&#xd;
+	        dd=&apos;0&apos;+dd&#xd;
+	    } &#xd;
+	    if(mm&lt;10){&#xd;
+	        mm=&apos;0&apos;+mm&#xd;
+	    } &#xd;
+&#xd;
+	return today = yyyy+&apos;-&apos;+mm+&apos;-&apos;+dd+&apos; &apos;+hour+&apos;:&apos;+minutes+&apos;:&apos;+seconds;&#xd;
+}&#xd;
+&#xd;
+function getFieldColleague(userFunc, fieldSearch, indexfieldReturn){&#xd;
+	var filtraLogin = DatasetFactory.createConstraint(fieldSearch, userFunc, userFunc, &#xd;
+			ConstraintType.MUST);&#xd;
+	var filtros = new Array(filtraLogin);&#xd;
+	var colaborador = DatasetFactory.getDataset(&quot;colleague&quot;, null, filtros, null);&#xd;
+    return colaborador.values[0][indexfieldReturn];&#xd;
+}</eventDescription>
+    </WorkflowProcessEvent>
+  </list>
+  <list/>
+  <list>
+    <SwimLane>
+      <color>FFFFFF</color>
+      <height>290</height>
+      <width>831</width>
+      <positionX>10</positionX>
+      <positionY>10</positionY>
+      <stateName>Aprovação de Pedido de Venda Web</stateName>
+      <type>1</type>
+      <parentSequence>0</parentSequence>
+      <swimLanePK>
+        <companyId>1</companyId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>1</version>
+        <sequence>1</sequence>
+      </swimLanePK>
+    </SwimLane>
+    <SwimLane>
+      <color>9F9F9F</color>
+      <height>145</height>
+      <width>801</width>
+      <positionX>40</positionX>
+      <positionY>10</positionY>
+      <stateName>Solicitante</stateName>
+      <type>2</type>
+      <parentSequence>1</parentSequence>
+      <swimLanePK>
+        <companyId>1</companyId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>1</version>
+        <sequence>2</sequence>
+      </swimLanePK>
+    </SwimLane>
+    <SwimLane>
+      <color>C0C0C0</color>
+      <height>145</height>
+      <width>801</width>
+      <positionX>40</positionX>
+      <positionY>155</positionY>
+      <stateName>Aprovador</stateName>
+      <type>2</type>
+      <parentSequence>1</parentSequence>
+      <swimLanePK>
+        <companyId>1</companyId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>1</version>
+        <sequence>3</sequence>
+      </swimLanePK>
+    </SwimLane>
+  </list>
+  <list>
+    <ProcessComponGraf>
+      <componType>1</componType>
+      <positionX>210</positionX>
+      <positionY>14</positionY>
+      <processComponGrafPK>
+        <companyId>1</companyId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>1</version>
+        <componGrafSequence>7</componGrafSequence>
+      </processComponGrafPK>
+      <stateName>Nessa atividade o usuário solicita para a gerência comercial a aprovação para o pedido de venda web ser aceito.</stateName>
+    </ProcessComponGraf>
+    <ProcessComponGraf>
+      <componType>1</componType>
+      <positionX>620</positionX>
+      <positionY>160</positionY>
+      <processComponGrafPK>
+        <companyId>1</companyId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>1</version>
+        <componGrafSequence>13</componGrafSequence>
+      </processComponGrafPK>
+      <stateName>Aprovar Exceção</stateName>
+    </ProcessComponGraf>
+    <ProcessComponGraf>
+      <componType>1</componType>
+      <positionX>620</positionX>
+      <positionY>240</positionY>
+      <processComponGrafPK>
+        <companyId>1</companyId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>1</version>
+        <componGrafSequence>14</componGrafSequence>
+      </processComponGrafPK>
+      <stateName>Reprovar Exceção</stateName>
+    </ProcessComponGraf>
+  </list>
+  <list>
+    <ProcessLinkAssoc>
+      <processLinkAssocPK>
+        <companyId>1</companyId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>1</version>
+        <linkSequence>8</linkSequence>
+      </processLinkAssocPK>
+      <initialStateSequence>7</initialStateSequence>
+      <finalStateSequence>4</finalStateSequence>
+    </ProcessLinkAssoc>
+    <ProcessLinkAssoc>
+      <processLinkAssocPK>
+        <companyId>1</companyId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>1</version>
+        <linkSequence>15</linkSequence>
+      </processLinkAssocPK>
+      <initialStateSequence>13</initialStateSequence>
+      <finalStateSequence>9</finalStateSequence>
+    </ProcessLinkAssoc>
+    <ProcessLinkAssoc>
+      <processLinkAssocPK>
+        <companyId>1</companyId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>1</version>
+        <linkSequence>16</linkSequence>
+      </processLinkAssocPK>
+      <initialStateSequence>14</initialStateSequence>
+      <finalStateSequence>11</finalStateSequence>
+    </ProcessLinkAssoc>
+  </list>
+  <list>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>6</version>
+        <linkSequence>6</linkSequence>
+        <bendSequence>1</bendSequence>
+      </processLinkBendPK>
+      <positionX>167</positionX>
+      <positionY>229</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>APROVAPEDIDOWEBVENDANG</processId>
+        <version>6</version>
+        <linkSequence>8</linkSequence>
+        <bendSequence>1</bendSequence>
+      </processLinkBendPK>
+      <positionX>167</positionX>
+      <positionY>48</positionY>
+    </ProcessLinkBend>
+  </list>
+  <list/>
+  <list/>
+  <list/>
+  <list/>
+  <list/>
+  <list>
+    <ProcessAppConfiguration>
+      <id>0</id>
+      <tenantId>0</tenantId>
+      <processId>APROVAPEDIDOWEBVENDANG</processId>
+      <processVersion>6</processVersion>
+      <stateSequence>5</stateSequence>
+      <appKey>approval</appKey>
+      <appField>title</appField>
+      <description>@[form:tipo_excecao]</description>
+    </ProcessAppConfiguration>
+    <ProcessAppConfiguration>
+      <id>0</id>
+      <tenantId>0</tenantId>
+      <processId>APROVAPEDIDOWEBVENDANG</processId>
+      <processVersion>6</processVersion>
+      <stateSequence>5</stateSequence>
+      <appKey>approval</appKey>
+      <appField>description</appField>
+      <description>Local: @[form:cidade]&#xd;
+ - @[form:uf]&#xd;
+Exceção: @[form:mensagem]&#xd;
+&#xd;
+&#xd;
+</description>
+    </ProcessAppConfiguration>
+    <ProcessAppConfiguration>
+      <id>0</id>
+      <tenantId>0</tenantId>
+      <processId>APROVAPEDIDOWEBVENDANG</processId>
+      <processVersion>6</processVersion>
+      <stateSequence>5</stateSequence>
+      <appKey>approval</appKey>
+      <appField>highlight</appField>
+      <description>@[form:nome_cliente]</description>
+    </ProcessAppConfiguration>
+    <ProcessAppConfiguration>
+      <id>0</id>
+      <tenantId>0</tenantId>
+      <processId>APROVAPEDIDOWEBVENDANG</processId>
+      <processVersion>6</processVersion>
+      <stateSequence>5</stateSequence>
+      <appKey>approval</appKey>
+      <appField>approve</appField>
+      <description>9</description>
+    </ProcessAppConfiguration>
+    <ProcessAppConfiguration>
+      <id>0</id>
+      <tenantId>0</tenantId>
+      <processId>APROVAPEDIDOWEBVENDANG</processId>
+      <processVersion>6</processVersion>
+      <stateSequence>5</stateSequence>
+      <appKey>approval</appKey>
+      <appField>reject</appField>
+      <description>11</description>
+    </ProcessAppConfiguration>
+  </list>
+  <list/>
+  <list/>
+</list>

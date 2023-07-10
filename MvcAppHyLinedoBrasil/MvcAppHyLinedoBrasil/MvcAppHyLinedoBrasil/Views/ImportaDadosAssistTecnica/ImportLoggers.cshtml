@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Importação de Loggers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="@Url.Content("//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("//code.jquery.com/jquery-1.10.2.js")" type="text/javascript"></script>
+<script src="@Url.Content("//code.jquery.com/ui/1.11.0/jquery-ui.js")" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#dataIni").datepicker({ dateFormat: "dd/mm/yy" });
+    });
+    $(function () {
+        $("#dataFim").datepicker({ dateFormat: "dd/mm/yy" });
+    });
+</script>
+
+@Html.Partial("MenuDadosAssistenciaTecnica")
+
+<h2>Importação de Arquivos dos Loggers</h2>
+
+<fieldset>
+    @using (Html.BeginForm("ListaEntregasLoggers", "ImportaDadosAssistTecnica", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {    
+        <p align="center">
+        <br />
+        Período de Nascimento: @Html.TextBox("dataIni", Session["sDataInicial"]) à @Html.TextBox("dataFim", Session["sDataFinal"])
+        <input type="submit" value="Pesquisar Entregas" />
+        </p>
+    }
+</fieldset>
+
+<div id="divUltimaReview">
+    <h4 style="color:Blue;">@ViewBag.fileName</h4>
+    <h4 style="color:Red;">@ViewBag.erro</h4>
+</div>
+
+<fieldset>
+@using (Html.BeginForm("ImportaLogger", "ImportaDadosAssistTecnica", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_ListaEntregas")
+        
+    <p align="center">
+        Informe o Número do Logger: @Html.TextBox("numeroLogger")
+        <input type="file" name="file1"/>
+        <input type="submit" value="Importar Arquivo"/>
+    </p>
+}
+</fieldset>

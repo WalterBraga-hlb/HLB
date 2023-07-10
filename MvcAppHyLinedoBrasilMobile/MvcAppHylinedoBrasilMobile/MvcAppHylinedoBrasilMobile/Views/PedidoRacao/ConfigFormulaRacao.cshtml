@@ -1,0 +1,467 @@
+﻿@{
+    ViewBag.Title = "";
+
+    var listaUnidades = (List<MvcAppHylinedoBrasilMobile.Models.Config_Formula_Racao_Unidade>)
+        Session["ListaUnidadesConfigFormulaRacao"];
+
+    var listaGalpoes = (List<MvcAppHylinedoBrasilMobile.Models.Config_Formula_Racao_Galpao>)
+        Session["ListaGalpoesConfigFormulaRacao"];
+
+    var listaLinhagens = (List<MvcAppHylinedoBrasilMobile.Models.Config_Formula_Racao_Linhagem>)
+        Session["ListaLinhagensConfigFormulaRacao"];
+
+    var listaAdicionais = (List<MvcAppHylinedoBrasilMobile.Models.Config_Formula_Racao_Adicionais>)
+        Session["ListaAdicionaisConfigFormulaRacao"];
+
+    var listaGranjas = (List<SelectListItem>)Session["ListaGranjasCFROriginal"];
+    var ddlAdicionais = (List<SelectListItem>)Session["ListaAdicionaisCFROriginal"];
+
+    //var id = Convert.ToInt32(Session["idCFR"]);
+    //MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+    //var cfr = hlbapp.Config_Formula_Racao.Where(w => w.ID == id).FirstOrDefault();
+}
+
+<script language="javascript" type="text/javascript">
+    function atualizaSession(value, field) {
+        $.ajax({
+            url: '/PedidoRacao/AtualizaSession',
+            type: 'POST',
+            data: JSON.stringify({ valor: value, campo: field }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                verificaCampos(false);
+            }
+        });
+    }
+
+    function carregaGalpoes(value) {
+        $('select#ddlGalpao').empty();
+        $('select#ddlGalpao').append('<option value="" selected="selected">(Carregando...)</option>');
+        $('select#ddlGalpao').selectmenu('refresh');
+        $.ajax({
+            url: '/PedidoRacao/CarregaGalpoesPS',
+            type: 'POST',
+            data: JSON.stringify({ id: value, origem: 'CPR' }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#ddlGalpao').empty();
+                $('select#ddlGalpao').append('<option value="" selected="selected">(Selecione um Galpão)</option>');
+                $.each(data, function (key, SelectListItem) {
+                    $('select#ddlGalpao').append('<option value="' + SelectListItem.Text + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#ddlGalpao').selectmenu('refresh');
+            }
+        });
+    }
+
+    function verificaCampos(click) {
+        var existe = 0;
+
+        // Verifica Fórmula
+        var formula = $('#CodFormula').val();
+        var errorFormula = document.getElementById('errorFormula');
+        if (formula == '') {
+            errorFormula.innerHTML = 'Obrigatório selecionar a fórmula!';
+            existe = existe + 1;
+        } else {
+            errorFormula.innerHTML = '';
+        }
+
+        // Verifica Descrição
+        var descricao = $('#descricao').val();
+        var errorDescricao = document.getElementById('errorDescricao');
+        if (descricao == '') {
+            errorDescricao.innerHTML = 'Obrigatório inserir uma descrição!';
+            existe = existe + 1;
+        } else {
+            errorDescricao.innerHTML = '';
+        }
+
+        //Verifica número de erros para bloquear botão salvar
+        if (existe > 0) {
+            $('#saveCFR').button('disable');
+            $('[type="submit"]').button('refresh');
+            if (click) {
+                alert('Existem itens campos em branco! Verifique!');
+            }
+            return true;
+        } else {
+            $('#saveCFR').button('enable');
+            $('[type="submit"]').button('refresh');
+            return false;
+        }
+    }
+
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mvalor(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{8})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{5})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{2})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+    function mvalor4(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{10})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{7})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{4})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+</script>
+<div align="center">
+    @Html.ActionLink("Voltar p/ Lista de Configuração das Fórmulas da Ração", "ListaConfigFormulaRacao",
+        "PedidoRacao")
+</div>
+<br />
+<div align="center">
+    @Html.Image(@Url.Content("~/Content/icons/assistencia_tecnica.png"), "")
+    <h2>Configuração da Fórmula da Ração</h2>
+</div>
+<h4 style="color:red;">@ViewBag.Erro</h4>
+<fieldset>
+    <div class="editor-label">
+        <b>Fórmula:</b>
+    </div>
+    <div class="editor-field">
+        @Html.DropDownList(
+        "Formula",
+        (List<SelectListItem>)Session["ListaFormulas"],
+        "(Selecione uma Fórmula)",
+                 new
+                 {
+                     @id = "CodFormula",
+                     @required = "true",
+                     @onchange = "atualizaSession(this.value, 'formulaCFR')"
+                 })
+    </div>
+    <div class="editor-label" id="errorFormula" style="color: Red; font-weight:bold;"></div>
+    <div class="editor-label">
+        <b>Descrição que será exibida no Pedido da Ração:</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox(
+        "Descricao",
+        Session["descricaoCFR"].ToString(),
+                 new
+                 {
+                     @id = "descricao",
+                     @required = "true",
+                     @onchange = "atualizaSession(this.value, 'descricaoCFR')"
+                 })
+    </div>
+    <div class="editor-label" id="errorDescricao" style="color: Red; font-weight:bold;"></div>
+    <div class="editor-label">
+        <b>Configuração Ativa?</b>
+    </div>
+    <div class="editor-field">
+        @Html.DropDownList(
+        "Ativa",
+        (List<SelectListItem>)Session["ListaAtivaCFR"],
+        null,
+        new
+        {
+            @id = "ddlAtiva",
+            @required = "true",
+            @onchange = "atualizaSession(this.value, 'ativaCFR')"
+        })
+    </div>
+</fieldset>
+<br />
+<ul data-role="listview" data-inset="true">
+    @if (Session["modeloCFR"].ToString() == "Por Granja")
+    {
+        <li data-role="list-divider">Granjas que utilizarão essa fórmula:</li>
+        <li>
+            @using (Html.BeginForm("SaveUnidadeConfigFormulaRacao", "PedidoRacao", FormMethod.Post,
+                new { enctype = "multipart/form-data" }))
+            {
+                <table style="border:none; background: none;">
+                    <tr style="border:none; background: none;">
+                        <td style="width: 95%; border:none; background: none;">
+                            <div class="editor-field">
+                                @Html.DropDownList(
+                     "Granja",
+                     (List<SelectListItem>)Session["ListaGranjasCFR"],
+                     "(Selecione uma Granja)",
+                     new { @required = "true" })
+                            </div>
+                        </td>
+                        <td style="width: 5%; border:none; background: none;">
+                            <input type="submit" value="+" />
+                        </td>
+                    </tr>
+                </table>
+            }
+        </li>
+        if (listaUnidades.Count > 0)
+        {
+            <li>
+                <div style="overflow:auto;">
+                    <table class="ajuste">
+                        <tbody class="ajuste">
+                            <tr class="ajuste">
+                                <th class="ajuste"></th>
+                                <th class="ajuste">
+                                    Código
+                                </th>
+                                <th class="ajuste">
+                                    Descrição
+                                </th>
+                            </tr>
+                            @foreach (var item in listaUnidades)
+                            {
+                                var unidade = listaGranjas.Where(w => w.Value == item.CodUnidade).FirstOrDefault();
+                                string descricaoUnidade = "";
+                                if (unidade != null)
+                                {
+                                    descricaoUnidade = unidade.Text;
+                                }
+
+                                <tr class="ajuste">
+                                    <td class="ajuste">
+                                        <div align="center">
+                                            @Html.ActionLink("Delete", "DeleteUnidadeConfigFormulaRacao",
+                                             "PedidoRacao",
+                                             new { codUnidade = item.CodUnidade }, new { @class = "delete" })
+                                        </div>
+                                    </td>
+                                    <td class="ajuste">
+                                        @Html.DisplayFor(modelItem => item.CodUnidade)
+                                    </td>
+                                    <td class="ajuste">
+                                        @(descricaoUnidade)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+        }
+    }
+    else
+    {
+        <li data-role="list-divider">Núcleo(s) / Galpão(ões) que utilizarão essa fórmula:</li>
+        <li>
+            @using (Html.BeginForm("SaveNucleoGalpaoConfigFormulaRacao", "PedidoRacao", FormMethod.Post,
+                new { enctype = "multipart/form-data" }))
+            {
+                <table style="border:none; background: none;">
+                    <tr style="border:none; background: none;">
+                        <td style="border:none; background: none;" class="ajusteWithoutHeader">
+                            @Html.DropDownList(
+                            "Nucleo",
+                            (List<SelectListItem>)Session["ListaNucleos"],
+                            "(Selecione um Núcleo)",
+                            new
+                            {
+                                @id = "ddlNucleo",
+                                @required = "true",
+                                @onchange = "carregaGalpoes(this.value)"
+                            })
+                        </td>
+                        <td style="border:none; background: none;" class="ajusteWithoutHeader">
+                            @Html.DropDownList(
+                            "Galpao",
+                            (List<SelectListItem>)Session["ListaGalpoesSelecionados"],
+                            new
+                            {
+                                @id = "ddlGalpao",
+                                @required = "true"
+                            })
+                        </td>
+                        <td style="width: 5%; border:none; background: none;">
+                            <input type="submit" value="+" />
+                        </td>
+                    </tr>
+                </table>
+            }
+        </li>
+        if (listaGalpoes.Count > 0)
+        {
+            <li>
+                <div style="overflow:auto;">
+                    <table class="ajuste">
+                        <tbody class="ajuste">
+                            <tr class="ajuste">
+                                <th class="ajuste"></th>
+                                <th class="ajuste">
+                                    Núcleo
+                                </th>
+                                <th class="ajuste">
+                                    Galpão
+                                </th>
+                            </tr>
+                            @foreach (var item in listaGalpoes)
+                            {
+                                <tr class="ajuste">
+                                    <td class="ajuste">
+                                        <div align="center">
+                                            @Html.ActionLink("Delete", "DeleteNucleoGalpaoConfigFormulaRacao",
+                                             "PedidoRacao",
+                                             new { nucleo = item.CodNucleo, galpao = item.NumGalpao }, new { @class = "delete" })
+                                        </div>
+                                    </td>
+                                    <td class="ajuste">
+                                        @Html.DisplayFor(modelItem => item.CodNucleo)
+                                    </td>
+                                    <td class="ajuste">
+                                        @Html.DisplayFor(modelItem => item.NumGalpao)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+        }
+    }
+</ul>
+<br />
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Linhagens que utilizarão essa fórmula:</li>
+    <li>
+        @using (Html.BeginForm("SaveLinhagemConfigFormulaRacao", "PedidoRacao", FormMethod.Post,
+            new { enctype = "multipart/form-data" }))
+        {
+            <table style="border:none; background: none;">
+                <tr style="border:none; background: none;">
+                    <td style="width: 95%; border:none; background: none;">
+                        <div class="editor-field">
+                            @Html.DropDownList(
+                            "Linhagem",
+                            (List<SelectListItem>)Session["ListaLinhagensCFR"],
+                            null,
+                            new { @required = "true" })
+                        </div>
+                    </td>
+                    <td style="width: 5%; border:none; background: none;">
+                        <input type="submit" value="+"/>
+                    </td>
+                </tr>
+            </table>
+        }
+    </li>
+    @if (listaLinhagens.Count > 0)
+    {
+    <li>
+        <div style="overflow:auto;">
+        <table class="ajuste">
+            <tbody class="ajuste">
+            <tr class="ajuste">
+                <th class="ajuste"></th>
+                <th class="ajuste">
+                    Linhagem
+                </th>
+            </tr>
+        @foreach (var item in listaLinhagens)
+        {
+            <tr class="ajuste">
+                <td class="ajuste">
+                    <div align="center">            
+                        @Html.ActionLink("Delete", "DeleteLinhagemConfigFormulaRacao",
+                            "PedidoRacao",
+                            new { linha = item.Linhagem }, new { @class = "delete" })
+                    </div>
+                </td>
+                <td class="ajuste">
+                    @Html.DisplayFor(modelItem => item.Linhagem)
+                </td>
+            </tr>
+        }
+        </tbody>
+        </table>
+        </div>
+    </li>
+    }
+</ul>
+<br />
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Adicionais que serão utilizados com essa fórmula:</li>
+    <li>
+        @using (Html.BeginForm("SaveAdicionalConfigFormulaRacao", "PedidoRacao", FormMethod.Post,
+            new { enctype = "multipart/form-data" }))
+        {
+            <table style="border:none; background: none;">
+                <tr style="border:none; background: none;">
+                    <td style="width: 70%; border:none; background: none;">
+                        <div class="editor-field">
+                            @Html.DropDownList(
+                            "Adicional",
+                            (List<SelectListItem>)Session["ListaAdicionaisCFR"],
+                            "(Selecione um Adicional)",
+                            new { @required = "true" })
+                        </div>
+                    </td>
+                    <td style="width: 25%; border:none; background: none;">
+                        @Html.TextBox("QtdeKgPorTon", null, new { @onkeyup = "mascara(this, mvalor4);", @required = "true" })
+                    </td>
+                    <td style="width: 5%; border:none; background: none;">
+                        <input type="submit" value="+"/>
+                    </td>
+                </tr>
+            </table>
+        }
+    </li>
+    @if (listaAdicionais.Count > 0)
+    {
+    <li>
+        <div style="overflow:auto;">
+        <table class="ajuste">
+            <tbody class="ajuste">
+            <tr class="ajuste">
+                <th class="ajuste"></th>
+                <th class="ajuste">
+                    Adicional
+                </th>
+                <th class="ajuste">
+                    Qtde. Kg. p/ Ton.:
+                </th>
+            </tr>
+        @foreach (var item in listaAdicionais)
+        {
+            var adicional = ddlAdicionais.Where(w => w.Value == item.ProdCodEstr).FirstOrDefault();
+            string descricao = "";
+            if (adicional != null)
+            {
+                descricao = adicional.Text;
+            }
+            
+            <tr class="ajuste">
+                <td class="ajuste">
+                    <div align="center">            
+                        @Html.ActionLink("Delete", "DeleteAdicionalConfigFormulaRacao",
+                            "PedidoRacao",
+                            new { adicional = item.ProdCodEstr }, new { @class = "delete" })
+                    </div>
+                </td>
+                <td class="ajuste">
+                    @(descricao)
+                </td>
+                <td class="ajuste">
+                    @String.Format("{0:N4}", item.QtdeKgPorTon)
+                </td>
+            </tr>
+        }
+        </tbody>
+        </table>
+        </div>
+    </li>
+    }
+</ul>
+@using (Html.BeginForm("SaveConfigFormulaRacao", "PedidoRacao", FormMethod.Post,
+    new { enctype = "multipart/form-data" }))
+{
+    <input type="submit" value="Salvar Configuração" id="saveCFR" onclick="verificaCampos(true)" />
+}

@@ -1,0 +1,3302 @@
+﻿@{
+    ViewBag.Title = "";
+
+    MvcAppHylinedoBrasilMobile.Models.LOG_Pedido_Venda logPV =
+        null;
+
+    decimal valorTotalItens = 0;
+    int qtdeTotalPintos = 0;
+    int qtdeTotalPintosCalcular = 0;
+    decimal valorTotalPintos = 0;
+    decimal precoTotalPintos = 0;
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities apoloStatic = new MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities();
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbappSession = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+}
+<style>
+    /* The container */
+    .container {
+      display: block;
+      position: relative;
+      @*padding-left: 35px;
+      margin-bottom: 12px;*@
+      cursor: pointer;
+      @*font-size: 22px;*@
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* Hide the browser's default checkbox */
+    .container input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    /* Create a custom checkbox */
+    .checkmark {
+      position: absolute;
+      top: 4px;
+      left: 10px;
+      height: 25px;
+      width: 25px;
+      background-color: #396b9e;
+      border-radius: 5px;
+    }
+
+    /* On mouse-over, add a grey background color */
+    @*.container:hover input ~ .checkmark {
+      background-color: #ccc;
+    }*@
+
+    /* When the checkbox is checked, add a blue background */
+    @*.container input:checked ~ .checkmark {
+      background-color: #2196F3;
+    }*@
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .container input:checked ~ .checkmark:after {
+      display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .container .checkmark:after {
+      left: 9px;
+      top: 5px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+</style>
+
+<script language="javascript" type="text/javascript">
+    window.onbeforeunload = function () {
+        return "Não é possível atualizar a página porque os dados serão perdidos! Sendo assim, a página será fechada!";
+    }
+
+    window.onkeydown = function (e) {
+        if (e.keyCode === 116) {
+            alert("Função não permitida");
+            e.keyCode = 0;
+            e.returnValue = false;
+            return false;
+        }
+    }
+
+    $(document).ready(function () {
+        //carregasVacinasSecundarias('inicio');
+        inicializaPagina();
+    });
+
+    setTimeout(function () { inicializaPagina(); }, 1);
+
+    function inicializaPagina() {
+        var textCliente = $('#ddlClientes option:selected').text();
+        var status = textCliente.substring(textCliente.indexOf("|") + 2,
+            textCliente.length);
+        verificaStatusCliente(status, 'inicializaPagina');
+        removeTableBonificacoesPendentes();
+        //var vacPrim = $('#ddlVacPrim').val();
+        carregasVacinasSecundarias('inicio');
+        //VerificaPrecoVacinaPrimaria(vacPrim);
+        $('#filtroCliente').focus();
+    }
+
+    function removeTableBonificacoesPendentes() {
+        $("#bonificacoesPendentes").remove();
+        $('#exibeBonificacoesPendentes').hide();
+    }
+
+    function createTableBonificacoesPendentes(data) {
+        var html = '<table id="bonificacoesPendentes"><tr>'
+            + '<th>Ação Tomada</th>'
+            + '<th>Data Nascimento</th>'
+            + '<th>Nº NF</th>'
+            + '<th>Qtde. Bonificada</th>'
+            + '</tr>';
+        $.each(data, function (key, item) {
+            html += '<tr>';
+            html += '<td>' + item.AcaoTomada + '</td>';
+            html += '<td>' + item.DataNascimento + '</td>';
+            html += '<td>' + item.NFNum + '</td>';
+            html += '<td>' + item.QtdeBonificada + '</td>';
+            html += "</tr>";
+        });
+        html += '</tbody></table>';
+        $('#exibeBonificacoesPendentes').show();
+        $(html).appendTo('#exibeBonificacoesPendentes');
+    }
+
+    function verificaFiltroCliente() {
+        var value = $('#filtroCliente').val();
+        var codCliente = "";
+        $.ajax({
+            url: '/PedidoVenda/FiltraCliente',
+            type: 'POST',
+            data: JSON.stringify({ id: value }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#ddlClientes').empty();
+                $.each(data, function (key, SelectListItem) {
+                    $('#lblMsgErro').hide();
+                    if (key == 0) {
+                        var status = SelectListItem.Text.substring(SelectListItem.Text.indexOf("|") + 2,
+                            SelectListItem.Text.length);
+                        var ret = verificaStatusCliente(status, 'verificaFiltroCliente');
+                        codCliente = SelectListItem.Value;
+                        if (ret == 'Erro') {
+                            return;
+                        }
+                    }
+                    if (SelectListItem.Value != "Erro") {
+                        $('select#ddlClientes').append('<option value="' + SelectListItem.Value + '">' + SelectListItem.Text + '</option>');
+                    }
+                });
+                $('select#ddlClientes').selectmenu('refresh');
+                $.each(data, function (key, SelectListItem) {
+                    if (SelectListItem.Value == "Erro") {
+                        alert(SelectListItem.Text);
+                        $('#FinalizaPedidoButton').button('disable');
+                        $('[type="submit"]').button('refresh');
+                    } else {
+                        $('#FinalizaPedidoButton').button('enable');
+                        $('[type="submit"]').button('refresh');
+                    }
+                });
+                $.ajax({
+                    url: '/PedidoVenda/CarregaEnderecoEntrega',
+                    type: 'POST',
+                    data: JSON.stringify({ id: codCliente }),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        $('select#ddlEnderecoEntrega').empty();
+                        $.each(data, function (key, SelectListItem) {
+                            $('select#ddlEnderecoEntrega').append('<option value="' + SelectListItem.Value + '">' + SelectListItem.Text + '</option>');
+                        });
+                        $('select#ddlEnderecoEntrega').selectmenu('refresh');
+                    }
+                });
+                $.ajax({
+                    url: '/PedidoVenda/VerificaBonificacoesPendentes',
+                    type: 'POST',
+                    data: JSON.stringify({ id: codCliente }),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        removeTableBonificacoesPendentes();
+                        if (data.length > 0) {
+                            createTableBonificacoesPendentes(data);
+                        }
+                    }
+                });
+                $.ajax({
+                    url: '/PedidoVenda/VerificaParticaBolsao',
+                    type: 'POST',
+                    data: JSON.stringify({ id: codCliente }),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        if (data) {
+                            $('#participaBolsao').val('Sim');
+                        } else {
+                            $('#participaBolsao').val('Não');
+                        }
+                        verificaLaringoBolsao();
+                    }
+                });
+            }
+        });
+    }
+
+    function verificaStatusCliente(status, origem) {
+        var ret = '';
+        $('#lblStatusCliente').html('<h2><i>Status: ' + status + '</i></h2>');
+        var background = 'Green';
+        var font = 'White';
+        $('#lblStatusMsg').html('');
+        if (origem != 'inicializaPagina') {
+            $('#FinalizaPedidoButton').button('enable');
+            $('[type="submit"]').button('refresh');
+        }
+        if (status == "Em Débito") {
+            background = 'Goldenrod';
+            font = 'White';
+            $('#lblStatusMsg').html('*** CASO SALVE O PEDIDO, SERÁ GERADA UMA SOLICITAÇÃO DE APROVAÇÃO PARA O GERENTE COMERCIAL '
+                                + ' E O STATUS DO PEDIDO FICARÁ COMO "AGUARDANDO ANÁLISE DA GERÊNCIA"!');
+        } else if (status == "Bloqueado") {
+            background = 'Red';
+            font = 'White';
+            $('#lblStatusMsg').html('*** CLIENTE COM PROGRAMAÇÃO BLOQUEADA... PROCURAR PROGRAMAÇÃO OU DEPTO. FINANCEIRO!');
+            if (origem != 'inicializaPagina') {
+                $('#FinalizaPedidoButton').button('disable');
+                $('[type="submit"]').button('refresh');
+                ret = 'Erro';
+            }
+        }
+        $('#pnlDadosCliente').css('background-color', background);
+        $('#pnlDadosCliente').css('color', font);
+        $('#pnlDadosCliente').css('border-radius', '10px');
+        $('#pnlDadosCliente').css('margin', '.6em 0');
+        $('#pnlDadosCliente').addClass('ui-li ui-li-static');
+        $('#lblStatusCliente').addClass('ui-li-heading');
+
+        return ret;
+    }
+
+    function verificaDDLClientes() {
+        var codCliente = $('#ddlClientes').val();
+        var textCliente = $('#ddlClientes option:selected').text();
+        var status = textCliente.substring(textCliente.indexOf("|") + 2,
+            textCliente.length);
+        if (verificaStatusCliente(status) == 'Erro') {
+            return;
+        }
+        $.ajax({
+            url: '/PedidoVenda/CarregaEnderecoEntrega',
+            type: 'POST',
+            data: JSON.stringify({ id: codCliente }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#ddlEnderecoEntrega').empty();
+                //$('select#ddlEnderecoEntrega').append('<option value="0" selected="selected">(Selecione um Endereço de Entrega)</option>');
+                $.each(data, function (key, SelectListItem) {
+                    $('select#ddlEnderecoEntrega').append('<option value="' + SelectListItem.Value + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#ddlEnderecoEntrega').selectmenu('refresh');
+                $.each(data, function (key, SelectListItem) {
+                    if (SelectListItem.Value == "Erro") {
+                        alert(SelectListItem.Text);
+                        $('#FinalizaPedidoButton').button('disable');
+                        $('[type="submit"]').button('refresh');
+                    } else {
+                        $('#FinalizaPedidoButton').button('enable');
+                        $('[type="submit"]').button('refresh');
+                    }
+                });
+                $.ajax({
+                    url: '/PedidoVenda/VerificaBonificacoesPendentes',
+                    type: 'POST',
+                    data: JSON.stringify({ id: codCliente }),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        removeTableBonificacoesPendentes();
+                        if (data.length > 0) {
+                            createTableBonificacoesPendentes(data);
+                        }
+                    }
+                });
+                $.ajax({
+                    url: '/PedidoVenda/VerificaParticaBolsao',
+                    type: 'POST',
+                    data: JSON.stringify({ id: codCliente }),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        if (data) {
+                            $('#participaBolsao').val('Sim');
+                        } else {
+                            $('#participaBolsao').val('Não');
+                        }
+                        verificaLaringoBolsao();
+                    }
+                });
+            }
+        });
+    }
+
+    function verificaDDLEnderecoEntrega() {
+        var idEndEnt = $('#ddlEnderecoEntrega').val();
+        $.ajax({
+            url: '/PedidoVenda/AtualizaEnderecoEntrega',
+            type: 'POST',
+            data: JSON.stringify({ id: idEndEnt }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+    }
+
+    function VerificaPrecoVacinaPrimaria(vacPrim) {
+        $.ajax({
+            url: '/PedidoVenda/CarregaPrecoVacinaPrimaria',
+            type: 'POST',
+            data: JSON.stringify({ codigoVacina: vacPrim }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (valorVacina) {
+                var precoHolder = document.getElementById('precoVacinaPrimaria');
+                if (precoHolder != null) {
+                    if (valorVacina != "0,00") {
+                        $('#pnlBonificaVacinaPrimaria').show();
+                        precoHolder.innerHTML = 'Preço da Vacina Primária: R$ ' + valorVacina.toString();
+                    } else {
+                        $('#pnlBonificaVacinaPrimaria').hide();
+                        precoHolder.innerHTML = '';
+                        $('#bonificaVacPrim').prop('checked', false).checkboxradio('refresh');
+                    }
+                }
+            }
+        });
+    }
+
+    function ValidaVacinasSecundarias() {
+        var vacPrim = $('#ddlVacPrim').val();
+//        if (vacPrim == "(Sem Vacinação)") {
+//            $('#bonificaVacPrim').prop('checked', false).checkboxradio('refresh');
+//            $('#bonificaVacPrim').prop('disabled', true).checkboxradio('refresh');
+//        } else {
+//            $('#bonificaVacPrim').prop('disabled', false).checkboxradio('refresh');
+//        }
+        $.ajax({
+            url: '/PedidoVenda/AtualizaVacinaPrimaria',
+            type: 'POST',
+            data: JSON.stringify({ id: vacPrim }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('#boubaAviaria').prop('checked', false).checkboxradio('refresh');
+                $('#boubaAviaria').prop('disabled', true).checkboxradio('refresh');
+                $('#boubaZoetis').prop('checked', false).checkboxradio('refresh');
+                $('#boubaZoetis').prop('disabled', true).checkboxradio('refresh');
+                $('#coccidiose').prop('checked', false).checkboxradio('refresh');
+                $('#coccidiose').prop('disabled', true).checkboxradio('refresh');
+                $('#bonificaCoccidiose').prop('checked', false).checkboxradio('refresh');
+                $('#bonificaCoccidiose').prop('disabled', true).checkboxradio('refresh');
+                $('#clienteCoccidiose').prop('checked', false).checkboxradio('refresh');
+                $('#clienteCoccidiose').prop('disabled', true).checkboxradio('refresh');
+                $('#gumboro').prop('checked', false).checkboxradio('refresh');
+                $('#gumboro').prop('disabled', true).checkboxradio('refresh');
+                $('#laringoCliente').prop('checked', false).checkboxradio('refresh');
+                $('#laringoCliente').prop('disabled', true).checkboxradio('refresh');
+                $('#laringoIncubatorio').prop('checked', false).checkboxradio('refresh');
+                $('#laringoIncubatorio').prop('disabled', true).checkboxradio('refresh');
+                $('#bonificaLaringoIncubatorio').prop('checked', false).checkboxradio('refresh');
+                $('#bonificaLaringoIncubatorio').prop('disabled', true).checkboxradio('refresh');
+                $('#clienteLaringoIncubatorio').prop('checked', false).checkboxradio('refresh');
+                $('#clienteLaringoIncubatorio').prop('disabled', true).checkboxradio('refresh');
+                $('#newcastle').prop('checked', false).checkboxradio('refresh');
+                $('#newcastle').prop('disabled', true).checkboxradio('refresh');
+                $('#bonificaNewcastle').prop('checked', false).checkboxradio('refresh');
+                $('#bonificaNewcastle').prop('disabled', true).checkboxradio('refresh');
+                $('#clienteNewcastle').prop('checked', false).checkboxradio('refresh');
+                $('#clienteNewcastle').prop('disabled', true).checkboxradio('refresh');
+                //$('#salmonella').prop('checked', false).checkboxradio('refresh');
+                //$('#salmonella').prop('disabled', true).checkboxradio('refresh');
+                $('#vectormuneFPMG').prop('checked', false).checkboxradio('refresh');
+                $('#vectormuneFPMG').prop('disabled', true).checkboxradio('refresh');
+                $('#bonificaVectormuneFPMG').prop('checked', false).checkboxradio('refresh');
+                $('#bonificaVectormuneFPMG').prop('disabled', true).checkboxradio('refresh');
+                $('#clienteVectormuneFPMG').prop('checked', false).checkboxradio('refresh');
+                $('#clienteVectormuneFPMG').prop('disabled', true).checkboxradio('refresh');
+                $('#magniplex').prop('checked', false).checkboxradio('refresh');
+                $('#magniplex').prop('disabled', true).checkboxradio('refresh');
+                $('#bonificaMagniplex').prop('checked', false).checkboxradio('refresh');
+                $('#bonificaMagniplex').prop('disabled', true).checkboxradio('refresh');
+                $('#clienteMagniplex').prop('checked', false).checkboxradio('refresh');
+                $('#clienteMagniplex').prop('disabled', true).checkboxradio('refresh');
+                $('#livacoxQ').prop('checked', false).checkboxradio('refresh');
+                $('#livacoxQ').prop('disabled', true).checkboxradio('refresh');
+                $('#vectormuneFPLT').prop('checked', false).checkboxradio('refresh');
+                $('#vectormuneFPLT').prop('disabled', true).checkboxradio('refresh');
+                $('#bonificaVectormuneFPLT').prop('checked', false).checkboxradio('refresh');
+                $('#bonificaVectormuneFPLT').prop('disabled', true).checkboxradio('refresh');
+                $('#clienteVectormuneFPLT').prop('checked', false).checkboxradio('refresh');
+                $('#clienteVectormuneFPLT').prop('disabled', true).checkboxradio('refresh');
+
+                $('#innovaxNDIBD').prop('checked', false).checkboxradio('refresh');
+                $('#innovaxNDIBD').prop('disabled', true).checkboxradio('refresh');
+                $('#bonificaInnovaxNDIBD').prop('checked', false).checkboxradio('refresh');
+                $('#bonificaInnovaxNDIBD').prop('disabled', true).checkboxradio('refresh');
+                $('#clienteInnovaxNDIBD').prop('checked', false).checkboxradio('refresh');
+                $('#clienteInnovaxNDIBD').prop('disabled', true).checkboxradio('refresh');
+                $.each(data, function (key, naoPodeCod) {
+                    verificavacsec(naoPodeCod, false);
+                });
+
+                VerificaPrecoVacinaPrimaria(vacPrim);
+            }
+        });
+    }
+
+    function verificaCasoTenhaPreco(codigoVacinaApolo, origem) {
+        var ckObjDOM = document.getElementById('ck_' + codigoVacinaApolo);
+        var ckBonificaObjDOM = document.getElementById('ck_' + codigoVacinaApolo + '_bonifica');
+        //var ckClienteEnviaObjDOM = document.getElementById('ck_' + codigoVacinaApolo + '_clienteEnvia');
+        if (origem == 'bonifica') {
+            //if (ckBonificaObjDOM.checked) {
+            //    ckClienteEnviaObjDOM.checked = false;
+            //}
+            $.ajax({
+                url: '/PedidoVenda/VerificaBonificacaoVacinaSecundaria',
+                type: 'POST',
+                data: JSON.stringify({ id: codigoVacinaApolo, check: ckObjDOM.checked, bonificaCheck: ckBonificaObjDOM.checked }),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                }
+            });
+        }
+        //else if (origem == 'clienteEnvia') {
+        //    if (ckClienteEnviaObjDOM.checked) {
+        //        ckBonificaObjDOM.checked = false;
+        //    }
+        //    $.ajax({
+        //        url: '/PedidoVenda/VerificaClienteVacinaSecundaria',
+        //        type: 'POST',
+        //        data: JSON.stringify({ id: codigoVacinaApolo, check: ckObjDOM.checked, clienteCheck: ckClienteEnviaObjDOM.checked }),
+        //        dataType: 'json',
+        //        contentType: 'application/json',
+        //        success: function (data) {
+        //        }
+        //    });
+
+        //}
+    }
+
+    function verificaVacinaSecundaria(codigoVacinaApolo) {
+        var ckObjDOM = document.getElementById('ck_' + codigoVacinaApolo);
+        var divCkObjDOM = document.getElementById('divck_' + codigoVacinaApolo);
+        var ckBonificaObjDOM = document.getElementById('ck_' + codigoVacinaApolo + '_bonifica');
+        var divCkBonificaObjDOM = document.getElementById('divck_' + codigoVacinaApolo + '_bonifica');
+        //var ckClienteEnviaObjDOM = document.getElementById('ck_' + codigoVacinaApolo + '_clienteEnvia');
+        //var divCkClienteEnviaObjDOM = document.getElementById('divck_' + codigoVacinaApolo + '_clienteEnvia');
+        var checked = ckObjDOM.checked;
+        if (ckBonificaObjDOM != null) {
+            if (!checked) {
+                ckBonificaObjDOM.checked = false;
+                ckBonificaObjDOM.disabled = true;
+                divCkBonificaObjDOM.setAttribute("class", "ui-disabled ui-checkbox container");
+                //ckClienteEnviaObjDOM.checked = false;
+                //ckClienteEnviaObjDOM.disabled = true;
+                //divCkClienteEnviaObjDOM.setAttribute("class", "ui-disabled ui-checkbox container");
+            } else {
+                ckBonificaObjDOM.disabled = false;
+                divCkBonificaObjDOM.setAttribute("class", "ui-checkbox container");
+                //ckClienteEnviaObjDOM.disabled = false;
+                //divCkClienteEnviaObjDOM.setAttribute("class", "ui-checkbox container");
+            }
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: codigoVacinaApolo, check: checked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $.each(data, function (key, naoPodeCod) {
+                    //var participaBolsao = $('#participaBolsao').val();
+                    var ckVSObjDOM = document.getElementById('ck_' + naoPodeCod);
+                    var divVSCkObjDOM = document.getElementById('divck_' + naoPodeCod);
+                    if (checked) {
+                        ckVSObjDOM.checked = false;
+                        ckVSObjDOM.disabled = true;
+                        divVSCkObjDOM.setAttribute("class", "ui-disabled ui-checkbox container");
+                    } else {
+                        ckVSObjDOM.disabled = false;
+                        divVSCkObjDOM.setAttribute("class", "ui-checkbox container");
+                    }
+                });
+            }
+        });
+    }
+
+    function createCheckBoxVacinaSecundaria(listaVacSec) {
+        var html = '';
+        var contColunas = 0;
+        $('#listaChecksVacinacasSecundarias').empty();
+
+        // Cabeçalho tabela
+        html += "<table id='tabelaVacSec' class='ajusteWithoutHeader'>"
+                + "<tbody class='ajusteWithoutHeader'>";
+        // Primeira Linha
+        html += "<tr class='ajusteWithoutHeader'>";
+
+        for (var i = 0; i < listaVacSec.length; i++) {
+            if (contColunas == 3) {
+                // Cria outra Linha
+                contColunas = 0;
+                html += "</tr>";
+                html += "<tr class='ajusteWithoutHeader'>";
+            }
+
+            // Inicio Cabeçalho Coluna
+            html += "<td class='ajusteWithoutHeader'>"
+                    + "<label style='width: 100%;'>";
+
+            var codigoVacinaApolo = listaVacSec[i].CodigoVacinaApolo;
+            var idCheck = "ck_" + codigoVacinaApolo;
+            var nomeComercialVacina = listaVacSec[i].NomeComercialVacina;
+            var checkCasoTenhaPreco = '';
+            if (listaVacSec[i].Preco != "") {
+                var disable = " disable='true' ";
+                var checkedBonifica = "";
+                //var checkedClienteEnvia = "";
+                if (listaVacSec[i].ExistePV) {
+                    disable = "";
+                    if (listaVacSec[i].Bonificacao) {
+                        checkedBonifica = " checked ";
+                    }
+                    //else if (listaVacSec[i].ClienteEnvia) {
+                    //    checkedClienteEnvia = " checked ";
+                    //}
+                }
+
+                var onchangeCasoTenhaPrecoBonifica = " onchange='verificaCasoTenhaPreco(" + JSON.stringify(codigoVacinaApolo) + "," + JSON.stringify('bonifica') + ")' ";
+                //var onchangeCasoTenhaPrecoClienteEnvia = " onchange='verificaCasoTenhaPreco(" + JSON.stringify(codigoVacinaApolo) + "," + JSON.stringify('clienteEnvia') + ")' ";
+                nomeComercialVacina = listaVacSec[i].NomeComercialVacina + " - " + listaVacSec[i].Preco;
+                checkCasoTenhaPreco = "<div id='div" + idCheck + "_bonifica' class='ui-checkbox container ui-disabled'>"
+                                        + "<label style='width: 50%;font-size: xx-small;'>"
+                                            + "<label style='width: 100%' data-corners='true' data-shadow='false' data-iconshadow='true' data-wrapperels='span' data-icon='checkbox-off'"
+                                                    + " data-theme='b' class='ui-btn ui-btn-corner-all ui-btn-icon-left ui-checkbox-off ui-btn-up-b'>"
+                                                + "<span class='ui-btn-inner ui-btn-corner-all'>"
+                                                    + "<span class='ui-btn-text'>"
+                                                        + "<input name='" + idCheck + "_bonifica' type='hidden' value='false'>"
+                                                            + "Bonifica?"
+                                                    + "</span>"
+                                                    + "<input type='checkbox' " + checkedBonifica + disable + " id='" + idCheck + "_bonifica'" + onchangeCasoTenhaPrecoBonifica + ">"
+                                                    + "<span class='checkmark'></span>"
+                                                + "</span>"
+                                            + "</label>"
+                                        + "</label>"
+                                    + "</div>"
+                                    //+ "<div id='div" + idCheck + "_clienteEnvia' class='ui-checkbox container ui-disabled'>"
+                                    //    + "<label style='width: 50%;font-size: xx-small;'>"
+                                    //        + "<label style='width: 100%' data-corners='true' data-shadow='false' data-iconshadow='true' data-wrapperels='span' data-icon='checkbox-off'"
+                                    //                + " data-theme='b' class='ui-btn ui-btn-corner-all ui-btn-icon-left ui-checkbox-off ui-btn-up-b'>"
+                                    //            + "<span class='ui-btn-inner ui-btn-corner-all'>"
+                                    //                + "<span class='ui-btn-text'>"
+                                    //                    + "<input name='" + idCheck + "_clienteEnvia' type='hidden' value='false'>"
+                                    //                        + "Cliente Envia?"
+                                    //                + "</span>"
+                                    //                + "<input type='checkbox' " + checkedClienteEnvia + disable + " id='" + idCheck + "_clienteEnvia'" + onchangeCasoTenhaPrecoClienteEnvia + ">"
+                                    //                + "<span class='checkmark'></span>"
+                                    //            + "</span>"
+                                    //        + "</label>"
+                                    //    + "</label>"
+                                    //+ "</div>"
+                                    ;
+            }
+            
+            var onchange = " onchange='verificaVacinaSecundaria(" + JSON.stringify(codigoVacinaApolo) + ")' ";
+            var checked = "";
+            if (listaVacSec[i].ExistePV) {
+                checked = " checked ";
+            }
+
+            html += "<div id='div" + idCheck + "' class='ui-checkbox container'>"
+                    + "<label style='width: 100%' data-corners='true' data-shadow='false' data-iconshadow='true' data-wrapperels='span' data-icon='checkbox-off'" 
+                            + " data-theme='b' class='ui-btn ui-btn-corner-all ui-btn-icon-left ui-checkbox-off ui-btn-up-b'>"
+                        + "<span class='ui-btn-inner ui-btn-corner-all'>"
+                            + "<span class='ui-btn-text'>"
+                                + "<input name='" + idCheck + "' type='hidden' value='false'>"
+                                    + nomeComercialVacina
+                            + "</span>"
+            //+"<span class='ui-icon ui-icon-checkbox-off ui-icon-shadow'>&nbsp;</span>"
+                            + "<input type='checkbox' " + checked + "id='" + idCheck + "'" + onchange + ">"
+                            + "<span class='checkmark'></span>"
+                            //+ "<span class='ui-icon ui-icon-checkbox-off ui-icon-shadow'>"
+                            //+ "</span>"
+                        + "</span>"
+                    + "</label>"
+				  + "</div>"
+                  + checkCasoTenhaPreco;
+
+            //+"<input type='checkbox' " + checked + "id='" + idCheck + "'" + onclick + ">"
+            //+ "<label for='" + idCheck + "'>" + nomeComercialVacina + "</label>"
+
+            // Fim Cabeçalho Coluna
+            html += "</label>"
+               + "</td>";
+
+            contColunas++;
+        }
+
+        // Fechamento última linha
+        html += "</tr>";
+
+        $(html).appendTo('#listaChecksVacinacasSecundarias');
+
+        for (var i = 0; i < listaVacSec.length; i++) {
+            var codigoVacinaApolo = listaVacSec[i].CodigoVacinaApolo;
+            if (listaVacSec[i].ExistePV) {
+                verificaVacinaSecundaria(codigoVacinaApolo);
+            }
+        }
+    }
+
+    function carregasVacinasSecundarias(origem) {
+        var vacPrim = $('#ddlVacPrim').val();
+        $.ajax({
+            url: '/PedidoVenda/CarregasVacinasSecundarias',
+            type: 'POST',
+            data: JSON.stringify({ id: vacPrim, chamada: origem }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                createCheckBoxVacinaSecundaria(data);
+                VerificaPrecoVacinaPrimaria(vacPrim);
+            }
+        });
+    }
+
+    function verificaDDLVacPrim() {
+        //ValidaVacinasSecundarias();
+        carregasVacinasSecundarias('trocaVacinaPrimaria');
+    }
+
+    function verificaBonificaVacPrim() {
+        var bonificaChecked = $('#bonificaVacPrim').prop('checked');
+        if (bonificaChecked) {
+            $('#clienteVacPrim').prop('checked', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/AtualizaBonificaVacinaPrimaria',
+            type: 'POST',
+            data: JSON.stringify({ bonificaCheck: bonificaChecked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+    }
+
+    function verificaClienteVacPrim() {
+        var clienteChecked = $('#clienteVacPrim').prop('checked');
+        if (clienteChecked) {
+            $('#bonificaVacPrim').prop('checked', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/AtualizaClienteVacinaPrimaria',
+            type: 'POST',
+            data: JSON.stringify({ clienteCheck: clienteChecked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+    }
+
+    function verificavacsec(naoPodeCod, checked) {
+        var participaBolsao = $('#participaBolsao').val();
+        if (naoPodeCod == '003.006.074') {
+            if (checked) {
+                $('#boubaAviaria').prop('checked', false).checkboxradio('refresh');
+                $('#boubaAviaria').prop('disabled', true).checkboxradio('refresh');
+            } else {
+                $('#boubaAviaria').prop('disabled', false).checkboxradio('refresh');
+            }
+        }
+        if (naoPodeCod == '003.006.050') {
+            if (checked) {
+                $('#boubaZoetis').prop('checked', false).checkboxradio('refresh');
+                $('#boubaZoetis').prop('disabled', true).checkboxradio('refresh');
+            } else {
+                $('#boubaZoetis').prop('disabled', false).checkboxradio('refresh');
+            }
+        }
+        if (naoPodeCod == '003.006.060') {
+            if (checked) {
+                $('#coccidiose').prop('checked', false).checkboxradio('refresh');
+                $('#coccidiose').prop('disabled', true).checkboxradio('refresh');
+//                $('#bonificaCoccidiose').prop('checked', false).checkboxradio('refresh');
+//                $('#bonificaCoccidiose').prop('disabled', true).checkboxradio('refresh');
+            } else {
+                $('#coccidiose').prop('disabled', false).checkboxradio('refresh');
+//                $('#bonificaCoccidiose').prop('disabled', false).checkboxradio('refresh');
+            }
+        }
+        if (naoPodeCod == '003.006.004') {
+            if (checked) {
+                $('#gumboro').prop('checked', false).checkboxradio('refresh');
+                $('#gumboro').prop('disabled', true).checkboxradio('refresh');
+            } else {
+                $('#gumboro').prop('disabled', false).checkboxradio('refresh');
+            }
+        }
+        if (naoPodeCod == '003.006.081') {
+            if (participaBolsao == 'Sim') {
+                if (checked) {
+                    $('#laringoCliente').prop('checked', false).checkboxradio('refresh');
+                    $('#laringoCliente').prop('disabled', true).checkboxradio('refresh');
+                } else {
+                    $('#laringoCliente').prop('disabled', false).checkboxradio('refresh');
+                }
+            } else {
+                $('#laringoCliente').prop('checked', false).checkboxradio('refresh');
+                $('#laringoCliente').prop('disabled', true).checkboxradio('refresh');
+            }
+        }
+        if (naoPodeCod == '003.006.064') {
+            //if (participaBolsao == 'Sim') {
+                if (checked) {
+                    $('#laringoIncubatorio').prop('checked', false).checkboxradio('refresh');
+                    $('#laringoIncubatorio').prop('disabled', true).checkboxradio('refresh');
+//                    $('#bonificaLaringoIncubatorio').prop('checked', false).checkboxradio('refresh');
+//                    $('#bonificaLaringoIncubatorio').prop('disabled', true).checkboxradio('refresh');
+                } else {
+                    $('#laringoIncubatorio').prop('disabled', false).checkboxradio('refresh');
+//                    $('#bonificaLaringoIncubatorio').prop('disabled', false).checkboxradio('refresh');
+                }
+//            } else {
+//                $('#laringoIncubatorio').prop('checked', false).checkboxradio('refresh');
+//                $('#laringoIncubatorio').prop('disabled', true).checkboxradio('refresh');
+////                $('#bonificaLaringoIncubatorio').prop('checked', false).checkboxradio('refresh');
+////                $('#bonificaLaringoIncubatorio').prop('disabled', true).checkboxradio('refresh');
+//            }
+        }
+        if (naoPodeCod == '003.006.098') {
+            if (checked) {
+                $('#newcastle').prop('checked', false).checkboxradio('refresh');
+                $('#newcastle').prop('disabled', true).checkboxradio('refresh');
+//                $('#bonificaNewcastle').prop('checked', false).checkboxradio('refresh');
+//                $('#bonificaNewcastle').prop('disabled', true).checkboxradio('refresh');
+            } else {
+                $('#newcastle').prop('disabled', false).checkboxradio('refresh');
+//                $('#bonificaNewcastle').prop('disabled', false).checkboxradio('refresh');
+            }
+        }
+//        if (naoPodeCod == '003.006.082') {
+//            if (checked) {
+//                $('#salmonella').prop('checked', false).checkboxradio('refresh');
+//                $('#salmonella').prop('disabled', true).checkboxradio('refresh');
+//            } else {
+//                $('#salmonella').prop('disabled', false).checkboxradio('refresh');
+//            }
+//        }
+        if (naoPodeCod == '003.006.104') {
+            if (checked) {
+                $('#vectormuneFPMG').prop('checked', false).checkboxradio('refresh');
+                $('#vectormuneFPMG').prop('disabled', true).checkboxradio('refresh');
+//                $('#bonificaVectormuneFPMG').prop('checked', false).checkboxradio('refresh');
+//                $('#bonificaVectormuneFPMG').prop('disabled', true).checkboxradio('refresh');
+            } else {
+                $('#vectormuneFPMG').prop('disabled', false).checkboxradio('refresh');
+//                $('#bonificaVectormuneFPMG').prop('disabled', false).checkboxradio('refresh');
+            }
+        }
+        if (naoPodeCod == '003.006.110') {
+            if (checked) {
+                $('#magniplex').prop('checked', false).checkboxradio('refresh');
+                $('#magniplex').prop('disabled', true).checkboxradio('refresh');
+//                $('#bonificaMagniplex').prop('checked', false).checkboxradio('refresh');
+//                $('#bonificaMagniplex').prop('disabled', true).checkboxradio('refresh');
+            } else {
+                $('#magniplex').prop('disabled', false).checkboxradio('refresh');
+//                $('#bonificaMagniplex').prop('disabled', false).checkboxradio('refresh');
+            }
+        }
+        if (naoPodeCod == '003.006.028') {
+            if (checked) {
+                $('#livacoxQ').prop('checked', false).checkboxradio('refresh');
+                $('#livacoxQ').prop('disabled', true).checkboxradio('refresh');
+            } else {
+                $('#livacoxQ').prop('disabled', false).checkboxradio('refresh');
+            }
+        }
+        if (naoPodeCod == '003.006.139') {
+            if (checked) {
+                $('#vectormuneFPLT').prop('checked', false).checkboxradio('refresh');
+                $('#vectormuneFPLT').prop('disabled', true).checkboxradio('refresh');
+                //                $('#bonificaMagniplex').prop('checked', false).checkboxradio('refresh');
+                //                $('#bonificaMagniplex').prop('disabled', true).checkboxradio('refresh');
+            } else {
+                $('#vectormuneFPLT').prop('disabled', false).checkboxradio('refresh');
+                //                $('#bonificaMagniplex').prop('disabled', false).checkboxradio('refresh');
+            }
+        }
+        if (naoPodeCod == '003.006.140') {
+            if (checked) {
+                $('#innovaxNDIBD').prop('checked', false).checkboxradio('refresh');
+                $('#innovaxNDIBD').prop('disabled', true).checkboxradio('refresh');
+                //                $('#bonificaMagniplex').prop('checked', false).checkboxradio('refresh');
+                //                $('#bonificaMagniplex').prop('disabled', true).checkboxradio('refresh');
+            } else {
+                $('#innovaxNDIBD').prop('disabled', false).checkboxradio('refresh');
+                //                $('#bonificaMagniplex').prop('disabled', false).checkboxradio('refresh');
+            }
+        }
+    }
+
+    function verificaBoubaAviaria() {
+        var checked = $('#boubaAviaria').prop('checked');
+        $.ajax({
+            url: '/PedidoVenda/VerificaVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.074', check: checked, bonificaCheck: false }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $.each(data, function (key, naoPodeCod) {
+                    verificavacsec(naoPodeCod, checked);
+                });
+            }
+        });
+    }
+
+    function verificaBoubaZoetis() {
+        var checked = $('#boubaZoetis').prop('checked');
+        $.ajax({
+            url: '/PedidoVenda/VerificaVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.050', check: checked, bonificaCheck: false }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $.each(data, function (key, naoPodeCod) {
+                    verificavacsec(naoPodeCod, checked);
+                });
+            }
+        });
+    }
+
+    function verificaCoccidiose() {
+        var checked = $('#coccidiose').prop('checked');
+        if (!checked) {
+            $('#bonificaCoccidiose').prop('checked', false).checkboxradio('refresh');
+            $('#bonificaCoccidiose').prop('disabled', true).checkboxradio('refresh');
+            $('#clienteCoccidiose').prop('checked', false).checkboxradio('refresh');
+            $('#clienteCoccidiose').prop('disabled', true).checkboxradio('refresh');
+        } else {
+            $('#bonificaCoccidiose').prop('disabled', false).checkboxradio('refresh');
+            $('#clienteCoccidiose').prop('disabled', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.060', check: checked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $.each(data, function (key, naoPodeCod) {
+                    verificavacsec(naoPodeCod, checked);
+                });
+            }
+        });
+    }
+
+    function verificaBonificaCoccidiose() {
+        var checked = $('#coccidiose').prop('checked');
+        var bonificaChecked = $('#bonificaCoccidiose').prop('checked');
+        if (bonificaChecked) {
+            $('#clienteCoccidiose').prop('checked', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaBonificacaoVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.060', check: checked, bonificaCheck: bonificaChecked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+    }
+
+    function verificaClienteCoccidiose() {
+        var checked = $('#coccidiose').prop('checked');
+        var clienteChecked = $('#clienteCoccidiose').prop('checked');
+        if (clienteChecked) {
+            $('#bonificaCoccidiose').prop('checked', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaClienteVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.060', check: checked, clienteCheck: clienteChecked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+    }
+
+    function verificaGumboro() {
+        var checked = $('#gumboro').prop('checked');
+        $.ajax({
+            url: '/PedidoVenda/VerificaVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.004', check: checked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $.each(data, function (key, naoPodeCod) {
+                    verificavacsec(naoPodeCod, checked);
+                });
+            }
+        });
+    }
+
+    function verificaLaringoCliente() {
+        var checked = $('#laringoCliente').prop('checked');
+        $.ajax({
+            url: '/PedidoVenda/VerificaVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.081', check: checked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $.each(data, function (key, naoPodeCod) {
+                    verificavacsec(naoPodeCod, checked);
+                });
+            }
+        });
+        //verificaLaringoBolsao();
+    }
+
+    function verificaLaringoIncubatorio() {
+        var checked = $('#laringoIncubatorio').prop('checked');
+        if (!checked) {
+            $('#bonificaLaringoIncubatorio').prop('checked', false).checkboxradio('refresh');
+            $('#bonificaLaringoIncubatorio').prop('disabled', true).checkboxradio('refresh');
+            $('#clienteLaringoIncubatorio').prop('checked', false).checkboxradio('refresh');
+            $('#clienteLaringoIncubatorio').prop('disabled', true).checkboxradio('refresh');
+        } else {
+            $('#bonificaLaringoIncubatorio').prop('disabled', false).checkboxradio('refresh');
+            $('#clienteLaringoIncubatorio').prop('disabled', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.064', check: checked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $.each(data, function (key, naoPodeCod) {
+                    verificavacsec(naoPodeCod, checked);
+                });
+            }
+        });
+        //verificaLaringoBolsao();
+    }
+
+    function verificaBonificaLaringoIncubatorio() {
+        var checked = $('#laringoIncubatorio').prop('checked');
+        var bonificaChecked = $('#bonificaLaringoIncubatorio').prop('checked');
+        if (bonificaChecked) {
+            $('#clienteLaringoIncubatorio').prop('checked', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaBonificacaoVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.064', check: checked, bonificaCheck: bonificaChecked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+    }
+
+    function verificaClienteLaringoIncubatorio() {
+        var checked = $('#laringoIncubatorio').prop('checked');
+        var clienteChecked = $('#clienteLaringoIncubatorio').prop('checked');
+        if (clienteChecked) {
+            $('#bonificaLaringoIncubatorio').prop('checked', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaClienteVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.064', check: checked, clienteCheck: clienteChecked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+    }
+
+    function verificaNewcastle() {
+        var checked = $('#newcastle').prop('checked');
+        if (!checked) {
+            $('#bonificaNewcastle').prop('checked', false).checkboxradio('refresh');
+            $('#bonificaNewcastle').prop('disabled', true).checkboxradio('refresh');
+            $('#clienteNewcastle').prop('checked', false).checkboxradio('refresh');
+            $('#clienteNewcastle').prop('disabled', true).checkboxradio('refresh');
+        } else {
+            $('#bonificaNewcastle').prop('disabled', false).checkboxradio('refresh');
+            $('#clienteNewcastle').prop('disabled', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.098', check: checked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $.each(data, function (key, naoPodeCod) {
+                    verificavacsec(naoPodeCod, checked);
+                });
+            }
+        });
+    }
+
+    function verificaBonificaNewcastle() {
+        var checked = $('#newcastle').prop('checked');
+        var bonificaChecked = $('#bonificaNewcastle').prop('checked');
+        if (bonificaChecked) {
+            $('#clienteNewcastle').prop('checked', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaBonificacaoVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.098', check: checked, bonificaCheck: bonificaChecked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+    }
+
+    function verificaClienteNewcastle() {
+        var checked = $('#newcastle').prop('checked');
+        var clienteChecked = $('#clienteNewcastle').prop('checked');
+        if (clienteChecked) {
+            $('#bonificaNewcastle').prop('checked', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaClienteVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.098', check: checked, clienteCheck: clienteChecked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+    }
+
+    function verificaSalmonella() {
+        var checked = $('#salmonella').prop('checked');
+        $.ajax({
+            url: '/PedidoVenda/VerificaVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.082', check: checked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $.each(data, function (key, naoPodeCod) {
+                    verificavacsec(naoPodeCod, checked);
+                });
+            }
+        });
+    }
+
+    function verificaVectormuneFPMG() {
+        var checked = $('#vectormuneFPMG').prop('checked');
+        if (!checked) {
+            $('#bonificaVectormuneFPMG').prop('checked', false).checkboxradio('refresh');
+            $('#bonificaVectormuneFPMG').prop('disabled', true).checkboxradio('refresh');
+            $('#clienteVectormuneFPMG').prop('checked', false).checkboxradio('refresh');
+            $('#clienteVectormuneFPMG').prop('disabled', true).checkboxradio('refresh');
+        } else {
+            $('#bonificaVectormuneFPMG').prop('disabled', false).checkboxradio('refresh');
+            $('#clienteVectormuneFPMG').prop('disabled', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.104', check: checked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $.each(data, function (key, naoPodeCod) {
+                    verificavacsec(naoPodeCod, checked);
+                });
+            }
+        });
+    }
+
+    function verificaBonificaVectormuneFPMG() {
+        var checked = $('#vectormuneFPMG').prop('checked');
+        var bonificaChecked = $('#bonificaVectormuneFPMG').prop('checked');
+        if (bonificaChecked) {
+            $('#clienteVectormuneFPMG').prop('checked', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaBonificacaoVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.104', check: checked, bonificaCheck: bonificaChecked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+    }
+
+    function verificaClienteVectormuneFPMG() {
+        var checked = $('#vectormuneFPMG').prop('checked');
+        var clienteChecked = $('#clienteVectormuneFPMG').prop('checked');
+        if (clienteChecked) {
+            $('#bonificaVectormuneFPMG').prop('checked', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaClienteVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.104', check: checked, clienteCheck: clienteChecked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+    }
+
+    function verificaMagniplex() {
+        var checked = $('#magniplex').prop('checked');
+        if (!checked) {
+            $('#bonificaMagniplex').prop('checked', false).checkboxradio('refresh');
+            $('#bonificaMagniplex').prop('disabled', true).checkboxradio('refresh');
+            $('#clienteMagniplex').prop('checked', false).checkboxradio('refresh');
+            $('#clienteMagniplex').prop('disabled', true).checkboxradio('refresh');
+        } else {
+            $('#bonificaMagniplex').prop('disabled', false).checkboxradio('refresh');
+            $('#clienteMagniplex').prop('disabled', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.110', check: checked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $.each(data, function (key, naoPodeCod) {
+                    verificavacsec(naoPodeCod, checked);
+                });
+            }
+        });
+    }
+
+    function verificaBonificaMagniplex() {
+        var checked = $('#magniplex').prop('checked');
+        var bonificaChecked = $('#bonificaMagniplex').prop('checked');
+        if (bonificaChecked) {
+            $('#clienteMagniplex').prop('checked', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaBonificacaoVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.110', check: checked, bonificaCheck: bonificaChecked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+    }
+
+    function verificaClienteMagniplex() {
+        var checked = $('#magniplex').prop('checked');
+        var clienteChecked = $('#clienteMagniplex').prop('checked');
+        if (clienteChecked) {
+            $('#bonificaMagniplex').prop('checked', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaClienteVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.110', check: checked, clienteCheck: clienteChecked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+    }
+
+    function verificaLivacoxQ() {
+        var checked = $('#livacoxQ').prop('checked');
+        $.ajax({
+            url: '/PedidoVenda/VerificaVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.028', check: checked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $.each(data, function (key, naoPodeCod) {
+                    verificavacsec(naoPodeCod, checked);
+                });
+            }
+        });
+    }
+
+    function verificaVectormuneFPLT() {
+        var checked = $('#vectormuneFPLT').prop('checked');
+        if (!checked) {
+            $('#bonificaVectormuneFPLT').prop('checked', false).checkboxradio('refresh');
+            $('#bonificaVectormuneFPLT').prop('disabled', true).checkboxradio('refresh');
+            $('#clienteVectormuneFPLT').prop('checked', false).checkboxradio('refresh');
+            $('#clienteVectormuneFPLT').prop('disabled', true).checkboxradio('refresh');
+        } else {
+            $('#bonificaVectormuneFPLT').prop('disabled', false).checkboxradio('refresh');
+            $('#clienteVectormuneFPLT').prop('disabled', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.139', check: checked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $.each(data, function (key, naoPodeCod) {
+                    verificavacsec(naoPodeCod, checked);
+                });
+            }
+        });
+    }
+
+    function verificaBonificaVectormuneFPLT() {
+        var checked = $('#vectormuneFPLT').prop('checked');
+        var bonificaChecked = $('#bonificaVectormuneFPLT').prop('checked');
+        if (bonificaChecked) {
+            $('#clienteVectormuneFPLT').prop('checked', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaBonificacaoVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.139', check: checked, bonificaCheck: bonificaChecked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+    }
+
+    function verificaClienteVectormuneFPLT() {
+        var checked = $('#vectormuneFPLT').prop('checked');
+        var clienteChecked = $('#clienteVectormuneFPLT').prop('checked');
+        if (clienteChecked) {
+            $('#bonificaVectormuneFPLT').prop('checked', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaClienteVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.139', check: checked, clienteCheck: clienteChecked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+    }
+
+    function verificaInnovaxNDIBD() {
+        var checked = $('#innovaxNDIBD').prop('checked');
+        if (!checked) {
+            $('#bonificaInnovaxNDIBD').prop('checked', false).checkboxradio('refresh');
+            $('#bonificaInnovaxNDIBD').prop('disabled', true).checkboxradio('refresh');
+            $('#clienteInnovaxNDIBD').prop('checked', false).checkboxradio('refresh');
+            $('#clienteInnovaxNDIBD').prop('disabled', true).checkboxradio('refresh');
+        } else {
+            $('#bonificaInnovaxNDIBD').prop('disabled', false).checkboxradio('refresh');
+            $('#clienteInnovaxNDIBD').prop('disabled', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.140', check: checked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $.each(data, function (key, naoPodeCod) {
+                    verificavacsec(naoPodeCod, checked);
+                });
+            }
+        });
+    }
+
+    function verificaBonificaInnovaxNDIBD() {
+        var checked = $('#innovaxNDIBD').prop('checked');
+        var bonificaChecked = $('#bonificaInnovaxNDIBD').prop('checked');
+        if (bonificaChecked) {
+            $('#clienteInnovaxNDIBD').prop('checked', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaBonificacaoVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.140', check: checked, bonificaCheck: bonificaChecked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+    }
+
+    function verificaClienteInnovaxNDIBD() {
+        var checked = $('#innovaxNDIBD').prop('checked');
+        var clienteChecked = $('#clienteInnovaxNDIBD').prop('checked');
+        if (clienteChecked) {
+            $('#bonificaInnovaxNDIBD').prop('checked', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/VerificaClienteVacinaSecundaria',
+            type: 'POST',
+            data: JSON.stringify({ id: '003.006.140', check: checked, clienteCheck: clienteChecked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+    }
+
+    function verificaTratamentoInfravermelho() {
+        //$('#qtdTratamentoInfravermelho').prop('disabled', !this.checked);
+        //var value = $('#tratamentoInfravermelho:checked').val();
+        var value = $('#tratamentoInfravermelho').prop('checked');
+        if (!value) {
+            $('#qtdTratamentoInfravermelho').val('');
+            $('#qtdTratamentoInfravermelho').prop('disabled', true);
+            $('#bonificaServico').prop('checked', false).checkboxradio('refresh');
+            $('#bonificaServico').prop('disabled', true).checkboxradio('refresh');
+        } else {
+            $('#qtdTratamentoInfravermelho').val('100');
+            $('#qtdTratamentoInfravermelho').prop('disabled', false);
+            $('#bonificaServico').prop('disabled', false).checkboxradio('refresh');
+        }
+        $.ajax({
+            url: '/PedidoVenda/AtualizaTratInfra',
+            type: 'POST',
+            data: JSON.stringify({ id: value }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                    $('#qtdTratamentoInfravermelho').focus();
+                } else {
+                    alert(data.toString());
+                }
+            }
+        });
+    }
+
+    function verificaQtdTratamentoInfravermelho() {
+        var value = $('#qtdTratamentoInfravermelho').val().replace(',','.');
+        if (isNaN(value)) {
+            alert('Somente números são permitidos!');
+            $('#qtdTratamentoInfravermelho').focus();
+        }
+        else if ((value < 1) || (value > 100)) {
+            alert('A quantidade deve de 1% a 100%!');
+            $('#qtdTratamentoInfravermelho').focus();
+        }
+        else {
+            var valueOK = $('#qtdTratamentoInfravermelho').val();
+            $.ajax({
+                url: '/PedidoVenda/AtualizaQtdTratVermelho',
+                type: 'POST',
+                data: JSON.stringify({ id: valueOK }),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                    if (data == '') {
+                    } else {
+                        alert(data.toString());
+                        $('#qtdTratamentoInfravermelho').focus();
+                    }
+                }
+            });
+        }
+    }
+
+    function verificaBonificaServico() {
+        var bonificaChecked = $('#bonificaServico').prop('checked');
+        $.ajax({
+            url: '/PedidoVenda/AtualizaBonificaServico',
+            type: 'POST',
+            data: JSON.stringify({ bonificaCheck: bonificaChecked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+    }
+
+    $('#ovosBrasil').change(function () {
+        //var value = $('#ovosBrasil:checked').val();
+        var value = $('#ovosBrasil').prop('checked');
+        $.ajax({
+            url: '/PedidoVenda/AtualizaOvosBrasil',
+            type: 'POST',
+            data: JSON.stringify({ id: value }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                } else {
+                    alert(data.toString());
+                }
+            }
+        });
+    });
+
+    function verificaCondPag() {
+        var value = $('#CondPag').val();
+        $.ajax({
+            url: '/PedidoVenda/AtualizaCondPag',
+            type: 'POST',
+            data: JSON.stringify({ id: value }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                } else {
+                    alert(data.toString());
+                }
+            }
+        });
+    }
+
+    function verificaFiltroCondPag() {
+        var value = $('#filtroCondPag').val();
+        $.ajax({
+            url: '/PedidoVenda/FiltraCondicaoPagamento',
+            type: 'POST',
+            data: JSON.stringify({ id: value }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#CondPag').empty();
+                //$('select#ddlEnderecoEntrega').append('<option value="0" selected="selected">(Selecione um Endereço de Entrega)</option>');
+                $.each(data, function (key, SelectListItem) {
+                    $('select#CondPag').append('<option value="' + SelectListItem.Value + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#CondPag').selectmenu('refresh');
+            }
+        });
+    }
+
+    function verificaObservacao() {
+        var value = $('#observacao').val();
+        $.ajax({
+            url: '/PedidoVenda/AtualizaObservacao',
+            type: 'POST',
+            data: JSON.stringify({ id: value }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                } else {
+                    alert(data.toString());
+                }
+            }
+        });
+    }
+
+    function verificaVendedor() {
+        var value = $('#Vendedor').val();
+        $.ajax({
+            url: '/PedidoVenda/AtualizaVendedor',
+            type: 'POST',
+            data: JSON.stringify({ id: value }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                } else {
+                    alert(data.toString());
+                }
+            }
+        });
+    }
+
+    function verificaLaringoBolsao() {
+        var laringoIncubatorio = $('#laringoIncubatorio').prop('checked');
+        var laringoCliente = $('#laringoCliente').prop('checked');
+        var participaBolsao = $('#participaBolsao').val();
+        var errorHolder = document.getElementById('error');
+        if (participaBolsao == 'Sim') {
+            ValidaVacinasSecundarias();
+//            if (!laringoIncubatorio && !laringoCliente) {
+//                errorHolder.innerHTML = 'O Cliente está dentro de Bolsão de Laringo! '
+//                + 'É obrigatório selecionar uma das opções de Vacina de Laringo para Salvar o Pedido!';
+//                $('#FinalizaPedidoButton').button('disable');
+//                $('[type="submit"]').button('refresh');
+//                return true;
+            //            }
+        } else {
+            $('#laringoCliente').prop('checked', false).checkboxradio('refresh');
+            $('#laringoCliente').prop('disabled', true).checkboxradio('refresh');
+//            $('#laringoIncubatorio').prop('checked', false).checkboxradio('refresh');
+//            $('#laringoIncubatorio').prop('disabled', true).checkboxradio('refresh');
+            errorHolder.innerHTML = '';
+            $('#FinalizaPedidoButton').button('enable');
+            $('[type="submit"]').button('refresh');
+            return false;
+        }
+    }
+
+//    $('#FinalizaPedidoButton').click(function () {
+//        //if (verificaLaringoBolsao()) { return; }
+//    });
+</script>
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Pedidos de Venda", "Index", "PedidoVenda")
+        <br />
+        <b style="color:red; background-color:Yellow">
+            * CUIDADO!!! CASO CLIQUE NO LINK ACIMA, OS DADOS INFORMADOS DO PEDIDO
+            ANTES DA FINALIZAÇÃO SERÃO PERDIDOS!!!
+        </b>
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/pedidoVenda.png"), "Pedido de Venda")
+</div>
+<br />
+@if (ViewBag.Erro != null)
+{
+<h4 class="msgErro ui-li ui-li-static">
+    @Html.Raw(ViewBag.Erro.Replace("\r\n", "<br />"))
+</h4>
+}
+
+<h2>
+    Preencha / Altere o formulário conforme solicitado.
+</h2>
+<div>
+@{
+    string codigoCliente = "";
+    if (Session["selectedCustomer"] != null)
+    {
+        codigoCliente = Session["selectedCustomer"].ToString();
+    }
+
+    string codigoVendedor = "";
+    if (Session["selectedCustomer"] != null)
+    {
+        codigoVendedor = Session["vendedorPV"].ToString();
+    }
+
+    //MvcAppHylinedoBrasilMobile.Models.CHICMobileDataSet.salesmanNavDataTable salesmanDT =
+    //    new MvcAppHylinedoBrasilMobile.Models.CHICMobileDataSet.salesmanNavDataTable();
+    //MvcAppHylinedoBrasilMobile.Models.CHICMobileDataSetTableAdapters.salesmanNavTableAdapter salesmanTA =
+    //    new MvcAppHylinedoBrasilMobile.Models.CHICMobileDataSetTableAdapters.salesmanNavTableAdapter();
+
+    ////salesmanTA.FillBy(salesmanDT, login, empresa, login, empresa);
+    //salesmanTA.FillByCode(salesmanDT, codigoVendedor);
+
+    //var vendedor = salesmanDT.ToList().Where(w => w.sl_code == codigoVendedor).FirstOrDefault();
+
+    var codigoVendedorApolo = "0" + codigoVendedor;
+    if (codigoVendedor.Length == 7)
+    {
+        codigoVendedorApolo = codigoVendedor;
+    }
+    var vendedor = apoloStatic.VU_Vendedores.Where(w => w.VendCod == codigoVendedorApolo).FirstOrDefault();
+
+    string empresaL = "";
+    if (vendedor != null)
+    {
+        empresaL = vendedor.CodigoCHIC;
+    }
+    else
+    {
+        empresaL = Session["empresa"].ToString().Substring(0, 2);
+    }
+
+    var itensPVList = (List<MvcAppHylinedoBrasilMobile.Models.Item_Pedido_Venda>)Session["ItensPVList"];
+
+    DateTime menorDataInicial = DateTime.Today;
+    DateTime maiorDataFinal = DateTime.Today;
+    int qtdAlterado = 0;
+    int qtdImportar = 0;
+    int existeItensOvo = 0;
+
+    if (itensPVList.Count > 0)
+    {
+        menorDataInicial = itensPVList.Min(m => m.DataEntregaInicial);
+        maiorDataFinal = itensPVList.Max(m => m.DataEntregaFinal);
+
+        qtdAlterado = itensPVList.Where(w => w.Alterado == 1).Count();
+        qtdImportar = itensPVList.Where(w => w.Importar == 1).Count();
+        existeItensOvo = itensPVList.Where(w => w.ProdCodEstr.Contains("Ovo")).Count();
+    }
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.ENTIDADE entidade =
+        apoloStatic
+        .ENTIDADE.Where(w => w.EntCod == codigoCliente).FirstOrDefault();
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.CIDADE cidade =
+        new MvcAppHylinedoBrasilMobile.Models.bdApolo.CIDADE();
+
+    if (entidade != null)
+    {
+        cidade =
+            apoloStatic
+            .CIDADE.Where(w => w.CidCod == entidade.CidCod).FirstOrDefault();
+    }
+
+    string codigoVacinaPrimaria = "";
+    if (Session["vacinaPrimariaPV"] != null)
+    {
+        codigoVacinaPrimaria = Session["vacinaPrimariaPV"].ToString();
+    }
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.PRODUTO vacinaPrimaria =
+        apoloStatic
+        .PRODUTO.Where(w => w.ProdCodEstr == codigoVacinaPrimaria).FirstOrDefault();
+
+    MvcAppHylinedoBrasilMobile.Models.Tabela_Precos precoVacinaPrimaria =
+        new MvcAppHylinedoBrasilMobile.Models.Tabela_Precos();
+
+    if (vacinaPrimaria != null)
+    {
+        precoVacinaPrimaria =
+            hlbappSession.Tabela_Precos
+            .Where(w => w.Tipo == "Vacina" && w.Produto == vacinaPrimaria.ProdNomeAlt2
+                && w.Regiao == "Todas" && w.Empresa == empresaL
+                && menorDataInicial >= w.DataInicial && maiorDataFinal <= w.DataFinal)
+            .FirstOrDefault();
+    }
+
+    string login = "";
+    if (Session["login"].ToString().Contains("@"))
+    {
+        login = Session["login"].ToString();
+    }
+
+    string empresa = "";
+    if (Session["login"].ToString().Contains("@"))
+    {
+        empresa = Session["empresa"].ToString();
+    }
+}
+@if (!MvcAppHyLinedoBrasil.Controllers.AccountController
+        .GetGroup("HLBAPPM-PedidoVendaDadosExportacao",
+        (System.Collections.ArrayList)Session["Direitos"]))
+{
+    <br />
+    <b style="color:red; background-color:Yellow">
+       - OS ITENS QUE TIVEREM OS ASTERISCO (*) SÃO OS QUE TIVERAM ALTERAÇÕES!!!
+       CASO NÃO APAREÇA, PODE TER SIDO ALTERADO MAIS O VALOR ESTÁ IDÊNTICO AO ANTIGO!!!
+    </b>
+    <br />
+}
+</div>
+<ul data-role="listview" data-inset="true">
+    @if (Session["idSelecionado"] != null && Session["idSelecionado"].Equals("0"))
+    {
+        int idSelecionado = Convert.ToInt32(Session["idSelecionado"].ToString());
+        MvcAppHylinedoBrasilMobile.Models.Pedido_Venda pedidoVenda =
+            hlbappSession
+            .Pedido_Venda.Where(w => w.ID == idSelecionado).FirstOrDefault();
+
+        logPV =
+            hlbappSession
+            .LOG_Pedido_Venda
+            .Where(w => w.IDPedidoVenda == pedidoVenda.ID
+                && (w.Operacao.Contains("Importado") || w.Operacao.Contains("Programado")))
+            .OrderByDescending(o => o.DataHora)
+            .FirstOrDefault();
+    <li data-role="fieldcontain">
+        <div class="editor-label">
+            <b>ID do Pedido:</b>
+            @(Session["idSelecionado"].ToString())
+            <br />
+            <b>Data do Pedido:</b>
+            @String.Format("{0:dd/MM/yy}", pedidoVenda.DataPedido)
+            <br />
+            <b>Usuário:</b>
+            @(pedidoVenda.Usuario)
+        </div>
+    </li>
+    }
+    <li>
+        <div>
+            <h3>
+                Passo 01 - Cliente / Endereço de Faturamento:
+                @if (logPV != null)
+                {
+                    if (logPV.CodigoCliente != codigoCliente)
+                    {
+                        <b style="color:red; background-color:Yellow">
+                            *
+                        </b>
+                        <br />
+                    }
+                }
+            </h3>
+            <b>
+                Para filtrar o Cliente, informe abaixo parte do nome e tecle TAB para realizar a pequisa.
+            </b>
+            @Html.TextBox("filtroCliente", Session["filtroClientePV"].ToString(),
+            new
+            {
+                @onchange = "verificaFiltroCliente()"
+            })
+            <br />
+            @Html.DropDownList(
+                "Text",
+                (List<SelectListItem>)Session["ListaClientesPV"],
+                new
+                {
+                    @id = "ddlClientes",
+                    @onchange = "verificaDDLClientes()"
+                })
+            @Html.Hidden("participaBolsao", Session["clienteParticipaBolsao"].ToString())
+        </div>
+        <div id="pnlDadosCliente">
+            <b id="lblStatusCliente"></b>
+            <b id="lblStatusMsg"></b>
+        </div>
+        <div id="exibeBonificacoesPendentes" style="border-style: solid; border-color: Red; display: none;">
+            <b style="color:red; background-color:Yellow">
+               EXISTEM BONIFICAÇÕES PENDENTES PARA O CLIENTE!!! VERIFIQUE NA TABELA ABAIXO!!!
+            </b>
+            <br />
+        </div>
+    </li>
+    <li>
+        <div>
+            <h3>Passo 01.01 - Endereço de Entrega:</h3>
+            @Html.DropDownList(
+                "Text",
+                (List<SelectListItem>)Session["ListaEnderecoEntrega"],
+                new
+                {
+                    @id = "ddlEnderecoEntrega",
+                    @onchange = "verificaDDLEnderecoEntrega()"
+                })
+        </div>
+    </li>
+    @if (((List<SelectListItem>)Session["ListaVendedores"]).Count > 1)
+    {
+    <li>
+        <div class="editor-label">
+            <h3>Passo 01.02 - Vendedor:</h3>
+            <b>Selecione o Vendedor / Representante:</b>
+            @Html.DropDownList(
+                "Vendedor",
+                (List<SelectListItem>)Session["ListaVendedores"],
+                new
+                {
+                    @onchange = "verificaVendedor()"
+                })
+        </div>
+    </li>
+    }
+    <li data-role="fieldcontain">
+        <h3>Passo 02 - Linhagens do Pedido:</h3>
+        <div class="editor-label"   align="center">
+            <table style="width: 90%">
+                <tr style="font-size: xx-small; background-color:Gray">
+                    <th colspan="4" style="font-size: xx-small; background-color:Gray">
+                        <u>Legenda de Ações:</u>
+                    </th>
+                </tr>
+                <tr style="font-size: xx-small">
+                    <td style="font-size: xx-small" colspan="2">
+                        @Html.Image(@Url.Content("~/Content/icons/alterado.png"), "")
+                        <i>Item Alterado</i>
+                    </td>
+                    <td style="font-size: xx-small">
+                        @Html.Image(@Url.Content("~/Content/icons/importar.png"), "")
+                        <i>Item para Importar no CHIC</i>
+                    </td>
+                    <td style="font-size: xx-small">
+                        @Html.Image(@Url.Content("~/Content/icons/icn_cancelar.png"), "")
+                        <i>Item Solicitado Cancelamento</i>
+                    </td>
+                </tr>
+            </table>
+            <table style="width: 90%">
+                <tr style="font-size: xx-small">
+                    <td style="font-size: xx-small">
+                        @Html.Image(@Url.Content("~/Content/icons/log.png"), "")
+                        <i>Clique em cada Item para Visualizar o Histórico de Eventos</i>
+                    </td>
+                    <td style="font-size: xx-small">
+                        @Html.Image(@Url.Content("~/Content/icons/cifrao.png"), "")
+                        <i>Clique em cada Item para Alterar o Preço / % de Bonificação</i>
+                    </td>
+                    <td style="font-size: xx-small">
+                        @Html.Image(@Url.Content("~/Content/icons/kjots.png"), "")
+                        <i>Clique em cada Item para Alterar o Item</i>
+                    </td>
+                    <td style="font-size: xx-small">
+                        @Html.Image(@Url.Content("~/Content/icons/button_cancel.png"), "")
+                        <i>Clique em cada Item para Excluir o Item</i>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        </li>
+        <li>
+            @Html.ActionLink("Adicionar Novo Item do Pedido de Venda", "AddItemPV", "PedidoVenda", null,
+                new { @class = "add", @title = "Clique aqui para Inserir novo Item do Pedido de Venda" })
+            @*@using (Html.BeginForm("AddItemPV", "PedidoVenda"))
+            {
+                <span id="box_icone_busca">
+                    <table>
+                        <tr>
+                            <td style="width: 5%">
+                                @Html.Image(@Url.Content("~/Content/images/add.png"), "")
+                            </td>
+                            <td style="width: 95%">
+                                <input type="submit" value="Adicionar Novo Item do Pedido de Venda" class="add" />
+                            </td>
+                        </tr>
+                    </table>
+                </span>
+            }*@
+        </li>
+        <li data-role="fieldcontain">
+        <br />
+        <b style="color:red; background-color:Yellow">
+           - OS ITENS QUE TIVEREM EM VERMELHO COM FUNDO AMARELO SÃO VALORES FORA DA TABELA PADRÃO!!!
+           SENDO ASSIM, VERIFICAR SE ESTÃO CORRETOS PARA NÃO TER ERRO NO FUTURO!!!
+        </b>
+        <br />
+        <div id="divtabelaItensPV" style="overflow:auto;">
+        <table id="tabelaItensPV" class="ajustetabelaItensFinalizaPV">
+            <thead class="ajustetabelaItensFinalizaPV">
+            <tr class="ajustetabelaItensFinalizaPV">
+                <th class="ajustetabelaItensFinalizaPV">
+                    Seq.
+                </th>
+                <th class="ajustetabelaItensFinalizaPV">
+                    De
+                </th>
+                <th class="ajustetabelaItensFinalizaPV">
+                    A
+                </th>
+                @if (MvcAppHyLinedoBrasil.Controllers.AccountController
+                    .GetGroup("HLBAPPM-PedidoVendaVisualizaDiasAtraso",
+                    (System.Collections.ArrayList)Session["Direitos"]))
+                {
+                <th class="ajustetabelaItensFinalizaPV">
+                    Dias de Atraso
+                </th>
+                }
+                <th class="ajustetabelaItensFinalizaPV">
+                    Linha
+                </th>
+                <th class="ajustetabelaItensFinalizaPV">
+                    Qt. Líq.
+                </th>
+                <th class="ajustetabelaItensFinalizaPV">
+                    % Bon.
+                </th>
+                <th class="ajustetabelaItensFinalizaPV">
+                    Qt. Bon.
+                </th>
+                <th class="ajustetabelaItensFinalizaPV">
+                    Rep.
+                </th>
+                <th class="ajustetabelaItensFinalizaPV">
+                    Qt. Tot.
+                </th>
+                <th class="ajustetabelaItensFinalizaPV">
+                    Pr. Pint.@* (Tab. Pr.)*@
+                </th>
+                @*<th class="ajustetabelaItensFinalizaPV">
+                    Pr. Extras
+                </th>*@
+                <th class="ajustetabelaItensFinalizaPV">
+                    Val. Tot. Pint.
+                </th>
+                <th class="ajustetabelaItensFinalizaPV">
+                    Pr. Tot.
+                </th>
+                <th class="ajustetabelaItensFinalizaPV">
+                    Val. Tot.
+                </th>
+                <th class="ajustetabelaItensFinalizaPV">
+                    CHIC
+                </th>
+                <th class="ajustetabelaItensFinalizaPV">
+                    CHIC Rep.
+                </th>
+                @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPPM-PedidoVendaSobra", (System.Collections.ArrayList)Session["Direitos"]))
+                {
+                    <th>Sobra?</th>
+                }
+                <th class="ajustetabelaItensFinalizaPV">
+                    Ações
+                </th>
+            </tr>
+            </thead>
+        @foreach (var item in itensPVList)
+        {
+            MvcAppHylinedoBrasilMobile.Models.LOG_Item_Pedido_Venda logIpv = null;
+            if (logPV != null)
+            {
+                logIpv =
+                    hlbappSession
+                    .LOG_Item_Pedido_Venda.Where(w => w.IDLogPedidoVenda == logPV.ID
+                        && w.Sequencia == item.Sequencia).FirstOrDefault();
+            }
+
+            MvcAppHylinedoBrasilMobile.Models.LOG_Item_Pedido_Venda logPrimeioIpvImportado =
+                hlbappSession
+                    .LOG_Item_Pedido_Venda.Where(w => w.IDItPedVenda == item.ID
+                        && (w.Operacao.Contains("Importado") || w.Operacao.Contains("Programado")))
+                    .OrderBy(o => o.DataHora)
+                    .FirstOrDefault();
+
+            int diasAtraso = 0;
+            if (logPrimeioIpvImportado != null)
+            {
+                if (!(item.DataEntregaFinal >= logPrimeioIpvImportado.DataEntregaInicial
+                    && item.DataEntregaFinal <= logPrimeioIpvImportado.DataEntregaFinal))
+                {
+                    TimeSpan date = (item.DataEntregaFinal - logPrimeioIpvImportado.DataEntregaFinal);
+                    diasAtraso = date.Days;
+                }
+            }
+            <tbody class="ajustetabelaItensFinalizaPV">
+            <tr class="ajustetabelaItensFinalizaPV">
+                <td class="ajustetabelaItensFinalizaPV">
+                    @item.Sequencia
+                </td>
+                <td class="ajustetabelaItensFinalizaPV">
+                    @String.Format("{0:dd/MM/yy}", item.DataEntregaInicial)
+                    @if (logIpv != null)
+                    {
+                        if (logIpv.DataEntregaInicial != item.DataEntregaInicial)
+                        {   
+                            <b style="color:red; background-color:Yellow">
+                                *
+                            </b>
+                            <br />
+                        }
+                    }
+                </td>
+                <td class="ajustetabelaItensFinalizaPV">
+                    @String.Format("{0:dd/MM/yy}", item.DataEntregaFinal)
+                    @if (logIpv != null)
+                    {
+                        if (logIpv.DataEntregaFinal != item.DataEntregaFinal)
+                        {
+                            <b style="color:red; background-color:Yellow">
+                                *
+                            </b>
+                            <br />
+                        }
+                    }
+                </td>
+                @if (MvcAppHyLinedoBrasil.Controllers.AccountController
+                    .GetGroup("HLBAPPM-PedidoVendaVisualizaDiasAtraso",
+                    (System.Collections.ArrayList)Session["Direitos"]))
+                {
+                <td class="ajustetabelaItensFinalizaPV">
+                    @Html.Label(diasAtraso.ToString())
+                </td>
+                }
+                @{
+                MvcAppHylinedoBrasilMobile.Models.bdApolo.PRODUTO produto =
+                apoloStatic
+                        .PRODUTO.Where(w => w.ProdCodEstr == item.ProdCodEstr).FirstOrDefault();
+                }
+                @if (produto == null)
+                {
+                <td class="ajustetabelaItensFinalizaPV">
+                    @item.ProdCodEstr
+                    @if (logIpv != null)
+                    {
+                        if (logIpv.ProdCodEstr != item.ProdCodEstr)
+                        {
+                            <b style="color:red; background-color:Yellow">
+                                *
+                            </b>
+                            <br />
+                        }
+                    }
+                </td>
+                }
+                else
+                {
+                    <td class="ajustetabelaItensFinalizaPV">
+                        @(produto.ProdNome)
+                    </td>
+                }
+                <td class="ajustetabelaItensFinalizaPV">
+                    @String.Format("{0:N0}", item.QtdeLiquida)
+                    @if (logIpv != null)
+                    {
+                        if (logIpv.QtdeLiquida != item.QtdeLiquida)
+                        {
+                            <b style="color:red; background-color:Yellow">
+                                *
+                            </b>
+                            <br />
+                        }
+                    }
+                </td>
+                <td class="ajustetabelaItensFinalizaPV">
+                    @if (item.PercBonificacao > Convert.ToDecimal(2.5))
+                    {
+                        <h1 style="color:red; background-color:Yellow">
+                            @String.Format("{0:N2}", item.PercBonificacao)%
+                        </h1>
+                    }
+                    else
+                    {
+                        @(String.Format("{0:N2}", item.PercBonificacao) + "%")
+                    }
+                    @if (logIpv != null)
+                    {
+                        if (logIpv.PercBonificacao != item.PercBonificacao)
+                        {
+                            <b style="color:red; background-color:Yellow">
+                                *
+                            </b>
+                            <br />
+                        }
+                    }
+                </td>
+                <td class="ajustetabelaItensFinalizaPV">
+                    @String.Format("{0:N0}", item.QtdeBonificada)
+                    @if (logIpv != null)
+                    {
+                        if (logIpv.QtdeBonificada != item.QtdeBonificada)
+                        {
+                            <b style="color:red; background-color:Yellow">
+                                *
+                            </b>
+                            <br />
+                        }
+                    }
+                </td>
+                <td class="ajustetabelaItensFinalizaPV">
+                    @String.Format("{0:N0}", item.QtdeReposicao)
+                    @if (logIpv != null)
+                    {
+                        if (logIpv.QtdeReposicao != item.QtdeReposicao)
+                        {
+                            <b style="color:red; background-color:Yellow">
+                                *
+                            </b>
+                            <br />
+                        }
+                    }
+                    @if (item.QtdeReposicao > 0)
+                    {
+                        <h1 style="color:red; background-color:Yellow">
+                            @(item.TipoReposicao)
+                        </h1>
+                    }
+                </td>
+                <td class="ajustetabelaItensFinalizaPV">
+                    @String.Format("{0:N0}", (item.QtdeLiquida + item.QtdeBonificada + item.QtdeReposicao))
+                    @{
+                    qtdeTotalPintos = qtdeTotalPintos + Convert.ToInt32((item.QtdeLiquida
+                        + item.QtdeBonificada + item.QtdeReposicao));
+                    int qtdeReposicao = 0;
+                    if (item.TipoReposicao == "Acerto Comercial")
+                    {
+                        qtdeReposicao = Convert.ToInt32(item.QtdeReposicao);
+                    }
+                    qtdeTotalPintosCalcular = qtdeTotalPintosCalcular + Convert.ToInt32((item.QtdeLiquida
+                        + item.QtdeBonificada + qtdeReposicao));
+                    }
+                </td>
+                <td class="ajustetabelaItensFinalizaPV">
+                    @{
+                    string condPag = "";
+                    if (Session["condicaoPagamentoPV"].ToString().Equals("PAGTO ANTECIPADO"))
+                    {
+                        condPag = Session["condicaoPagamentoPV"].ToString();
+                    }
+                    else
+                    {
+                        condPag = "Faturamento";
+                    }
+
+                    MvcAppHylinedoBrasilMobile.Models.bdApolo.UNID_FEDERACAO uf =
+                        apoloStatic
+                        .UNID_FEDERACAO.Where(w => w.UfSigla == cidade.UfSigla).FirstOrDefault();
+
+                    MvcAppHylinedoBrasilMobile.Models.Tabela_Precos precoLinhagem =
+                        hlbappSession
+                        .Tabela_Precos.Where(w => w.Tipo == condPag && w.Produto == item.ProdCodEstr
+                        && w.Regiao == uf.UfSigla && w.Empresa == empresaL
+                        && item.DataEntregaInicial >= w.DataInicial && item.DataEntregaFinal <= w.DataFinal)
+                    .FirstOrDefault();
+
+                    if (precoLinhagem == null)
+                    {
+                        precoLinhagem =
+                            hlbappSession
+                            .Tabela_Precos.Where(w => w.Tipo == condPag && w.Produto == item.ProdCodEstr
+                            && w.Regiao == uf.UfRegGeog && w.Empresa == empresaL
+                            && item.DataEntregaInicial >= w.DataInicial && item.DataEntregaFinal <= w.DataFinal)
+                        .FirstOrDefault();
+                    }
+
+                    decimal? precoLin = 0;
+                    if ((precoLinhagem != null) && item.PrecoUnitario != 0)
+                    {
+                        int qtdTotalMesmaData = itensPVList
+                                .Where(w => w.DataEntregaInicial == item.DataEntregaInicial).FirstOrDefault().QtdeLiquida;
+
+                        if (qtdTotalMesmaData < 5000)
+                        {
+                            precoLin = precoLinhagem.ValorMenor5000Aves;
+                        }
+                        else
+                        {
+                            precoLin = precoLinhagem.ValorNormal;
+                        }
+                    }
+                    }
+                    @if (item.PrecoPinto != null && item.PrecoPinto > 0)
+                    {
+                        if (item.PrecoPinto == precoLin)
+                        {
+                            @String.Format("{0:N2}", item.PrecoPinto)
+                        }
+                        else
+                        {
+                            <h1 style="color:red; background-color:Yellow">
+                                @String.Format("{0:N2}", item.PrecoPinto)
+                            </h1>
+                            <div style="color:red; font-weight: bold;">
+                                @("Tab. Pr.: " + String.Format("{0:N2}", precoLin))
+                            </div>
+                        }
+                        precoTotalPintos = precoTotalPintos + Convert.ToDecimal(item.PrecoPinto);
+                        valorTotalPintos = valorTotalPintos + (item.QtdeLiquida
+                            * Convert.ToDecimal(item.PrecoPinto));
+                    }
+                    else
+                    {
+                        @String.Format("{0:N2}", precoLin)
+                        precoTotalPintos = precoTotalPintos + Convert.ToDecimal(precoLin);
+                        valorTotalPintos = valorTotalPintos + (item.QtdeLiquida * Convert.ToDecimal(precoLin));
+                    }
+                </td>
+                <td class="ajustetabelaItensFinalizaPV">
+                    @if (item.PrecoPinto != null && item.PrecoPinto > 0)
+                    {
+                        @String.Format("{0:N2}", (item.QtdeLiquida * Convert.ToDecimal(item.PrecoPinto)))
+                    }
+                    else
+                    {
+                        @String.Format("{0:N2}", (item.QtdeLiquida * Convert.ToDecimal(precoLin)))
+                    }
+                </td>
+                @*<td class="ajustetabelaItensFinalizaPV">
+                    @if ((item.PrecoUnitario - precoLin) > 0)
+                    {
+                        @String.Format("{0:N6}", (item.PrecoUnitario - precoLin))
+                    }
+                </td>*@
+                <td class="ajustetabelaItensFinalizaPV">
+                    @String.Format("{0:N4}", item.PrecoUnitario)
+                    @if (logIpv != null)
+                    {
+                        if (logIpv.PrecoUnitario != item.PrecoUnitario)
+                        {
+                            <b style="color:red; background-color:Yellow">
+                                *
+                            </b>
+                            <br />
+                        }
+                    }
+                </td>
+                <td class="ajustetabelaItensFinalizaPV">
+                    @if (item.ValorTotal == 0 || item.ValorTotal == null)
+                    {
+                        decimal qtdTratVerm = 0;
+                        if ((Session["qtdTratamentoInfravermelhoPV"] != null)
+                            && (Session["qtdTratamentoInfravermelhoPV"].ToString() != ""))
+                        {
+                            qtdTratVerm = Convert.ToDecimal(Session["qtdTratamentoInfravermelhoPV"]);
+                        }
+                        decimal? qtTV = 0;
+                        qtTV = ((item.QtdeLiquida + item.QtdeBonificada) * (qtdTratVerm / 100));
+                        valorTotalItens = valorTotalItens +
+                            Convert.ToDecimal(item.PrecoUnitario * item.QtdeLiquida);
+                    
+                        @String.Format("{0:N2}", (item.PrecoUnitario * item.QtdeLiquida)
+                         + (Convert.ToDecimal(Session["valorServicoPV"])
+                            * qtTV))
+                    }
+                    else
+                    {
+                        @String.Format("{0:N2}", item.ValorTotal)
+                        valorTotalItens = valorTotalItens + Convert.ToDecimal(item.ValorTotal);
+                        //+ (Convert.ToInt32(item.QtdeLiquida + item.QtdeBonificada + item.QtdeReposicao)
+                        //    * Convert.ToDecimal(Session["valorVacinaAntigo"].ToString()));
+                    }
+                </td>
+                <td class="ajustetabelaItensFinalizaPV">
+                    @item.OrderNoCHIC
+                </td>
+                <td class="ajustetabelaItensFinalizaPV">
+                    @item.OrderNoCHICReposicao
+                </td>
+                @*<td>
+                    @item.Vacina
+                </td>*@
+                @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPPM-PedidoVendaSobra", (System.Collections.ArrayList)Session["Direitos"]))
+                {
+                    <td>@(item.Sobra == 0 ? "Não" : "Sim")</td>
+                }
+                <td class="ajustetabelaItensFinalizaPV">
+                    <table>
+                        <tr>
+                            @if (item.Alterado.Equals(1)
+                                && !Convert.ToBoolean(Session["solicitaCancelarPV"])
+                                && !Session["status"].ToString().Equals("Cancelamento Pendente"))
+                            {
+                                <td align="center">
+                                    @Html.Image(@Url.Content("~/Content/icons/alterado.png"), "")
+                                </td>
+                
+                            }
+                            @if (item.Importar.Equals(1))
+                            {
+                                <td align="center">
+                                    @Html.Image(@Url.Content("~/Content/icons/importar.png"), "")
+                                </td>
+                            }
+                            @if ((!Session["status"].ToString().Contains("Cancela"))
+                                && (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                                .GetGroup("HLBAPPM-AlteraPrecoBonificacaoItemPV",
+                                (System.Collections.ArrayList)Session["Direitos"]))
+                                && (Convert.ToBoolean(Session["visualizaPV"])))
+                            {
+                                <td align="center">
+                                    @Html.ActionLink("Alteração de Preço / Bonificação", "AlteraPrecoBonificacao",
+                                        new { sequencia = item.Sequencia },
+                                        new { @class = "preco", @title = "Clique aqui para Alterar o Preço ou a Bonificação deste Item" })
+                                </td>
+                            }
+                            @*@if ((!Session["status"].ToString().Contains("Cancela"))
+                                && (Convert.ToBoolean(Session["visualizaPV"])))
+                            {
+                                <td>
+                                    @Html.ActionLink("Alteração de Vacinas do Item", "AlteraVacinaItem",
+                                        new { sequencia = item.Sequencia, origem = "Visualiza" },
+                                     new { @class = "vacina", @title = "Clique aqui para Alterar as Vacinas deste Item" })
+                                </td>
+                            }*@
+                            @if (Session["origemPV"].ToString() != "Inclusão")
+                            {
+                                <td align="center">
+                                    @Html.ActionLink("Histórico de Eventos", "LogItemPV",
+                                        new { id = item.ID },
+                                        new { @class = "log", @title = "Clique aqui para visualizar o Histórico de Eventos" })
+                                </td>
+                            }
+                            @if (item.Alterado.Equals(1)
+                                && (Convert.ToBoolean(Session["solicitaCancelarPV"])
+                                    || Session["status"].ToString().Equals("Cancelamento Pendente")))
+                            {
+                                <td align="center">
+                                    @Html.Image(@Url.Content("~/Content/icons/icn_cancelar.png"), "")
+                                </td>
+                    
+                            }
+                            @if (!Convert.ToBoolean(Session["solicitaCancelarPV"]))
+                            {
+                                if (item.OrderNoCHIC != "Cancelado")
+                                {
+                                    <td>
+                                        <div align="center">
+                                            @Html.ActionLink("Edit", "EditItemPV",
+                                                new { sequencia = item.Sequencia },
+                                                new { @class = "edit", @title = "Clique aqui para Alterar o item deste Pedido" })
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div align="center">
+                                            @Html.ActionLink("Delete", "DeleteItemPV",
+                                                new { sequencia = item.Sequencia },
+                                                    new { @class = "delete", @title = "Clique aqui para Excluir o item deste Pedido" })
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div align="center">
+                                            @Html.ActionLink("Duplicar", "CopyItemPV",
+                                                new { sequenciaItemCopia = item.Sequencia },
+                                                    new { @class = "duplicar", @title = "Clique aqui para Duplicar o item deste Pedido" })
+                                        </div>
+                                    </td>
+                                }
+                            }
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        }
+        </table>
+        </div>
+        <br />
+        @if (existeItensOvo == 0)
+        {
+        <div class="editor-label">
+            <b>Preço Unitário Total das Vacinas:</b>
+            @String.Format("{0:N2}", Convert.ToDecimal(Session["valorVacinaAntigo"].ToString()))
+        </div>
+        }
+        <div class="editor-label">
+            <b>Qtde. Total de Pintos / Ovos do Pedido (Líquido + Bonificado + Reposição):</b>
+            @String.Format("{0:N0}", Convert.ToDecimal(qtdeTotalPintos))
+        </div>
+        @if (existeItensOvo == 0)
+        {
+        <div class="editor-label">
+            <b>Qtde. Total de Pintos do Pedido a ser calulado Vacinas e Serviços 
+                (Líquido + Bonificado + Reposição [Somente se Tipo for "Acerto Comercial"]):</b>
+            @String.Format("{0:N0}", Convert.ToDecimal(qtdeTotalPintosCalcular))
+        </div>
+        <div class="editor-label">
+            <b>Valor Total das Vacinas:</b>
+            @String.Format("{0:N2}", Convert.ToDecimal(qtdeTotalPintosCalcular)
+                * Convert.ToDecimal(Session["valorVacinaAntigo"].ToString()))
+        </div>
+        <div class="editor-label">
+        @{
+            decimal qtdTratamentoInfravermelhoPV = 0;
+            if (Session["qtdTratamentoInfravermelhoPV"] != null && Session["qtdTratamentoInfravermelhoPV"] != "")
+            {
+                qtdTratamentoInfravermelhoPV = Convert.ToDecimal(Session["qtdTratamentoInfravermelhoPV"].ToString());
+            }
+            decimal valortotalServicos = (Convert.ToDecimal(qtdeTotalPintosCalcular)
+                * (qtdTratamentoInfravermelhoPV / 100))
+                        * Convert.ToDecimal(Session["valorServicoPV"].ToString());
+        }
+            <b>Valor Total dos Serviços (@Session["qtdTratamentoInfravermelhoPV"].ToString()% do Total):</b>
+            @String.Format("{0:N2}", valortotalServicos)
+        </div>
+        }
+        <div class="editor-label">
+            <b>Valor Total dos Pintos / Ovos:</b>
+            @String.Format("{0:N2}", (valorTotalPintos))
+        </div>
+        <br />
+        <div class="editor-label">
+            <b>Valor Total do Pedido:</b>
+            @String.Format("{0:N2}",
+                    (Convert.ToDecimal(Session["valorDocumentacaoDE"].ToString()) +
+                    Convert.ToDecimal(Session["valorFreteDE"].ToString()) +
+                    (valorTotalItens)))
+        </div>
+        @using (Html.BeginForm("AtualizaValores", "PedidoVenda", FormMethod.Post))
+        {
+            <input type="submit" value="Atualizar Valores" />
+        }
+    </li>
+    @if (existeItensOvo == 0)
+    {
+    <li>
+        <h3>Passo 03 - Vacinas:</h3>
+        <div>
+            <b>Vacina Primária:</b>
+            @{
+        MvcAppHylinedoBrasilMobile.Models.LOG_Vacinas_Primaria_Pedido_Venda logVacPrim = null;
+            }
+            @if (logPV != null)
+            {
+                logVacPrim =
+                    hlbappSession
+                    .LOG_Vacinas_Primaria_Pedido_Venda
+                    .Where(w => w.IDLogPedidoVenda == logPV.ID)
+                    .FirstOrDefault();
+            }
+                    
+            @Html.DropDownList(
+                "Text",
+                (List<SelectListItem>)Session["ListaVacinasPrimarias"],
+                new
+                {
+                    @id = "ddlVacPrim",
+                    @onchange = "verificaDDLVacPrim()"
+                })
+
+            @if (logVacPrim != null)
+            {
+                if (logVacPrim.ProdCodEstr != codigoVacinaPrimaria)
+                {
+                    <b style="color:red; background-color:Yellow">
+                        *
+                    </b>
+                    <br />
+                }
+            }
+            <div id="pnlBonificaVacinaPrimaria">
+                <div class="editor-label" id="precoVacinaPrimaria" style="font-weight:bold;"></div>
+                <label style="width: 100%;font-size: xx-small">
+                    @Html.CheckBox("bonificaVacPrim", Convert.ToBoolean(Session["bonificaVacPrimPV"]),
+                    new
+                    {
+                        @onchange = "verificaBonificaVacPrim()"
+                    })
+                    Bonifica Vacina Primária?   
+                </label>
+                @*<label style="width: 100%;font-size: xx-small">
+                    @Html.CheckBox("clienteVacPrim", Convert.ToBoolean(Session["clienteVacPrimPV"]),
+                    new
+                    {
+                        @onchange = "verificaClienteVacPrim()"
+                    })
+                    Cliente Envia Vacina Primária?   
+                </label>*@
+            </div>
+        </div>
+        @{
+            var itensVacinaList = (List<MvcAppHylinedoBrasilMobile.Models.Vacinas_Secundaria_Pedido_Venda>)Session["VacinasSecundariaPVList"];
+        }
+        <br />
+        <div id="tabelaVacinasSecundariaPV">
+            <b>Vacinas Secundárias (para as vacinas cobradas, selecione se será bonificada ou não):</b>
+            <div id="listaChecksVacinacasSecundarias">
+            </div>
+        @*<br />
+        <br />
+        <br />
+        <table id="tabelaVacSec" class="ajusteWithoutHeader">
+            <tbody class="ajusteWithoutHeader">
+            <tr class="ajusteWithoutHeader">
+                <td class="ajusteWithoutHeader">
+                    <label style="width: 100%;">
+                        @if (Convert.ToBoolean(Session["disabledBoubaAviariaPV"]))
+                        {
+                            @Html.CheckBox("boubaAviaria", Convert.ToBoolean(Session["boubaAviariaPV"]),
+                            new
+                            {
+                                @disabled = "true",
+                                @onchange = "verificaBoubaAviaria()"
+                            })
+                        }
+                        else
+                        {
+                            @Html.CheckBox("boubaAviaria", Convert.ToBoolean(Session["boubaAviariaPV"]),
+                            new
+                            {
+                                @onchange = "verificaBoubaAviaria()"
+                            })
+                        }
+                        DIFTOVAX (BOUBA) - BOEHRINGER
+                    </label>
+                </td>
+                <td class="ajusteWithoutHeader">
+                    <label style="width: 100%;">
+                        @if (Convert.ToBoolean(Session["disabledBoubaZoetisPV"]))
+                        {
+                            @Html.CheckBox("boubaZoetis", Convert.ToBoolean(Session["boubaZoetisPV"]),
+                            new
+                            {
+                                @disabled = "true",
+                                @onchange = "verificaBoubaZoetis()"
+                            })
+                        }
+                        else
+                        {
+                            @Html.CheckBox("boubaZoetis", Convert.ToBoolean(Session["boubaZoetisPV"]),
+                            new
+                            {
+                                @onchange = "verificaBoubaZoetis()"
+                            })
+                        }
+                        POULVAC CHICK-N-POX (BOUBA)-ZOETIS
+                    </label>
+                </td>
+                <td class="ajusteWithoutHeader">
+                    <label style="width: 100%;">
+                        @if (Convert.ToBoolean(Session["disabledCoccidiosePV"]))
+                        {
+                            @Html.CheckBox("coccidiose", Convert.ToBoolean(Session["coccidiosePV"]),
+                            new
+                            {
+                                @disabled = "true",
+                                @onchange = "verificaCoccidiose()"
+                            })
+                        }
+                        else
+                        {
+                            @Html.CheckBox("coccidiose", Convert.ToBoolean(Session["coccidiosePV"]),
+                            new
+                            {
+                                @onchange = "verificaCoccidiose()"
+                            })
+                        }
+                        BIO COCCIVET R (COCCIDIOSE)- BIOVET - R$ 
+                        @String.Format("{0:N2}", MvcAppHylinedoBrasilMobile.Controllers.PedidoVendaController
+                            .CalculaValoresVacinasServicosNovoPV("Coccidiose", menorDataInicial, maiorDataFinal,
+                                empresaL, "Vacina"))
+                    </label>
+                    @if (Convert.ToBoolean(Session["disabledCoccidiosePV"])
+                            || !Convert.ToBoolean(Session["coccidiosePV"]))
+                    {
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("bonificaCoccidiose", Convert.ToBoolean(Session["bonificaCoccidiosePV"]),
+                                new
+                                {
+                                    @disabled = "true",
+                                    @onchange = "verificaBonificaCoccidiose()"
+                                })
+                            Bonifica?
+                        </label>
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("clienteCoccidiose", Convert.ToBoolean(Session["clienteCoccidiosePV"]),
+                                new
+                                {
+                                    @disabled = "true",
+                                    @onchange = "verificaClienteCoccidiose()"
+                                })
+                            Cliente Envia?
+                        </label>
+                    }
+                    else
+                    {
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("bonificaCoccidiose", Convert.ToBoolean(Session["bonificaCoccidiosePV"]),
+                             new
+                             {
+                                 @onchange = "verificaBonificaCoccidiose()"
+                             })
+                            Bonifica?
+                        </label>
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("clienteCoccidiose", Convert.ToBoolean(Session["clienteCoccidiosePV"]),
+                             new
+                             {
+                                 @onchange = "verificaClienteCoccidiose()"
+                             })
+                            Cliente Envia?
+                        </label>
+                    }
+                </td>
+                <td class="ajusteWithoutHeader">
+                    <label style="width: 100%;">
+                        @if (Convert.ToBoolean(Session["disabledGumboroPV"]))
+                        {
+                            @Html.CheckBox("gumboro", Convert.ToBoolean(Session["gumboroPV"]),
+                            new
+                            {
+                                @disabled = "true",
+                                @onchange = "verificaGumboro()"
+                            })
+                        }
+                        else
+                        {
+                            @Html.CheckBox("gumboro", Convert.ToBoolean(Session["gumboroPV"]),
+                            new
+                            {
+                                @onchange = "verificaGumboro()"
+                            })
+                        }
+                        BUR-706 (GUMBORO)- BOEHRINGER
+                    </label>
+                </td>
+                <td class="ajusteWithoutHeader">
+                    <label style="width: 100%;">
+                        @if (Convert.ToBoolean(Session["disabledLaringoClientePV"]))
+                        {
+                            @Html.CheckBox("laringoCliente", Convert.ToBoolean(Session["laringoClientePV"]),
+                            new
+                            {
+                                @disabled = "true",
+                                @onchange = "verificaLaringoCliente()"
+                            })
+                        }
+                        else
+                        {
+                            @Html.CheckBox("laringoCliente", Convert.ToBoolean(Session["laringoClientePV"]),
+                            new
+                            {
+                                @onchange = "verificaLaringoCliente()"
+                            })
+                        }
+                        LARINGOTRAQUEÍTE (BOUBA/ LTI - GRANJA CLIENTE)
+                    </label>
+                </td>
+            </tr>
+            <tr class="ajusteWithoutHeader">
+                <td class="ajusteWithoutHeader">
+                    <label style="width: 100%;">
+                        @if (Convert.ToBoolean(Session["disabledLaringoIncubatorioPV"]))
+                        {
+                            @Html.CheckBox("laringoIncubatorio", Convert.ToBoolean(Session["laringoIncubatorioPV"]),
+                            new
+                            {
+                                @disabled = "true",
+                                @onchange = "verificaLaringoIncubatorio()"
+                            })
+                        }
+                        else
+                        {
+                            @Html.CheckBox("laringoIncubatorio", Convert.ToBoolean(Session["laringoIncubatorioPV"]),
+                            new
+                            {
+                                @onchange = "verificaLaringoIncubatorio()"
+                            })
+                        }
+                        INNOVAX ILT (LARINGO/HVT) - MSD - R$ 
+                        @String.Format("{0:N2}", MvcAppHylinedoBrasilMobile.Controllers.PedidoVendaController
+                            .CalculaValoresVacinasServicosNovoPV("Laringo (s/ HVT)", menorDataInicial, maiorDataFinal,
+                                empresaL, "Vacina"))
+                    </label>
+                    @if (Convert.ToBoolean(Session["disabledLaringoIncubatorioPV"])
+                            || !Convert.ToBoolean(Session["laringoIncubatorioPV"]))
+                    {
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("bonificaLaringoIncubatorio",
+                                Convert.ToBoolean(Session["bonificaLaringoIncubatorioPV"]),
+                                new
+                                {
+                                    @disabled = "true",
+                                    @onchange = "verificaBonificaLaringoIncubatorio()"
+                                })
+                            Bonifica?
+                        </label>
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("clienteLaringoIncubatorio",
+                                Convert.ToBoolean(Session["clienteLaringoIncubatorioPV"]),
+                                new
+                                {
+                                    @disabled = "true",
+                                    @onchange = "verificaClienteLaringoIncubatorio()"
+                                })
+                            Cliente Envia?
+                        </label>
+                    }
+                    else
+                    {
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("bonificaLaringoIncubatorio",
+                                Convert.ToBoolean(Session["bonificaLaringoIncubatorioPV"]),
+                                 new
+                                 {
+                                     @onchange = "verificaBonificaLaringoIncubatorio()"
+                                 })
+                            Bonifica?
+                        </label>
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("clienteLaringoIncubatorio",
+                                Convert.ToBoolean(Session["clienteLaringoIncubatorioPV"]),
+                                 new
+                                 {
+                                     @onchange = "verificaClienteLaringoIncubatorio()"
+                                 })
+                            Cliente Envia?
+                        </label>
+                    }
+                    @*<label style="width: 50%;font-size: xx-small">
+                        @if (Convert.ToBoolean(Session["disabledLaringoIncubatorioPV"])
+                            || !Convert.ToBoolean(Session["laringoIncubatorioPV"]))
+                        {
+                            @Html.CheckBox("bonificaLaringoIncubatorio", Convert.ToBoolean(Session["bonificaLaringoIncubatorioPV"]),
+                            new { @disabled = "true" })
+                        }
+                        else
+                        {
+                            @Html.CheckBox("bonificaLaringoIncubatorio", Convert.ToBoolean(Session["bonificaLaringoIncubatorioPV"]))
+                        }
+                        Bonifica?
+                    </label>*@
+                    @*@if (Convert.ToBoolean(Session["disabledLaringoIncubatorioPV"])
+                            || !Convert.ToBoolean(Session["laringoIncubatorioPV"]))
+                    {
+                        <label style="width: 100%;font-size: xx-small;">
+                            @Html.RadioButton("bonificaLaringoIncubatorio", "Bonifica",
+                                 Convert.ToBoolean(Session["bonificaLaringoIncubatorioPV"]),
+                                    new { @disabled = "true" }) Bonifica?
+                        </label>
+                        <label style="width: 100%;font-size: xx-small;">
+                            @Html.RadioButton("bonificaLaringoIncubatorio", "Cliente",
+                                 Convert.ToBoolean(Session["clienteLaringoIncubatorioPV"]),
+                                     new { @disabled = "true" }) Cliente irá enviar?
+                        </label>
+                    }
+                    else
+                    {
+                        <label style="width: 100%;font-size: xx-small;">
+                            @Html.RadioButton("bonificaLaringoIncubatorio", "Bonifica",
+                                 Convert.ToBoolean(Session["bonificaLaringoIncubatorioPV"])) Bonifica?
+                        </label>
+                        <label style="width: 100%;font-size: xx-small;">
+                            @Html.RadioButton("bonificaLaringoIncubatorio", "Cliente",
+                                 Convert.ToBoolean(Session["clienteLaringoIncubatorioPV"])) Cliente irá enviar?
+                        </label>
+                    }*@
+                @*</td>
+                <td class="ajusteWithoutHeader">
+                    <label style="width: 100%;">
+                        @if (Convert.ToBoolean(Session["disabledNewcastlePV"]))
+                        {
+                            @Html.CheckBox("newcastle", Convert.ToBoolean(Session["newcastlePV"]),
+                            new
+                            {
+                                @disabled = "true",
+                                @onchange = "verificaNewcastle()"
+                            })
+                        }
+                        else
+                        {
+                            @Html.CheckBox("newcastle", Convert.ToBoolean(Session["newcastlePV"]),
+                            new
+                            {
+                                @onchange = "verificaNewcastle()"
+                            })
+                        }
+                        INNOVAX ND (NEWCASTLE/HVT)-MSD - R$ 
+                        @String.Format("{0:N2}", MvcAppHylinedoBrasilMobile.Controllers.PedidoVendaController
+                            .CalculaValoresVacinasServicosNovoPV("Innovax ND", menorDataInicial, maiorDataFinal,
+                                empresaL, "Vacina"))
+                    </label>
+                    @*<label style="width: 50%;font-size: xx-small">
+                        @if (Convert.ToBoolean(Session["disabledNewcastlePV"])
+                            || !Convert.ToBoolean(Session["newcastlePV"]))
+                        {
+                            @Html.CheckBox("bonificaNewcastle", Convert.ToBoolean(Session["bonificaNewcastlePV"]),
+                            new { @disabled = "true" })
+                        }
+                        else
+                        {
+                            @Html.CheckBox("bonificaNewcastle", Convert.ToBoolean(Session["bonificaNewcastlePV"]))
+                        }
+                        Bonifica?
+                    </label>*@
+                    @*@if (Convert.ToBoolean(Session["disabledNewcastlePV"])
+                            || !Convert.ToBoolean(Session["newcastlePV"]))
+                    {
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("bonificaNewcastle", Convert.ToBoolean(Session["bonificaNewcastlePV"]),
+                                new
+                                {
+                                    @disabled = "true",
+                                    @onchange = "verificaBonificaNewcastle()"
+                                })
+                            Bonifica?
+                        </label>
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("clienteNewcastle", Convert.ToBoolean(Session["clienteNewcastlePV"]),
+                                new
+                                {
+                                    @disabled = "true",
+                                    @onchange = "verificaClienteNewcastle()"
+                                })
+                            Cliente Envia?
+                        </label>
+                    }
+                    else
+                    {
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("bonificaNewcastle", Convert.ToBoolean(Session["bonificaNewcastlePV"]),
+                             new
+                             {
+                                 @onchange = "verificaBonificaNewcastle()"
+                             })
+                            Bonifica?
+                        </label>
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("clienteNewcastle", Convert.ToBoolean(Session["clienteNewcastlePV"]),
+                             new
+                             {
+                                 @onchange = "verificaClienteNewcastle()"
+                             })
+                            Cliente Envia?
+                        </label>
+                    }
+                </td>
+                @*<td class="ajusteWithoutHeader">
+                    <label style="width: 100%;">
+                        @if (Convert.ToBoolean(Session["disabledSalmonellaPV"]))
+                        {
+                            @Html.CheckBox("salmonella", Convert.ToBoolean(Session["salmonellaPV"]),
+                            new { @disabled = "true" })
+                        }
+                        else
+                        {
+                            @Html.CheckBox("salmonella", Convert.ToBoolean(Session["salmonellaPV"]))
+                        }
+                        @Html.CheckBox("salmonella", Convert.ToBoolean(Session["salmonellaPV"]),
+                            new
+                            {
+                                @disabled = "true",
+                                @onchange = "verificaSalmonella()"
+                            })
+                        Salmonella (Enteritidis) - INDISPONÍVEL
+                    </label>
+                </td>*@
+                @*<td class="ajusteWithoutHeader">
+                    <label style="width: 100%;">
+                        @if (Convert.ToBoolean(Session["disabledVectormuneFPMG"]))
+                        {
+                            @Html.CheckBox("vectormuneFPMG", Convert.ToBoolean(Session["vectormuneFPMGPV"]),
+                            new
+                            {
+                                @disabled = "true",
+                                @onchange = "verificaVectormuneFPMG()"
+                            })
+                        }
+                        else
+                        {
+                            @Html.CheckBox("vectormuneFPMG", Convert.ToBoolean(Session["vectormuneFPMGPV"]),
+                            new
+                            {
+                                @onchange = "verificaVectormuneFPMG()"
+                            })
+                        }
+                        VECTORMUNE FP-MG (MG/BOUBA)-CEVA - R$ 
+                        @String.Format("{0:N2}", MvcAppHylinedoBrasilMobile.Controllers.PedidoVendaController
+                            .CalculaValoresVacinasServicosNovoPV("Vectormune FP-MG", menorDataInicial, maiorDataFinal,
+                                empresaL, "Vacina"))
+                    </label>
+                    @*<label style="width: 50%;font-size: xx-small">
+                        @if (Convert.ToBoolean(Session["disabledVectormuneFPMG"])
+                            || !Convert.ToBoolean(Session["vectormuneFPMGPV"]))
+                        {
+                            @Html.CheckBox("bonificaVectormuneFPMG", Convert.ToBoolean(Session["bonificaVectormuneFPMGPV"]),
+                            new { @disabled = "true" })
+                        }
+                        else
+                        {
+                            @Html.CheckBox("bonificaVectormuneFPMG", Convert.ToBoolean(Session["bonificaVectormuneFPMGPV"]))
+                        }
+                        Bonifica?
+                    </label>*@
+                    @*@if (Convert.ToBoolean(Session["disabledVectormuneFPMG"])
+                            || !Convert.ToBoolean(Session["vectormuneFPMGPV"]))
+                    {
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("bonificaVectormuneFPMG",
+                                Convert.ToBoolean(Session["bonificaVectormuneFPMGPV"]),
+                                new
+                                {
+                                    @disabled = "true",
+                                    @onchange = "verificaBonificaVectormuneFPMG()"
+                                })
+                            Bonifica?
+                        </label>
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("clienteVectormuneFPMG",
+                                Convert.ToBoolean(Session["clienteVectormuneFPMGPV"]),
+                                new
+                                {
+                                    @disabled = "true",
+                                    @onchange = "verificaClienteVectormuneFPMG()"
+                                })
+                            Cliente Envia?
+                        </label>
+                    }
+                    else
+                    {
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("bonificaVectormuneFPMG",
+                                Convert.ToBoolean(Session["bonificaVectormuneFPMGPV"]),
+                                 new
+                                 {
+                                     @onchange = "verificaBonificaVectormuneFPMG()"
+                                 })
+                            Bonifica?
+                        </label>
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("clienteVectormuneFPMG",
+                                Convert.ToBoolean(Session["clienteVectormuneFPMGPV"]),
+                                 new
+                                 {
+                                     @onchange = "verificaClienteVectormuneFPMG()"
+                                 })
+                            Cliente Envia?
+                        </label>
+                    }
+                </td>
+                <td class="ajusteWithoutHeader">
+                    <label style="width: 100%;">
+                        @if (Convert.ToBoolean(Session["disabledMagniplex"]))
+                        {
+                            @Html.CheckBox("magniplex", Convert.ToBoolean(Session["magniplex"]),
+                            new
+                            {
+                                @disabled = "true",
+                                @onchange = "verificaMagniplex()"
+                            })
+                        }
+                        else
+                        {
+                            @Html.CheckBox("magniplex", Convert.ToBoolean(Session["magniplex"]),
+                            new
+                            {
+                                @onchange = "verificaMagniplex()"
+                            })
+                        }
+                        POULVAC MAGNIPLEX (GUMBORO)-ZOETIS - R$ 
+                        @String.Format("{0:N2}", MvcAppHylinedoBrasilMobile.Controllers.PedidoVendaController
+                            .CalculaValoresVacinasServicosNovoPV("Magniplex", menorDataInicial, maiorDataFinal,
+                                empresaL, "Vacina"))
+                    </label>
+                    @*<label style="width: 50%;font-size: xx-small">
+                        @if (Convert.ToBoolean(Session["disabledMagniplex"])
+                            || !Convert.ToBoolean(Session["magniplex"]))
+                        {
+                            @Html.CheckBox("bonificaMagniplex", Convert.ToBoolean(Session["bonificaMagniplexPV"]),
+                            new { @disabled = "true" })
+                        }
+                        else
+                        {
+                            @Html.CheckBox("bonificaMagniplex", Convert.ToBoolean(Session["bonificaMagniplexPV"]))
+                        }
+                        Bonifica?
+                    </label>*@
+                    @*@if (Convert.ToBoolean(Session["disabledMagniplex"])
+                            || !Convert.ToBoolean(Session["magniplex"]))
+                    {
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("bonificaMagniplex", Convert.ToBoolean(Session["bonificaMagniplex"]),
+                                new
+                                {
+                                    @disabled = "true",
+                                    @onchange = "verificaBonificaMagniplex()"
+                                })
+                            Bonifica?
+                        </label>
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("clienteMagniplex", Convert.ToBoolean(Session["clienteMagniplex"]),
+                                new
+                                {
+                                    @disabled = "true",
+                                    @onchange = "verificaClienteMagniplex()"
+                                })
+                            Cliente Envia?
+                        </label>
+                    }
+                    else
+                    {
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("bonificaMagniplex", Convert.ToBoolean(Session["bonificaMagniplex"]),
+                             new
+                             {
+                                 @onchange = "verificaBonificaMagniplex()"
+                             })
+                            Bonifica?
+                        </label>
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("clienteMagniplex", Convert.ToBoolean(Session["clienteMagniplex"]),
+                             new
+                             {
+                                 @onchange = "verificaClienteMagniplex()"
+                             })
+                            Cliente Envia?
+                        </label>
+                    }
+                </td>
+                @*<td class="ajusteWithoutHeader">
+                    <label style="width: 100%;">
+                        @if (Convert.ToBoolean(Session["disabledLivacoxQ"]))
+                        {
+                            @Html.CheckBox("livacoxQ", Convert.ToBoolean(Session["livacoxQ"]),
+                            new
+                            {
+                                @disabled = "true",
+                                @onchange = "verificaLivacoxQ()"
+                            })
+                        }
+                        else
+                        {
+                            @Html.CheckBox("livacoxQ", Convert.ToBoolean(Session["livacoxQ"]),
+                            new
+                            {
+                                @onchange = "verificaLivacoxQ()"
+                            })
+                        }
+                        Livacox Q - Merial
+                    </label>
+                </td>*@
+                @*<td class="ajusteWithoutHeader">
+                    <label style="width: 100%;">
+                        @if (Convert.ToBoolean(Session["disabledVectormuneFPLT"]))
+                        {
+                            @Html.CheckBox("vectormuneFPLT", Convert.ToBoolean(Session["vectormuneFPLT"]),
+                            new
+                            {
+                                @disabled = "true",
+                                @onchange = "verificaVectormuneFPLT()"
+                            })
+                        }
+                        else
+                        {
+                            @Html.CheckBox("vectormuneFPLT", Convert.ToBoolean(Session["vectormuneFPLT"]),
+                            new
+                            {
+                                @onchange = "verificaVectormuneFPLT()"
+                            })
+                        }
+                        VECTORMUNE FP LT(LARINGO/BOUBA)CEVA - R$ 
+                        @String.Format("{0:N2}", MvcAppHylinedoBrasilMobile.Controllers.PedidoVendaController
+                                .CalculaValoresVacinasServicosNovoPV("Vectormune FP LT",
+                                    menorDataInicial, maiorDataFinal, empresaL, "Vacina"))
+                    </label>
+                    @if (Convert.ToBoolean(Session["disabledVectormuneFPLT"])
+                            || !Convert.ToBoolean(Session["vectormuneFPLT"]))
+                    {
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("bonificaVectormuneFPLT", Convert.ToBoolean(Session["bonificaVectormuneFPLT"]),
+                                new
+                                {
+                                    @disabled = "true",
+                                    @onchange = "verificaBonificaVectormuneFPLT()"
+                                })
+                            Bonifica?
+                        </label>
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("clienteVectormuneFPLT", Convert.ToBoolean(Session["clienteVectormuneFPLT"]),
+                                new
+                                {
+                                    @disabled = "true",
+                                    @onchange = "verificaClienteVectormuneFPLT()"
+                                })
+                            Cliente Envia?
+                        </label>
+                    }
+                    else
+                    {
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("bonificaVectormuneFPLT", Convert.ToBoolean(Session["bonificaVectormuneFPLT"]),
+                             new
+                             {
+                                 @onchange = "verificaBonificaVectormuneFPLT()"
+                             })
+                            Bonifica?
+                        </label>
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("clienteVectormuneFPLT", Convert.ToBoolean(Session["clienteVectormuneFPLT"]),
+                             new
+                             {
+                                 @onchange = "verificaClienteVectormuneFPLT()"
+                             })
+                            Cliente Envia?
+                        </label>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="ajusteWithoutHeader">
+                    <label style="width: 100%;">
+                        @if (Convert.ToBoolean(Session["disabledInnovaxNDIBD"]))
+                        {
+                            @Html.CheckBox("innovaxNDIBD", Convert.ToBoolean(Session["innovaxNDIBD"]),
+                            new
+                            {
+                                @disabled = "true",
+                                @onchange = "verificaInnovaxNDIBD()"
+                            })
+                        }
+                        else
+                        {
+                            @Html.CheckBox("innovaxNDIBD", Convert.ToBoolean(Session["innovaxNDIBD"]),
+                            new
+                            {
+                                @onchange = "verificaInnovaxNDIBD()"
+                            })
+                        }
+                        INNOVAX ND-IBD (NC/GUMB/HVT)-MSD - R$ 
+                        @String.Format("{0:N2}", MvcAppHylinedoBrasilMobile.Controllers.PedidoVendaController
+                            .CalculaValoresVacinasServicosNovoPV("Innovax ND-IBD",
+                                    menorDataInicial, maiorDataFinal, empresaL, "Vacina"))
+                    </label>
+                    @if (Convert.ToBoolean(Session["disabledInnovaxNDIBD"])
+                            || !Convert.ToBoolean(Session["innovaxNDIBD"]))
+                    {
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("bonificaInnovaxNDIBD", Convert.ToBoolean(Session["bonificaInnovaxNDIBD"]),
+                                new
+                                {
+                                    @disabled = "true",
+                                    @onchange = "verificaBonificaInnovaxNDIBD()"
+                                })
+                            Bonifica?
+                        </label>
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("clienteInnovaxNDIBD", Convert.ToBoolean(Session["clienteInnovaxNDIBD"]),
+                                new
+                                {
+                                    @disabled = "true",
+                                    @onchange = "verificaClienteInnovaxNDIBD()"
+                                })
+                            Cliente Envia?
+                        </label>
+                    }
+                    else
+                    {
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("bonificaInnovaxNDIBD", Convert.ToBoolean(Session["bonificaInnovaxNDIBD"]),
+                             new
+                             {
+                                 @onchange = "verificaBonificaInnovaxNDIBD()"
+                             })
+                            Bonifica?
+                        </label>
+                        <label style="width: 50%;font-size: xx-small;">
+                            @Html.CheckBox("clienteInnovaxNDIBD", Convert.ToBoolean(Session["clienteInnovaxNDIBD"]),
+                             new
+                             {
+                                 @onchange = "verificaClienteInnovaxNDIBD()"
+                             })
+                            Cliente Envia?
+                        </label>
+                    }
+                </td>
+            </tr>
+            </tbody>
+        </table>*@
+        </div>
+    </li>
+    }
+    <li data-role="fieldcontain">
+        <h3>Passo 04 - Dados Adicionais:</h3>
+        <div>
+        <div class="editor-label" 
+             style="background-color: 
+               @MvcAppHylinedoBrasilMobile.Controllers.PedidoVendaController.GetColorStatus(Session["status"].ToString());">
+            <b>Status:</b>
+            @(Session["status"].ToString())
+        </div>
+        @if (existeItensOvo == 0)
+        {
+        <div class="editor-label">
+            <label style="width: 100%">
+                @Html.CheckBox("tratamentoInfravermelho", Convert.ToBoolean(Session["tratamentoInfravermelhoPV"]),
+                new
+                {
+                    @onchange = "verificaTratamentoInfravermelho()"
+                })
+                Tratamento Infravermelho - R$ 
+                @String.Format("{0:N2}", MvcAppHylinedoBrasilMobile.Controllers.PedidoVendaController
+                    .CalculaValoresVacinasServicosNovoPV("Tratamento Infravermelho", menorDataInicial, maiorDataFinal,
+                        empresaL, "Serviço", codigoCliente))
+            </label>
+            <b>% que receberá o Serviço:</b>
+            <div class="editor-label">
+                @if (Session["qtdTratamentoInfravermelhoPV"].ToString() != "")
+                {
+                    @Html.TextBox("qtdTratamentoInfravermelho", Session["qtdTratamentoInfravermelhoPV"].ToString(),
+                    new
+                    {
+                        @onchange = "verificaQtdTratamentoInfravermelho()"
+                    });
+                }
+                else
+                {
+                    @Html.TextBox("qtdTratamentoInfravermelho", Session["qtdTratamentoInfravermelhoPV"].ToString(),
+                    new
+                    {
+                        @disabled = "true",
+                        @onchange = "verificaQtdTratamentoInfravermelho()"
+                    });
+                }
+            </div>
+            <div id="pnlBonificaServico">
+                <label style="width: 100%;font-size: xx-small">
+                    @if (Convert.ToBoolean(Session["bonificaServicoPV"])
+                        || Convert.ToBoolean(Session["tratamentoInfravermelhoPV"]))
+                    {
+                        @Html.CheckBox("bonificaServico", Convert.ToBoolean(Session["bonificaServicoPV"]),
+                        new
+                        {
+                            @onchange = "verificaBonificaServico()"
+                        })
+                    }
+                    else
+                    {
+                        @Html.CheckBox("bonificaServico", Convert.ToBoolean(Session["bonificaServicoPV"]),
+                            new
+                            {
+                                @disabled = "true",
+                                @onchange = "verificaBonificaServico()"
+                            })
+                    }
+                    Bonifica Tratamento Infravermelho?   
+             </label>
+            </div>
+        </div>
+        }
+        @*<br />
+        <div class="editor-label">
+            <label style="width: 100%">
+                @Html.CheckBox("ovosBrasil", Convert.ToBoolean(Session["ovosBrasilPV"]))
+                Ovos Brasil
+            </label>
+        </div>*@
+        <br />
+        <div>
+            <b>Selecione a Condição de Pagamento:</b>
+            <br />
+            <br />
+            <b>
+                Para filtrar as Condições de Pagamento, informe abaixo parte da descrição.
+            </b>
+            @Html.TextBox("filtroCondPag", Session["filtroCondPagPV"].ToString(),
+                new
+                {
+                    @onkeyup = "verificaFiltroCondPag()"
+                })
+            <br />
+            @Html.DropDownList(
+                "CondPag",
+                (List<SelectListItem>)Session["ListaCondicaoPagamento"],
+                new
+                {
+                    @onchange = "verificaCondPag()"
+                })            
+        </div>
+        <br />
+        <div class="editor-label">
+            <b>Observações:</b>
+            <div class="editor-label">
+                @Html.TextArea("observacao", Session["observacaoPV"].ToString(),
+                new
+                {
+                    @onchange = "verificaObservacao()"
+                })
+            </div>
+        </div>
+        <br />
+        <div class="editor-label">
+            <b>Motivo da(s) Alteração(ões):</b>
+            <br />
+            @*<p>@Html.Raw("<pre>" + Html.Encode(Session["motivoAlteracaoPV"].ToString()) + "</pre>")</p>*@
+            @Html.Raw(Session["motivoAlteracaoPV"].ToString().Replace("\r\n", "<br />"))
+        </div>
+        </div>
+    </li>
+</ul>
+
+<div>
+    @using (Html.BeginForm("SaveFinalizaPV", "PedidoVenda", FormMethod.Post))
+    {
+        if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                .GetGroup("HLBAPPM-PedidoVendaAcessoProjecao", (System.Collections.ArrayList)Session["Direitos"]))
+        {
+            <b>É Projeção?</b>
+            @Html.DropDownList("Projecao", (List<SelectListItem>)Session["ListaSimNao"])
+            <br />
+            <br />
+        }
+        if (Convert.ToBoolean(Session["alteracaoPrecoBonificacaoPV"])
+            || Session["origemPV"].ToString().Equals("Alteração"))
+        {
+            if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                .GetGroup("HLBAPPM-TipoAlteracaoInterno", (System.Collections.ArrayList)Session["Direitos"]))
+            {
+                <b>Selecione o Tipo da Alteração (MOTIVO INTERNO):</b>
+                @Html.DropDownList(
+                    "TipoAlteracao",
+                    (List<SelectListItem>)Session["ListaTipoAlteracaoPV"])
+                <br />
+                <br />
+            }
+            <b>Motivo da Alteração:</b>
+            @Html.TextArea("motivoAlteraPrecoBonificacao", null, new { @required = true })
+        }
+        <div class="editor-label" id="error" style="color: Red; font-weight:bold;"></div>
+        <input type="submit" value="Finaliza Pedido" name="FinalizaPedidoButton" id="FinalizaPedidoButton" />
+    }
+  
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+</div>

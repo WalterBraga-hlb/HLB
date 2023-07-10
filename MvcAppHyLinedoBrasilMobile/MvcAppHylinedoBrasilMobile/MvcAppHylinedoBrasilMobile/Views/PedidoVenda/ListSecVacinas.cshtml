@@ -1,0 +1,243 @@
+﻿@{
+    ViewBag.Title = "";
+
+    var itensVacinaList = (List<MvcAppHylinedoBrasilMobile.Models.Vacinas_Secundaria_Pedido_Venda>)
+        Session["VacinasSecundariaItemPVListExibe"];
+
+    if (itensVacinaList == null)
+    {
+        itensVacinaList = new List<MvcAppHylinedoBrasilMobile.Models.Vacinas_Secundaria_Pedido_Venda>();
+    }
+
+    string vacinaPrimaria = Session["vacinaPrimariaItemPV"].ToString();
+    
+    int sequencia = Convert.ToInt32(Session["idItemSelecionado"]);
+
+    var listaVacPrim = (List<MvcAppHylinedoBrasilMobile.Models.Vacinas_Primaria_Pedido_Venda>)
+        Session["VacinasPrimariaItemPVList"];
+
+    MvcAppHylinedoBrasilMobile.Models.Vacinas_Primaria_Pedido_Venda vacPrimObj = listaVacPrim
+                .Where(w => w.SeqItemPedVenda == sequencia).FirstOrDefault();
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.PRODUTO produto =
+        MvcAppHylinedoBrasilMobile.Controllers.PedidoVendaController.apoloStatic
+        .PRODUTO.Where(w => w.ProdCodEstr == vacinaPrimaria).FirstOrDefault();
+
+    int sequenciaItem = 0;
+    MvcAppHylinedoBrasilMobile.Models.Item_Pedido_Venda itemPV = 
+        new MvcAppHylinedoBrasilMobile.Models.Item_Pedido_Venda();
+    if (Session["idItemSelecionado"] != null)
+    {
+        List<MvcAppHylinedoBrasilMobile.Models.Item_Pedido_Venda> listItensPV = 
+            (List<MvcAppHylinedoBrasilMobile.Models.Item_Pedido_Venda>)Session["ItensPVList"];
+        
+        sequenciaItem = Convert.ToInt32(Session["idItemSelecionado"]);
+        itemPV = listItensPV.Where(w => w.Sequencia == sequenciaItem).FirstOrDefault();
+    }
+}
+
+<div align="center">
+    @if (!Convert.ToBoolean(Session["visualizaPV"]) && !Session["origemVacinaItenm"].ToString().Equals("LOG"))
+    {
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Pedidos de Venda", "Index", "PedidoVenda")
+        <br />
+        <br />
+        <b style="color:red; background-color:Yellow">
+            * CUIDADO!!! CASO CLIQUE NO LINK ACIMA, OS DADOS INFORMADOS DO PEDIDO
+            ANTES DA FINALIZAÇÃO SERÃO PERDIDOS!!!
+        </b>
+    </p>
+    }
+    @Html.Image(@Url.Content("~/Content/icons/pedidoVenda.png"), "Pedido de Venda")
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+
+@if (!Convert.ToBoolean(Session["visualizaPV"]) && !Session["origemVacinaItenm"].ToString().Equals("LOG"))
+{
+    <h2>Passo 03.01: Insira as Vacinas Secundárias que combinam com a Primária ou clique em Próximo.</h2>
+    <br />
+}
+else
+{
+    <h2>
+        Vacinas do Item @Session["idItemSelecionado"].ToString(): 
+        @itemPV.ProdCodEstr - @itemPV.DataEntregaInicial.ToShortDateString() a 
+        @itemPV.DataEntregaFinal.ToShortDateString()
+    </h2>
+    <br />
+}
+
+<ul data-role="listview" data-inset="true">
+    <li data-role="fieldcontain">
+        <b>Vacina Primária:</b>
+        @produto.ProdNomeAlt1
+        @if (!Session["origemVacinaItenm"].ToString().Equals("LOG"))
+        {
+        <br />
+        <b style="color: Red">
+            Para selecionar outra Vacina Primária, primeiro delete 
+            as Vacinas Secundárias!
+        </b>
+        }
+    </li>
+</ul>
+
+@if (!Session["origemVacinaItenm"].ToString().Equals("LOG"))
+{
+<br />
+
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Menu das Vacinas que combinaram com a Vacina Primária selecionada acima</li>
+    <li>
+        @Html.ActionLink("Adicionar Nova Vacina Secundária", "AddVacinaSecundariaPV", "PedidoVenda", null,
+            new { @class = "add", @title = "Clique aqui para Inserir nova Vacina Secundária" })
+    </li>
+</ul>
+}
+
+<br />
+
+<div id="tabelaVacinasSecundariaPV" style="overflow:auto;">
+<table id="tabela">
+    <tr>
+        @if (!Session["origemVacinaItenm"].ToString().Equals("LOG"))
+        {
+        <th></th>
+        }
+        <th>
+            Vacina Secundária
+        </th>
+    </tr>
+@foreach (var item in itensVacinaList)
+{
+    <tr>
+        @if (!Session["origemVacinaItenm"].ToString().Equals("LOG"))
+        {
+        <td class="ajuste">
+            <div align="center">
+                @Html.ActionLink("Delete", "DeleteVacSecPV",
+                    new { sequencia = item.Sequencia },
+                        new { @class = "delete", @title = "Clique aqui para Excluir esta Vacina" })
+            </div>
+        </td>
+        }
+        <td>
+            @(MvcAppHylinedoBrasilMobile.Controllers.PedidoVendaController.apoloStatic
+                .PRODUTO.Where(w => w.ProdCodEstr == item.ProdCodEstr).FirstOrDefault().ProdNomeAlt1)
+        </td>
+    </tr>
+}
+</table>
+</div>
+
+<br />
+
+@if (Session["origemVacinaItenm"].ToString().Equals("LOG"))
+{
+    using (Html.BeginForm("LogItemDetalheReturn", "PedidoVenda", FormMethod.Post))
+    {
+    <input type="submit" value="Voltar" />
+    }
+}
+else
+{
+    if (!Convert.ToBoolean(Session["visualizaPV"]))
+    {
+        if (Session["origemPV"].ToString().Equals("Alteração"))
+        {
+            using (Html.BeginForm("FinalizaPV", "PedidoVenda", FormMethod.Post))
+            {
+                <input type="submit" value="Voltar para a Visualização do Pedido" />
+            }
+        }
+        else
+        {
+            bool viewAll = (MvcAppHyLinedoBrasil.Controllers.AccountController
+                .GetGroup("HLBAPPM-PedidoVendaVisualizarTodosPedidos",
+                (System.Collections.ArrayList)Session["Direitos"]));
+            
+            if (!viewAll)
+            {
+                if (!MvcAppHyLinedoBrasil.Controllers.AccountController
+                    .GetGroup("HLBAPPM-PedidoVendaDadosExportacao",
+                    (System.Collections.ArrayList)Session["Direitos"]))
+                {
+                    using (Html.BeginForm("OtherInformations", "PedidoVenda", FormMethod.Post))
+                    {
+                        @Html.Hidden("origem", "Sim")
+                        <input type="submit" value="Próximo" />
+                    }
+                }
+                else
+                {
+                    using (Html.BeginForm("FinalizaPV", "PedidoVenda", FormMethod.Post))
+                    {
+                        <input type="submit" value="Próximo" />
+                    }
+                }
+            }
+            else
+            {
+                using (Html.BeginForm("OtherInformations", "PedidoVenda", FormMethod.Post))
+                {
+                    @Html.Hidden("origem", "Sim")
+                    <input type="submit" value="Dados Adicionais" />
+                }
+                using (Html.BeginForm("FinalizaPV", "PedidoVenda", FormMethod.Post))
+                {
+                    <input type="submit" value="Finaliza PV" />
+                }
+            }
+        }
+
+        using (Html.BeginForm("ListVacinasPVReturn", "PedidoVenda", FormMethod.Post))
+        {
+            <input type="submit" value="Anterior" />
+        }
+    }
+    else
+    {
+        <ul data-role="listview" data-inset="true">
+            <li data-role="fieldcontain">
+                @using (Html.BeginForm("SaveAlteraVacinaItem", "PedidoVenda", FormMethod.Post))
+                {
+                    <input type="submit" value="Salva Alterações das Vacinas no Item" name="SaveAlteraVacinaItem" />
+                }
+            </li>
+            @if (!itemPV.Vacina.Equals("Nenhuma"))
+            {
+                <li data-role="fieldcontain">
+                @using (Html.BeginForm("DeletaVacinasItens", "PedidoVenda", FormMethod.Post))
+                {
+                    <label style="width: 100%">
+                        @Html.CheckBox("manterVacinaPedido") 
+                        MANTER AS VACINAS DO PEDIDO INICIAL? CASO DEIXE DESMARCADA ESSA OPÇÃO, FICARÁ SEM NENHUMA VACINA!
+                    </label>
+                    <input type="submit" value="Excluir Vacinas do Item" name="DeletaVacinasItens" />
+                }
+                </li>
+            }
+            <li>
+                @if (itensVacinaList.Count == 0)
+                {
+                    using (Html.BeginForm("ListVacinasPVReturn", "PedidoVenda", FormMethod.Post))
+                    {
+                        <input type="submit" value="Alterar Vacina Primária" />
+                    }
+                }
+            </li>
+            <li>
+                @using (Html.BeginForm("FinalizaPV", "PedidoVenda", FormMethod.Post))
+                {
+                    <input type="submit" value="Voltar para Visualização do Pedido" />
+                }
+            </li>
+        </ul>
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

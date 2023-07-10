@@ -1,0 +1,29 @@
+﻿@using am = MvcAppHyLinedoBrasil.Controllers.AccountController;
+@{
+    string lg = Session["language"].ToString();
+
+    ViewBag.Title = am.Translate("Ficha de Estoque de Ovos Férteis", lg);
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@am.Translate("Ficha de Estoque de Ovos Férteis", lg)</h2>
+
+@using (Html.BeginForm("DownloadRelFichaEstoque", "RelatoriosProducao",
+    FormMethod.Post, new { enctype = "multipart/form-data", target = "_blank" }))
+{
+    <table>
+        <tr>
+            <td align="center">
+                <b>@am.Translate("Movimentações de ", lg)</b>@Html.TextBox("dataIniMov", Session["dataIniMov"], new { @type = "date", @required = "true" }) 
+                <b>@am.Translate(" até ", lg)</b>@Html.TextBox("dataFimMov", Session["dataFimMov"], new { @type = "date", @required = "true" })
+            </td>
+        </tr>
+    </table>
+    <div id="divUltimaReview">
+        <h4>@Html.Raw(ViewBag.fileName)</h4>
+        <h4 style="color:red;">@ViewBag.erro</h4>
+    </div>
+    <div class="editor-field" align="center">
+        <input type="submit" value="@am.Translate("Gerar Relatório", lg)" id="importar" />
+    </div>
+}

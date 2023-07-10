@@ -1,0 +1,226 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+
+    List<MvcAppHylinedoBrasilMobile.Models.RDV> listaRDV =
+        (List<MvcAppHylinedoBrasilMobile.Models.RDV>)Session["ListaRDV"];
+
+    var listaRDVFechados = listaRDV
+        .GroupBy(g => new
+        {
+            g.NumeroFechamentoRDV,
+            g.Empresa,
+            g.MesAnoFatura,
+            g.Status,
+        })
+        .Select(s => new
+        {
+            s.Key.Empresa,
+            s.Key.NumeroFechamentoRDV,
+            s.Key.Status,
+            NomeUsuario = s.Max(m => m.NomeUsuario),
+            Banco = s.Max(m => m.Banco),
+            s.Key.MesAnoFatura,
+            DataInicial = s.Min(m => m.DataRDV),
+            DataFinal = s.Max(m => m.DataRDV),
+            ValorReal = s.Sum(m => m.ValorDespesa),
+            ValorMoedaEstrangeira = s.Sum(m => m.ValorMoedaEstrangeira)
+        })
+        .OrderBy(o => o.DataInicial)
+        .ToList();
+
+    bool downloadMobile = false;
+    if (Request.Browser.IsMobileDevice)
+    {
+        downloadMobile = true;
+    }
+
+    string usuario = Session["login"].ToString();
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities apolo = new MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities();
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo2.FUNCIONARIO preencheRDV = apolo.FUNCIONARIO
+        .Where(w => w.UsuCod == usuario.ToUpper()
+            && apolo.GRP_FUNC.Any(a => a.FuncCod == w.FuncCod
+                && a.GrpFuncObs == "Preenche RDV"))
+        .FirstOrDefault();
+}
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Menu RDV", "MenuRDV", "RDV")
+    </p>
+    @Html.Image(@Url.Content("~/Content/images/Amil-Reembolso-Icon.png"), "RDV")
+    <h2>Lista de Faturas do Cartão Corporativo</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+@using (Html.BeginForm("SearchListaFaturaCartaoCorporativo", "RDV"))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <b>Mês/Ano Inicial:</b>
+            <div class="editor-label">
+                @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+                {
+                    @Html.TextBox("dataInicialRDV", Convert.ToDateTime(Session["dataInicialRDV"]).ToString("yyyy-MM"), new { @type = "month" })
+                }
+                else
+                {
+                    @Html.TextBox("dataInicialRDV", Convert.ToDateTime(Session["dataInicialRDV"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+                }
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Mês/Ano Final:</b>
+            <div class="editor-label">
+                @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+                {
+                    @Html.TextBox("dataFinalRDV", Convert.ToDateTime(Session["dataFinalRDV"]).ToString("yyyy-MM"), new { @type = "month" })
+                }
+                else
+                {
+                    @Html.TextBox("dataFinalRDV", Convert.ToDateTime(Session["dataFinalRDV"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+                }
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Pesquisar" />
+        </li>
+    </ul>
+}
+@Html.Partial("_MenuRDVCartaoCorporativo")
+<br />
+<div class="editor-label"  align="center">
+    <table style="width: 90%">
+        <tr style="font-size: xx-small; background-color:Gray">
+            <th colspan="6" style="font-size: xx-small; background-color:Gray">
+                <u>Legenda de Ações:</u>
+            </th>
+        </tr>
+        <tr style="font-size: xx-small">
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/visualizar.png"), "")
+                <i>Visualiza RDV</i>
+            </td>
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/button_cancel.png"), "")
+                <i>Excluir RDV</i>
+            </td>
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/print.png"), "")
+                <i>Imprimir RDV</i>
+            </td>
+        </tr>
+    </table>
+</div>
+<br />
+<div id="divTabelaIndexPV" style="overflow:auto" >
+<table id="tabelaIndexPV" class="ajustetabelaIndexPV">
+    <tbody class="ajustetabelaIndexPV">
+    <tr class="ajustetabelaIndexPV">
+        @if (preencheRDV != null)
+        {
+        <th class="ajustetabelaIndexPV">
+            Colaborador
+        </th>
+        }
+        <th class="ajustetabelaIndexPV">
+            Banco
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Mês / Ano
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Data Inicial
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Data Final
+        </th>
+        <th class="ajustetabelaIndexPV" colspan="2">
+            Valores
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Nº Fech. RDV
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Status
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Ações
+        </th>
+    </tr>
+@foreach (var item in listaRDVFechados)
+{
+    <tr class="ajustetabelaIndexPV">
+        @if (preencheRDV != null)
+        {
+            <td class="ajustetabelaIndexPV">
+                @Html.DisplayFor(modelItem => item.NomeUsuario)
+            </td>
+        }
+        <td class="ajustetabelaIndexPV">
+            @Html.DisplayFor(modelItem => item.Banco)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @String.Format("{0:dd/MM/yy}", item.MesAnoFatura)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @String.Format("{0:dd/MM/yy}", item.DataInicial)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @String.Format("{0:dd/MM/yy}", item.DataFinal)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @String.Format("R$ {0:N2}", item.ValorReal)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @String.Format("US$ {0:N2}", item.ValorMoedaEstrangeira)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @Html.DisplayFor(modelItem => item.NumeroFechamentoRDV)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td align="center">
+                        @Html.ActionLink("Classificar", "ClassificaFatura",
+                             new { numRDV = item.NumeroFechamentoRDV },
+                             new
+                                  {
+                                      @class = "edit",
+                                 @title = "Clique aqui para Classificar a Fatura"
+                                  })
+                    </td>
+                    @if (item.NumeroFechamentoRDV != null && item.NumeroFechamentoRDV != "")
+                    {
+                        <td align="center">
+                            @Html.ActionLink("Imprimir RDV", "PrintRDV",
+                                new
+                                {
+                                    numRDV = item.NumeroFechamentoRDV,
+                                    download = downloadMobile
+                                },
+                                new
+                                {
+                                    @class = "print",
+                                    @target = "_blank",
+                                    @title = "Clique aqui para Imprimir o RDV"
+                                })
+                        </td>
+                    }
+                </tr>
+            </table>
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

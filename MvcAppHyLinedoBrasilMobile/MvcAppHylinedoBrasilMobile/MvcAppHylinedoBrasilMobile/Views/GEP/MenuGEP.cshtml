@@ -1,0 +1,20 @@
+﻿<ul data-role="listview" data-inset="true">
+    <li>
+        @Html.ActionLink("Voltar para Menu Principal", "Index", "HomeMobile", 
+            null,
+            new { @title = "Clique aqui para Voltar para o Menu Principal" })
+    </li>
+</ul>
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">MENU GEP</li>
+</ul>
+@if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+    .GetGroup("HLBAPPM-GEPCadastros", (System.Collections.ArrayList)Session["Direitos"]))
+{
+    @Html.Partial("_MenuCadastros")
+}
+@if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+    .GetGroup("HLBAPPM-GEPManutencao", (System.Collections.ArrayList)Session["Direitos"]))
+{
+    @Html.Partial("_MenuManutencao")
+}

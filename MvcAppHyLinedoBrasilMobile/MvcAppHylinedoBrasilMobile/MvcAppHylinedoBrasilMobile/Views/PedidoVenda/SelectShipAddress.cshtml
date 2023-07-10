@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "";
+}
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Pedidos de Venda", "Index", "PedidoVenda")
+        <br />
+        <br />
+        <b style="color:red; background-color:Yellow">
+            * CUIDADO!!! CASO CLIQUE NO LINK ACIMA, OS DADOS INFORMADOS DO PEDIDO
+            ANTES DA FINALIZAÇÃO SERÃO PERDIDOS!!!
+        </b>
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/pedidoVenda.png"), "Pedido de Venda")
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+
+<h2>Passo 01.01: Selecione o Endereço de Entrega do Cliente que será utilizado no Pedido de Venda</h2>
+<br />
+@{
+    List<MvcAppHylinedoBrasilMobile.Models.bdApolo2.ENDER_ENT> customerList =
+        (List<MvcAppHylinedoBrasilMobile.Models.bdApolo2.ENDER_ENT>)Session["ShipAddressList"];
+}
+@using (Html.BeginForm("SaveSelectShipAddress", "PedidoVenda", FormMethod.Post))
+{
+    if (customerList.Count > 0)
+    {
+        <div id="customerTable" style="overflow:auto;">
+        <table id="tabela">
+            <tr>
+                <th></th>
+                <th>
+                    Sequencia
+                </th>
+                <th>
+                    Endereço
+                </th>
+                <th>
+                    Cidade
+                </th>
+                <th>
+                    Estado
+                </th>
+                <th>
+                    País
+                </th>
+            </tr>
+
+        @foreach (var item in customerList)
+        {
+            <tr>
+                <td class="ajuste">
+                    <div align="center" style="width: 50%;">
+                        <label style="width: 45px">
+                            @Html.RadioButton("selectedShipAddress", item.EnderEntSeq, Convert.ToInt32(Session["selectedShipAddress"].ToString()) == item.EnderEntSeq ? true : false)
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnderEntSeq)
+                </td>
+                <td>
+                    @(item.EnderEnt + " "
+                        + item.EnderEntNo + " - " + item.EnderEntComp + " - " + item.EnderEntBair)
+                </td>
+                <td>
+                    @{
+                        MvcAppHylinedoBrasilMobile.Models.bdApolo.CIDADE cidade =
+                            MvcAppHylinedoBrasilMobile.Controllers.PedidoVendaController.apoloStatic
+                            .CIDADE.Where(w => w.CidCod == item.CidCod).FirstOrDefault();
+                    }
+                    @if (cidade != null)
+                    {
+                        <label>@(cidade.CidNomeComp)</label>
+                    }
+                </td>
+                <td>
+                    @if (cidade != null)
+                    {
+                        <label>@(cidade.UfSigla)</label>
+                    }
+                </td>
+                <td>
+                    @if (cidade != null)
+                    {
+                        <label>@(cidade.PaisSigla)</label>
+                    }
+                </td>
+            </tr>
+        }
+
+        </table>
+        </div>
+    }
+
+    if (Session["origemPV"].ToString().Equals("Alteração"))
+    {   
+        <input type="submit" value="Salvar" name="SelectShipAddressPV" />
+    }
+    else
+    {
+        <input type="submit" value="Próximo" name="SelectShipAddressPV" />
+    }
+}
+
+@if (Session["origemPV"].ToString().Equals("Alteração"))
+{
+    using (Html.BeginForm("FinalizaPV", "PedidoVenda", FormMethod.Post))
+    {
+        <input type="submit" value="Voltar para a Visualização do Pedido" />
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

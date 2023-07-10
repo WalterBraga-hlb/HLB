@@ -1,0 +1,629 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HLBAPPServiceModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="HLBAPPServiceEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Tabela_Precos" EntityType="HLBAPPServiceModel.Tabela_Precos" />
+    <EntitySet Name="LOG_Item_Pedido_Venda" EntityType="HLBAPPServiceModel.LOG_Item_Pedido_Venda" />
+    <EntitySet Name="LOG_Pedido_Venda" EntityType="HLBAPPServiceModel.LOG_Pedido_Venda" />
+    <EntitySet Name="Item_Pedido_Venda" EntityType="HLBAPPServiceModel.Item_Pedido_Venda" />
+    <EntitySet Name="Pedido_Venda" EntityType="HLBAPPServiceModel.Pedido_Venda" />
+    <AssociationSet Name="FK__Item_Pedi__IDPed__214BF109" Association="HLBAPPServiceModel.FK__Item_Pedi__IDPed__214BF109">
+      <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+      <End Role="Item_Pedido_Venda" EntitySet="Item_Pedido_Venda" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Item_Pedi__IDPed__3BFFE745" Association="HLBAPPServiceModel.FK__Item_Pedi__IDPed__3BFFE745">
+      <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+      <End Role="Item_Pedido_Venda" EntitySet="Item_Pedido_Venda" />
+    </AssociationSet>
+    <EntitySet Name="LOG_Servicos_Pedido_Venda" EntityType="HLBAPPServiceModel.LOG_Servicos_Pedido_Venda" />
+    <EntitySet Name="LOG_Vacinas_Primaria_Pedido_Venda" EntityType="HLBAPPServiceModel.LOG_Vacinas_Primaria_Pedido_Venda" />
+    <EntitySet Name="LOG_Vacinas_Secundaria_Pedido_Venda" EntityType="HLBAPPServiceModel.LOG_Vacinas_Secundaria_Pedido_Venda" />
+    <EntitySet Name="Servicos_Pedido_Venda" EntityType="HLBAPPServiceModel.Servicos_Pedido_Venda" />
+    <EntitySet Name="Vacinas_Primaria_Pedido_Venda" EntityType="HLBAPPServiceModel.Vacinas_Primaria_Pedido_Venda" />
+    <EntitySet Name="Vacinas_Secundaria_Pedido_Venda" EntityType="HLBAPPServiceModel.Vacinas_Secundaria_Pedido_Venda" />
+    <AssociationSet Name="FK__Servicos___IDPed__2F9A1060" Association="HLBAPPServiceModel.FK__Servicos___IDPed__2F9A1060">
+      <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+      <End Role="Servicos_Pedido_Venda" EntitySet="Servicos_Pedido_Venda" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Servicos___IDPed__4A4E069C" Association="HLBAPPServiceModel.FK__Servicos___IDPed__4A4E069C">
+      <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+      <End Role="Servicos_Pedido_Venda" EntitySet="Servicos_Pedido_Venda" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vacinas_P__IDPed__2610A626" Association="HLBAPPServiceModel.FK__Vacinas_P__IDPed__2610A626">
+      <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+      <End Role="Vacinas_Primaria_Pedido_Venda" EntitySet="Vacinas_Primaria_Pedido_Venda" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vacinas_P__IDPed__40C49C62" Association="HLBAPPServiceModel.FK__Vacinas_P__IDPed__40C49C62">
+      <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+      <End Role="Vacinas_Primaria_Pedido_Venda" EntitySet="Vacinas_Primaria_Pedido_Venda" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vacinas_S__IDVac__2AD55B43" Association="HLBAPPServiceModel.FK__Vacinas_S__IDVac__2AD55B43">
+      <End Role="Vacinas_Primaria_Pedido_Venda" EntitySet="Vacinas_Primaria_Pedido_Venda" />
+      <End Role="Vacinas_Secundaria_Pedido_Venda" EntitySet="Vacinas_Secundaria_Pedido_Venda" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vacinas_S__IDVac__4589517F" Association="HLBAPPServiceModel.FK__Vacinas_S__IDVac__4589517F">
+      <End Role="Vacinas_Primaria_Pedido_Venda" EntitySet="Vacinas_Primaria_Pedido_Venda" />
+      <End Role="Vacinas_Secundaria_Pedido_Venda" EntitySet="Vacinas_Secundaria_Pedido_Venda" />
+    </AssociationSet>
+    <EntitySet Name="Prog_Diaria_Transp_Veiculos" EntityType="HLBAPPServiceModel.Prog_Diaria_Transp_Veiculos" />
+    <EntitySet Name="CHIC_Ultimo_Numero" EntityType="HLBAPPServiceModel.CHIC_Ultimo_Numero" />
+    <EntitySet Name="VU_Verifica_Pedidos_Num_CHIC_Duplicados" EntityType="HLBAPPServiceModel.VU_Verifica_Pedidos_Num_CHIC_Duplicados" />
+    <EntitySet Name="LOG_Atualizacao_CHIC_SQLServer" EntityType="HLBAPPServiceModel.LOG_Atualizacao_CHIC_SQLServer" />
+    <EntitySet Name="LOG_Prog_Diaria_Transp_Pedidos" EntityType="HLBAPPServiceModel.LOG_Prog_Diaria_Transp_Pedidos" />
+    <EntitySet Name="Prog_Diaria_Transp_Pedidos" EntityType="HLBAPPServiceModel.Prog_Diaria_Transp_Pedidos" />
+    <AssociationSet Name="FK__Prog_Diar__IDPed__39A368DE" Association="HLBAPPServiceModel.FK__Prog_Diar__IDPed__39A368DE">
+      <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+      <End Role="Prog_Diaria_Transp_Pedidos" EntitySet="Prog_Diaria_Transp_Pedidos" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Tabela_Precos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Empresa" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="Produto" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Tipo" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="DataInicial" Type="DateTime" Precision="3" />
+    <Property Name="DataFinal" Type="DateTime" Precision="3" />
+    <Property Name="Regiao" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="ValorMenor5000Aves" Type="Decimal" Precision="16" Scale="4" />
+    <Property Name="ValorNormal" Type="Decimal" Precision="16" Scale="4" />
+  </EntityType>
+  <EntityType Name="LOG_Item_Pedido_Venda">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="IDPedidoVenda" Nullable="false" />
+    <Property Type="String" Name="ProdCodEstr" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DataEntregaInicial" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="DataEntregaFinal" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="QtdeLiquida" Nullable="false" />
+    <Property Type="Decimal" Name="PercBonificacao" Precision="14" Scale="2" />
+    <Property Type="Int32" Name="QtdeBonificada" />
+    <Property Type="Int32" Name="QtdeReposicao" />
+    <Property Type="Decimal" Name="PrecoUnitario" Precision="24" Scale="9" />
+    <Property Type="Int32" Name="Sequencia" Nullable="false" />
+    <Property Type="DateTime" Name="DataHora" Nullable="false" Precision="3" />
+    <Property Type="String" Name="Operacao" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="IDItPedVenda" />
+    <Property Type="String" Name="OrderNoCHIC" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="IDLogPedidoVenda" />
+    <Property Type="String" Name="OrderNoCHICReposicao" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TipoAlteracao" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Vacina" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="PrecoPinto" Precision="24" Scale="9" />
+    <Property Type="String" Name="TipoReposicao" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ValorTotal" Precision="14" Scale="2" />
+    <Property Name="Sobra" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LOG_Pedido_Venda">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CodigoCliente" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DataPedido" Nullable="false" Precision="3" />
+    <Property Type="String" Name="Usuario" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DataHora" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="OvosBrasil" Nullable="false" />
+    <Property Type="String" Name="CondicaoPagamento" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Observacoes" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Vendedor" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Operacao" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="IDPedidoVenda" />
+    <Property Type="String" Name="Motivo" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EnviadoVia" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AeroportoOrigem" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AeroportoDestino" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ValorDocumentacao" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="ValorFrete" Precision="14" Scale="2" />
+    <Property Type="Int32" Name="NumCaixas" />
+    <Property Type="DateTime" Name="DataEnvio" Precision="3" />
+    <Property Type="DateTime" Name="DataSaidaIncubatorio" Precision="3" />
+    <Property Type="String" Name="TipoPedido" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="NumPaletes" />
+    <Property Type="String" Name="NumFatura" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NumeroVoo" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CiaAerea" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NCM" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AWB" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DataColetaNascimento" Precision="3" />
+    <Property Type="String" Name="Placa" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Lacre" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Motorista" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="RGMotorista" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Projecao" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Item_Pedido_Venda">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="IDPedidoVenda" Nullable="false" />
+    <Property Type="String" Name="ProdCodEstr" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DataEntregaInicial" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="DataEntregaFinal" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="QtdeLiquida" Nullable="false" />
+    <Property Type="Decimal" Name="PercBonificacao" Precision="14" Scale="2" />
+    <Property Type="Int32" Name="QtdeBonificada" />
+    <Property Type="Int32" Name="QtdeReposicao" />
+    <Property Type="Decimal" Name="PrecoUnitario" Precision="24" Scale="9" />
+    <Property Type="Int32" Name="Sequencia" Nullable="false" />
+    <Property Type="String" Name="OrderNoCHIC" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Alterado" />
+    <Property Type="Int32" Name="Importar" />
+    <Property Type="String" Name="OrderNoCHICReposicao" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Vacina" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Pedido_Venda" Relationship="HLBAPPServiceModel.FK__Item_Pedi__IDPed__214BF109" FromRole="Item_Pedido_Venda" ToRole="Pedido_Venda" />
+    <NavigationProperty Name="Pedido_Venda1" Relationship="HLBAPPServiceModel.FK__Item_Pedi__IDPed__3BFFE745" FromRole="Item_Pedido_Venda" ToRole="Pedido_Venda" />
+    <Property Type="Decimal" Name="ValorTotal" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="PrecoPinto" Precision="24" Scale="9" />
+    <Property Type="String" Name="TipoReposicao" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DataNascimento" Precision="3" />
+    <Property Name="Sobra" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pedido_Venda">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CodigoCliente" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DataPedido" Nullable="false" Precision="3" />
+    <Property Type="String" Name="Usuario" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DataHora" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="OvosBrasil" Nullable="false" />
+    <Property Type="String" Name="CondicaoPagamento" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Observacoes" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Vendedor" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Empresa" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NomeCliente" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EnviadoVia" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AeroportoOrigem" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AeroportoDestino" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ValorDocumentacao" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="ValorFrete" Precision="14" Scale="2" />
+    <Property Type="Int32" Name="NumCaixas" />
+    <Property Type="DateTime" Name="DataEnvio" Precision="3" />
+    <Property Type="DateTime" Name="DataSaidaIncubatorio" Precision="3" />
+    <Property Type="String" Name="TipoPedido" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="NumPaletes" />
+    <Property Type="String" Name="NumFatura" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NumeroVoo" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CiaAerea" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NCM" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AWB" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="EnderEntSeq" />
+    <NavigationProperty Name="Item_Pedido_Venda" Relationship="HLBAPPServiceModel.FK__Item_Pedi__IDPed__214BF109" FromRole="Pedido_Venda" ToRole="Item_Pedido_Venda" />
+    <NavigationProperty Name="Item_Pedido_Venda1" Relationship="HLBAPPServiceModel.FK__Item_Pedi__IDPed__3BFFE745" FromRole="Pedido_Venda" ToRole="Item_Pedido_Venda" />
+    <NavigationProperty Name="Servicos_Pedido_Venda" Relationship="HLBAPPServiceModel.FK__Servicos___IDPed__2F9A1060" FromRole="Pedido_Venda" ToRole="Servicos_Pedido_Venda" />
+    <NavigationProperty Name="Servicos_Pedido_Venda1" Relationship="HLBAPPServiceModel.FK__Servicos___IDPed__4A4E069C" FromRole="Pedido_Venda" ToRole="Servicos_Pedido_Venda" />
+    <NavigationProperty Name="Vacinas_Primaria_Pedido_Venda" Relationship="HLBAPPServiceModel.FK__Vacinas_P__IDPed__2610A626" FromRole="Pedido_Venda" ToRole="Vacinas_Primaria_Pedido_Venda" />
+    <NavigationProperty Name="Vacinas_Primaria_Pedido_Venda1" Relationship="HLBAPPServiceModel.FK__Vacinas_P__IDPed__40C49C62" FromRole="Pedido_Venda" ToRole="Vacinas_Primaria_Pedido_Venda" />
+    <Property Type="DateTime" Name="DataColetaNascimento" Precision="3" />
+    <Property Type="String" Name="Placa" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Lacre" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Motorista" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="RGMotorista" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Veterinario" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ValorTotalPintinho" Precision="14" Scale="2" />
+    <Property Type="String" Name="Projecao" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Prog_Diaria_Transp_Pedidos" Relationship="HLBAPPServiceModel.FK__Prog_Diar__IDPed__39A368DE" FromRole="Pedido_Venda" ToRole="Prog_Diaria_Transp_Pedidos" />
+  </EntityType>
+  <Association Name="FK__Item_Pedi__IDPed__214BF109">
+    <End Type="HLBAPPServiceModel.Pedido_Venda" Role="Pedido_Venda" Multiplicity="1" />
+    <End Type="HLBAPPServiceModel.Item_Pedido_Venda" Role="Item_Pedido_Venda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pedido_Venda">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Item_Pedido_Venda">
+        <PropertyRef Name="IDPedidoVenda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Item_Pedi__IDPed__3BFFE745">
+    <End Type="HLBAPPServiceModel.Pedido_Venda" Role="Pedido_Venda" Multiplicity="1" />
+    <End Type="HLBAPPServiceModel.Item_Pedido_Venda" Role="Item_Pedido_Venda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pedido_Venda">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Item_Pedido_Venda">
+        <PropertyRef Name="IDPedidoVenda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="LOG_Servicos_Pedido_Venda">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="IDPedidoVenda" Nullable="false" />
+    <Property Type="String" Name="ProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="PercAplicacaoServico" Precision="14" Scale="2" />
+    <Property Type="DateTime" Name="DataHora" Nullable="false" Precision="3" />
+    <Property Type="String" Name="Operacao" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="IDServPedVenda" />
+    <Property Type="Int32" Name="IDLogPedidoVenda" />
+    <Property Type="Int32" Name="Bonificada" />
+    <Property Type="Decimal" Name="PrecoUnitario" Precision="24" Scale="9" />
+  </EntityType>
+  <EntityType Name="LOG_Vacinas_Primaria_Pedido_Venda">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="IDPedidoVenda" Nullable="false" />
+    <Property Type="String" Name="ProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DataHora" Nullable="false" Precision="3" />
+    <Property Type="String" Name="Operacao" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="IDVacPrimPedVenda" />
+    <Property Type="Int32" Name="IDLogPedidoVenda" />
+    <Property Type="Int32" Name="SeqItemPedVenda" />
+    <Property Type="Int32" Name="Bonificada" />
+    <Property Type="Decimal" Name="PrecoUnitario" Precision="24" Scale="9" />
+  </EntityType>
+  <EntityType Name="LOG_Vacinas_Secundaria_Pedido_Venda">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="IDVacPrimPedVenda" Nullable="false" />
+    <Property Type="String" Name="ProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Sequencia" Nullable="false" />
+    <Property Type="DateTime" Name="DataHora" Nullable="false" Precision="3" />
+    <Property Type="String" Name="Operacao" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="IDVacSecPedVenda" />
+    <Property Type="Int32" Name="IDVacPrimLogPedidoVenda" />
+    <Property Type="Int32" Name="SeqItemPedVenda" />
+    <Property Type="Int32" Name="Bonificada" />
+    <Property Type="Decimal" Name="PrecoUnitario" Precision="24" Scale="9" />
+  </EntityType>
+  <EntityType Name="Servicos_Pedido_Venda">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="IDPedidoVenda" Nullable="false" />
+    <Property Type="String" Name="ProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="PercAplicacaoServico" Precision="14" Scale="2" />
+    <NavigationProperty Name="Pedido_Venda" Relationship="HLBAPPServiceModel.FK__Servicos___IDPed__2F9A1060" FromRole="Servicos_Pedido_Venda" ToRole="Pedido_Venda" />
+    <NavigationProperty Name="Pedido_Venda1" Relationship="HLBAPPServiceModel.FK__Servicos___IDPed__4A4E069C" FromRole="Servicos_Pedido_Venda" ToRole="Pedido_Venda" />
+    <Property Type="Int32" Name="Bonificada" />
+    <Property Type="Decimal" Name="PrecoUnitario" Precision="24" Scale="9" />
+    <Property Name="MascaraTI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Vacinas_Primaria_Pedido_Venda">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="IDPedidoVenda" Nullable="false" />
+    <Property Type="String" Name="ProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="SeqItemPedVenda" />
+    <NavigationProperty Name="Pedido_Venda" Relationship="HLBAPPServiceModel.FK__Vacinas_P__IDPed__2610A626" FromRole="Vacinas_Primaria_Pedido_Venda" ToRole="Pedido_Venda" />
+    <NavigationProperty Name="Pedido_Venda1" Relationship="HLBAPPServiceModel.FK__Vacinas_P__IDPed__40C49C62" FromRole="Vacinas_Primaria_Pedido_Venda" ToRole="Pedido_Venda" />
+    <NavigationProperty Name="Vacinas_Secundaria_Pedido_Venda" Relationship="HLBAPPServiceModel.FK__Vacinas_S__IDVac__2AD55B43" FromRole="Vacinas_Primaria_Pedido_Venda" ToRole="Vacinas_Secundaria_Pedido_Venda" />
+    <NavigationProperty Name="Vacinas_Secundaria_Pedido_Venda1" Relationship="HLBAPPServiceModel.FK__Vacinas_S__IDVac__4589517F" FromRole="Vacinas_Primaria_Pedido_Venda" ToRole="Vacinas_Secundaria_Pedido_Venda" />
+    <Property Type="Decimal" Name="PrecoUnitario" Precision="24" Scale="9" />
+    <Property Type="Int32" Name="Bonificada" />
+  </EntityType>
+  <EntityType Name="Vacinas_Secundaria_Pedido_Venda">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="IDVacPrimPedVenda" Nullable="false" />
+    <Property Type="String" Name="ProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Sequencia" Nullable="false" />
+    <Property Type="Int32" Name="SeqItemPedVenda" />
+    <NavigationProperty Name="Vacinas_Primaria_Pedido_Venda" Relationship="HLBAPPServiceModel.FK__Vacinas_S__IDVac__2AD55B43" FromRole="Vacinas_Secundaria_Pedido_Venda" ToRole="Vacinas_Primaria_Pedido_Venda" />
+    <NavigationProperty Name="Vacinas_Primaria_Pedido_Venda1" Relationship="HLBAPPServiceModel.FK__Vacinas_S__IDVac__4589517F" FromRole="Vacinas_Secundaria_Pedido_Venda" ToRole="Vacinas_Primaria_Pedido_Venda" />
+    <Property Type="Decimal" Name="PrecoUnitario" Precision="24" Scale="9" />
+    <Property Type="Int32" Name="Bonificada" />
+  </EntityType>
+  <Association Name="FK__Servicos___IDPed__2F9A1060">
+    <End Type="HLBAPPServiceModel.Pedido_Venda" Role="Pedido_Venda" Multiplicity="1" />
+    <End Type="HLBAPPServiceModel.Servicos_Pedido_Venda" Role="Servicos_Pedido_Venda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pedido_Venda">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Servicos_Pedido_Venda">
+        <PropertyRef Name="IDPedidoVenda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Servicos___IDPed__4A4E069C">
+    <End Type="HLBAPPServiceModel.Pedido_Venda" Role="Pedido_Venda" Multiplicity="1" />
+    <End Type="HLBAPPServiceModel.Servicos_Pedido_Venda" Role="Servicos_Pedido_Venda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pedido_Venda">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Servicos_Pedido_Venda">
+        <PropertyRef Name="IDPedidoVenda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vacinas_P__IDPed__2610A626">
+    <End Type="HLBAPPServiceModel.Pedido_Venda" Role="Pedido_Venda" Multiplicity="1" />
+    <End Type="HLBAPPServiceModel.Vacinas_Primaria_Pedido_Venda" Role="Vacinas_Primaria_Pedido_Venda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pedido_Venda">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Vacinas_Primaria_Pedido_Venda">
+        <PropertyRef Name="IDPedidoVenda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vacinas_P__IDPed__40C49C62">
+    <End Type="HLBAPPServiceModel.Pedido_Venda" Role="Pedido_Venda" Multiplicity="1" />
+    <End Type="HLBAPPServiceModel.Vacinas_Primaria_Pedido_Venda" Role="Vacinas_Primaria_Pedido_Venda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pedido_Venda">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Vacinas_Primaria_Pedido_Venda">
+        <PropertyRef Name="IDPedidoVenda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vacinas_S__IDVac__2AD55B43">
+    <End Type="HLBAPPServiceModel.Vacinas_Primaria_Pedido_Venda" Role="Vacinas_Primaria_Pedido_Venda" Multiplicity="1" />
+    <End Type="HLBAPPServiceModel.Vacinas_Secundaria_Pedido_Venda" Role="Vacinas_Secundaria_Pedido_Venda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vacinas_Primaria_Pedido_Venda">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Vacinas_Secundaria_Pedido_Venda">
+        <PropertyRef Name="IDVacPrimPedVenda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vacinas_S__IDVac__4589517F">
+    <End Type="HLBAPPServiceModel.Vacinas_Primaria_Pedido_Venda" Role="Vacinas_Primaria_Pedido_Venda" Multiplicity="1" />
+    <End Type="HLBAPPServiceModel.Vacinas_Secundaria_Pedido_Venda" Role="Vacinas_Secundaria_Pedido_Venda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vacinas_Primaria_Pedido_Venda">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Vacinas_Secundaria_Pedido_Venda">
+        <PropertyRef Name="IDVacPrimPedVenda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Prog_Diaria_Transp_Veiculos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="DataProgramacao" Precision="3" />
+    <Property Type="Int32" Name="NumVeiculo" />
+    <Property Type="String" Name="Placa" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Motorista01" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Motorista02" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="QuantidadeTotal" />
+    <Property Type="Int32" Name="QuantidadePorCaixa" />
+    <Property Type="Int32" Name="QunatidadeCaixa" />
+    <Property Type="Decimal" Name="ValorTotal" Precision="14" Scale="2" />
+    <Property Type="String" Name="EmpresaTranportador" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="InicioCarregamentoEsperado" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="HorarioEntregaNF" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Tranportadora" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ValorKM" Precision="14" Scale="2" />
+    <Property Type="String" Name="UnidadeBaseEmbarcador" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CargaLiberada" />
+    <Property Type="DateTime" Name="DataEmbarque" Precision="3" />
+    <Property Type="String" Name="AeroportoOrigem" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="HorarioChegadaAeroporto" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Despachante" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DataInicioVazio" Precision="3" />
+    <Property Type="Int32" Name="IDCargaEmbarcador" />
+    <Property Name="InicioCarregamentoReal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="TerminoCarregamentoReal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="OdometroVeiculoDataEmbarque" Type="Decimal" Precision="14" Scale="2" />
+    <Property Name="EntCod" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="IdRoteiroTarget" Type="Int32" />
+    <Property Name="IdOperacaoTransporte" Type="Int32" />
+    <Property Name="EntCodMotorista01" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="EntCodMotorista02" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="EquipCodEstrVeiculo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CHIC_Ultimo_Numero">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="UltimoOrderNOCHIC" />
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="VU_Verifica_Pedidos_Num_CHIC_Duplicados">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="CodigoCliente" />
+      <PropertyRef Name="DataPedido" />
+      <PropertyRef Name="Usuario" />
+      <PropertyRef Name="DataHora" />
+      <PropertyRef Name="OvosBrasil" />
+      <PropertyRef Name="Vendedor" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="CodigoCliente" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DataPedido" Nullable="false" Precision="3" />
+    <Property Type="String" Name="Usuario" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DataHora" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="OvosBrasil" Nullable="false" />
+    <Property Type="String" Name="CondicaoPagamento" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Observacoes" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Vendedor" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Empresa" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NomeCliente" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EnviadoVia" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AeroportoOrigem" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AeroportoDestino" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ValorDocumentacao" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="ValorFrete" Precision="14" Scale="2" />
+    <Property Type="Int32" Name="NumCaixas" />
+    <Property Type="DateTime" Name="DataEnvio" Precision="3" />
+    <Property Type="DateTime" Name="DataSaidaIncubatorio" Precision="3" />
+    <Property Type="String" Name="TipoPedido" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="NumPaletes" />
+    <Property Type="String" Name="NumFatura" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NumeroVoo" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CiaAerea" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NCM" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AWB" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="EnderEntSeq" />
+    <Property Type="DateTime" Name="DataColetaNascimento" Precision="3" />
+    <Property Type="String" Name="Placa" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Lacre" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Motorista" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="RGMotorista" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Veterinario" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ValorTotalPintinho" Type="Decimal" Precision="14" Scale="2" />
+    <Property Name="Projecao" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="LOG_Atualizacao_CHIC_SQLServer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DataHoraInicio" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DataHoraFim" Type="DateTime" Precision="3" />
+    <Property Name="Usuario" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Periodo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Observacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="LOG_Prog_Diaria_Transp_Pedidos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DataHora" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Usuario" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Operacao" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ObsLog" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DataProgramacao" Type="DateTime" Precision="3" />
+    <Property Name="CodigoCliente" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="NomeCliente" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="NumVeiculo" Type="Int32" />
+    <Property Name="Quantidade" Type="Int32" />
+    <Property Name="LocalEntrega" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Produto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Linhagem" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Embalagem" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ValorTotal" Type="Decimal" Precision="14" Scale="2" />
+    <Property Name="NFEspecie" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="NFSerie" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="NFNum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CHICNum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LocalNascimento" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="TelefoneCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="InicioCarregamentoEsperado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DataEntrega" Type="DateTime" Precision="3" />
+    <Property Name="ChegadaClienteEsperado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="KM" Type="Int32" />
+    <Property Name="CodigoRepresentante" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="NomeRepresentante" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="InicioCarregamentoReal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ChegadaClienteReal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Observacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ObservacaoCHIC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Debicagem" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Ordem" Type="Int32" />
+    <Property Name="EmpresaTranportador" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Empresa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="QuantidadeCaixa" Type="Int32" />
+    <Property Name="CHICOrigem" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="NumRoteiroEntregaFluig" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="DataChegadaClienteReal" Type="DateTime" Precision="3" />
+    <Property Name="IDProgDiariaTranspPedidos" Type="Int32" Nullable="false" />
+    <Property Name="QtdeVendida" Type="Int32" />
+    <Property Name="QtdeBonificada" Type="Int32" />
+    <Property Name="QtdeReposicao" Type="Int32" />
+    <Property Name="QtdeSobra" Type="Int32" />
+    <Property Name="MotivoSobra" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CHICNumReposicao" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="MotivoReposicao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IDPedidoVenda" Type="Int32" />
+    <Property Name="EnderEntSeq" Type="Int32" />
+    <Property Name="PercBonificacao" Type="Decimal" Precision="16" Scale="4" />
+    <Property Name="PrecoProduto" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ObsProgramacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CondicaoPagamento" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Prog_Diaria_Transp_Pedidos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DataProgramacao" Type="DateTime" Precision="3" />
+    <Property Name="CodigoCliente" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="NomeCliente" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="NumVeiculo" Type="Int32" />
+    <Property Name="Quantidade" Type="Int32" />
+    <Property Name="LocalEntrega" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Produto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Linhagem" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Embalagem" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ValorTotal" Type="Decimal" Precision="14" Scale="2" />
+    <Property Name="NFEspecie" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="NFSerie" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="NFNum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CHICNum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LocalNascimento" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="TelefoneCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="InicioCarregamentoEsperado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DataEntrega" Type="DateTime" Precision="3" />
+    <Property Name="ChegadaClienteEsperado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="KM" Type="Int32" />
+    <Property Name="CodigoRepresentante" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="NomeRepresentante" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="InicioCarregamentoReal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ChegadaClienteReal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Observacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ObservacaoCHIC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Debicagem" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Ordem" Type="Int32" />
+    <Property Name="EmpresaTranportador" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Empresa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="QuantidadeCaixa" Type="Int32" />
+    <Property Name="CHICOrigem" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="NumRoteiroEntregaFluig" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="DataChegadaClienteReal" Type="DateTime" Precision="3" />
+    <Property Name="QtdeVendida" Type="Int32" Nullable="false" />
+    <Property Name="QtdeBonificada" Type="Int32" Nullable="false" />
+    <Property Name="QtdeReposicao" Type="Int32" Nullable="false" />
+    <Property Name="QtdeSobra" Type="Int32" Nullable="false" />
+    <Property Name="MotivoSobra" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CHICNumReposicao" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="MotivoReposicao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IDPedidoVenda" Type="Int32" />
+    <Property Name="EnderEntSeq" Type="Int32" Nullable="false" />
+    <Property Name="PercBonificacao" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
+    <Property Name="PrecoProduto" Type="Decimal" Nullable="false" Precision="24" Scale="9" />
+    <Property Name="ObsProgramacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ObsFaturamento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Pedido_Venda" Relationship="HLBAPPServiceModel.FK__Prog_Diar__IDPed__39A368DE" FromRole="Prog_Diaria_Transp_Pedidos" ToRole="Pedido_Venda" />
+    <Property Name="CondicaoPagamento" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK__Prog_Diar__IDPed__39A368DE">
+    <End Type="HLBAPPServiceModel.Pedido_Venda" Role="Pedido_Venda" Multiplicity="0..1" />
+    <End Type="HLBAPPServiceModel.Prog_Diaria_Transp_Pedidos" Role="Prog_Diaria_Transp_Pedidos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pedido_Venda">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Prog_Diaria_Transp_Pedidos">
+        <PropertyRef Name="IDPedidoVenda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

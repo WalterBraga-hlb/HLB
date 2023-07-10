@@ -1,0 +1,1048 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+    
+    List<MvcAppHylinedoBrasilMobile.Models.RDV> listaRDV =
+        (List<MvcAppHylinedoBrasilMobile.Models.RDV>)Session["ListaRDV"];
+}
+
+<script src="../../Scripts/jquery.maskedinput.js" type="text/javascript"></script>
+
+<script language="javascript" type="text/javascript">
+    var listaDespesas = null;
+
+    window.onbeforeunload = function () {
+        return "Não é possível atualizar a página porque os dados serão perdidos! Sendo assim, a página será fechada!";
+    }
+
+    window.onkeydown = function (e) {
+        if (e.keyCode === 116) {
+            alert("Função não permitida");
+            e.keyCode = 0;
+            e.returnValue = false;
+            return false;
+        }
+    }
+
+    function carregaListaDespesas() {
+        $.ajax({
+            url: '/RDV/CarregaListaDespesas',
+            type: 'POST',
+            data: JSON.stringify(),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                listaDespesas = data;
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        carregaListaDespesas();
+        $("#placa").mask("aaa-9999");
+        var value = $('#valorMoedaEstrangeira').val();
+        if (value > 0) {
+            //$("#ddlOrigem").val("Internacional");
+            $('#pnlIndEcon').show();
+        } else {
+            //$("#ddlOrigem").val("Nacional");
+            $('#pnlIndEcon').hide();
+        }
+        //verificaOrigemSelecionada();
+        var motivo = $('#motivo').val();
+        if (motivo != "") {
+            $('#pnlMotivo').show();
+        } else {
+            $('#pnlMotivo').hide();
+        }
+        var origem = $('#ddlOrigem option:selected').text();
+        //        var formaPagamento = $('#ddlFormaPag option:selected').text();
+        //        if (origem == "Internacional" && formaPagamento == "Cartão Corp.") {
+        //            $('#pnlExterior').show();
+        //        } else {
+        //            if (origem == "Internacional" && formaPagamento == "Espécie") {
+        //                $('#pnlIndEcon').show();
+        //            } else {
+        //                $('#pnlIndEcon').hide();
+        //            }
+        //            $('#pnlExterior').hide();
+        //        }
+        $('#pnlExterior').hide();
+        if (origem == "Internacional") {
+            $('#pnlIndEcon').show();
+        } else {
+            $('#pnlIndEcon').hide();
+        }
+        verificaTipoDespesa();
+        carregaLimiteDespesa();
+    });
+
+    function verificaTipoDespesa() {
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        if (tipoDespesa == "HOSPEDAGEM(DN)" || tipoDespesa == "HOSPEDAGEM(DI)") {
+            $('#pnlQtdeDiariasHospedagem').show();
+        } else {
+            $('#qtd').val('');
+            $('#valorDiaria').val('');
+            $('#pnlQtdeDiariasHospedagem').hide();
+        }
+        //if (tipoDespesa == "KILOMETRAGEM (DN)" || tipoDespesa == "COMBUSTÍVEL(DN)") {
+        if (tipoDespesa == "KILOMETRAGEM (DN)") {
+            $('#valorDespesa').prop('readOnly', true);
+        } else {
+            $('#valorDespesa').prop('readOnly', false);
+        }
+        if (tipoDespesa == "KILOMETRAGEM (DN)") {
+            $('#pnlQtdeKM').show();
+        } else {
+            $('#qtdKM').val('');
+            $('#pnlQtdeKM').hide();
+        }
+        if (tipoDespesa == "COMBUSTÍVEL(DN)") {
+            $('#pnlCombustivel').show();
+        } else {
+            $('#kmAtual').val('');
+            $('#qtdeLitros').val('');
+            $('#valorLitro').val('');
+            $('#placa').val('');
+            $('#pnlCombustivel').hide();
+        }
+    }
+
+    function verificaTipoDespesaHospedagem() {
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        if (tipoDespesa == "HOSPEDAGEM(DN)" || tipoDespesa == "HOSPEDAGEM(DI)") {
+            $('#pnlQtdeDiariasHospedagem').show();
+        } else {
+            $('#qtd').val('');
+            $('#valorDiaria').val('');
+            $('#pnlQtdeDiariasHospedagem').hide();
+        }
+    }
+
+    function verificaTipoDespesaKM() {
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        if (tipoDespesa == "KILOMETRAGEM (DN)") {
+            $('#valorDespesa').prop('readOnly', true);
+            $('#pnlQtdeKM').show();
+        } else {
+            $('#valorDespesa').prop('readOnly', false);
+            $('#qtdKM').val('');
+            $('#pnlQtdeKM').hide();
+        }
+    }
+
+    function verificaTipoDespesaCombustivel() {
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        if (tipoDespesa == "COMBUSTÍVEL(DN)") {
+            //$('#valorDespesa').prop('readOnly', true);
+            $('#pnlCombustivel').show();
+        } else {
+            //$('#valorDespesa').prop('readOnly', false);
+            $('#kmAtual').val('');
+            $('#qtdeLitros').val('');
+            $('#valorLitro').val('');
+            $('#placa').val('');
+            $('#pnlCombustivel').hide();
+        }
+    }
+
+    function mostrarElemento(id, visibilidade) {
+        document.getElementById(id).style.display = visibilidade;
+    }
+
+    function verificaDescricao() {
+        var descricao = $('#descricao').val();
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        var errorHolder = document.getElementById('errorDescricao');
+        var listaDespesa = listaDespesas.filter(function (f) {
+            return f.TipoDespNome == tipoDespesa;
+        });
+        if (descricao == "" && listaDespesa[0].TipoDespAltValUnit == 'Sim') {
+            //&& (tipoDespesa == 'OUTROS (DI)' || tipoDespesa == 'OUTROS (DN)' || tipoDespesa == 'MANUTENÇÃO DE CARRO(DN)' || tipoDespesa == 'KILOMETRAGEM (DN)')) {
+            //alert('O campo Descrição é obrigatório!');
+            errorHolder.innerHTML = 'O campo Descrição é obrigatório, pois selecionada o Tipo de Despesa "' + tipoDespesa + '"!';
+            $('#descricao').focus();
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        } else {
+            errorHolder.innerHTML = '';
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+            return false;
+        }
+    }
+
+    function verificaValorDespesa() {
+        var value = $('#valorDespesa').val();
+        var errorHolder = document.getElementById('errorValDespesa');
+        if (value == "") {
+            //alert('O campo Valor da Despesa tem que ser maior que zero!');
+            //$('#valorDespesa').focus();
+            errorHolder.innerHTML = 'O campo Valor da Despesa tem que ser maior que zero!';
+            $('#valorDespesa').focus();
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        }
+        else {
+            if (value == 0) {
+                //alert('O campo Valor da Despesa tem que ser maior que zero!');
+                //$('#valorDespesa').focus();
+                errorHolder.innerHTML = 'O campo Valor da Despesa tem que ser maior que zero!';
+                $('#valorDespesa').focus();
+                $('#add').button('disable');
+                $('[type="submit"]').button('refresh');
+                return true;
+            } else {
+                errorHolder.innerHTML = '';
+                $('#add').button('enable');
+                $('[type="submit"]').button('refresh');
+                return false;
+            }
+            return false;
+        }
+    }
+
+    function verificaQtdeDiarias() {
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        var value = $('#qtd').val();
+        var errorHolder = document.getElementById('errorQtdeDiariasHospedagem');
+        if (tipoDespesa == "HOSPEDAGEM(DN)" || tipoDespesa == "HOSPEDAGEM(DI)") {
+            if (value == "") {
+                //alert('O campo Valor da Despesa tem que ser maior que zero!');
+                //$('#valorDespesa').focus();
+                errorHolder.innerHTML = 'O campo Qtde. Diárias tem que ser maior que zero!';
+                $('#qtd').focus();
+                $('#add').button('disable');
+                $('[type="submit"]').button('refresh');
+                return true;
+            }
+            else {
+                if (value == 0) {
+                    //alert('O campo Valor da Despesa tem que ser maior que zero!');
+                    //$('#valorDespesa').focus();
+                    errorHolder.innerHTML = 'O campo Qtde. Diárias tem que ser maior que zero!';
+                    $('#qtd').focus();
+                    $('#add').button('disable');
+                    $('[type="submit"]').button('refresh');
+                    return true;
+                } else {
+                    errorHolder.innerHTML = '';
+                    $('#add').button('enable');
+                    $('[type="submit"]').button('refresh');
+                    return false;
+                }
+                return false;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    function verificaValorDiaria() {
+        var value = $('#valorDiaria').val();
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        var errorHolder = document.getElementById('errorValorDiariaHospedagem');
+        if (tipoDespesa == "HOSPEDAGEM(DN)" || tipoDespesa == "HOSPEDAGEM(DI)") {
+            if (value == "") {
+                //alert('O campo Valor da Despesa tem que ser maior que zero!');
+                //$('#valorDespesa').focus();
+                errorHolder.innerHTML = 'O campo Valor Diária tem que ser maior que zero!';
+                $('#valorDiaria').focus();
+                $('#add').button('disable');
+                $('[type="submit"]').button('refresh');
+                return true;
+            }
+            else {
+                if (value == 0) {
+                    //alert('O campo Valor da Despesa tem que ser maior que zero!');
+                    //$('#valorDespesa').focus();
+                    errorHolder.innerHTML = 'O campo Valor Diária tem que ser maior que zero!';
+                    $('#valorDiaria').focus();
+                    $('#add').button('disable');
+                    $('[type="submit"]').button('refresh');
+                    return true;
+                } else {
+                    errorHolder.innerHTML = '';
+                    $('#add').button('enable');
+                    $('[type="submit"]').button('refresh');
+                    return false;
+                }
+                return false;
+            }
+            return false;
+        } 
+        return false;
+    }
+
+    function verificaQtdeKM() {
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        var value = $('#qtdKM').val();
+        var errorHolder = document.getElementById('errorQtdeKM');
+        if (tipoDespesa == "KILOMETRAGEM (DN)") {
+            if (value == "") {
+                //alert('O campo Valor da Despesa tem que ser maior que zero!');
+                //$('#valorDespesa').focus();
+                errorHolder.innerHTML = 'O campo Qtde. KM tem que ser maior que zero!';
+                $('#qtdKM').focus();
+                $('#add').button('disable');
+                $('[type="submit"]').button('refresh');
+                return true;
+            }
+            else {
+                if (value == 0) {
+                    //alert('O campo Valor da Despesa tem que ser maior que zero!');
+                    //$('#valorDespesa').focus();
+                    errorHolder.innerHTML = 'O campo Qtde. KM tem que ser maior que zero!';
+                    $('#qtdKM').focus();
+                    $('#add').button('disable');
+                    $('[type="submit"]').button('refresh');
+                    return true;
+                } else {
+                    var limite = $('#limiteDespesa').val();
+                    var replacelimite = limite.replace(',', '.');
+                    var floatlimite = parseFloat(replacelimite);
+
+                    var replacevalue = value.replace(',', '.');
+                    var floatvalue = parseFloat(replacevalue);
+
+                    var re = floatlimite * floatvalue;
+                    var result = parseFloat(re).toFixed(2);
+
+                    $('#valorDespesa').val(result);
+                    errorHolder.innerHTML = '';
+                    $('#add').button('enable');
+                    $('[type="submit"]').button('refresh');
+                    return false;
+                }
+                return false;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    function verificaValorMoedaEstrangeira() {
+        var value = $('#valorMoedaEstrangeira').val();
+        //var local = $('#ddlLocais option:selected').text();
+        var origem = $('#ddlOrigem option:selected').text();
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        var errorHolder = document.getElementById('errorvalorMoedaEstrangeira');
+        var formaPagamento = $('#ddlFormaPag option:selected').text();
+        if (parseFloat(value) > 0) {
+            $('#pnlIndEcon').show();
+        } else {
+            $('#pnlIndEcon').hide();
+        }
+        //if (local.indexOf('/BRA') == -1 && tipoDespesa.indexOf('(D)') > 0) {
+        if (origem == "Internacional" && formaPagamento == "Cartão Corp.") {
+            if (value == "") {
+                //alert('O campo Valor Moeda Estrangeria tem que ser maior que zero!');
+                //$('#valorMoedaEstrangeira').focus();
+                errorHolder.innerHTML = 'O campo Valor Moeda Estrangeria tem que ser maior que zero!';
+                $('#valorMoedaEstrangeira').focus();
+                $('#add').button('disable');
+                $('[type="submit"]').button('refresh');
+                return true;
+            }
+            else {
+                if (value == 0) {
+                    //alert('O campo Valor Moeda Estrangeria tem que ser maior que zero!');
+                    //$('#valorMoedaEstrangeira').focus();
+                    errorHolder.innerHTML = 'O campo Valor Moeda Estrangeria tem que ser maior que zero!';
+                    $('#valorMoedaEstrangeira').focus();
+                    $('#add').button('disable');
+                    $('[type="submit"]').button('refresh');
+                    return true;
+                } else {
+                    errorHolder.innerHTML = '';
+                    $('#add').button('enable');
+                    $('[type="submit"]').button('refresh');
+                    return false;
+                }
+                return false;
+            }
+            return false;
+        }
+    }
+
+    function verificaOrigemSelecionada() {
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        if (tipoDespesa.indexOf('(C)') > 0) {
+            //$("#ddlLocais").val("00085839");
+            $("#ddlFormaPag").val("Espécie");   
+//            $('#pnlLocal').hide();
+//            $('#pnlImagem').hide();
+            $('#pnlFormaPag').hide();
+        } else {
+            //$('#pnlLocal').show();
+            //$('#pnlImagem').show();  
+            $("#cidade").val("");
+            $("#valorMoedaEstrangeira").val("");
+            $('#pnlFormaPag').show();
+        }
+        var origem = $('#ddlOrigem option:selected').text();
+//        var formaPagamento = $('#ddlFormaPag option:selected').text();
+//        if (origem == "Internacional" && formaPagamento == "Cartão Corp.") {
+//            $('#pnlExterior').show();
+//        } else {
+//            if (origem == "Internacional" && formaPagamento == "Espécie") {
+//                $('#pnlIndEcon').show();
+//            } else {
+//                $('#pnlIndEcon').hide();
+//            }
+//            $('#pnlExterior').hide();
+//        }
+        if (origem == "Internacional") {
+            $('#pnlIndEcon').show();
+        } else {
+            $('#pnlIndEcon').hide();
+        }
+    }
+
+    function verificaArquivoSelecionado() {
+        var fileUpload = document.getElementById("myFile");
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        var errorHolder = document.getElementById('errorFile');
+        var src = $("#img").val();
+        if (tipoDespesa.indexOf('(C)') == -1) {
+            if (src == null) {
+                if (fileUpload.files.length == 0) {
+                    //alert("Nenhum Arquivo Selecionado");
+                    errorHolder.innerHTML = 'Nenhum Arquivo Selecionado';
+                    $('#add').button('disable');
+                    $('[type="submit"]').button('refresh');
+                    return true;
+                } else {
+                    errorHolder.innerHTML = '';
+                    $('#add').button('enable');
+                    $('[type="submit"]').button('refresh');
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+    }
+
+    function verificaCidade() {
+        var cidade = $('#cidade').val();
+        var origem = $('#ddlOrigem option:selected').text();
+        var errorHolder = document.getElementById('errorCidade');
+        var formaPagamento = $('#ddlFormaPag option:selected').text();
+        if (cidade == "" && origem == "Internacional" && formaPagamento == "Cartão Corp.") {
+            errorHolder.innerHTML = 'O campo Cidade quando a Origem for Internacional é obrigatória!';
+            $('#cidade').focus();
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        } else {
+            errorHolder.innerHTML = '';
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+            return false;
+        }
+    }
+
+    function verificaKMAtual() {
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        var value = $('#kmAtual').val();
+        var errorHolder = document.getElementById('errorKmAtual');
+        if (tipoDespesa == "COMBUSTÍVEL(DN)") {
+            if (value == "") {
+                errorHolder.innerHTML = 'O campo KM Atual tem que ser maior que zero!';
+                $('#kmAtual').focus();
+                $('#add').button('disable');
+                $('[type="submit"]').button('refresh');
+                return true;
+            }
+            else {
+                if (value == 0) {
+                    errorHolder.innerHTML = 'O campo KM Atual tem que ser maior que zero!';
+                    $('#kmAtual').focus();
+                    $('#add').button('disable');
+                    $('[type="submit"]').button('refresh');
+                    return true;
+                } else {
+                    errorHolder.innerHTML = '';
+                    $('#add').button('enable');
+                    $('[type="submit"]').button('refresh');
+                    return false;
+                }
+                return false;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    function verificaQtdeLitros() {
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        var value = $('#qtdeLitros').val();
+        var errorHolder = document.getElementById('errorQtdeLitros');
+        if (tipoDespesa == "COMBUSTÍVEL(DN)") {
+            if (value == "") {
+                errorHolder.innerHTML = 'O campo Qtde. Litros tem que ser maior que zero!';
+                $('#qtdeLitros').focus();
+                $('#add').button('disable');
+                $('[type="submit"]').button('refresh');
+                return true;
+            }
+            else {
+                if (value == 0) {
+                    errorHolder.innerHTML = 'O campo Qtde. Litros tem que ser maior que zero!';
+                    $('#qtdeLitros').focus();
+                    $('#add').button('disable');
+                    $('[type="submit"]').button('refresh');
+                    return true;
+                } else {
+                    var valorLitro = $('#valorLitro').val();
+                    if (valorLitro == "") {
+                        valorLitro = 0;
+                    }
+                    var replaceValorLitro = valorLitro.replace(',', '.');
+                    var floatValorLitro = parseFloat(replaceValorLitro);
+
+                    var replacevalue = value.replace(',', '.');
+                    var floatvalue = parseFloat(replacevalue);
+
+                    var re = floatValorLitro * floatvalue;
+                    var result = parseFloat(re).toFixed(2);
+
+                    //$('#valorDespesa').val(result.replace('.', ','));
+                    $('#valorDespesa').val(result);
+                    errorHolder.innerHTML = '';
+                    $('#add').button('enable');
+                    $('[type="submit"]').button('refresh');
+                    return false;
+                }
+                return false;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    function verificaValorLitro() {
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        var value = $('#valorLitro').val();
+        var errorHolder = document.getElementById('errorValorLitro');
+        if (tipoDespesa == "COMBUSTÍVEL(DN)") {
+            if (value == "") {
+                errorHolder.innerHTML = 'O campo Valor do Litro tem que ser maior que zero!';
+                $('#valorLitro').focus();
+                $('#add').button('disable');
+                $('[type="submit"]').button('refresh');
+                return true;
+            }
+            else {
+                if (value == 0) {
+                    errorHolder.innerHTML = 'O campo Valor do Litro tem que ser maior que zero!';
+                    $('#valorLitro').focus();
+                    $('#add').button('disable');
+                    $('[type="submit"]').button('refresh');
+                    return true;
+                } else {
+                    var qtdeLitros = $('#qtdeLitros').val();
+                    if (qtdeLitros == "") {
+                        qtdeLitros = 0;
+                    }
+                    var replaceQtdeLitros = qtdeLitros.replace(',', '.');
+                    var floatQtdeLitros = parseFloat(replaceQtdeLitros);
+
+                    var replacevalue = value.replace(',', '.');
+                    var floatvalue = parseFloat(replacevalue);
+
+                    var re = floatQtdeLitros * floatvalue;
+                    var result = parseFloat(re).toFixed(2);
+
+                    //$('#valorDespesa').val(result.replace('.', ','));
+                    $('#valorDespesa').val(result);
+                    errorHolder.innerHTML = '';
+                    $('#add').button('enable');
+                    $('[type="submit"]').button('refresh');
+                    return false;
+                }
+                return false;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    function verificaPlaca() {
+        var descricao = $('#placa').val();
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        var errorHolder = document.getElementById('errorPlaca');
+        if (descricao == "" && tipoDespesa == 'COMBUSTÍVEL(DN)') {
+            errorHolder.innerHTML = 'O campo Placa é obrigatório!';
+            $('#placa').focus();
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        } else {
+            errorHolder.innerHTML = '';
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+            return false;
+        }
+    }
+
+    function carregaLimiteDespesa() {
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        $.ajax({
+            url: '/RDV/VerificaLimite',
+            type: 'POST',
+            data: JSON.stringify({ id: tipoDespesa }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('#limiteDespesa').val(data);
+                verificaLimiteDespesa();
+//                alert(data);
+//                var floatlimite = parseFloat(data);
+//                alert(floatlimite);
+//                if (floatlimite > 0 && tipoDespesa == "KILOMETRAGEM (DN)") {
+//                    msgHolder.innerHTML = 'Valor do KM - R$ ' + limite;
+//                } else {
+//                    msgHolder.innerHTML = '';
+//                }
+
+            }
+        });
+    }
+
+    function verificaLimiteDespesa() {
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        var value = 0;
+        if (tipoDespesa == 'HOSPEDAGEM(DN)' || tipoDespesa == 'HOSPEDAGEM(DI)') {
+            value = $('#valorDiaria').val();
+        } else {
+            value = $('#valorDespesa').val();
+        }
+        var motivo = $('#motivo').val();
+        var limite = $('#limiteDespesa').val();
+        var errorHolder = document.getElementById('errorValDespesa');
+        if (limite < parseFloat(value) && limite != 0 && tipoDespesa != "KILOMETRAGEM (DN)") {
+            if (motivo == '') {
+                errorHolder.innerHTML = 'O limite da Despesa foi excedido (Limite: R$ ' + limite
+                    + '). Por favor, informar o motivo no campo abaixo!';
+                $('#motivo').focus();
+                $('#add').button('disable');
+                $('[type="submit"]').button('refresh');
+                $('#pnlMotivo').show();
+                return true;
+            } else {
+                $('#pnlMotivo').show();
+                errorHolder.innerHTML = '';
+                $('#add').button('enable');
+                $('[type="submit"]').button('refresh');
+                return false;
+            }
+        } else {
+            var msgHolder = document.getElementById('msgTipoDespesa');
+            var floatlimite = parseFloat(limite);
+            if (floatlimite > 0 && tipoDespesa == "KILOMETRAGEM (DN)") {
+                msgHolder.innerHTML = 'Valor do KM - R$ ' + limite;
+            } else {
+                msgHolder.innerHTML = '';
+            }
+            $('#motivo').val("");
+            $('#pnlMotivo').hide();
+            errorHolder.innerHTML = '';
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+            return false;
+        }
+    }
+
+    $('#descricao').blur(function () {
+        verificaDescricao();
+    });
+
+    $('#valorDespesa').keydown(function () {
+        verificaValorDespesa();
+        verificaLimiteDespesa();
+    });
+
+    $('#qtd').blur(function () {
+        verificaQtdeDiarias();
+    });
+
+    $('#valorDiaria').blur(function () {
+        verificaValorDiaria();
+        verificaLimiteDespesa();
+    });
+
+    $('#qtdKM').blur(function () {
+        verificaQtdeKM();
+    });
+
+    $('#motivo').blur(function () {
+        verificaLimiteDespesa();
+    });
+    $('#valorMoedaEstrangeira').blur(function () {
+        verificaValorMoedaEstrangeira();
+    });
+
+    $('#kmAtual').blur(function () {
+        verificaKMAtual();
+    });
+
+    $('#qtdeLitros').blur(function () {
+        verificaQtdeLitros();
+    });
+
+    $('#valorLitro').blur(function () {
+        verificaValorLitro();
+    });
+
+    $('#placa').blur(function () {
+        verificaPlaca();
+    });
+
+//    $('#ddlLocais').change(function () {
+//        verificaOrigemSelecionada();
+//    });
+    $('#ddlTipoDespesa').change(function () {
+        verificaOrigemSelecionada();
+        verificaTipoDespesa();
+        carregaLimiteDespesa();
+        //verificaLimiteDespesa();
+    });
+
+    $('#ddlFormaPag').change(function () {
+        verificaOrigemSelecionada();
+    });
+
+    $('#ddlOrigem').change(function () {
+        var origem = $('#ddlOrigem').val();
+        $.ajax({
+            url: '/RDV/AtualizaTipoDespesa',
+            type: 'POST',
+            data: JSON.stringify({ id: origem }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#ddlTipoDespesa').empty();
+                $.each(data, function (key, SelectListItem) {
+                    $('select#ddlTipoDespesa').append('<option value="' + SelectListItem.Text + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#ddlTipoDespesa').selectmenu('refresh');
+            }
+        });
+        verificaOrigemSelecionada();
+        var origem = $('#ddlOrigem option:selected').text();
+        if (origem == "Nacional") {
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+        }
+        $("#qtd").val("");
+        $("#valorDiaria").val("");
+        $('#pnlQtdeDiariasHospedagem').hide();
+        $("#qtdKM").val("");
+        $('#pnlQtdeKM').hide();
+        $("#kmAtual").val("");
+        $("#qtdeLitros").val("");
+        $("#valorLitro").val("");
+        $("#placa").val("");
+        $('#pnlCombustivel').hide();
+    });
+//    $('#myFile').change(function () {
+//        //verificaArquivoSelecionado();
+//    });
+
+    $('#cidade').blur(function () {
+        verificaCidade();
+    });
+
+//    function hideImage() {
+//        $('#img').hide();
+//    }
+
+    $('#add').click(function () {
+        if (verificaValorDespesa()) { return; }
+        if (verificaLimiteDespesa()) { return; }
+        if (verificaCidade()) { return; }
+        if (verificaValorMoedaEstrangeira()) { return; }
+        if (verificaDescricao()) { return; }
+        if (verificaQtdeDiarias()) { return; }
+        if (verificaValorDiaria()) { return; }
+        if (verificaQtdeKM()) { return; }
+        if (verificaKMAtual()) { return; }
+        if (verificaQtdeLitros()) { return; }
+        if (verificaValorLitro()) { return; }
+        if (verificaPlaca()) { return; }
+        //if (verificaArquivoSelecionado()) { return; }
+    });
+
+//    $('#filtroLocal').change(function () {
+//        var value = $('#filtroLocal').val();
+//        $.ajax({
+//            url: '/RDV/FiltraLocal',
+//            type: 'POST',
+//            data: JSON.stringify({ id: value }),
+//            dataType: 'json',
+//            contentType: 'application/json',
+//            success: function (data) {
+//                $('select#ddlLocais').empty();
+//                $.each(data, function (key, SelectListItem) {
+//                    $('select#ddlLocais').append('<option value="' + SelectListItem.Value + '">' + SelectListItem.Text + '</option>');
+//                });
+//                $('select#ddlLocais').selectmenu('refresh');
+//                verificaPaisSelecionado();
+//            }
+//        });
+    //    });
+
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mvalor(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{8})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{5})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{2})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+    function mvalor4(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{10})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{7})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{4})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+    function mnum(v) {
+        v = v.replace(/\D/g, "");                                      //Remove tudo o que não é dígito
+        return v;
+    }
+</script>
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Lançamentos Pendentes", "ListaLancamentosPendentes", "RDV")
+    </p>
+    @Html.Image(@Url.Content("~/Content/images/Amil-Reembolso-Icon.png"), "RDV")
+    <h2>Nova Despesa</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+@using (Html.BeginForm("SaveDespesa", "RDV", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        <div class="editor-label">
+            <b>Data:</b>
+        </div>
+        <div class="editor-field">
+            @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+            {
+                @Html.TextBox("dataRDV", Convert.ToDateTime(Session["dataRDV"]).ToString("yyyy-MM-dd"), new { @type = "date", @required = true })
+            }
+            else
+            {
+                @Html.TextBox("dataRDV", Convert.ToDateTime(Session["dataRDV"]).ToString("dd/MM/yyyy"), new { @type = "date", @required = true })
+            }
+        </div>
+        @*<div id="pnlFormaPag">
+            <div class="editor-label">
+                <b>Forma de Pagamento:</b>
+            </div>        
+            <div class="editor-field">
+                @Html.DropDownList(
+                    "FormaPagamento",
+                    (List<SelectListItem>)Session["ListaFormaPag"],
+                    new { @id = "ddlFormaPag" })
+            </div>
+        </div>*@
+        <div class="editor-label">
+            <b>Valor:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("valorDespesa", Session["valorDespesaRDV"].ToString().Replace(",", "."),
+                 new { @required = true, @placeholder="Exemplo: 10,54", @type = "number", @step="0.01",
+                       @lang = "pt-BR",
+                       @id = "valorDespesa"
+                 })
+            @Html.Hidden("limiteDespesa")
+        </div>
+        <div class="editor-label" id="errorValDespesa" style="color: Red; font-weight:bold;"></div>
+        <div id="pnlMotivo">
+            <div class="editor-label">
+                <b>Motivo:</b>
+            </div>        
+            <div class="editor-field">
+                @Html.TextArea("motivo", Session["motivoRDV"].ToString())
+            </div>
+        </div>
+        <div id="pnlOrigem">
+            <div class="editor-label">
+                <b>Origem:</b>
+            </div>        
+            <div class="editor-field">
+                @Html.DropDownList(
+                    "Origem",
+                    (List<SelectListItem>)Session["ListaOrigem"],
+                    new { @id = "ddlOrigem" })
+            </div>
+        </div>
+        <div class="editor-label">
+            <b>Tipo de Despesa:</b>
+        </div>        
+        <div class="editor-field">
+            @Html.DropDownList(
+                "TipoDespesa",
+                (List<SelectListItem>)Session["ListaTipoDespesaRDV"],
+                new { @id = "ddlTipoDespesa" })
+            <div class="editor-label" id="msgTipoDespesa" style="color: Red; font-weight:bold;"></div>
+        </div>
+        <div id="pnlQtdeDiariasHospedagem">
+            <div class="editor-label">
+                <b>Qtde. Diárias:</b>
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("qtdeDiarias", Convert.ToInt32(Session["qtdeDiariaRDV"]),
+                 new { @type = "number", @id = "qtd" })
+            </div>
+            <div class="editor-label" id="errorQtdeDiariasHospedagem" style="color: Red; font-weight:bold;"></div>
+            <div class="editor-label">
+                <b>Valor Diária:</b>
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("valorDiaria", Session["valorDiariaDespesaRDV"].ToString().Replace(",", "."),
+                 new { placeholder="Exemplo: 10,54", @type = "number", @step="0.01",
+                       @id = "valorDiaria",
+                       @lang = "pt-BR"
+                 })
+            </div>
+            <div class="editor-label" id="errorValorDiariaHospedagem" style="color: Red; font-weight:bold;"></div>
+        </div>
+        <div id="pnlQtdeKM">
+            <div class="editor-label">
+                <b>Qtde. KM:</b>
+            </div>
+            <div class="editor-field">
+                @*@Html.TextBox("qtdeKM", Convert.ToInt32(Session["qtdeKMRDV"]),
+                 new { @type = "number", @id = "qtdKM" })*@
+                @Html.TextBox("qtdeKM", Session["qtdeKMRDV"].ToString().Replace(",", "."),
+                 new { 
+                     @placeholder="Exemplo: 10,54", 
+                     @type = "number",
+                     @step="0.01",
+                     @id = "qtdKM",
+                     @lang = "pt-BR"
+                 })
+            </div>
+            <div class="editor-label" id="errorQtdeKM" style="color: Red; font-weight:bold;"></div>
+        </div>
+        <div id="pnlExterior">
+            <div class="editor-label">
+                <b>Cidade:</b>
+            </div>        
+            <div class="editor-field">
+                @Html.TextBox("cidade", Session["cidadeRDV"].ToString())
+            </div>
+            <div class="editor-label" id="errorCidade" style="color: Red; font-weight:bold;"></div>
+            <div class="editor-label">
+                <b>País:</b>
+            </div>        
+            <div class="editor-field">
+                @Html.DropDownList(
+                    "Pais",
+                    (List<SelectListItem>)Session["ListaPaises"])
+            </div>
+            <div class="editor-label">
+                <b>Valor Moeda Estrangeira:</b>                
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("valorMoedaEstrangeira", Session["valorMoedaEstrangeiraRDV"].ToString().Replace(",", "."),
+                 new { placeholder="Exemplo: 10,54", @type = "number", @step="0.01",
+                       @id = "valorDiaria",
+                       @lang = "pt-BR"
+                 })
+            </div>
+            <div class="editor-label" id="errorvalorMoedaEstrangeira" style="color: Red; font-weight:bold;"></div>
+        </div>
+        <div id="pnlIndEcon">
+            <div class="editor-label">
+                <b>Índice Econômico:</b>                
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList(
+                    "IndiceEconomico",
+                    (List<SelectListItem>)Session["ListaIndiceEconomico"])
+            </div>
+            <div class="editor-label" id="errorIndiceEconomico" style="color: Red; font-weight:bold;"></div>
+        </div>
+        <div id="pnlCombustivel">
+            @*<div class="editor-label">
+                <b>KM Atual:</b>
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("kmAtual", Convert.ToInt32(Session["kmAtualRDV"]),
+                    new { @type = "number", @id = "kmAtual" })
+            </div>
+            <div class="editor-label" id="errorKmAtual" style="color: Red; font-weight:bold;"></div>
+            <div class="editor-label">
+                <b>Qtde. Litros:</b>
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("qtdeLitros", Session["qtdeLitrosRDV"].ToString().Replace(",", "."),
+                 new { @placeholder="Exemplo: 10,5499", @type = "number", @step="0.0001",
+                       @id = "qtdeLitros",
+                       @lang = "pt-BR"
+                 })
+            </div>
+            <div class="editor-label" id="errorQtdeLitros" style="color: Red; font-weight:bold;"></div>
+            <div class="editor-label">
+                <b>Valor do Litro:</b>
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("valorLitro", Session["valorLitroRDV"].ToString().Replace(",", "."),
+                 new { @placeholder="Exemplo: 10,5499", @type = "number", @step="0.0001",
+                       @id = "valorLitro",
+                       @lang = "pt-BR"
+                 })
+            </div>
+            <div class="editor-label" id="errorValorLitro" style="color: Red; font-weight:bold;"></div>
+            <div class="editor-label">
+                <b>Tipo de Combustível:</b>                
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList(
+                    "TipoCombustivel",
+                    (List<SelectListItem>)Session["ListaTipoCombustivel"])
+            </div>
+            <div class="editor-label" id="errorTipoCombustivel" style="color: Red; font-weight:bold;"></div>
+            <div class="editor-label">
+                <b>Placa:</b>
+            </div>        
+            <div class="editor-field">
+                @Html.TextBox("placa", Session["placaRDV"].ToString(),
+                    new { @style = "text-transform: uppercase" })
+            </div>
+            <div class="editor-label" id="errorPlaca" style="color: Red; font-weight:bold;"></div>*@
+        </div>
+        <div class="editor-label">
+            <b>Descrição:</b>
+        </div>        
+        <div class="editor-field">
+            @Html.TextArea("descricao", Session["descricaoRDV"].ToString())
+        </div>
+        <div class="editor-label" id="errorDescricao" style="color: Red; font-weight:bold;"></div>
+        <p>
+            <input type="submit" value="Salvar Despesa" id="add" />
+        </p>
+    </fieldset>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

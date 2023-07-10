@@ -1,0 +1,62 @@
+﻿<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Title_Menu_NavisionIntegrationApp", Session["language"].ToString())</li>
+    <li>
+            @*@Ajax.ActionLink("Teste Calendário", "OrdersCalendar", "NavisionIntegrationApp", null,
+                new AjaxOptions { OnSuccess = "init", UpdateTargetId = "scheduler_here" },
+                new { @class = "importExcel", @title = "Teste Calendario" })*@
+            @Html.ActionLink(@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                .GetTextOnLanguage("Title_Calendar_NavisionIntegrationApp", Session["language"].ToString()), 
+                "OrdersCalendar", "NavisionIntegrationApp",
+                new { firstDate = Convert.ToDateTime(Session["CalendarFirstDateMonth"]), source = "" },
+                new { @class = "calendar32"/*, data_ajax = "false"*/ })
+    </li>
+    <li>
+            @Html.ActionLink(@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                .GetTextOnLanguage("Title_Agenda_NavisionIntegrationApp", Session["language"].ToString()), 
+                "OrdersAgenda", "NavisionIntegrationApp",
+                null,
+                         new { @class = "agenda32" })
+    </li>
+    <li>
+            @Html.ActionLink(@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                .GetTextOnLanguage("Title_List_NavisionIntegrationApp", Session["language"].ToString()), 
+                "ListNavisionIntegration", "NavisionIntegrationApp",
+                new { source = "Menu" }, new { @class = "list32" })
+    </li>
+    <li>
+            @Html.ActionLink(MvcAppHylinedoBrasilMobile.Controllers
+                    .AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_Menu_LinkCHICWithNav", 
+                    Session["language"].ToString()),
+                "RelationCHICWithNavisionIndex", "NavisionIntegrationApp", null,
+                new { @class = "link", @title = MvcAppHylinedoBrasilMobile.Controllers
+                    .AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_Menu_LinkCHICWithNav_Hint", 
+                    Session["language"].ToString()) })
+    </li>
+    <li>
+            @Html.ActionLink(MvcAppHylinedoBrasilMobile.Controllers
+                             .AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_Menu_ImportCHICExternal", 
+                    Session["language"].ToString()),
+                         "ImportCHICExternalIndex", "NavisionIntegrationApp", null,
+                new { @class = "importExcel", @title = MvcAppHylinedoBrasilMobile.Controllers
+                    .AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_Menu_ImportCHICExternal_Hint", 
+                    Session["language"].ToString()) })
+    </li>
+    <li>
+            @Html.ActionLink(MvcAppHylinedoBrasilMobile.Controllers
+                                      .AccountMobileController.GetTextOnLanguage("Title_ImportActualOrders_NavisionIntegrationApp", 
+                    Session["language"].ToString()),
+                                  "ImportActualOrdersIndex", "NavisionIntegrationApp", null,
+                new { @class = "importExcel", @title = MvcAppHylinedoBrasilMobile.Controllers
+                    .AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_Menu_ImportActualOrders_Hint", 
+                    Session["language"].ToString()) })
+    </li>
+    <li>
+            @Html.ActionLink(MvcAppHylinedoBrasilMobile.Controllers
+                                      .AccountMobileController.GetTextOnLanguage("Title_ImportAgenda_NavisionIntegrationApp", 
+                    Session["language"].ToString()),
+                                  "ImportAgendaIndex", "NavisionIntegrationApp", null,
+                new { @class = "importExcel", @title = MvcAppHylinedoBrasilMobile.Controllers
+                    .AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_Menu_ImportAgenda_Hint", 
+                    Session["language"].ToString()) })
+    </li>
+</ul>

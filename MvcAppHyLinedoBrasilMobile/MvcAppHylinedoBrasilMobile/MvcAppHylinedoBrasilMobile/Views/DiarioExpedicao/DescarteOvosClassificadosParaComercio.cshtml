@@ -1,0 +1,172 @@
+﻿@using am = MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController;
+
+@{
+    ViewBag.Title = "";
+    string lg = Session["language"].ToString();
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities bd = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+
+    var lista = (List<MvcAppHylinedoBrasilMobile.Models.LayoutDiarioExpedicaos>)Session["ListaItensDescarteOvosClassificadosParaComercio"];
+
+    var listaAgrupada = lista
+        .GroupBy(g => new
+        {
+            g.DataHoraCarreg,
+            g.NumIdentificacao,
+            g.LoteCompleto,
+            g.Lote,
+            g.DataProducao
+        })
+        .ToList();
+
+    string incubatorio = Session["incubatorioSelecionado"].ToString();
+
+    var listaTipoClassficacaoOvo = bd.TIPO_CLASSFICACAO_OVO
+        .Where(w => w.Unidade == incubatorio && w.AproveitamentoOvo == "Incubável" && w.Origem == "Interna")
+        .OrderBy(o => o.ID)
+        .ToList();
+}
+
+<script type="text/javascript">
+    function atualizaDataDescarte() {
+        var vData = $('#txtDataDescarte').val();
+        $.ajax({
+            url: '/DiarioExpedicao/AtualizaSession',
+            type: 'POST',
+            data: JSON.stringify({ value: vData, nameSession: 'dataDescarte' }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                } else {
+                    alert(data.toString());
+                }
+            }
+        });
+    }
+</script>
+
+@using (Html.BeginForm("SaveDescarteOvosClassificadosParaComercio", "DiarioExpedicao", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div align="center">
+        <ul data-role="listview" data-inset="true">
+            <li>
+                @Html.ActionLink(am.GetTextOnLanguage("Voltar p/ Lista de Descarte de Ovos Classificados para Comércio", lg), "ListaDescarteOvosClassificadosParaComercio", "DiarioExpedicao",
+                    null, new { @class = "AQO" })
+            </li>
+        </ul>
+        @Html.Image(@Url.Content("~/Content/icons/egg.png"), "")
+        <h2>@am.GetTextOnLanguage("Descarte de Ovos Classificados para Comércio", lg)</h2>
+        <br />
+        <h2>@am.GetTextOnLanguage("Origem do Descarte", lg): @Html.Label(Session["incubatorioSelecionadoNome"].ToString())</h2>
+        @if (ViewBag.Erro != null)
+        {
+            <h4 id="lblMsgErro" class="@(ViewBag.ClasseMsg) ui-li ui-li-static">
+                @Html.Raw(ViewBag.Erro)
+            </h4>
+        }
+        <br />
+        <div class="editor-label">
+            <b>@am.GetTextOnLanguage("Data de Descarte", lg):</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("dataDescarte", Convert.ToDateTime(Session["dataDescarte"]).ToString("yyyy-MM-ddTHH:mm:ss"),
+                new { @type = "datetime-local", @onchange = "atualizaDataDescarte()", @id = "txtDataDescarte" })
+        </div>
+        <div class="editor-field">
+            <ul data-role="listview" data-inset="true">
+                <li>
+                    @Html.ActionLink(am.GetTextOnLanguage("Novo Lote do Descarte de Ovos Classificados para Comércio", lg), "CreateDescarteOvosClassificadosParaComercioItem", "DiarioExpedicao",
+                        null,
+                        new { @class = "AQO" })
+                </li>
+            </ul>
+            <br />
+            <div id="tabelaDEO" style="overflow:auto;">
+                <table id="tabela">
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>
+                            @am.GetTextOnLanguage("Lote", lg)
+                        </th>
+                        <th>
+                            @am.GetTextOnLanguage("Data de Produção", lg)
+                        </th>
+                        @foreach (var tipoOvo in listaTipoClassficacaoOvo)
+                        {
+                            <th>
+                                @tipoOvo.DescricaoTipo
+                            </th>
+                        }
+                    </tr>
+
+                    @foreach (var item in listaAgrupada)
+                    {
+                        var qtdTotalLoteData = lista.Where(w => w.NumIdentificacao == item.Key.NumIdentificacao
+                                && w.Lote == item.Key.Lote
+                                && w.DataProducao == item.Key.DataProducao
+                                && w.Importado != "Conferido")
+                            .Sum(s => s.QtdeOvos);
+
+                        bool existeSaldo = MvcAppHylinedoBrasilMobile.Controllers.DiarioExpedicaoController
+                            .ExisteSaldo(incubatorio + "C", item.Key.DataHoraCarreg, "VARIOS",
+                                Convert.ToDateTime("1988-01-01 00:00:00.000"), (int)qtdTotalLoteData);
+
+                        <tr>
+                            <td class="ajuste">
+                                <div align="center">
+                                    @Html.ActionLink("Edit", "EditDescarteOvosClassificadosParaComercioItem",
+                                        new
+                                        {
+                                            numIdentificacao = item.Key.NumIdentificacao,
+                                            lote = item.Key.LoteCompleto,
+                                            dataProducao = item.Key.DataProducao
+                                        },
+                                        new { @class = "edit" })
+                                </div>
+                            </td>
+                            <td class="ajuste">
+                                <div align="center">
+                                    @if (existeSaldo)
+                                    {
+                                        @Html.ActionLink("Delete", "DeleteDescarteOvosClassificadosParaComercioItem",
+                                            new
+                                            {
+                                                numIdentificacao = item.Key.NumIdentificacao,
+                                                lote = item.Key.LoteCompleto,
+                                                dataProducao = item.Key.DataProducao
+                                            },
+                                            new { @class = "delete" })
+                                    }
+                                </div>
+                            </td>
+                            <td>
+                                @item.Key.Lote
+                            </td>
+                            <td>
+                                @item.Key.DataProducao.ToString("dd/MM/yyyy")
+                            </td>
+                            @foreach (var tipoOvo in listaTipoClassficacaoOvo)
+                            {
+                                var qtd = lista.Where(w => w.NumIdentificacao == item.Key.NumIdentificacao
+                                        && w.Granja == tipoOvo.CodigoTipo
+                                        && w.Lote == item.Key.Lote
+                                        && w.DataProducao == item.Key.DataProducao)
+                                    .Sum(s => s.QtdeOvos);
+
+                                <td>
+                                    @String.Format("{0:N0}", qtd)
+                                </td>
+                            }
+                        </tr>
+                    }
+
+                </table>
+            </div>
+            <p>
+                <input type="submit" value="@am.GetTextOnLanguage("Salvar Descarte de Ovos Classificados para Comércio", lg)" id="add" />
+            </p>
+        </div>
+    </div>
+}

@@ -1,0 +1,11 @@
+﻿<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">CONFIGURAÇÕES</li>
+    <li>
+        @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+            .GetGroup("HLBAPPM-FiscalConfiguracaoImportacaoNFe", (System.Collections.ArrayList)Session["Direitos"]))
+        {
+            @Html.ActionLink("Lista de Configuração de Importação de NF-e", "ListaConfiguracaoImportaNFe", "Fiscal",
+                null, new { @class = "configDoc_32", @title = "Clique aqui para abrir a lista de Configuração de Importação de NF-e." })
+        }
+    </li>
+</ul>

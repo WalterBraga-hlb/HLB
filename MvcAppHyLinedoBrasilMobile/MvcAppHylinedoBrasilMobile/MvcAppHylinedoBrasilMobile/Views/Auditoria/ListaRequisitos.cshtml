@@ -1,0 +1,131 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+    
+    List<MvcAppHylinedoBrasilMobile.Models.Auditoria_Requisito> lista =
+        (List<MvcAppHylinedoBrasilMobile.Models.Auditoria_Requisito>)Session["ListaRequisitos"];
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities apolo = new MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities();
+}
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para o Menu da Auditoria", "MenuAuditoria", "Auditoria", 
+                null,
+                new { @title = "Clique aqui para voltar para o Menu da Auditoria", @class = "auditoria" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/requisito_32.png"), "Requisito")
+    <h2>Lista de Requisitos</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+@using (Html.BeginForm("SearchRequisito", "Auditoria"))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <b>Informe parte da descrição:</b>
+            <div class="editor-field">
+                @Html.TextBox("pesquisa", Session["pesquisaSession"])
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Tipo de Unidade:</b>
+            <div class="editor-field">
+                @Html.DropDownList(
+                "TipoUnidade",
+                (List<SelectListItem>)Session["FiltroDDLListaTiposUnidade"],
+                new { @id = "ddlTipoUnidade" })
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Pesquisar" />
+        </li>
+    </ul>
+}
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Requisito</li>
+    <li>
+        @Html.ActionLink("Adicionar Novo Requisito", "CreateRequisito", "Auditoria",
+            null,
+            new { @class = "add", @title = "Clique aqui para inserir um novo requisito" })
+    </li>
+</ul>
+<br />
+<div class="editor-label"  align="center">
+    <table style="width: 90%">
+        <tr style="font-size: xx-small; background-color:Gray">
+            <th colspan="6" style="font-size: xx-small; background-color:Gray">
+                <u>Legenda de Ações:</u>
+            </th>
+        </tr>
+        <tr style="font-size: xx-small">
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/kjots.png"), "")
+                <i>Alterar Requisito</i>
+            </td>
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/button_cancel.png"), "")
+                <i>Excluir Requisito</i>
+            </td>
+        </tr>
+    </table>
+</div>
+<br />
+<div id="divTabelaIndexPV" style="overflow:auto" >
+<table id="tabelaRequisito" class="ajustetabelaRequisito">
+    <tbody class="ajustetabelaRequisito">
+    <tr class="ajustetabelaRequisito">
+        <th class="ajustetabelaRequisito">
+            Tipo de Unidade
+        </th>
+        <th class="ajustetabelaRequisito">
+            Grupo
+        </th>
+        <th class="ajustetabelaRequisito">
+            Requisito
+        </th>
+        <th class="ajustetabelaRequisito">
+            Ações
+        </th>
+    </tr>
+@foreach (var item in lista)
+{
+    <tr class="ajustetabelaRequisito">
+        <td class="ajustetabelaRequisito">
+            @(item.TipoUnidade)
+        </td>
+        <td class="ajustetabelaRequisito">
+            @(item.Grupo)
+        </td>
+        <td class="ajustetabelaRequisito">
+            @(item.Codigo + " - " + item.Descricao)
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td align="center">
+                        @Html.ActionLink("Edit", "EditRequisito",
+                            new { id = item.ID },
+                                new { @class = "edit", @title = "Clique aqui para alterar o requisito." })
+                    </td>
+                    <td align="center">
+                        @Html.ActionLink("Delete", "ConfirmaDeleteRequisito",
+                            new { id = item.ID },
+                                     new { @class = "delete", @title = "Clique aqui para excluir o requisito." })
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

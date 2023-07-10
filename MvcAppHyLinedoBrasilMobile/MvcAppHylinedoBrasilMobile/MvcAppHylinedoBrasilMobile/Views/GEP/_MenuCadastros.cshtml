@@ -1,0 +1,13 @@
+﻿<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">CADASTROS</li>
+    <li>
+        @Html.ActionLink("Pilares", "ListaPilares", "GEP",
+            null,
+            new { @class = "pilar", @title = "Clique aqui para abrir o cadastro de pilares." })
+    </li>
+    <li>
+        @Html.ActionLink("Objetivos", "ListaObjetivos", "GEP",
+            null,
+            new { @class = "alvo", @title = "Clique aqui para abrir o cadastro de objetos." })
+    </li>
+</ul>

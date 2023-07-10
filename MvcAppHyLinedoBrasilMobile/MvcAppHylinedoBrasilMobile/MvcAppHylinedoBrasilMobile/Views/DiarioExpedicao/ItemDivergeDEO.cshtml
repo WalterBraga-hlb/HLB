@@ -1,0 +1,150 @@
+﻿@model IEnumerable<MvcAppHylinedoBrasilMobile.Models.LayoutDiarioExpedicaos>
+@using am = MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController;
+
+@{
+    ViewBag.Title = "";
+    string lg = Session["language"].ToString();
+
+    var listaAgrupada = Model
+.GroupBy(g => new
+{
+    g.LoteCompleto,
+    g.DataProducao
+})
+.OrderBy(o => o.Key.LoteCompleto)
+.ThenBy(t => t.Key.DataProducao)
+.Select(s => new
+{
+    Lote = s.Key.LoteCompleto,
+    Data = s.Key.DataProducao,
+    Status = s.Max(m => m.Importado),
+    QtdOvos = s.Sum(m => (m.QtdeOvos == null ? 0 : m.QtdeOvos)),
+    QtdDif = s.Sum(m => (m.QtdDiferenca == null ? 0 : m.QtdDiferenca)),
+    ID = s.Max(m => m.ID)
+})
+.ToList();
+}
+<script type='text/javascript'>
+            //    $('td input[type="checkbox"]').change(function () {
+            //        $(this).closest('tr').find('input[type="text"]').prop('disabled', !this.checked);
+            //    }).change();
+</script>
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de DEOs Divergentes", "ListaDivergenciaDEO", "DiarioExpedicao")
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/deo_nao_conforme.jpg"), "DEO")
+    <h2>Diário de Expedição @Html.Label(Session["dataHoraCarreg"].ToString()) c/ Divergências</h2>
+</div>
+<br />
+<h2>@am.GetTextOnLanguage("Granja / Incubatório de Origem", lg): @Html.Label(Session["incubatorioSelecionadoNome"].ToString())</h2>
+<br />
+<h4 style="color:yellow;">* Campos com o (*) são obrigatórios!</h4>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<br />
+@using (Html.BeginForm("ConfereDEODivergente", "DiarioExpedicao", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div style="overflow:auto;">
+        <table class="ajuste">
+            <tbody class="ajuste">
+                <tr class="ajuste">
+                    @*<th class="ajuste">
+                            Núcleo
+                        </th>
+                        <th class="ajuste">
+                            Galpão
+                        </th>*@
+                    <th class="ajuste">
+                        Lote
+                    </th>
+                    @*<th class="ajuste">
+                            Idade
+                        </th>
+                        <th class="ajuste">
+                            Linhagem
+                        </th>*@
+                    <th class="ajuste">
+                        Data Produção
+                    </th>
+                    <th class="ajuste">
+                        Granja
+                    </th>
+                    <th class="ajuste">
+                        Inc.
+                    </th>
+                    <th class="ajuste">
+                        Dif.
+                    </th>
+                    <th colspan="2" class="ajuste">
+
+                    </th>
+                </tr>
+
+                @foreach (var item in listaAgrupada)
+                {
+                    <tr class="ajuste">
+                        @*<td class="ajuste">
+                                @Html.DisplayFor(modelItem => item.Nucleo)
+                            </td>
+                            <td class="ajuste">
+                                @Html.DisplayFor(modelItem => item.Galpao)
+                            </td>*@
+                        <td class="ajuste">
+                            @Html.DisplayFor(modelItem => item.Lote)
+                        </td>
+                        @*<td class="ajuste">
+                                @Html.DisplayFor(modelItem => item.Idade)
+                            </td>
+                            <td class="ajuste">
+                                @Html.DisplayFor(modelItem => item.Linhagem)
+                            </td>*@
+                        <td class="ajuste">
+                            @String.Format("{0:dd/MM/yyyy}", item.Data)
+                        </td>
+                        <td class="ajuste">
+                            @String.Format("{0:N0}", item.QtdOvos)
+                        </td>
+                        <td class="ajuste">
+                            @String.Format("{0:N0}", (item.QtdOvos + item.QtdDif))
+                        </td>
+                        @if (item.QtdDif >= 0)
+                        {
+                            <td class="ajuste">
+                                @String.Format("{0:N0}", item.QtdDif)
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="color:red;" class="ajuste">
+                                @String.Format("{0:N0}", item.QtdDif)
+                            </td>
+                        }
+                        <td>
+                            @Html.DropDownList(
+                                "motivoDivergenciaDEO_"
+                                    + item.Lote.ToString() + "|"
+                                    + item.Data.ToShortDateString(),
+                                (List<SelectListItem>)Session["ListaMotivoDivergenciaDEO_"
+                                    + item.Lote.ToString() + "|"
+                                    + item.Data.ToShortDateString()],
+                                "(Selecione um Motivo para a Divergência)",
+                                new { @required = "true" })
+                            @Html.Hidden("id", item.ID)
+                        </td>
+                        <td class="ajuste">
+                            @Html.TextArea("motivo_" + item.Lote.ToString() + "|"
+                                + item.Data.ToShortDateString(), new { @required = "true" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <br />
+    <fieldset>
+        <p>
+            <input type="submit" value="Salvar Conferência das Divergências" />
+        </p>
+    </fieldset>
+}

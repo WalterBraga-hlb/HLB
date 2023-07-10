@@ -1,0 +1,207 @@
+﻿@model IEnumerable<MvcAppHylinedoBrasilMobile.Models.LayoutDiarioExpedicaos>
+
+@{
+    ViewBag.Title = "";
+}
+
+<script type="text/javascript">
+    window.onbeforeunload = function () {
+        return "Se a página for atualizada, os dados alterados serão perdidos!";
+    }
+
+    function atualizaSessionQtdeOvos(valor, pLote, dataProducao) {
+        var value = valor.value;
+        $.ajax({
+            url: '/DiarioExpedicao/AtualizaSessionQtdeOvos',
+            type: 'POST',
+            data: JSON.stringify({ valor: value, lote: pLote, data: dataProducao }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                    $('#saveDEO').button('enable');
+                    $('[type="submit"]').button('refresh');
+                } else {
+                    alert(data.toString());
+                    $('#saveDEO').button('disable');
+                    $('[type="submit"]').button('refresh');
+                }
+            }
+        });
+    }
+</script>
+
+@using (Html.BeginForm("SaveDEOGerado", "DiarioExpedicao", FormMethod.Post, 
+    new { enctype = "multipart/form-data" }))
+{
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de DEOs", "ListaDEOs", "DiarioExpedicao")
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/diario_expedicao.png"), "DEO")
+    <h2>Diário de Expedição: @Html.Label(Session["dataHoraCarreg"].ToString())</h2>
+    <h2>Destino: @Html.Label(Session["descricaoIncubatorioDestinoSelecionado"].ToString())</h2>
+</div>
+<h4 style="color:red;">@ViewBag.Erro</h4>
+<br />
+<div id="pnlDeoNormal">
+<div style="overflow:auto;">
+<table class="ajuste">
+    <tbody class="ajuste">
+    <tr class="ajuste">
+        <th class="ajuste"></th>
+        <th class="ajuste">
+            Núcleo
+        </th>
+        <th class="ajuste">
+            Linhagem
+        </th>
+        <th class="ajuste">
+            Data Produção
+        </th>
+        <th class="ajuste">
+            Qtde. Ovos
+        </th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr class="ajuste">
+        <td class="ajuste">
+            <div align="center"> 
+                @if (item.TipoDEO.Equals("Ovos Incubáveis") || item.TipoDEO.Equals("Transf. Ovos Incubáveis"))
+                {
+                    if (!item.Importado.Equals("Divergência"))
+                    {
+                        if (!item.Importado.Equals("Conferido") ||
+                            (item.Importado.Equals("Conferido") && !item.TipoDEO.Equals("Ovos Incubáveis")))
+                        {
+                            string local = "";
+                            if (item.TipoOvo == "")
+                            {
+                                local = item.Incubatorio;
+                            }
+                            else
+                            {
+                                local = item.TipoOvo;
+                            }
+                            if ((!MvcAppHylinedoBrasilMobile.Controllers.DiarioExpedicaoController
+                                .ExisteSaldo(local, item.DataHoraCarreg, item.LoteCompleto,
+                                    item.DataProducao, Convert.ToInt32(item.QtdeOvos))
+                                &&
+                                item.Importado == "Conferido" && item.TipoDEO.Equals("Ovos Incubáveis"))
+                                ||
+                                (!MvcAppHylinedoBrasilMobile.Controllers.DiarioExpedicaoController
+                                .ExisteSaldo(local, item.DataHoraCarreg, item.LoteCompleto,
+                                    item.DataProducao, Convert.ToInt32(item.QtdeOvos))
+                                &&
+                                !item.TipoDEO.Equals("Ovos Incubáveis")))
+                            {
+                            @Html.ActionLink("Rastrear Lote", "RastreabilidadeLote",
+                                new { lote = item.LoteCompleto, dataProducao = item.DataProducao, chamada = "Index" },
+                                new { @class = "ajuste" })
+                            }
+                            else
+                            {
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID, origem = "Cadastro" }, 
+                                new { @class = "delete" });
+                            }
+                        }
+                        else
+                        {
+                        @Html.ActionLink("Rastrear Lote", "RastreabilidadeLote",
+                                new { lote = item.LoteCompleto, dataProducao = item.DataProducao },
+                                new { @class = "ajuste" })
+                        }
+                    }
+                }
+                else
+                {
+                    if ((item.NumIdentificacao.Equals("")) || (item.NumIdentificacao == null))
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID, origem = "Cadastro" }, 
+                            new { @class = "delete" })
+                    }
+                }
+            </div>
+        </td>
+        <td class="ajuste">
+            @Html.DisplayFor(modelItem => item.Nucleo)
+        </td>
+        <td class="ajuste">
+            @Html.DisplayFor(modelItem => item.Linhagem)
+        </td>
+        <td class="ajuste">
+            @String.Format("{0:dd/MM/yyyy}", item.DataProducao)
+        </td>
+        @if (item.Importado == "Divergência")
+        {
+            <td class="ajuste">
+                Divergência
+            </td>
+        }
+        else
+        {
+            <td class="ajuste">
+                @Html.TextBox("qtdOvos_"
+                        + item.LoteCompleto.ToString() + "|"
+                        + item.DataProducao.ToShortDateString(),
+                    Session["qtdOvos_"
+                        + item.LoteCompleto.ToString() + "|"
+                        + item.DataProducao.ToShortDateString()].ToString(),
+                    new
+                    {
+                        @min = "1",
+                        @type = "number",
+                        @required = "true",
+                        @onchange = "atualizaSessionQtdeOvos(this,'"
+                            + item.LoteCompleto.ToString() + "','"
+                            + item.DataProducao.ToShortDateString() + "')"
+                    })
+            </td>
+        }
+    </tr>
+}
+</tbody>
+</table>
+</div>
+<br />
+<div align="center">
+    <h2>Informe os parâmetros abaixo após a inclusão dos itens.</h2>
+</div>
+<br />
+<br />
+    <fieldset>
+        <div id="pnlDadosGerais">
+            <div class="editor-label">
+                <b>Número da N.F.:</b>
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("nfNum", (string)Session["nfNum"], new { @type = "number", @required = "true" })
+            </div>
+            <div class="editor-label">
+                <b>GTA:</b>
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("GTA", (string)Session["GTA"], new { @type = "number", @required = "true" })
+            </div>
+            <div class="editor-label">
+                <b>Lacre:</b>
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("Lacre", (string)Session["Lacre"], new { @type = "number", @required = "true" })
+            </div>
+            <br />
+            <div class="editor-label">
+                <b>Observação:</b>
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("observacao", (string)Session["Observacao"], new { @id = "txtObs", @required = "true" })
+            </div>
+        </div>
+        <p>
+            <input type="submit" value="Salvar" id="saveDEO" />
+        </p>
+    </fieldset>
+</div>
+}

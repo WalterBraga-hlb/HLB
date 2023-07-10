@@ -1,0 +1,910 @@
+﻿@{
+    ViewBag.Title = "";
+
+    var listaItens = (List<MvcAppHylinedoBrasilMobile.Models.PedidoRacao_Item>)Session["ListaItensPedidoRacao"];
+    var listaAdicionais = (List<MvcAppHylinedoBrasilMobile.Models.PedidoRacao_Item_Aditivo>)
+        Session["ListaAdicionaisPedidoRacao"];
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities apolo =
+        new MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities();
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbappSession =
+        new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+
+    int totalSolicitado = Convert.ToInt32(listaItens.Sum(s => s.QtdeKg));
+    
+    string granja = Session["granjaSelecionada"].ToString();
+    DateTime dataPedido = new DateTime();
+
+    if (Session["dataInicialPedidoRacao"] != "")
+    {
+        dataPedido = Convert.ToDateTime(Session["dataInicialPedidoRacao"]);
+    }
+
+    bool permiteAlterarPedido = MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+        .GetGroup("HLBAPPM-PedidoRacaoAlteraPedido", (System.Collections.ArrayList)Session["Direitos"]);
+
+    bool permiteAlteracaoEmpresaFilial = MvcAppHylinedoBrasilMobile.Controllers.PedidoRacaoController
+        .VerificaAlteracaoEmpresaFilialApolo(Session["login"].ToString(),
+        granja, dataPedido, false, false);
+
+    int id = Convert.ToInt32(Session["IDPedidoRacao"]);
+
+    var logPR = hlbappSession.LOG_PedidoRacao.Where(w => w.IDPedidoRacao == id)
+            .OrderByDescending(o => o.DataOperacao).FirstOrDefault();
+
+    int idLog = 0;
+    if (logPR != null) { idLog = logPR.ID; }
+
+    string statusPedido = Session["statusPR"].ToString();
+
+    var listaLogItens = hlbappSession.LOG_PedidoRacao_Item
+            .Where(w => w.IDLogPedidoRacao == idLog
+                && w.Operacao == "Inclusão")
+            .ToList();
+    
+    if (statusPedido.Contains("Pendente"))
+    {
+        var qtdListaLogItens = hlbappSession.LOG_PedidoRacao_Item
+            .Where(w => w.IDLogPedidoRacao == idLog
+                && (w.Operacao == "Inclusão" || w.Operacao == "Alteração"))
+            .ToList();
+
+        totalSolicitado = Convert.ToInt32(qtdListaLogItens.Sum(s => s.QtdeKg));
+    }
+}
+
+<script type="text/javascript">
+    var tid = setTimeout(inicializar, 500);
+
+    function inicializar() {
+        var vDentroPeriodoPermitido = $('#hdDentroPeriodoPermitido').val();
+        var status = $('#hdStatusPR').val();
+        var dataPedido = $('#txtDataPedidoRacao').val();
+        if (dataPedido == undefined) {
+            dataPedido = $('#lblDataPedidoRacao').html();
+            dataPedido = dataPedido.substring(6, 10) + '-' + dataPedido.substring(3, 5) + '-' + dataPedido.substring(0, 2);
+        }
+        if (!status.includes('Pendente')) {
+            if (dataPedido != '' && vDentroPeriodoPermitido == 'False') {
+                $('#pnlMotivo').show();
+                document.getElementById("txtObservacao").required = true;
+            } else {
+                document.getElementById("txtObservacao").required = false;
+                $('#pnlMotivo').load();
+                $('#pnlMotivo').hide();
+            }
+        }
+
+        //desabilitaFormula(dataPedido);
+    }
+
+    function desabilitaFormula(dataPedido) {
+        var dataAtual = "2020-03-29";
+        if (dataPedido >= dataAtual) {
+            $('#pnlFormula').hide();
+            $('.pnlFormulaLista').hide();
+            $('#ddlFormula').prop('required', false);
+        } else {
+            $('#pnlFormula').show();
+            $('.pnlFormulaLista').show();
+            $('#ddlFormula').prop('required', true);
+        }
+    }
+
+    function atualizaSessionData(dataInicial) {
+        var errorHolder = document.getElementById('errorDataPedido');
+        //desabilitaFormula(dataInicial);
+        $.ajax({
+            url: '/PedidoRacao/AtualizaSessionData',
+            type: 'POST',
+            data: JSON.stringify({ id: dataInicial, chamada: '4' }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data != '') {
+                    errorHolder.innerHTML = data;
+                    $('#hdDentroPeriodoPermitido').val(false);
+                    $('#pnlMotivo').show();
+                    document.getElementById("txtObservacao").required = true;
+//                    $('#savePedido').button('disable');
+//                    $('[type="submit"]').button('refresh');
+                } else {
+                    errorHolder.innerHTML = '';
+                    $('#hdDentroPeriodoPermitido').val(true);
+                    $('#txtObservacao').val("");
+                    document.getElementById("txtObservacao").required = false;
+                    $('#pnlMotivo').hide();
+//                    $('#savePedido').button('enable');
+//                    $('[type="submit"]').button('refresh');
+                }
+            }
+        });
+    }
+
+    function atualizaSession(value, field) {
+        $.ajax({
+            url: '/PedidoRacao/AtualizaSession',
+            type: 'POST',
+            data: JSON.stringify({ valor: value, campo: field }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                verificaCampos(false);
+            }
+        });
+    }
+
+    function carregaGalpoes(value) {
+        $('select#ddlLinhagem').empty();
+        $('select#ddlLinhagem').selectmenu('refresh');
+        $('select#ddlFormula').empty();
+        $('select#ddlFormula').selectmenu('refresh');
+
+        $('select#ddlGalpao').empty();
+        $('select#ddlGalpao').append('<option value="" selected="selected">(Carregando...)</option>');
+        $('select#ddlGalpao').selectmenu('refresh');
+        $.ajax({
+            url: '/PedidoRacao/CarregaGalpoesPS',
+            type: 'POST',
+            data: JSON.stringify({ id: value, origem: 'PR' }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#ddlGalpao').empty();
+                $('select#ddlGalpao').append('<option value="" selected="selected">(Selecione um Galpão)</option>');
+                $.each(data, function (key, SelectListItem) {
+                    $('select#ddlGalpao').append('<option value="' + SelectListItem.Text + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#ddlGalpao').selectmenu('refresh');
+            }
+        });
+    }
+
+    function carregaLinhagens(value) {
+        $('select#ddlFormula').empty();
+        $('select#ddlFormula').selectmenu('refresh');
+
+        $('select#ddlLinhagem').empty();
+        $('select#ddlLinhagem').append('<option value="" selected="selected">(Carregando...)</option>');
+        $('select#ddlLinhagem').selectmenu('refresh');
+        $.ajax({
+            url: '/PedidoRacao/CarregaLinhagens',
+            type: 'POST',
+            data: JSON.stringify({ id: value }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#ddlLinhagem').empty();
+                $('select#ddlLinhagem').append('<option value="" selected="selected">(Selecione uma Linhagem)</option>');
+                $.each(data, function (key, SelectListItem) {
+                    $('select#ddlLinhagem').append('<option value="' + SelectListItem.Text + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#ddlLinhagem').selectmenu('refresh');
+            }
+        });
+    }
+
+    function carregaFormulas(value) {
+        $('select#ddlFormula').empty();
+        $('select#ddlFormula').append('<option value="" selected="selected">(Carregando...)</option>');
+        $('select#ddlFormula').selectmenu('refresh');
+        $.ajax({
+            url: '/PedidoRacao/RetornaLinhagemSelecionadaNovo',
+            type: 'POST',
+            data: JSON.stringify({ id: value }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#ddlFormula').empty();
+                $('select#ddlFormula').append('<option value="" selected="selected">(Selecione uma Fórmula)</option>');
+                $.each(data, function (key, SelectListItem) {
+                    $('select#ddlFormula').append('<option value="' + SelectListItem.Value + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#ddlFormula').selectmenu('refresh');
+            }
+        });
+    }
+
+    function carregaCodigoProduto(value) {
+        $.ajax({
+            url: '/PedidoRacao/RetornaCodigoProduto',
+            type: 'POST',
+            data: JSON.stringify({ id: value }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('#hdProduto').val(data);
+            }
+        });
+    }
+
+    function verificaSaldoQtdeKg() {
+        var qtdeKg = $('#txtQtdeKg').val();
+        var errorHolder = document.getElementById('errorQtdeKg');
+        var dataPedido = $('#txtDataPedidoRacao').val();
+        if (dataPedido == '') {
+            atualizaSessionData(dataPedido);
+            $('#txtQtdeKg').focus();
+            $('#saveItem').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        }
+        else {
+            $.ajax({
+                url: '/PedidoRacao/RetornaQtdeKgNovo',
+                type: 'POST',
+                data: JSON.stringify({ id: qtdeKg }),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                    if (data == '') {
+                        errorHolder.innerHTML = '';
+                        $('#saveItem').button('enable');
+                        $('[type="submit"]').button('refresh');
+                        return false;
+                    } else {
+                        errorHolder.innerHTML = data;
+                        $('#txtQtdeKg').focus();
+                        $('#saveItem').button('disable');
+                        $('[type="submit"]').button('refresh');
+                        return true;
+                    }
+                }
+            });
+        }
+    }
+
+    function verificaCampos(click) {
+        var existe = 0;
+
+        // Verifica Data do Pedido
+        var dataPedido = $('#txtDataPedidoRacao').val();
+        var errorDataPedido = document.getElementById('errorDataPedido');
+        if (dataPedido == '') {
+            errorDataPedido.innerHTML = 'Obrigatório informar a data do pedido!';
+            existe = existe + 1;
+        } else {
+            errorDataPedido.innerHTML = '';
+        }
+
+        // Verifica Motivo da Alteração
+        var observacao = $('#txtObservacao').val();
+        var vDentroPeriodoPermitido = $('#hdDentroPeriodoPermitido').val();
+        var errorObservacao = document.getElementById('errorObservacao');
+        if (dataPedido != '' && vDentroPeriodoPermitido == false) {
+            errorObservacao.innerHTML = 'Obrigatório informar o motivo da alteração fora do período permitido!';
+            existe = existe + 1;
+        } else {
+            errorObservacao.innerHTML = '';
+        }
+
+        //Verifica número de erros para bloquear botão salvar
+        if (existe > 0) {
+            $('#savePedido').button('disable');
+            $('[type="submit"]').button('refresh');
+            if (click) {
+                alert('Existem itens campos em branco! Verifique!');
+            }
+            return true;
+        } else {
+            $('#savePedido').button('enable');
+            $('[type="submit"]').button('refresh');
+            return false;
+        }
+    }
+
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mvalor(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{8})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{5})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{2})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+    function mvalor4(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{10})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{7})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{4})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+</script>
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Pedidos de Ração", "Index", "PedidoRacao")
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/graos_32x32.png"), "PedidoRacao")
+    <h2>Pedido de Ração</h2>
+    <br />
+    <h3 style="color:red;">@ViewBag.Erro</h3>
+    <b style="color:red; background-color:Yellow">
+        **** OS PEDIDOS COM DATA DE ENTREGA A PARTIR DE 29/03/2020 NÃO SERÃO MAIS NECESSÁRIOS SELECIONAR A FÓRMULA.
+        ISSO PORQUE FOI CRIADO UM NOVO MODELO DE CONFIGURAÇÃO ONDE SERÁ CONFIGURADA A FÓRMULA E FASE POR NÚCLEO / GALPÃO.
+        QUALQUER DÚVIDA, ENTRAR EM CONTATO COM O WELLINGTON!!! ****
+    </b>
+    @if (!statusPedido.Contains("Pendente"))
+    {
+        <div class="editor-label">
+            <b>Data da Entrega da Ração:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("dataInicialPedidoRacao",
+                (Session["dataInicialPedidoRacao"] != "" && Session["dataInicialPedidoRacao"] != null ?
+                Convert.ToDateTime(Session["dataInicialPedidoRacao"]).ToString("yyyy-MM-dd") : ""),
+                new
+                {
+                    @type = "date",
+                    @id = "txtDataPedidoRacao",
+                    @onchange = "atualizaSessionData(this.value)"
+                })
+        </div>
+        <div class="editor-label" id="errorDataPedido" style="color: Red; font-weight:bold;"></div>
+    }
+    else
+    {
+        <div class="editor-label">
+            <b>Data da Entrega da Ração:</b>
+            @Html.Label((Session["dataInicialPedidoRacao"] != "" && Session["dataInicialPedidoRacao"] != null ?
+                Convert.ToDateTime(Session["dataInicialPedidoRacao"]).ToString("dd/MM/yyyy") : ""), new { @id = "lblDataPedidoRacao" })
+            @if (logPR != null)
+            {
+                if (logPR.DataInicial != Convert.ToDateTime(Session["dataInicialPedidoRacao"])
+                    && statusPedido.Contains("Pendente"))
+                {
+                    <b style="color:red; background-color:Yellow">
+                        *
+                    </b>
+                    <br />
+                }
+            }
+        </div>
+    }
+    @Html.Hidden("hdDentroPeriodoPermitido", Convert.ToBoolean(Session["dentroPeriodoPermitido"]))
+    @Html.Hidden("hdStatusPR", Session["statusPR"].ToString())
+</div>
+<br />
+<div align="center">
+    <h3>Qtde. Total Solicitada neste pedido: @(totalSolicitado.ToString("0,00")) Kg</h3>
+</div>
+<br />
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Itens do Pedido</li>
+    @if (!statusPedido.Contains("Pendente"))
+    {
+    <li>
+        @using (Html.BeginForm("SaveItemPedidoRacaoNovo", "PedidoRacao", FormMethod.Post,
+            new { enctype = "multipart/form-data" }))
+        {
+            <table style="border:none; background: none;" class="ajusteWithoutHeader">
+                <tbody class="ajusteWithoutHeader">
+                <tr style="border:none; background: none;" class="ajusteWithoutHeader">
+                    <td style="border:none; background: none;" class="ajusteWithoutHeader">
+                        @Html.DropDownList(
+                        "Nucleo",
+                        (List<SelectListItem>)Session["ListaNucleos"],
+                        "(Selecione um Núcleo)",
+                        new
+                        {
+                            @id = "ddlNucleo",
+                            @required = "true",
+                            @onchange = "carregaGalpoes(this.value)"
+                        })
+                    </td>
+                    <td style="border:none; background: none;" class="ajusteWithoutHeader">
+                        @Html.DropDownList(
+                        "Galpao",
+                        (List<SelectListItem>)Session["ListaGalpoesSelecionados"],
+                        new
+                        {
+                            @id = "ddlGalpao",
+                            @required = "true",
+                            @onchange = "carregaLinhagens(this.value)"
+                        })
+                    </td>
+                    <td style="border:none; background: none;" class="ajusteWithoutHeader">
+                        @Html.DropDownList(
+                        "Linhagem",
+                        (List<SelectListItem>)Session["ListaLinhagensSelecionadas"],
+                        new
+                        {
+                            @id = "ddlLinhagem",
+                            @required = "true",
+                            @onchange = "carregaFormulas(this.value)"
+                        })
+                    </td>
+                    @*<td id="pnlFormula" style="border:none; background: none;" class="ajusteWithoutHeader">
+                        @Html.DropDownList(
+                            "CodFormulaRacao",
+                            (List<SelectListItem>)Session["ListaFormulas"],
+                            new
+                            {
+                                @id = "ddlFormula",
+                                @required = "true",
+                                @onchange = "carregaCodigoProduto(this.value)"
+                            })
+                        @Html.Hidden("Produto", new { @id = "hdProduto" })
+                    </td>*@
+                    <td style="border:none; background: none;" class="ajusteWithoutHeader">
+                        @Html.TextBox("QtdeKg", null, new
+                   {
+                       @id = "txtQtdeKg",
+                       //@onkeyup = "mascara(this, mvalor4)",
+                       @type = "number",
+                       @onchange = "verificaSaldoQtdeKg()",
+                       @required = "true",
+                       @placeholder = "Informa a qtde. em kg."
+                   })
+                        <div class="editor-label" id="errorQtdeKg" style="color: Red; font-weight:bold;"></div>
+                    </td>
+                    <td style="border:none; background: none;" class="ajusteWithoutHeader">
+                        <input type="submit" value="+" id="saveItem" onclick="verificaSaldoQtdeKg()"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        }
+    </li>
+    }
+    @if (listaItens.Count > 0 || listaLogItens.Count > 0)
+    {        
+    <li>
+        <div style="overflow:auto;">
+        <table class="ajuste">
+            <tbody class="ajuste">
+            <tr class="ajuste">
+                <th class="ajuste"></th>
+                <th class="ajuste">
+                    Seq.
+                </th>
+                <th class="ajuste">
+                    Núcleo
+                </th>
+                <th class="ajuste">
+                    Galpão
+                </th>
+                <th class="ajuste">
+                    Linhagem
+                </th>
+                @*<th class="pnlFormulaLista ajuste">
+                    Fórmula
+                </th>*@
+                <th class="ajuste">
+                    Qtde. Kg.
+                </th>
+            </tr>
+        @foreach (var item in listaItens)
+        {
+            string nomeProduto = "";
+
+            MvcAppHylinedoBrasilMobile.Models.bdApolo.PRODUTO1 produto1 =
+            MvcAppHylinedoBrasilMobile.Controllers.PedidoRacaoController
+                        .bdApolo.PRODUTO1.Where(w => w.USERNumFormula == item.CodFormulaRacao).FirstOrDefault();
+
+            if (produto1 != null)
+            {
+                nomeProduto = item.CodFormulaRacao + " - " + MvcAppHylinedoBrasilMobile.Controllers.PedidoRacaoController
+                        .bdApolo.PRODUTO.Where(w => w.ProdCodEstr == produto1.ProdCodEstr).FirstOrDefault().ProdNome;
+            }
+
+            var listaAdicionaisItem = listaAdicionais.Where(w => w.SeqItem == item.Sequencia).ToList();            
+
+            var logItem = hlbappSession.LOG_PedidoRacao_Item.Where(w => w.IDPedidoRacao_Item == item.ID
+                && w.IDLogPedidoRacao == idLog).FirstOrDefault();
+
+            var listaLogAdicionais = hlbappSession.LOG_PedidoRacao_Item_Aditivo
+                .Where(w => w.IDPedidoRacao_Item == item.ID 
+                    && w.IDLogPedidoRacao == idLog
+                    && w.Operacao == "Inclusão").ToList();
+            
+            var cfr = hlbappSession.Config_Formula_Racao.Where(w => w.ID == item.IDConfigFormulaRacao).FirstOrDefault();
+            if (cfr != null)
+            {
+                nomeProduto = cfr.Descricao;
+            }
+    
+            <tr class="ajuste">
+                <td class="ajuste">
+                    @if (permiteAlteracaoEmpresaFilial && !statusPedido.Contains("Pendente"))
+                    {
+                    <div align="center">            
+                        @Html.ActionLink("Delete", "DeleteItemPedidoRacaoNovo", new { sequencia = item.Sequencia }, new { @class = "delete" })
+                    </div>
+                    }
+                    @if (logItem != null
+                        && statusPedido.Contains("Pendente"))
+                    {
+                        <b style="color:red; background-color:Yellow">
+                            * @logItem.Operacao
+                        </b>
+                        <br />
+                    }
+                </td>
+                <td class="ajuste">
+                    @Html.DisplayFor(modelItem => item.Sequencia)
+                </td>
+                <td class="ajuste">
+                    @Html.DisplayFor(modelItem => item.Nucleo)
+                    @if (logItem != null)
+                    {
+                        if (logItem.Nucleo != item.Nucleo
+                            && statusPedido.Contains("Pendente"))
+                        {
+                            <b style="color:red; background-color:Yellow">
+                                *
+                            </b>
+                            <br />
+                        }
+                    }
+                </td>
+                <td class="ajuste">
+                    @Html.DisplayFor(modelItem => item.Galpao)
+                    @if (logItem != null)
+                    {
+                        if (logItem.Galpao != item.Galpao
+                            && statusPedido.Contains("Pendente"))
+                        {
+                            <b style="color:red; background-color:Yellow">
+                                *
+                            </b>
+                            <br />
+                        }
+                    }
+                </td>
+                <td class="ajuste">
+                    @Html.DisplayFor(modelItem => item.Linhagem)
+                    @if (logItem != null)
+                    {
+                        if (logItem.Linhagem != item.Linhagem
+                            && statusPedido.Contains("Pendente"))
+                        {
+                            <b style="color:red; background-color:Yellow">
+                                *
+                            </b>
+                            <br />
+                        }
+                    }
+                </td>
+                @*<td class="pnlFormulaLista ajuste">
+                    @(nomeProduto)
+                    @if (logItem != null)
+                    {
+                        if (logItem.CodFormulaRacao != item.CodFormulaRacao
+                            && statusPedido.Contains("Pendente"))
+                        {
+                            <b style="color:red; background-color:Yellow">
+                                *
+                            </b>
+                            <br />
+                        }
+                    }
+                </td>*@
+                <td class="ajuste">
+                    @String.Format("{0:N0}", item.QtdeKg)
+                    @if (logItem != null)
+                    {
+                        if (logItem.QtdeKg != item.QtdeKg
+                            && statusPedido.Contains("Pendente"))
+                        {
+                            <b style="color:red; background-color:Yellow">
+                                *
+                            </b>
+                            <br />
+                        }
+                    }
+                </td>
+            </tr>
+                    if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                        .GetGroup("HLBAPPM-PedidoRacaoInsereAdicionais", (System.Collections.ArrayList)Session["Direitos"]))
+                    {
+            <tr>
+                <td>
+                </td>
+                <td colspan="6">
+                <ul data-role="listview" data-inset="true">
+                    <li data-role="list-divider">Adicionais do Item</li>
+                    @if (!statusPedido.Contains("Pendente"))
+                    {
+                    <li>
+                        @using (Html.BeginForm("SaveAdicionalItemPedidoRacaoNovo", "PedidoRacao", FormMethod.Post,
+                            new { enctype = "multipart/form-data" }))
+                        {
+                            <table style="border:none; background: none;" class="ajusteWithoutHeader">
+                                <tbody class="ajusteWithoutHeader">
+                                <tr style="border:none; background: none;" class="ajusteWithoutHeader">
+                                    <td style="width: 70%; border:none; background: none;">
+                                        <div class="editor-field">
+                                            @Html.DropDownList(
+                                            "Adicional",
+                                            (List<SelectListItem>)Session["ListaAdicionaisPR"],
+                                            "(Selecione um Adicional)",
+                                            new { @required = "true" })
+                                        </div>
+                                        @Html.Hidden("sequenciaItem", item.Sequencia.ToString())
+                                    </td>
+                                    <td style="width: 25%; border:none; background: none;">
+                                        @Html.TextBox("QtdeKgPorTon", null, new { @onkeyup = "mascara(this, mvalor4);", @required = "true" })
+                                    </td>
+                                    <td style="width: 5%; border:none; background: none;">
+                                        <input type="submit" value="+"/>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        }
+                    </li>
+                    }
+                    @if (listaAdicionaisItem.Count > 0)
+                    {
+                    <li>
+                        <div style="overflow:auto;">
+                        <table class="ajuste">
+                            <tbody class="ajuste">
+                            <tr class="ajuste">
+                                <th class="ajuste"></th>
+                                <th class="ajuste">
+                                    Adicional
+                                </th>
+                                <th class="ajuste">
+                                    Qtde. Kg. p/ Ton.:
+                                </th>
+                            </tr>
+                        @foreach (var adicional in listaAdicionaisItem)
+                        {
+                            var adicionalApolo = apolo.PRODUTO.Where(w => w.ProdCodEstr == adicional.ProdCodEstr)
+                                .FirstOrDefault();
+                            string descricao = "";
+                            if (adicionalApolo != null)
+                            {
+                                descricao = adicionalApolo.ProdNome;
+                            }
+
+                            int idLogItem = 0;
+                            if (logItem != null) { idLogItem = logItem.ID; }
+
+                            var logAdd = hlbappSession.LOG_PedidoRacao_Item_Aditivo
+                                .Where(w => w.IDLogPedidoRacao_Item == idLogItem
+                                    && w.IDPedidoRacao_Item_Aditivo == adicional.ID).FirstOrDefault();
+            
+                            <tr class="ajuste">
+                                <td class="ajuste">
+                                    @if (permiteAlteracaoEmpresaFilial && !statusPedido.Contains("Pendente"))
+                                    {
+                                    <div align="center">            
+                                        @Html.ActionLink("Delete", "DeleteAdicionalItemPedidoRacaoNovo",
+                                            "PedidoRacao",
+                                            new
+                                            {
+                                                seqItem = adicional.SeqItem,
+                                                sequencia = adicional.Sequencia
+                                            }, new { @class = "delete" })
+                                    </div>
+                                    }
+                                    @if (logAdd != null
+                                        && statusPedido.Contains("Pendente"))
+                                    {
+                                        <b style="color:red; background-color:Yellow">
+                                            * @logAdd.Operacao
+                                        </b>
+                                        <br />
+                                    }
+                                </td>
+                                <td class="ajuste">
+                                    @(descricao)
+                                </td>
+                                <td class="ajuste">
+                                    @String.Format("{0:N4}", adicional.QtdeKgPorTon)
+                                </td>
+                            </tr>
+                        }
+                        @if (statusPedido.Contains("Pendente"))
+                        {
+                            foreach (var adicional in listaLogAdicionais)
+                            {
+                                var adicionalApolo = apolo.PRODUTO.Where(w => w.ProdCodEstr == adicional.ProdCodEstr)
+                                    .FirstOrDefault();
+                                string descricao = "";
+                                if (adicionalApolo != null)
+                                {
+                                    descricao = adicionalApolo.ProdNome;
+                                }
+
+                                <tr class="ajuste">
+                                    <td class="ajuste">
+                                        <b style="color:red; background-color:Yellow">
+                                            * @adicional.Operacao
+                                        </b>
+                                        <br />
+                                    </td>
+                                    <td class="ajuste">
+                                        @(descricao)
+                                    </td>
+                                    <td class="ajuste">
+                                        @String.Format("{0:N4}", adicional.QtdeKgPorTon)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        </tbody>
+                        </table>
+                        </div>
+                    </li>
+                    }
+                </ul>
+                </td>
+            </tr>
+                    }
+        }
+        @if (statusPedido.Contains("Pendente"))
+        {
+            foreach (var item in listaLogItens)
+            {
+                string nomeProduto = "";
+                var produto1 = MvcAppHylinedoBrasilMobile.Controllers.PedidoRacaoController
+                    .bdApolo.PRODUTO1.Where(w => w.USERNumFormula == item.CodFormulaRacao).FirstOrDefault();
+                if (produto1 != null)
+                {
+                    nomeProduto = produto1.USERNumFormula + " - " + MvcAppHylinedoBrasilMobile.Controllers.PedidoRacaoController
+                        .bdApolo.PRODUTO.Where(w => w.ProdCodEstr == produto1.ProdCodEstr).FirstOrDefault().ProdNome;
+                }
+
+                var cfr = hlbappSession.Config_Formula_Racao.Where(w => w.ID == item.IDConfigFormulaRacao).FirstOrDefault();
+                if (cfr != null)
+                {
+                    nomeProduto = cfr.Descricao;
+                }
+
+                var listaLogAdicionais = hlbappSession.LOG_PedidoRacao_Item_Aditivo
+                    .Where(w => w.IDLogPedidoRacao_Item == item.ID).ToList();
+            
+            <tr class="ajuste">
+                <td class="ajuste">
+                    <b style="color:red; background-color:Yellow">
+                        * @item.Operacao
+                    </b>
+                    <br />
+                </td>
+                <td class="ajuste">
+                    @Html.DisplayFor(modelItem => item.Sequencia)
+                </td>
+                <td class="ajuste">
+                    @Html.DisplayFor(modelItem => item.Nucleo)
+                </td>
+                <td class="ajuste">
+                    @Html.DisplayFor(modelItem => item.Galpao)
+                </td>
+                <td class="ajuste">
+                    @Html.DisplayFor(modelItem => item.Linhagem)
+                </td>
+                @*<td class="pnlFormulaLista ajuste">
+                    @(nomeProduto)
+                </td>*@
+                <td class="ajuste">
+                    @String.Format("{0:N0}", item.QtdeKg)
+                </td>
+            </tr>
+                if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                    .GetGroup("HLBAPPM-PedidoRacaoInsereAdicionais", (System.Collections.ArrayList)Session["Direitos"])
+                    && listaLogAdicionais.Count > 0)
+                {
+            <tr>
+                <td>
+                </td>
+                <td colspan="6">
+                    <ul data-role="listview" data-inset="true">
+                        <li data-role="list-divider">Adicionais do Item</li>
+                        <li>
+                            <div style="overflow:auto;">
+                            <table class="ajuste">
+                                <tbody class="ajuste">
+                                <tr class="ajuste">
+                                    <th class="ajuste"></th>
+                                    <th class="ajuste">
+                                        Adicional
+                                    </th>
+                                    <th class="ajuste">
+                                        Qtde. Kg. p/ Ton.:
+                                    </th>
+                                </tr>
+                            @foreach (var adicional in listaLogAdicionais)
+                            {
+                                var adicionalApolo = apolo.PRODUTO.Where(w => w.ProdCodEstr == adicional.ProdCodEstr)
+                                    .FirstOrDefault();
+                                string descricao = "";
+                                if (adicionalApolo != null)
+                                {
+                                    descricao = adicionalApolo.ProdNome;
+                                }
+
+                                <tr class="ajuste">
+                                    <td class="ajuste">
+                                        <b style="color:red; background-color:Yellow">
+                                            * @adicional.Operacao
+                                        </b>
+                                        <br />
+                                    </td>
+                                    <td class="ajuste">
+                                        @(descricao)
+                                    </td>
+                                    <td class="ajuste">
+                                        @String.Format("{0:N4}", adicional.QtdeKgPorTon)
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                            </table>
+                            </div>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+                }
+            }
+        }
+        </tbody>
+        </table>
+        </div>
+    </li>
+    }
+</ul>
+<br />
+
+@if (permiteAlteracaoEmpresaFilial && statusPedido != "Realizada" && statusPedido != "Em Produção")
+{
+    if (statusPedido.Contains("Pendente") && permiteAlterarPedido)
+    {
+        <div class="editor-label">
+            <b>Motivo da Alteração:</b>
+            @Html.Raw(Session["observacao"].ToString().Replace("\r\n", "<br />"))
+        </div>
+        using (Html.BeginForm("AprovaAlteracaoPedidoRacaoNovo", "PedidoRacao", FormMethod.Post,
+            new { enctype = "multipart/form-data" }))
+        {
+            <input type="submit" value="Aprovar Alteração do Pedido" />
+        }
+        <br />
+        using (Html.BeginForm("ReprovaAlteracaoPedidoRacaoNovo", "PedidoRacao", FormMethod.Post,
+            new { enctype = "multipart/form-data" }))
+        {
+            <div class="editor-label">
+                <b>Motivo da Reprovação:</b>
+            </div>
+            <div class="editor-field">
+                @Html.TextArea("motivoReprovacao", Session["motivoReprovacao"].ToString(),
+                    new { @id = "txtMotivoReprovacao", @required = "true" })
+            </div>
+            <input type="submit" value="Reprovar Alteração do Pedido" />
+        }
+    }
+    else if (!statusPedido.Contains("Pendente"))
+    {
+        using (Html.BeginForm("SavePedidoRacaoNovo", "PedidoRacao", FormMethod.Post,
+            new { enctype = "multipart/form-data" }))
+        {
+        <div id="pnlMotivo">
+            <div class="editor-label">
+                <b>Motivo da Alteração:</b>
+                <div class="editor-label" style="color: Red; font-weight:bold;">
+                    Obrigatório informar o motivo da alteração pois a data informada está fora do prazo permitido!
+                </div>
+            </div>
+            <div class="editor-field">
+                @Html.TextArea("observacao", Session["observacao"].ToString(),
+                     new { @id = "txtObservacao", @required = "true", @onchange = "verificaCampos(false)" })
+            </div>
+            <div class="editor-label" id="errorObservacao" style="color: Red; font-weight:bold;"></div>
+        </div>
+        <input type="submit" value="Salvar Pedido" id="savePedido" onclick="verificaCampos(true)" />
+        }
+    }
+}

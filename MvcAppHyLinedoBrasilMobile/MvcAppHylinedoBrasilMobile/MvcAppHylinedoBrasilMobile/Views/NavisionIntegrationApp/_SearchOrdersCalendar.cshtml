@@ -1,0 +1,52 @@
+﻿@using (Html.BeginForm("LoadNavOrdersCalendarView", "NavisionIntegrationApp", FormMethod.Post))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="list-divider">
+            <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_VisitorList", Session["language"].ToString())</b>
+            @Html.DropDownList(
+                "Visitor",
+                (List<SelectListItem>)Session["VisitorList"],
+                new { @id = "dropBoxVisitorList" })
+        </li>
+        <li data-role="fieldcontain">
+            <label style="width: 100%">
+                <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_ShowAgenda", Session["language"].ToString())</b>
+                @Html.CheckBox("showAgenda", Convert.ToBoolean(Session["showAgendaSearchNav"]))
+            </label>
+        </li>
+    </ul>
+    <br />
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_CountryList", Session["language"].ToString())</b>
+            <div id="tabelaCountry" style="overflow:auto; height: 200px;">
+                @foreach (var item in (List<SelectListItem>)Session["CountryList"])
+                {
+                    <label style="width: 100%">
+                        @if (item.Selected)
+                        {
+                            @Html.CheckBox("countrySelect", true)
+                            @item.Text
+                            @Html.Hidden("name", item.Text)
+                        }
+                        else
+                        {
+                            @Html.CheckBox("countrySelect")
+                            @item.Text
+                            @Html.Hidden("name", item.Text)
+                        }    
+                    </label>
+                }
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_CustomerName", Session["language"].ToString())</b>
+            <div class="editor-label">
+                @Html.TextBox("customerName", Session["customerNameSearchNav"].ToString())
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_SeachButton", Session["language"].ToString())" />
+        </li>
+    </ul>
+}

@@ -1,0 +1,80 @@
+﻿@model MvcAppHyLinedoBrasil.Models.DropDownListParametros
+@using MvcAppHyLinedoBrasil.Models
+
+@{
+    ViewBag.Title = "Envio de Lista de Pedidos p/ E-mail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="@Url.Content("//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("//code.jquery.com/jquery-1.10.2.js")" type="text/javascript"></script>
+<script src="@Url.Content("//code.jquery.com/ui/1.11.0/jquery-ui.js")" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#dataIni").datepicker({ dateFormat: "dd/mm/yy" });
+    });
+    $(function () {
+        $("#dataFim").datepicker({ dateFormat: "dd/mm/yy" });
+    });
+
+    $(document).ready(function () {
+
+        // Hide the "busy" Gif at load:
+        $("#divProcessing").hide();
+
+        // Attach click handler to the submit button:
+        $('#importar').click(function () {
+            $("#divProcessing").show();
+        });
+    });
+</script>
+
+@Html.Partial("Menu")
+
+<h3>Envio de Lista de Pedidos p/ E-mail</h3>
+
+@using (Html.BeginForm("EnviarListaPedidosEmail", "RelatoriosComerciais", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        <p align="center">
+        Informe os parâmetros a seguir:
+            <br />
+            <br />
+        @if (Session["empresa"].ToString().Length > 2)
+        {
+        <b>Selecione a Empresa: </b>
+        @Html.DropDownListFor(
+            d => d.Empresa,
+            (IEnumerable<SelectListItem>)Session["ListaEmpresasRelComercial"])
+        <br />
+        <br />
+        }
+        <b>Período: @Html.TextBox("dataIni", Session["sDataInicial"]) à @Html.TextBox("dataFim", Session["sDataFinal"])</b>
+        @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-AcessoListaVendedoresRelComercial",
+                    (System.Collections.ArrayList)Session["Direitos"]))
+        {
+        <br />
+        <br />
+        <b>Selecione o Vendedor / Representante: </b>
+        @Html.DropDownListFor(
+            d => d.Vendedor,
+            (IEnumerable<SelectListItem>)Session["ListaVendedoresRelComercial"])
+        }
+        </p>
+    </fieldset>
+
+    <div id="divUltimaReview">
+        <h4>@Html.Raw(ViewBag.fileName)</h4>
+        <h4 style="color:red;">@ViewBag.erro</h4>
+    </div>
+    <div id="divProcessing">
+        <p>Processando, por favor, aguarde . . . <img src="../../Content/images/ajax-loading.gif"></p>
+    </div>
+    <div class="editor-field">
+        <h4 style="color:red;">**** CUIDADO!!! AO CLICAR NO BOTÃO ABAIXO, O PROCESSO INICIARÁ E NÃO TERÁ COMO CANCELAR!!! SENDO ASSIM, 
+            CONFIRA ANTES!!! ****</h4>
+        <input type="submit" value="Enviar E-mail(s)" id="importar"/>
+    </div>
+}
+

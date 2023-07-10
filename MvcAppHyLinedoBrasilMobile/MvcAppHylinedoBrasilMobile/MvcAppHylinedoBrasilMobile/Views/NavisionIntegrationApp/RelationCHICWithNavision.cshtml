@@ -1,0 +1,53 @@
+﻿@model IEnumerable<MvcAppHylinedoBrasilMobile.Models.NavOrders>
+
+@{
+    ViewBag.Title = "";
+}
+
+<div align="center">
+    @Html.ActionLink(@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Link_Back_Home", Session["language"].ToString()), "Index", "HomeMobile")
+</div>
+<br />
+<div align="center">
+    @Html.Image(@Url.Content("~/Content/icons/link_32x32.png"), MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Title_LinkCHICWithNavision_NavisionIntegrationApp", Session["language"].ToString()))
+    <h2>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Title_LinkCHICWithNavision_NavisionIntegrationApp", Session["language"].ToString())</h2>
+</div>
+<h3 style="color:Red; background-color:White"><b>@ViewBag.Erro</b></h3>
+
+<div class="editor-label">
+    <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("LinkCHICWithNav_Header", Session["language"].ToString())</b>
+</div>
+
+@Html.Partial("_SearchOrders")
+
+@using (Html.BeginForm("SaveRelationCHICWithNavision", "NavisionIntegrationApp", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+@Html.Partial("_OrdersList")
+<br />
+
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <div class="editor-label" style="color:Red; background-color:White">
+            <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("LinkCHICWithNav_Warning", Session["language"].ToString())</b>
+        </div>
+        <br />
+        <div class="editor-label">
+            <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("LinkCHICWithNav_NavOrderNo", Session["language"].ToString())</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("OrderNumberNavision")
+            @Html.ValidationMessage("OrderNumberNavision","Necessário")
+        </div>
+
+        <p>
+            <input type="submit" value="@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("LinkCHICWithNav_ButtonLink", Session["language"].ToString())" id="add" />
+        </p>
+    </fieldset>
+}
+
+@Html.Partial("_Menu")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

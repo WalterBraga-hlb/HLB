@@ -1,0 +1,742 @@
+<html>
+<head>
+<title>Form</title>
+
+<meta content="pt-br" http-equiv="Content-Language" />
+<meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type">
+
+<link rel="stylesheet" type="text/css"
+	href="/resources/style-guide/css/fluig-style-guide.min.css">
+<script src="/resources/js/jquery/jquery.js"></script>
+<script src="/resources/js/jquery/jquery-ui.min.js"></script>
+<script src="/resources/js/mustache/mustache-min.js"></script>
+<script src="/resources/style-guide/js/fluig-style-guide.min.js"></script>
+<!-- <script type="text/javascript" src="/webdesk/vcXMLRPC.js"></script> -->
+<script type="text/javascript" src="/webdesk/vcXMLRPC-mobile.js"></script>
+
+<!-- CUSTOM -->
+<link href="/resources/style-guide/css/fluig-style-guide-filter.min.css"
+	rel="stylesheet" type="text/css">
+<link
+	href="/resources/style-guide/css/fluig-style-guide-ratingstars.min.css"
+	rel="stylesheet" type="text/css">
+<script src="/resources/style-guide/js/fluig-style-guide-filter.min.js"></script>
+<script
+	src="/resources/style-guide/js/fluig-style-guide-ratingstars.min.js"></script>
+
+<link
+	href='/webdesk/customresources?cid=1&resourceName=temaFormulario/0.css'
+	type='text/css' rel='stylesheet' />
+</head>
+<body class="fluig-style-guide" onload="inicializaFormulario()">
+	<form
+		class="totvs-form grid vertical create-form-components ui-sortable t0"
+		name="createFormComponents"
+		style="padding-left: 10px; padding-right: 10px;">
+		<h1 class="title-form-application">Recibo de Educação</h1>
+		<div align="center">
+			<h4 id="lblNumProcesso" class="title-form-application"></h4>
+		</div>
+		<div
+			class="paragraph-is-required system-message-information alert alert-info"
+			role="alert">Todos os campos com * são de preenchimento
+			obrigatório.</div>
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="form-input">
+					<div class="form-group">
+						<label>Empresa / Filial:</label>
+						<span class="required text-danger"><strong>*</strong></span>
+						<select
+							class="form-control" name="fu_filial" id="ddlFilial" required="required" 
+							analytics="true" gooddataid="1" dataset="ds_FiliaisMIX"
+							datasetkey="FU_ES_COD_FILIAL" datasetvalue="ES_NOME" 
+							onchange="filtraDepartamento('filtro')" addBlankLine="true">
+						</select>
+						<input type="hidden" class="form-control" name="fu_CodigoFilial" id="hdCodigoFilial" value="">
+						<input type="hidden" class="form-control" name="fu_diretor" id="hddiretor" value="">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="form-field" data-type="combo" data-show-properties=""
+					data-field-name="fu_depto"
+					style="position: relative; left: 0px; top: 0px;">
+					<div class="form-input">
+						<div class="form-group">
+							<label>Departamento:</label> <span
+								class="required text-danger"><strong>*</strong></span> <select
+								class="form-control" name="fu_depto" id="ddlDepto"
+								required="required" analytics="true" gooddataid="2"
+								dataset="ds_DepartamentosMIX" datasetkey="ES_NOME" datasetvalue="ES_NOME"
+								onchange="filtraFuncionario()">
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="form-field" data-type="combo" data-show-properties=""
+					data-field-name="fu_nome">
+					<div class="form-input">
+						<div class="form-group">
+							<label>Funcionário:</label><span class="required text-danger"><strong>*</strong></span><select
+								class="form-control" name="fu_nome" id="ddlNome"
+								required="required" analytics="true" gooddataid="3"
+								dataset="ds_FuncionariosChefiaMIX" datasetkey="PE_NOME" datasetvalue="PE_NOME"
+								onchange="carregaDadosFuncionario()">
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="form-field" data-type="textbox" data-show-properties=""
+					data-field-name="fu_matricula">
+					<div class="form-input">
+						<div class="form-group">
+							<label>CPF:</label> <input type="text"
+								class="form-control" name="fu_cpf" id="txtCPF"
+								value="" placeholder="" data-size="small" analytics="true"
+								gooddataid="11">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-sm-4 col-xs-12">
+				<div class="form-field" data-type="textbox" data-show-properties=""
+					data-field-name="fu_matricula">
+					<div class="form-input">
+						<div class="form-group">
+							<label>Nº Matrícula:</label> <input type="text"
+								class="form-control" name="fu_matricula" id="txtMatricula"
+								value="" placeholder="" data-size="small" analytics="true"
+								gooddataid="4">
+							<input type="hidden"
+								class="form-control" name="fu_cargoConf" id="txtCargoConfianca"
+								value="" placeholder="" data-size="small">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-4 col-xs-12">
+				<div class="form-field" data-type="textbox" data-show-properties=""
+					data-field-name="fu_cargo">
+					<div class="form-input">
+						<div class="form-group">
+							<label>Cargo:</label><input type="text" class="form-control"
+								name="fu_cargo" id="txtCargo" value="" placeholder=""
+								data-size="medium" analytics="true" gooddataid="5">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-4 col-xs-12">
+				<div class="form-field" data-type="textbox" data-show-properties=""
+					data-field-name="fu_lider">
+					<div class="form-input">
+						<div class="form-group">
+							<label>Líder:</label> <input type="text" class="form-control"
+								name="fu_lider" id="txtLider" value="" placeholder=""
+								data-size="big" analytics="true" gooddataid="6"> <input
+								type="hidden" class="form-control" name="fu_liderMatric"
+								id="txtLiderMatricula" value="" placeholder="" data-size="big">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="form-field" data-type="combo" data-show-properties=""
+					data-field-name="fu_nome">
+					<div class="form-input">
+						<div class="form-group">
+							<label>Curso:</label><span class="required text-danger"><strong>*</strong></span>
+							<select
+								class="form-control" name="fu_curso" id="ddlCursos"
+								required="required" analytics="true" gooddataid="7"
+								onchange="carregaDadosCurso()">
+							</select>
+							<input type="hidden"
+								class="form-control" name="fu_codCurso" id="txtCodCurso"
+								value="" placeholder="" data-size="small">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-sm-4 col-xs-12">
+				<div class="form-field" data-type="date" data-show-properties=""
+					data-field-name="mes_ano_2">
+					<div class="form-input">
+						<div class="form-group">
+							<label>Mês / Ano:</label>
+							<span class="required text-danger"><strong>*</strong></span>
+							<input type="month" id="dtMesAno" class="form-control"
+								name="mes_ano_2" required="required"
+								analytics="true" gooddataid="8"
+								onchange="testeMesAno()">
+						</div>
+					</div>
+				</div>
+				<div class="form-field" data-type="date" data-show-properties=""
+					data-field-name="mes_ano">
+					<div class="form-input">
+						<div class="form-group">
+							<label>Mês / Ano:</label>
+							<span class="required text-danger"><strong>*</strong></span>
+							<input type="text"
+								class="form-control" name="mes_ano" id="hdMesAno"
+								value="" placeholder="" data-size="small">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-4 col-xs-12">
+				<div class="form-field" data-type="date" data-show-properties=""
+					data-field-name="data_final"
+					style="position: relative; left: 0px; top: 0px;">
+					<div class="form-input">
+						<div class="form-group">
+							<label>Valor da Mensalidade (R$):</label>
+							<span class="required text-danger"><strong>*</strong></span>
+							<input 
+ 								type="number" step="0.01" lang="pt-BR"					
+								class="form-control" name="valor_mensalidade" value=""
+								data-size="big"
+								placeholder="Exemplo: 1115,36"
+								required="required" analytics="true" gooddataid="9"
+								style="width: 100%;" id="txtValorMensalidade"
+								onkeyup="carregaValorReembolso()">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-4 col-xs-12">
+				<div class="form-field" data-type="date" data-show-properties=""
+					data-field-name="data_final"
+					style="position: relative; left: 0px; top: 0px;">
+					<div class="form-input">
+						<div class="form-group">
+							<label>Valor do Reembolso (R$):</label>
+							<span class="required text-danger"><strong>*</strong></span>
+							<input type="number" step="0.01" lang="pt-BR" 
+								class="form-control" name="valor_reembolso" value=""
+								data-size="big" data-only-numbers=""
+								required="required" analytics="true" gooddataid="10"
+								style="width: 100%;" id="txtValorReembolso">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-sm-4 col-xs-12">
+				<div class="form-field" data-type="combo" data-show-properties=""
+					data-field-name="fu_nome">
+					<div class="form-input">
+						<div class="form-group">
+							<label>Aprovado por:</label> <input type="text"
+								class="form-control" name="diretor" id="txtDiretor"
+								value="" placeholder="" data-size="small" analytics="true"
+								gooddataid="12">
+							<input type="hidden"
+								class="form-control" name="cod_diretor" id="txtCodDiretor"
+								value="" placeholder="" data-size="small">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-4 col-xs-12">
+				<div class="form-field" data-type="textbox" data-show-properties=""
+					data-field-name="fu_matricula">
+					<div class="form-input">
+						<div class="form-group">
+							<label>Aprovado em:</label> <input type="text"
+								class="form-control" name="data_aprov_diretor" id="txtDataAprovDiretor"
+								value="" placeholder="" data-size="small" analytics="true"
+								gooddataid="13">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-4 col-xs-12">
+				<div class="form-field" data-type="textbox" data-show-properties=""
+					data-field-name="fu_matricula">
+					<div class="form-input">
+						<div class="form-group">
+							<label>Data de Pagamento:</label> <input type="text"
+								class="form-control" name="data_pagamento" id="txtDataPagamento"
+								value="" placeholder="" data-size="small" analytics="true"
+								gooddataid="13">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript">
+		document.forms['createFormComponents'].fu_cpf.setAttribute('readonly', true);
+		document.forms['createFormComponents'].fu_matricula.setAttribute('readonly', true);
+		document.forms['createFormComponents'].fu_cargo.setAttribute('readonly', true);
+		document.forms['createFormComponents'].fu_lider.setAttribute('readonly', true);
+		//document.forms['createFormComponents'].valor_reembolso.setAttribute('readonly', true);
+		document.forms['createFormComponents'].diretor.setAttribute('readonly', true);
+		document.forms['createFormComponents'].data_aprov_diretor.setAttribute('readonly', true);
+		bloqueiaReembolso();
+		var empresa = null;
+		function bloqueiaReembolso(){
+			/* var input = document.querySelector("#_txtValorReembolso");
+			input.disabled = false; */
+			document.getElementById("txtValorReembolso").readOnly = true;
+		}
+		function liberaReembolso(){
+			/* var input = document.querySelector("#_txtValorReembolso");
+			input.disabled = false; */
+			document.getElementById("txtValorReembolso").readOnly = false;
+		}
+		
+		function inicializaFormulario() {
+			carregaFiliais();
+			$('select#ddlDepto').empty();
+			$('select#ddlNome').empty();
+			filtraDepartamento('inicio');
+			var matricula = $('#txtMatricula').val();
+			if (matricula != '') {
+				carregaCursos(matricula);
+			}
+			if (numProcesso != 0) {
+				$('#lblNumProcesso').html('<b>Nº: ' + numProcesso + '</b>');
+			}
+			if(atividade == 6){
+				liberaReembolso();	
+			}
+		}
+		
+		function carregaFiliais() {
+			var filtraUserCode = DatasetFactory.createConstraint("USER_CODE", userCode, userCode, ConstraintType.MUST);
+			var filtraDataKeyFiliais = DatasetFactory.createConstraint("DATA_KEY", 'AcessoFilialRH%', 'AcessoFilialRH%', 
+					ConstraintType.MUST);
+		  	var filtrosUDFiliais = new Array(filtraUserCode, filtraDataKeyFiliais);
+			var dsUserDataFiliais = DatasetFactory.getDataset("ds_Custom_User_Data", null, filtrosUDFiliais, null);
+			
+			if (dsUserDataFiliais.values.length > 0) {
+				$('select#ddlFilial').empty();
+				$('select#ddlFilial').append('<option value="" selected="selected">(Selecione uma Filial)</option>');
+				for (var i = 0; i < dsUserDataFiliais.values.length; i++) {
+					var value = dsUserDataFiliais.values[i].DATA_VALUE;
+					
+					/* var filtraFilial = DatasetFactory.createConstraint("FU_ES_COD_FILIAL", value+"%", value+"%", 
+							ConstraintType.MUST); */
+					var filtraFilial = DatasetFactory.createConstraint('FU_ES_COD_FILIAL-Charindex', "'" + value + "'", '', ConstraintType.MUST);
+					
+					var filtrosFiliais = new Array(filtraFilial);
+					var dsFiliais = DatasetFactory.getDataset("ds_FiliaisMIX", null, filtrosFiliais, null);
+					
+					var text = dsFiliais.values[0].ES_NOME;
+					$('select#ddlFilial').append('<option value="' + value + '" title="' + value + '">' + text + '</option>');
+				}
+			}
+		}
+		
+		function testeMesAno() {
+			var valor = $('#dtMesAno').val();
+			$('#hdMesAno').val(valor);
+		}
+
+		function filtraDepartamento(origem) {
+			var valor = $('#ddlFilial option:selected').val();
+			if (valor == undefined) {
+				valor = $('#hdCodigoFilial').val();
+				if(valor == "09.02" || valor == "09.01"){
+					$('#hddiretor').val("jpf7d9md1f38q3tp1538016128530");
+				}
+				else{
+					$('#hddiretor').val("mbarbosa_hyline.com.br");
+				}
+				
+			} else {
+				$('#hdCodigoFilial').val(valor);
+			}
+
+
+			if (valor != '') {
+				/* var filtraDepto = DatasetFactory.createConstraint(
+						"FU_ES_COD_FILIAL", "%" + valor + "%", "%" + valor
+								+ "%", ConstraintType.MUST, true); */
+				var filtraDepto = DatasetFactory.createConstraint('FU_ES_COD_FILIAL-Charindex', "'" + valor + "'", '', ConstraintType.MUST);
+				var filtros = new Array(filtraDepto);
+				var meuDS = DatasetFactory.getDataset("ds_DepartamentosMIX",null, filtros, null);
+// 				$('select#ddlNome').empty();
+// 				$('#txtCPF').val("");
+// 				$('select#ddlDepto').empty();
+// 				$('select#ddlCursos').empty();
+// 				$('#txtCodCurso').val("");
+// 				$('#txtValorMensalidade').val("");
+// 				$('#txtValorReembolso').val("");
+// 				$('#txtMatricula').val("");
+// 				$('#txtCargoConfianca').val("");
+// 				$('#txtCargo').val("");
+// 				$('#txtLider').val("");
+// 				$('#txtLiderMatricula').val("");
+
+				if (origem != 'inicio') {
+			    	$('select#ddlDepto').empty();
+			    	$('select#ddlNome').empty();
+			    }
+
+				$('select#ddlDepto')
+						.append(
+								'<option value="" selected="selected">(Selecione um Departamento)</option>');
+				for (var i = 0; i < meuDS.values.length; i++) {
+					var value = meuDS.values[i].FU_ES_ID_ESTRUTURA;
+					var text = meuDS.values[i].ES_NOME;
+					$('select#ddlDepto').append(
+							'<option value="' + text + '" title="' + value + '">'
+									+ text + '</option>');
+				}
+			} else {
+				$('select#ddlDepto').empty();
+				$('select#ddlNome').empty();
+				$('#txtCPF').val("");
+				$('select#ddlDepto').empty();
+				$('select#ddlCursos').empty();
+				$('#txtCodCurso').val("");
+				$('#txtValorMensalidade').val("");
+				$('#txtValorReembolso').val("");
+				$('#txtMatricula').val("");
+				$('#txtCargoConfianca').val("");
+				$('#txtCargo').val("");
+				$('#txtLider').val("");
+				$('#txtLiderMatricula').val("");
+			}
+		}
+
+		function filtraFuncionario() {
+			var valor = $('#ddlDepto option:selected').prop('title');
+
+			if (valor != '') {
+				var filtraDepto = DatasetFactory.createConstraint(
+						"FU_ES_ID_ESTRUTURA", "%" + valor + "%", "%" + valor
+								+ "%", ConstraintType.MUST, true);
+
+				var filtros = new Array(filtraDepto);
+				var meuDS = DatasetFactory.getDataset(
+						"ds_FuncionariosChefiaMIX", null, filtros, null);
+
+				$('select#ddlNome').empty();
+				$('select#ddlCursos').empty();
+				$('#txtCPF').val("");
+				$('#txtCodCurso').val("");
+				$('#txtValorMensalidade').val("");
+				$('#txtValorReembolso').val("");
+				$('#txtMatricula').val("");
+				$('#txtCargoConfianca').val("");
+				$('#txtCargo').val("");
+				$('#txtLider').val("");
+				$('#txtLiderMatricula').val("");
+
+				$('select#ddlNome')
+						.append(
+								'<option value="" selected="selected">(Selecione um Funcionário)</option>');
+				for (var i = 0; i < meuDS.values.length; i++) {
+					var value = meuDS.values[i].FU_MATRICULA;
+					var text = meuDS.values[i].PE_NOME;
+					$('select#ddlNome').append(
+							'<option value="' + text + '" title="' + value + '">'
+									+ text + '</option>');
+				}
+			} else {
+				$('select#ddlNome').empty();
+				$('select#ddlCursos').empty();
+				$('#txtCPF').val("");
+				$('#txtCodCurso').val("");
+				$('#txtValorMensalidade').val("");
+				$('#txtValorReembolso').val("");
+				$('#txtMatricula').val("");
+				$('#txtCargoConfianca').val("");
+				$('#txtCargo').val("");
+				$('#txtLider').val("");
+				$('#txtLiderMatricula').val("");
+			}
+		}
+
+		function carregaDadosFuncionario() {
+			var matricula = $('#ddlNome option:selected').prop('title');
+
+			if (matricula != '') {
+				var filtro = DatasetFactory.createConstraint("FU_MATRICULA",
+						matricula, matricula, ConstraintType.MUST, true);
+
+				var filtros = new Array(filtro);
+				var meuDS = DatasetFactory.getDataset(
+						"ds_FuncionariosChefiaMIX", null, filtros, null);
+
+				for (var i = 0; i < meuDS.values.length; i++) {
+					$('#txtMatricula').val(meuDS.values[i].FU_MATRICULA);
+					$('#txtCargoConfianca')
+							.val(meuDS.values[i].CARGO_CONFIANCA);
+					$('#txtCargo').val(meuDS.values[i].CAR_NOME);
+					$('#txtLider').val(meuDS.values[i].PE_EMAIL);
+					$('#txtCPF').val(meuDS.values[i].PE_CPF);
+					var matriculaLider = getIDUsuariobyMail(meuDS.values[i].PE_EMAIL);
+					if (matriculaLider == "") {
+						$('#txtLider').val(
+								"L�DER " + meuDS.values[i].PE_EMAIL
+										+ " N�O CADASTRADO NO FLUIG!");
+						$('#txtLiderMatricula').val("");
+					} else {
+						$('#txtLiderMatricula').val(
+								getIDUsuariobyMail(meuDS.values[i].PE_EMAIL));
+					}
+				}
+				
+				$('select#ddlCursos').empty();
+				$('#txtCodCurso').val("");
+				$('#txtValorMensalidade').val("");
+				$('#txtValorReembolso').val("");
+				
+				carregaCursos(matricula);
+			}
+		}
+		
+		function carregaDadosCurso() {
+			var matricula = $('#ddlNome option:selected').prop('title');
+			var curso = $('#ddlCursos option:selected').prop('title');
+
+			if (curso != '') {
+				$('#txtCodCurso').val(curso);
+				
+				// Carrega os dados do curso selecionado.
+				var filtroMatriculaCurso = DatasetFactory.createConstraint("FU_MATRICULA",
+						matricula, matricula, ConstraintType.MUST, true);
+				var filtroCodigoCurso = DatasetFactory.createConstraint("CRP_CODIGO", 
+						curso, curso, ConstraintType.MUST, true);
+
+				var filtrosC = new Array(filtroMatriculaCurso, filtroCodigoCurso);
+				var meuDSCursos = DatasetFactory.getDataset(
+						"ds_CursosPessoaBetweenMIX", null, filtrosC, null);
+
+				for (var i = 0; i < meuDSCursos.values.length; i++) {
+					$('#txtValorMensalidade').val(meuDSCursos.values[i].CRP_RESULTADO);
+				}
+			}
+		}
+		
+		function carregaCursos(matricula) {
+			// Carrega data atual
+			var today = new Date();
+		  	var year = today.getFullYear();
+		  	var month = today.getMonth() + 1 < 10 ? '0' + (today.getMonth() + 1) : (today.getMonth() + 1);
+		  	var day = today.getDate() < 10 ? '0' + today.getDate() : today.getDate();
+		  	var todayStr = year + '-' + month + '-' + day;
+			
+			// Carrega os cursos do funcion�rio
+			var filtroMatriculaCurso = DatasetFactory.createConstraint("FU_MATRICULA",
+					matricula, matricula, ConstraintType.MUST, true);
+			
+			var filtroDataCurso = DatasetFactory.createConstraint(todayStr, 
+					"CRP_DT_INI", "CRP_DT_FIM", ConstraintType.SHOULD);
+
+			var filtrosC = new Array(filtroMatriculaCurso, filtroDataCurso);
+			var meuDSCursos = DatasetFactory.getDataset(
+					"ds_CursosPessoaBetweenMIX", null, filtrosC, null);
+			
+			$('select#ddlCursos')
+				.append(
+						'<option value="" selected="selected">(Selecione um Curso)</option>');
+			for (var i = 0; i < meuDSCursos.values.length; i++) {
+				var value = meuDSCursos.values[i].CRP_CODIGO;
+				var text = meuDSCursos.values[i].Descricao_Curso;
+				$('select#ddlCursos').append(
+						'<option value="' + text + '" title="' + value + '">'
+								+ text + '</option>');
+			}
+		}
+			function carregaValorReembolso() {
+				var matricula = $('#ddlNome option:selected').prop('title');
+				if (matricula == undefined) {
+					matricula = $('#txtMatricula').val();
+				}
+				var curso = $('#ddlCursos option:selected').prop('title');
+				var valorMensalidade = parseFloat($('#txtValorMensalidade').val());
+	
+				if (curso != '') {
+					// Carrega os dados do curso selecionado.
+					var filtroMatriculaCurso = DatasetFactory.createConstraint("FU_MATRICULA",
+							matricula, matricula, ConstraintType.MUST, true);
+					var filtroCodigoCurso = DatasetFactory.createConstraint("CRP_CODIGO", 
+							curso, curso, ConstraintType.MUST, true);
+	
+					var filtrosC = new Array(filtroMatriculaCurso, filtroCodigoCurso);
+					var meuDSCursos = DatasetFactory.getDataset(
+							"ds_CursosPessoaBetweenMIX", null, filtrosC, null);
+	
+					for (var i = 0; i < meuDSCursos.values.length; i++) {
+						var valorReembolso = 0;
+						if (meuDSCursos.values[i].CRS_CODIGO == "1") {
+							if (valorMensalidade < 160) {
+								valorReembolso = valorMensalidade;
+							} else {
+								valorReembolso = 160;
+							}
+						} else {
+							valorReembolso = valorMensalidade * 0.5;
+						}
+						$('#txtValorReembolso').val(valorReembolso.toFixed(2));
+					}
+				}
+			}
+		
+		function getIDUsuariobyMail (userFunc){
+ 		    var filtro = DatasetFactory.createConstraint(
+					"mail", userFunc, userFunc, ConstraintType.MUST, true);
+
+			var filtros = new Array(filtro);
+			var meuDS = DatasetFactory.getDataset("colleague",
+					null, filtros, null);
+		    
+			if (meuDS.values.length > 0){
+				return meuDS.values[0]["colleaguePK.colleagueId"];
+			} else {
+				return "";
+			}
+		}
+
+		var keyDown = false, ctrl = 17, vKey = 86, Vkey = 118;
+
+		$(document).keydown(function(e) {
+			if (e.keyCode == ctrl)
+				keyDown = true;
+		}).keyup(function(e) {
+			if (e.keyCode == ctrl)
+				keyDown = false;
+		});
+
+		$('[data-only-numbers]').on('keypress', function(e) {
+			if (!e) {
+				var e = window.event;
+			}
+
+			if (e.keyCode > 0 && e.which == 0) {
+				return true;
+			}
+
+			if (e.keyCode) {
+				code = e.keyCode;
+			} else if (e.which) {
+				code = e.which;
+			}
+
+			if (code == 46) {
+				return true;
+			}
+
+			var character = String.fromCharCode(code);
+			if (character == '\b' || character == ' ' || character == '\t') {
+				return true;
+			}
+			if (keyDown && (code == vKey || code == Vkey)) {
+				return (character);
+			} else {
+				return (/[0-9]$/.test(character));
+			}
+		}).on('focusout', function(e) {
+			var $this = $(this);
+			if ($this.val() == "") {
+				return true;
+			}
+			$this.val($this.val().replace(/[^0-9\.]/g, ''));
+		}).on('paste', function(e) {
+			var $this = $(this);
+			setTimeout(function() {
+				$this.val($this.val().replace(/[^0-9\.]/g, ''));
+			}, 5);
+		});
+
+		$('.create-form-components')
+				.on(
+						'keyup',
+						'input[required="required"][type="text"], input[required="required"][type="number"], input[required="required"][type="date"], textarea[required="required"]',
+						function() {
+							validationFieldsForm($(this), $(this).parents(
+									'.form-field').data('type'));
+						});
+
+		$('.create-form-components')
+				.on(
+						'change',
+						'input[required="required"][type="checkbox"], input[required="required"][type="radio"], select[required="required"]',
+						function() {
+							validationFieldsForm($(this), $(this).parents(
+									'.form-field').data('type'));
+						});
+
+		function validationFieldsForm(field, type) {
+			if (type === "checkbox" || type === "radio") {
+				if (!field.is(':checked')) {
+					field.parents('.form-field').addClass('required');
+				} else {
+					field.parents('.form-field').removeClass('required');
+				}
+			} else {
+				if (!field.val().trim()) {
+					field.parents('.form-field').addClass('required');
+				} else {
+					field.parents('.form-field').removeClass('required');
+				}
+			}
+		}
+
+		var $zoomPreview = $(".zoom-preview");
+		if ($zoomPreview.length) {
+			$zoomPreview.parent().removeClass("input-group");
+			$zoomPreview.remove();
+		}
+
+		var ratings = $(".rating");
+		if (ratings.length > 0)
+			ratingStars(ratings);
+		function ratingStars(stars) {
+			$.each(stars, function(i, obj) {
+				var field = $(this).closest(".form-group")
+						.find(".rating-value");
+				var tgt = $(obj);
+				tgt.html("");
+				var rating = FLUIGC.stars(tgt, {
+					value : field.val()
+				});
+				rating.on("click", function(o) {
+					field.val($(this).index() + 1);
+				});
+			});
+		}
+
+		$.each($("[data-date]"), function(i, o) {
+			var id = $(o).attr("id");
+			FLUIGC.calendar("#" + id);
+		});
+
+		$(document).ready(function() {
+			$.each($("[data-date]"), function(i, o) {
+				var id = $(o).attr("id");
+				if ($("#" + id).attr("readonly")) {
+					$("#" + id).data('DateTimePicker').disable();
+				}
+			});
+		});
+		
+		function disablePullToRefresh() {
+			return true;
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+﻿<h2>Importa XML Fiscal</h2>
+
+<ul id="menu2">
+    @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-ImportaXMLFiscalCTe", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+    <li>@Html.ActionLink("Importa CT-e", "Index", "ImportaXMLFiscal")</li>
+    }
+    @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-ImportaXMLFiscalNFe", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+    <li>@Html.ActionLink("Importa NF-e", "NFe", "ImportaXMLFiscal")</li>
+    }
+</ul>

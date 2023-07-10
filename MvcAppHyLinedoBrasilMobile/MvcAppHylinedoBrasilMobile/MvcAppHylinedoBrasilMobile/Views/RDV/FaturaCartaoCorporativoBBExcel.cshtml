@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "";
+}
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Menu RDV", "MenuRDV", "RDV")
+    </p>
+    @Html.Image(@Url.Content("~/Content/images/bb_logo.jpg"), "RDV")
+    <h2>Faturas - Banco do Brasil</h2>
+</div>
+<br />
+
+<script language="javascript" type="text/javascript">
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mvalor4(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{8})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{5})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{4})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+</script>
+
+<h3 style="color:Red; background-color:White"><b>@ViewBag.Erro</b></h3>
+<h3 style="color:Blue;">@ViewBag.fileName</h3>
+
+@using (Html.BeginForm("ImportaFaturaCartaoCorporativoBBEXCEL", "RDV",
+    FormMethod.Post, new { enctype = "multipart/form-data", data_ajax = "false" }))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <b>IMPORTAÇÃO DA FATURA</b>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Informe o Valor da Cotação do Dólar da Fatura a ser importada:</b>
+        </li>
+        <li data-role="fieldcontain">
+            @Html.TextBox("cotacaoDolar", Session["cotacaoDolarRDV"],
+              new { @onkeyup = "mascara(this, mvalor4);", @id = "cotacaoDolar" })
+        </li>
+        <li data-role="fieldcontain">
+            <b>Selecione o arquivo a ser Importado:</b>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="file" name="file" />
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Importar" id="importar"/>
+        </li>
+    </ul>
+}
+
+<br />
+
+@using (Html.BeginForm("EnviarEmailsFaturasBB", "RDV",
+    FormMethod.Post, new { enctype = "multipart/form-data", data_ajax = "false" }))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <b>ENVIO DE E-MAILS P/ OS FUNCIONÁRIOS COM CARTÃO CORP. BANCO DO BRASIL</b>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Selecione para qual empresa será enviado o e-mail:</b>
+        </li>
+        <li data-role="fieldcontain">
+            @Html.DropDownList(
+                "EmpresaFaturaBB",
+                (List<SelectListItem>)Session["ListaEmpresasRDV"],
+                new { @id = "ddlEmpresaFaturaBB" })
+        </li>
+        <li data-role="fieldcontain">
+            <b>Selecione o Mês / Ano da Fatura do Banco do Brasil:</b>
+        </li>
+        <li data-role="fieldcontain">
+            @Html.DropDownList(
+                "AnoMesFaturaBB",
+                (List<SelectListItem>)Session["ListaAnoMesFaturaBBRDV"],
+                new { @id = "ddlAnoMesFaturaBB" })
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Enviar" id="enviar"/>
+        </li>
+    </ul>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

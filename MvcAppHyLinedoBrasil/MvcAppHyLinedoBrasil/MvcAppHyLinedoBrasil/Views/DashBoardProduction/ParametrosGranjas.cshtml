@@ -1,0 +1,30 @@
+﻿@model MvcAppHyLinedoBrasil.Models.DropDownListDashBoard
+@using MvcAppHyLinedoBrasil.Models
+    <script type="text/javascript">
+        $(function () {
+            $("#dataInicial").datepicker({ dateFormat: "dd/mm/yy" });
+        });
+        $(function () {
+            $("#dataFinal").datepicker({ dateFormat: "dd/mm/yy" });
+        });
+    </script>
+        <p align="center">
+            Informe os parâmetros a seguir:
+            <br />
+            <br />
+            Período: @Html.TextBox("dataInicial", Session["sDataInicial"]) à @Html.TextBox("dataFinal", Session["sDataFinal"])
+            <br />
+            Selecione a Linhagem:
+            @Html.DropDownListFor(
+            d => d.Linhagem,
+            (IEnumerable<SelectListItem>)Session["Linhagens"])
+            Selecione a Fazenda:
+            @Html.DropDownListFor(
+            d => d.Fazenda,
+            (IEnumerable<SelectListItem>)Session["Fazendas"])
+            Selecione a Granja:
+            @Html.DropDownListFor(
+            d => d.Granja,
+            (IEnumerable<SelectListItem>)Session["Granjas"])
+            <input id="Anual" type="submit" value="Atualizar Gráfico" />
+        </p>

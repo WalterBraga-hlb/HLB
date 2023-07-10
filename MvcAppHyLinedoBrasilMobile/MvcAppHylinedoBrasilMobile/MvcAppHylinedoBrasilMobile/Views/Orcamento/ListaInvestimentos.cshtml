@@ -1,0 +1,173 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+    
+    List<MvcAppHylinedoBrasilMobile.Models.Investimento> listaInvestimentos =
+        (List<MvcAppHylinedoBrasilMobile.Models.Investimento>)Session["ListaInvestimentos"];
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities apolo = new MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities();
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+}
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para o Menu de Orçamentos", "MenuOrcamento", "Orcamento", 
+                null,
+                new { @title = "Clique aqui para voltar para o Menu de Orçamentos", @class = "budget" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/chart.png"), "Investimento")
+    <h2>Lista de Investimentos</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+@using (Html.BeginForm("SearchInvestimentos", "Orcamento"))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <b>Ano Fiscal:</b>
+            <div class="editor-field">
+                @Html.DropDownList(
+                    "AnoFiscal",
+                    (List<SelectListItem>)Session["FiltroListaAnoFiscalInv"])
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Departamento:</b>
+            <div class="editor-field">
+                @Html.DropDownList(
+                    "Departamento",
+                    (List<SelectListItem>)Session["FiltroListaDepartamentosInv"])
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Pesquisar" />
+        </li>
+    </ul>
+}
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Investimentos</li>
+    <li>
+        @Html.ActionLink("Adicionar Novo Investimento", "CreateInvestimento", "Orcamento",
+            null,
+            new { @class = "add", @title = "Clique aqui para inserir um novo investimento" })
+    </li>
+</ul>
+<br />
+<div class="editor-label"  align="center">
+    <table style="width: 90%">
+        <tr style="font-size: xx-small; background-color:Gray">
+            <th colspan="6" style="font-size: xx-small; background-color:Gray">
+                <u>Legenda de Ações:</u>
+            </th>
+        </tr>
+        <tr style="font-size: xx-small">
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/kjots.png"), "")
+                <i>Alterar Investimento</i>
+            </td>
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/button_cancel.png"), "")
+                <i>Excluir Investimento</i>
+            </td>
+        </tr>
+    </table>
+</div>
+<br />
+<div id="divTabelaIndexPV" style="overflow:auto" >
+<table id="tabelaIndexPV" class="ajustetabelaIndexPV">
+    <tbody class="ajustetabelaIndexPV">
+    <tr class="ajustetabelaIndexPV">
+        <th class="ajustetabelaIndexPV">
+            Nº Projeto
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Nome
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Departamento
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Valor
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Ano Fiscal
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Usuário
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Data Cadastro
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Ações
+        </th>
+    </tr>
+@foreach (var item in listaInvestimentos)
+{
+    string anoFiscal = item.AnoMesInicial.ToString().Substring(0, 4) + "-" + item.AnoMesFinal.ToString().Substring(0, 4);
+
+    string nomeDepartamento = apolo.FUNCIONARIO.Where(w => w.FuncCod == item.Departamento).FirstOrDefault().FuncNome;
+    //string nomeResponsavel = apolo.FUNCIONARIO.Where(w => w.FuncCod == item.Responsavel).FirstOrDefault().FuncNome;
+
+    MvcAppHylinedoBrasilMobile.Models.AnoFiscal anoFiscalObj = hlbapp.AnoFiscal.Where(w => w.AnoFiscal1 == anoFiscal).FirstOrDefault();
+    
+    decimal valores = hlbapp.Investimento_Mes.Where(w => w.IDInvestimento == item.ID).ToList().Sum(s => s.Saldo)
+        + hlbapp.Investimento_Mes.Where(w => w.IDInvestimento == item.ID).ToList().Sum(s => s.ValorUtilizado);
+    
+    <tr class="ajustetabelaIndexPV">
+        <td class="ajustetabelaIndexPV">
+            @(item.NumeroProjeto)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(item.NomeProjeto)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(nomeDepartamento)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(String.Format("{0:C}", item.ValorAprovado))
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(anoFiscal)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(item.Usuario)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(Convert.ToDateTime(item.DataHoraCadastro).ToString("dd/MM/yy HH:ss"))
+        </td>
+        <td>
+            @if ((anoFiscalObj.FechaAlteracaoInvestimento == "Não" && item.Origem == "Alemanha")
+                || (item.Origem == "Manual" && valores == 0))
+            {
+            <table>
+                <tr>
+                    <td align="center">
+                        @Html.ActionLink("Edit", "EditInvestimento",
+                            new { id = item.ID },
+                                new { @class = "edit", @title = "Clique aqui para Alterar o Investimento" })
+                    </td>
+                    @if (item.Origem == "Manual" && item.ValorAprovado == 0)
+                    {
+                    <td align="center">
+                        @Html.ActionLink("Delete", "ConfirmaDeleteInvestimento",
+                            new { id = item.ID },
+                                     new { @class = "delete", @title = "Clique aqui para Excluir o Investimento" })
+                    </td>
+                    }
+                </tr>
+            </table>
+            }
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

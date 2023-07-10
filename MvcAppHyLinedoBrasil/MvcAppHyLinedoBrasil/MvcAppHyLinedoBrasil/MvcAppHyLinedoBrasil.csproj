@@ -1,0 +1,2405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8A184B2F-20FB-4DA6-97FC-55AA5A7943AF}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MvcAppHyLinedoBrasil</RootNamespace>
+    <AssemblyName>MvcAppHyLinedoBrasil</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\MvcAppHyLinedoBrasil.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\MvcAppHyLinedoBrasil.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=19.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.19.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.DataSetConversion">
+      <HintPath>..\..\..\..\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\CrystalDecisions.ReportAppServer.DataSetConversion.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\CrystalDecisions.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\CrystalDecisions.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.20.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.20.0\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ImportaCHICService">
+      <HintPath>..\..\..\ImportacaoService\ImportacaoService\ImportaCHICService\ImportaCHICService\bin\Debug\ImportaCHICService.exe</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Access, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Access.15.0.4420.1017\lib\net20\Microsoft.Office.Interop.Access.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.14.0.0.1\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Outlook.15.0.4797.1004\lib\net20\Microsoft.Office.Interop.Outlook.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.PowerPoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.PowerPoint.15.0.4420.1018\lib\net20\Microsoft.Office.Interop.PowerPoint.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <HintPath>..\packages\Microsoft.Office.Interop.Word.12.0.4518.1014\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\System32\inetsrv\Microsoft.Web.Administration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="NetOffice, Version=1.7.4.11, Culture=neutral, PublicKeyToken=7292cd2a8b1e0703, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOffice.Core.1.7.4.11\lib\net40\NetOffice.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Office, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Excel.14.0.4760.1000\lib\net20\Office.dll</HintPath>
+    </Reference>
+    <Reference Include="OfficeApi, Version=1.7.4.11, Culture=neutral, PublicKeyToken=7292cd2a8b1e0703, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOffice.Core.1.7.4.11\lib\net40\OfficeApi.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="PdfSharp">
+      <HintPath>..\packages\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SautinSoft.ExcelToPdf, Version=5.4.1.20, Culture=neutral, PublicKeyToken=239046b8a1e8c07b, processorArchitecture=MSIL">
+      <HintPath>..\packages\sautinsoft.exceltopdf.5.4.1.20\lib\net40\SautinSoft.ExcelToPdf.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.OracleClient">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.DirectoryServices">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.DirectoryServices.AccountManagement">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.DirectoryServices.Protocols">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Abstractions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.EnterpriseServices">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="VBIDEApi, Version=1.7.4.11, Culture=neutral, PublicKeyToken=7292cd2a8b1e0703, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOffice.Core.1.7.4.11\lib\net40\VBIDEApi.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Visualization">
+      <HintPath>Content\Release.1.3.0.39301\bin\Visualization.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="WordApi, Version=1.7.4.11, Culture=neutral, PublicKeyToken=7292cd2a8b1e0703, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOffice.Word.1.7.4.11\lib\net40\WordApi.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classe\EggInv.cs" />
+    <Compile Include="Classe\HatcheryEgg.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AnaliseArquivoDDAController.cs" />
+    <Compile Include="Controllers\DashBoardProductionController.cs" />
+    <Compile Include="Controllers\Default1Controller.cs" />
+    <Compile Include="Controllers\DiarioProducaoOvosController.cs" />
+    <Compile Include="Controllers\DiarioProducaoRacaoController.cs" />
+    <Compile Include="Controllers\FormulaPPCPController.cs" />
+    <Compile Include="Controllers\FormularioPedidosController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImportaDadosAssistTecnicaController.cs" />
+    <Compile Include="Controllers\ImportaPedidosCHICController.cs" />
+    <Compile Include="Controllers\ImportaXMLFiscalController.cs" />
+    <Compile Include="Controllers\RelatoriosComerciaisController.cs" />
+    <Compile Include="Controllers\RelatoriosProducaoController.cs" />
+    <Compile Include="Data\CHICDataSet.cs">
+      <DependentUpon>CHICDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CHICDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CHICDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CHICOracleDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CHICOracleDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CHICParentDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CHICParentDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Data\FLIPDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FLIPDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\FISCAL_ITEM_NF\FISCAL_ITEM_NF1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FISCAL_ITEM_NF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\FISCAL_ITEM_NF\FISCAL_NF.cs">
+      <DependentUpon>FISCAL_ITEM_NF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\HATCHERY_EGG_DATA\CONF_MOV_ESTQ.cs">
+      <DependentUpon>HATCHERY_EGG_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\HATCHERY_EGG_DATA\CONF_MOV_ESTQ_VALORES.cs">
+      <DependentUpon>HATCHERY_EGG_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\HATCHERY_EGG_DATA\CTRL_LOTE_LOC_ARMAZ_WEB.cs">
+      <DependentUpon>HATCHERY_EGG_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\HATCHERY_EGG_DATA\HATCHERY_EGG_DATA1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HATCHERY_EGG_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\HATCHERY_EGG_DATA\HATCHERY_FLOCK_SETTER_DATA.cs">
+      <DependentUpon>HATCHERY_EGG_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\HATCHERY_EGG_DATA\HATCHERY_ORDER_DATA.cs">
+      <DependentUpon>HATCHERY_EGG_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\HATCHERY_EGG_DATA\HATCHERY_ORDER_FLOCK_DATA.cs">
+      <DependentUpon>HATCHERY_EGG_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\HATCHERY_EGG_DATA\HATCHERY_ORDER_ROTULO_DATA.cs">
+      <DependentUpon>HATCHERY_EGG_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\HATCHERY_EGG_DATA\HATCHERY_ORDER_VACC_DATA.cs">
+      <DependentUpon>HATCHERY_EGG_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\HATCHERY_EGG_DATA\HATCHERY_TRAN_DATA.cs">
+      <DependentUpon>HATCHERY_EGG_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\HATCHERY_EGG_DATA\LayoutDiarioExpedicaos.cs">
+      <DependentUpon>HATCHERY_EGG_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\HATCHERY_EGG_DATA\LOG_HATCHERY_EGG_DATA.cs">
+      <DependentUpon>HATCHERY_EGG_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\HATCHERY_EGG_DATA\LOG_HATCHERY_FLOCK_SETTER_DATA.cs">
+      <DependentUpon>HATCHERY_EGG_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\HATCHERY_EGG_DATA\LOG_LayoutPedidoPlanilhas.cs">
+      <DependentUpon>HATCHERY_EGG_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\HATCHERY_EGG_DATA\TIPO_CLASSFICACAO_OVO_02.cs">
+      <DependentUpon>HATCHERY_EGG_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\HATCHERY_EGG_DATA\VU_Pedidos_Vendas_CHIC_Matrizes.cs">
+      <DependentUpon>HATCHERY_EGG_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HLBAPPDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HLBAPPDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FormulaPPCP\InsumoFormulaRacao.cs" />
+    <Compile Include="Models\Apolo\ApoloDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApoloDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\ApoloModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApoloModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\ApoloModel.Context.Extensions.cs">
+      <DependentUpon>ApoloModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\ApoloModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApoloModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\ApoloModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApoloModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\CIDADE.cs">
+      <DependentUpon>ApoloModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\EMPRESA_FILIAL.cs">
+      <DependentUpon>ApoloModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\EMP_FILIAL_CERTIFICACAO.cs">
+      <DependentUpon>ApoloModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\EMP_FIL_USUARIO.cs">
+      <DependentUpon>ApoloModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\ENTIDADE.cs">
+      <DependentUpon>ApoloModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\ENTIDADE1.cs">
+      <DependentUpon>ApoloModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\FUNCIONARIO.cs">
+      <DependentUpon>ApoloModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\ITEM_NF.cs">
+      <DependentUpon>ApoloModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\NOTA_FISCAL.cs">
+      <DependentUpon>ApoloModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\PED_VENDA1.cs">
+      <DependentUpon>ApoloModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\PRODUTO.cs">
+      <DependentUpon>ApoloModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\PRODUTO1.cs">
+      <DependentUpon>ApoloModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\SUP_VENDEDOR.cs">
+      <DependentUpon>ApoloModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\VENDEDOR.cs">
+      <DependentUpon>ApoloModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\VEND_NF.cs">
+      <DependentUpon>ApoloModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\VU_Lista_Entregas.cs">
+      <DependentUpon>ApoloModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apolo\WORKFLOW_EMAIL.cs">
+      <DependentUpon>ApoloModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CIDADE.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CLASSE_REC_DESP.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CLASSE_REC_DESP_CENTRO_CTRL.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CLASSE_REC_DESP_CTA_CONTAB.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CLAS_FISCAL.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CLAS_FISCAL_AUX.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CLAS_FISCAL_COFINS.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CLAS_FISCAL_PIS.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\COND_PAG.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\COND_PAG_PED_COMP.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\DiarioProducaoRacaoModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiarioProducaoRacaoModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\DiarioProducaoRacaoModel.Context.Extensions.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\DiarioProducaoRacaoModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\ESTQ_LOC_ARMAZ.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\FIC_TEC_PROD.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\ITEM_NEC_PLAN_PRODUC.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\ITEM_PLAN_PRODUC.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\ITEM_REQ_MAT.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\LOC_ARMAZ.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\MARCA_PROD.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\NEC_PLAN_PRODUC.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\OPER_ORD_PRODUC.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\OPER_ORD_PRODUC_FUNC.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\ORD_PRODUC.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\PLAN_PRODUC.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\PLAN_PRODUC_FIC_TEC.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\PRODUTO.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\PRODUTO1.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\PROD_GRUPO_SUBGRUPO.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\PROD_UNID_MED.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\RATEIO_REQ_MAT.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\REQ_MAT.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\REQ_MAT_CLASSE_REC_DESP.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\SALDO_ESTQ_DATA.cs">
+      <DependentUpon>DiarioProducaoRacaoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DropDownListDashBoard.cs" />
+    <Compile Include="Models\DropDownListParametros.cs" />
+    <Compile Include="Models\EMPRESA_FILIAL.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ENTIDADE1.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entrega.cs" />
+    <Compile Include="Models\ENT_CATEG.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ENT_CONTATO.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ENT_FONE.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ENT_WEB.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EQUIPAMENTO.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FLUIG\Fluig_Teste.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Fluig_Teste.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FLUIG\Fluig_Teste.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Fluig_Teste.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FLUIG\Fluig_Teste.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Fluig_Teste.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FLUIG\VW_Manutencao_Preventiva.cs">
+      <DependentUpon>Fluig_Teste.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FormulaPPCP\DESCR_TECN_PROD.cs">
+      <DependentUpon>FormulaPPCPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FormulaPPCP\PRODUTO.cs">
+      <DependentUpon>FormulaPPCPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FormulaPPCP\PRODUTO1.cs">
+      <DependentUpon>FormulaPPCPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FormulaPPCP\PROD_UNID_MED1.cs">
+      <DependentUpon>FormulaPPCPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\Configuracao_Importa_NFe.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\Dados_Assistencia_Tecnica.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\Dados_Loggers.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\Empresas.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\Entity.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\Envio_Confirmacao.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\Envio_Confirmacao_Email.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\Envio_Confirmacao_PV.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\HLBAPPModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HLBAPPModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\HLBAPPModel.Context.Extensions.cs">
+      <DependentUpon>HLBAPPModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\HLBAPPModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\HLBAPPModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HLBAPPModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\Lancamentos_Classificadora_Excel_02.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\Languages.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\LayoutDDASegmentoGs_EnvioEmailFiscal.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\LINHAGEM_CONCORRENTE.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\LINHAGEM_GRUPO.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\LOG_Atualizacao_CHIC_SQLServer.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\LOG_Importacao_Dados_Assist_Tec.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\LOG_Prog_Diaria_Transp_Pedidos.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\LOG_Prog_Diaria_Transp_Veiculos.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\LOG_Prog_Diaria_Transp_Veiculos_TARGET.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\Lotes_Clientes.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\PAIS.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\PDI.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\Prog_Diaria_Transp_Pedidos.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\Prog_Diaria_Transp_Veiculos.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\Recebimento_Documento.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\Tabela_Precos.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\TIPO_CLASSFICACAO_OVO.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HLBAPP\VU_Resumo_Dados_Lotes_Clientes.cs">
+      <DependentUpon>HLBAPPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICMS_MOV_ESTQ.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ITEM_MOV_ESTQ.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ITEM_OCOR.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ITEM_PED_COMP.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LayoutPedidoPlanilha.cs" />
+    <Compile Include="Models\LOC_ARMAZ_ITEM_MOV_ESTQ.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoginAPIWindows.cs" />
+    <Compile Include="Models\MOTIVO_OCOR.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MOV_ESTQ.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MOV_ESTQ_CCTRL.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MOV_ESTQ_CLASSE_REC_DESP.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NAT_OPERACAO.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OBJETO.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OCORRENCIA.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PAIS.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PARC_PAG_MOV_ESTQ.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PARC_PAG_PED_COMP.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PED_COMP.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRODUTO.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRODUTO1.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PROD_CONTA_CONTAB.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RATEIO_MOV_ESTQ.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SequenciaLinha.cs" />
+    <Compile Include="Models\Teste_Gera_Ocor_Auto.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VENDEDOR.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VEND_ENT.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VU_Teste_Gera_Ocor_Auto.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\XML\det.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DocsExport\PERU\Atestado_PERU.cs">
+      <DependentUpon>Atestado_PERU.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\DocsExport\PERU\CZI_PERU.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CZI_PERU.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reports\DocsExport\TabelaQtdesPorGranja.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TabelaQtdesPorGranja.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reports\DocsExport\VacinasGenitores1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VacinasGenitores.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reports\DocsExport\VacinasPintos1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VacinasPintos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Views\ImportaPedidosCHIC\ConfirmacaoPedido_BR.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConfirmacaoPedido_BR.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Views\ImportaPedidosCHIC\ConfirmacaoPedido_LB.cs">
+      <DependentUpon>ConfirmacaoPedido_LB.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Views\ImportaPedidosCHIC\ConfirmacaoPedido_HN.cs">
+      <DependentUpon>ConfirmacaoPedido_HN.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Web References\br.com.hyline.fluigteste\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.com.hyline.fluig\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.com.transportesbra.dev\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\ControleQualidadeCargas.cs">
+      <DependentUpon>ControleQualidadeCargas.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebForms\ControleQualidadeCargas_Interno.cs">
+      <DependentUpon>ControleQualidadeCargas_Interno.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="WebForms\RelDiarioProducaoAvos.aspx.cs">
+      <DependentUpon>RelDiarioProducaoAvos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\RelDiarioProducaoAvos.aspx.designer.cs">
+      <DependentUpon>RelDiarioProducaoAvos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\RelRastreabilidade.aspx.cs">
+      <DependentUpon>RelRastreabilidade.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\RelRastreabilidade.aspx.designer.cs">
+      <DependentUpon>RelRastreabilidade.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\FichaDescrLote.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FichaDescrLote.rpt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebForms\NascimentoPorSetter.aspx.cs">
+      <DependentUpon>NascimentoPorSetter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\NascimentoPorSetter.aspx.designer.cs">
+      <DependentUpon>NascimentoPorSetter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\Incubacao_Teste.aspx.cs">
+      <DependentUpon>Incubacao_Teste.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\Incubacao_Teste.aspx.designer.cs">
+      <DependentUpon>Incubacao_Teste.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\DadosResumidosPorLote.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DadosResumidosPorLote.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Data\Conexao.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\EggInvData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\FLIPDataSet.cs">
+      <DependentUpon>FLIPDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\FISCAL_ITEM_NF\FISCAL_ITEM_NF.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FISCAL_ITEM_NF.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\FISCAL_ITEM_NF\FISCAL_ITEM_NF.Context.Extensions.cs">
+      <DependentUpon>FISCAL_ITEM_NF.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\FISCAL_ITEM_NF\FISCAL_ITEM_NF.cs">
+      <DependentUpon>FISCAL_ITEM_NF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\FISCAL_ITEM_NF\FISCAL_ITEM_NF.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FISCAL_ITEM_NF.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\HATCHERY_EGG_DATA\HATCHERY_EGG_DATA.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HATCHERY_EGG_DATA.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\HATCHERY_EGG_DATA\HATCHERY_EGG_DATA.Context.Extensions.cs">
+      <DependentUpon>HATCHERY_EGG_DATA.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\HATCHERY_EGG_DATA\HATCHERY_EGG_DATA.cs">
+      <DependentUpon>HATCHERY_EGG_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\HATCHERY_EGG_DATA\HATCHERY_EGG_DATA.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HATCHERY_EGG_DATA.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\PAT_BEM\media.cs">
+      <DependentUpon>PAT_BEM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\PAT_BEM\PAT_BEM.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PAT_BEM.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\PAT_BEM\PAT_BEM.Context.Extensions.cs">
+      <DependentUpon>PAT_BEM.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\PAT_BEM\PAT_BEM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PAT_BEM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\PAT_BEM\PAT_BEM.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PAT_BEM.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="EntityWebForms\Infra\MyHelpers.cs" />
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ArquivosLidos.cs" />
+    <Compile Include="Models\COB_BANC.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiarioProducaoRacao\DiarioProducaoRacaoModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiarioProducaoRacaoModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DOC_FIN.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EggInvModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ENTIDADE.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FormulaPPCP\FIC_TEC_PROD.cs">
+      <DependentUpon>FormulaPPCPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FormulaPPCP\FIC_TEC_PROD_DATA.cs">
+      <DependentUpon>FormulaPPCPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinanceiroModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinanceiroModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinanceiroModel.Context.Extensions.cs">
+      <DependentUpon>FinanceiroModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinanceiroModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinanceiroModel.Designer.cs">
+      <DependentUpon>FinanceiroModel.edmx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Models\FormulaPPCP\FormulaPPCPModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FormulaPPCPModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FormulaPPCP\FormulaPPCPModel.Context.Extensions.cs">
+      <DependentUpon>FormulaPPCPModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FormulaPPCP\FormulaPPCPModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FormulaPPCPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FormulaPPCP\FormulaPPCPModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FormulaPPCPModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ITEM_COB_BANC.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LayoutDb.cs" />
+    <Compile Include="Models\LayoutDDASegmentoG.cs" />
+    <Compile Include="Models\LayoutOrdemProducao.cs" />
+    <Compile Include="Models\Office.cs" />
+    <Compile Include="Models\PARC_DOC_FIN.cs">
+      <DependentUpon>FinanceiroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FormulaPPCP\PROD_OPER.cs">
+      <DependentUpon>FormulaPPCPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FormulaPPCP\PROD_OPER_ITEM.cs">
+      <DependentUpon>FormulaPPCPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebForms\ControleQualidadeCargas_Antigo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControleQualidadeCargas_Antigo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="WebForms\ControleQualidadeCargasPintos.aspx.cs">
+      <DependentUpon>ControleQualidadeCargasPintos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\ControleQualidadeCargasPintos.aspx.designer.cs">
+      <DependentUpon>ControleQualidadeCargasPintos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\DadosResumidoPorLote.aspx.cs">
+      <DependentUpon>DadosResumidoPorLote.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\DadosResumidoPorLote.aspx.designer.cs">
+      <DependentUpon>DadosResumidoPorLote.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\Incubacao.aspx.cs">
+      <DependentUpon>Incubacao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\Incubacao.aspx.designer.cs">
+      <DependentUpon>Incubacao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\EFD_PisCofins.aspx.cs">
+      <DependentUpon>EFD_PisCofins.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\EFD_PisCofins.aspx.designer.cs">
+      <DependentUpon>EFD_PisCofins.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\EFD_PisCofins_F130.aspx.cs">
+      <DependentUpon>EFD_PisCofins_F130.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\EFD_PisCofins_F130.aspx.designer.cs">
+      <DependentUpon>EFD_PisCofins_F130.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\EFD_PisCofins_Nfs_Saida.aspx.cs">
+      <DependentUpon>EFD_PisCofins_Nfs_Saida.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\EFD_PisCofins_Nfs_Saida.aspx.designer.cs">
+      <DependentUpon>EFD_PisCofins_Nfs_Saida.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\MapaIncubacao.aspx.cs">
+      <DependentUpon>MapaIncubacao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\MapaIncubacao.aspx.designer.cs">
+      <DependentUpon>MapaIncubacao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\ProgDiarioTransp.aspx.cs">
+      <DependentUpon>ProgDiarioTransp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\ProgDiarioTransp.aspx.designer.cs">
+      <DependentUpon>ProgDiarioTransp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\Rastreabilidade.aspx.cs">
+      <DependentUpon>Rastreabilidade.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\Rastreabilidade.aspx.designer.cs">
+      <DependentUpon>Rastreabilidade.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\RelatoriosFLIP.aspx.cs">
+      <DependentUpon>RelatoriosFLIP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\RelatoriosFLIP.aspx.designer.cs">
+      <DependentUpon>RelatoriosFLIP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\RelConfIncWebXFlip.aspx.cs">
+      <DependentUpon>RelConfIncWebXFlip.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\RelConfIncWebXFlip.aspx.designer.cs">
+      <DependentUpon>RelConfIncWebXFlip.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\RelControleQualidadeCargas.aspx.cs">
+      <DependentUpon>RelControleQualidadeCargas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\RelControleQualidadeCargas.aspx.designer.cs">
+      <DependentUpon>RelControleQualidadeCargas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\RelDadosResumidosPorLote.aspx.cs">
+      <DependentUpon>RelDadosResumidosPorLote.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\RelDadosResumidosPorLote.aspx.designer.cs">
+      <DependentUpon>RelDadosResumidosPorLote.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\RelDEOGranja.aspx.cs">
+      <DependentUpon>RelDEOGranja.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\RelDEOGranja.aspx.designer.cs">
+      <DependentUpon>RelDEOGranja.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\RelDiarioProducao.aspx.cs">
+      <DependentUpon>RelDiarioProducao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\RelDiarioProducao.aspx.designer.cs">
+      <DependentUpon>RelDiarioProducao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\RelEggInv.aspx.cs">
+      <DependentUpon>RelEggInv.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\RelEggInv.aspx.designer.cs">
+      <DependentUpon>RelEggInv.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\RelEstoqueOvos.aspx.cs">
+      <DependentUpon>RelEstoqueOvos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\RelEstoqueOvos.aspx.designer.cs">
+      <DependentUpon>RelEstoqueOvos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\RelNascEmbrio.aspx.cs">
+      <DependentUpon>RelNascEmbrio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\RelNascEmbrio.aspx.designer.cs">
+      <DependentUpon>RelNascEmbrio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\TransferenciaOvos.aspx.cs">
+      <DependentUpon>TransferenciaOvos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\TransferenciaOvos.aspx.designer.cs">
+      <DependentUpon>TransferenciaOvos.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\icons\excel.png" />
+    <Content Include="Content\icons\logo_ew.ico" />
+    <Content Include="Content\images\add.png" />
+    <Content Include="Content\images\airplane.png" />
+    <Content Include="Content\images\ajax-loading.gif" />
+    <Content Include="Content\images\apply.png" />
+    <Content Include="Content\images\aviso.png" />
+    <Content Include="Content\images\button_cancel.png" />
+    <Content Include="Content\images\cifrao.png" />
+    <Content Include="Content\images\copy.png" />
+    <Content Include="Content\images\duplicar.png" />
+    <Content Include="Content\images\Gnome-View-Refresh-32.png" />
+    <Content Include="Content\images\kjots.png" />
+    <Content Include="Content\images\Logo.png" />
+    <Content Include="Content\images\logo_ave.png" />
+    <Content Include="Content\images\Logo_BR.png" />
+    <Content Include="Content\images\Logo_EW.png" />
+    <Content Include="Content\images\Logo_HLB_Horizontal.jpg" />
+    <Content Include="Content\images\Logo_HN.png" />
+    <Content Include="Content\images\Logo_ILD.ico" />
+    <Content Include="Content\images\Logo_ILD.png" />
+    <Content Include="Content\images\Logo_LB.png" />
+    <Content Include="Content\images\Logo_PL.png" />
+    <Content Include="Content\images\Nao.png" />
+    <Content Include="Content\images\Next_16x16.gif" />
+    <Content Include="Content\images\packages2.png" />
+    <Content Include="Content\images\Sim.png" />
+    <Content Include="Content\redmond\images\animated-overlay.gif" />
+    <Content Include="Content\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Content\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Content\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Content\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Content\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Content\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Content\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Content\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Content\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Content\redmond\jquery-ui-1.10.3.custom.css" />
+    <Content Include="Content\redmond\jquery-ui-1.10.3.custom.min.css" />
+    <Content Include="Content\Release.1.3.0.39301\bin\Visualization.dll" />
+    <Content Include="Content\Release.1.3.0.39301\samples\vis2.aspx" />
+    <Content Include="Content\Release.1.3.0.39301\samples\visdates.aspx" />
+    <Content Include="Content\Release.1.3.0.39301\samples\visualization.aspx" />
+    <Content Include="Content\Release.1.3.0.39301\samples\visualizationclient.htm" />
+    <Content Include="Content\themes\ThemeChartHyline.xml" />
+    <Content Include="Content\ui.all.css" />
+    <Content Include="Content\ui.base.css" />
+    <Content Include="Content\ui.core.css" />
+    <Content Include="Content\ui.progressbar.css" />
+    <Content Include="Content\ui.theme.css" />
+    <Content Include="Content\Uploadify\jquery.uploadify.js" />
+    <Content Include="Content\Uploadify\jquery.uploadify.min.js" />
+    <Content Include="Content\Uploadify\uploadify-cancel.png" />
+    <Content Include="Content\Uploadify\uploadify.css" />
+    <Content Include="Content\Uploadify\uploadify.swf" />
+    <Content Include="Global.asax" />
+    <Content Include="Models\DiarioProducaoRacao\DiarioProducaoRacaoModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DiarioProducaoRacaoModel.Context.cs</LastGenOutput>
+      <DependentUpon>DiarioProducaoRacaoModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\DiarioProducaoRacao\DiarioProducaoRacaoModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DiarioProducaoRacaoModel.cs</LastGenOutput>
+      <DependentUpon>DiarioProducaoRacaoModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\FLUIG\Fluig_Teste.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Fluig_Teste.Context.cs</LastGenOutput>
+      <DependentUpon>Fluig_Teste.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\FLUIG\Fluig_Teste.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Fluig_Teste.edmx</DependentUpon>
+      <LastGenOutput>Fluig_Teste.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\Gruntfile.js" />
+    <Content Include="Scripts\jquery-1.3.2-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.3.2.js" />
+    <Content Include="Scripts\jquery-1.4.2.min.js" />
+    <Content Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.0.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.0.2.min.js" />
+    <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\themes\base\images\animated-overlay.gif" />
+    <Content Include="Scripts\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Scripts\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Scripts\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Scripts\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Scripts\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Scripts\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Scripts\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Scripts\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Scripts\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Scripts\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Scripts\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Scripts\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Scripts\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Scripts\themes\base\jquery-ui.css" />
+    <Content Include="Scripts\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Scripts\themes\base\jquery.ui.all.css" />
+    <Content Include="Scripts\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Scripts\themes\base\jquery.ui.base.css" />
+    <Content Include="Scripts\themes\base\jquery.ui.button.css" />
+    <Content Include="Scripts\themes\base\jquery.ui.core.css" />
+    <Content Include="Scripts\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Scripts\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Scripts\themes\base\jquery.ui.menu.css" />
+    <Content Include="Scripts\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Scripts\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Scripts\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Scripts\themes\base\jquery.ui.slider.css" />
+    <Content Include="Scripts\themes\base\jquery.ui.spinner.css" />
+    <Content Include="Scripts\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Scripts\themes\base\jquery.ui.theme.css" />
+    <Content Include="Scripts\themes\base\jquery.ui.tooltip.css" />
+    <Content Include="Scripts\themes\base\minified\images\animated-overlay.gif" />
+    <Content Include="Scripts\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Scripts\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Scripts\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Scripts\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Scripts\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Scripts\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Scripts\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Scripts\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Scripts\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Scripts\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Scripts\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Scripts\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Scripts\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Scripts\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Scripts\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Scripts\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Scripts\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Scripts\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Scripts\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Scripts\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Scripts\themes\base\minified\jquery.ui.menu.min.css" />
+    <Content Include="Scripts\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Scripts\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Scripts\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Scripts\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Scripts\themes\base\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Scripts\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Scripts\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Scripts\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Scripts\ui.core.js" />
+    <Content Include="Scripts\ui.progressbar.js" />
+    <Content Include="Scripts\ui\i18n\jquery-ui-i18n.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-af.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-ar-DZ.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-ar.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-az.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-be.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-bg.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-bs.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-ca.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-cs.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-cy-GB.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-da.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-de.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-el.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-en-AU.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-en-GB.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-en-NZ.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-eo.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-es.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-et.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-eu.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-fa.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-fi.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-fo.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-fr-CA.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-fr-CH.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-fr.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-gl.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-he.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-hi.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-hr.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-hu.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-hy.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-id.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-is.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-it.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-ja.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-ka.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-kk.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-km.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-ko.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-ky.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-lb.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-lt.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-lv.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-mk.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-ml.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-ms.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-nb.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-nl-BE.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-nl.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-nn.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-no.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-pl.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-pt-BR.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-pt.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-rm.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-ro.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-ru.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-sk.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-sl.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-sq.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-sr-SR.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-sr.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-sv.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-ta.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-th.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-tj.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-tr.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-uk.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-vi.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-zh-CN.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-zh-HK.js" />
+    <Content Include="Scripts\ui\i18n\jquery.ui.datepicker-zh-TW.js" />
+    <Content Include="Scripts\ui\jquery-ui.js" />
+    <Content Include="Scripts\ui\jquery.ui.accordion.js" />
+    <Content Include="Scripts\ui\jquery.ui.autocomplete.js" />
+    <Content Include="Scripts\ui\jquery.ui.button.js" />
+    <Content Include="Scripts\ui\jquery.ui.core.js" />
+    <Content Include="Scripts\ui\jquery.ui.datepicker.js" />
+    <Content Include="Scripts\ui\jquery.ui.dialog.js" />
+    <Content Include="Scripts\ui\jquery.ui.draggable.js" />
+    <Content Include="Scripts\ui\jquery.ui.droppable.js" />
+    <Content Include="Scripts\ui\jquery.ui.effect-blind.js" />
+    <Content Include="Scripts\ui\jquery.ui.effect-bounce.js" />
+    <Content Include="Scripts\ui\jquery.ui.effect-clip.js" />
+    <Content Include="Scripts\ui\jquery.ui.effect-drop.js" />
+    <Content Include="Scripts\ui\jquery.ui.effect-explode.js" />
+    <Content Include="Scripts\ui\jquery.ui.effect-fade.js" />
+    <Content Include="Scripts\ui\jquery.ui.effect-fold.js" />
+    <Content Include="Scripts\ui\jquery.ui.effect-highlight.js" />
+    <Content Include="Scripts\ui\jquery.ui.effect-pulsate.js" />
+    <Content Include="Scripts\ui\jquery.ui.effect-scale.js" />
+    <Content Include="Scripts\ui\jquery.ui.effect-shake.js" />
+    <Content Include="Scripts\ui\jquery.ui.effect-slide.js" />
+    <Content Include="Scripts\ui\jquery.ui.effect-transfer.js" />
+    <Content Include="Scripts\ui\jquery.ui.effect.js" />
+    <Content Include="Scripts\ui\jquery.ui.menu.js" />
+    <Content Include="Scripts\ui\jquery.ui.mouse.js" />
+    <Content Include="Scripts\ui\jquery.ui.position.js" />
+    <Content Include="Scripts\ui\jquery.ui.progressbar.js" />
+    <Content Include="Scripts\ui\jquery.ui.resizable.js" />
+    <Content Include="Scripts\ui\jquery.ui.selectable.js" />
+    <Content Include="Scripts\ui\jquery.ui.slider.js" />
+    <Content Include="Scripts\ui\jquery.ui.sortable.js" />
+    <Content Include="Scripts\ui\jquery.ui.spinner.js" />
+    <Content Include="Scripts\ui\jquery.ui.tabs.js" />
+    <Content Include="Scripts\ui\jquery.ui.tooltip.js" />
+    <Content Include="Scripts\ui\jquery.ui.widget.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery-ui-i18n.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-af.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-ar-DZ.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-ar.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-az.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-be.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-bg.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-bs.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-ca.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-cs.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-cy-GB.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-da.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-de.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-el.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-en-AU.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-en-GB.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-en-NZ.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-eo.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-es.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-et.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-eu.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-fa.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-fi.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-fo.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-fr-CA.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-fr-CH.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-fr.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-gl.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-he.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-hi.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-hr.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-hu.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-hy.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-id.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-is.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-it.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-ja.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-ka.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-kk.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-km.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-ko.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-ky.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-lb.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-lt.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-lv.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-mk.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-ml.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-ms.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-nb.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-nl-BE.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-nl.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-nn.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-no.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-pl.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-pt-BR.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-pt.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-rm.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-ro.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-ru.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-sk.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-sl.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-sq.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-sr-SR.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-sr.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-sv.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-ta.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-th.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-tj.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-tr.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-uk.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-vi.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-zh-CN.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-zh-HK.min.js" />
+    <Content Include="Scripts\ui\minified\i18n\jquery.ui.datepicker-zh-TW.min.js" />
+    <Content Include="Scripts\ui\minified\jquery-ui.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.accordion.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.autocomplete.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.button.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.core.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.datepicker.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.dialog.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.draggable.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.droppable.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.effect-blind.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.effect-bounce.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.effect-clip.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.effect-drop.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.effect-explode.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.effect-fade.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.effect-fold.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.effect-highlight.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.effect-pulsate.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.effect-scale.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.effect-shake.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.effect-slide.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.effect-transfer.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.effect.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.menu.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.mouse.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.position.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.progressbar.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.resizable.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.selectable.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.slider.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.sortable.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.spinner.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.tabs.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.tooltip.min.js" />
+    <Content Include="Scripts\ui\minified\jquery.ui.widget.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Scripts\jquery-1.4.4.js" />
+    <Content Include="Scripts\jquery-1.4.4.min.js" />
+    <Content Include="Scripts\jquery-1.4.4-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
+    <Content Include="Views\Account\LogOn.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_LogOnPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="WebForms\ControleQualidadeCargasPintos.aspx" />
+    <Content Include="WebForms\RelDiarioProducaoAvos.aspx" />
+    <Content Include="WebForms\RelRastreabilidade.aspx" />
+    <Content Include="WebForms\NascimentoPorSetter.aspx" />
+    <Content Include="WebForms\Incubacao_Teste.aspx" />
+    <Content Include="WebForms\DadosResumidoPorLote.aspx" />
+    <Content Include="WebForms\Incubacao.aspx" />
+    <Content Include="WebForms\EFD_PisCofins.aspx" />
+    <Content Include="WebForms\EFD_PisCofins_F130.aspx" />
+    <Content Include="WebForms\EFD_PisCofins_Nfs_Saida.aspx" />
+    <Content Include="WebForms\MapaIncubacao.aspx" />
+    <Content Include="WebForms\ProgDiarioTransp.aspx" />
+    <Content Include="WebForms\Rastreabilidade.aspx" />
+    <Content Include="WebForms\RelatoriosFLIP.aspx" />
+    <Content Include="WebForms\RelConfIncWebXFlip.aspx" />
+    <Content Include="WebForms\RelControleQualidadeCargas.aspx" />
+    <Content Include="WebForms\RelDadosResumidosPorLote.aspx" />
+    <Content Include="WebForms\RelDEOGranja.aspx" />
+    <Content Include="WebForms\RelDiarioProducao.aspx" />
+    <Content Include="WebForms\RelEggInv.aspx" />
+    <Content Include="WebForms\RelEstoqueOvos.aspx" />
+    <Content Include="WebForms\RelNascEmbrio.aspx" />
+    <Content Include="WebForms\TransferenciaOvos.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AnaliseArquivoDDA\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AnaliseArquivoDDA\_ListaDDA.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\FinanceiroModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FinanceiroModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="EntityWebForms\FISCAL_ITEM_NF\FISCAL_ITEM_NF.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FISCAL_ITEM_NF.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="EntityWebForms\PAT_BEM\PAT_BEM.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PAT_BEM.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Content\Release.1.3.0.39301\samples\VisualizationProgrammingTasks.ashx" />
+    <None Include="Data\CHICDataSet.xsc">
+      <DependentUpon>CHICDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Data\CHICDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CHICDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Data\CHICDataSet.xss">
+      <DependentUpon>CHICDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Data\CHICOracleDataSet.xsc">
+      <DependentUpon>CHICOracleDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Data\CHICOracleDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CHICOracleDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Data\CHICOracleDataSet.xss">
+      <DependentUpon>CHICOracleDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Data\CHICParentDataSet.xsc">
+      <DependentUpon>CHICParentDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Data\CHICParentDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CHICParentDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Data\CHICParentDataSet.xss">
+      <DependentUpon>CHICParentDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Data\FLIPDataSet.xsc">
+      <DependentUpon>FLIPDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Data\FLIPDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FLIPDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Data\FLIPDataSet.xss">
+      <DependentUpon>FLIPDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="EntityWebForms\FISCAL_ITEM_NF\FISCAL_ITEM_NF.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FISCAL_ITEM_NF.Context.cs</LastGenOutput>
+    </None>
+    <None Include="EntityWebForms\FISCAL_ITEM_NF\FISCAL_ITEM_NF.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FISCAL_ITEM_NF1.cs</LastGenOutput>
+    </None>
+    <EntityDeploy Include="EntityWebForms\HATCHERY_EGG_DATA\HATCHERY_EGG_DATA.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HATCHERY_EGG_DATA.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EntityWebForms\HATCHERY_EGG_DATA\HATCHERY_EGG_DATA.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HATCHERY_EGG_DATA.Context.cs</LastGenOutput>
+    </None>
+    <None Include="EntityWebForms\HATCHERY_EGG_DATA\HATCHERY_EGG_DATA.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HATCHERY_EGG_DATA1.cs</LastGenOutput>
+    </None>
+    <None Include="EntityWebForms\PAT_BEM\PAT_BEM.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PAT_BEM.Context.cs</LastGenOutput>
+    </None>
+    <None Include="EntityWebForms\PAT_BEM\PAT_BEM.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PAT_BEM.cs</LastGenOutput>
+    </None>
+    <EntityDeploy Include="Models\DiarioProducaoRacao\DiarioProducaoRacaoModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DiarioProducaoRacaoModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Models\Apolo\ApoloModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ApoloModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="HLBAPPDataSet.xsc">
+      <DependentUpon>HLBAPPDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="HLBAPPDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>HLBAPPDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="HLBAPPDataSet.xss">
+      <DependentUpon>HLBAPPDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Models\Apolo\ApoloDataSet.xsc">
+      <DependentUpon>ApoloDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Models\Apolo\ApoloDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ApoloDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Models\Apolo\ApoloDataSet.xss">
+      <DependentUpon>ApoloDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Models\Apolo\ApoloModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ApoloModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Models\Apolo\ApoloModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ApoloModel.cs</LastGenOutput>
+    </None>
+    <None Include="Models\FinanceiroModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FinanceiroModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Models\FinanceiroModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FinanceiroModel.cs</LastGenOutput>
+    </None>
+    <EntityDeploy Include="Models\FormulaPPCP\FormulaPPCPModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FormulaPPCPModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Models\FLUIG\Fluig_Teste.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Fluig_Teste.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\FLUIG\Fluig_Teste.edmx.diagram">
+      <DependentUpon>Fluig_Teste.edmx</DependentUpon>
+    </Content>
+    <None Include="Models\FormulaPPCP\FormulaPPCPModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FormulaPPCPModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Models\FormulaPPCP\FormulaPPCPModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FormulaPPCPModel.cs</LastGenOutput>
+    </None>
+    <EntityDeploy Include="Models\HLBAPP\HLBAPPModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HLBAPPModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\HLBAPP\HLBAPPModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HLBAPPModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Models\HLBAPP\HLBAPPModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HLBAPPModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\Folder Profile - Produção.pubxml" />
+    <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\Web Publish - Produção.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Scripts\ui.accordion.jquery.json" />
+    <None Include="Scripts\ui.autocomplete.jquery.json" />
+    <None Include="Scripts\ui.button.jquery.json" />
+    <None Include="Scripts\ui.core.jquery.json" />
+    <None Include="Scripts\ui.datepicker.jquery.json" />
+    <None Include="Scripts\ui.dialog.jquery.json" />
+    <None Include="Scripts\ui.draggable.jquery.json" />
+    <None Include="Scripts\ui.droppable.jquery.json" />
+    <None Include="Scripts\ui.effect-blind.jquery.json" />
+    <None Include="Scripts\ui.effect-bounce.jquery.json" />
+    <None Include="Scripts\ui.effect-clip.jquery.json" />
+    <None Include="Scripts\ui.effect-drop.jquery.json" />
+    <None Include="Scripts\ui.effect-explode.jquery.json" />
+    <None Include="Scripts\ui.effect-fade.jquery.json" />
+    <None Include="Scripts\ui.effect-fold.jquery.json" />
+    <None Include="Scripts\ui.effect-highlight.jquery.json" />
+    <None Include="Scripts\ui.effect-pulsate.jquery.json" />
+    <None Include="Scripts\ui.effect-scale.jquery.json" />
+    <None Include="Scripts\ui.effect-shake.jquery.json" />
+    <None Include="Scripts\ui.effect-slide.jquery.json" />
+    <None Include="Scripts\ui.effect-transfer.jquery.json" />
+    <None Include="Scripts\ui.effect.jquery.json" />
+    <None Include="Scripts\ui.menu.jquery.json" />
+    <None Include="Scripts\ui.mouse.jquery.json" />
+    <None Include="Scripts\ui.position.jquery.json" />
+    <None Include="Scripts\ui.progressbar.jquery.json" />
+    <None Include="Scripts\ui.resizable.jquery.json" />
+    <None Include="Scripts\ui.selectable.jquery.json" />
+    <None Include="Scripts\ui.slider.jquery.json" />
+    <None Include="Scripts\ui.sortable.jquery.json" />
+    <None Include="Scripts\ui.spinner.jquery.json" />
+    <None Include="Scripts\ui.tabs.jquery.json" />
+    <None Include="Scripts\ui.tooltip.jquery.json" />
+    <None Include="Scripts\ui.widget.jquery.json" />
+    <None Include="Scripts\ui\.jshintrc" />
+    <Content Include="Views\FormulaPPCP\Index.cshtml" />
+    <Content Include="Views\DiarioProducaoRacao\Index.cshtml" />
+    <Content Include="Views\DiarioProducaoRacao\_ListaOrdemProducao.cshtml" />
+    <Content Include="Views\Default1\Index.cshtml" />
+    <Content Include="Views\Default1\Edit.cshtml" />
+    <Content Include="Views\FormularioPedidos\Index.cshtml" />
+    <Content Include="Views\ImportaPedidosCHIC\Index.cshtml" />
+    <Content Include="Views\ImportaPedidosCHIC\_ListaPedidoPlanilha.cshtml" />
+    <Content Include="Views\DashBoardProduction\GranjasMensal.cshtml" />
+    <Content Include="Views\DashBoardProduction\OvosIncubaveisDiario.cshtml" />
+    <Content Include="Views\DashBoardProduction\OvosIncPorSemanaDoAno.cshtml" />
+    <Content Include="Views\ImportaDadosAssistTecnica\Index.cshtml" />
+    <Content Include="Views\DashBoardProduction\OvosIncubaveisMensal.cshtml" />
+    <Content Include="Views\DashBoardProduction\ParametrosGranjas.cshtml" />
+    <Content Include="Views\DashBoardProduction\IncubatoriosMensal.cshtml" />
+    <Content Include="Views\DashBoardProduction\Abas.cshtml" />
+    <Content Include="Views\DashBoardProduction\AbasPeriodoIncubatorios.cshtml" />
+    <Content Include="Views\DashBoardProduction\AbasPeriodoGranjas.cshtml" />
+    <Content Include="Views\DashBoardProduction\PesoOvosMensal.cshtml" />
+    <Content Include="Views\DashBoardProduction\OvosSujosMensal.cshtml" />
+    <Content Include="Views\DashBoardProduction\OvosTrincadosMensal.cshtml" />
+    <Content Include="Views\DashBoardProduction\MediaIdadeLotesMensal.cshtml" />
+    <Content Include="Views\DashBoardProduction\GranjasSemanal.cshtml" />
+    <Content Include="Views\DashBoardProduction\PesoOvosSemanal.cshtml" />
+    <Content Include="Views\DashBoardProduction\OvosSujosSemanal.cshtml" />
+    <Content Include="Views\DashBoardProduction\OvosTrincadosSemanal.cshtml" />
+    <Content Include="Views\DashBoardProduction\MediaIdadeLotesSemanal.cshtml" />
+    <Content Include="Views\DashBoardProduction\GranjasDiario.cshtml" />
+    <Content Include="Views\DashBoardProduction\OvosSujosDiario.cshtml" />
+    <Content Include="Views\DashBoardProduction\OvosTrincadosDiario.cshtml" />
+    <Content Include="Views\DashBoardProduction\MediaIdadeLotesDiario.cshtml" />
+    <Content Include="Views\DashBoardProduction\ParametrosIncubatorios.cshtml" />
+    <Content Include="Views\DashBoardProduction\CapacidadeMensal.cshtml" />
+    <Content Include="Views\DashBoardProduction\CapacidadeSemanal.cshtml" />
+    <Content Include="Views\DashBoardProduction\CapacidadeDiaria.cshtml" />
+    <Content Include="Views\DashBoardProduction\MediaEclosaoMensal.cshtml" />
+    <Content Include="Views\DashBoardProduction\MediaEclosaoSemanal.cshtml" />
+    <Content Include="Views\DashBoardProduction\MediaEclosaoDiaria.cshtml" />
+    <Content Include="Views\DashBoardProduction\MediaRefugosMensal.cshtml" />
+    <Content Include="Views\DashBoardProduction\MediaRefugosSemanal.cshtml" />
+    <Content Include="Views\DashBoardProduction\MediaRefugosDiaria.cshtml" />
+    <Content Include="Views\DashBoardProduction\MediaDestruidosMensal.cshtml" />
+    <Content Include="Views\DashBoardProduction\MediaDestruidosSemanal.cshtml" />
+    <Content Include="Views\DashBoardProduction\MediaDestruidosDiaria.cshtml" />
+    <Content Include="Views\DashBoardProduction\IncubatoriosSemanal.cshtml" />
+    <Content Include="Views\DashBoardProduction\IncubatoriosDiario.cshtml" />
+    <Content Include="Views\DashBoardProduction\TabelaProducao.cshtml" />
+    <Content Include="Views\ImportaDadosAssistTecnica\_ListaClientes.cshtml" />
+    <Content Include="Views\ImportaDadosAssistTecnica\RelatorioGeral.cshtml" />
+    <Content Include="Views\RelatoriosComerciais\Index.cshtml" />
+    <Content Include="Views\RelatoriosComerciais\Menu.cshtml" />
+    <Content Include="Views\RelatoriosComerciais\ListagemPedidosEmail.cshtml" />
+    <Content Include="Views\ImportaDadosAssistTecnica\ImportMultiplesFiles.cshtml" />
+    <Content Include="Views\ImportaDadosAssistTecnica\Arquivo.cshtml" />
+    <Content Include="Views\ImportaPedidosCHIC\Confirmacoes.cshtml" />
+    <Content Include="Views\ImportaPedidosCHIC\Abas.cshtml" />
+    <Content Include="Views\ImportaPedidosCHIC\_ListaClientes.cshtml" />
+    <Content Include="Views\ImportaDadosAssistTecnica\ImportLoggers.cshtml" />
+    <Content Include="Views\ImportaDadosAssistTecnica\MenuDadosAssistenciaTecnica.cshtml" />
+    <Content Include="Views\ImportaDadosAssistTecnica\_ListaEntregas.cshtml" />
+    <Content Include="Views\ImportaDadosAssistTecnica\SAC.cshtml" />
+    <Content Include="Views\ImportaDadosAssistTecnica\RRC.cshtml" />
+    <Content Include="Views\RelatoriosComerciais\ListagemPedidosMatriz.cshtml" />
+    <Content Include="Views\RelatoriosComerciais\Main.cshtml" />
+    <Content Include="Views\ImportaDadosAssistTecnica\SACMantiqueira.cshtml" />
+    <Content Include="Views\ImportaXMLFiscal\Index.cshtml" />
+    <Content Include="Views\ImportaXMLFiscal\Arquivo.cshtml" />
+    <Content Include="Views\DiarioProducaoOvos\Index.cshtml" />
+    <Content Include="Views\DiarioProducaoOvos\_Menu.cshtml" />
+    <Content Include="Views\DiarioProducaoOvos\DownloadPlanilha.cshtml" />
+    <Content Include="Views\ImportaDadosAssistTecnica\AcompanhamentoLote.cshtml" />
+    <Content Include="Views\ImportaDadosAssistTecnica\RelVisitaTecnica.cshtml" />
+    <Content Include="Views\RelatoriosComerciais\PlanejamentoIncubacao.cshtml" />
+    <Content Include="Views\RelatoriosComerciais\ListaPedidosRepresentante.cshtml" />
+    <Content Include="Views\ImportaPedidosCHIC\AtualizaPedidoSistemas.cshtml" />
+    <Content Include="Views\RelatoriosComerciais\PlanejamentoVacinacao.cshtml" />
+    <Content Include="Views\DiarioProducaoRacao\_MenuPR.cshtml" />
+    <Content Include="Views\DiarioProducaoRacao\ImportaDiarioPR.cshtml" />
+    <Content Include="Views\DiarioProducaoRacao\_ListaOrdemProducaoMensal.cshtml" />
+    <Content Include="Views\ImportaXMLFiscal\NFe.cshtml" />
+    <Content Include="Views\ImportaXMLFiscal\_Menu.cshtml" />
+    <Content Include="Views\RelatoriosComerciais\ProgramacaoTransportes.cshtml" />
+    <Content Include="Views\ImportaDadosAssistTecnica\SACNF.cshtml" />
+    <Content Include="Views\ImportaDadosAssistTecnica\_ListaLotesClientes.cshtml" />
+    <Content Include="Views\ImportaDadosAssistTecnica\ImportSingleFile.cshtml" />
+    <Content Include="Views\RelatoriosProducao\Index.cshtml" />
+    <Content Include="Views\RelatoriosProducao\_Menu.cshtml" />
+    <Content Include="Views\RelatoriosProducao\RelIncubacaoWEB.cshtml" />
+    <Content Include="Views\RelatoriosProducao\RelNascimentoWEB.cshtml" />
+    <Content Include="Views\RelatoriosProducao\RelEmbrioWEB.cshtml" />
+    <Content Include="Views\RelatoriosComerciais\ListaVacinasServicos.cshtml" />
+    <Content Include="Views\RelatoriosProducao\RelIncubacaoPorTipoOvoWEB.cshtml" />
+    <Content Include="Views\RelatoriosProducao\RelNascimentoEmbrioNovoWEB.cshtml" />
+    <Content Include="Views\RelatoriosProducao\RelPosicaoEstoque.cshtml" />
+    <Content Include="Views\RelatoriosProducao\RelFichaEstoque.cshtml" />
+    <Content Include="Views\ImportaDadosAssistTecnica\_NovoClienteHLB.cshtml" />
+    <None Include="Web References\br.com.hyline.fluigteste\availableUsersDto.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.hyline.fluigteste\deadLineDto.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.hyline.fluigteste\ECMWorkflowEngineServiceService.wsdl" />
+    <None Include="Web References\br.com.hyline.fluigteste\keyValueDto.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.hyline.fluigteste\processAttachmentDto.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.hyline.fluigteste\processDefinitionDto.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.hyline.fluigteste\processDefinitionVersionDto.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.hyline.fluigteste\processHistoryDto.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.hyline.fluigteste\processStateDto.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.hyline.fluigteste\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.hyline.fluigteste\webServiceMessage.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.hyline.fluig\availableUsersDto.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.hyline.fluig\deadLineDto.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.hyline.fluig\ECMWorkflowEngineServiceService.wsdl" />
+    <None Include="Web References\br.com.hyline.fluig\keyValueDto.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.hyline.fluig\processAttachmentDto.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.hyline.fluig\processDefinitionDto.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.hyline.fluig\processDefinitionVersionDto.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.hyline.fluig\processHistoryDto.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.hyline.fluig\processStateDto.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.hyline.fluig\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.hyline.fluig\webServiceMessage.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <Content Include="Web References\br.com.transportesbra.dev\AssociacaoSubstituicaoCartaoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\AtualizaCompraValePedagioResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\BuscaInformacoesContratacaoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\BuscarCartoesResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\BuscaTerminaisCarregamentoAutorizadosResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\CadastroAtualizacaoDadosItemReguaImpostoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\CadastroAtualizacaoDadosQuitacaoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\CadastroRoteiroCustomizadoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\CalculoImpostosFreteResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\CalculoValoresPisCofinsResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\CalculoValorTabelaFreteResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\CancelaCompraValePedagioResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\CancelamentoOperacaoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\CentroDeCustoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\CombustivelAvulsoCartaoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\CompraValePedagioResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\ConfirmarPedagioResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\ConsultaSituacaoEmpresaTransportadorAnttResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\ConsultaSituacaoTransportadorAnttResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\DeclaracaoOperacaoTransporteResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\DetalhesQuitacaoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\EmissaoDocumentoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\EncerramentoOperacaoTransporteResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\FinalizacaoOperacaoTransporteResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\br.com.transportesbra.dev\FreteService.wsdl" />
+    <Content Include="Web References\br.com.transportesbra.dev\GeraTokenParaAcessoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\InformacaoCartaoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\InformacaoServicoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\MotoristaResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\ObtencaoCustoRotaPorPracaResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\ObtencaoCustoRotaResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\OperacaoTransporteResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\PagamentoAvulsoCartaoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\PagamentoParcelaIndividualResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\ParcelaAdicionalResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\ParticipanteResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\ResultadoPaginadoBuscaCombustivelAvulsoCartaoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\ResultadoPaginadoBuscaCompraValePedagioResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\ResultadoPaginadoBuscaItemReguaImpostoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\ResultadoPaginadoBuscaPagamentoAvulsoCartaoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\ResultadoPaginadoBuscaTransacoesFinanceirasResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\ResultadoPaginadoCentroDeCustoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\ResultadoPaginadoConsultaTaxasCalculadasResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\ResultadoPaginadoListarRotasClienteResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\ResultadoPaginadoMotoristaResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\ResultadoPaginadoOperacaoTransporteResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\ResultadoPaginadoParticipanteResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\ResultadoPaginadoRoteiroResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\RetificacaoOperacaoTransporteResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\RotaDetalhadaResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\RoteiroResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\TransportadorResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\br.com.transportesbra.dev\TrocaPlacaCompraValePedagioTAGResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WebForms\MapaIncubacaoCrystalReport_2015-02-26.rpt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WebForms\ControleQualidadeCargas_Antigo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ControleQualidadeCargas_Antigo.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WebForms\ControleQualidadeCargas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ControleQualidadeCargas.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebForms\MapaIncubacaoCrystalReport.rpt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\ImportaPedidosCHIC\ConfirmacaoPedido_BR.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ConfirmacaoPedido_BR.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\ImportaPedidosCHIC\ConfirmacaoPedido_LB.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ConfirmacaoPedido_LB.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\ImportaPedidosCHIC\ConfirmacaoPedido_HN.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ConfirmacaoPedido_HN.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebForms\ControleQualidadeCargas_Interno.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ControleQualidadeCargas_Interno.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\DocsExport\PERU\CZI_PERU.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CZI_PERU.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\DocsExport\PERU\Atestado_PERU.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Atestado_PERU.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\DocsExport\TabelaQtdesPorGranja.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TabelaQtdesPorGranja.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\DocsExport\VacinasGenitores.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>VacinasGenitores1.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\DocsExport\VacinasPintos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>VacinasPintos1.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="WebForms\DadosResumidosPorLote.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DadosResumidosPorLote.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Content Include="WebForms\FichaDescrLote.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>FichaDescrLote.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ImportaIncubacao\ImportaIncubacao.csproj">
+      <Project>{E50C46AE-91D1-4850-AC91-EB890E4FBB03}</Project>
+      <Name>ImportaIncubacao</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://fluig.hyline.com.br:8080/webdesk/ECMWorkflowEngineService%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.hyline.fluig\</RelPath>
+      <UpdateFromURL>http://fluig.hyline.com.br:8080/webdesk/ECMWorkflowEngineService%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>MvcAppHyLinedoBrasil_br_com_hyline_fluig_ECMWorkflowEngineServiceService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://fluigteste.hyline.com.br/webdesk/ECMWorkflowEngineService%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.hyline.fluigteste\</RelPath>
+      <UpdateFromURL>http://fluigteste.hyline.com.br/webdesk/ECMWorkflowEngineService%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>MvcAppHyLinedoBrasil_br_com_hyline_fluigteste_ECMWorkflowEngineServiceService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://dev.transportesbra.com.br/frete/TMS/FreteService.svc%3fsingleWsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.transportesbra.dev\</RelPath>
+      <UpdateFromURL>https://dev.transportesbra.com.br/frete/TMS/FreteService.svc%3fsingleWsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>MvcAppHyLinedoBrasil_br_com_transportesbra_dev_FreteService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>54548</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este projeto faz referência a pacotes do NuGet que não estão presentes neste computador. Use a Restauração de Pacotes do NuGet para baixá-los.  Para obter mais informações, consulte http://go.microsoft.com/fwlink/?LinkID=322105. O arquivo ausente é {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

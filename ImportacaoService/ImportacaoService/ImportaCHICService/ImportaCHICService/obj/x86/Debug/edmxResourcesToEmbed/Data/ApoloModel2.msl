@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ApoloModel2StoreContainer" CdmEntityContainer="ApoloEntities2">
+    <EntitySetMapping Name="SUP_VENDEDOR">
+      <EntityTypeMapping TypeName="ApoloModel2.SUP_VENDEDOR">
+        <MappingFragment StoreEntitySet="SUP_VENDEDOR">
+          <ScalarProperty Name="VendCod" ColumnName="VendCod" />
+          <ScalarProperty Name="SupVendCod" ColumnName="SupVendCod" />
+          <ScalarProperty Name="FxaCod" ColumnName="FxaCod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

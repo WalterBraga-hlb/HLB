@@ -1,0 +1,9 @@
+﻿@{
+    ViewBag.Title = "";
+}
+
+<h2>@ViewBag.Message</h2>
+<p>
+    @MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Header_Home", Session["language"].ToString())
+</p>
+@Html.Partial("_NavigationPartial")

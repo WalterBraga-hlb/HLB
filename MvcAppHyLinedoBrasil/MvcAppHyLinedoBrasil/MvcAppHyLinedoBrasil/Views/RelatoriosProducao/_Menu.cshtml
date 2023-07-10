@@ -1,0 +1,76 @@
+﻿@using am = MvcAppHyLinedoBrasil.Controllers.AccountController;
+@{
+    Layout = null;
+    string lg = Session["language"].ToString();
+}
+<h2>@am.GetTextOnLanguage("Title_Menu_Reports_FLIP_WebDesktop", lg)</h2>
+<table>
+    <tr>
+        <td>
+            <h3>@am.Translate("Relatórios das Granjas", lg)</h3>
+            <ul>
+                @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-RELPRD_RelDiarioCompleto", (System.Collections.ArrayList)Session["Direitos"]))
+                {
+                    <li><a href="@Url.Content("~/WebForms/RelDiarioProducao.aspx")" target="_blank">@am.Translate("Title_Report_Rel_Diario_Completo_WebDesktop", lg)</a></li>
+                }
+                @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-RELPRD_RelDEOGranja", (System.Collections.ArrayList)Session["Direitos"]))
+                {
+                    <li><a href="@Url.Content("~/WebForms/RelDEOGranja.aspx")" target="_blank">@am.Translate("Relatório de DEOS", lg)</a></li>
+                }
+            </ul>
+        </td>
+        <td>
+            <h3>@am.Translate("Relatórios dos Incubatórios", lg)</h3>
+            <ul>
+                @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-RELPRD_RelEstoqueOvos", (System.Collections.ArrayList)Session["Direitos"]))
+                {
+                    <li><a href="@Url.Content("~/WebForms/RelEstoqueOvos.aspx")" target="_blank">@am.Translate("Relatório de Estoque de Ovos", lg)</a></li>
+                }
+                @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-RELPRD_RelNascEmbrio", (System.Collections.ArrayList)Session["Direitos"]))
+                {
+                    <li><a href="@Url.Content("~/WebForms/RelNascEmbrio.aspx")" target="_blank">@am.Translate("Relatório de Nascimento / Embriodiagnóstico", lg)</a></li>
+                    <li>@Html.ActionLink(am.Translate("Relatório de Nascimento e Embriodiagnóstico Novo - WEB", lg), "RelNascimentoEmbrioNovoWEB", "RelatoriosProducao")</li>
+                }
+                @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-RELPRD_ControleQualidadeCargas", (System.Collections.ArrayList)Session["Direitos"]))
+                {
+                    <li><a href="@Url.Content("~/WebForms/ControleQualidadeCargasPintos.aspx")" target="_blank">@am.Translate("Composição dos Lotes dos Clientes", lg)</a></li>
+                }
+                @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-RELPRD_RelRastreabilidade", (System.Collections.ArrayList)Session["Direitos"]))
+                {
+                    <li><a href="@Url.Content("~/WebForms/RelRastreabilidade.aspx")" target="_blank">@am.Translate("Relatório de Rastreabilidade", lg)</a></li>
+                }
+                @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-RELPRD_BrazilGPWeeklyFollowUpReport", (System.Collections.ArrayList)Session["Direitos"]))
+                {
+                    <li><a href="@Url.Content("~/WebForms/RelDiarioProducaoAvos.aspx")" target="_blank">@am.Translate("BRAZIL-GP WEEKLY FOLLOW-UP REPORT", lg)</a></li>
+                }
+
+                @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-RELPRD_RelIncubacaoWEB", (System.Collections.ArrayList)Session["Direitos"]))
+                {
+                    <li>@Html.ActionLink(am.Translate("Relatório de Incubação de Ovos - WEB", lg), "RelIncubacaoWEB", "RelatoriosProducao")</li>
+                }
+                @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-RELPRD_RelIncubacaoPorTipoOvoWEB", (System.Collections.ArrayList)Session["Direitos"]))
+                {
+                    <li>@Html.ActionLink(am.Translate("Relatório de Incubação de Ovos Por Tipo - WEB", lg), "RelIncubacaoPorTipoOvoWEB", "RelatoriosProducao")</li>
+                }
+                @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-RELPRD_RelNascimentoWEB", (System.Collections.ArrayList)Session["Direitos"]))
+                {
+                    <li>@Html.ActionLink(am.Translate("Relatório de Nascimento - WEB", lg), "RelNascimentoWEB", "RelatoriosProducao")</li>
+                }
+                @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-RELPRD_RelEmbrioWEB", (System.Collections.ArrayList)Session["Direitos"]))
+                {
+                    <li>@Html.ActionLink(am.Translate("Relatório de Embriodiagnóstico - WEB", lg), "RelEmbrioWEB", "RelatoriosProducao")</li>
+                }
+            </ul>
+        </td>
+        @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-RELPRD_RelEstoqueOvos", (System.Collections.ArrayList)Session["Direitos"]))
+        {
+            <td>
+                <h3>@am.Translate("Relatórios de Estoque de Ovos", lg)</h3>
+                <ul>
+                    <li>@Html.ActionLink(am.Translate("Posição de Estoque de Ovos Férteis", lg), "RelPosicaoEstoque", "RelatoriosProducao")</li>
+                    <li>@Html.ActionLink(am.Translate("Ficha de Estoque de Ovos Férteis", lg), "RelFichaEstoque", "RelatoriosProducao")</li>
+                </ul>
+            </td>
+        }
+        </tr>
+</table>

@@ -1,0 +1,1133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DiarioProducaoRacaoModelStoreContainer" CdmEntityContainer="DiarioProducaoRacaoEntities">
+    <EntitySetMapping Name="ITEM_NEC_PLAN_PRODUC">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.ITEM_NEC_PLAN_PRODUC">
+        <MappingFragment StoreEntitySet="ITEM_NEC_PLAN_PRODUC">
+          <ScalarProperty Name="ItemNecPlanProducQtdSldComp" ColumnName="ItemNecPlanProducQtdSldComp" />
+          <ScalarProperty Name="ItNecPlanProducQtdConsMed" ColumnName="ItNecPlanProducQtdConsMed" />
+          <ScalarProperty Name="ItNecPlanProducQtdEstqMax" ColumnName="ItNecPlanProducQtdEstqMax" />
+          <ScalarProperty Name="ItNecPlanProdQtdEstqProjAnt" ColumnName="ItNecPlanProdQtdEstqProjAnt" />
+          <ScalarProperty Name="ItNecPlanProdQtdDispAnt" ColumnName="ItNecPlanProdQtdDispAnt" />
+          <ScalarProperty Name="ItNecPlanProdIndPerdaRet" ColumnName="ItNecPlanProdIndPerdaRet" />
+          <ScalarProperty Name="ItNecPlanProdQtdInic" ColumnName="ItNecPlanProdQtdInic" />
+          <ScalarProperty Name="ItNecPlanProdQtdEstqProj" ColumnName="ItNecPlanProdQtdEstqProj" />
+          <ScalarProperty Name="ItNecPlanProdPercFatEstq" ColumnName="ItNecPlanProdPercFatEstq" />
+          <ScalarProperty Name="ItNecPlanProdQtdFatEstq" ColumnName="ItNecPlanProdQtdFatEstq" />
+          <ScalarProperty Name="ItNecPlanProducQtdDispProduc" ColumnName="ItNecPlanProducQtdDispProduc" />
+          <ScalarProperty Name="ItNecPlanProducQtdEstqUtil" ColumnName="ItNecPlanProducQtdEstqUtil" />
+          <ScalarProperty Name="ItNecPlanProducQtdEstqUso" ColumnName="ItNecPlanProducQtdEstqUso" />
+          <ScalarProperty Name="ItNecPlanProducQtdFatMult" ColumnName="ItNecPlanProducQtdFatMult" />
+          <ScalarProperty Name="ItNecPlanProducQtdEstqProd" ColumnName="ItNecPlanProducQtdEstqProd" />
+          <ScalarProperty Name="ItNecPlanProducQtdEstqMin" ColumnName="ItNecPlanProducQtdEstqMin" />
+          <ScalarProperty Name="EmpCod" ColumnName="EmpCod" />
+          <ScalarProperty Name="PlanProducNum" ColumnName="PlanProducNum" />
+          <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+          <ScalarProperty Name="ItNecPlanProducSeq" ColumnName="ItNecPlanProducSeq" />
+          <ScalarProperty Name="ProdGradeCorCod" ColumnName="ProdGradeCorCod" />
+          <ScalarProperty Name="ItNecPlanProducUnidMedCod" ColumnName="ItNecPlanProducUnidMedCod" />
+          <ScalarProperty Name="ItNecPlanProducUnidMedPos" ColumnName="ItNecPlanProducUnidMedPos" />
+          <ScalarProperty Name="ItNecPlanProducQtdOrig" ColumnName="ItNecPlanProducQtdOrig" />
+          <ScalarProperty Name="ItNecPlanProducQtdReal" ColumnName="ItNecPlanProducQtdReal" />
+          <ScalarProperty Name="ItNecPlanProducQtdEstq" ColumnName="ItNecPlanProducQtdEstq" />
+          <ScalarProperty Name="ItNecPlanProducQtdReserv" ColumnName="ItNecPlanProducQtdReserv" />
+          <ScalarProperty Name="ItNecPlanProducQtdEmp" ColumnName="ItNecPlanProducQtdEmp" />
+          <ScalarProperty Name="ItNecPlanProducQtdNec" ColumnName="ItNecPlanProducQtdNec" />
+          <ScalarProperty Name="ItNecPlanProducQtdDisp" ColumnName="ItNecPlanProducQtdDisp" />
+          <ScalarProperty Name="ItNecPlanProducQtdDesm" ColumnName="ItNecPlanProducQtdDesm" />
+          <ScalarProperty Name="ItNecPlanProducUtiliz" ColumnName="ItNecPlanProducUtiliz" />
+          <ScalarProperty Name="ItNecPlanProducQtdComp" ColumnName="ItNecPlanProducQtdComp" />
+          <ScalarProperty Name="ItNecPlanProducQtdNecPeso" ColumnName="ItNecPlanProducQtdNecPeso" />
+          <ScalarProperty Name="ItNecPlanProducIndRetalho" ColumnName="ItNecPlanProducIndRetalho" />
+          <ScalarProperty Name="ItNecPlanProducQtdNecPesoTot" ColumnName="ItNecPlanProducQtdNecPesoTot" />
+          <ScalarProperty Name="ItNecPlanProducCapHrMaq" ColumnName="ItNecPlanProducCapHrMaq" />
+          <ScalarProperty Name="ItNecPlanProducSeqLeit" ColumnName="ItNecPlanProducSeqLeit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ITEM_PLAN_PRODUC">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.ITEM_PLAN_PRODUC">
+        <MappingFragment StoreEntitySet="ITEM_PLAN_PRODUC">
+          <ScalarProperty Name="IdProdId" ColumnName="IdProdId" />
+          <ScalarProperty Name="ItPlanProducQtdEstqUso" ColumnName="ItPlanProducQtdEstqUso" />
+          <ScalarProperty Name="ItPlanProducQtdEstqUtil" ColumnName="ItPlanProducQtdEstqUtil" />
+          <ScalarProperty Name="ItPlanProducQtdEstqMin" ColumnName="ItPlanProducQtdEstqMin" />
+          <ScalarProperty Name="ItPlanProducQtdComplementar" ColumnName="ItPlanProducQtdComplementar" />
+          <ScalarProperty Name="EmpCod" ColumnName="EmpCod" />
+          <ScalarProperty Name="PlanProducNum" ColumnName="PlanProducNum" />
+          <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+          <ScalarProperty Name="ItPlanProducSeq" ColumnName="ItPlanProducSeq" />
+          <ScalarProperty Name="ProdGradeCorCod" ColumnName="ProdGradeCorCod" />
+          <ScalarProperty Name="ItPlanProducUnidMedCod" ColumnName="ItPlanProducUnidMedCod" />
+          <ScalarProperty Name="ItPlanProducUnidMedPos" ColumnName="ItPlanProducUnidMedPos" />
+          <ScalarProperty Name="ItPlanProducQtd" ColumnName="ItPlanProducQtd" />
+          <ScalarProperty Name="ItPlanProducQtdEstq" ColumnName="ItPlanProducQtdEstq" />
+          <ScalarProperty Name="ItPlanProducQtdReserv" ColumnName="ItPlanProducQtdReserv" />
+          <ScalarProperty Name="ItPlanProducQtdEmp" ColumnName="ItPlanProducQtdEmp" />
+          <ScalarProperty Name="ItPlanProducQtdNec" ColumnName="ItPlanProducQtdNec" />
+          <ScalarProperty Name="ItPlanProducQtdDisp" ColumnName="ItPlanProducQtdDisp" />
+          <ScalarProperty Name="ItPlanProducQtdComp" ColumnName="ItPlanProducQtdComp" />
+          <ScalarProperty Name="ItPlanProducQtdNecPeso" ColumnName="ItPlanProducQtdNecPeso" />
+          <ScalarProperty Name="ItPlanProducIndRetalho" ColumnName="ItPlanProducIndRetalho" />
+          <ScalarProperty Name="ItPlanProducQtdNecPesoTot" ColumnName="ItPlanProducQtdNecPesoTot" />
+          <ScalarProperty Name="ItPlanProducCapHrMaq" ColumnName="ItPlanProducCapHrMaq" />
+          <ScalarProperty Name="ItPlanProducConsidEstq" ColumnName="ItPlanProducConsidEstq" />
+          <ScalarProperty Name="PedVendaNum" ColumnName="PedVendaNum" />
+          <ScalarProperty Name="ItPedVendaSeq" ColumnName="ItPedVendaSeq" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NEC_PLAN_PRODUC">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.NEC_PLAN_PRODUC">
+        <MappingFragment StoreEntitySet="NEC_PLAN_PRODUC">
+          <ScalarProperty Name="NecPlanProducConsMedAcab" ColumnName="NecPlanProducConsMedAcab" />
+          <ScalarProperty Name="NecPlanProducConsMedAlt" ColumnName="NecPlanProducConsMedAlt" />
+          <ScalarProperty Name="NecPlanProducConsMedMat" ColumnName="NecPlanProducConsMedMat" />
+          <ScalarProperty Name="NecPlanProducConsMedSemAcab" ColumnName="NecPlanProducConsMedSemAcab" />
+          <ScalarProperty Name="NecPlanProducEstqMaxSemAcab" ColumnName="NecPlanProducEstqMaxSemAcab" />
+          <ScalarProperty Name="NecPlanProducEstqMaxAcab" ColumnName="NecPlanProducEstqMaxAcab" />
+          <ScalarProperty Name="NecPlanProducEstqMaxMat" ColumnName="NecPlanProducEstqMaxMat" />
+          <ScalarProperty Name="NecPlanProducEstqMaxAlt" ColumnName="NecPlanProducEstqMaxAlt" />
+          <ScalarProperty Name="NecPlanProducEmUso" ColumnName="NecPlanProducEmUso" />
+          <ScalarProperty Name="NecPlanProducDtPosEstq" ColumnName="NecPlanProducDtPosEstq" />
+          <ScalarProperty Name="NecPlanProdConsEstqProjAlt" ColumnName="NecPlanProdConsEstqProjAlt" />
+          <ScalarProperty Name="NecPlanProdConsEstqProjSemA" ColumnName="NecPlanProdConsEstqProjSemA" />
+          <ScalarProperty Name="NecPlanProdConsEstqProjAcab" ColumnName="NecPlanProdConsEstqProjAcab" />
+          <ScalarProperty Name="NecPlanProdConsEstqProjMat" ColumnName="NecPlanProdConsEstqProjMat" />
+          <ScalarProperty Name="NecPlanProdConsFatEstqAlt" ColumnName="NecPlanProdConsFatEstqAlt" />
+          <ScalarProperty Name="NecPlanProdConsFatEstqSemAc" ColumnName="NecPlanProdConsFatEstqSemAc" />
+          <ScalarProperty Name="NecPlanProdConsFatEstqAcab" ColumnName="NecPlanProdConsFatEstqAcab" />
+          <ScalarProperty Name="NecPlanProdConsFatEstqMat" ColumnName="NecPlanProdConsFatEstqMat" />
+          <ScalarProperty Name="NecPlanProdConsFatMultAlt" ColumnName="NecPlanProdConsFatMultAlt" />
+          <ScalarProperty Name="NecPlanProdConsFatMultMat" ColumnName="NecPlanProdConsFatMultMat" />
+          <ScalarProperty Name="NecPlanProducDtHoraNec" ColumnName="NecPlanProducDtHoraNec" />
+          <ScalarProperty Name="NecPlanProdSimul" ColumnName="NecPlanProdSimul" />
+          <ScalarProperty Name="NecPlanProdConsFatMultSemi" ColumnName="NecPlanProdConsFatMultSemi" />
+          <ScalarProperty Name="NecPlanProdConsFatMultAcab" ColumnName="NecPlanProdConsFatMultAcab" />
+          <ScalarProperty Name="NecPlanProdConsEstqProdSemi" ColumnName="NecPlanProdConsEstqProdSemi" />
+          <ScalarProperty Name="NecPlanProdConsEstqProdAcab" ColumnName="NecPlanProdConsEstqProdAcab" />
+          <ScalarProperty Name="NecPlanProducConsEstqMinAlt" ColumnName="NecPlanProducConsEstqMinAlt" />
+          <ScalarProperty Name="NecPlanProducConsEstqMinSem" ColumnName="NecPlanProducConsEstqMinSem" />
+          <ScalarProperty Name="NecPlanProduConsEstqMinAcab" ColumnName="NecPlanProduConsEstqMinAcab" />
+          <ScalarProperty Name="NecPlanProducConsEstqMinMat" ColumnName="NecPlanProducConsEstqMinMat" />
+          <ScalarProperty Name="EmpCod" ColumnName="EmpCod" />
+          <ScalarProperty Name="PlanProducNum" ColumnName="PlanProducNum" />
+          <ScalarProperty Name="NecPlanProducDataEmis" ColumnName="NecPlanProducDataEmis" />
+          <ScalarProperty Name="NecPlanProducDataInic" ColumnName="NecPlanProducDataInic" />
+          <ScalarProperty Name="NecPlanProducDataFim" ColumnName="NecPlanProducDataFim" />
+          <ScalarProperty Name="NecPlanProducGerouOp" ColumnName="NecPlanProducGerouOp" />
+          <ScalarProperty Name="NecPlanProducReqMat" ColumnName="NecPlanProducReqMat" />
+          <ScalarProperty Name="NecPlanProducReqComp" ColumnName="NecPlanProducReqComp" />
+          <ScalarProperty Name="NecPlanProducVerEstqMat" ColumnName="NecPlanProducVerEstqMat" />
+          <ScalarProperty Name="NecPlanProducVerEstqAcab" ColumnName="NecPlanProducVerEstqAcab" />
+          <ScalarProperty Name="NecPlanProducVerEstqSemiAcab" ColumnName="NecPlanProducVerEstqSemiAcab" />
+          <ScalarProperty Name="NecPlanProducVerEstqAlt" ColumnName="NecPlanProducVerEstqAlt" />
+          <ScalarProperty Name="NecPlanProducTexto" ColumnName="NecPlanProducTexto" />
+          <ScalarProperty Name="NecPlanProducVerPedComp" ColumnName="NecPlanProducVerPedComp" />
+          <ScalarProperty Name="NecPlanProducDataEntPedComp" ColumnName="NecPlanProducDataEntPedComp" />
+          <ScalarProperty Name="NecPlanProducDesmSemiAcab" ColumnName="NecPlanProducDesmSemiAcab" />
+          <ScalarProperty Name="NecPlanProducDesativada" ColumnName="NecPlanProducDesativada" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OPER_ORD_PRODUC">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.OPER_ORD_PRODUC">
+        <MappingFragment StoreEntitySet="OPER_ORD_PRODUC">
+          <ScalarProperty Name="OperOrdProducTempoCentLiq" ColumnName="OperOrdProducTempoCentLiq" />
+          <ScalarProperty Name="OperOrdProducTempoCentVariac" ColumnName="OperOrdProducTempoCentVariac" />
+          <ScalarProperty Name="IdProdId" ColumnName="IdProdId" />
+          <ScalarProperty Name="OperOrdProducDtHrRef" ColumnName="OperOrdProducDtHrRef" />
+          <ScalarProperty Name="OperOrdProducUsuCodRef" ColumnName="OperOrdProducUsuCodRef" />
+          <ScalarProperty Name="OperOrdProducSeqRef" ColumnName="OperOrdProducSeqRef" />
+          <ScalarProperty Name="OperOrdProducQtdRef" ColumnName="OperOrdProducQtdRef" />
+          <ScalarProperty Name="OperOrdProducCodSscc" ColumnName="OperOrdProducCodSscc" />
+          <ScalarProperty Name="OperOrdProducUsuCodDtHrInic" ColumnName="OperOrdProducUsuCodDtHrInic" />
+          <ScalarProperty Name="OperOrdProducDataValidLote" ColumnName="OperOrdProducDataValidLote" />
+          <ScalarProperty Name="OperOrdProducPrefixoLoteMask" ColumnName="OperOrdProducPrefixoLoteMask" />
+          <ScalarProperty Name="OperOrdProducTipoCalcCusto" ColumnName="OperOrdProducTipoCalcCusto" />
+          <ScalarProperty Name="TipoApontCod" ColumnName="TipoApontCod" />
+          <ScalarProperty Name="PedVendaNum" ColumnName="PedVendaNum" />
+          <ScalarProperty Name="EmpCod" ColumnName="EmpCod" />
+          <ScalarProperty Name="OrdProducNum" ColumnName="OrdProducNum" />
+          <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+          <ScalarProperty Name="ProdOperSeq" ColumnName="ProdOperSeq" />
+          <ScalarProperty Name="OperOrdProducSeq" ColumnName="OperOrdProducSeq" />
+          <ScalarProperty Name="CCtrlCodEstr" ColumnName="CCtrlCodEstr" />
+          <ScalarProperty Name="OperOrdProducStat" ColumnName="OperOrdProducStat" />
+          <ScalarProperty Name="OperOrdProducDataHoraInic" ColumnName="OperOrdProducDataHoraInic" />
+          <ScalarProperty Name="OperOrdProducDataHoraFim" ColumnName="OperOrdProducDataHoraFim" />
+          <ScalarProperty Name="OperOrdProducQtdBoa" ColumnName="OperOrdProducQtdBoa" />
+          <ScalarProperty Name="OperOrdProducQtdRefug" ColumnName="OperOrdProducQtdRefug" />
+          <ScalarProperty Name="OperOrdProducQtdReproc" ColumnName="OperOrdProducQtdReproc" />
+          <ScalarProperty Name="EquipCodEstr" ColumnName="EquipCodEstr" />
+          <ScalarProperty Name="OperCod" ColumnName="OperCod" />
+          <ScalarProperty Name="UsuCod" ColumnName="UsuCod" />
+          <ScalarProperty Name="ProdGradeCorCod" ColumnName="ProdGradeCorCod" />
+          <ScalarProperty Name="OperOrdProducTempoCent" ColumnName="OperOrdProducTempoCent" />
+          <ScalarProperty Name="EntCod" ColumnName="EntCod" />
+          <ScalarProperty Name="OperOrdProducDocEspec" ColumnName="OperOrdProducDocEspec" />
+          <ScalarProperty Name="OperOrdProducDocSerie" ColumnName="OperOrdProducDocSerie" />
+          <ScalarProperty Name="OperOrdProducDocNum" ColumnName="OperOrdProducDocNum" />
+          <ScalarProperty Name="OperOrdProducApont" ColumnName="OperOrdProducApont" />
+          <ScalarProperty Name="OperOrdProducGerReqMat" ColumnName="OperOrdProducGerReqMat" />
+          <ScalarProperty Name="OperOrdProducPesoUnitProd" ColumnName="OperOrdProducPesoUnitProd" />
+          <ScalarProperty Name="OperOrdProducQtdRetalho" ColumnName="OperOrdProducQtdRetalho" />
+          <ScalarProperty Name="AtivGrpCodEstr" ColumnName="AtivGrpCodEstr" />
+          <ScalarProperty Name="OperOrdProducGeraLoteAutom" ColumnName="OperOrdProducGeraLoteAutom" />
+          <ScalarProperty Name="ProdUnidMedCod" ColumnName="ProdUnidMedCod" />
+          <ScalarProperty Name="ProdUnidMedPos" ColumnName="ProdUnidMedPos" />
+          <ScalarProperty Name="OperOrdProducCompBruto" ColumnName="OperOrdProducCompBruto" />
+          <ScalarProperty Name="OperOrdProducCompLiq" ColumnName="OperOrdProducCompLiq" />
+          <ScalarProperty Name="OperOrdProducAltBruta" ColumnName="OperOrdProducAltBruta" />
+          <ScalarProperty Name="OperOrdProducAltLiq" ColumnName="OperOrdProducAltLiq" />
+          <ScalarProperty Name="OperOrdProducLargBruta" ColumnName="OperOrdProducLargBruta" />
+          <ScalarProperty Name="OperOrdProducLargLiq" ColumnName="OperOrdProducLargLiq" />
+          <ScalarProperty Name="OperOrdProducEspacoBruto" ColumnName="OperOrdProducEspacoBruto" />
+          <ScalarProperty Name="OperOrdProducEspacoLiq" ColumnName="OperOrdProducEspacoLiq" />
+          <ScalarProperty Name="OperOrdProducDataHoraApont" ColumnName="OperOrdProducDataHoraApont" />
+          <ScalarProperty Name="OperOrdProducTara" ColumnName="OperOrdProducTara" />
+          <ScalarProperty Name="OperOrdProducPesoBruto" ColumnName="OperOrdProducPesoBruto" />
+          <ScalarProperty Name="OperOrdProducTipo" ColumnName="OperOrdProducTipo" />
+          <ScalarProperty Name="LocArmazCodEstr" ColumnName="LocArmazCodEstr" />
+          <ScalarProperty Name="OperOrdProducQtdReal" ColumnName="OperOrdProducQtdReal" />
+          <ScalarProperty Name="CtrlLoteNum" ColumnName="CtrlLoteNum" />
+          <ScalarProperty Name="CtrlLoteDataValid" ColumnName="CtrlLoteDataValid" />
+          <ScalarProperty Name="TipoLancCod" ColumnName="TipoLancCod" />
+          <ScalarProperty Name="OperOrdProducIntegraEstq" ColumnName="OperOrdProducIntegraEstq" />
+          <ScalarProperty Name="OperOrdProducIntegradoEstq" ColumnName="OperOrdProducIntegradoEstq" />
+          <ScalarProperty Name="OperOrdProducUnidMedPeso" ColumnName="OperOrdProducUnidMedPeso" />
+          <ScalarProperty Name="OperOrdProducQtdCalc" ColumnName="OperOrdProducQtdCalc" />
+          <ScalarProperty Name="OperOrdProducNumSerie" ColumnName="OperOrdProducNumSerie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OPER_ORD_PRODUC_FUNC">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.OPER_ORD_PRODUC_FUNC">
+        <MappingFragment StoreEntitySet="OPER_ORD_PRODUC_FUNC">
+          <ScalarProperty Name="EmpCod" ColumnName="EmpCod" />
+          <ScalarProperty Name="OrdProducNum" ColumnName="OrdProducNum" />
+          <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+          <ScalarProperty Name="ProdOperSeq" ColumnName="ProdOperSeq" />
+          <ScalarProperty Name="OperOrdProducSeq" ColumnName="OperOrdProducSeq" />
+          <ScalarProperty Name="FuncCod" ColumnName="FuncCod" />
+          <ScalarProperty Name="OperOrdProducFuncApont" ColumnName="OperOrdProducFuncApont" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ORD_PRODUC">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.ORD_PRODUC">
+        <MappingFragment StoreEntitySet="ORD_PRODUC">
+          <ScalarProperty Name="IdProdId" ColumnName="IdProdId" />
+          <ScalarProperty Name="OrdProducOrigMod" ColumnName="OrdProducOrigMod" />
+          <ScalarProperty Name="OrdProducDtEncer" ColumnName="OrdProducDtEncer" />
+          <ScalarProperty Name="IDGeraNumSer" ColumnName="IDGeraNumSer" />
+          <ScalarProperty Name="ORDPRODUCDTFIN" ColumnName="ORDPRODUCDTFIN" />
+          <ScalarProperty Name="OrdProducEmpCodPedVendaOrig" ColumnName="OrdProducEmpCodPedVendaOrig" />
+          <ScalarProperty Name="OrdProducOrigem" ColumnName="OrdProducOrigem" />
+          <ScalarProperty Name="OrdProducNumRevisao" ColumnName="OrdProducNumRevisao" />
+          <ScalarProperty Name="EmpCod" ColumnName="EmpCod" />
+          <ScalarProperty Name="OrdProducNum" ColumnName="OrdProducNum" />
+          <ScalarProperty Name="PlanProducNum" ColumnName="PlanProducNum" />
+          <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+          <ScalarProperty Name="ItNecPlanProducSeq" ColumnName="ItNecPlanProducSeq" />
+          <ScalarProperty Name="OrdProducSerie" ColumnName="OrdProducSerie" />
+          <ScalarProperty Name="OrdProducDataEmis" ColumnName="OrdProducDataEmis" />
+          <ScalarProperty Name="OrdProducQtdNec" ColumnName="OrdProducQtdNec" />
+          <ScalarProperty Name="OrdProducQtdBoa" ColumnName="OrdProducQtdBoa" />
+          <ScalarProperty Name="OrdProducQtdRefug" ColumnName="OrdProducQtdRefug" />
+          <ScalarProperty Name="OrdProducQtdReproc" ColumnName="OrdProducQtdReproc" />
+          <ScalarProperty Name="OrdProducStat" ColumnName="OrdProducStat" />
+          <ScalarProperty Name="OrdProducTipo" ColumnName="OrdProducTipo" />
+          <ScalarProperty Name="OrdProducNumRef" ColumnName="OrdProducNumRef" />
+          <ScalarProperty Name="OrdProducReqMat" ColumnName="OrdProducReqMat" />
+          <ScalarProperty Name="OrdProducReqComp" ColumnName="OrdProducReqComp" />
+          <ScalarProperty Name="ProdGradeCorCod" ColumnName="ProdGradeCorCod" />
+          <ScalarProperty Name="EquipCodEstr" ColumnName="EquipCodEstr" />
+          <ScalarProperty Name="OrdProducQtdNecPc" ColumnName="OrdProducQtdNecPc" />
+          <ScalarProperty Name="OrdProducNumPrimEtiq" ColumnName="OrdProducNumPrimEtiq" />
+          <ScalarProperty Name="OrdProducNumUltEtiq" ColumnName="OrdProducNumUltEtiq" />
+          <ScalarProperty Name="OrdProducQtdNecDesm" ColumnName="OrdProducQtdNecDesm" />
+          <ScalarProperty Name="OrdProducQtdNecPcDesm" ColumnName="OrdProducQtdNecPcDesm" />
+          <ScalarProperty Name="OrdProducPesoPadrao" ColumnName="OrdProducPesoPadrao" />
+          <ScalarProperty Name="OrdProducEtiqEmit" ColumnName="OrdProducEtiqEmit" />
+          <ScalarProperty Name="LocArmazCodEstr" ColumnName="LocArmazCodEstr" />
+          <ScalarProperty Name="OrdProducProdDesativado" ColumnName="OrdProducProdDesativado" />
+          <ScalarProperty Name="OrdProducTempo" ColumnName="OrdProducTempo" />
+          <ScalarProperty Name="OrdProducTempoCent" ColumnName="OrdProducTempoCent" />
+          <ScalarProperty Name="OrdProducDataPrevEntrega" ColumnName="OrdProducDataPrevEntrega" />
+          <ScalarProperty Name="OrdProducComp" ColumnName="OrdProducComp" />
+          <ScalarProperty Name="OrdProducAlt" ColumnName="OrdProducAlt" />
+          <ScalarProperty Name="OrdProducLarg" ColumnName="OrdProducLarg" />
+          <ScalarProperty Name="OrdProducEspaco" ColumnName="OrdProducEspaco" />
+          <ScalarProperty Name="ProdUnidMedCod" ColumnName="ProdUnidMedCod" />
+          <ScalarProperty Name="ProdUnidMedPos" ColumnName="ProdUnidMedPos" />
+          <ScalarProperty Name="OrdProducTipoOrd" ColumnName="OrdProducTipoOrd" />
+          <ScalarProperty Name="GranjaCod" ColumnName="GranjaCod" />
+          <ScalarProperty Name="PedVendaNum" ColumnName="PedVendaNum" />
+          <ScalarProperty Name="OrdProducDataPrevProd" ColumnName="OrdProducDataPrevProd" />
+          <ScalarProperty Name="OrdProducDataLiberacao" ColumnName="OrdProducDataLiberacao" />
+          <ScalarProperty Name="LoteCriaCod" ColumnName="LoteCriaCod" />
+          <ScalarProperty Name="FormProdCod" ColumnName="FormProdCod" />
+          <ScalarProperty Name="CCtrlCodEstr" ColumnName="CCtrlCodEstr" />
+          <ScalarProperty Name="OrdProducPedVendaNumOrig" ColumnName="OrdProducPedVendaNumOrig" />
+          <ScalarProperty Name="CtrlLoteNum" ColumnName="CtrlLoteNum" />
+          <ScalarProperty Name="CtrlLoteDataValid" ColumnName="CtrlLoteDataValid" />
+          <ScalarProperty Name="OrdProducFinalidade" ColumnName="OrdProducFinalidade" />
+          <ScalarProperty Name="OrdProducQtdEmp" ColumnName="OrdProducQtdEmp" />
+          <ScalarProperty Name="EntCod" ColumnName="EntCod" />
+          <ScalarProperty Name="OrdProducObs" ColumnName="OrdProducObs" />
+          <ScalarProperty Name="GeraNumLoteCod" ColumnName="GeraNumLoteCod" />
+          <ScalarProperty Name="OrdProducDtEntrgDesSetProj" ColumnName="OrdProducDtEntrgDesSetProj" />
+          <ScalarProperty Name="OrdProducDtRecebSetProj" ColumnName="OrdProducDtRecebSetProj" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PLAN_PRODUC">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.PLAN_PRODUC">
+        <MappingFragment StoreEntitySet="PLAN_PRODUC">
+          <ScalarProperty Name="UsuCod" ColumnName="UsuCod" />
+          <ScalarProperty Name="PlanProducStat" ColumnName="PlanProducStat" />
+          <ScalarProperty Name="OrcNum" ColumnName="OrcNum" />
+          <ScalarProperty Name="PlanProducDtHoraNec" ColumnName="PlanProducDtHoraNec" />
+          <ScalarProperty Name="PlanProducSimul" ColumnName="PlanProducSimul" />
+          <ScalarProperty Name="EmpCod" ColumnName="EmpCod" />
+          <ScalarProperty Name="PlanProducNum" ColumnName="PlanProducNum" />
+          <ScalarProperty Name="PlanProducNome" ColumnName="PlanProducNome" />
+          <ScalarProperty Name="PlanProducData" ColumnName="PlanProducData" />
+          <ScalarProperty Name="PlanProducDataInic" ColumnName="PlanProducDataInic" />
+          <ScalarProperty Name="PlanProducDataFim" ColumnName="PlanProducDataFim" />
+          <ScalarProperty Name="PlanProducCompEstq" ColumnName="PlanProducCompEstq" />
+          <ScalarProperty Name="PlanProducConsidLoteEcon" ColumnName="PlanProducConsidLoteEcon" />
+          <ScalarProperty Name="PlanProducConsidEstq" ColumnName="PlanProducConsidEstq" />
+          <ScalarProperty Name="PlanProducDesativado" ColumnName="PlanProducDesativado" />
+          <ScalarProperty Name="LoteCriaCod" ColumnName="LoteCriaCod" />
+          <ScalarProperty Name="CCtrlCodEstr" ColumnName="CCtrlCodEstr" />
+          <ScalarProperty Name="GranjaCod" ColumnName="GranjaCod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PLAN_PRODUC_FIC_TEC">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.PLAN_PRODUC_FIC_TEC">
+        <MappingFragment StoreEntitySet="PLAN_PRODUC_FIC_TEC">
+          <ScalarProperty Name="PlanProducFicTecQtdFatMult" ColumnName="PlanProducFicTecQtdFatMult" />
+          <ScalarProperty Name="PlanProducFicTecQtdEstqProd" ColumnName="PlanProducFicTecQtdEstqProd" />
+          <ScalarProperty Name="EmpCod" ColumnName="EmpCod" />
+          <ScalarProperty Name="PlanProducNum" ColumnName="PlanProducNum" />
+          <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+          <ScalarProperty Name="ItPlanProducSeq" ColumnName="ItPlanProducSeq" />
+          <ScalarProperty Name="FTProdCodEstr" ColumnName="FTProdCodEstr" />
+          <ScalarProperty Name="FicTecProdSeq" ColumnName="FicTecProdSeq" />
+          <ScalarProperty Name="PlanProducFicTecProdCodEstr" ColumnName="PlanProducFicTecProdCodEstr" />
+          <ScalarProperty Name="PlanProducFicTecQtd" ColumnName="PlanProducFicTecQtd" />
+          <ScalarProperty Name="PlanProducFicTecQtdEstq" ColumnName="PlanProducFicTecQtdEstq" />
+          <ScalarProperty Name="PlanProducFicTecQtdReserv" ColumnName="PlanProducFicTecQtdReserv" />
+          <ScalarProperty Name="PlanProducFicTecQtdEmp" ColumnName="PlanProducFicTecQtdEmp" />
+          <ScalarProperty Name="PlanProducFicTecQtdNec" ColumnName="PlanProducFicTecQtdNec" />
+          <ScalarProperty Name="PlanProducFicTecQtdComp" ColumnName="PlanProducFicTecQtdComp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GeraOrdemProducao" FunctionName="DiarioProducaoRacaoModel.Store.GERA_ORDEM_PRODUCAO" />
+    <FunctionImportMapping FunctionImportName="InsertOperOrdProducProc" FunctionName="DiarioProducaoRacaoModel.Store.INSERT_OPER_ORD_PRODUC_PROC" />
+    <EntitySetMapping Name="FIC_TEC_PROD">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.FIC_TEC_PROD">
+        <MappingFragment StoreEntitySet="FIC_TEC_PROD">
+          <ScalarProperty Name="FicTecProdImpEtiq" ColumnName="FicTecProdImpEtiq" />
+          <ScalarProperty Name="FicTecProdBaseNumLote" ColumnName="FicTecProdBaseNumLote" />
+          <ScalarProperty Name="FicTecProdCondPesoBrtAtend" ColumnName="FicTecProdCondPesoBrtAtend" />
+          <ScalarProperty Name="FicTecProdParCalcLoteApon" ColumnName="FicTecProdParCalcLoteApon" />
+          <ScalarProperty Name="FicTecProdBloqueada" ColumnName="FicTecProdBloqueada" />
+          <ScalarProperty Name="FicTecProdCompCustoAnaFinanc" ColumnName="FicTecProdCompCustoAnaFinanc" />
+          <ScalarProperty Name="fictecprodcalccustovalinsumo" ColumnName="fictecprodcalccustovalinsumo" />
+          <ScalarProperty Name="FicTecProdOperCalculo" ColumnName="FicTecProdOperCalculo" />
+          <ScalarProperty Name="FicTecProdGeraNFRetorno" ColumnName="FicTecProdGeraNFRetorno" />
+          <ScalarProperty Name="FicTecProdSubstPorSeq" ColumnName="FicTecProdSubstPorSeq" />
+          <ScalarProperty Name="FicTecProdSubstPor" ColumnName="FicTecProdSubstPor" />
+          <ScalarProperty Name="FicTecProdNumSeq" ColumnName="FicTecProdNumSeq" />
+          <ScalarProperty Name="FicTecProdTerc" ColumnName="FicTecProdTerc" />
+          <ScalarProperty Name="FicTecProdFormula" ColumnName="FicTecProdFormula" />
+          <ScalarProperty Name="FicTecProdPercRatDif" ColumnName="FicTecProdPercRatDif" />
+          <ScalarProperty Name="FicTecProdDiscOpt" ColumnName="FicTecProdDiscOpt" />
+          <ScalarProperty Name="FicTecProdPartVendaUnidMedPos" ColumnName="FicTecProdPartVendaUnidMedPos" />
+          <ScalarProperty Name="FicTecProdAcessorio" ColumnName="FicTecProdAcessorio" />
+          <ScalarProperty Name="FicTecProdUnidMedQtdDig" ColumnName="FicTecProdUnidMedQtdDig" />
+          <ScalarProperty Name="FicTecProdUnidMedPosDig" ColumnName="FicTecProdUnidMedPosDig" />
+          <ScalarProperty Name="FicTecProdUnidMedCodDig" ColumnName="FicTecProdUnidMedCodDig" />
+          <ScalarProperty Name="FicTecProdPartVendaPercAcresc" ColumnName="FicTecProdPartVendaPercAcresc" />
+          <ScalarProperty Name="FicTecProdPartVendaPercDesc" ColumnName="FicTecProdPartVendaPercDesc" />
+          <ScalarProperty Name="FicTecProdPartVenda" ColumnName="FicTecProdPartVenda" />
+          <ScalarProperty Name="FicTecProdPercPartic" ColumnName="FicTecProdPercPartic" />
+          <ScalarProperty Name="FicTecProdGeraOP" ColumnName="FicTecProdGeraOP" />
+          <ScalarProperty Name="FicTecProdCompCusto" ColumnName="FicTecProdCompCusto" />
+          <ScalarProperty Name="FicTecProdDataFim" ColumnName="FicTecProdDataFim" />
+          <ScalarProperty Name="FicTecProdDataInic" ColumnName="FicTecProdDataInic" />
+          <ScalarProperty Name="FicTecProdCustoQtd" ColumnName="FicTecProdCustoQtd" />
+          <ScalarProperty Name="FicTecProdCustoPercTipo" ColumnName="FicTecProdCustoPercTipo" />
+          <ScalarProperty Name="FicTecProdCustoPerc" ColumnName="FicTecProdCustoPerc" />
+          <ScalarProperty Name="FicTecProdQtdCalc" ColumnName="FicTecProdQtdCalc" />
+          <ScalarProperty Name="FicTecProdPercTipo" ColumnName="FicTecProdPercTipo" />
+          <ScalarProperty Name="FicTecProdPerc" ColumnName="FicTecProdPerc" />
+          <ScalarProperty Name="FicTecProdQtd" ColumnName="FicTecProdQtd" />
+          <ScalarProperty Name="FicTecProdGradeCorCod" ColumnName="FicTecProdGradeCorCod" />
+          <ScalarProperty Name="FicTecProdCodEstr" ColumnName="FicTecProdCodEstr" />
+          <ScalarProperty Name="ProdGradeCorCod" ColumnName="ProdGradeCorCod" />
+          <ScalarProperty Name="FicTecProdSeq" ColumnName="FicTecProdSeq" />
+          <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GerarCodigo" FunctionName="DiarioProducaoRacaoModel.Store.gerar_codigo" />
+    <EntitySetMapping Name="LOC_ARMAZ">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.LOC_ARMAZ">
+        <MappingFragment StoreEntitySet="LOC_ARMAZ">
+          <ScalarProperty Name="LOCARMAZCODESTREXPEDICAO" ColumnName="LOCARMAZCODESTREXPEDICAO" />
+          <ScalarProperty Name="LocArmazEntCod" ColumnName="LocArmazEntCod" />
+          <ScalarProperty Name="USEREntraPlanProdRacao" ColumnName="USEREntraPlanProdRacao" />
+          <ScalarProperty Name="USERTitRQRelDEO" ColumnName="USERTitRQRelDEO" />
+          <ScalarProperty Name="USERTipoProduto" ColumnName="USERTipoProduto" />
+          <ScalarProperty Name="USERTipoLancSaidaInc" ColumnName="USERTipoLancSaidaInc" />
+          <ScalarProperty Name="USERTipoLancSaidaCom" ColumnName="USERTipoLancSaidaCom" />
+          <ScalarProperty Name="USERTipoLancSaidaAjuste" ColumnName="USERTipoLancSaidaAjuste" />
+          <ScalarProperty Name="USERLocalEstoqueIncub" ColumnName="USERLocalEstoqueIncub" />
+          <ScalarProperty Name="USERGeracaoFLIP" ColumnName="USERGeracaoFLIP" />
+          <ScalarProperty Name="USERCodigoFLIP" ColumnName="USERCodigoFLIP" />
+          <ScalarProperty Name="LocArmazPermiteRepasse" ColumnName="LocArmazPermiteRepasse" />
+          <ScalarProperty Name="LocArmazUltDataMod" ColumnName="LocArmazUltDataMod" />
+          <ScalarProperty Name="LocArmazInservivel" ColumnName="LocArmazInservivel" />
+          <ScalarProperty Name="LocArmazRelatorio" ColumnName="LocArmazRelatorio" />
+          <ScalarProperty Name="LocArmazStat" ColumnName="LocArmazStat" />
+          <ScalarProperty Name="LocArmazCodAlt" ColumnName="LocArmazCodAlt" />
+          <ScalarProperty Name="LocArmazCodRed" ColumnName="LocArmazCodRed" />
+          <ScalarProperty Name="LocArmazGrupo" ColumnName="LocArmazGrupo" />
+          <ScalarProperty Name="LocArmazCodEstrNiv" ColumnName="LocArmazCodEstrNiv" />
+          <ScalarProperty Name="LocArmazNome" ColumnName="LocArmazNome" />
+          <ScalarProperty Name="LocArmazCodEstr" ColumnName="LocArmazCodEstr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ITEM_REQ_MAT">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.ITEM_REQ_MAT">
+        <MappingFragment StoreEntitySet="ITEM_REQ_MAT">
+          <ScalarProperty Name="ITREQMATPRODCODALT" ColumnName="ITREQMATPRODCODALT" />
+          <ScalarProperty Name="IdProdId" ColumnName="IdProdId" />
+          <ScalarProperty Name="ItReqMatQtdPerdaCalc" ColumnName="ItReqMatQtdPerdaCalc" />
+          <ScalarProperty Name="ItReqMatQtdDevolCalc" ColumnName="ItReqMatQtdDevolCalc" />
+          <ScalarProperty Name="ITREQMATPRODOPERSEQ" ColumnName="ITREQMATPRODOPERSEQ" />
+          <ScalarProperty Name="ItReqMatQtdComprarCalc" ColumnName="ItReqMatQtdComprarCalc" />
+          <ScalarProperty Name="ItReqMatQtdEmpenCalc" ColumnName="ItReqMatQtdEmpenCalc" />
+          <ScalarProperty Name="ItReqMatSaldoQtdCalc" ColumnName="ItReqMatSaldoQtdCalc" />
+          <ScalarProperty Name="OBJCODESTR" ColumnName="OBJCODESTR" />
+          <ScalarProperty Name="ITREQMATENTCOD" ColumnName="ITREQMATENTCOD" />
+          <ScalarProperty Name="ItReqMatNomeLocadVeic" ColumnName="ItReqMatNomeLocadVeic" />
+          <ScalarProperty Name="ItReqMatDataDevVeic" ColumnName="ItReqMatDataDevVeic" />
+          <ScalarProperty Name="ItReqMatDataRetVeic" ColumnName="ItReqMatDataRetVeic" />
+          <ScalarProperty Name="ItReqMatCidLocacaoVeic" ColumnName="ItReqMatCidLocacaoVeic" />
+          <ScalarProperty Name="ItReqMatNomeHotel" ColumnName="ItReqMatNomeHotel" />
+          <ScalarProperty Name="ItReqMatDataCheckOut" ColumnName="ItReqMatDataCheckOut" />
+          <ScalarProperty Name="ItReqMatDataCheckIN" ColumnName="ItReqMatDataCheckIN" />
+          <ScalarProperty Name="ItReqMatCidHosped" ColumnName="ItReqMatCidHosped" />
+          <ScalarProperty Name="ItReqMatHoraChegada" ColumnName="ItReqMatHoraChegada" />
+          <ScalarProperty Name="ItReqMatHoraSaidaPassag" ColumnName="ItReqMatHoraSaidaPassag" />
+          <ScalarProperty Name="ItReqMatTrecho" ColumnName="ItReqMatTrecho" />
+          <ScalarProperty Name="ItReqMatDataSaidaPassag" ColumnName="ItReqMatDataSaidaPassag" />
+          <ScalarProperty Name="VerbaCompCod" ColumnName="VerbaCompCod" />
+          <ScalarProperty Name="ItReqMatQtdPerda" ColumnName="ItReqMatQtdPerda" />
+          <ScalarProperty Name="ItReqMatQtdDevol" ColumnName="ItReqMatQtdDevol" />
+          <ScalarProperty Name="ItReqMatDataHoraAtend" ColumnName="ItReqMatDataHoraAtend" />
+          <ScalarProperty Name="ItReqMatQtdSeparadaCalc" ColumnName="ItReqMatQtdSeparadaCalc" />
+          <ScalarProperty Name="ItReqMatQtdSeparada" ColumnName="ItReqMatQtdSeparada" />
+          <ScalarProperty Name="OrdProducNum" ColumnName="OrdProducNum" />
+          <ScalarProperty Name="ItReqMatTerc" ColumnName="ItReqMatTerc" />
+          <ScalarProperty Name="ItReqMatSeqDocOrig" ColumnName="ItReqMatSeqDocOrig" />
+          <ScalarProperty Name="ItReqMatDataNec" ColumnName="ItReqMatDataNec" />
+          <ScalarProperty Name="ItReqMatValLimite" ColumnName="ItReqMatValLimite" />
+          <ScalarProperty Name="ItReqMatEstornado" ColumnName="ItReqMatEstornado" />
+          <ScalarProperty Name="ItReqMatQtdAtendSim" ColumnName="ItReqMatQtdAtendSim" />
+          <ScalarProperty Name="ItReqMatUnidMedPosSim" ColumnName="ItReqMatUnidMedPosSim" />
+          <ScalarProperty Name="ItReqMatUnidMedCodSim" ColumnName="ItReqMatUnidMedCodSim" />
+          <ScalarProperty Name="ProdCodEstrSimilar" ColumnName="ProdCodEstrSimilar" />
+          <ScalarProperty Name="USEROrdProducNum" ColumnName="USEROrdProducNum" />
+          <ScalarProperty Name="ItReqMatProcSeqItAux" ColumnName="ItReqMatProcSeqItAux" />
+          <ScalarProperty Name="ClasseRecDespCodEstr" ColumnName="ClasseRecDespCodEstr" />
+          <ScalarProperty Name="ItReqMatQtdAtendCalc" ColumnName="ItReqMatQtdAtendCalc" />
+          <ScalarProperty Name="ItReqMatDataPedEnt" ColumnName="ItReqMatDataPedEnt" />
+          <ScalarProperty Name="ItReqMatNumProdEnt" ColumnName="ItReqMatNumProdEnt" />
+          <ScalarProperty Name="ItReqMatQtdEntregaParc" ColumnName="ItReqMatQtdEntregaParc" />
+          <ScalarProperty Name="ItReqMatDataProm" ColumnName="ItReqMatDataProm" />
+          <ScalarProperty Name="ItReqMatDataSolic" ColumnName="ItReqMatDataSolic" />
+          <ScalarProperty Name="ItReqMatNumPedEnt" ColumnName="ItReqMatNumPedEnt" />
+          <ScalarProperty Name="ItReqMatReqComp" ColumnName="ItReqMatReqComp" />
+          <ScalarProperty Name="ItReqMatProcSeqCompIt" ColumnName="ItReqMatProcSeqCompIt" />
+          <ScalarProperty Name="ItReqMatProcSeqIt" ColumnName="ItReqMatProcSeqIt" />
+          <ScalarProperty Name="ItReqMatCIData" ColumnName="ItReqMatCIData" />
+          <ScalarProperty Name="ItReqMatCINum" ColumnName="ItReqMatCINum" />
+          <ScalarProperty Name="FicTecProdSeq" ColumnName="FicTecProdSeq" />
+          <ScalarProperty Name="FicTecProdCodEstr" ColumnName="FicTecProdCodEstr" />
+          <ScalarProperty Name="LocArmazCodEstrDest" ColumnName="LocArmazCodEstrDest" />
+          <ScalarProperty Name="ItReqMatQtdCalc" ColumnName="ItReqMatQtdCalc" />
+          <ScalarProperty Name="ItReqMatQtdAtendMaior" ColumnName="ItReqMatQtdAtendMaior" />
+          <ScalarProperty Name="ItReqMatQtdOrig" ColumnName="ItReqMatQtdOrig" />
+          <ScalarProperty Name="ItReqMatObs" ColumnName="ItReqMatObs" />
+          <ScalarProperty Name="ItReqMatCancUsuCod" ColumnName="ItReqMatCancUsuCod" />
+          <ScalarProperty Name="ItReqMatCancData" ColumnName="ItReqMatCancData" />
+          <ScalarProperty Name="ItReqMatCanc" ColumnName="ItReqMatCanc" />
+          <ScalarProperty Name="ItReqMatAtendFuncCod" ColumnName="ItReqMatAtendFuncCod" />
+          <ScalarProperty Name="ItReqMatBxaEstqQtdAtend" ColumnName="ItReqMatBxaEstqQtdAtend" />
+          <ScalarProperty Name="ItReqMatQtdComprarEmpen" ColumnName="ItReqMatQtdComprarEmpen" />
+          <ScalarProperty Name="ItReqMatQtdComprar" ColumnName="ItReqMatQtdComprar" />
+          <ScalarProperty Name="ItReqMatQtdEmpen" ColumnName="ItReqMatQtdEmpen" />
+          <ScalarProperty Name="ItReqMatGeraEmpen" ColumnName="ItReqMatGeraEmpen" />
+          <ScalarProperty Name="ItReqMatAtendData" ColumnName="ItReqMatAtendData" />
+          <ScalarProperty Name="ItReqMatGeraPend" ColumnName="ItReqMatGeraPend" />
+          <ScalarProperty Name="ItReqMatSaldoQtd" ColumnName="ItReqMatSaldoQtd" />
+          <ScalarProperty Name="ItReqMatQtdAtend" ColumnName="ItReqMatQtdAtend" />
+          <ScalarProperty Name="ItReqMatQtd" ColumnName="ItReqMatQtd" />
+          <ScalarProperty Name="LocArmazCodEstr" ColumnName="LocArmazCodEstr" />
+          <ScalarProperty Name="ItReqMatUnidMedPos" ColumnName="ItReqMatUnidMedPos" />
+          <ScalarProperty Name="ItReqMatUnidMedCod" ColumnName="ItReqMatUnidMedCod" />
+          <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+          <ScalarProperty Name="ItReqMatSeq" ColumnName="ItReqMatSeq" />
+          <ScalarProperty Name="ReqMatNum" ColumnName="ReqMatNum" />
+          <ScalarProperty Name="EmpCod" ColumnName="EmpCod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RATEIO_REQ_MAT">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.RATEIO_REQ_MAT">
+        <MappingFragment StoreEntitySet="RATEIO_REQ_MAT">
+          <ScalarProperty Name="RatReqMatPerc" ColumnName="RatReqMatPerc" />
+          <ScalarProperty Name="CCtrlCodEstr" ColumnName="CCtrlCodEstr" />
+          <ScalarProperty Name="ClasseRecDespCodEstr" ColumnName="ClasseRecDespCodEstr" />
+          <ScalarProperty Name="ReqMatNum" ColumnName="ReqMatNum" />
+          <ScalarProperty Name="EmpCod" ColumnName="EmpCod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="REQ_MAT">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.REQ_MAT">
+        <MappingFragment StoreEntitySet="REQ_MAT">
+          <ScalarProperty Name="ReqMatDataMaiorAtend" ColumnName="ReqMatDataMaiorAtend" />
+          <ScalarProperty Name="ReqMatDataMenorAtend" ColumnName="ReqMatDataMenorAtend" />
+          <ScalarProperty Name="IDGERENCPROJ" ColumnName="IDGERENCPROJ" />
+          <ScalarProperty Name="IdVerbaGerencProj" ColumnName="IdVerbaGerencProj" />
+          <ScalarProperty Name="REQMATDATAHORADIG" ColumnName="REQMATDATAHORADIG" />
+          <ScalarProperty Name="OrdProducNum" ColumnName="OrdProducNum" />
+          <ScalarProperty Name="REQMATUSUCODRETIROU" ColumnName="REQMATUSUCODRETIROU" />
+          <ScalarProperty Name="REQMATCONFERESEPARAC" ColumnName="REQMATCONFERESEPARAC" />
+          <ScalarProperty Name="REQMATDATAFIMSEPARAC" ColumnName="REQMATDATAFIMSEPARAC" />
+          <ScalarProperty Name="REQMATDATAINISEPARAC" ColumnName="REQMATDATAINISEPARAC" />
+          <ScalarProperty Name="EntCodRetirou" ColumnName="EntCodRetirou" />
+          <ScalarProperty Name="EntCodSolic" ColumnName="EntCodSolic" />
+          <ScalarProperty Name="OBJCODESTR" ColumnName="OBJCODESTR" />
+          <ScalarProperty Name="REQMATENTCOD" ColumnName="REQMATENTCOD" />
+          <ScalarProperty Name="ReqMatTextoCanc" ColumnName="ReqMatTextoCanc" />
+          <ScalarProperty Name="MotCancCodEstr" ColumnName="MotCancCodEstr" />
+          <ScalarProperty Name="FinCompCod" ColumnName="FinCompCod" />
+          <ScalarProperty Name="ReqMatOrig" ColumnName="ReqMatOrig" />
+          <ScalarProperty Name="ProdCodEstrRefer" ColumnName="ProdCodEstrRefer" />
+          <ScalarProperty Name="ReqMatDataCanc" ColumnName="ReqMatDataCanc" />
+          <ScalarProperty Name="ReqMatUsuCodCanc" ColumnName="ReqMatUsuCodCanc" />
+          <ScalarProperty Name="ReqMatAlarmePrevSeparac" ColumnName="ReqMatAlarmePrevSeparac" />
+          <ScalarProperty Name="ReqMatDataPrevSeparac" ColumnName="ReqMatDataPrevSeparac" />
+          <ScalarProperty Name="ReqMatAlarmePrevRetirada" ColumnName="ReqMatAlarmePrevRetirada" />
+          <ScalarProperty Name="ReqMatDataPrevRetirada" ColumnName="ReqMatDataPrevRetirada" />
+          <ScalarProperty Name="ReqMatFuncCodConfere" ColumnName="ReqMatFuncCodConfere" />
+          <ScalarProperty Name="ReqMatDataConfere" ColumnName="ReqMatDataConfere" />
+          <ScalarProperty Name="ReqMatTipoConsumo" ColumnName="ReqMatTipoConsumo" />
+          <ScalarProperty Name="ReqMatGerouPed" ColumnName="ReqMatGerouPed" />
+          <ScalarProperty Name="ReqMatSucata" ColumnName="ReqMatSucata" />
+          <ScalarProperty Name="ReqMatDataRMOrig" ColumnName="ReqMatDataRMOrig" />
+          <ScalarProperty Name="VerbaCtrlProjSeq" ColumnName="VerbaCtrlProjSeq" />
+          <ScalarProperty Name="ColunaCod" ColumnName="ColunaCod" />
+          <ScalarProperty Name="LinhaCod" ColumnName="LinhaCod" />
+          <ScalarProperty Name="MatrizCod" ColumnName="MatrizCod" />
+          <ScalarProperty Name="TipoReqMatCod" ColumnName="TipoReqMatCod" />
+          <ScalarProperty Name="CtrlProjNum" ColumnName="CtrlProjNum" />
+          <ScalarProperty Name="ReqMatDataNec" ColumnName="ReqMatDataNec" />
+          <ScalarProperty Name="ReqMatValLimite" ColumnName="ReqMatValLimite" />
+          <ScalarProperty Name="ReqMatCodRota" ColumnName="ReqMatCodRota" />
+          <ScalarProperty Name="ReqMatEmpCod" ColumnName="ReqMatEmpCod" />
+          <ScalarProperty Name="ReqMatControle" ColumnName="ReqMatControle" />
+          <ScalarProperty Name="ReqMatNumAltDoc" ColumnName="ReqMatNumAltDoc" />
+          <ScalarProperty Name="ReqMatNumPedEnt" ColumnName="ReqMatNumPedEnt" />
+          <ScalarProperty Name="EntCod" ColumnName="EntCod" />
+          <ScalarProperty Name="ReqMatEmpen" ColumnName="ReqMatEmpen" />
+          <ScalarProperty Name="ReqMatDocRespRet" ColumnName="ReqMatDocRespRet" />
+          <ScalarProperty Name="ReqMatNomeRespRet" ColumnName="ReqMatNomeRespRet" />
+          <ScalarProperty Name="LocArmazCodEstr" ColumnName="LocArmazCodEstr" />
+          <ScalarProperty Name="ReqMatAlarmeValidade" ColumnName="ReqMatAlarmeValidade" />
+          <ScalarProperty Name="ReqMatDataValidade" ColumnName="ReqMatDataValidade" />
+          <ScalarProperty Name="ReqMatTipoAtend" ColumnName="ReqMatTipoAtend" />
+          <ScalarProperty Name="ReqMatFuncCodSeparac" ColumnName="ReqMatFuncCodSeparac" />
+          <ScalarProperty Name="ReqMatDataSeparac" ColumnName="ReqMatDataSeparac" />
+          <ScalarProperty Name="ReqMatDataAprov" ColumnName="ReqMatDataAprov" />
+          <ScalarProperty Name="ReqMatFuncCodAprov" ColumnName="ReqMatFuncCodAprov" />
+          <ScalarProperty Name="ReqMatContatoFone" ColumnName="ReqMatContatoFone" />
+          <ScalarProperty Name="ReqMatContatoNome" ColumnName="ReqMatContatoNome" />
+          <ScalarProperty Name="ReqMatNumDocEmit" ColumnName="ReqMatNumDocEmit" />
+          <ScalarProperty Name="AreaRespCod" ColumnName="AreaRespCod" />
+          <ScalarProperty Name="ReqMatOper" ColumnName="ReqMatOper" />
+          <ScalarProperty Name="UsuCod" ColumnName="UsuCod" />
+          <ScalarProperty Name="ReqMatFuncCodRetirou" ColumnName="ReqMatFuncCodRetirou" />
+          <ScalarProperty Name="ReqMatFuncCodEntregou" ColumnName="ReqMatFuncCodEntregou" />
+          <ScalarProperty Name="ReqMatDataEntrega" ColumnName="ReqMatDataEntrega" />
+          <ScalarProperty Name="ReqMatSeqDoc" ColumnName="ReqMatSeqDoc" />
+          <ScalarProperty Name="ReqMatTexto" ColumnName="ReqMatTexto" />
+          <ScalarProperty Name="TipoLancCod" ColumnName="TipoLancCod" />
+          <ScalarProperty Name="ReqMatBaixouEstq" ColumnName="ReqMatBaixouEstq" />
+          <ScalarProperty Name="ReqMatRef" ColumnName="ReqMatRef" />
+          <ScalarProperty Name="ReqMatStat" ColumnName="ReqMatStat" />
+          <ScalarProperty Name="ReqMatNumDoc" ColumnName="ReqMatNumDoc" />
+          <ScalarProperty Name="ReqMatSerieDoc" ColumnName="ReqMatSerieDoc" />
+          <ScalarProperty Name="ReqMatEspecDoc" ColumnName="ReqMatEspecDoc" />
+          <ScalarProperty Name="FuncCod" ColumnName="FuncCod" />
+          <ScalarProperty Name="CCtrlCodEstr" ColumnName="CCtrlCodEstr" />
+          <ScalarProperty Name="ReqMatDescr" ColumnName="ReqMatDescr" />
+          <ScalarProperty Name="ReqMatData" ColumnName="ReqMatData" />
+          <ScalarProperty Name="ReqMatNum" ColumnName="ReqMatNum" />
+          <ScalarProperty Name="EmpCod" ColumnName="EmpCod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="REQ_MAT_CLASSE_REC_DESP">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.REQ_MAT_CLASSE_REC_DESP">
+        <MappingFragment StoreEntitySet="REQ_MAT_CLASSE_REC_DESP">
+          <ScalarProperty Name="ReqMatClasseRecDespPerc" ColumnName="ReqMatClasseRecDespPerc" />
+          <ScalarProperty Name="ClasseRecDespCodEstr" ColumnName="ClasseRecDespCodEstr" />
+          <ScalarProperty Name="ReqMatNum" ColumnName="ReqMatNum" />
+          <ScalarProperty Name="EmpCod" ColumnName="EmpCod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ReqMaterialAtendeAutomatico" FunctionName="DiarioProducaoRacaoModel.Store.reqmaterial_atende_automat" />
+    <EntitySetMapping Name="ESTQ_LOC_ARMAZ">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.ESTQ_LOC_ARMAZ">
+        <MappingFragment StoreEntitySet="ESTQ_LOC_ARMAZ">
+          <ScalarProperty Name="IdProdId" ColumnName="IdProdId" />
+          <ScalarProperty Name="EstqLocArmazStat" ColumnName="EstqLocArmazStat" />
+          <ScalarProperty Name="EstqLocArmazEntraRatSldZero" ColumnName="EstqLocArmazEntraRatSldZero" />
+          <ScalarProperty Name="EstqLocArmazQtdLim" ColumnName="EstqLocArmazQtdLim" />
+          <ScalarProperty Name="EstqLocArmazLocaliz" ColumnName="EstqLocArmazLocaliz" />
+          <ScalarProperty Name="EstqLocArmazPrior" ColumnName="EstqLocArmazPrior" />
+          <ScalarProperty Name="EstqLocArmazQtd" ColumnName="EstqLocArmazQtd" />
+          <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+          <ScalarProperty Name="LocArmazCodEstr" ColumnName="LocArmazCodEstr" />
+          <ScalarProperty Name="EmpCod" ColumnName="EmpCod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROD_UNID_MED">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.PROD_UNID_MED">
+        <MappingFragment StoreEntitySet="PROD_UNID_MED">
+          <ScalarProperty Name="ProdUnidMedVisualAplicExt" ColumnName="ProdUnidMedVisualAplicExt" />
+          <ScalarProperty Name="USERExibeRastrIncubatorio" ColumnName="USERExibeRastrIncubatorio" />
+          <ScalarProperty Name="PRODUNIDMEDACONDPALET" ColumnName="PRODUNIDMEDACONDPALET" />
+          <ScalarProperty Name="PRODUNIDMEDPALETIZACAO" ColumnName="PRODUNIDMEDPALETIZACAO" />
+          <ScalarProperty Name="PRODUNIDMEDALTLIQ" ColumnName="PRODUNIDMEDALTLIQ" />
+          <ScalarProperty Name="PRODUNIDMEDALTBRUTA" ColumnName="PRODUNIDMEDALTBRUTA" />
+          <ScalarProperty Name="PRODUNIDMEDLARGLIQ" ColumnName="PRODUNIDMEDLARGLIQ" />
+          <ScalarProperty Name="PRODUNIDMEDLARGBRUTA" ColumnName="PRODUNIDMEDLARGBRUTA" />
+          <ScalarProperty Name="PRODUNIDMEDCOMPLIQ" ColumnName="PRODUNIDMEDCOMPLIQ" />
+          <ScalarProperty Name="PRODUNIDMEDCOMPBRUTO" ColumnName="PRODUNIDMEDCOMPBRUTO" />
+          <ScalarProperty Name="ProdUnidMedPrNeg" ColumnName="ProdUnidMedPrNeg" />
+          <ScalarProperty Name="ProdUnidMedCodBarUnidTrib" ColumnName="ProdUnidMedCodBarUnidTrib" />
+          <ScalarProperty Name="ProdUnidMedTributExport" ColumnName="ProdUnidMedTributExport" />
+          <ScalarProperty Name="PRODUNIDMEDTRIBUT" ColumnName="PRODUNIDMEDTRIBUT" />
+          <ScalarProperty Name="ProdUnidMedSeqFCI" ColumnName="ProdUnidMedSeqFCI" />
+          <ScalarProperty Name="ProdUnidMedFatorFCI" ColumnName="ProdUnidMedFatorFCI" />
+          <ScalarProperty Name="ProdUnidMedFatorMultFornecto" ColumnName="ProdUnidMedFatorMultFornecto" />
+          <ScalarProperty Name="ProdUnidMedObjVenda" ColumnName="ProdUnidMedObjVenda" />
+          <ScalarProperty Name="ProdUnidMedEntrega" ColumnName="ProdUnidMedEntrega" />
+          <ScalarProperty Name="ProdUnidMedCubagRod" ColumnName="ProdUnidMedCubagRod" />
+          <ScalarProperty Name="ProdUnidMedUltDataMod" ColumnName="ProdUnidMedUltDataMod" />
+          <ScalarProperty Name="ProdUnidMedPadMovEstq" ColumnName="ProdUnidMedPadMovEstq" />
+          <ScalarProperty Name="ProdUnidMedCodAlt" ColumnName="ProdUnidMedCodAlt" />
+          <ScalarProperty Name="ProdUnidMedDep" ColumnName="ProdUnidMedDep" />
+          <ScalarProperty Name="ProdUnidMedExibeAltVenda" ColumnName="ProdUnidMedExibeAltVenda" />
+          <ScalarProperty Name="ProdUnidMedExibeLargVenda" ColumnName="ProdUnidMedExibeLargVenda" />
+          <ScalarProperty Name="ProdUnidMedExibeComprimVenda" ColumnName="ProdUnidMedExibeComprimVenda" />
+          <ScalarProperty Name="ProdUnidMedSeq" ColumnName="ProdUnidMedSeq" />
+          <ScalarProperty Name="ProdUnidMedPadVenda" ColumnName="ProdUnidMedPadVenda" />
+          <ScalarProperty Name="ProdUnidMedProduc" ColumnName="ProdUnidMedProduc" />
+          <ScalarProperty Name="ProdUnidMedCompra" ColumnName="ProdUnidMedCompra" />
+          <ScalarProperty Name="ProdUnidMedEstat" ColumnName="ProdUnidMedEstat" />
+          <ScalarProperty Name="ProdUnidMedLoteUnico" ColumnName="ProdUnidMedLoteUnico" />
+          <ScalarProperty Name="ProdUnidMedDataValidFim" ColumnName="ProdUnidMedDataValidFim" />
+          <ScalarProperty Name="ProdUnidMedDataValidInic" ColumnName="ProdUnidMedDataValidInic" />
+          <ScalarProperty Name="ProdUnidMedFatorMult" ColumnName="ProdUnidMedFatorMult" />
+          <ScalarProperty Name="ProdUnidMedPesoQtd" ColumnName="ProdUnidMedPesoQtd" />
+          <ScalarProperty Name="ProdUnidMedQtdMinFat" ColumnName="ProdUnidMedQtdMinFat" />
+          <ScalarProperty Name="ProdUnidMedCodBar" ColumnName="ProdUnidMedCodBar" />
+          <ScalarProperty Name="ProdUnidMedPesoFD" ColumnName="ProdUnidMedPesoFD" />
+          <ScalarProperty Name="ProdUnidMedPeso" ColumnName="ProdUnidMedPeso" />
+          <ScalarProperty Name="ProdUnidMedPos" ColumnName="ProdUnidMedPos" />
+          <ScalarProperty Name="ProdUnidMedCod" ColumnName="ProdUnidMedCod" />
+          <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUTO1">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.PRODUTO1">
+        <MappingFragment StoreEntitySet="PRODUTO1">
+          <ScalarProperty Name="ProdSegRocha" ColumnName="ProdSegRocha" />
+          <ScalarProperty Name="IdTipoProdPpcp" ColumnName="IdTipoProdPpcp" />
+          <ScalarProperty Name="IDCodigoConsumo" ColumnName="IDCodigoConsumo" />
+          <ScalarProperty Name="ProdTpLigacao" ColumnName="ProdTpLigacao" />
+          <ScalarProperty Name="GrupTensaoCod" ColumnName="GrupTensaoCod" />
+          <ScalarProperty Name="TipoAssinCod" ColumnName="TipoAssinCod" />
+          <ScalarProperty Name="PRODPERMLOTEVENCIDO" ColumnName="PRODPERMLOTEVENCIDO" />
+          <ScalarProperty Name="ProdProdutAssocVend" ColumnName="ProdProdutAssocVend" />
+          <ScalarProperty Name="USERFaseRacao" ColumnName="USERFaseRacao" />
+          <ScalarProperty Name="USERStatusPedidoRacao" ColumnName="USERStatusPedidoRacao" />
+          <ScalarProperty Name="USERInsumoDosado" ColumnName="USERInsumoDosado" />
+          <ScalarProperty Name="ProdFabricEscalRelev" ColumnName="ProdFabricEscalRelev" />
+          <ScalarProperty Name="ProdValKgSemICMS" ColumnName="ProdValKgSemICMS" />
+          <ScalarProperty Name="ProdPercGasNatImp" ColumnName="ProdPercGasNatImp" />
+          <ScalarProperty Name="ProdPercGasNatNac" ColumnName="ProdPercGasNatNac" />
+          <ScalarProperty Name="ProdPercGLP" ColumnName="ProdPercGLP" />
+          <ScalarProperty Name="ProdDescrANP" ColumnName="ProdDescrANP" />
+          <ScalarProperty Name="ProdUnidPrNeg" ColumnName="ProdUnidPrNeg" />
+          <ScalarProperty Name="ProdCodAnvisa" ColumnName="ProdCodAnvisa" />
+          <ScalarProperty Name="ProdNormaAplic" ColumnName="ProdNormaAplic" />
+          <ScalarProperty Name="ProdSimilar" ColumnName="ProdSimilar" />
+          <ScalarProperty Name="IDTipoServReinf" ColumnName="IDTipoServReinf" />
+          <ScalarProperty Name="ProdParticipaSaldoDesmVend" ColumnName="ProdParticipaSaldoDesmVend" />
+          <ScalarProperty Name="ProdObrigAtendRMLibOP" ColumnName="ProdObrigAtendRMLibOP" />
+          <ScalarProperty Name="ProdPesoRateioEstrCusto" ColumnName="ProdPesoRateioEstrCusto" />
+          <ScalarProperty Name="ProdIndEscRelev" ColumnName="ProdIndEscRelev" />
+          <ScalarProperty Name="USERTLBaixaAdicProd" ColumnName="USERTLBaixaAdicProd" />
+          <ScalarProperty Name="USERTipoLinha" ColumnName="USERTipoLinha" />
+          <ScalarProperty Name="USERTipoLancSaidaProd" ColumnName="USERTipoLancSaidaProd" />
+          <ScalarProperty Name="USERTipoLancEntradaProd" ColumnName="USERTipoLancEntradaProd" />
+          <ScalarProperty Name="USERPRODDATAICMSST" ColumnName="USERPRODDATAICMSST" />
+          <ScalarProperty Name="USERPRODCODICMSST" ColumnName="USERPRODCODICMSST" />
+          <ScalarProperty Name="USERPpcpKg01Batida" ColumnName="USERPpcpKg01Batida" />
+          <ScalarProperty Name="USERNumFormula" ColumnName="USERNumFormula" />
+          <ScalarProperty Name="USERLinhagemRRC" ColumnName="USERLinhagemRRC" />
+          <ScalarProperty Name="USEREmpresaLinha" ColumnName="USEREmpresaLinha" />
+          <ScalarProperty Name="USERCodigoCHIC" ColumnName="USERCodigoCHIC" />
+          <ScalarProperty Name="PRODOPFINALIZAPONTQTDNEC" ColumnName="PRODOPFINALIZAPONTQTDNEC" />
+          <ScalarProperty Name="PRODPATHARQUIVO2" ColumnName="PRODPATHARQUIVO2" />
+          <ScalarProperty Name="PRODNOMERELAT2" ColumnName="PRODNOMERELAT2" />
+          <ScalarProperty Name="ProdDesconsidPesagem" ColumnName="ProdDesconsidPesagem" />
+          <ScalarProperty Name="ProdNecessitaSSCC" ColumnName="ProdNecessitaSSCC" />
+          <ScalarProperty Name="ProdNomeRelat" ColumnName="ProdNomeRelat" />
+          <ScalarProperty Name="ProdObrigEmbAtendPv" ColumnName="ProdObrigEmbAtendPv" />
+          <ScalarProperty Name="ProdPesoFixoMaximo" ColumnName="ProdPesoFixoMaximo" />
+          <ScalarProperty Name="ProdDtUltAtualiz" ColumnName="ProdDtUltAtualiz" />
+          <ScalarProperty Name="PRODCTRLCARGAORDEMIMPRESS" ColumnName="PRODCTRLCARGAORDEMIMPRESS" />
+          <ScalarProperty Name="ProdTerc" ColumnName="ProdTerc" />
+          <ScalarProperty Name="ProdHotelQtdEstrela" ColumnName="ProdHotelQtdEstrela" />
+          <ScalarProperty Name="ProdBenefic" ColumnName="ProdBenefic" />
+          <ScalarProperty Name="ProdFabricProp" ColumnName="ProdFabricProp" />
+          <ScalarProperty Name="RefPautaCod" ColumnName="RefPautaCod" />
+          <ScalarProperty Name="PRODSTATDMI" ColumnName="PRODSTATDMI" />
+          <ScalarProperty Name="ProdPercTotAproxImpost" ColumnName="ProdPercTotAproxImpost" />
+          <ScalarProperty Name="ProdEntEstqApontUltOper" ColumnName="ProdEntEstqApontUltOper" />
+          <ScalarProperty Name="DesCodEstr" ColumnName="DesCodEstr" />
+          <ScalarProperty Name="RegraPagtoEntCod" ColumnName="RegraPagtoEntCod" />
+          <ScalarProperty Name="ProdNecessitaCA" ColumnName="ProdNecessitaCA" />
+          <ScalarProperty Name="ProdVacina" ColumnName="ProdVacina" />
+          <ScalarProperty Name="ProdCodART" ColumnName="ProdCodART" />
+          <ScalarProperty Name="ProdEntraCalcQtdTotVenda" ColumnName="ProdEntraCalcQtdTotVenda" />
+          <ScalarProperty Name="ProdCodMS" ColumnName="ProdCodMS" />
+          <ScalarProperty Name="ProdBloqVendConectExterno" ColumnName="ProdBloqVendConectExterno" />
+          <ScalarProperty Name="ProdTurDataBase" ColumnName="ProdTurDataBase" />
+          <ScalarProperty Name="ProdCertificado" ColumnName="ProdCertificado" />
+          <ScalarProperty Name="ProdDeduzCOFINSSegCusto" ColumnName="ProdDeduzCOFINSSegCusto" />
+          <ScalarProperty Name="ProdDeduzPISSegCusto" ColumnName="ProdDeduzPISSegCusto" />
+          <ScalarProperty Name="ProdDeduzIPISegCusto" ColumnName="ProdDeduzIPISegCusto" />
+          <ScalarProperty Name="ProdDeduzICMSSTSegCusto" ColumnName="ProdDeduzICMSSTSegCusto" />
+          <ScalarProperty Name="ProdDeduzICMSSegCusto" ColumnName="ProdDeduzICMSSegCusto" />
+          <ScalarProperty Name="ProdCtrlCustoFIFO" ColumnName="ProdCtrlCustoFIFO" />
+          <ScalarProperty Name="GrpProdCodObjVend" ColumnName="GrpProdCodObjVend" />
+          <ScalarProperty Name="MarcaProdCodObjVend" ColumnName="MarcaProdCodObjVend" />
+          <ScalarProperty Name="ProdTaxaDuBruLiq" ColumnName="ProdTaxaDuBruLiq" />
+          <ScalarProperty Name="ProdMarcaComerc" ColumnName="ProdMarcaComerc" />
+          <ScalarProperty Name="ProdCodGrupoIncidPisCofins" ColumnName="ProdCodGrupoIncidPisCofins" />
+          <ScalarProperty Name="ProdTabIncidPisCofinsCod" ColumnName="ProdTabIncidPisCofinsCod" />
+          <ScalarProperty Name="ProdImprimeNumSerNFe" ColumnName="ProdImprimeNumSerNFe" />
+          <ScalarProperty Name="ProdCodEstrProdPaiProj" ColumnName="ProdCodEstrProdPaiProj" />
+          <ScalarProperty Name="ProdEntraRegInventSpedSinteg" ColumnName="ProdEntraRegInventSpedSinteg" />
+          <ScalarProperty Name="ProdCodSeloControleIPI" ColumnName="ProdCodSeloControleIPI" />
+          <ScalarProperty Name="ProdCodEnquadIPI" ColumnName="ProdCodEnquadIPI" />
+          <ScalarProperty Name="ProdCorteDedo" ColumnName="ProdCorteDedo" />
+          <ScalarProperty Name="ProdCalcQtdPorParticipItOS" ColumnName="ProdCalcQtdPorParticipItOS" />
+          <ScalarProperty Name="ProdPossuiTarget" ColumnName="ProdPossuiTarget" />
+          <ScalarProperty Name="ProdModoAtualizacao" ColumnName="ProdModoAtualizacao" />
+          <ScalarProperty Name="ProdObrigRelacLoteOP" ColumnName="ProdObrigRelacLoteOP" />
+          <ScalarProperty Name="ProdGeraReqMatTransf" ColumnName="ProdGeraReqMatTransf" />
+          <ScalarProperty Name="ProdRetPermSelManualCarga" ColumnName="ProdRetPermSelManualCarga" />
+          <ScalarProperty Name="ProdVisualReembOnline" ColumnName="ProdVisualReembOnline" />
+          <ScalarProperty Name="ProdPrefer" ColumnName="ProdPrefer" />
+          <ScalarProperty Name="ProdCidCodBloq" ColumnName="ProdCidCodBloq" />
+          <ScalarProperty Name="ProdTipoTabPV" ColumnName="ProdTipoTabPV" />
+          <ScalarProperty Name="ProdEntraCalcVerbaProjeto" ColumnName="ProdEntraCalcVerbaProjeto" />
+          <ScalarProperty Name="ProdServMobilDesmobil" ColumnName="ProdServMobilDesmobil" />
+          <ScalarProperty Name="ProdUltDataMod" ColumnName="ProdUltDataMod" />
+          <ScalarProperty Name="ProdVisPocket" ColumnName="ProdVisPocket" />
+          <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SALDO_ESTQ_DATA">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.SALDO_ESTQ_DATA">
+        <MappingFragment StoreEntitySet="SALDO_ESTQ_DATA">
+          <ScalarProperty Name="IdProdId" ColumnName="IdProdId" />
+          <ScalarProperty Name="SALDOESTQDATACUSTUNITICMSREC" ColumnName="SALDOESTQDATACUSTUNITICMSREC" />
+          <ScalarProperty Name="SALDOESTQDATAVALICMSREC" ColumnName="SALDOESTQDATAVALICMSREC" />
+          <ScalarProperty Name="SaldoEstqDataSegValSegMoeda" ColumnName="SaldoEstqDataSegValSegMoeda" />
+          <ScalarProperty Name="SaldoEstqDataSegVal" ColumnName="SaldoEstqDataSegVal" />
+          <ScalarProperty Name="SaldoEstqDataSegCustUnitSegM" ColumnName="SaldoEstqDataSegCustUnitSegM" />
+          <ScalarProperty Name="SaldoEstqDataSegCustoUnit" ColumnName="SaldoEstqDataSegCustoUnit" />
+          <ScalarProperty Name="SaldoEstqDataCustoUnitSegMoeda" ColumnName="SaldoEstqDataCustoUnitSegMoeda" />
+          <ScalarProperty Name="SaldoEstqDataValSegMoeda" ColumnName="SaldoEstqDataValSegMoeda" />
+          <ScalarProperty Name="SaldoEstqDataCustoUnit" ColumnName="SaldoEstqDataCustoUnit" />
+          <ScalarProperty Name="SaldoEstqDataVal" ColumnName="SaldoEstqDataVal" />
+          <ScalarProperty Name="SaldoEstqDataQtd" ColumnName="SaldoEstqDataQtd" />
+          <ScalarProperty Name="SaldoEstqData" ColumnName="SaldoEstqData" />
+          <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+          <ScalarProperty Name="EmpCod" ColumnName="EmpCod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="EstornaAtendReqMat" FunctionName="DiarioProducaoRacaoModel.Store.ESTORNA_ATEND_REQMAT" />
+    <FunctionImportMapping FunctionImportName="DeleteReqmat" FunctionName="DiarioProducaoRacaoModel.Store.DELETE_REQMAT" />
+    <FunctionImportMapping FunctionImportName="DeleteOrdProduc" FunctionName="DiarioProducaoRacaoModel.Store.DELETE_ORD_PRODUC" />
+    <FunctionImportMapping FunctionImportName="DeleteNecPlanProduc" FunctionName="DiarioProducaoRacaoModel.Store.DELETE_NEC_PLAN_PRODUC" />
+    <FunctionImportMapping FunctionImportName="DeletePlanProduc" FunctionName="DiarioProducaoRacaoModel.Store.DELETE_PLAN_PRODUC" />
+    <FunctionImportMapping FunctionImportName="DeleteApontOrdProduc" FunctionName="DiarioProducaoRacaoModel.Store.DELETE_APONT_ORD_PRODUC" />
+    <FunctionImportMapping FunctionImportName="DeleteOperOrdProduc" FunctionName="DiarioProducaoRacaoModel.Store.DELETE_OPER_ORD_PRODUC" />
+    <EntitySetMapping Name="PRODUTO">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.PRODUTO">
+        <MappingFragment StoreEntitySet="PRODUTO">
+          <ScalarProperty Name="ProdEntraCtrlCarga" ColumnName="ProdEntraCtrlCarga" />
+          <ScalarProperty Name="ProdDescrBec" ColumnName="ProdDescrBec" />
+          <ScalarProperty Name="ClasseBecCod" ColumnName="ClasseBecCod" />
+          <ScalarProperty Name="ProdDataSolicNatDesp" ColumnName="ProdDataSolicNatDesp" />
+          <ScalarProperty Name="ProdDataRecCodBEC" ColumnName="ProdDataRecCodBEC" />
+          <ScalarProperty Name="ProdDataSolicCodBEC" ColumnName="ProdDataSolicCodBEC" />
+          <ScalarProperty Name="ProdCodBEC" ColumnName="ProdCodBEC" />
+          <ScalarProperty Name="ProdRetornavel" ColumnName="ProdRetornavel" />
+          <ScalarProperty Name="ProdNecConferDescarga" ColumnName="ProdNecConferDescarga" />
+          <ScalarProperty Name="ProdValUnitVendaTabPV" ColumnName="ProdValUnitVendaTabPV" />
+          <ScalarProperty Name="ProdTipoMedic" ColumnName="ProdTipoMedic" />
+          <ScalarProperty Name="ProdIndicTipoArmaFogo" ColumnName="ProdIndicTipoArmaFogo" />
+          <ScalarProperty Name="TipoProdFiscCod" ColumnName="TipoProdFiscCod" />
+          <ScalarProperty Name="ProdPautaCoefConvPisCofins" ColumnName="ProdPautaCoefConvPisCofins" />
+          <ScalarProperty Name="ModoConservCod" ColumnName="ModoConservCod" />
+          <ScalarProperty Name="ModoEstocCod" ColumnName="ModoEstocCod" />
+          <ScalarProperty Name="ManuseioCod" ColumnName="ManuseioCod" />
+          <ScalarProperty Name="EmbalagemCod" ColumnName="EmbalagemCod" />
+          <ScalarProperty Name="EstFisCod" ColumnName="EstFisCod" />
+          <ScalarProperty Name="FragilidadeCod" ColumnName="FragilidadeCod" />
+          <ScalarProperty Name="PericulosidadeCod" ColumnName="PericulosidadeCod" />
+          <ScalarProperty Name="ToxidadeCod" ColumnName="ToxidadeCod" />
+          <ScalarProperty Name="ProdPrzValidDias" ColumnName="ProdPrzValidDias" />
+          <ScalarProperty Name="ProdPrzValid" ColumnName="ProdPrzValid" />
+          <ScalarProperty Name="ProdQtdInstalTotal" ColumnName="ProdQtdInstalTotal" />
+          <ScalarProperty Name="ProdQtdInstalEquipSist" ColumnName="ProdQtdInstalEquipSist" />
+          <ScalarProperty Name="ProdInspFabricaObs" ColumnName="ProdInspFabricaObs" />
+          <ScalarProperty Name="ProdInspFabrica" ColumnName="ProdInspFabrica" />
+          <ScalarProperty Name="ProdUtilizacao" ColumnName="ProdUtilizacao" />
+          <ScalarProperty Name="ProdPercMaiorValor" ColumnName="ProdPercMaiorValor" />
+          <ScalarProperty Name="ProdPercMenorValor" ColumnName="ProdPercMenorValor" />
+          <ScalarProperty Name="ProdPercMaiorQtd" ColumnName="ProdPercMaiorQtd" />
+          <ScalarProperty Name="ProdPercMenorQtd" ColumnName="ProdPercMenorQtd" />
+          <ScalarProperty Name="ProdCapacEmbalagem" ColumnName="ProdCapacEmbalagem" />
+          <ScalarProperty Name="TipoProdPautaCod" ColumnName="TipoProdPautaCod" />
+          <ScalarProperty Name="ProdPossuiTribPauta" ColumnName="ProdPossuiTribPauta" />
+          <ScalarProperty Name="ProdBaixaEstqComp" ColumnName="ProdBaixaEstqComp" />
+          <ScalarProperty Name="ProdEntraRotSac" ColumnName="ProdEntraRotSac" />
+          <ScalarProperty Name="ClasTurCodEstr" ColumnName="ClasTurCodEstr" />
+          <ScalarProperty Name="ProdCalcQtdItPvQtdLote" ColumnName="ProdCalcQtdItPvQtdLote" />
+          <ScalarProperty Name="ProdQtdLoteSaldoLote" ColumnName="ProdQtdLoteSaldoLote" />
+          <ScalarProperty Name="ProdTaraPesoFixo" ColumnName="ProdTaraPesoFixo" />
+          <ScalarProperty Name="ProdPesoFixoMinimo" ColumnName="ProdPesoFixoMinimo" />
+          <ScalarProperty Name="ProdPesoFixo" ColumnName="ProdPesoFixo" />
+          <ScalarProperty Name="ProdPossuiPesoFixo" ColumnName="ProdPossuiPesoFixo" />
+          <ScalarProperty Name="ProdComponPossuiRecalcQtd" ColumnName="ProdComponPossuiRecalcQtd" />
+          <ScalarProperty Name="ProdGrauConcentracao" ColumnName="ProdGrauConcentracao" />
+          <ScalarProperty Name="ProdCodAnp" ColumnName="ProdCodAnp" />
+          <ScalarProperty Name="ProdQtdFixacao" ColumnName="ProdQtdFixacao" />
+          <ScalarProperty Name="ProdEntraArqPosicaoEstq" ColumnName="ProdEntraArqPosicaoEstq" />
+          <ScalarProperty Name="ProdUtilizPesoPadCalcVol" ColumnName="ProdUtilizPesoPadCalcVol" />
+          <ScalarProperty Name="ProdPossuiICMSSTValor" ColumnName="ProdPossuiICMSSTValor" />
+          <ScalarProperty Name="ProdRelatorio" ColumnName="ProdRelatorio" />
+          <ScalarProperty Name="ProdAplicOrdServ" ColumnName="ProdAplicOrdServ" />
+          <ScalarProperty Name="ProdQtdDiasLiberaAeracao" ColumnName="ProdQtdDiasLiberaAeracao" />
+          <ScalarProperty Name="ProdEntraCtrlEsterilizacao" ColumnName="ProdEntraCtrlEsterilizacao" />
+          <ScalarProperty Name="ProdTipoComb" ColumnName="ProdTipoComb" />
+          <ScalarProperty Name="ProdAlteraReservaOnLine" ColumnName="ProdAlteraReservaOnLine" />
+          <ScalarProperty Name="ProdExcluiReservaOnLine" ColumnName="ProdExcluiReservaOnLine" />
+          <ScalarProperty Name="ProdIncluiReservaOnLine" ColumnName="ProdIncluiReservaOnLine" />
+          <ScalarProperty Name="ProdLoteEmbalagVenda" ColumnName="ProdLoteEmbalagVenda" />
+          <ScalarProperty Name="FxaProdCod" ColumnName="FxaProdCod" />
+          <ScalarProperty Name="CategProdCod" ColumnName="CategProdCod" />
+          <ScalarProperty Name="AptProdCod" ColumnName="AptProdCod" />
+          <ScalarProperty Name="EspecProdCod" ColumnName="EspecProdCod" />
+          <ScalarProperty Name="ProdRegExportado" ColumnName="ProdRegExportado" />
+          <ScalarProperty Name="PRODGERARESTURSEMDADOSCOMPL" ColumnName="PRODGERARESTURSEMDADOSCOMPL" />
+          <ScalarProperty Name="ProdQtdMaiorOrdProduc" ColumnName="ProdQtdMaiorOrdProduc" />
+          <ScalarProperty Name="ProdPercMinDetalhamento" ColumnName="ProdPercMinDetalhamento" />
+          <ScalarProperty Name="ProdPercMaxDetalhamento" ColumnName="ProdPercMaxDetalhamento" />
+          <ScalarProperty Name="ProdPossuiDetalhamentoDimen" ColumnName="ProdPossuiDetalhamentoDimen" />
+          <ScalarProperty Name="ProdCalcDiariaPor" ColumnName="ProdCalcDiariaPor" />
+          <ScalarProperty Name="ProdTipoUtiliz" ColumnName="ProdTipoUtiliz" />
+          <ScalarProperty Name="ProdAgrupaQtdRes" ColumnName="ProdAgrupaQtdRes" />
+          <ScalarProperty Name="ProdProducPorKanban" ColumnName="ProdProducPorKanban" />
+          <ScalarProperty Name="ProdApareceDestacadoWeb" ColumnName="ProdApareceDestacadoWeb" />
+          <ScalarProperty Name="ProdVisPagInicWeb" ColumnName="ProdVisPagInicWeb" />
+          <ScalarProperty Name="ProdIncluiISSPrecoCusto" ColumnName="ProdIncluiISSPrecoCusto" />
+          <ScalarProperty Name="ProdIncluiISSPrecoVenda" ColumnName="ProdIncluiISSPrecoVenda" />
+          <ScalarProperty Name="ProdTextoHist" ColumnName="ProdTextoHist" />
+          <ScalarProperty Name="ProdEstqAtualizaCustoOnLine" ColumnName="ProdEstqAtualizaCustoOnLine" />
+          <ScalarProperty Name="ProdModelo" ColumnName="ProdModelo" />
+          <ScalarProperty Name="GENSERVCOD" ColumnName="GENSERVCOD" />
+          <ScalarProperty Name="ProdAtivEconCodEstrSubDiv" ColumnName="ProdAtivEconCodEstrSubDiv" />
+          <ScalarProperty Name="AtivEconCodEstr" ColumnName="AtivEconCodEstr" />
+          <ScalarProperty Name="ProdRestritivo" ColumnName="ProdRestritivo" />
+          <ScalarProperty Name="ProdTaxaAdm" ColumnName="ProdTaxaAdm" />
+          <ScalarProperty Name="TribBCod" ColumnName="TribBCod" />
+          <ScalarProperty Name="ProdIgnoraHomForn" ColumnName="ProdIgnoraHomForn" />
+          <ScalarProperty Name="ProdEntraPesqInternet" ColumnName="ProdEntraPesqInternet" />
+          <ScalarProperty Name="ProdGeraLoteAutomPPCP" ColumnName="ProdGeraLoteAutomPPCP" />
+          <ScalarProperty Name="ProdUtilizDimensaoLote" ColumnName="ProdUtilizDimensaoLote" />
+          <ScalarProperty Name="ProdQtdDiasDataValidLotePPCP" ColumnName="ProdQtdDiasDataValidLotePPCP" />
+          <ScalarProperty Name="ProdAltEntraCalcQtdPPCP" ColumnName="ProdAltEntraCalcQtdPPCP" />
+          <ScalarProperty Name="ProdPossuiCompPPCP" ColumnName="ProdPossuiCompPPCP" />
+          <ScalarProperty Name="ProdAltEntraCalcEspaco" ColumnName="ProdAltEntraCalcEspaco" />
+          <ScalarProperty Name="ProdLargEntraCalcEspaco" ColumnName="ProdLargEntraCalcEspaco" />
+          <ScalarProperty Name="ProdCompEntraCalcEspaco" ColumnName="ProdCompEntraCalcEspaco" />
+          <ScalarProperty Name="ProdBxaEstqMedApontProduc" ColumnName="ProdBxaEstqMedApontProduc" />
+          <ScalarProperty Name="ProdVendaPor" ColumnName="ProdVendaPor" />
+          <ScalarProperty Name="ProdCodEstrOrigProc" ColumnName="ProdCodEstrOrigProc" />
+          <ScalarProperty Name="ProdPathArqDesenho" ColumnName="ProdPathArqDesenho" />
+          <ScalarProperty Name="ProdContratoPartListaPadMat" ColumnName="ProdContratoPartListaPadMat" />
+          <ScalarProperty Name="ProdCtrlEstqLoteNumAutom" ColumnName="ProdCtrlEstqLoteNumAutom" />
+          <ScalarProperty Name="PesoMensMedEstqCod" ColumnName="PesoMensMedEstqCod" />
+          <ScalarProperty Name="EstrutCustoCodEstr" ColumnName="EstrutCustoCodEstr" />
+          <ScalarProperty Name="PRODPATHVOUCHER" ColumnName="PRODPATHVOUCHER" />
+          <ScalarProperty Name="ProdCompDesativado" ColumnName="ProdCompDesativado" />
+          <ScalarProperty Name="ProdStrechFilm" ColumnName="ProdStrechFilm" />
+          <ScalarProperty Name="ProdNumFaca" ColumnName="ProdNumFaca" />
+          <ScalarProperty Name="ProdNumCliche" ColumnName="ProdNumCliche" />
+          <ScalarProperty Name="ProdAtualInformProd" ColumnName="ProdAtualInformProd" />
+          <ScalarProperty Name="ProdCapVolDNF" ColumnName="ProdCapVolDNF" />
+          <ScalarProperty Name="ProdCodAlt1" ColumnName="ProdCodAlt1" />
+          <ScalarProperty Name="ProdNecAprovReqCompra" ColumnName="ProdNecAprovReqCompra" />
+          <ScalarProperty Name="ProdNecAprovCotacCompra" ColumnName="ProdNecAprovCotacCompra" />
+          <ScalarProperty Name="ProdServIrrfDedParc" ColumnName="ProdServIrrfDedParc" />
+          <ScalarProperty Name="ProdCodEstrRetorno" ColumnName="ProdCodEstrRetorno" />
+          <ScalarProperty Name="ProdCxaEmbalagem" ColumnName="ProdCxaEmbalagem" />
+          <ScalarProperty Name="ProdQtdM3Toler" ColumnName="ProdQtdM3Toler" />
+          <ScalarProperty Name="ProdQtdM3Liq" ColumnName="ProdQtdM3Liq" />
+          <ScalarProperty Name="ProdQtdM2Toler" ColumnName="ProdQtdM2Toler" />
+          <ScalarProperty Name="ProdQtdM2Liq" ColumnName="ProdQtdM2Liq" />
+          <ScalarProperty Name="ProdQtdMToler" ColumnName="ProdQtdMToler" />
+          <ScalarProperty Name="ProdQtdMLiq" ColumnName="ProdQtdMLiq" />
+          <ScalarProperty Name="ProdQtdMBruto" ColumnName="ProdQtdMBruto" />
+          <ScalarProperty Name="ProdPartCtrlResCompCalcAprov" ColumnName="ProdPartCtrlResCompCalcAprov" />
+          <ScalarProperty Name="ProdPartCtrlResCompVenda" ColumnName="ProdPartCtrlResCompVenda" />
+          <ScalarProperty Name="ProdCodDNF" ColumnName="ProdCodDNF" />
+          <ScalarProperty Name="ProdGenero" ColumnName="ProdGenero" />
+          <ScalarProperty Name="GrpCompraCod" ColumnName="GrpCompraCod" />
+          <ScalarProperty Name="ProdCursoCargaHorOpt" ColumnName="ProdCursoCargaHorOpt" />
+          <ScalarProperty Name="ProdConjExc" ColumnName="ProdConjExc" />
+          <ScalarProperty Name="ProdAplicaFM" ColumnName="ProdAplicaFM" />
+          <ScalarProperty Name="ProdUnidNegocio" ColumnName="ProdUnidNegocio" />
+          <ScalarProperty Name="ProgDescCodPGC" ColumnName="ProgDescCodPGC" />
+          <ScalarProperty Name="ProdServPartCalcMargemLucro" ColumnName="ProdServPartCalcMargemLucro" />
+          <ScalarProperty Name="ProgDescCod" ColumnName="ProgDescCod" />
+          <ScalarProperty Name="ProdServCsllRF" ColumnName="ProdServCsllRF" />
+          <ScalarProperty Name="ProdServPisRF" ColumnName="ProdServPisRF" />
+          <ScalarProperty Name="ProdServCofinsRF" ColumnName="ProdServCofinsRF" />
+          <ScalarProperty Name="ProdRecCofinsPerc" ColumnName="ProdRecCofinsPerc" />
+          <ScalarProperty Name="ProdRecCofins" ColumnName="ProdRecCofins" />
+          <ScalarProperty Name="ProdRecPisPerc" ColumnName="ProdRecPisPerc" />
+          <ScalarProperty Name="ProdRecPis" ColumnName="ProdRecPis" />
+          <ScalarProperty Name="ProdVendaGeraMovEstq" ColumnName="ProdVendaGeraMovEstq" />
+          <ScalarProperty Name="ProdMixCodOrig" ColumnName="ProdMixCodOrig" />
+          <ScalarProperty Name="ProdMixDomOrig" ColumnName="ProdMixDomOrig" />
+          <ScalarProperty Name="ProdTurFinalSemanaFim" ColumnName="ProdTurFinalSemanaFim" />
+          <ScalarProperty Name="ProdTurFinalSemanaInic" ColumnName="ProdTurFinalSemanaInic" />
+          <ScalarProperty Name="ProdServAliqIrrf" ColumnName="ProdServAliqIrrf" />
+          <ScalarProperty Name="ProdTribIssAliqOrigDest" ColumnName="ProdTribIssAliqOrigDest" />
+          <ScalarProperty Name="ProdCustoManEm" ColumnName="ProdCustoManEm" />
+          <ScalarProperty Name="ProdValCustoMan" ColumnName="ProdValCustoMan" />
+          <ScalarProperty Name="ProdCustoOperacaoEm" ColumnName="ProdCustoOperacaoEm" />
+          <ScalarProperty Name="ProdValCustoOperacao" ColumnName="ProdValCustoOperacao" />
+          <ScalarProperty Name="ProdPercValRevenda" ColumnName="ProdPercValRevenda" />
+          <ScalarProperty Name="ProdVidaUtilEm" ColumnName="ProdVidaUtilEm" />
+          <ScalarProperty Name="ProdVidaUtil" ColumnName="ProdVidaUtil" />
+          <ScalarProperty Name="TribACod" ColumnName="TribACod" />
+          <ScalarProperty Name="ProdRecIIPerc" ColumnName="ProdRecIIPerc" />
+          <ScalarProperty Name="ProdRecII" ColumnName="ProdRecII" />
+          <ScalarProperty Name="ProdCContabDeb3" ColumnName="ProdCContabDeb3" />
+          <ScalarProperty Name="ProdCContabDeb2" ColumnName="ProdCContabDeb2" />
+          <ScalarProperty Name="ProdCContabDeb" ColumnName="ProdCContabDeb" />
+          <ScalarProperty Name="ProdCContabCred3" ColumnName="ProdCContabCred3" />
+          <ScalarProperty Name="ProdCContabCred2" ColumnName="ProdCContabCred2" />
+          <ScalarProperty Name="ProdCContabCred" ColumnName="ProdCContabCred" />
+          <ScalarProperty Name="PlanoCtaEmpCod" ColumnName="PlanoCtaEmpCod" />
+          <ScalarProperty Name="CategCodEstr" ColumnName="CategCodEstr" />
+          <ScalarProperty Name="ProdCodDesenho" ColumnName="ProdCodDesenho" />
+          <ScalarProperty Name="ProdNecLaudo" ColumnName="ProdNecLaudo" />
+          <ScalarProperty Name="ProdHomologado" ColumnName="ProdHomologado" />
+          <ScalarProperty Name="ProdTipoConsumo" ColumnName="ProdTipoConsumo" />
+          <ScalarProperty Name="ProdCodEstrGrupoBloq" ColumnName="ProdCodEstrGrupoBloq" />
+          <ScalarProperty Name="ProdGarCodCompra" ColumnName="ProdGarCodCompra" />
+          <ScalarProperty Name="ProdGarCodVenda" ColumnName="ProdGarCodVenda" />
+          <ScalarProperty Name="ProdPermVendaFrenteLoja" ColumnName="ProdPermVendaFrenteLoja" />
+          <ScalarProperty Name="ProdMedChapaPap" ColumnName="ProdMedChapaPap" />
+          <ScalarProperty Name="ProdEmiteVoucGrpIndiv" ColumnName="ProdEmiteVoucGrpIndiv" />
+          <ScalarProperty Name="ProdAnoCor" ColumnName="ProdAnoCor" />
+          <ScalarProperty Name="ProdCodCorMontad" ColumnName="ProdCodCorMontad" />
+          <ScalarProperty Name="ProdCodCorFabric" ColumnName="ProdCodCorFabric" />
+          <ScalarProperty Name="ProdCodCorProp" ColumnName="ProdCodCorProp" />
+          <ScalarProperty Name="ProdCompPVCodCusto" ColumnName="ProdCompPVCodCusto" />
+          <ScalarProperty Name="ProdPercDesc" ColumnName="ProdPercDesc" />
+          <ScalarProperty Name="ProdStrDesc" ColumnName="ProdStrDesc" />
+          <ScalarProperty Name="ProdPrecoListaCalc" ColumnName="ProdPrecoListaCalc" />
+          <ScalarProperty Name="ProdUnidMedProp" ColumnName="ProdUnidMedProp" />
+          <ScalarProperty Name="MarcaProdCod" ColumnName="MarcaProdCod" />
+          <ScalarProperty Name="SubGrpProdCod" ColumnName="SubGrpProdCod" />
+          <ScalarProperty Name="GrpProdCod" ColumnName="GrpProdCod" />
+          <ScalarProperty Name="ProdPossuiCompNaVenda" ColumnName="ProdPossuiCompNaVenda" />
+          <ScalarProperty Name="FormProdCodEstr" ColumnName="FormProdCodEstr" />
+          <ScalarProperty Name="ProdConfDadosCompl" ColumnName="ProdConfDadosCompl" />
+          <ScalarProperty Name="ProdNecCalcMedidaComp" ColumnName="ProdNecCalcMedidaComp" />
+          <ScalarProperty Name="ProdCtrlEstqLote" ColumnName="ProdCtrlEstqLote" />
+          <ScalarProperty Name="ProdMultQtdDiaNoite" ColumnName="ProdMultQtdDiaNoite" />
+          <ScalarProperty Name="ProdDependeForm" ColumnName="ProdDependeForm" />
+          <ScalarProperty Name="ProdQtdDependeUsuTur" ColumnName="ProdQtdDependeUsuTur" />
+          <ScalarProperty Name="ProdEmiteVouc" ColumnName="ProdEmiteVouc" />
+          <ScalarProperty Name="ProdConfirmAutomTur" ColumnName="ProdConfirmAutomTur" />
+          <ScalarProperty Name="ProdBaixaEstqReqMat" ColumnName="ProdBaixaEstqReqMat" />
+          <ScalarProperty Name="ProdBaixaEstqLoja" ColumnName="ProdBaixaEstqLoja" />
+          <ScalarProperty Name="ProdBaixaEstqProduc" ColumnName="ProdBaixaEstqProduc" />
+          <ScalarProperty Name="ProdBaixaEstqTur" ColumnName="ProdBaixaEstqTur" />
+          <ScalarProperty Name="ProdBaixaEstqOrdServ" ColumnName="ProdBaixaEstqOrdServ" />
+          <ScalarProperty Name="ProdBaixaEstqOcor" ColumnName="ProdBaixaEstqOcor" />
+          <ScalarProperty Name="ProdBaixaEstqVenda" ColumnName="ProdBaixaEstqVenda" />
+          <ScalarProperty Name="ProdBaixaEstqExped" ColumnName="ProdBaixaEstqExped" />
+          <ScalarProperty Name="ProdPossuiPVDiario" ColumnName="ProdPossuiPVDiario" />
+          <ScalarProperty Name="FxaCod" ColumnName="FxaCod" />
+          <ScalarProperty Name="ProdPasta" ColumnName="ProdPasta" />
+          <ScalarProperty Name="ProdObs" ColumnName="ProdObs" />
+          <ScalarProperty Name="ProdServPossuiInss" ColumnName="ProdServPossuiInss" />
+          <ScalarProperty Name="ProdServPossuiIrrf" ColumnName="ProdServPossuiIrrf" />
+          <ScalarProperty Name="ProdCtrlEstq" ColumnName="ProdCtrlEstq" />
+          <ScalarProperty Name="ProdImpRelRepos" ColumnName="ProdImpRelRepos" />
+          <ScalarProperty Name="ProdIncideTxaServ" ColumnName="ProdIncideTxaServ" />
+          <ScalarProperty Name="ProdSetorUtiliz" ColumnName="ProdSetorUtiliz" />
+          <ScalarProperty Name="ProdTxaEmisValCusto" ColumnName="ProdTxaEmisValCusto" />
+          <ScalarProperty Name="ProdTxaEmisValVenda" ColumnName="ProdTxaEmisValVenda" />
+          <ScalarProperty Name="ProdCtrlExped" ColumnName="ProdCtrlExped" />
+          <ScalarProperty Name="ProdMarkup" ColumnName="ProdMarkup" />
+          <ScalarProperty Name="ProdEntraCalcCaracVol" ColumnName="ProdEntraCalcCaracVol" />
+          <ScalarProperty Name="ProdCodEstrGrupoFat" ColumnName="ProdCodEstrGrupoFat" />
+          <ScalarProperty Name="ProdQtdParaIpiEmReal" ColumnName="ProdQtdParaIpiEmReal" />
+          <ScalarProperty Name="ProdValIpiEmReal" ColumnName="ProdValIpiEmReal" />
+          <ScalarProperty Name="ProdPossuiIpiEmReal" ColumnName="ProdPossuiIpiEmReal" />
+          <ScalarProperty Name="ProdCustoQtdCalc" ColumnName="ProdCustoQtdCalc" />
+          <ScalarProperty Name="ProdCustoPercTipo" ColumnName="ProdCustoPercTipo" />
+          <ScalarProperty Name="ProdCustoPerc" ColumnName="ProdCustoPerc" />
+          <ScalarProperty Name="ProdProducQtdCalc" ColumnName="ProdProducQtdCalc" />
+          <ScalarProperty Name="ProdProducPercTipo" ColumnName="ProdProducPercTipo" />
+          <ScalarProperty Name="ProdProducPerc" ColumnName="ProdProducPerc" />
+          <ScalarProperty Name="ProdNecAprovCompra" ColumnName="ProdNecAprovCompra" />
+          <ScalarProperty Name="ProdCusto" ColumnName="ProdCusto" />
+          <ScalarProperty Name="ProdQtdM3" ColumnName="ProdQtdM3" />
+          <ScalarProperty Name="ProdQtdM2" ColumnName="ProdQtdM2" />
+          <ScalarProperty Name="ProdFecham" ColumnName="ProdFecham" />
+          <ScalarProperty Name="ProdVisor" ColumnName="ProdVisor" />
+          <ScalarProperty Name="ProdAba" ColumnName="ProdAba" />
+          <ScalarProperty Name="ProdTranspasse" ColumnName="ProdTranspasse" />
+          <ScalarProperty Name="ProdCorCxa" ColumnName="ProdCorCxa" />
+          <ScalarProperty Name="TipoCxaPapCod" ColumnName="TipoCxaPapCod" />
+          <ScalarProperty Name="ProdCodEstrQualPap" ColumnName="ProdCodEstrQualPap" />
+          <ScalarProperty Name="CCtrlCodEstr" ColumnName="CCtrlCodEstr" />
+          <ScalarProperty Name="ProdStat" ColumnName="ProdStat" />
+          <ScalarProperty Name="ProdCodEstrSubst" ColumnName="ProdCodEstrSubst" />
+          <ScalarProperty Name="ProdNecCertQual" ColumnName="ProdNecCertQual" />
+          <ScalarProperty Name="ProdPrazoMedEntCalc" ColumnName="ProdPrazoMedEntCalc" />
+          <ScalarProperty Name="ProdPesoToler" ColumnName="ProdPesoToler" />
+          <ScalarProperty Name="ProdAltToler" ColumnName="ProdAltToler" />
+          <ScalarProperty Name="ProdAltLiq" ColumnName="ProdAltLiq" />
+          <ScalarProperty Name="ProdAltBruta" ColumnName="ProdAltBruta" />
+          <ScalarProperty Name="ProdLargToler" ColumnName="ProdLargToler" />
+          <ScalarProperty Name="ProdLargLiq" ColumnName="ProdLargLiq" />
+          <ScalarProperty Name="ProdLargBruta" ColumnName="ProdLargBruta" />
+          <ScalarProperty Name="ProdCompToler" ColumnName="ProdCompToler" />
+          <ScalarProperty Name="ProdCompLiq" ColumnName="ProdCompLiq" />
+          <ScalarProperty Name="ProdCompBruto" ColumnName="ProdCompBruto" />
+          <ScalarProperty Name="ProdDataValidFim" ColumnName="ProdDataValidFim" />
+          <ScalarProperty Name="ProdDataValidInic" ColumnName="ProdDataValidInic" />
+          <ScalarProperty Name="ProdDataCad" ColumnName="ProdDataCad" />
+          <ScalarProperty Name="ProdCtrlUEP" ColumnName="ProdCtrlUEP" />
+          <ScalarProperty Name="ProdConstaTabPV" ColumnName="ProdConstaTabPV" />
+          <ScalarProperty Name="ProdQtdLoteEconProduc" ColumnName="ProdQtdLoteEconProduc" />
+          <ScalarProperty Name="ProdQtdLimOrdProduc" ColumnName="ProdQtdLimOrdProduc" />
+          <ScalarProperty Name="ProdHost" ColumnName="ProdHost" />
+          <ScalarProperty Name="ProdDivPv" ColumnName="ProdDivPv" />
+          <ScalarProperty Name="ProdCoefComis" ColumnName="ProdCoefComis" />
+          <ScalarProperty Name="IndEconCod" ColumnName="IndEconCod" />
+          <ScalarProperty Name="ProdEntCodFab" ColumnName="ProdEntCodFab" />
+          <ScalarProperty Name="ProdVerSaldoVenda" ColumnName="ProdVerSaldoVenda" />
+          <ScalarProperty Name="ProdCalcMed" ColumnName="ProdCalcMed" />
+          <ScalarProperty Name="ProdNumSer" ColumnName="ProdNumSer" />
+          <ScalarProperty Name="GradeCod" ColumnName="GradeCod" />
+          <ScalarProperty Name="CompPVCod" ColumnName="CompPVCod" />
+          <ScalarProperty Name="ProdPrazoMedEnt" ColumnName="ProdPrazoMedEnt" />
+          <ScalarProperty Name="ProdRecIcmsSTPerc" ColumnName="ProdRecIcmsSTPerc" />
+          <ScalarProperty Name="ProdRecIcmsST" ColumnName="ProdRecIcmsST" />
+          <ScalarProperty Name="ProdRecIpiPerc" ColumnName="ProdRecIpiPerc" />
+          <ScalarProperty Name="ProdRecIpi" ColumnName="ProdRecIpi" />
+          <ScalarProperty Name="ProdRecIcmsPerc" ColumnName="ProdRecIcmsPerc" />
+          <ScalarProperty Name="ProdRecIcms" ColumnName="ProdRecIcms" />
+          <ScalarProperty Name="ClasFiscCod" ColumnName="ClasFiscCod" />
+          <ScalarProperty Name="ProdPesoPadrao" ColumnName="ProdPesoPadrao" />
+          <ScalarProperty Name="ProdPesoLiq" ColumnName="ProdPesoLiq" />
+          <ScalarProperty Name="ProdPesoBruto" ColumnName="ProdPesoBruto" />
+          <ScalarProperty Name="TipoProdCod" ColumnName="TipoProdCod" />
+          <ScalarProperty Name="ProdGrupo" ColumnName="ProdGrupo" />
+          <ScalarProperty Name="ProdCodEstrNiv" ColumnName="ProdCodEstrNiv" />
+          <ScalarProperty Name="ProdNomeAlt3" ColumnName="ProdNomeAlt3" />
+          <ScalarProperty Name="ProdNomeAlt2" ColumnName="ProdNomeAlt2" />
+          <ScalarProperty Name="ProdNomeAlt1" ColumnName="ProdNomeAlt1" />
+          <ScalarProperty Name="ProdNome" ColumnName="ProdNome" />
+          <ScalarProperty Name="ProdCodBar" ColumnName="ProdCodBar" />
+          <ScalarProperty Name="ProdCodAlt" ColumnName="ProdCodAlt" />
+          <ScalarProperty Name="ProdCodRed" ColumnName="ProdCodRed" />
+          <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MARCA_PROD">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.MARCA_PROD">
+        <MappingFragment StoreEntitySet="MARCA_PROD">
+          <ScalarProperty Name="CategProdCodEstr" ColumnName="CategProdCodEstr" />
+          <ScalarProperty Name="MarcaProdTipo" ColumnName="MarcaProdTipo" />
+          <ScalarProperty Name="MarcaProdPos" ColumnName="MarcaProdPos" />
+          <ScalarProperty Name="MarcaProdPesoPrem" ColumnName="MarcaProdPesoPrem" />
+          <ScalarProperty Name="MarcaProdEntraCalcComis" ColumnName="MarcaProdEntraCalcComis" />
+          <ScalarProperty Name="MarcaProdDataFim" ColumnName="MarcaProdDataFim" />
+          <ScalarProperty Name="MarcaProdDataInic" ColumnName="MarcaProdDataInic" />
+          <ScalarProperty Name="MarcaProdVisualizaWeb" ColumnName="MarcaProdVisualizaWeb" />
+          <ScalarProperty Name="MarcaProdNome" ColumnName="MarcaProdNome" />
+          <ScalarProperty Name="MarcaProdCod" ColumnName="MarcaProdCod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROD_GRUPO_SUBGRUPO">
+      <EntityTypeMapping TypeName="DiarioProducaoRacaoModel.PROD_GRUPO_SUBGRUPO">
+        <MappingFragment StoreEntitySet="PROD_GRUPO_SUBGRUPO">
+          <ScalarProperty Name="SubGrpProdCod" ColumnName="SubGrpProdCod" />
+          <ScalarProperty Name="GrpProdCod" ColumnName="GrpProdCod" />
+          <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

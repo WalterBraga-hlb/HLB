@@ -1,0 +1,433 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+    
+    List<MvcAppHylinedoBrasilMobile.Models.RDV> listaRDV =
+        (List<MvcAppHylinedoBrasilMobile.Models.RDV>)Session["ListaRDV"];
+}
+
+<script language="javascript" type="text/javascript">
+    window.onbeforeunload = function () {
+        return "Não é possível atualizar a página porque os dados serão perdidos! Sendo assim, a página será fechada!";
+    }
+
+    window.onkeydown = function (e) {
+        if (e.keyCode === 116) {
+            alert("Função não permitida");
+            e.keyCode = 0;
+            e.returnValue = false;
+            return false;
+        }
+    }
+
+    function mostrarElemento(id, visibilidade) {
+        document.getElementById(id).style.display = visibilidade;
+    }
+
+    function verificaDescricao() {
+        var descricao = $('#descricao').val();
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        var errorHolder = document.getElementById('errorDescricao');
+        if (descricao == ""
+            && (tipoDespesa == 'OUTROS (DI)' || tipoDespesa == 'OUTROS (DN)')) {
+            //alert('O campo Descrição é obrigatório!');
+            errorHolder.innerHTML = 'O campo Descrição é obrigatório, pois selecionada o Tipo de Despesa "Outros"!';
+            $('#descricao').focus();
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        } else {
+            errorHolder.innerHTML = '';
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+            return false;
+        }
+    }
+
+    function verificaValorDespesa() {
+        var value = $('#valorDespesa').val();
+        var errorHolder = document.getElementById('errorValDespesa');
+        if (value == "") {
+            //alert('O campo Valor da Despesa tem que ser maior que zero!');
+            //$('#valorDespesa').focus();
+            errorHolder.innerHTML = 'O campo Valor da Despesa tem que ser maior que zero!';
+            $('#valorDespesa').focus();
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        }
+        else {
+            if (value == 0) {
+                //alert('O campo Valor da Despesa tem que ser maior que zero!');
+                //$('#valorDespesa').focus();
+                errorHolder.innerHTML = 'O campo Valor da Despesa tem que ser maior que zero!';
+                $('#valorDespesa').focus();
+                $('#add').button('disable');
+                $('[type="submit"]').button('refresh');
+                return true;
+            } else {
+                errorHolder.innerHTML = '';
+                $('#add').button('enable');
+                $('[type="submit"]').button('refresh');
+                return false;
+            }
+            return false;
+        }
+    }
+
+    function verificaValorMoedaEstrangeira() {
+        var value = $('#valorMoedaEstrangeira').val();
+        //var local = $('#ddlLocais option:selected').text();
+        var origem = $('#ddlOrigem option:selected').text();
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        var errorHolder = document.getElementById('errorvalorMoedaEstrangeira');
+        if (parseFloat(value) > 0) {
+            $('#pnlIndEcon').show();
+        } else {
+            $('#pnlIndEcon').hide();
+        }
+        //if (local.indexOf('/BRA') == -1 && tipoDespesa.indexOf('(D)') > 0) {
+        if (origem == "Internacional") {
+            if (value == "") {
+                //alert('O campo Valor Moeda Estrangeria tem que ser maior que zero!');
+                //$('#valorMoedaEstrangeira').focus();
+                errorHolder.innerHTML = 'O campo Valor Moeda Estrangeria tem que ser maior que zero!';
+                $('#valorMoedaEstrangeira').focus();
+                $('#add').button('disable');
+                $('[type="submit"]').button('refresh');
+                return true;
+            }
+            else {
+                if (value == 0) {
+                    //alert('O campo Valor Moeda Estrangeria tem que ser maior que zero!');
+                    //$('#valorMoedaEstrangeira').focus();
+                    errorHolder.innerHTML = 'O campo Valor Moeda Estrangeria tem que ser maior que zero!';
+                    $('#valorMoedaEstrangeira').focus();
+                    $('#add').button('disable');
+                    $('[type="submit"]').button('refresh');
+                    return true;
+                } else {
+                    errorHolder.innerHTML = '';
+                    $('#add').button('enable');
+                    $('[type="submit"]').button('refresh');
+                    return false;
+                }
+                return false;
+            }
+            return false;
+        }
+    }
+
+    function verificaOrigemSelecionada() {
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        if (tipoDespesa.indexOf('(C)') > 0) {
+            //$("#ddlLocais").val("00085839");
+            $("#ddlFormaPag").val("Espécie");
+            //            $('#pnlLocal').hide();
+            //            $('#pnlImagem').hide();
+            $('#pnlFormaPag').hide();
+        } else {
+            //$('#pnlLocal').show();
+            //$('#pnlImagem').show();  
+            $("#cidade").val("");
+            $("#valorMoedaEstrangeira").val("");
+            $('#pnlFormaPag').show();
+        }
+        var origem = $('#ddlOrigem option:selected').text();
+        if (origem == "Internacional") {
+            $('#pnlExterior').show();
+        } else {
+            $('#pnlExterior').hide();
+        }
+    }
+
+    function verificaArquivoSelecionado() {
+        var fileUpload = document.getElementById("myFile");
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        var errorHolder = document.getElementById('errorFile');
+        var src = $("#img").val();
+        if (tipoDespesa.indexOf('(C)') == -1) {
+            if (src == null) {
+                if (fileUpload.files.length == 0) {
+                    //alert("Nenhum Arquivo Selecionado");
+                    errorHolder.innerHTML = 'Nenhum Arquivo Selecionado';
+                    $('#add').button('disable');
+                    $('[type="submit"]').button('refresh');
+                    return true;
+                } else {
+                    errorHolder.innerHTML = '';
+                    $('#add').button('enable');
+                    $('[type="submit"]').button('refresh');
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+    }
+
+    function verificaCidade() {
+        var cidade = $('#cidade').val();
+        var origem = $('#ddlOrigem option:selected').text();
+        var errorHolder = document.getElementById('errorCidade');
+        if (cidade == "" && origem == "Internacional") {
+            errorHolder.innerHTML = 'O campo Cidade quando a Origem for Internacional é obrigatória!';
+            $('#cidade').focus();
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        } else {
+            errorHolder.innerHTML = '';
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+            return false;
+        }
+    }
+
+    function carregaLimiteDespesa() {
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        $.ajax({
+            url: '/RDV/VerificaLimite',
+            type: 'POST',
+            data: JSON.stringify({ id: tipoDespesa }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('#limiteDespesa').val(data);
+            }
+        });
+    }
+
+    function verificaLimiteDespesa() {
+        var tipoDespesa = $('#ddlTipoDespesa option:selected').text();
+        var value = $('#valorDespesa').val();
+        var motivo = $('#motivo').val();
+        var limite = $('#limiteDespesa').val();
+        var errorHolder = document.getElementById('errorValDespesa');
+        if (limite < parseFloat(value) && limite != 0) {
+            if (motivo == '') {
+                errorHolder.innerHTML = 'O limite da Despesa foi excedido (Limite: R$ ' + limite
+            + '). Por favor, informar o motivo no campo abaixo!';
+                $('#add').button('disable');
+                $('[type="submit"]').button('refresh');
+                $('#pnlMotivo').show();
+                return true;
+            } else {
+                $('#pnlMotivo').show();
+                errorHolder.innerHTML = '';
+                $('#add').button('enable');
+                $('[type="submit"]').button('refresh');
+                return false;
+            }
+        } else {
+            $('#motivo').val("");
+            $('#pnlMotivo').hide();
+            errorHolder.innerHTML = '';
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+            return false;
+        }
+    }
+
+    $('#descricao').blur(function () {
+        verificaDescricao();
+    });
+
+    $('#valorDespesa').blur(function () {
+        verificaValorDespesa();
+        verificaLimiteDespesa();
+    });
+    $('#motivo').blur(function () {
+        verificaLimiteDespesa();
+    });
+    $('#valorMoedaEstrangeira').blur(function () {
+        verificaValorMoedaEstrangeira();
+    });
+    //    $('#ddlLocais').change(function () {
+    //        verificaOrigemSelecionada();
+    //    });
+    $('#ddlTipoDespesa').change(function () {
+        verificaOrigemSelecionada();
+        carregaLimiteDespesa();
+    });
+    $('#ddlOrigem').change(function () {
+        var origem = $('#ddlOrigem').val();
+        $.ajax({
+            url: '/RDV/AtualizaTipoDespesa',
+            type: 'POST',
+            data: JSON.stringify({ id: origem }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#ddlTipoDespesa').empty();
+                $.each(data, function (key, SelectListItem) {
+                    $('select#ddlTipoDespesa').append('<option value="' + SelectListItem.Text + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#ddlTipoDespesa').selectmenu('refresh');
+            }
+        });
+        verificaOrigemSelecionada();
+        var origem = $('#ddlOrigem option:selected').text();
+        if (origem == "Nacional") {
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+        }
+    });
+    //    $('#myFile').change(function () {
+    //        //verificaArquivoSelecionado();
+    //    });
+
+    $('#cidade').blur(function () {
+        verificaCidade();
+    });
+
+    //    function hideImage() {
+    //        $('#img').hide();
+    //    }
+
+    $('#add').click(function () {
+        if (verificaValorDespesa()) { return; }
+        if (verificaLimiteDespesa()) { return; }
+        if (verificaCidade()) { return; }
+        if (verificaValorMoedaEstrangeira()) { return; }
+        if (verificaDescricao()) { return; }
+        //if (verificaArquivoSelecionado()) { return; }
+    });
+
+    //    $('#filtroLocal').change(function () {
+    //        var value = $('#filtroLocal').val();
+    //        $.ajax({
+    //            url: '/RDV/FiltraLocal',
+    //            type: 'POST',
+    //            data: JSON.stringify({ id: value }),
+    //            dataType: 'json',
+    //            contentType: 'application/json',
+    //            success: function (data) {
+    //                $('select#ddlLocais').empty();
+    //                $.each(data, function (key, SelectListItem) {
+    //                    $('select#ddlLocais').append('<option value="' + SelectListItem.Value + '">' + SelectListItem.Text + '</option>');
+    //                });
+    //                $('select#ddlLocais').selectmenu('refresh');
+    //                verificaPaisSelecionado();
+    //            }
+    //        });
+    //    });
+
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mvalor(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{8})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{5})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{2})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+</script>
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Adiantamentos", "ListaAdiantamentos", "RDV")
+    </p>
+    @Html.Image(@Url.Content("~/Content/images/Amil-Reembolso-Icon.png"), "RDV")
+    <h2>Novo Adiantamento</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+@using (Html.BeginForm("SaveAdiantamento", "RDV", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        <div class="editor-label">
+        <b>Funcionário:</b>
+        </div>        
+        <div class="editor-field">
+            @Html.DropDownList(
+                "Usuario",
+                (List<SelectListItem>)Session["ListaFuncionarios"])
+        </div>
+        <div class="editor-label">
+            <b>Data:</b>
+        </div>
+        <div class="editor-field">
+            @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+            {
+                @Html.TextBox("dataRDV", Convert.ToDateTime(Session["dataRDV"]).ToString("yyyy-MM-dd"), new { @type = "date", @required = true })
+            }
+            else
+            {
+                @Html.TextBox("dataRDV", Convert.ToDateTime(Session["dataRDV"]).ToString("dd/MM/yyyy"), new { @type = "date", @required = true })
+            }
+        </div>
+        <div class="editor-label">
+            <b>Valor:</b>
+        </div>
+        <div class="editor-field">
+            @if (!browser.Browser.Equals("Safari"))
+            {
+                @Html.TextBox("valorDespesa", Session["valorDespesaRDV"],
+                    new { @onkeyup = "mascara(this, mvalor);", @required = true })
+            }
+            else
+            {
+                @Html.TextBox("valorDespesa", Session["valorDespesaRDV"],
+                    new { @onkeyup = "mascara(this, mvalor);", @required = true })
+            }
+        </div>
+        <div id="pnlIndEcon">
+            <div class="editor-label">
+                <b>Índice Econômico:</b>                
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList(
+                    "IndiceEconomico",
+                    (List<SelectListItem>)Session["ListaIndiceEconomico"])
+            </div>
+            <div class="editor-label" id="errorIndiceEconomico" style="color: Red; font-weight:bold;"></div>
+        </div>
+        <div class="editor-label">
+            <b>Descrição:</b>
+        </div>        
+        <div class="editor-field">
+            @Html.TextArea("descricao", Session["descricaoRDV"].ToString())
+        </div>
+        <div class="editor-label" id="errorDescricao" style="color: Red; font-weight:bold;"></div>
+        @*<div id="pnlImagem">
+            <div class="editor-label" align="center">
+                <b>Insira / Altere a foto do Recibo:</b>
+            </div>
+            @if (!Session["imagem"].ToString().Equals("")
+                //&& !Session["imagem"].ToString().Equals("data:image/gif;base64,ICAgICAgIA=="))
+                && Session["TipoDespesaSelecionadaRDV"].ToString().Contains("(D)"))
+            {
+            <div class="editor-label" align="center">
+                <img src="@Session["imagem"].ToString()" alt="Imagem do Recibo" width="60%" height="60%" id="img"/>
+            </div>
+            }
+            <div class="editor-field" id="input" align="center">
+                @if (!browser.Browser.Equals("Safari"))
+                {
+                    <input type="file" name="file" accept="image/*" id="myFile" onclick="hideImage()"
+                        onchange="showImage()">
+                }
+                else
+                {
+                    <input type="file" name="file" accept="image/*" id="myFile" onclick="hideImage()" 
+                        onchange="showImage()"/>
+                }
+            </div>
+            <div align="center" class="editor-label" id="errorFile" style="color: Red; font-weight:bold;"></div>
+        </div>*@
+        <p>
+            <input type="submit" value="Salvar Adiantamento" id="add" />
+        </p>
+    </fieldset>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

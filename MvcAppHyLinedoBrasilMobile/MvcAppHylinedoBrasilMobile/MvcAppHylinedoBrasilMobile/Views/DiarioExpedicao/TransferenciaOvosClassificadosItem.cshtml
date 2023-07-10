@@ -1,0 +1,323 @@
+﻿@using am = MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController;
+@{
+    ViewBag.Title = "";
+    string lg = Session["language"].ToString();
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities bd = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+
+    string incubatorio = Session["incubatorioSelecionado"].ToString();
+
+    var listaTipoClassficacaoOvo = bd.TIPO_CLASSFICACAO_OVO
+        .Where(w => w.Unidade == incubatorio && w.AproveitamentoOvo == "Incubável" && w.Origem == "Interna")
+        .OrderBy(o => o.ID)
+        .ToList();
+}
+
+<script type='text/javascript'>
+    window.onbeforeunload = function () {
+        return "Se a página for atualizada, os dados alterados serão perdidos!";
+    }
+
+    function verificaQtdeDisponivel() {
+        var errorHolder = document.getElementById('errorHolder');
+        var qtdeTotal = 0;
+        for (var i = 0; i < $("input[id^='tco']").length; i++) {
+            var tcoObj = $("input[id^='tco']")[i];
+            var tipo = tcoObj.id.replace('tco', '');
+            qtdeTotal = qtdeTotal + ($('#txtQtdeTotal_' + tipo).val() * 1);
+        }
+        if (qtdeTotal == 0) {
+            errorHolder.innerHTML = '@(am.GetTextOnLanguage("Não existe ovos classificados disponíveis para serem transferidos", lg))!'
+               + ' @(am.GetTextOnLanguage("Verifique!", lg))';
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+        } else {
+            errorHolder.innerHTML = '';
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+        }
+    }
+
+    function verificaQtdes() {
+        var qtdeClassificada = 0;
+        var qtdeTotal = $('#txtQtdeTotal').val();
+        var errorHolder = document.getElementById('errorHolder');
+        for (var i = 0; i < $("input[id^='tco']").length; i++) {
+            var tcoObj = $("input[id^='tco']")[i];
+            qtdeClassificada = qtdeClassificada + tcoObj.value;
+        }
+
+        if (qtdeClassificada == 0) {
+            errorHolder.innerHTML = '@(am.GetTextOnLanguage("Não foi realizada nenhuma transferência", lg))!'
+               + ' @(am.GetTextOnLanguage("Verifique!", lg))';
+            return true;
+        } else if (qtdeClassificada > qtdeTotal) {
+            errorHolder.innerHTML = '@(am.GetTextOnLanguage("A quantidade transferida é maior que a qtde disponível", lg))!'
+               + ' @(am.GetTextOnLanguage("Verifique!", lg))';
+            return true;
+        } else {
+            errorHolder.innerHTML = '';
+            return false;
+        }
+    }
+
+    function carregaLotes() {
+        var farm = $('#ddlNucleo').val();
+        $('#txtQtdeTotal').val(0);
+        $.ajax({
+            url: 'CarregaLotesJS',
+            type: 'POST',
+            data: JSON.stringify({ id: farm }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#ddlLote').empty();
+                $('select#ddlLote').append('<option value="0" selected="selected">(@am.GetTextOnLanguage("Selecione um Lote", lg))</option>');
+                $.each(data, function (key, SelectListItem) {
+                    $('select#ddlLote').append('<option value="' + SelectListItem.Text + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#ddlLote').selectmenu('refresh');
+            }
+        });
+    }
+
+    function carregaInformacoesLote() {
+        carregaGalpoes();
+        carregaSaldoLotePorTipoOvo();
+    }
+
+    function carregaGalpoes() {
+        var lote = $('#ddlLote option:selected').text();
+        $.ajax({
+            url: 'CarregaGalpoesJS',
+            type: 'POST',
+            data: JSON.stringify({ id: lote }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#ddlGalpao').empty();
+                $('select#ddlGalpao').append('<option value="0" selected="selected">(@am.GetTextOnLanguage("Selecione um Galpão", lg))</option>');
+                $.each(data, function (key, Lotes) {
+                    if (Lotes.Location == 'GP') {
+                        $('select#ddlGalpao').append('<option value="' + Lotes.Galpao + " - " + Lotes.Linhagem + '">' + Lotes.Galpao + " - " + Lotes.Linhagem + '</option>');
+                    }
+                    else {
+                        $('select#ddlGalpao').append('<option value="' + Lotes.Galpao + '">' + Lotes.Galpao + '</option>');
+                    }
+                    $('#hddLinhagem').val(Lotes.Linhagem);
+                });
+                $('select#ddlGalpao').selectmenu('refresh');
+            }
+        });
+    }
+
+    function carregaLoteCompleto() {
+        var lote = $('#ddlLote option:selected').val();
+        var galpao = $('#ddlGalpao option:selected').val();
+        $.ajax({
+            url: 'RetornaLoteCompletoJS',
+            type: 'POST',
+            data: JSON.stringify({ id: lote, id2: galpao }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('#loteCompleto').val(data.LoteCompleto);
+                $('#hddLinhagem').val(data.Linhagem);
+            }
+        });
+    }
+
+    function carregaSaldoLotePorTipoOvo() {
+        //var lote = $('#loteCompleto').val();
+        var lote = $('#ddlLote option:selected').val();
+        var data = $('#txtDataProducao').val();
+
+        $.ajax({
+            url: 'RetornaSaldoLotePorTipoOvoJS',
+            type: 'POST',
+            data: JSON.stringify({ numeroLote: lote, dataProducao: data }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $.each(data, function (key, Lotes) {
+                    var idDivDesc = 'dvDesc' + Lotes.TipoOvo;
+                    //var idDescricao = 'hdDescricao' + Lotes.TipoOvo;
+                    //var descricao = $('#' + idDescricao).val();
+                    var descHolder = document.getElementById(idDivDesc);
+                    descHolder.innerHTML = "<b>" + Lotes.DescricaoTipoOvo + " - Saldo: " + Lotes.SaldoString + "<b>";
+                    $('#txtQtdeTotal_' + Lotes.TipoOvo).val(Lotes.Saldo);
+                    $('#hddIdade').val(Lotes.Idade);
+                    verificaQtdeDisponivel();
+                });                
+            }
+        });
+    }
+
+    function atualizaQtdDisponivel(obj, codigoTipo, descricaoTipo) {
+        var errorHolder = document.getElementById('errorHolder');
+        var descHolder = document.getElementById('dvDesc' + codigoTipo);
+        var newValue = (obj.value * 1);
+        var oldValue = (obj.getAttribute("prevvalue") * 1);
+        var qtdeTotal = ($('#txtQtdeTotal_' + codigoTipo).val() * 1);
+
+        if (((qtdeTotal + oldValue) - newValue) < 0) {
+            errorHolder.innerHTML = '@(am.GetTextOnLanguage("Não existe ovos disponíveis para serem transferidos", lg))!'
+               + ' @(am.GetTextOnLanguage("Verifique!", lg))';
+            obj.value = oldValue;
+            obj.focus();
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+        } else {
+            var saldo = (qtdeTotal + oldValue) - newValue;
+            var saldoStr = formatNumber(saldo);
+            $('#txtQtdeTotal_' + codigoTipo).val(saldo);
+            descHolder.innerHTML = "<b>" + descricaoTipo + " - Saldo: " + (saldoStr).toString() + "<b>";
+            obj.setAttribute("prevvalue", newValue);
+            errorHolder.innerHTML = '';
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+        }
+    }
+
+    function verificaCampos() {
+        if (verificaQtdes()) { return false; }
+    }
+
+    function formatNumber(num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+    }
+</script>
+
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink(am.GetTextOnLanguage("Voltar para a Lista de Lotes da Transferência de Ovos Classificados", lg), "ReturnTransferenciaOvosClassificados", "DiarioExpedicao",
+                null,
+                new { @class = "AQO" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/egg.png"), "AQO")
+    <h2>@am.GetTextOnLanguage("Lote da Transferência de Ovos Classificados", lg)</h2>
+</div>
+@if (ViewBag.Erro != null)
+{
+    <br />
+    <h4 id="lblMsgErro" class="@(ViewBag.ClasseMsg) ui-li ui-li-static">
+        @Html.Raw(ViewBag.Erro)
+    </h4>
+    <br />
+}
+@using (Html.BeginForm("SaveTransferenciaOvosClassificadosItem", "DiarioExpedicao", FormMethod.Post, new { enctype = "multipart/form-data", @onsubmit = "verificaCampos()" }))
+{
+    <fieldset>
+        <div class="editor-label">
+            <b>Núcleo:</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList(
+            "Nucleo",
+            (List<SelectListItem>)Session["DDLNucleo"],
+            "(" + am.GetTextOnLanguage("Selecione um Núcleo", lg) + ")",
+            new { @id = "ddlNucleo", @required = "true", @onchange = "carregaLotes()" })
+        </div>
+        <div class="editor-label">
+            <b>@am.GetTextOnLanguage("Lote", lg):</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList(
+            "Lote",
+            (List<SelectListItem>)Session["DDLLotes"],
+        //new { @id = "ddlLote", @required = "true", @onchange = "carregaGalpoes()" })
+            new { @id = "ddlLote", @required = "true", @onchange = "carregaInformacoesLote()" })
+        </div>
+        @if (Session["tipoClassificacaoOvos"].ToString() == "SHD" || Session["tipoClassificacaoOvos"].ToString() == "NO")
+        {
+            <div class="editor-label">
+                <b>@am.GetTextOnLanguage("Galpão", lg):</b>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList(
+                "Galpao",
+                (List<SelectListItem>)Session["DDLGalpoes"],
+                new { @id = "ddlGalpao", @required = "true", @onchange = "carregaLoteCompleto()" })
+            </div>
+        }
+
+        @Html.Hidden("linhagem", "", new { @id = "hddLinhagem" })
+        @Html.Hidden("loteCompleto", Session["loteCompleto"].ToString(), new { @id = "loteCompleto" })
+        @Html.Hidden("idade", Session["idadeLote"].ToString(), new { @id = "hddIdade" })
+
+        <div class="editor-label">
+            <b>@am.GetTextOnLanguage("Data de Produção", lg):</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("dataProducaoCO", Convert.ToDateTime(Session["DataProducao"]).ToString("yyyy-MM-dd", System.Globalization.CultureInfo.GetCultureInfo("pt-BR")),
+             new { @id = "txtDataProducao", @type = "date", @required = "true", @onchange = "carregaSaldoLotePorTipoOvo()" })
+        </div>
+        @*<div class="editor-label">
+            <b>@am.GetTextOnLanguage("Quantidade a ser classificada", lg):</b>
+        </div>
+        <div class="editor-field">
+
+        </div>*@
+        @{
+            int saldoSemClassificar = Convert.ToInt32(Session["QtdeTotal_" + incubatorio]);
+            int qtdeMinSemClassificar = 0;
+            if (saldoSemClassificar < Convert.ToInt32(Session[incubatorio]))
+            {
+                qtdeMinSemClassificar = (Convert.ToInt32(Session[incubatorio]) - saldoSemClassificar);
+            }
+        }
+        <div id="@("dvDesc" + incubatorio)" class="editor-label">
+            @Html.Raw("<b>" + am.GetTextOnLanguage("Não Classificado", lg) + " - Saldo: " + String.Format("{0:N0}", saldoSemClassificar) + "<b>")
+        </div>
+        <div class="editor-field">
+            @Html.Hidden("QtdeTotal_" + incubatorio, Convert.ToInt32(Session["QtdeTotal_" + incubatorio]),
+                new { @id = "txtQtdeTotal_" + incubatorio, @readonly = "true", @min = "1" })
+            @Html.TextBox(incubatorio, Convert.ToInt32(Session[incubatorio]),
+            new { @type = "number", @id = "tco" + incubatorio,
+                @required = "true",
+                @onchange = "atualizaQtdDisponivel(this, '" + incubatorio + "','Não Classificado')",
+                @prevvalue = Convert.ToInt32(Session[incubatorio]),
+                @min = qtdeMinSemClassificar
+            })
+        </div>
+        @foreach (var item in listaTipoClassficacaoOvo)
+        {
+            int saldo = Convert.ToInt32(Session["QtdeTotal_" + item.CodigoTipo]);
+            int qtdeMin = 0;
+            if (saldo < Convert.ToInt32(Session[item.CodigoTipo]))
+            {
+                qtdeMin = (Convert.ToInt32(Session[item.CodigoTipo]) - saldo);
+            }
+
+            string descricao = "<b>" + item.DescricaoTipo + " - Saldo: " + String.Format("{0:N0}", saldo) + "<b>";
+
+            <div id="@("dvDesc" + item.CodigoTipo)" class="editor-label">
+                @Html.Raw(descricao)
+            </div>
+            <div class="editor-field">
+                @Html.Hidden("QtdeTotal_" + item.CodigoTipo, Convert.ToInt32(Session["QtdeTotal_" + item.CodigoTipo]),
+                    new { @id = "txtQtdeTotal_" + item.CodigoTipo, @readonly = "true", @min = "1" })
+                @Html.Hidden("descricaoTipoOvo", item.DescricaoTipo, new { @id = "hdDescricao" + item.CodigoTipo })
+                @*@Html.Hidden("QtdeTotal", 1000, new { @id = "txtQtdeTotal", @readonly = "true", @min = "1" })*@
+                @Html.TextBox(item.CodigoTipo, Convert.ToInt32(Session[item.CodigoTipo]),
+                new { @type = "number", @id = "tco" + item.CodigoTipo,
+                        @required = "true",
+                        @onchange = "atualizaQtdDisponivel(this, '" + item.CodigoTipo + "','" + item.DescricaoTipo + "')",
+                        @prevvalue = Convert.ToInt32(Session[item.CodigoTipo]),
+                        @min = qtdeMin
+           })
+            </div>
+        }
+
+        <div class="editor-label" id="errorHolder" style="color: Red; font-weight:bold;"></div>
+        <p>
+            <input type="submit" value="@am.GetTextOnLanguage("Salvar Transferência de Ovos Classificados do Lote", lg)" id="add" />
+        </p>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

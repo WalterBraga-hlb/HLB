@@ -1,0 +1,664 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Apolo10Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="Apolo10Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="FISCAL_ITEM_NF" EntityType="Apolo10Model.FISCAL_ITEM_NF" />
+    <EntitySet Name="FISCAL_NF" EntityType="Apolo10Model.FISCAL_NF" />
+  </EntityContainer>
+  <EntityType Name="FISCAL_ITEM_NF">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="FiscalNFChv" />
+      <PropertyRef Name="FiscalItNFSeq" />
+    </Key>
+    <Property Type="String" Name="EmpCod" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="FiscalNFChv" Nullable="false" />
+    <Property Type="Int32" Name="FiscalItNFSeq" Nullable="false" />
+    <Property Type="String" Name="FiscalItNFIndServ" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalItNFUnidMedCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="Int16" Name="FiscalItNFUnidMedPos" Nullable="false" />
+    <Property Type="String" Name="FiscalItNFNomeProd" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CCtrlCodEstr" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NatOpCodEstr" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ClasFiscCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TribCod" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalItNFTribIpi" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFQtd" Nullable="false" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="FiscalItNFPesoLiq" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="FiscalItNFValUnit" Nullable="false" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="FiscalItNFValTotal" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValDesc" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFPercDesc" Nullable="false" Precision="10" Scale="4" />
+    <Property Type="String" Name="FiscalItNFNumRom" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalItNFDataRom" Precision="3" />
+    <Property Type="Decimal" Name="FiscalItNFValFrete" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValSeguro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNfValOutrasDesp" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFAliqIpi" Nullable="false" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIpi" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIpi" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalItNFIpiEmValor" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFAliqIcms" Nullable="false" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIcms" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcms" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIcmsST" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsRetST" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFAliqIcmsDif" Nullable="false" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFValRedBaseIcms" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFAliqRedBaseIcms" Nullable="false" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFAliqIss" Nullable="false" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIss" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIss" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalItNFCodNCM" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalItNFIncluiIpiBaseIcms" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFValFreteDestST" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsFrete" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIpiFrete" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValBaseSTFrete" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsSTFrete" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsSeguro" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIpiSeguro" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValBaseSTSeguro" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsSTSeguro" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsOutras" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIpiOutras" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValBaseSTOutras" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsSTOutras" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsFreteDestST" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseSTFreteDestST" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsSTFreteDestST" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFAliqIcmsST" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFQtdBaseIpiEmValor" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="FiscalItNFValDescZFM" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsDif" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalItNFCredIpiCompCom" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFPercCredIpiCompCom" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsIsentas" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsOutrasDesp" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIpiIsentas" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIpiOutrasDesp" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalItNFIcmsCod" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="FiscalItNFIpiCod" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFIcmsIsenFrete" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFIcmsIsenSeguro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFIcmsIsenOutrasDesp" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFIcmsOutFrete" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFIcmsOutSeguro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFIcmsOutOutrasDesp" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFIpiIsenFrete" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFIpiIsenSeguro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFIpiIsenOutrasDesp" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFIpiOutFrete" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFIpiOutSeguro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFIpiOutOutrasDesp" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValBasePis" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValPis" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValBaseCofins" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValCofins" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalItNFNatOpCodEstr" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFPercRecIcms" Nullable="false" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFPercRecIpi" Nullable="false" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFBaseCalcIcmsLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFAliqIcmsLivro" Nullable="false" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseCalcIpiLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFAliqIpiLivro" Nullable="false" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFValIpiLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseCalcIcmsSTLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsSTLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIpiFrete" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIpiSeguro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIpiOutrasDesp" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIcmsFrete" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIcmsSeguro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIcmsOutrasDesp" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIpiFreteLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIpiSeguroLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIpiOutDespLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIpiFreteLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIpiSeguroLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIpiOutDespLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIcmsFreteLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIcmsSeguroLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIcmsOutDespLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsFreteLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsSeguroLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsOutDespLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseSTFreteLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseSTSeguroLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseSTOutDespLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsSTFreteLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsSTSeguroLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsSTOutDesLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalItNFOrigMod" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalItNFOrigEspec" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalItNFOrigSerie" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalItNFOrigNum" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="FiscalItNFOrigChv" />
+    <Property Type="Int32" Name="FiscalItNFOrigSeq" />
+    <Property Type="String" Name="FiscalItNFProdDivCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdDivNome" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFBaseII" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFAliqII" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFValII" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIIEmbalagem" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIIFrete" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIISeguro" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIIOutrasDesp" Precision="14" Scale="2" />
+    <Property Type="String" Name="TribACod" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="TribBCod" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFValSiscomex" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsSiscomex" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIcmsSiscomex" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFIcmsIsenSiscomex" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFIcmsOutSiscomex" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIcmsSiscomexLiv" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsSiscomexLiv" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValCalcIssDedTot" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValDescIcms" Precision="14" Scale="2" />
+    <Property Type="DateTime" Name="FiscalItNFIpiDataVenc" Precision="3" />
+    <Property Type="String" Name="FiscalItNFServDivCod" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFValCalcIrrfDedTot" Precision="14" Scale="2" />
+    <Property Type="String" Name="ImpTipoIpi" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpCodReceitaIpi" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFMultaIpi" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFJuroIpi" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFAliqPis" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFValBasePisRF" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValPisRF" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFAliqCofins" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFValBaseCofinsRF" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValCofinsRF" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValBaseCsllRF" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValCsllRF" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFAliqIrrf" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFValBaseIrpjRF" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIrpjRF" Precision="14" Scale="2" />
+    <Property Type="String" Name="ImpTipoPisCofinsCsllIrRF" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpCodReceitaPisCofinsCsllIrRF" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalItNFPisCofCsIrRFDataVenc" Precision="3" />
+    <Property Type="Decimal" Name="FiscalItNfAliqCofinsRF" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFAliqPisRF" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFAliqCsllRF" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFValDifBasePis" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValDifBaseCofins" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValDescPisZFM" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValDescCofinsZFM" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValCap" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsCap" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIpiCap" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValBaseSTCap" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsSTCap" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValPisCap" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValCofinsCap" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFIcmsIsenCap" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFIcmsOutCap" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFIpiIsenCap" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFIpiOutCap" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIcmsCap" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIpiCap" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIpiCapLivro" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIpiCapLivro" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIcmsCapLivro" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsCapLivro" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseSTCapLivro" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsSTCapLivro" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIICap" Precision="14" Scale="2" />
+    <Property Type="DateTime" Name="FiscalItNFIpiPerApur" Precision="3" />
+    <Property Type="DateTime" Name="FiscalItNFPisCofCsIrrfPerApur" Precision="3" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsRetSTRec" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValPisRec" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValCofinsRec" Precision="14" Scale="2" />
+    <Property Type="String" Name="CodGiaRSCod" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFPercRedInss" Precision="10" Scale="4" />
+    <Property Type="String" Name="FISCALITNFSERVDIVNOME" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFPercRedIcms" Precision="10" Scale="4" />
+    <Property Type="String" Name="FiscalItNFRedIcms" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFPercRedIcmsST" Precision="10" Scale="4" />
+    <Property Type="String" Name="FiscalItNFRedIcmsST" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFPercRedPis" Precision="10" Scale="4" />
+    <Property Type="String" Name="FiscalItNFRedPis" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFPercRedCofins" Precision="10" Scale="4" />
+    <Property Type="String" Name="FiscalItNFRedCofins" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFPercRedIPI" Precision="10" Scale="4" />
+    <Property Type="String" Name="FiscalItNFRedIPI" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFPercRedII" Precision="10" Scale="4" />
+    <Property Type="String" Name="FiscalItNFRedII" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFPercRedISS" Precision="10" Scale="4" />
+    <Property Type="String" Name="FiscalItNFRedISS" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFValDescISS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFPercDiferimICMS" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFValDiferimICMS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValICMSDevido" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValCredPresumICMS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValICMSRecolher" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalItNFDaeGnrePago" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalItNFDeduzValIcmsRetSt" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFValPedagio" Precision="14" Scale="2" />
+    <Property Type="String" Name="TribBModBCCod" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TribBModBCSTCod" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalItNFConfTribTipoIpi" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalItNFConfTribTipoPis" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalItNFConfTribTipoCofins" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalItNFConfTribIpiCod" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalItNFConfTribPisCod" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalItNFConfTribCofinsCod" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFValBaseIcmsOper" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFPercIcmsOper" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsOper" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFPrecoVendaVarejo" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="FiscalItNFSeloCtrl" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="FiscalItNFRepIcmsDifPercDesc" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFRepIcmsDifValDesc" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItBaseDifIcms" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItBaseFECP" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItAliqFECP" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItValFECP" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFPercIcmsExonerado" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNfValPisRFProdFrete" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNfValPisRFProdSeguro" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNfValPisRFOutrasDesp" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNfValCofinsRFProdFrete" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNfValCofinsRFProdSeg" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNfValCofinsRFOutDesp" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFQtdBasePisEmValor" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="FiscalItNFQtdBaseCofinsEmVlr" Precision="24" Scale="9" />
+    <Property Type="String" Name="ConfTribSimpNacCod" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="FiscalItNFQtdMes" />
+    <Property Type="Decimal" Name="FiscalItNFFatCalComodato" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIcmsSTDaeGnre" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFAliqIcmsSTDaeGnre" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsRetSTDG" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFAcresBenSimples" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="FiscalItNfValBaseINSS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNfAliqINSS" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNfValINSS" Precision="14" Scale="2" />
+    <Property Type="String" Name="CidCod" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalItNFNumAdic" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="FiscalItNFAdicSeq" />
+    <Property Type="String" Name="FiscalItNFEntCodFabEst" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFAdicDesc" Precision="14" Scale="2" />
+    <Property Type="String" Name="EFDBaseCalcCredCod" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalItNFCodNBS" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFTxaMaMerc" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsTxaMarMerc" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalItNFNatFrete" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="FiscalItNFTribICMSEnfDecl" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalItNFImpTipoIrrfPJ" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalItNFPerApurIrrfPJ" Precision="3" />
+    <Property Type="DateTime" Name="FiscalItNFDataVencIrrfPJ" Precision="3" />
+    <Property Type="String" Name="FiscalItNFImpCodRecIrrfPJ" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIcmsInter" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsOrig" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseIcmsDest" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFAliqIntDest" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsAliqDest" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsDest" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsDifalDest" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsTotal" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsPart1" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValIcmsPart2" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValContabil" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValTotBaseICMS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValTotBaseICMSLiv" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValTotICMS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValTotICMSLiv" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValTotICMSIsen" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValTotICMSOut" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValTotBaseIPI" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValTotBaseIPILiv" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValTotIPI" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValTotIPILiv" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValTotIPIIsen" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValTotIPIOut" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValTotBaseICMSST" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValTotBaseICMSSTLiv" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValTotICMSST" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValTotICMSSTLiv" Precision="14" Scale="2" />
+    <Property Type="String" Name="MotEnqLegIPICod" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalItNFCEST" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalItNFNrMemo" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PlanoCtaEmpCod" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PlanoCtaCodRed" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="IDTipoServReinf" />
+    <Property Type="Decimal" Name="FiscalItNFBaseFCPICMS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFPercFCPICMS" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFValFCPICMS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFBaseFCPICMSST" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFPercFCPICMSST" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFValFCPICMSST" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFVlrServicos15" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFVlrServicos20" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFVlrServicos25" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFVlrAdicional" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFVlrNRetAdic" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFNaoDevBsINSS" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="FiscalItNFNaoDevAliqINSS" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFNaoDevVlrINSS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFNaoDevBsIR" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="FiscalItNFNaoDevAliqIR" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFNaoDevVlrIR" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFNaoDevBsPIS" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="FiscalItNFNaoDevAliqPIS" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFNaoDevVlrPIS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFNaoDevBsCOFINS" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="FiscalItNFNaoDevAliqCOFINS" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFNaoDevVlrCOFINS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFNaoDevBsCSLL" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="FiscalItNFNaoDevAliqCSLL" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalItNFNaoDevVlrCSLL" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValCalcINSSDedTot" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalItNFValFCPRetST" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFOperacao" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalItNFEspecie" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="FISCAL_NF">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="FiscalNFChv" />
+    </Key>
+    <Property Type="String" Name="EmpCod" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="FiscalNFChv" Nullable="false" />
+    <Property Type="DateTime" Name="FiscalNFDataEmis" Nullable="false" Precision="3" />
+    <Property Type="String" Name="FiscalNFEspec" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFSerie" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFNum" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFIndMov" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFCategEnt" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EntCod" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFRazaoSocial" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFCnpj" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFInscEst" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PaisSigla" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="UfSigla" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalNFDataSaiEnt" Nullable="false" Precision="3" />
+    <Property Type="String" Name="FiscalNFCancelada" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFValTotProd" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValTotServ" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFPercDescProd" Nullable="false" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalNFPercDescServ" Nullable="false" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FiscalNFValDescProd" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValDescServ" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValTotNota" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValFrete" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValSeguro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValOutrasDesp" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFBaseIpi" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIpi" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFBaseIcms" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIcms" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalNFIESubTrib" MaxLength="14" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFBaseIcmsST" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIcmsST" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFBaseIss" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIss" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFBaseIrrf" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIrrf" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalNFViaTransp" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFModFrete" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFTranspCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFIdentVeic" MaxLength="17" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFQtdVol" Precision="24" Scale="9" />
+    <Property Type="String" Name="FiscalNFVolume" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFPesoBruto" Nullable="false" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="FiscalNFPesoLiq" Nullable="false" Precision="24" Scale="9" />
+    <Property Type="String" Name="PlanoCtaEmpCod" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PlanoCtaCodRed" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="UsuCod" Nullable="false" MaxLength="31" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFOrigDoc" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFValFreteDestST" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalNFComplem" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFValIssDedTot" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFValBaseInss" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValInss" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalNFValInssDedTot" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFValDescZFM" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValCalcInss" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValCalcIrrf" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIcmsIsentas" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIcmsOutras" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIpiIsentas" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIpiOutras" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValBasePis" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValPis" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValBaseCofins" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValCofins" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFBaseCalcIcmsLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIcmsLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFBaseCalcIpiLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIpiLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFBaseCalcIcmsSTLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIcmsSTLivro" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalNFDedIrrfValServ" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFDocEmitEmp" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFBaseII" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValII" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalNFNumRegExport" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalNFDataRegExport" Precision="3" />
+    <Property Type="String" Name="FiscalNFNumDespachoExport" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFValSiscomex" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValCalcCofinsRF" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValCofinsRF" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalNFDedCofinsValServ" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFValBaseCsll" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValCalcCsllRF" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalNFDedCsllValServ" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFValCsllRF" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValCalcPisRF" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValPisRF" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalNFDedPisValServ" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFValCalcIssDedTot" Precision="14" Scale="2" />
+    <Property Type="String" Name="CidCod" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFValDescIcms" Precision="14" Scale="2" />
+    <Property Type="DateTime" Name="FiscalNFDataVencCofins" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFDataVencCsll" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFDataVencIcms" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFDataVencIcmsST" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFDataVencInss" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFDataVencIrrfPJ" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFDataVencIss" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFDataVencPis" Precision="3" />
+    <Property Type="Int32" Name="FiscalNFOrigChv" />
+    <Property Type="Int16" Name="FiscalNFOrigSeq" />
+    <Property Type="Int16" Name="FiscalNFOrigDesm" />
+    <Property Type="Int16" Name="FiscalNFOrigSeq2" />
+    <Property Type="String" Name="FiscalNFOrigNum" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TipoDocCod" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalNFDataVencDifIcms" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFDataVencIssRF" Precision="3" />
+    <Property Type="Decimal" Name="FiscalNFValCalcIrrfDedTot" Precision="14" Scale="2" />
+    <Property Type="String" Name="ImpTipoPis" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpCodReceitaPis" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpTipoIssRF" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpCodReceitaIssRF" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpTipoIss" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpCodReceitaIss" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpTipoIrrfPJ" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpCodReceitaIrrfPJ" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpTipoInss" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpCodReceitaInss" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpTipoIcmsST" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpCodReceitaIcmsST" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpTipoIcmsDifAliq" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpCodReceitaIcmsDifAliq" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpTipoIcms" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpCodReceitaIcms" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpTipoCsll" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpCodReceitaCsll" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpTipoCofins" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpCodReceitaCofins" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFValMultaIssRF" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValJuroIssRF" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValMultaIss" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValJuroIss" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValMultaIrrfPJ" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValJuroIrrfPJ" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValMultaInss" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValJuroInss" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValMultaIcmsST" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValJuroIcmsST" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValMultaIcmsDifAliq" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValJuroIcmsDifAliq" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValMultaIcms" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValJuroIcms" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValMultaCsll" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValJuroCsll" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalNFTareGerado" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalNFTareDataHora" Precision="3" />
+    <Property Type="String" Name="FiscalNFTareFinalidade" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FISCALNFVALBASEPISSERV" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FISCALNFVALPISSERV" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FISCALNFVALBASECOFINSSERV" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FISCALNFVALCOFINSSERV" Precision="14" Scale="2" />
+    <Property Type="String" Name="EntCodRem" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFRazaoSocialRem" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFCnpjRem" MaxLength="14" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFInscEstRem" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PaisSiglaRem" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="UfSiglaRem" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFSubSerie" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="IMPTIPOSimpEstadual" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalNFDataVencSimpEstadual" Precision="3" />
+    <Property Type="String" Name="ImpCodReceitaSimpEstadual" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="IMPTIPOSimpFederal" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalNFDataVencSimpFederal" Precision="3" />
+    <Property Type="String" Name="ImpCodReceitaSimpFederal" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFValDescPisZFM" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValDescCofinsZFM" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValCap" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalNFRateioCapPorPeso" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalNFPerApurIcms" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFPerApurIcmsST" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFPerApurDifIcms" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFPerApurCofins" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFPerApurIrrfPJ" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFPerApurInss" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFPerApurCsll" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFPerApurPis" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFPerApurIss" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFPerApurIssRF" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFPerApurSimpEstadual" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFPerApurSimpFederal" Precision="3" />
+    <Property Type="String" Name="FiscalNfCEI" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFValRecAntIcmsST" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalNFValPagRecAntIcmsST" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFDivergencia" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpTipoGnreST" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpCodReceitaGnreST" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalNFPerApurGnreST" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFDataVencGnreST" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFDataDespachoExport" Precision="3" />
+    <Property Type="String" Name="FiscalNFNumConhecEmb" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalNFDataConhecEmb" Precision="3" />
+    <Property Type="String" Name="FiscalNFTipoConhecEmb" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FISCALNFDataAverbDecExport" Precision="3" />
+    <Property Type="Decimal" Name="FiscalNFValDescISS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValDiferimIcms" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValICMSDevido" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValCredPresumICMS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValICMSRecolher" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalNFOrigEmpCod" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TipoLancCod" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpTipoCSLLPJLP" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalNfPerApurCSLLPJLP" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFDataVencCSLLPJLP" Precision="3" />
+    <Property Type="String" Name="ImpCodReceitaCSLLPJLP" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpTipoIRRFPJLP" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalNfPerApurIRRFPJLP" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFDataVencIRRFPJLP" Precision="3" />
+    <Property Type="String" Name="ImpCodReceitaIRRFPJLP" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFBaseIcmsServ" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIcmsServ" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValPedagio" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalNFVeicPlaca" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFVeicUfSigla" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFVeicPaisSigla" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFVeic2Placa" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFVeic2UfSigla" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFVeic2PaisSigla" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFVeic3Placa" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFVeic3UfSigla" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFVeic3PaisSigla" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="FISCALNFDOCCONTORCCHV" />
+    <Property Type="Decimal" Name="FiscalNFValBaseIcmsOper" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIcmsOper" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFPrecoVendaVarejo" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="FiscalNFSeloCtrl" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="FiscalNFValBasePisProdRF" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValPisProdRF" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValBaseCofinsProdRF" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValCofinsProdRF" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFRepIcmsDifValDesc" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFBaseDifIcms" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFBaseFECP" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValFECP" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalNFDenegada" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFNumDocDI" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalNFDataDI" Precision="3" />
+    <Property Type="String" Name="FiscalNFCidCodDI" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalNFDataDesembDI" Precision="3" />
+    <Property Type="String" Name="FiscalNFCodExportDI" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFNumAcDraw" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFBaseIcmsSTDaeGnre" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIcmsSTDaeGnre" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValCalcINSSDedTot" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalNFNumFim" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFChvNfse" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFTxaMarMerc" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalNFRatTxaMarMercPorPeso" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFRatSiscomexPorPeso" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFRatDespImportPorPeso" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalNFDataMovimento" Nullable="false" Precision="3" />
+    <Property Type="String" Name="FiscalNFExtemporaneo" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalNFDataEntrega" Precision="3" />
+    <Property Type="String" Name="FiscalNFCancExtemp" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFBaseIcmsInter" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIcmsOrig" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFBaseIcmsDest" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIcmsAliqDest" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIcmsDifalDest" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIcmsTotal" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIcmsPart1" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValIcmsPart2" Precision="14" Scale="2" />
+    <Property Type="String" Name="FiscalNFCnoCeiIndPrestServ" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFCnoCeiCodObra" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalNFCanceladaData" Precision="3" />
+    <Property Type="String" Name="CidCodInicPrestServ" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CidCodFinalPrestServ" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFBaseFCPICMS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValFCPICMS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFBaseFCPICMSST" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValFCPICMSST" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFVlrServicos15" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFVlrServicos20" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFVlrServicos25" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFVlrAdicional" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFVlrNRetAdic" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFNaoDevBsINSS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFNaoDevVlrINSS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFNaoDevBsIR" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFNaoDevVlrIR" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFNaoDevBsPIS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFNaoDevVlrPIS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFNaoDevBsCOFINS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFNaoDevVlrCOFINS" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFNaoDevBsCSLL" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFNaoDevVlrCSLL" Precision="14" Scale="2" />
+    <Property Type="String" Name="REINFReg2010ID" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="REINFReg2020ID" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="REINFReg2050ID" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpTipoFECP" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImpCodReceitaFECP" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalNFPerApurFECP" Precision="3" />
+    <Property Type="DateTime" Name="FiscalNFDataVencFECP" Precision="3" />
+    <Property Type="String" Name="REINFReg2040ID" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FiscalNFValFCPRetST" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="FiscalNFValDifIcms" Precision="14" Scale="2" />
+    <Property Type="DateTime" Name="FiscalNFDtHrDig" Precision="3" />
+    <Property Type="String" Name="FiscalNFSubstituida" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="FiscalNFSubstituidaData" Precision="3" />
+    <Property Type="String" Name="FiscalNFNatOpProd" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FiscalNFNatOpServ" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalNFObs" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

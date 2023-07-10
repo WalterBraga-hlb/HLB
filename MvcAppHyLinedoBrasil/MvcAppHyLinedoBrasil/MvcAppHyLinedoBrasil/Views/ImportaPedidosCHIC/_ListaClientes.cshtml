@@ -1,0 +1,54 @@
+﻿@*@model IEnumerable<MvcAppHyLinedoBrasil.Models.Cliente>*@
+
+@if (Session["ListaClientesConf"] != null)
+{
+    <fieldset>
+        <p align="center">
+            <legend><u>Lista de Clientes</u></legend>
+        </p>
+        <table style="width: 100%">
+            <tr>
+                <th>
+                </th>
+                <th>
+                    Código
+                </th>
+                <th>
+                    Razão Social
+                </th>
+                <th>
+                    Nome Fantasia
+                </th>
+                <th>
+                    Cidade
+                </th>
+                <th>
+                    Estado
+                </th>
+            </tr>
+            @foreach (var item in (List<MvcAppHyLinedoBrasil.Models.Cliente>)Session["ListaClientesConf"])
+            {
+                <tr align="center">
+                    <td>
+                        @Html.RadioButton("clienteSelecionado", item.EntCod, Session["marcadoConf"].ToString() == item.EntCod ? true : false)
+                    </td>
+                    <td>
+                        @item.EntCod
+                    </td>
+                    <td>
+                        @item.EntNome
+                    </td>
+                    <td>
+                        @item.EntNomeFant
+                    </td>
+                    <td>
+                        @item.CidNomeComp
+                    </td>
+                    <td>
+                        @item.UfSigla
+                    </td>
+                </tr>
+            }
+        </table>
+    </fieldset>
+}

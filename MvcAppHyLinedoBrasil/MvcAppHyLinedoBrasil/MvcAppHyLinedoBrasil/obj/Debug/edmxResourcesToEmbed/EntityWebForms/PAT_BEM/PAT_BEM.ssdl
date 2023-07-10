@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Apolo10Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="Apolo10Model1StoreContainer">
+    <EntitySet Name="PAT_BEM" EntityType="Apolo10Model1.Store.PAT_BEM" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="PAT_BEM">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="PatBemCodRed" />
+    </Key>
+    <Property Name="EmpCod" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="PatBemCodEstr" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="PlanoCtaEmpCod" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="PlanoCtaCodRed" Type="varchar" Nullable="false" MaxLength="7" />
+    <Property Name="PatBemCodRed" Type="varchar" Nullable="false" MaxLength="7" />
+    <Property Name="PatBemEquip" Type="varchar" MaxLength="5" />
+    <Property Name="EquipCodEstr" Type="varchar" MaxLength="15" />
+    <Property Name="PatBemQtd" Type="int" />
+    <Property Name="PatBemNome" Type="varchar" MaxLength="80" />
+    <Property Name="PatBemNomeAlt1" Type="varchar" MaxLength="255" />
+    <Property Name="PatBemNomeAlt2" Type="varchar" MaxLength="255" />
+    <Property Name="PatBemNomeAlt3" Type="varchar" MaxLength="255" />
+    <Property Name="PatBemGrupo" Type="char" MaxLength="1" />
+    <Property Name="PatBemCodEstrNiv" Type="varchar" MaxLength="30" />
+    <Property Name="PatBemPlanoCtaBemCodEstr" Type="varchar" MaxLength="60" />
+    <Property Name="CCtrlCodEstr" Type="varchar" MaxLength="30" />
+    <Property Name="PatLocCodEstr" Type="varchar" MaxLength="15" />
+    <Property Name="FuncCod" Type="varchar" MaxLength="7" />
+    <Property Name="PatBemDataAquis" Type="datetime" />
+    <Property Name="PatBemTxaNormal" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="PatBemTxaAceler" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="PatBemValOrig" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PatBemValDepAcum" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PatBemValOrigOutraMoeda" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PatBemValDepAcumOutraMoeda" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PatBemCodPlaq" Type="varchar" MaxLength="30" />
+    <Property Name="PatBemStat" Type="varchar" MaxLength="15" />
+    <Property Name="PatBemVinculo" Type="varchar" MaxLength="10" />
+    <Property Name="TipoDocCod" Type="varchar" MaxLength="3" />
+    <Property Name="PatBemSerieDoc" Type="varchar" MaxLength="3" />
+    <Property Name="PatBemNumDoc" Type="varchar" MaxLength="15" />
+    <Property Name="PatBemDataDoc" Type="datetime" />
+    <Property Name="EntCod" Type="varchar" MaxLength="7" />
+    <Property Name="NatOpCodEstr" Type="varchar" MaxLength="15" />
+    <Property Name="PatBemValBaseIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PatBemPercIcms" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="PatBemValIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PatBemDataValidGar" Type="datetime" />
+    <Property Name="PatBemTexto" Type="text" />
+    <Property Name="ProdCodEstr" Type="varchar" MaxLength="30" />
+    <Property Name="MovEstqChv" Type="int" />
+    <Property Name="ItMovEstqSeq" Type="smallint" />
+    <Property Name="PatBemAnoMesCad" Type="varchar" Nullable="false" MaxLength="6" />
+    <Property Name="PatBemValCambioOutraMoeda" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PatBemPlanoCtaCodRedAquis" Type="varchar" MaxLength="7" />
+    <Property Name="PatBemCCtrlCodEstrAquis" Type="varchar" MaxLength="30" />
+    <Property Name="PatBemPatLocCodEstrAquis" Type="varchar" MaxLength="15" />
+    <Property Name="PatBemFuncCodAquis" Type="varchar" MaxLength="7" />
+    <Property Name="PatBemCodEstrAquis" Type="varchar" MaxLength="30" />
+    <Property Name="PatBemOrigMod" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="PatBemEmpCodMovEstq" Type="varchar" MaxLength="20" />
+    <Property Name="CONTRATONUM" Type="varchar" MaxLength="20" />
+    <Property Name="ITCONTRATOORCAMSEQ" Type="smallint" />
+    <Property Name="PARCITCONTRATOORCAMSEQ" Type="smallint" />
+    <Property Name="PARCITCONTRATOORCAMDESMPAG" Type="smallint" />
+    <Property Name="DOCPARCITCONTRATOORCAMSEQ" Type="smallint" />
+    <Property Name="PatBemNumLRE" Type="varchar" MaxLength="25" />
+    <Property Name="PatBemFolhaLRE" Type="smallint" />
+    <Property Name="PatBemNumCTRC" Type="varchar" MaxLength="10" />
+    <Property Name="PatBemEntCodTransp" Type="varchar" MaxLength="7" />
+    <Property Name="PatBemValIcmsFrete" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PatBemValIcmsDifAliq" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PatBemValCiap" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PatBemParticipProduc" Type="varchar" MaxLength="5" />
+    <Property Name="PatBemQdtMesCredCiap" Type="smallint" />
+    <Property Name="PatBemValFrete" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PatBemValLiq" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NumSerCtrl" Type="int" />
+    <Property Name="PATBEMHISTORICO" Type="varchar" MaxLength="5" />
+    <Property Name="PatBemGestaoPublica" Type="varchar" MaxLength="5" />
+    <Property Name="PatBemNumItemGestPub" Type="varchar" MaxLength="20" />
+    <Property Name="PatBemCodHospGestPub" Type="varchar" MaxLength="40" />
+    <Property Name="PatBemNumSerFabricGestPub" Type="varchar" MaxLength="255" />
+    <Property Name="PatBemMarcaModTipoGestPub" Type="varchar" MaxLength="255" />
+    <Property Name="PatBemNumSES" Type="varchar" MaxLength="30" />
+    <Property Name="PatBemComponente" Type="varchar" MaxLength="5" />
+    <Property Name="PatBemValIcmsSt" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PatBemChaveAcessoNFe" Type="varchar" MaxLength="44" />
+    <Property Name="PatBemCodBaseCred" Type="varchar" MaxLength="60" />
+    <Property Name="PatBemBaseCalcPIS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PatBemPercPIS" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="PatBemValPIS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PatBemBaseCalcCOFINS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PatBemPercCOFINS" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="PatBemValCOFINS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PatBemIdentifBemIncorp" Type="varchar" MaxLength="60" />
+    <Property Name="PatBemIndicUtiliz" Type="varchar" MaxLength="40" />
+    <Property Name="PatBemParcAquisDeduzCred" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PatBemIndicNumParc" Type="char" MaxLength="1" />
+    <Property Name="PatBemParticipEfdPisCofins" Type="varchar" MaxLength="5" />
+    <Property Name="PatBemAnoMesEfdPisCofins" Type="varchar" MaxLength="6" />
+    <Property Name="PatBemAnoMesAprEfdPisCofins" Type="varchar" MaxLength="6" />
+    <Property Name="PatBemValAquisEfdPisCofins" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PatBemAnoMesInicEfdPisCofins" Type="varchar" MaxLength="6" />
+    <Property Name="PatBemAnoMesFimEfdPisCofins" Type="varchar" MaxLength="6" />
+    <Property Name="PatBemQtdParcApropiar" Type="smallint" />
+    <Property Name="PatBemCst" Type="varchar" MaxLength="7" />
+    <Property Name="PatBemOrigCred" Type="varchar" MaxLength="50" />
+    <Property Name="PatBemAreaTot" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PatBemAreaConst" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PatBemPeqVal" Type="varchar" Nullable="false" MaxLength="5" />
+    <Property Name="PatBemVidaUtil" Type="int" />
+    <Property Name="PatBemVidaUtilEm" Type="varchar" MaxLength="10" />
+    <Property Name="PatBemJustAquis" Type="varchar" MaxLength="255" />
+    <Property Name="TipoBemCod" Type="varchar" MaxLength="2" />
+    <Property Name="UsuCod" Type="varchar" MaxLength="31" />
+    <Property Name="PatBemDataHoraDig" Type="datetime" />
+  </EntityType>
+  <Function Name="gerar_codigo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="empresa" Type="varchar" Mode="In" />
+    <Parameter Name="tabela" Type="varchar" Mode="In" />
+    <Parameter Name="codigo" Type="int" Mode="InOut" />
+  </Function>
+</Schema>

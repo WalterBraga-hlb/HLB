@@ -1,0 +1,466 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+}
+
+<script src="../../Scripts/jquery.maskedinput.js" type="text/javascript"></script>
+
+<script language="javascript" type="text/javascript">
+//    window.onbeforeunload = function () {
+//        return "Não é possível atualizar a página porque os dados serão perdidos! Sendo assim, a página será fechada!";
+//    }
+
+    window.onkeydown = function (e) {
+        if (e.keyCode === 116) {
+            alert("Função não permitida");
+            e.keyCode = 0;
+            e.returnValue = false;
+            return false;
+        }
+    }
+
+    function atualizaCampoSolInv(pValor, pSessionName, pTipoControle, pNameDiv) {
+        var errorHolder = document.getElementById(pNameDiv);
+        $.ajax({
+            url: '/Orcamento/AtualizaCampoSolInv',
+            type: 'POST',
+            data: JSON.stringify({ valor: pValor, sessionName: pSessionName, tipoControle: pTipoControle, nameDiv: pNameDiv }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data != "") {
+                    $('#hdSaldoInv').val(data);
+                    errorHolder.innerHTML = 'Saldo: R$ ' + mvalor(data);
+                } else {
+                    errorHolder.innerHTML = '';
+                }
+                if (pSessionName == "ListaInvestimentos") {
+                    $.ajax({
+                        url: '/Orcamento/LocalizaInvestimentoObj',
+                        type: 'POST',
+                        data: JSON.stringify({ valor: pValor }),
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            var dataInicialInv = data.AnoMesInicial.toString().substring(0, 4) + '-' + data.AnoMesInicial.toString().substring(4, 7) + '-01';
+                            var dataFinalInv = data.AnoMesFinal.toString().substring(0, 4) + '-' + data.AnoMesFinal.toString().substring(4, 7) + '-30';
+                            document.getElementById("txtDataInicioProjeto").min = dataInicialInv;
+                            document.getElementById("txtDataTerminoProjeto").min = dataInicialInv;
+                            document.getElementById("txtInicioFuncionamentoProjeto").min = dataInicialInv;
+                            document.getElementById("txtDataInicioProjeto").max = dataFinalInv;
+                            document.getElementById("txtDataTerminoProjeto").max = dataFinalInv;
+                            document.getElementById("txtInicioFuncionamentoProjeto").max = dataFinalInv;
+                            var dataInicioProjeto = document.getElementById("txtDataInicioProjeto").value;
+                            var dataTerminoProjeto = document.getElementById("txtDataTerminoProjeto").value;
+                            if (dataInicioProjeto < dataInicialInv || dataInicioProjeto > dataFinalInv) {
+                                document.getElementById("txtDataInicioProjeto").value = dataInicialInv;
+                            }
+                            if (dataTerminoProjeto < dataInicialInv || dataTerminoProjeto > dataFinalInv) {
+                                document.getElementById("txtDataTerminoProjeto").value = dataInicialInv;
+                            }
+                            dataInicioProjeto = document.getElementById("txtDataInicioProjeto").value;
+                            dataTerminoProjeto = document.getElementById("txtDataTerminoProjeto").value;
+                            var inicioFuncionamento = document.getElementById("txtInicioFuncionamentoProjeto").value;
+                            if (inicioFuncionamento < dataInicioProjeto || inicioFuncionamento > dataFinalInv) {
+                                document.getElementById("txtInicioFuncionamentoProjeto").value = dataInicioProjeto;
+                            }
+                            $('[type="date"]').textinput('refresh');
+                        }
+                    });
+                } else if (pSessionName == "dataInicioProjetoSolInv") {
+                    var dataInicioProjeto = document.getElementById("txtDataInicioProjeto").value;
+                    document.getElementById("txtInicioFuncionamentoProjeto").min = dataInicioProjeto;
+                    $('[type="date"]').textinput('refresh');
+                } else if (pSessionName == "inicioFuncionamentoProjetoSolInv") {
+                    var dataInicioProjeto = document.getElementById("txtDataInicioProjeto").value;
+                    var dataTerminoProjeto = document.getElementById("txtDataTerminoProjeto").value;
+                    var inicioFuncionamento = document.getElementById("txtInicioFuncionamentoProjeto").value;
+                    if (dataInicioProjeto < inicioFuncionamento || inicioFuncionamento > dataFinalInv) {
+                        document.getElementById("txtInicioFuncionamentoProjeto").value = dataInicioProjeto;
+                    }
+                }
+            }
+        });
+    }
+
+    function verificaExisteItens() {
+        var qtdItens = $('#hdQtdItens').val();
+        var replaceqtdItens = qtdItens.replace(/\./g, '').replace(',', '.');
+        var floatqtdItens = parseFloat(replaceqtdItens);
+
+        var errorHolder = document.getElementById('errorItens');
+        errorHolder.innerHTML = '';
+        if (floatqtdItens == 0) {
+            errorHolder.innerHTML = 'É necessário inserir pelo menos um item!';
+            return true;
+        } else {
+            errorHolder.innerHTML = '';
+            return false;
+        }
+    }
+
+    function verificaValorProjPagXCotacoes() {
+        var qtdeTotalCotacoes = $('#hdQtdTotalCotacoes').val();
+        var errorHolder = document.getElementById('errorValoresMes');
+        var valorTotal = 0;
+        $('#tabelaValoresMes tr').each(function () {
+            $(this).find('td').each(function () {
+                $(this).find('input').each(function () {
+                    if ($(this).attr("id") == "valorMesJS") {
+                        var valor = $(this).val();
+                        if (valor != "") {
+                            var replacevalor = valor.replace(/\./g, '').replace(',', '.');
+                            var floatvalor = parseFloat(replacevalor);
+                            valorTotal = valorTotal + floatvalor;
+                        }
+                    }
+                });
+            });
+        });
+
+        errorHolder.innerHTML = '';
+        var replacevalorAprovado = qtdeTotalCotacoes.replace(/\./g, '').replace(',', '.');
+        var floatvalorAprovado = parseFloat(replacevalorAprovado);
+
+        if (valorTotal != floatvalorAprovado && document.getElementById('txtDescricao').readonly == undefined) {
+            errorHolder.innerHTML = 'O valor total das cotações selecionadas (R$ ' + qtdeTotalCotacoes
+                + ') não pode ser divergente do valor total da projeção de pagamentos (R$ ' + valorTotal.toLocaleString('pt-BR') + ')!';
+            return true;
+        } else {
+            errorHolder.innerHTML = '';
+            return false;
+        }
+    }
+
+    $('#add').click(function () {
+        if (verificaExisteItens()) { return false; }
+        if (verificaSaldoFinal()) { return false; }
+        if (verificaValorProjPagXCotacoes()) { return false; }
+    });
+
+    /* Máscaras ER */
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mvalor(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{8})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{5})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{2})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+</script>
+
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para a Lista de Solicitações de Investimento", "ListaSolicitacaoInvestimento", "Orcamento",
+                null,
+                new { @class = "solInvestimento", @title = "Clique aqui para voltar para a Lista de Solicitações de Investimento" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/sol_invest.png"), "Solicitação de Investimento")
+    <h2>Solicitação de Investimento</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+@using (Html.BeginForm("SaveSolicitacaoInvestimento", "Orcamento", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <ul data-role="listview" data-inset="true">
+        @if (Session["Status"].ToString() != "Pendente")
+        {
+            <li>
+                <b>Investimento:</b>
+                @Html.DropDownList(
+                    "Investimento",
+                    (List<SelectListItem>)Session["ListaInvestimentos"],
+                    "(Selecione um Investimento)",
+                    new
+                    {
+                        @id = "ddlInvestimentos",
+                        @required = true,
+                        @onchange = "atualizaCampoSolInv(this.value, \"ListaInvestimentos\", \"ddl\", \"saldoValorInvestimento\")",
+                        @style = "background: #eee; pointer-events: none; touch-action: none;"
+                    })
+            </li>
+            <li>
+                <b>Descrição do projeto:</b>
+                @Html.TextArea("descricao", Session["descricaoSolInv"].ToString(),
+                    new
+                    {
+                        @required = true,
+                        @onkeyup = "this.value = this.value.toUpperCase();",
+                        @placeholder = "Insira a descrição do projeto.",
+                        @id = "txtDescricao",
+                        @onchange = "atualizaCampoSolInv(this.value, \"descricaoSolInv\", \"txt\", \"\")",
+                        @readonly = "true"
+                    })
+            </li>
+            <li>
+                <b>Motivo:</b>
+                @Html.DropDownList(
+                    "Motivo",
+                    (List<SelectListItem>)Session["ListaMotivoSolInv"],
+                    "(Selecione um Motivo)",
+                    new
+                    {
+                        @id = "ddlMotivo",
+                        @required = true,
+                        @onchange = "atualizaCampoSolInv(this.value, \"ListaMotivoSolInv\", \"ddl\", \"\")",
+                        @style = "background: #eee; pointer-events: none; touch-action: none;"
+                    })
+            </li>
+            <li>
+                <b>Tipo de projeto:</b>
+                @Html.DropDownList(
+                    "TipoProjeto",
+                    (List<SelectListItem>)Session["ListaTiposProjetoSolInv"],
+                    "(Selecione um Tipo de Projeto)",
+                    new
+                    {
+                        @id = "ddlTipoProjeto",
+                        @required = true,
+                        @onchange = "atualizaCampoSolInv(this.value, \"ListaTiposProjetoSolInv\", \"ddl\", \"\")",
+                        @style = "background: #eee; pointer-events: none; touch-action: none;"
+                    })
+            </li>
+            <li>
+                <b>Data de início do projeto:</b>
+                @Html.TextBox("dataInicioProjeto", Convert.ToDateTime(Session["dataInicioProjetoSolInv"]).ToString("yyyy-MM-dd"),
+                    new
+                    {
+                        @type = "date",
+                        @required = true,
+                        @onchange = "atualizaCampoSolInv(this.value, \"dataInicioProjetoSolInv\", \"txt\", \"\")",
+                        @min = DateTime.Today.ToString("yyyy-MM-dd"),
+                        @id = "txtDataInicioProjeto",
+                        @readonly = "true"
+                    })
+            </li>
+            <li>
+                <b>Data de término do projeto:</b>
+                @Html.TextBox("dataTerminoProjeto", Convert.ToDateTime(Session["dataTerminoProjetoSolInv"]).ToString("yyyy-MM-dd"),
+                    new
+                    {
+                        @type = "date",
+                        @required = true,
+                        @onchange = "atualizaCampoSolInv(this.value, \"dataTerminoProjetoSolInv\", \"txt\", \"\")",
+                        @min = DateTime.Today.ToString("yyyy-MM-dd"),
+                        @id = "txtDataTerminoProjeto",
+                        @readonly = "true"
+                    })
+            </li>
+            <li>
+                <b>Início de Funcionamento:</b>
+                @Html.TextBox("inicioFuncionamentoProjeto", Convert.ToDateTime(Session["inicioFuncionamentoProjetoSolInv"]).ToString("yyyy-MM-dd"),
+                    new
+                    {
+                        @type = "date",
+                        @required = true,
+                        @onchange = "atualizaCampoSolInv(this.value, \"inicioFuncionamentoProjetoSolInv\", \"txt\", \"\")",
+                        @id = "txtInicioFuncionamentoProjeto",
+                        @readonly = "true"
+                    })
+            </li>
+        }
+        else
+        {
+            <li>
+                <b>Investimento:</b>
+                @Html.DropDownList(
+                    "Investimento",
+                    (List<SelectListItem>)Session["ListaInvestimentos"],
+                    "(Selecione um Investimento)",
+                    new
+                    {
+                        @id = "ddlInvestimentos",
+                        @required = true,
+                        @onchange = "atualizaCampoSolInv(this.value, \"ListaInvestimentos\", \"ddl\", \"saldoValorInvestimento\")"
+                    })
+                <div align="center" class="editor-label" id="saldoValorInvestimento" style="color: Red; font-weight:bold;">@Session["saldoValorInvestimento"].ToString()</div>
+                @Html.Hidden("saldoInv", Session["hdSaldoInvSession"].ToString(), new { @id = "hdSaldoInv" })
+            </li>
+            <li>
+                <b>Descrição do projeto:</b>
+                @Html.TextArea("descricao", Session["descricaoSolInv"].ToString(),
+                    new
+                    {
+                        @required = true,
+                        @onkeyup = "this.value = this.value.toUpperCase();",
+                        @placeholder = "Insira a descrição do projeto.",
+                        @id = "txtaDescricao",
+                        @onchange = "atualizaCampoSolInv(this.value, \"descricaoSolInv\", \"txt\", \"\")"
+                    })
+            </li>
+            <li>
+                <b>Motivo:</b>
+                @Html.DropDownList(
+                    "Motivo",
+                    (List<SelectListItem>)Session["ListaMotivoSolInv"],
+                    "(Selecione um Motivo)",
+                    new
+                    {
+                        @id = "ddlMotivo",
+                        @required = true,
+                        @onchange = "atualizaCampoSolInv(this.value, \"ListaMotivoSolInv\", \"ddl\", \"\")"
+                    })
+            </li>
+            <li>
+                <b>Tipo de projeto:</b>
+                @Html.DropDownList(
+                    "TipoProjeto",
+                    (List<SelectListItem>)Session["ListaTiposProjetoSolInv"],
+                    "(Selecione um Tipo de Projeto)",
+                    new
+                    {
+                        @id = "ddlTipoProjeto",
+                        @required = true,
+                        @onchange = "atualizaCampoSolInv(this.value, \"ListaTiposProjetoSolInv\", \"ddl\", \"\")"
+                    })
+            </li>
+            <li>
+                <b>Data de início do projeto:</b>
+                @Html.TextBox("dataInicioProjeto", Convert.ToDateTime(Session["dataInicioProjetoSolInv"]).ToString("yyyy-MM-dd"),
+                    new
+                    {
+                        @type = "date",
+                        @required = true,
+                        @onchange = "atualizaCampoSolInv(this.value, \"dataInicioProjetoSolInv\", \"txt\", \"\")",
+                        @min = Convert.ToDateTime(Session["dataMinProj"]).ToString("yyyy-MM-dd"),
+                        @max = Convert.ToDateTime(Session["dataMaxProj"]).ToString("yyyy-MM-dd"),
+                        @id = "txtDataInicioProjeto"
+                    })
+            </li>
+            <li>
+                <b>Data de término do projeto:</b>
+                @Html.TextBox("dataTerminoProjeto", Convert.ToDateTime(Session["dataTerminoProjetoSolInv"]).ToString("yyyy-MM-dd"),
+                    new
+                    {
+                        @type = "date",
+                        @required = true,
+                        @onchange = "atualizaCampoSolInv(this.value, \"dataTerminoProjetoSolInv\", \"txt\", \"\")",
+                        @min = Convert.ToDateTime(Session["dataMinProj"]).ToString("yyyy-MM-dd"),
+                        @max = Convert.ToDateTime(Session["dataMaxProj"]).ToString("yyyy-MM-dd"),
+                        @id = "txtDataTerminoProjeto"
+                    })
+            </li>
+            <li>
+                <b>Início de Funcionamento:</b>
+                @Html.TextBox("inicioFuncionamentoProjeto", Convert.ToDateTime(Session["inicioFuncionamentoProjetoSolInv"]).ToString("yyyy-MM-dd"),
+                    new
+                    {
+                        @type = "date",
+                        @required = true,
+                        @onchange = "atualizaCampoSolInv(this.value, \"inicioFuncionamentoProjetoSolInv\", \"txt\", \"\")",
+                        @min = Convert.ToDateTime(Session["dataInicioMinProj"]).ToString("yyyy-MM-dd"),
+                        @max = Convert.ToDateTime(Session["dataMaxProj"]).ToString("yyyy-MM-dd"),
+                        @id = "txtInicioFuncionamentoProjeto"
+                    })
+            </li>
+        }
+        @*<li>
+            <b>Explicação do motivo de iniciar o projeto:</b>
+            @Html.TextArea("motivoInicio", Session["motivoInicioSolInv"].ToString(), 
+                new {
+                    @required = true,
+                    @onkeyup = "this.value = this.value.toUpperCase();",
+                    @placeholder = "Insira a explicação do motivo de iniciar o projeto.",
+                    @onchange = "atualizaCampoSolInv(this.value, \"motivoInicioSolInv\", \"txt\", \"\")"
+                })
+        </li>
+        <li>
+            <b>Justificativa do projeto - qual o benefício?:</b>
+            @Html.TextArea("justificativa", Session["justificativaSolInv"].ToString(), 
+                new {
+                    @required = true,
+                    @onkeyup = "this.value = this.value.toUpperCase();",
+                    @placeholder = "Insira a justificativa do projeto.",
+                    @onchange = "atualizaCampoSolInv(this.value, \"justificativaSolInv\", \"txt\", \"\")"
+                })
+        </li>
+        <li>
+            <b>Alternativas caso o projeto não seja feito:</b>
+            @Html.TextArea("alternativas", Session["alternativasSolInv"].ToString(), 
+                new { 
+                    @required = true,
+                    @onkeyup = "this.value = this.value.toUpperCase();",
+                    @placeholder = "Insira as alternativas caso o projeto não seja feito.",
+                    @onchange = "atualizaCampoSolInv(this.value, \"alternativasSolInv\", \"txt\", \"\")"
+                })
+        </li>
+        <li>
+            <b>Riscos e fatores críticos de sucesso do projeto:</b>
+            @Html.TextArea("riscosFatores", Session["riscosFatoresSolInv"].ToString(), 
+                new {
+                    @required = true,
+                    @onkeyup = "this.value = this.value.toUpperCase();",
+                    @placeholder = "Insira os riscos e fatores críticos de sucesso do projeto.",
+                    @onchange = "atualizaCampoSolInv(this.value, \"riscosFatoresSolInv\", \"txt\", \"\")"
+                })
+        </li>*@
+        @Html.Partial("_ListaInvestimentoSolicitacaoItem")
+        <div class="editor-label" id="errorItens" style="color: Red; font-weight:bold;" align="center"></div>
+        @if (Session["Status"].ToString() != "Pendente")
+        {
+            <li>
+                <div align="center" class="editor-label" id="saldoValorInvestimento" style="color: Red; font-weight:bold;">@Session["saldoValorInvestimento"].ToString()</div>
+                @Html.Hidden("saldoInv", Session["hdSaldoInvSession"].ToString(), new { @id = "hdSaldoInv" })
+                @Html.Partial("_ListaInvestimentoSolicitacaoProjPag")
+            </li>
+        }
+        @if (Session["Status"].ToString() == "Pendente")
+        {
+            <li>
+                <b>Disponibilizar solicitação de investimento para o depto. de compras?</b>
+                @Html.DropDownList(
+                    "DisponibilizaCompras",
+                    (List<SelectListItem>)Session["ListaSimNao"],
+                    "(Selecione uma Opção)",
+                    new
+                    {
+                        @id = "ddlMotivo",
+                        @required = true,
+                        @onchange = "atualizaCampoSolInv(this.value, \"ListaMotivoSolInv\", \"ddl\", \"\")"
+                    })
+            </li>
+        }
+        @if ((MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                .GetGroup("HLBAPPM-OrcamentoInvestimentoSolicitacaoCompras", (System.Collections.ArrayList)Session["Direitos"])
+                && Session["Status"].ToString() == "Em Cotação")
+            || Session["Status"].ToString() == "Pendente")
+        {
+            <li>
+                <input type="submit" value="Salvar Solicitação de Investimento" id="add" />
+            </li>
+        }
+    </ul>
+}
+@if (Session["OperacaoSolInv"].ToString() == "Reprovação")
+{
+    <h1 style="color:red; background-color:Yellow">
+        * POR FAVOR, INSIRA O MOTIVO DA REPROVAÇÃO DA SOLICITAÇÃO DO INVESTIMENTO:
+    </h1>
+    using (Html.BeginForm("ConfirmaReprovaSolicitacaoInvestimento", "Orcamento", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+    <fieldset>
+        <div class="editor-label">
+            <b>Motivo da reprovação:</b>
+            @Html.TextArea("motivo", "",
+                 new { @id = "txtMotivo", @required = "true", @onkeyup = "this.value = this.value.toUpperCase();" })
+        </div>
+        <p>
+            <input type="submit" value="Reprovar Solicitação de Investimento" id="add" />
+        </p>
+    </fieldset>
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

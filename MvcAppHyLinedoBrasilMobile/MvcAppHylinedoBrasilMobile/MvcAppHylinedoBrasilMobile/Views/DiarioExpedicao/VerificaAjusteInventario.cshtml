@@ -1,0 +1,33 @@
+﻿<div align="center">
+    @Html.Image(@Url.Content("~/Content/icons/reposicao_estoque.gif"), "Ajuste de Inventário de Ovos")
+    <h2>Ajuste de DEOs de Inventário de Ovos</h2>
+<br />
+@if (ViewBag.ControleInventario != "")
+{
+    <h3>INVENTÁRIO JÁ AJUSTADO: - CONTROLE DE INVENTÁRIO Nº @ViewBag.ControleInventario</h3>
+    <h3 style="color:Red;">
+        <br />
+        **** AO REFAZER O INVENTÁRIO, O ANTIGO SERÁ DELETADO!!! ****
+    </h3>
+    <br />
+}
+<h3>CONFIRMA O AJUSTE DO DEO @Html.Label(Session["dataHoraCarreg"].ToString()) DE INVENTÁRIO DE OVOS?</h3>
+<br />
+<h3 style="color:Red;">
+    ****CUIDADO!!!****
+    <br />
+    **** APÓS ESSE AJUSTE, TODOS OS LOTES E DATAS DE PRODUÇÃO QUE NÃO ESTIVEREM NA LISTA
+         SERÃO ZERADOS!!! OS QUE ESTIVEREM NA LISTA, FICARÃO COM AS QUANTIDADES DA LISTA!!!****
+</h3>
+<br />
+<p>
+    @Html.ActionLink("SIM", "GeraAjusteInventario", new
+{
+    granja = Session["granjaSelecionada"].ToString(),
+    dataHoraCarregdataFiltro = Session["dataHoraCarreg"]
+})
+    <br />
+    <br />
+    @Html.ActionLink("NÃO", "ListaDEOs")
+</p>
+</div>

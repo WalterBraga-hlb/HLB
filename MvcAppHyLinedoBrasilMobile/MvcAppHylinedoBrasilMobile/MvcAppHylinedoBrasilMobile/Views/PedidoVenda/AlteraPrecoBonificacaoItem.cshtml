@@ -1,0 +1,204 @@
+﻿@{
+    ViewBag.Title = "";
+}
+
+<script type='text/javascript'>
+    
+        //$("#preco").mask('9,9999');
+//        $("#preco").maskMoney({ prefix: 'R$ ', precision: 4, allowNegative: false, thousands: '.', decimal: ',', affixesStay: false });
+//        $("#percBonificacao").maskMoney({ precision: 2, allowNegative: false, thousands: '.', decimal: ',', affixesStay: false });
+        //        $('#percBonificacao').jStepper({ minValue: 0, maxValue: 100, maxDecimals:4 });
+        //$("#percBonificacao").mask('999,99');
+//
+    $(document).ready(function () {
+        $('#percBonificacao').focusout(function () {
+            var value = $('#percBonificacao').val();
+            if (value == "") {
+                alert('O campo % de Bonificação não pode ser VAZIO!');
+                $('#percBonificacao').focus();
+            }
+            var replaceValue = value.replace(',', '.');
+            var floatValue = parseFloat(replaceValue);
+            if (floatValue < 0 || floatValue > 100) {
+                alert('O % de Bonificação tem que ser entre 0 e 100.');
+                $('#percBonificacao').focus();
+            }
+        });
+        $('#preco').focusout(function () {
+            var value = $('#preco').val();
+            if (value == "") {
+                alert('O campo Preço não pode ser VAZIO!');
+                $('#preco').focus();
+            }
+        });
+    });
+
+    /* Máscaras ER */
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mcep(v) {
+        v = v.replace(/\D/g, "")                    //Remove tudo o que não é dígito
+        v = v.replace(/^(\d{5})(\d)/, "$1-$2")         //Esse é tão fácil que não merece explicações
+        return v
+    }
+    function mtel(v) {
+        v = v.replace(/\D/g, "");             //Remove tudo o que não é dígito
+        v = v.replace(/^(\d{2})(\d)/g, "($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+        v = v.replace(/(\d)(\d{4})$/, "$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
+        return v;
+    }
+    function cnpj(v) {
+        v = v.replace(/\D/g, "")                           //Remove tudo o que não é dígito
+        v = v.replace(/^(\d{2})(\d)/, "$1.$2")             //Coloca ponto entre o segundo e o terceiro dígitos
+        v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3") //Coloca ponto entre o quinto e o sexto dígitos
+        v = v.replace(/\.(\d{3})(\d)/, ".$1/$2")           //Coloca uma barra entre o oitavo e o nono dígitos
+        v = v.replace(/(\d{4})(\d)/, "$1-$2")              //Coloca um hífen depois do bloco de quatro dígitos
+        return v
+    }
+    function mcpf(v) {
+        v = v.replace(/\D/g, "")                    //Remove tudo o que não é dígito
+        v = v.replace(/(\d{3})(\d)/, "$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+        v = v.replace(/(\d{3})(\d)/, "$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+        //de novo (para o segundo bloco de números)
+        v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2") //Coloca um hífen entre o terceiro e o quarto dígitos
+        return v
+    }
+    function mdata(v) {
+        v = v.replace(/\D/g, "");                    //Remove tudo o que não é dígito
+        v = v.replace(/(\d{2})(\d)/, "$1/$2");
+        v = v.replace(/(\d{2})(\d)/, "$1/$2");
+
+        v = v.replace(/(\d{2})(\d{2})$/, "$1$2");
+        return v;
+    }
+    function mtempo(v) {
+        v = v.replace(/\D/g, "");                    //Remove tudo o que não é dígito
+        v = v.replace(/(\d{1})(\d{2})(\d{2})/, "$1:$2.$3");
+        return v;
+    }
+    function mhora(v) {
+        v = v.replace(/\D/g, "");                    //Remove tudo o que não é dígito
+        v = v.replace(/(\d{2})(\d)/, "$1h$2");
+        return v;
+    }
+    function mrg(v) {
+        v = v.replace(/\D/g, "");                                      //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{7})$/, "$1.$2");    //Coloca o . antes dos últimos 3 dígitos, e antes do verificador
+        v = v.replace(/(\d)(\d{4})$/, "$1.$2");    //Coloca o . antes dos últimos 3 dígitos, e antes do verificador
+        v = v.replace(/(\d)(\d)$/, "$1-$2");               //Coloca o - antes do último dígito
+        return v;
+    }
+    function mnum(v) {
+        v = v.replace(/\D/g, "");                                      //Remove tudo o que não é dígito
+        return v;
+    }
+    function mvalor(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{8})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{5})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{2})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+    function mvalor4(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{8})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{5})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{4})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+    function mvalorperc(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        //v = v.replace(/(\d)(\d{8})$/, "$1.$2"); //coloca o ponto dos milhões
+        //v = v.replace(/(\d)(\d{5})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{2})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+</script>
+
+<div align="center">
+    @*<p>
+        @Html.ActionLink("Voltar p/ Lista de Itens do Pedido de Venda - Passo 02", "ListItensPVReturn", "PedidoVenda")
+    </p>*@
+    @Html.Image(@Url.Content("~/Content/icons/pedidoVenda.png"), "Pedido de Venda")
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+
+<h2>Altere o Preço ou a Qtde. Bonificada abaixo e insira o motivo:</h2>
+<br />
+@using (Html.BeginForm("SaveAlteraPrecoBonificacao", "PedidoVenda", FormMethod.Post))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <div class="editor-label">
+                <b>Entrega de</b>
+                @Convert.ToDateTime(Session["dataEntregaInicial"]).ToString("dd/MM/yyyy")
+                <b>a</b>
+                @Convert.ToDateTime(Session["dataEntregaFinal"]).ToString("dd/MM/yyyy")
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <div class="editor-label">
+                <b>Linhagem:</b>
+            </div>
+            <div class="editor-label">
+                @Session["linhagemSelecionada"].ToString()
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <div class="editor-label">
+                <b>Qtde. Líquida:</b>
+            </div>
+            <div class="editor-label">
+                @String.Format("{0:N0}", Convert.ToInt32(Session["qtdeLiquida"]))
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <div class="editor-label">
+                <b>Qtde. Reposição:</b>
+            </div>
+            <div class="editor-label">
+                @String.Format("{0:N0}", Convert.ToInt32(Session["qtdeReposicao"]))
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <div class="editor-label">
+                <b>Preço:</b>
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("preco", Convert.ToDecimal(Session["preco"]),
+                    new { @onkeyup = "mascara(this, mvalor4);" })
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <div class="editor-label">
+                <b>% Bonificação:</b>
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("percBonificacao", Convert.ToDecimal(Session["percBonificacao"]),
+                new { @onkeyup = "mascara(this, mvalorperc);" })
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Salvar Alteração de Preço / Bonificação" id="add" />
+        </li>
+    </ul>
+}
+
+@using (Html.BeginForm("PrintPVReturn", "PedidoVenda", FormMethod.Post))
+{
+    <input type="submit" value="Voltar" />
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

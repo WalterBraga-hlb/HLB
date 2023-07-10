@@ -1,0 +1,273 @@
+﻿@model MvcAppHylinedoBrasilMobile.Models.LayoutDiarioExpedicaos
+
+@{
+    ViewBag.Title = "";
+    string empresa = Session["granjaSelecionada"].ToString();
+    string tipoDEO = Session["tipoDEOselecionado"].ToString();
+    string destino = Session["incubatorioDestinoSelecionado"].ToString();
+    string origem = Session["origemCreateItemDEO"].ToString();
+}
+
+<script type='text/javascript'>
+    window.onbeforeunload = function () {
+        return "Se a página for atualizada, os dados alterados serão perdidos!";
+    }
+    
+    $('#MyId').change(function () {
+        var farm = $('#MyId').val();
+        $.ajax({
+            url: 'CarregaLotes',
+            type: 'POST',
+            data: JSON.stringify({ id: farm }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#Lote').empty();
+                $('select#Lote').append('<option value="0" selected="selected">(Selecione um Lote)</option>');
+                $.each(data, function (key, SelectListItem) {
+                    $('select#Lote').append('<option value="' + SelectListItem.Text + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#Lote').selectmenu('refresh');
+            }
+        });
+    });
+
+    $('#Lote').change(function () {
+        var lote = $('#Lote option:selected').text();
+        $.ajax({
+            url: 'CarregaGalpoes',
+            type: 'POST',
+            data: JSON.stringify({ id: lote }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#Galpao').empty();
+                $('select#Galpao').append('<option value="0" selected="selected">(Selecione um Galpão)</option>');
+                $.each(data, function (key, Lotes) {
+                    if (Lotes.Location == 'GP') {
+                        $('select#Galpao').append('<option value="' + Lotes.Galpao + " - " + Lotes.Linhagem + '">' + Lotes.Galpao + " - " + Lotes.Linhagem + '</option>');
+                    }
+                    else {
+                        $('select#Galpao').append('<option value="' + Lotes.Galpao + '">' + Lotes.Galpao + '</option>');
+                    }
+                    $('#linhagem').val(Lotes.Linhagem);
+                });
+                $('select#Galpao').selectmenu('refresh');
+            }
+        });
+    });
+
+    $('#Galpao').change(function () {
+        var lote = $('#Lote option:selected').val();
+        var galpao = $('#Galpao option:selected').val();
+        $.ajax({
+            url: 'RetornaLoteCompleto',
+            type: 'POST',
+            data: JSON.stringify({ id: lote, id2: galpao }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('#loteCompleto').val(data.LoteCompleto);
+                $('#linhagem').val(data.Linhagem);
+            }
+        });
+    });
+
+    $('#dataProducao').focusout(function () {
+        var dataProducao = $('#dataProducao').val();
+        $.ajax({
+            url: 'RetorndaIdade',
+            type: 'POST',
+            data: JSON.stringify({ id: dataProducao }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                //                $('#idade').val(data);
+                //                $('#bandejas').val(0)
+                $.each(data, function (key, Lotes) {
+                    if (Lotes.Linhagem == '') {
+                        $('#idade').val(Lotes.Galpao);
+                        $('#bandejas').val(0);
+                        $('#add').button('enable');
+                        $('[type="submit"]').button('refresh');
+                    } else {
+                        alert(Lotes.Linhagem.toString());
+                        $('#add').button('disable');
+                        $('[type="submit"]').button('refresh');
+                    }
+                });
+            }
+        });
+    });
+
+    $('#ovos').change(function () {
+        var result = null;
+        var dataProducao = $('#dataProducao').val();
+        var radioQtde = $("input:radio[name='QtdeBandejas']:checked").val();
+        var lote = $('#loteCompleto').val();
+        //var qtdeBandejas = $('#ovos').val();
+        //var qtdeOvos = qtdeBandejas * 150;
+        var qtdeOvos = 0;
+        var qtdeBandejas = 0;
+        if (radioQtde == 0) {
+            qtdeOvos = $('#ovos').val();
+            qtdeBandejas = qtdeOvos / 150;
+        }
+        else {
+            qtdeOvos = $('#ovos').val() * 150;
+            qtdeBandejas = qtdeOvos;
+        }
+        $.ajax({
+            url: 'VerificaEstoque',
+            type: 'POST',
+            data: JSON.stringify({ id: dataProducao, id2: lote, id3: qtdeOvos }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                    $('#bandejas').val(qtdeBandejas.toFixed(0));
+                    $('#add').button('enable');
+                    $('[type="submit"]').button('refresh');
+                } else {
+                    alert(data.toString());
+                    $('#add').button('disable');
+                    $('[type="submit"]').button('refresh');
+                }
+            }
+        });
+    });
+</script>
+
+<div align="center">
+    @if (origem == "Cadastro")
+    {
+        @Html.Image(@Url.Content("~/Content/icons/diario_expedicao.png"), "DEO")
+        <h2>Inserir Item do Diário da Produção</h2>
+    }
+    else
+    {
+        @Html.Image(@Url.Content("~/Content/icons/deo_nao_conforme.jpg"), "DEO")
+        <h2>Inserir Item Divergente do Diário da Produção</h2>
+    }
+</div>
+@if (ViewBag.Erro != null)
+{
+<h4 id="lblMsgErro" class="msgErro ui-li ui-li-static">
+    @Html.Raw(ViewBag.Erro)
+</h4>
+}
+@using (Html.BeginForm("CreateItem", "DiarioExpedicao", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        <div class="editor-label">
+            <b>Núcleo:</b>
+        </div>        
+        <div class="editor-field">
+            @Html.DropDownListFor(
+
+            n => n.Nucleo,
+            (List<SelectListItem>)Session["ListaNucleos"],
+            "(Selecione um Núcleo)",
+            new { @id = "MyId" })
+        </div>
+        <div class="editor-label">
+            <b>Lote:</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(
+            l => l.Lote,
+        //Enumerable.Empty<SelectListItem>(),
+            (List<SelectListItem>)Session["ListaLotes"],
+            new { @id = "Lote" })
+        </div>
+        <div class="editor-label">
+            <b>Galpão:</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(
+            g => g.Galpao,
+        //Enumerable.Empty<SelectListItem>(),
+            (List<SelectListItem>)Session["ListaGalpoes"],
+            new { @id = "Galpao" })
+        </div>
+
+        @Html.HiddenFor(model => model.Linhagem, new { @id = "linhagem" })
+        @Html.Hidden("loteCompleto", Session["loteCompletoSelecionado"].ToString(), new { @id = "loteCompleto" })
+        
+        <div class="editor-label">
+            <b>Data de Produção:</b>
+        </div>
+        <div class="editor-field">
+            @*@Html.TextBoxFor(model => model.DataProducao, new { @id = "dataProducao", @type = "date" })*@
+            @Html.TextBox("dataProducao", Convert.ToDateTime(Session["dataProducaoSelecionada"]).ToString("yyyy-MM-dd"), new { @id = "dataProducao", @type = "date" })
+        </div>
+
+        @Html.HiddenFor(model => model.Idade, new { @id = "idade" })
+
+        @if (empresa.Equals("PL") && tipoDEO.Equals("Transf. Ovos Incubáveis") && destino.Equals("NM"))
+        {
+            <div class="editor-label">
+                <b>Tipo do Ovos:</b>
+            </div>        
+            <div class="editor-field">
+                @Html.DropDownListFor(
+                n => n.TipoOvo,
+                (List<SelectListItem>)Session["ListaTipoOvo"],
+                new { @id = "TipoOvo" })
+            </div>
+        }
+        
+        <div class="editor-label">
+            <b style="color:Black;">Qtde.:</b>
+        </div>
+        <table style="width: 100%;">
+            <tr>
+                <td>
+                    <label style="width: 50px">@Html.RadioButtonFor(model => model.QtdeBandejas, "0", new { @name = "radioQtde" })</label>
+                </td>
+                <td>
+                    Ovos
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label style="width: 50px">@Html.RadioButtonFor(model => model.QtdeBandejas, "1", new { @name = "radioQtde" })</label>
+                </td>
+                <td>
+                    Bandejas
+                </td>
+            </tr>
+        </table>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.QtdeOvos, new { @type = "number", @id = "ovos" })
+        </div>
+
+        @Html.HiddenFor(model => model.QtdeBandejas, new { @id = "bandejas" })
+        
+        <p>
+            <input type="submit" value="Adicionar" id="add" />
+        </p>
+    </fieldset>
+}
+
+@if (origem == "Cadastro")
+{
+    <div>
+        @Html.ActionLink("Voltar p/ Lista", "EditDEO", new { dataFiltro = Convert.ToDateTime(Session["dataHoraCarreg"]),
+            nfNum = Session["nfNum"], numIdentificacao = Session["numIdentificacaoSelecionado"],
+   })
+    </div>
+}
+else
+{
+    <div>
+        @Html.ActionLink("Voltar p/ Lista", "ListaItensDEO", new { dataFiltro = Convert.ToDateTime(Session["dataHoraCarreg"]),
+            nfNum = Session["nfNum"], tipoDEO = Session["tipoDEOselecionado"], origem = "Edição",
+            numIdentificacao = Session["numIdentificacaoSelecionado"],
+   })
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

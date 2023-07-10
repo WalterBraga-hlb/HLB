@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProceduresApoloModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <Function Name="USER_Insere_RDV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pMatricula" Type="int" Mode="In" />
+    <Parameter Name="pNumRDV" Type="int" Mode="In" />
+    <Parameter Name="pAnoMes" Type="varchar" Mode="In" />
+    <Parameter Name="pValorReembolso" Type="decimal" Mode="In" />
+    <Parameter Name="pAprovador" Type="varchar" Mode="In" />
+    <Parameter Name="pDataHoraAprov" Type="varchar" Mode="In" />
+    <Parameter Name="pDataLancamento" Type="datetime" Mode="In" />
+  </Function>
+  <EntityContainer Name="ProceduresApoloModelStoreContainer" />
+</Schema>

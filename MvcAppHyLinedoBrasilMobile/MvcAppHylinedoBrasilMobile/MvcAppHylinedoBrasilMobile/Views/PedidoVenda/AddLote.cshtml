@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = "";
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+}
+
+<script type='text/javascript'>
+    function mnum(v) {
+        v = v.replace(/\D/g, "");                                      //Remove tudo o que não é dígito
+        return v;
+    }
+    $('#MyId').change(function () {
+        var farm = $('#MyId').val();
+        $.ajax({
+            url: 'CarregaLotes',
+            type: 'POST',
+            data: JSON.stringify({ id: farm }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#Lote').empty();
+                $('select#Lote').append('<option value="0" selected="selected">(Selecione um Lote)</option>');
+                $.each(data, function (key, SelectListItem) {
+                    $('select#Lote').append('<option value="' + SelectListItem.Text + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#Lote').selectmenu('refresh');
+            }
+        });
+    });
+
+    $('#Lote').change(function () {
+        var lote = $('#Lote option:selected').text();
+        $.ajax({
+            url: 'CarregaGalpoes',
+            type: 'POST',
+            data: JSON.stringify({ id: lote }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+//                $('select#Galpao').empty();
+//                $('select#Galpao').append('<option value="0" selected="selected">(Selecione um Galpão)</option>');
+//                $.each(data, function (key, Lotes) {
+//                    if (Lotes.Location == 'GP') {
+//                        $('select#Galpao').append('<option value="' + Lotes.Galpao + " - " + Lotes.Linhagem + '">' + Lotes.Galpao + " - " + Lotes.Linhagem + '</option>');
+//                    }
+//                    else {
+//                        $('select#Galpao').append('<option value="' + Lotes.Galpao + '">' + Lotes.Galpao + '</option>');
+//                    }
+//                    $('#linhagem').val(Lotes.Linhagem);
+//                });
+//                $('select#Galpao').selectmenu('refresh');
+            }
+        });
+    });
+</script>
+
+<div align="center">
+    @*<p>
+        @Html.ActionLink("Voltar p/ Lista de Itens do Pedido de Venda - Passo 02", "ListItensPVReturn", "PedidoVenda")
+    </p>*@
+    @Html.Image(@Url.Content("~/Content/icons/pedidoVenda.png"), "Pedido de Venda")
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+
+<h2>Passo 02.01.01.01: Insira um Lote para a Composição do Item do Pedido de Venda</h2>
+<br />
+@using (Html.BeginForm("SaveLotePV", "PedidoVenda", FormMethod.Post))
+{
+    <fieldset>
+        <div class="editor-label">
+            <b>Núcleo:</b>
+        </div>        
+        <div class="editor-field">
+            @Html.DropDownList(
+            "MyId",
+            (List<SelectListItem>)Session["ListaNucleosPV"],
+            "(Selecione um Núcleo)")
+        </div>
+        <div class="editor-label">
+            <b>Lote:</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList(
+            "Lote",
+            Enumerable.Empty<SelectListItem>())
+        </div>
+        @*<div class="editor-label">
+            <b>Galpão:</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList(
+            "Galpao",
+            Enumerable.Empty<SelectListItem>())
+        </div>*@
+        <div class="editor-label">
+            <b>Data de Produção:</b>
+        </div>
+        <div class="editor-field">
+            @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+            {
+                @Html.TextBox("dataProducaoPV", Convert.ToDateTime(Session["dataProducaoPV"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+            }
+            else
+            {
+                @Html.TextBox("dataProducaoPV", Convert.ToDateTime(Session["dataProducaoPV"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+            }
+        </div>
+        <div class="editor-label">
+            <b style="color:Black;">Idade do Lote:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("idadeLotePV", Session["idadeLotePV"].ToString(),
+             new { @type = "number", @onkeyup = "mascara(this, mnum);" })
+        </div>
+        <div class="editor-label">
+            <b style="color:Black;">Peso do Ovo:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("pesoOvoLotePV", Session["pesoOvoLotePV"].ToString(),
+             new { @type = "number", @onkeyup = "mascara(this, mnum);" })
+        </div>        
+        <div class="editor-label">
+            <b style="color:Black;">Qtde.:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("qtdeLotePV", Session["qtdeLotePV"].ToString(),
+             new { @type = "number", @onkeyup = "mascara(this, mnum);" })
+        </div>
+        <p>
+            <input type="submit" value="Salvar Lote" id="addLote" />
+        </p>
+    </fieldset>
+}
+
+@using (Html.BeginForm("ListLotesPVReturn", "PedidoVenda", FormMethod.Post))
+{
+    <input type="submit" value="Voltar" />
+}

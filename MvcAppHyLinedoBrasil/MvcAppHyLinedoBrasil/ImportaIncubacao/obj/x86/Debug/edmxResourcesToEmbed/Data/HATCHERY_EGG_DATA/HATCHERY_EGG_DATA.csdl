@@ -1,0 +1,422 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HLBAPPModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="HLBAPPEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="HATCHERY_EGG_DATA" EntityType="HLBAPPModel.HATCHERY_EGG_DATA" />
+    <EntitySet Name="Inv_Ovos" EntityType="HLBAPPModel.Inv_Ovos" />
+    <EntitySet Name="ImportaDiarioExpedicao" EntityType="HLBAPPModel.ImportaDiarioExpedicao" />
+    <EntitySet Name="LayoutDEO_X_ImportaDEO" EntityType="HLBAPPModel.LayoutDEO_X_ImportaDEO" />
+    <EntitySet Name="Estq_Planalto" EntityType="HLBAPPModel.Estq_Planalto" />
+    <EntitySet Name="FLOCK_DATA" EntityType="HLBAPPModel.FLOCK_DATA" />
+    <EntitySet Name="CTRL_LOTE_LOC_ARMAZ_WEB" EntityType="HLBAPPModel.CTRL_LOTE_LOC_ARMAZ_WEB" />
+    <EntitySet Name="HATCHERY_FLOCK_SETTER_DATA" EntityType="HLBAPPModel.HATCHERY_FLOCK_SETTER_DATA" />
+    <EntitySet Name="LOG_HATCHERY_EGG_DATA" EntityType="HLBAPPModel.LOG_HATCHERY_EGG_DATA" />
+    <EntitySet Name="LOG_HATCHERY_FLOCK_SETTER_DATA" EntityType="HLBAPPModel.LOG_HATCHERY_FLOCK_SETTER_DATA" />
+    <EntitySet Name="LayoutDiarioExpedicaos" EntityType="HLBAPPModel.LayoutDiarioExpedicaos" />
+    <EntitySet Name="PedidoRacao_Item" EntityType="HLBAPPModel.PedidoRacao_Item" />
+    <EntitySet Name="PedidoRacao" EntityType="HLBAPPModel.PedidoRacao" />
+    <AssociationSet Name="FK__PedidoRac__IDPed__55009F39" Association="HLBAPPModel.FK__PedidoRac__IDPed__55009F39">
+      <End Role="PedidoRacao" EntitySet="PedidoRacao" />
+      <End Role="PedidoRacao_Item" EntitySet="PedidoRacao_Item" />
+    </AssociationSet>
+    <EntitySet Name="HATCHERY_TRAN_DATA" EntityType="HLBAPPModel.HATCHERY_TRAN_DATA" />
+  </EntityContainer>
+  <EntityType Name="HATCHERY_EGG_DATA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Company" Type="String" Nullable="false" MaxLength="4" Unicode="false" FixedLength="false" />
+    <Property Name="Region" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="Location" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="Set_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Hatch_loc" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="Flock_id" Type="String" MaxLength="26" Unicode="false" FixedLength="false" />
+    <Property Name="Lay_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Eggs_rcvd" Type="Int32" />
+    <Property Name="Egg_key" Type="String" MaxLength="44" Unicode="false" FixedLength="false" />
+    <Property Name="Machine" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="Track_no" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="Estimate" Type="Decimal" Precision="14" Scale="2" />
+    <Property Name="Variety" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="Posicao" Type="Int32" Nullable="false" />
+    <Property Name="Bandejas" Type="Int32" />
+    <Property Name="Horario" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Peso_Ovo" Type="Decimal" Precision="19" Scale="6" />
+    <Property Name="Peso_Ent_Inv" Type="Decimal" Precision="19" Scale="6" />
+    <Property Name="Peso_Transf" Type="Decimal" Precision="19" Scale="6" />
+    <Property Name="Peso_Rentab" Type="Decimal" Precision="19" Scale="6" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Observacao" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="Status" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Type="String" Name="Usuario" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImportadoApolo" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ImportadoFLIP" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ClassOvo" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Inv_Ovos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="String" Name="Linhagem" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LoteCompleto" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Total" />
+    <Property Type="DateTime" Name="DataProducao" Precision="3" />
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="ImportaDiarioExpedicao">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Nucleo" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Galpao" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Lote" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Idade" Nullable="false" />
+    <Property Type="String" Name="Linhagem" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LoteCompleto" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DataProducao" Nullable="false" Precision="3" />
+    <Property Type="String" Name="NumeroReferencia" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="QtdeOvos" Nullable="false" Precision="14" Scale="0" />
+    <Property Type="Decimal" Name="QtdeBandejas" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="String" Name="Usuario" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DataHora" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="DataHoraCarreg" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="DataHoraRecebInc" Nullable="false" Precision="3" />
+    <Property Type="String" Name="ResponsavelCarreg" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ResponsavelReceb" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NFNum" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Granja" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Importado" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Incubatorio" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TipoDEO" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="GTANum" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Lacre" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NumIdentificacao" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CodItemImportaDEO" />
+    <Property Type="String" Name="TipoOvo" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="LayoutDEO_X_ImportaDEO">
+    <Key>
+      <PropertyRef Name="CodItemDEO" />
+      <PropertyRef Name="CodItemImportaDEO" />
+    </Key>
+    <Property Type="Int32" Name="CodItemDEO" Nullable="false" />
+    <Property Type="Int32" Name="CodItemImportaDEO" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Estq_Planalto">
+    <Key>
+      <PropertyRef Name="Data_Producao" />
+      <PropertyRef Name="Lote_Completo" />
+    </Key>
+    <Property Type="DateTime" Name="Data_Producao" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="Idade" />
+    <Property Type="Int32" Name="T0" />
+    <Property Type="Int32" Name="T1" />
+    <Property Type="Int32" Name="COD_LOTE_NUM" />
+    <Property Type="String" Name="Lote_Completo" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Nucleo" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Linha" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="FLOCK_DATA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Farm_ID" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Flock_ID" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NumLote" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Variety" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Active" />
+    <Property Type="Int32" Name="Age" />
+    <Property Type="DateTime" Name="Trx_Date" Precision="3" />
+    <Property Type="Int32" Name="Hen_Mort" />
+    <Property Type="Decimal" Name="Hen_Wt" Precision="24" Scale="9" />
+    <Property Type="Int32" Name="Male_Mort" />
+    <Property Type="Decimal" Name="Hen_Feed_Del" Precision="24" Scale="9" />
+    <Property Type="Int32" Name="Total_Eggs_Prod" />
+    <Property Type="Decimal" Name="Egg_Wt" Precision="24" Scale="9" />
+    <Property Type="Int32" Name="Hatch_Eggs" />
+    <Property Type="String" Name="Comentarios" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="farm_name" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="count_females" />
+    <Property Type="Int32" Name="count_males" />
+    <Property Type="Int32" Name="broken" />
+    <Property Type="Int32" Name="dirty" />
+    <Property Type="Int32" Name="consume" />
+    <Property Type="Int32" Name="floor" />
+    <Property Type="Int32" Name="destroyed" />
+    <Property Type="Decimal" Name="uniformity" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="water_consumption" Precision="24" Scale="9" />
+    <Property Type="Int32" Name="num_galpao" />
+    <Property Type="String" Name="Company" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Region" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CTRL_LOTE_LOC_ARMAZ_WEB">
+    <Key>
+      <PropertyRef Name="Local" />
+      <PropertyRef Name="LoteCompleto" />
+      <PropertyRef Name="DataProducao" />
+    </Key>
+    <Property Type="String" Name="Local" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Linhagem" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LoteCompleto" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NumLote" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DataProducao" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="Qtde" />
+    <Property Type="String" Name="Nucleo" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="IdadeLote" />
+    <Property Type="Decimal" Name="PercMediaIncUlt4SemFLIP" Precision="14" Scale="2" />
+  </EntityType>
+  <EntityType Name="HATCHERY_FLOCK_SETTER_DATA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Hatch_Loc" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="Set_date" Precision="3" />
+    <Property Type="String" Name="Flock_id" MaxLength="26" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NumLote" MaxLength="26" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Setter" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Hatcher" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ClassOvo" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Eliminado" />
+    <Property Type="Int32" Name="Morto" />
+    <Property Type="Int32" Name="Macho" />
+    <Property Type="Int32" Name="Pintos_Vendaveis" />
+    <Property Type="Int32" Name="Refugo" />
+    <Property Type="Int32" Name="Pinto_Terceira" />
+    <Property Type="Int32" Name="Qtde_Incubada" />
+    <Property Type="DateTime" Name="DataRetiradaReal" Precision="3" />
+    <Property Type="String" Name="Horario_01_Retirada" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Qtde_01_Retirada" />
+    <Property Type="String" Name="Horario_02_Retirada" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Qtde_02_Retirada" />
+    <Property Type="String" Name="Variety" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="De0a4" />
+    <Property Type="Int32" Name="De5a12" />
+    <Property Type="Int32" Name="De13a17" />
+    <Property Type="Int32" Name="De18a21" />
+    <Property Type="Int32" Name="BicadoVivo" />
+    <Property Type="Int32" Name="BicadoMorto" />
+    <Property Type="Int32" Name="ContaminacaoBacteriana" />
+    <Property Type="Int32" Name="Fungo" />
+    <Property Type="Int32" Name="MalPosicionado" />
+    <Property Type="Int32" Name="MalFormado" />
+    <Property Type="Int32" Name="Infertil" />
+    <Property Type="Int32" Name="Inicial0a3" />
+    <Property Type="Int32" Name="Inicial4a7" />
+    <Property Type="Int32" Name="Media8a14" />
+    <Property Type="Int32" Name="Tardia15a18" />
+    <Property Type="Int32" Name="Tardia19a21" />
+    <Property Type="Int32" Name="MaFormacaoCerebro" />
+    <Property Type="Int32" Name="MaFormacaoVisceras" />
+    <Property Type="Int32" Name="Hemorragico" />
+    <Property Type="Int32" Name="Anormalidade" />
+    <Property Type="Int32" Name="Amostra" />
+    <Property Type="Decimal" Name="Infertilidade10Dias" Precision="24" Scale="9" />
+    <Property Type="Int32" Name="EliminadoCancelamento" />
+    <Property Name="PerdaUmidade" Type="Decimal" Precision="14" Scale="2" />
+    <Property Name="ChickYeld" Type="Decimal" Precision="14" Scale="2" />
+    <Property Name="TempCloaca" Type="Decimal" Precision="14" Scale="2" />
+    <Property Name="OvoVirado" Type="Int32" />
+    <Property Name="QuebradoTrincado" Type="Int32" />
+    <Property Name="SetterEmbrio" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="HatcherEmbrio" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="QtdeNascidos" Type="Int32" />
+  </EntityType>
+  <EntityType Name="LOG_HATCHERY_EGG_DATA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="String" Name="Company" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Region" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Location" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="Set_date" Nullable="false" Precision="3" />
+    <Property Type="String" Name="Hatch_loc" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Flock_id" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="Lay_date" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="Eggs_rcvd" />
+    <Property Type="String" Name="Egg_key" MaxLength="34" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Machine" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Track_no" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="Estimate" Precision="14" Scale="2" />
+    <Property Type="String" Name="Variety" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Posicao" Nullable="false" />
+    <Property Type="Int32" Name="Bandejas" />
+    <Property Type="String" Name="Horario" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="Peso_Ovo" Precision="19" Scale="6" />
+    <Property Type="Decimal" Name="Peso_Ent_Inv" Precision="19" Scale="6" />
+    <Property Type="Decimal" Name="Peso_Transf" Precision="19" Scale="6" />
+    <Property Type="Decimal" Name="Peso_Rentab" Precision="19" Scale="6" />
+    <Property Type="Int32" Name="Age" />
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Observacao" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Status" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Usuario" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="Data_Hora" Precision="3" />
+    <Property Type="String" Name="Opercao" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="LOG_HATCHERY_FLOCK_SETTER_DATA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="Data_Hora" Precision="3" />
+    <Property Type="String" Name="Operacao" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Usuario" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Hatch_Loc" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="Set_date" Precision="3" />
+    <Property Type="String" Name="Flock_id" MaxLength="26" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NumLote" MaxLength="26" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Setter" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Hatcher" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ClassOvo" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Eliminado" />
+    <Property Type="Int32" Name="Morto" />
+    <Property Type="Int32" Name="Macho" />
+    <Property Type="Int32" Name="Pintos_Vendaveis" />
+    <Property Type="Int32" Name="Refugo" />
+    <Property Type="Int32" Name="Pinto_Terceira" />
+    <Property Type="Int32" Name="Qtde_Incubada" />
+    <Property Type="DateTime" Name="DataRetiradaReal" Precision="3" />
+    <Property Type="String" Name="Horario_01_Retirada" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Qtde_01_Retirada" />
+    <Property Type="String" Name="Horario_02_Retirada" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Qtde_02_Retirada" />
+    <Property Type="String" Name="Variety" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="De0a4" />
+    <Property Type="Int32" Name="De5a12" />
+    <Property Type="Int32" Name="De13a17" />
+    <Property Type="Int32" Name="De18a21" />
+    <Property Type="Int32" Name="BicadoVivo" />
+    <Property Type="Int32" Name="BicadoMorto" />
+    <Property Type="Int32" Name="ContaminacaoBacteriana" />
+    <Property Type="Int32" Name="Fungo" />
+    <Property Type="Int32" Name="MalPosicionado" />
+    <Property Type="Int32" Name="MalFormado" />
+    <Property Type="Int32" Name="Infertil" />
+    <Property Type="Int32" Name="Inicial0a3" />
+    <Property Type="Int32" Name="Inicial4a7" />
+    <Property Type="Int32" Name="Media8a14" />
+    <Property Type="Int32" Name="Tardia15a18" />
+    <Property Type="Int32" Name="Tardia19a21" />
+    <Property Type="Int32" Name="MaFormacaoCerebro" />
+    <Property Type="Int32" Name="MaFormacaoVisceras" />
+    <Property Type="Int32" Name="Hemorragico" />
+    <Property Type="Int32" Name="Anormalidade" />
+    <Property Type="Int32" Name="Amostra" />
+    <Property Type="Decimal" Name="Infertilidade10Dias" Precision="24" Scale="9" />
+    <Property Type="Int32" Name="EliminadoCancelamento" />
+  </EntityType>
+  <EntityType Name="LayoutDiarioExpedicaos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Nucleo" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Galpao" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Lote" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Idade" Nullable="false" />
+    <Property Type="String" Name="Linhagem" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LoteCompleto" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DataProducao" Nullable="false" Precision="3" />
+    <Property Type="String" Name="NumeroReferencia" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="QtdeOvos" Nullable="false" Precision="14" Scale="0" />
+    <Property Type="Decimal" Name="QtdeBandejas" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="String" Name="Usuario" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DataHora" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="DataHoraCarreg" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="DataHoraRecebInc" Nullable="false" Precision="3" />
+    <Property Type="String" Name="ResponsavelCarreg" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ResponsavelReceb" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NFNum" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Granja" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Importado" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Incubatorio" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TipoDEO" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="GTANum" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Lacre" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NumIdentificacao" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CodItemDEO" />
+    <Property Type="String" Name="Observacao" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TipoOvo" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="QtdDiferenca" />
+    <Property Type="Int32" Name="QtdeConferencia" />
+    <Property Name="TemperaturaOvoInterna" Type="Decimal" Precision="14" Scale="2" />
+  </EntityType>
+  <EntityType Name="PedidoRacao_Item">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="IDPedidoRacao" Nullable="false" />
+    <Property Type="String" Name="Nucleo" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Galpao" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Linhagem" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CodFormulaRacao" />
+    <Property Type="String" Name="ProdCodEstr" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="QtdeKg" Precision="24" Scale="9" />
+    <Property Type="Int32" Name="IDOrdemProducaoRacao" />
+    <Property Type="Int32" Name="Sequencia" />
+    <Property Type="Int32" Name="IDConfigFormulaRacao" />
+    <Property Type="String" Name="UltimoLoteGalpaoPorLinhagem" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="IdadeLote" />
+    <NavigationProperty Name="PedidoRacao" Relationship="HLBAPPModel.FK__PedidoRac__IDPed__55009F39" FromRole="PedidoRacao_Item" ToRole="PedidoRacao" />
+  </EntityType>
+  <EntityType Name="PedidoRacao">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Empresa" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Usuario" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DataPedido" Precision="3" />
+    <Property Type="DateTime" Name="DataInicial" Precision="3" />
+    <Property Type="DateTime" Name="DataFinal" Precision="3" />
+    <Property Type="String" Name="StatusPedido" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="RotaEntregaCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PedidoRacao_Item" Relationship="HLBAPPModel.FK__PedidoRac__IDPed__55009F39" FromRole="PedidoRacao" ToRole="PedidoRacao_Item" />
+    <Property Name="Ordem" Type="Int32" />
+  </EntityType>
+  <Association Name="FK__PedidoRac__IDPed__55009F39">
+    <End Type="HLBAPPModel.PedidoRacao" Role="PedidoRacao" Multiplicity="1" />
+    <End Type="HLBAPPModel.PedidoRacao_Item" Role="PedidoRacao_Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PedidoRacao">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PedidoRacao_Item">
+        <PropertyRef Name="IDPedidoRacao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="HATCHERY_TRAN_DATA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Hatch_Loc" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Set_date" Type="DateTime" Precision="3" />
+    <Property Name="Flock_id" Type="String" MaxLength="26" FixedLength="false" Unicode="false" />
+    <Property Name="NumLote" Type="String" MaxLength="26" FixedLength="false" Unicode="false" />
+    <Property Name="Lay_date" Type="DateTime" Precision="3" />
+    <Property Name="Setter" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Hatcher" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ClassOvo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Transf_date" Type="DateTime" Precision="3" />
+    <Property Name="Hora_Inicio" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Contaminado_Transferencia" Type="Int32" />
+    <Property Name="Contaminado_Rodizio" Type="Int32" />
+    <Property Name="Bicados" Type="Int32" />
+    <Property Name="Trincados_Transferencia" Type="Int32" />
+    <Property Name="Trincados_Rodizio" Type="Int32" />
+    <Property Name="Num_Grudados" Type="Int32" />
+    <Property Name="Pintos_Nascidos" Type="Int32" />
+    <Property Name="Perdidos_Transferencia" Type="Int32" />
+    <Property Name="Perdidos_Rodizio" Type="Int32" />
+    <Property Name="Hora_Termino" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Qtde_Ovos_Transferidos" Type="Int32" />
+    <Property Name="Variety" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Claros" Type="Int32" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "";
+}
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Configuração das Fórmulas da Ração", "ListaConfigFormulaRacao",
+            "PedidoRacao")
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/checkDiarioProducao.png"), "DEO")
+    <h2>Parâmetros para a geração das Ordens de Produção</h2>
+    <br />
+    <h4 style="color:red;">
+        CUIDADO!!! Caso já existam ordens de produção geradas no período informado abaixo, as mesmas serão 
+        excluídas para gerar novamente.
+    </h4>
+    @using (Html.BeginForm("SaveGerarOrdemProducao", "PedidoRacao"))
+    {
+        <ul data-role="listview" data-inset="true">
+            <li data-role="fieldcontain">
+                <b>Primeira Data de Produção:</b>
+                <div class="editor-label">
+                    @Html.TextBox("dataInicial", null,
+                        new
+                        {
+                            @type = "date",
+                            @required = "true"//,
+                            //@min = DateTime.Today.ToString("yyyy-MM-dd")
+                        })
+                </div>
+            </li>
+            <li data-role="fieldcontain">
+                <b>Última Data de Produção:</b>
+                <div class="editor-label">
+                    @Html.TextBox("dataFinal", null,
+                        new
+                        {
+                            @type = "date",
+                            @required = "true"//,
+                            //@min = DateTime.Today.ToString("yyyy-MM-dd")
+                        })
+                </div>
+            </li>
+            <li data-role="fieldcontain">
+                <input type="submit" value="Gerar Ordens de Produção" />
+            </li>
+        </ul>
+    }
+</div>

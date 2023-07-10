@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "Importa XML NF-e";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript" src="@Url.Content("~/Content/Uploadify/jquery.uploadify.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/Uploadify/jquery.uploadify.min.js")"></script>
+
+<script type="text/javascript">
+    @*$(function () {
+
+        $('#file_upload').uploadify({
+            'swf': "@Url.Content("~/Content/Uploadify/uploadify.swf")",
+            'cancelImg': "@Url.Content("~/Content/Uploadify/uploadify-cancel.png")",
+            'uploader': "@Url.Action("ImportaNFe", "ImportaXMLFiscal")",
+            'fileTypeDesc' : 'XML Files',
+            'width'    : 300,
+            'fileTypeExts' : '*.xml',
+            'buttonText': 'Clique para selecionar um ou mais arquivos',
+            //'formData' : { 'id' : $('input[name="clienteSelecionado"]:checked').val() },
+//            'onUploadStart' : function(file) {
+//                var tipoNFe = $('#ddlTipoNFe option:selected').val();
+//                $('#file_upload').uploadify("settings", "formData",
+//                    {"data": $("input[name='dataEntrada']").val(),
+//                        "pedCompNum": $("input[name='pedCompNum']").val(),
+//                        "tipoNFe": tipoNFe });
+//            },
+            'onUploadSuccess': function (file, data, response) {
+                $("#Status").append(data);
+            }
+        });
+    });*@
+
+    /* Máscaras ER */
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mdata(v) {
+        v = v.replace(/\D/g, "");                    //Remove tudo o que não é dígito
+        v = v.replace(/(\d{2})(\d)/, "$1/$2");
+        v = v.replace(/(\d{2})(\d)/, "$1/$2");
+
+        v = v.replace(/(\d{2})(\d{2})$/, "$1$2");
+        return v;
+    }
+</script>
+
+@Html.Partial("_Menu")
+
+<h2>NF-e</h2>
+
+@*<b>Código do pedido de compra (Incluir os zeros a esquerda): @Html.TextBox("pedCompNum")</b>
+    <br />
+    <b>Data de Entrada (Deixar vazio para assumir Data da NF-e): @Html.TextBox("dataEntrada", null, new { @onkeyup = "mascara(this, mdata);" })</b>
+    <br />
+    <b>Tipo de N.F.: @Html.DropDownList("ddlTipoNFe", (IEnumerable<SelectListItem>)Session["ListaConfiguracaoNFe"])</b>
+    <br />
+    <br />*@
+@using (Html.BeginForm("ImportaNFe", "ImportaXMLFiscal", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div>
+        <table>
+            <tr>
+                <td align="center"><h4>Clique abaixo para selecionar um ou mais arquivos:</h4></td>
+            </tr>
+            <tr>
+                <td align="center"><input type="file" name="file_upload" multiple accept=".xml" /></td>
+            </tr>
+            <tr>
+                <td align="center"><input type="submit" value="Importar" required/></td>
+            </tr>
+        </table>
+        <br />
+        @Html.Raw(ViewBag.msg)
+    </div>
+
+    @*<h4 style="color:Red;">@ViewBag.erro</h4>
+        <h4 style="color:Blue;">@ViewBag.OK</h4>*@
+    @*<div id="Status">
+        </div>*@
+}

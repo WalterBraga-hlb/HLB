@@ -1,0 +1,8 @@
+﻿@using am = MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController;
+<h3>@am.GetTextOnLanguage("Confirma a exclusão da Solicitação de Ajuste de Estoque Número", Session["language"].ToString()) @Html.Label(Session["numIdentificacaoSelecionado"].ToString())?</h3>
+<p>
+    @Html.ActionLink(am.GetTextOnLanguage("Sim", Session["language"].ToString()), "DeleteAjusteEstoqueConfirma")
+    <br />
+    <br />
+    @Html.ActionLink(am.GetTextOnLanguage("Não", Session["language"].ToString()), "ListaAjusteEstoque")
+</p>

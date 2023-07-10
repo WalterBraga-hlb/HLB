@@ -1,0 +1,62 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities apolo = new MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities();
+
+    string empresa = Session["empresaSelecionada"].ToString();
+    string especie = Session["especieSelecionada"].ToString();
+    string serie = Session["serieSelecionada"].ToString();
+    string nfnum = Session["nfnumSelecionada"].ToString();
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.VW_Dados_RRC rrc = apolo.VW_Dados_RRC
+        .Where(w => w.EmpCod == empresa && w.CtrlDFModForm == especie
+            && w.CtrlDFSerie == serie && w.Nº_NF == nfnum)
+        .FirstOrDefault();
+}
+
+<script src="../../Scripts/jquery.maskedinput.js" type="text/javascript"></script>
+
+<script language="javascript" type="text/javascript">
+    window.onkeydown = function (e) {
+        if (e.keyCode === 116) {
+            alert("Função não permitida");
+            e.keyCode = 0;
+            e.returnValue = false;
+            return false;
+        }
+    }
+</script>
+
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para a Lista das Soluções das RRC", "ReturnListaRRC", "AssistenciaTecnica",
+                null, new { @title = "Clique aqui para voltar para a Lista das Soluções das RRC", @class = "uncheck_button" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/reclamacao.png"), "Solução da RRC")
+    <h2>Solução da RRC @(rrc.Nº_NF) - Empresa: @(rrc.Empresa)</h2>
+    <br />
+    <h3>Tipo de Reclamação: @(rrc.Reclamação)</h3>
+    <br />
+    <h3>Descrição: @Html.Raw(rrc.Descr__Fatos.Replace("\r\n", "<br />"))</h3>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+@using (Html.BeginForm("SaveSolucaoRRC", "AssistenciaTecnica", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        <div class="editor-label">
+            <b>Solução:</b>
+            @Html.TextArea("solucaoRRC", Session["respostaRRC"].ToString(),
+             new { @id = "txtsolucaoRRC", @required = "true" })
+        </div>
+        <p>
+            <input type="submit" value="Salvar Solução da RRC" id="add" />
+        </p>
+    </fieldset>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

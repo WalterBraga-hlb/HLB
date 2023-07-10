@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Download da Planilha p/ Preenchimento do Diário de Produção de Ovos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Diário de Produção de Ovos</h2>
+
+@Html.Partial("_Menu")
+
+<h3>Download da Planilha p/ Preenchimento do Diário de Produção de Ovos</h3>
+
+@using (Html.BeginForm("DownloadPlanilhaDiarioProducaoOvos", "DiarioProducaoOvos", FormMethod.Post, 
+    new { enctype = "multipart/form-data" }))
+{
+    <legend>Clique abaixo para fazer o Download da Planilha:</legend>
+    <div class="editor-field">
+        <input type="submit" value="Download" id="download" />
+    </div>
+}
+<br />

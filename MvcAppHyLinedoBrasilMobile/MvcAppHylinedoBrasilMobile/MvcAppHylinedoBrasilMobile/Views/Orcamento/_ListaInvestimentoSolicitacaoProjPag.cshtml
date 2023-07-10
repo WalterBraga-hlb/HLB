@@ -1,0 +1,236 @@
+﻿@{
+    ViewBag.Title = "";
+
+    DateTime dataInicial = new DateTime(2018, 7, 1);
+    DateTime dataFinal = new DateTime(2019, 6, 1);
+}
+
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        $('#tabelaValoresMes tr').each(function () {
+            $(this).find('td').each(function () {
+                var anoMesItem = $(this).find('#lblAnoMes').val();
+                var valor = $(this).find('#valorMesJS').val();
+                if (valor != undefined) {
+                    var replacevalor = valor.replace(/\./g, '').replace(',', '.');
+                    var floatvalor = parseFloat(replacevalor);
+                    if (floatvalor > 0) {
+                        $('#pnlOrigemPagamento_' + anoMesItem).show();
+                    } else {
+                        $('#pnlOrigemPagamento_' + anoMesItem).hide();
+                    }
+                }
+            });
+        });
+    });
+
+    function verificaSaldo(o, mes) {
+        var valorObj = o.value;
+        var valorTotal = 0;
+        var valorAprovado = $('#hdSaldoInv').val();
+        
+        //        if (verifyZero(o, "errorValor_" + mes)) {
+        //            o.focus();
+        //            return; 
+        //        }
+
+        var errorHolder = document.getElementById('errorValoresMes');
+        errorHolder.innerHTML = '';
+//        $('#tabelaValoresMes tr').each(function () {
+//            $(this).find('td').each(function () {
+//                $(this).find('input').each(function () {
+//                    if ($(this).attr("id") == "valorMesJS") {
+//                        var valor = $(this).val();
+//                        if (valor != "") {
+//                            var replacevalor = valor.replace(/\./g, '').replace(',', '.');
+//                            var floatvalor = parseFloat(replacevalor);
+//                            valorTotal = valorTotal + floatvalor;
+//                        }
+//                    }
+//                });
+//            });
+        //        });
+        $('#tabelaValoresMes tr').each(function () {
+            $(this).find('td').each(function () {
+                var anoMesItem = $(this).find('#lblAnoMes').val();
+                var valor = $(this).find('#valorMesJS').val();
+                var replacevalor = valor.replace(/\./g, '').replace(',', '.');
+                var floatvalor = parseFloat(replacevalor);
+                if (floatvalor > 0) {
+                    valorTotal = valorTotal + floatvalor;
+                    $('#pnlOrigemPagamento_' + anoMesItem).show();
+                } else {
+                    $('#pnlOrigemPagamento_' + anoMesItem).hide();
+                }
+            });
+        });
+
+        var replacevalorAprovado = valorAprovado.replace(/\./g, '').replace(',', '.');
+        var floatvalorAprovado = parseFloat(replacevalorAprovado);
+
+        if (valorTotal > floatvalorAprovado) {
+            errorHolder.innerHTML = 'O valor total da projeção não pode ser maior que o saldo disponível!';
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        } else {
+            errorHolder.innerHTML = '';
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+            return false;
+        }
+    }
+
+    function verificaSaldoFinal() {
+        var valorTotal = 0;
+        var valorAprovado = $('#hdSaldoInv').val();
+
+        var errorHolder = document.getElementById('errorValoresMes');
+        errorHolder.innerHTML = '';
+        $('#tabelaValoresMes tr').each(function () {
+            $(this).find('td').each(function () {
+                $(this).find('input').each(function () {
+                    if ($(this).attr("id") == "valorMesJS") {
+                        var valor = $(this).val();
+                        if (valor != "") {
+                            var replacevalor = valor.replace(/\./g, '').replace(',', '.');
+                            var floatvalor = parseFloat(replacevalor);
+                            valorTotal = valorTotal + floatvalor;
+                        }
+                    }
+                });
+            });
+        });
+
+        var replacevalorAprovado = valorAprovado.replace(/\./g, '').replace(',', '.');
+        var floatvalorAprovado = parseFloat(replacevalorAprovado);
+
+        if (valorTotal > floatvalorAprovado) {
+            errorHolder.innerHTML = 'O valor total da projeção não pode ser maior que o saldo disponível!'
+                + ' (Valor Total Rateado: ' + valorTotal.toString()
+                + ') Verifique!';
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        } else {
+            errorHolder.innerHTML = '';
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+            return false;
+        }
+    }
+</script>
+
+<br />
+<div class="editor-label"  align="center">
+    <h3>Projeção de Pagamentos para Imobilizar</h3>
+    <div class="editor-label" id="errorValoresMes" style="color: Red; font-weight:bold;" align="center"></div>
+    <table id="tabelaValoresMes" class="ajusteWithoutHeader">
+        <tbody class="ajusteWithoutHeader">
+            @while (dataInicial <= dataFinal)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                <tr class="ajusteWithoutHeader">
+                    @for (int j = 0; j < 4; j++)
+                    {
+                        <td class="ajusteWithoutHeader">
+                            @Html.Hidden("anoMes", dataInicial.ToString("MMM"), new { @id = "lblAnoMes" })
+                            <div class="editor-label">
+                                <b>@(dataInicial.ToString("MMM"))</b>
+                            </div>
+                            @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                                .GetGroup("HLBAPPM-OrcamentoInvestimentoSolicitacaoCompras", (System.Collections.ArrayList)Session["Direitos"])
+                                && Session["Status"].ToString() == "Em Cotação")
+                            {
+                            <div class="editor-field">
+                                @if (Request.Browser.IsMobileDevice)
+                                {
+                                    @Html.TextBox("valorMes_" + dataInicial.ToString("MMM"),
+                                        Session["valorMesInv_" + dataInicial.ToString("MMM")].ToString().Replace(",", "."),
+                                        new
+                                        {
+                                            @required = true,
+                                            @placeholder = "Exemplo: 1000,54",
+                                            @type = "number",
+                                            @step = "0.01",
+                                            @lang = "pt-BR",
+                                            @id = "valorMesJS",
+                                            @onchange = "verificaSaldo(this,\"" + dataInicial.ToString("MMM") + "\")"
+                                        })
+                                }
+                                else
+                                {
+                                    @Html.TextBox("valorMes_" + dataInicial.ToString("MMM"),
+                                          Session["valorMesInv_" + dataInicial.ToString("MMM")],
+                                          new
+                                          {
+                                              @required = true,
+                                              @placeholder = "Informe somente os números. A vírgula e ponto serão adicionados automaticamente.",
+                                              @id = "valorMesJS",
+                                              @onkeyup = "mascara(this, mvalor);",
+                                              //@onblur = "verifyZero(this, \"errorValor_" + dataInicial.ToString("MMM") + "\")",
+                                              @onblur = "verificaSaldo(this,\"" + dataInicial.ToString("MMM") + "\")"
+                                          })   
+                                }
+                                <div class="editor-label" id="errorValor_@dataInicial.ToString("MMM")" style="color: Red; font-weight:bold;"></div>
+                            </div>
+                            <div id="pnlOrigemPagamento_@dataInicial.ToString("MMM")">
+                                <b>Origem Baixa:</b>
+                                <div class="editor-field">
+                                    @Html.DropDownList(
+                                        "OrigemPagamento_" + dataInicial.ToString("MMM"),
+                                        (List<SelectListItem>)Session["ListaOrigemPagamento_" + dataInicial.ToString("MMM")],
+                                        new { @id = "ddlOrigemPagamento" })
+                                </div>
+                            </div>
+                            }
+                            else
+                            {
+                                if (Request.Browser.IsMobileDevice)
+                                {
+                                    @Html.TextBox("valorMes_" + dataInicial.ToString("MMM"),
+                                        Session["valorMesInv_" + dataInicial.ToString("MMM")].ToString().Replace(",", "."),
+                                        new
+                                        {
+                                            @required = true,
+                                            @placeholder = "Exemplo: 1000,54",
+                                            @type = "number",
+                                            @step = "0.01",
+                                            @lang = "pt-BR",
+                                            @id = "valorMesJS",
+                                            @readonly = true
+                                        })
+                                }
+                                else
+                                {
+                                    @Html.TextBox("valorMes_" + dataInicial.ToString("MMM"),
+                                          Session["valorMesInv_" + dataInicial.ToString("MMM")],
+                                          new
+                                          {
+                                              @required = true,
+                                              @placeholder = "Informe somente os números. A vírgula e ponto serão adicionados automaticamente.",
+                                              @id = "valorMesJS",
+                                              @onkeyup = "mascara(this, mvalor);",
+                                              @readonly = true
+                                          })   
+                                }
+                                <div id="pnlOrigemPagamento_@dataInicial.ToString("MMM")">
+                                <b>Origem Baixa:</b>
+                                <div class="editor-field">
+                                    @Html.DropDownList(
+                                        "OrigemPagamento_" + dataInicial.ToString("MMM"),
+                                        (List<SelectListItem>)Session["ListaOrigemPagamento_" + dataInicial.ToString("MMM")],
+                                         new { @id = "ddlOrigemPagamento", @style = "background: #eee; pointer-events: none; touch-action: none;" })
+                                </div>
+                            </div>
+                            }
+                        </td>
+                            dataInicial = dataInicial.AddMonths(1);
+                    }
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

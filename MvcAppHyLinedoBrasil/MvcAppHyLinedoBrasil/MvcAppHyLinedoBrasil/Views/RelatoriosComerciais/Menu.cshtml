@@ -1,0 +1,45 @@
+﻿@{
+    Layout = null;
+}
+
+<h2>Relatórios Comerciais</h2>
+
+<ul id="menu2">
+    @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-RelatoriosComerciaisListaPedidosComercial", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink("Lista de Pedidos - Comercial", "Index", "RelatoriosComerciais")</li>
+        <li>@Html.ActionLink("Lista de Pedidos por Representante", "ListaPedidosRepresentante", "RelatoriosComerciais")</li>
+    }
+    @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-RelatoriosComerciaisListaPedidosPorEmail", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+    <li>@Html.ActionLink("Envio de Lista de Pedidos Comercial p/ E-mail", "ListagemPedidosEmail", "RelatoriosComerciais")</li>
+    }
+    @*@if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-RelatoriosComerciaisListaPedidosMatriz", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+    <li>@Html.ActionLink("Lista de Pedidos - Matriz", "ListaPedidosMatriz", "RelatoriosComerciais")</li>
+    }*@
+    @if (MvcAppHyLinedoBrasil.Controllers.AccountController
+        .GetGroup("HLBAPP-RelatoriosComerciaisPlanejamentoIncubacao",
+        (System.Collections.ArrayList)Session["Direitos"]))
+    {
+    <li>@Html.ActionLink("Planejamento da Incubação - Comercial", "PlanejamentoIncubacao", "RelatoriosComerciais")</li>
+    }
+    @if (MvcAppHyLinedoBrasil.Controllers.AccountController
+        .GetGroup("HLBAPP-RelatoriosComerciaisPlanejamentoVacinacao",
+        (System.Collections.ArrayList)Session["Direitos"]))
+    {
+    <li>@Html.ActionLink("Planejamento de Vacinação - Comercial", "PlanejamentoVacinacao", "RelatoriosComerciais")</li>
+    }
+    @if (MvcAppHyLinedoBrasil.Controllers.AccountController
+        .GetGroup("HLBAPP-RelatoriosComerciaisListaVacinasServicos",
+        (System.Collections.ArrayList)Session["Direitos"]))
+    {
+    <li>@Html.ActionLink("Lista de Vacinas e Serviços", "ListaVacinasServicos", "RelatoriosComerciais")</li>
+    }
+    @if (MvcAppHyLinedoBrasil.Controllers.AccountController
+        .GetGroup("HLBAPP-RelatoriosComerciaisProgramacaoTransportes",
+        (System.Collections.ArrayList)Session["Direitos"]))
+    {
+    <li>@Html.ActionLink("Programação de Transportes", "ProgramacaoTransportes", "RelatoriosComerciais")</li>
+    }
+</ul>

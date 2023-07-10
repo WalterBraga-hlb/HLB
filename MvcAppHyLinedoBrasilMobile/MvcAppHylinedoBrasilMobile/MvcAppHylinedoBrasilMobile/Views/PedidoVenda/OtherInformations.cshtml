@@ -1,0 +1,266 @@
+﻿@{
+    ViewBag.Title = "";
+}
+
+<script type='text/javascript'>
+//    $('#CondPag').change(function () {
+//        var value = $('#CondPag').val();
+//        $.ajax({
+//            url: '/PedidoVenda/AtualizaCondPag',
+//            type: 'POST',
+//            data: JSON.stringify({ id: value }),
+//            dataType: 'json',
+//            contentType: 'application/json',
+//            success: function (data) {
+//                if (data == '') {
+//                } else {
+//                    alert(data.toString());
+//                }
+//            }
+//        });
+//    });
+
+    $('#tratamentoInfravermelho').change(function () {
+        $('#qtdTratamentoInfravermelho').prop('disabled', !this.checked);
+        var value = $('#tratamentoInfravermelho:checked').val();
+        if (value == null) {
+            $('#qtdTratamentoInfravermelho').val('');
+        }
+//        $.ajax({
+//            url: '/PedidoVenda/AtualizaTratInfra',
+//            type: 'POST',
+//            data: JSON.stringify({ id: value }),
+//            dataType: 'json',
+//            contentType: 'application/json',
+//            success: function (data) {
+//                if (data == '') {
+//                    $('#qtdTratamentoInfravermelho').focus();
+//                } else {
+//                    alert(data.toString());
+//                }
+//            }
+//        });
+    }).change();
+
+//    $('#qtdTratamentoInfravermelho').change(function () {
+////        var value = $('#qtdTratamentoInfravermelho').val().replace(',','.');
+////        if (isNaN(value)) {
+////            alert('Somente números são permitidos!');
+////            $('#qtdTratamentoInfravermelho').focus();
+////        }
+////        else if ((value < 1) || (value > 100)) {
+////            alert('A quantidade deve de 1% a 100%!');
+////            $('#qtdTratamentoInfravermelho').focus();
+////        }
+//        //else {
+//            var valueOK = $('#qtdTratamentoInfravermelho').val();
+//            $.ajax({
+//                url: '/PedidoVenda/AtualizaQtdTratVermelho',
+//                type: 'POST',
+//                data: JSON.stringify({ id: valueOK }),
+//                dataType: 'json',
+//                contentType: 'application/json',
+//                success: function (data) {
+//                    if (data == '') {
+//                    } else {
+//                        alert(data.toString());
+//                        $('#qtdTratamentoInfravermelho').focus();
+//                    }
+//                }
+//            });
+//        //}
+//    });
+
+//    $('#ovosBrasil').change(function () {
+//        var value = $('#ovosBrasil:checked').val();
+//        $.ajax({
+//            url: '/PedidoVenda/AtualizaOvosBrasil',
+//            type: 'POST',
+//            data: JSON.stringify({ id: value }),
+//            dataType: 'json',
+//            contentType: 'application/json',
+//            success: function (data) {
+//                if (data == '') {
+//                } else {
+//                    alert(data.toString());
+//                }
+//            }
+//        });
+//    }).change();
+
+//    $('#observacao').change(function () {
+//        var value = $('#observacao').val();
+//        $.ajax({
+//            url: '/PedidoVenda/AtualizaObservacao',
+//            type: 'POST',
+//            data: JSON.stringify({ id: value }),
+//            dataType: 'json',
+//            contentType: 'application/json',
+//            success: function (data) {
+//                if (data == '') {
+//                } else {
+//                    alert(data.toString());
+//                }
+//            }
+//        });
+//    });
+
+//    $('#motivo').change(function () {
+//        var value = $('#motivo').val();
+//        $.ajax({
+//            url: '/PedidoVenda/AtualizaMotivo',
+//            type: 'POST',
+//            data: JSON.stringify({ id: value }),
+//            dataType: 'json',
+//            contentType: 'application/json',
+//            success: function (data) {
+//                if (data == '') {
+//                } else {
+//                    alert(data.toString());
+//                    $('#motivo').focus();
+//                }
+//            }
+//        });
+//    });
+
+//    $('#Vendedor').change(function () {
+//        var value = $('#Vendedor').val();
+//        $.ajax({
+//            url: '/PedidoVenda/AtualizaVendedor',
+//            type: 'POST',
+//            data: JSON.stringify({ id: value }),
+//            dataType: 'json',
+//            contentType: 'application/json',
+//            success: function (data) {
+//                if (data == '') {
+//                } else {
+//                    alert(data.toString());
+//                }
+//            }
+//        });
+//    });
+</script>
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Pedidos de Venda", "Index", "PedidoVenda")
+        <br />
+        <br />
+        <b style="color:red; background-color:Yellow">
+            * CUIDADO!!! CASO CLIQUE NO LINK ACIMA, OS DADOS INFORMADOS DO PEDIDO
+            ANTES DA FINALIZAÇÃO SERÃO PERDIDOS!!!
+        </b>
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/pedidoVenda.png"), "Pedido de Venda")
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+
+<h2>Passo 04: Informe os Dados Finais como: Serviço, Ovos Brasil, Condição de Pagamento e Observações</h2>
+<br />
+@using (Html.BeginForm("FinalizaPV", "PedidoVenda", FormMethod.Post))
+{
+<ul data-role="listview" data-inset="true">
+    <li data-role="fieldcontain">
+        <label style="width: 100%">
+            @Html.CheckBox("tratamentoInfravermelho", Convert.ToBoolean(Session["tratamentoInfravermelhoPV"]))
+            Tratamento Infravermelho
+        </label>
+        <b>% que receberá o Serviço:</b>
+        <div class="editor-label">
+            @Html.TextBox("qtdTratamentoInfravermelho", Session["qtdTratamentoInfravermelhoPV"].ToString())
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <label style="width: 100%">
+            @Html.CheckBox("ovosBrasil", Convert.ToBoolean(Session["ovosBrasilPV"]))
+            Ovos Brasil
+        </label>
+    </li>
+    <li data-role="fieldcontain">
+        <b>Selecione a Condição de Pagamento:</b>
+        @Html.DropDownList(
+            "CondPag",
+            (List<SelectListItem>)Session["ListaCondicaoPagamento"])
+        <br />
+        <br />
+        <b>
+            Para filtrar as Condições de Pagamento, informe abaixo parte da descrição e clique no botão 
+            "Filtrar Cond. Pag.".
+        </b>
+        @Html.TextBox("filtroCondPag", Session["filtroCondPagPV"].ToString())
+        <input type="submit" value="Filtrar Cond. Pag." />
+    </li>
+    <li data-role="fieldcontain">
+        <b>Observações:</b>
+        <div class="editor-label">
+            @Html.TextArea("observacao", Session["observacaoPV"].ToString())
+        </div>
+    </li>
+    @*@if (Session["origemPV"].ToString().Equals("Alteração"))
+    {
+    <li data-role="fieldcontain">
+        @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+            .GetGroup("HLBAPPM-TipoAlteracaoInterno", (System.Collections.ArrayList)Session["Direitos"]))
+        {
+            <b>Selecione o Tipo da Alteração (MOTIVO INTERNO):</b>
+            @Html.DropDownList(
+                "TipoAlteracao",
+                (List<SelectListItem>)Session["ListaTipoAlteracaoPV"])
+            <br />
+            <br />
+        }
+        <b>Motivo da Alteração:</b>
+        <div class="editor-label">
+            @Html.TextArea("motivo", Session["motivoAlteracaoPV"].ToString())
+        </div>
+    </li>
+    }*@
+    @if (((List<SelectListItem>)Session["ListaVendedores"]).Count > 1)
+    {
+    <li data-role="fieldcontain">
+        <b>Selecione o Vendedor / Representante:</b>
+        @Html.DropDownList(
+            "Vendedor",
+            (List<SelectListItem>)Session["ListaVendedores"])
+    </li>
+    }
+</ul>
+<br />
+    if (Session["origemPV"].ToString().Equals("Alteração"))
+    {
+        <input type="submit" value="Salvar" name="OtherInformationsNext"  />
+    }
+    else
+    {
+        <input type="submit" value="Próximo" name="OtherInformationsNext" />
+    }
+}
+@if (Session["origemPV"].ToString().Equals("Alteração"))
+{
+    using (Html.BeginForm("FinalizaPV", "PedidoVenda", FormMethod.Post))
+    {
+       <input type="submit" value="Voltar para a Visualização do Pedido" />
+    }
+}
+else
+{
+    if (Session["vacinaPrimariaPV"].ToString() == "(Sem Vacinação)")
+    {
+        using (Html.BeginForm("VerificaVacina", "PedidoVenda", FormMethod.Post))
+        {
+            <input type="submit" value="Anterior" />
+        }
+    }
+    else
+    {
+        using (Html.BeginForm("ListSecVacinas", "PedidoVenda", FormMethod.Post))
+        {
+            <input type="submit" value="Anterior" />
+        }
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

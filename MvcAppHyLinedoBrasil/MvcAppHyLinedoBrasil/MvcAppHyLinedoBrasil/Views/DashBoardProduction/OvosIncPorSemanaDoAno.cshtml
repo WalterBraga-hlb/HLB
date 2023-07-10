@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "% Ovos Incubáveis p/ Semana do Ano";
+}
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = new google.visualization.DataTable(@(Html.Raw(ViewBag.OvosIncPorSemana)));
+
+            var options = {
+                title: '% Ovos Incubáveis p/ Semana do Ano',
+                hAxis: {gridlines: {count: @ViewBag.QtdeRegistrosEixoXOvosIncSemana }},
+                height: 400,
+                chartArea: {width:'75%',height:'80%'},
+                legend: {position: 'bottom'},
+                trendlines: { 1: {} }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('chartOvosIncSem'));
+            chart.draw(data, options);
+        }
+    </script>
+<div>
+    @if (ViewBag.QtdeRegistrosEixoXOvosIncSemana != 0)
+    {
+    @*<p><img src="@Url.Action("Chart", "DashBoardProduction")" alt="hello chart" /></p>*@
+    <div id="chartOvosIncSem" style="width: 100%; height: 100%;"></div>
+    }
+    else
+    {
+    <h3>
+        % Ovos Incubáveis p/ Semana do Ano
+        <br />
+        Não existem dados para os parâmetros selecionados!
+    </h3>
+    }
+</div>

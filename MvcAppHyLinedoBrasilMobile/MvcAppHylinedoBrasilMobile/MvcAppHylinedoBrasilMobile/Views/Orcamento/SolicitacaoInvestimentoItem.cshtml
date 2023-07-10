@@ -1,0 +1,398 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+
+    List<MvcAppHylinedoBrasilMobile.Models.Investimento_Solicitacao_Item_Cotacao> listaCotacoes =
+        (List<MvcAppHylinedoBrasilMobile.Models.Investimento_Solicitacao_Item_Cotacao>)Session["ListaInvestimentoSolicitacaoItemCotacaoExibe"];
+}
+
+<script src="../../Scripts/jquery.maskedinput.js" type="text/javascript"></script>
+
+<script language="javascript" type="text/javascript">
+//    window.onbeforeunload = function () {
+//        return "Não é possível atualizar a página porque os dados serão perdidos! Sendo assim, a página será fechada!";
+//    }
+
+    window.onkeydown = function (e) {
+        if (e.keyCode === 116) {
+            alert("Função não permitida");
+            e.keyCode = 0;
+            e.returnValue = false;
+            return false;
+        }
+    }
+
+    function verifyZero(o, error) {
+        var errorHolder = document.getElementById(error);
+        var replaceValor = o.value.replace(/\./g, '').replace(',', '.');
+        var floatValor = parseFloat(replaceValor);
+        if (floatValor == 0) {
+            errorHolder.innerHTML = 'Não pode inserir zero!';
+            o.focus();
+            $('#addItem').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        } else {
+            errorHolder.innerHTML = '';
+            $('#addItem').button('enable');
+            $('[type="submit"]').button('refresh');
+            return false;
+        }
+    }
+
+    function filtraFornecedor(o, nameSession, nameDDL) {
+        var valor = o.value;
+        $.ajax({
+            url: '/Orcamento/FiltraFornecedor',
+            type: 'POST',
+            data: JSON.stringify({ pesquisa: valor, nameLista: nameSession }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#' + nameDDL).empty();
+                $.each(data, function (key, SelectListItem) {
+                    if (key == 0) {
+                        codCliente = SelectListItem.Value;
+                    }
+                    $('select#' + nameDDL).append('<option value="' + SelectListItem.Value + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#' + nameDDL).selectmenu('refresh');
+            }
+        });
+    }
+
+    function filtraCodigoApolo(o, nameSession, nameDDL) {
+        var valor = o.value;
+        $.ajax({
+            url: '/Orcamento/FiltraCodigoApolo',
+            type: 'POST',
+            data: JSON.stringify({ pesquisa: valor, nameLista: nameSession }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#' + nameDDL).empty();
+                $.each(data, function (key, SelectListItem) {
+                    if (key == 0) {
+                        codCliente = SelectListItem.Value;
+                    }
+                    $('select#' + nameDDL).append('<option value="' + SelectListItem.Value + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#' + nameDDL).selectmenu('refresh');
+            }
+        });
+    }
+
+    function verificaCotacao() {
+        var qtdCotacoes = 0;
+        var errorHolder = document.getElementById('errorCotacao');
+        var valorMenorCotacao = 0;
+        var valorCotacaoEscolhida = 0;
+        var cotacaoEscolhida = $('#ddlCotacaoEscolhida option:selected').val();
+        for (var i = 1; i <= 3; i++) {
+            var fornecedor = $('#ddlFornecedor0' + i.toString() + ' option:selected').val();
+            var valor = $('#txtValor0' + i.toString()).val();
+            var replaceValor = valor.replace(/\./g, '').replace(',', '.');
+            var floatValor = parseFloat(replaceValor);
+
+            if ((fornecedor == "" && floatValor > 0) || (fornecedor != "" && floatValor == 0)) {
+                errorHolder.innerHTML = 'Fornecedor ou Valor faltando na Cotação ' + i.toString() + '! Verifique!';
+                return true;
+            } else {
+                errorHolder.innerHTML = '';
+            }
+
+            if (cotacaoEscolhida == i && floatValor == 0) {
+                errorHolder.innerHTML = 'Cotação escolhida sem valor! Por favor, escolha outra cotação!';
+                return true;
+            } else {
+                errorHolder.innerHTML = '';
+            }
+
+            if (fornecedor != "" && floatValor > 0) {
+                qtdCotacoes = qtdCotacoes + 1;
+                if (valorMenorCotacao > floatValor || valorMenorCotacao == 0) {
+                    valorMenorCotacao = floatValor;
+                }
+                if (cotacaoEscolhida == i) {
+                    valorCotacaoEscolhida = floatValor;
+                }
+            }
+        }
+
+        if (qtdCotacoes < 2) {
+            errorHolder.innerHTML = 'É necessário pelo menos 02 Cotações!';
+            return true;
+        } else {
+            errorHolder.innerHTML = '';
+        }
+
+        var razaoNaoTer03Cotacoes = $('#txtRazaoNaoTer03Cotacoes').val();
+        var razaoExcederOrcamentoOuNaoUtilizarMenorCotacao = $('#txtRazaoExcederOrcamentoOuNaoUtilizarMenorCotacao').val();
+        if (qtdCotacoes < 3 && razaoNaoTer03Cotacoes == "") {
+            errorHolder.innerHTML = 'Informe a razão de não ter 03 cotações!';
+            $('#txtRazaoNaoTer03Cotacoes').focus();
+            return true;
+        } else {
+            errorHolder.innerHTML = '';
+        }
+
+        if (valorCotacaoEscolhida > valorMenorCotacao) {
+            errorHolder.innerHTML = 'Informe a razão por não utilizar a menor cotação!';
+            $('#txtRazaoExcederOrcamentoOuNaoUtilizarMenorCotacao').focus();
+            return true;
+        } else {
+            errorHolder.innerHTML = '';
+        }
+    }
+
+    $('#addItem').click(function () {
+        if (verificaCotacao()) { return false; }
+    });
+
+    /* Máscaras ER */
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mvalor(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{8})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{5})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{2})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+</script>
+
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para a Solicitação de Investimento", "ReturnSolicitacaoInvestimento", "Orcamento",
+                null,
+                new { @class = "solInvestimento", @title = "Clique aqui para voltar para a Solicitação de Investimentos" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/sol_invest.png"), "Solicitação de Investimento")
+    <h2>Item da Solicitação de Investimento</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+@using (Html.BeginForm("SaveSolicitacaoInvestimentoItem", "Orcamento", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <ul data-role="listview" data-inset="true">
+        @if (Session["Status"].ToString() != "Pendente")
+        {
+            <li>
+                <b>Categoria:</b>
+                @Html.DropDownList(
+                    "Categoria",
+                    (List<SelectListItem>)Session["ListaCategoriasItemProjeto"],
+                    "(Selecione uma Categoria)",
+                    new { @id = "ddlCatergoria", @required = true, @style = "background: #eee; pointer-events: none; touch-action: none;" })
+            </li>
+            <li>
+                <b>Descrição do item:</b>
+                @Html.TextBox("descricaoItem", Session["descricaoInvItem"].ToString(),
+                    new
+                    {
+                        @required = true,
+                        @onkeyup = "this.value = this.value.toUpperCase();",
+                        @placeholder = "Insira a descrição do item a ser cotado.",
+                        @readonly = true
+                    })
+            </li>
+            <li>
+                <b>Quantidade:</b>
+                @Html.TextBox("quantidadeItem", Session["quantidadeInvItem"].ToString(),
+                    new
+                    {
+                        @type = "number",
+                        @readonly = true
+                    })
+            </li>
+        }
+        else
+        {
+            <li>
+                <b>Categoria:</b>
+                @Html.DropDownList(
+                    "Categoria",
+                    (List<SelectListItem>)Session["ListaCategoriasItemProjeto"],
+                    "(Selecione uma Categoria)",
+                    new { @id = "ddlCatergoria", @required = true })
+            </li>
+            <li>
+                <b>Descrição do item:</b>
+                @Html.TextBox("descricaoItem", Session["descricaoInvItem"].ToString(),
+                    new
+                    {
+                        @required = true,
+                        @onkeyup = "this.value = this.value.toUpperCase();",
+                        @placeholder = "Insira a descrição do item a ser cotado."
+                    })
+            </li>
+            <li>
+                <b>Quantidade:</b>
+                @Html.TextBox("quantidadeItem", Session["quantidadeInvItem"].ToString(),
+                    new
+                    {
+                        @required = true,
+                        @placeholder = "Insira a quantidade do item a ser cotado.",
+                        @type = "number",
+                        @min = "1"
+                    })
+            </li>
+        }
+        @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                .GetGroup("HLBAPPM-OrcamentoInvestimentoSolicitacaoCompras", (System.Collections.ArrayList)Session["Direitos"])
+                && Session["Status"].ToString() == "Em Cotação")
+        {
+            <li>
+                <b>
+                    Para filtrar o produto, informe abaixo parte do nome ou o código estruturado e tecle TAB para realizar a pequisa.
+                </b>
+                @Html.TextBox("filtroCodigoApolo", "",
+                new
+                {
+                    @onchange = "filtraCodigoApolo(this, \"CodigoApolo\", \"ddlCodigoApolo\")"
+                })
+                <br />
+                <b>Código no APOLO:</b>
+                @Html.DropDownList(
+                    "CodigoApolo",
+                    (List<SelectListItem>)Session["ListaProdutoApolo"],
+                    "(Selecione um Produto)",
+                    new { @id = "ddlCodigoApolo", @required = true })
+            </li>
+            <li>
+            <div id="divInvestimentoSolicitacaoItemCotacao" style="overflow:auto" >
+            <table id="tabelaInvestimentoSolicitacaoItemCotacao" class="ajustetabelaInvestimentoSolicitacaoItemCotacao">
+                <tbody class="ajustetabelaInvestimentoSolicitacaoItemCotacao">
+                <tr class="ajustetabelaInvestimentoSolicitacaoItemCotacao">
+                    <th class="ajustetabelaInvestimentoSolicitacaoItemCotacao">
+                        Cotação
+                    </th>
+                    <th class="ajustetabelaInvestimentoSolicitacaoItemCotacao">
+                        Fornecedor
+                    </th>
+                    <th class="ajustetabelaInvestimentoSolicitacaoItemCotacao">
+                        Valor
+                    </th>
+                </tr>
+            @for (int i = 1; i <= 3; i++)
+            {
+                string nameFornecedorSession = "ListaFornecedor0" + i.ToString();
+                string nameValorSession = "ValorCotacao0" + i.ToString();
+
+                <tr class="ajustetabelaInvestimentoSolicitacaoItemCotacao">
+                    <td class="ajustetabelaInvestimentoSolicitacaoItemCotacao">
+                        @(i.ToString())
+                    </td>
+                    <td class="ajustetabelaInvestimentoSolicitacaoItemCotacao">
+                        <b>
+                            Para filtrar o fornecedor, informe abaixo parte do nome ou CNPJ e tecle TAB para realizar a pequisa.
+                        </b>
+                        @Html.TextBox("filtroFornecedor0" + i.ToString(), "",
+                        new
+                        {
+                            @onchange = "filtraFornecedor(this, \"Fornecedor0" + i.ToString() + "\", \"ddlFornecedor0" + i.ToString() + "\")"
+                        })
+                        <br />
+                        @Html.DropDownList(
+                            "Fornecedor0" + i.ToString(),
+                            (List<SelectListItem>)Session[nameFornecedorSession],
+                            "(Selecione um Fornecedor)",
+                            new
+                            {
+                                @id = "ddlFornecedor0" + i.ToString()
+                                //,@onchange = "verificaCotacao(this, \"txtValor0" + i.ToString() + "\", \"ddlFornecedor0" + i.ToString() + "\")"
+                            })
+                    </td>
+                    <td class="ajustetabelaInvestimentoSolicitacaoItemCotacao">
+                        @if (Request.Browser.IsMobileDevice)
+                        {
+                            @Html.TextBox("valor0" + i.ToString(), Session[nameValorSession].ToString().Replace(",", "."),
+                              new
+                              {
+                                  //@required = true,
+                                  @placeholder = "Exemplo: 10,54",
+                                  @type = "number",
+                                  @step = "0.01",
+                                  @lang = "pt-BR",
+                                  @min = "0.01",
+                                  @id = "txtValor0" + i.ToString()
+                              })
+                        }
+                        else
+                        {
+                            @Html.TextBox("valor0" + i.ToString(), Session[nameValorSession],
+                              new
+                              {
+                                  @required = true,
+                                  @placeholder = "Informe somente os números. A vírgula e ponto serão adicionados automaticamente.",
+                                  @id = "txtValor0" + i.ToString(),
+                                  @onkeyup = "mascara(this, mvalor);",
+                                  //@onblur = "verifyZero(this, \"errorValorAprovado\")"
+                              })
+                        }
+                    </td>
+                </tr>
+            }
+            </tbody>
+            </table>
+            </div>
+            <div class="editor-label" id="errorCotacao" style="color: Red; font-weight:bold;" align="center"></div>
+            </li>
+            <li>
+                <b>Razões para não obter 3 cotações:</b>
+                @Html.TextArea("razaoNaoTer03Cotacoes", Session["razaoNaoTer03CotacoesSolInv"].ToString(),
+                    new
+                    {
+                        //@required = true,
+                        @onkeyup = "this.value = this.value.toUpperCase();",
+                        @placeholder = "Insira as razões para não obter 3 cotações.",
+                        @id = "txtRazaoNaoTer03Cotacoes"
+                    })
+            </li>
+            <li>
+                <b>Razões por não utilizar a menor cotação:</b>
+                @Html.TextArea("razaoExcederOrcamentoOuNaoUtilizarMenorCotacao", Session["razaoExcederOrcamentoOuNaoUtilizarMenorCotacaoSolInv"].ToString(),
+                    new
+                    {
+                        //@required = true,
+                        @onkeyup = "this.value = this.value.toUpperCase();",
+                        @placeholder = "Insira as razões por execeder o orçamento original ou não utilizar a menor cotação.",
+                        @id = "txtRazaoExcederOrcamentoOuNaoUtilizarMenorCotacao"
+                    })
+            </li>
+            <li>
+                <b>Selecione a Cotação Escolhida:</b>
+                @Html.DropDownList(
+                    "CotacaoEscolhida",
+                    (List<SelectListItem>)Session["ListaNumeroCotacoes"],
+                    "(Selecione a Cotação Escolhida)",
+                    new
+                    {
+                        @id = "ddlCotacaoEscolhida",
+                        @required = true
+                    })
+            </li>
+        }
+        @if (Session["Status"].ToString() == "Pendente" ||
+            (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                .GetGroup("HLBAPPM-OrcamentoInvestimentoSolicitacaoCompras", (System.Collections.ArrayList)Session["Direitos"])
+            && Session["Status"].ToString() == "Em Cotação"))
+        {
+        <li>
+            <input type="submit" value="Salvar Item da Solicitação de Investimento" id="addItem" />
+        </li>
+        }
+    </ul>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

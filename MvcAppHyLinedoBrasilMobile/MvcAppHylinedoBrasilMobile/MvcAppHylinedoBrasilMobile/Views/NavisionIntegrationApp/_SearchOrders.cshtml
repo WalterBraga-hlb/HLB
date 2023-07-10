@@ -1,0 +1,55 @@
+﻿@using (Html.BeginForm("LoadNavOrdersView", "NavisionIntegrationApp", FormMethod.Post))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="list-divider">
+            <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_HatcheryList", Session["language"].ToString())</b>
+            @Html.DropDownList(
+                "Text",
+                (List<SelectListItem>)Session["HatcheryList"])
+        </li>
+        <li data-role="list-divider">
+            <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_DateTypeList", Session["language"].ToString())</b>
+            @Html.DropDownList(
+                "DateType",
+                (List<SelectListItem>)Session["DateTypeList"],
+                new { @id = "dropBoxDateTypeList" })
+        </li>
+        <li data-role="fieldcontain">
+            <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_InitialDate", Session["language"].ToString())</b>
+            <div class="editor-label">
+                @Html.TextBox("initialDate", Convert.ToDateTime(Session["initialDateSearchNav"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_FinalDate", Session["language"].ToString())</b>
+            <div class="editor-label">
+                @Html.TextBox("finalDate", Convert.ToDateTime(Session["finalDateSearchNav"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+            </div>
+        </li>
+        <li data-role="list-divider">
+            <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_CountryList", Session["language"].ToString())</b>
+            @Html.DropDownList(
+                "Country",
+                (List<SelectListItem>)Session["CountryList"],
+                new { @id = "dropBoxCountryList" })
+        </li>
+        <li data-role="fieldcontain">
+            <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_CustomerName", Session["language"].ToString())</b>
+            <div class="editor-label">
+                @Html.TextBox("customerName", Session["customerNameSearchNav"].ToString())
+            </div>
+        </li>
+        @if (Session["sourceClick"].ToString() == "Index")
+        {
+        <li data-role="fieldcontain">
+            <label style="width: 100%">
+                <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_ShowDetails", Session["language"].ToString())</b>
+                @Html.CheckBox("showDetails", Convert.ToBoolean(Session["showDetailsSearchNav"]))
+            </label>
+        </li>
+        }
+        <li data-role="fieldcontain">
+            <input type="submit" value="@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_SeachButton", Session["language"].ToString())" />
+        </li>
+    </ul>
+}

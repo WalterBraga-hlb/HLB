@@ -1,0 +1,967 @@
+﻿@model IEnumerable<MvcAppHyLinedoBrasil.Models.LayoutOrdemProducao>
+
+@if (Model.Count() > 0)
+{
+<br />
+<legend>Ordens de Produção Geradas:</legend>
+<br />
+<br />
+<div style="width:100%; overflow: auto;">
+<table id="retornoImportacao">
+    <tr>
+        <th>
+            Cód.Apolo
+        </th>
+        <th>
+            Cód.Fórmula
+        </th>
+        <th>
+            Tipo Ração
+        </th>
+        <th>
+            Total Produzido
+        </th>
+        <th>
+            Ordem de Produção
+        </th>
+        <th>
+            Responsável
+        </th>
+        <th>
+            Núcleo / Galpão
+        </th>
+        @if (@ViewBag.AdicionalN8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalN8
+        </th>
+        }
+        @if (@ViewBag.AdicionalO8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalO8
+        </th>
+        }
+        @if (@ViewBag.AdicionalP8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalP8
+        </th>
+        }
+        @if (@ViewBag.AdicionalQ8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalQ8
+        </th>
+        }
+        @if (@ViewBag.AdicionalR8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalR8
+        </th>
+        }
+        @if (@ViewBag.AdicionalS8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalS8
+        </th>
+        }
+        @if (@ViewBag.AdicionalT8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalT8
+        </th>
+        }
+        @if (@ViewBag.AdicionalU8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalU8
+        </th>
+        }
+        @if (@ViewBag.AdicionalV8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalV8
+        </th>
+        }
+        @if (@ViewBag.AdicionalX8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalX8
+        </th>
+        }
+        @if (@ViewBag.AdicionalY8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalY8
+        </th>
+        }
+        @if (@ViewBag.AdicionalZ8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalZ8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAA8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAA8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAB8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAB8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAC8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAC8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAD8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAD8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAE8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAE8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAF8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAF8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAG8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAG8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAH8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAH8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAI8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAI8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAJ8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAJ8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAK8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAK8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAL8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAL8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAM8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAM8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAN8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAN8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAO8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAO8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAP8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAP8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAQ8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAQ8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAR8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAR8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAS8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAS8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAT8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAT8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAU8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAU8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAV8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAV8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAW8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAW8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAX8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAX8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAY8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAY8
+        </th>
+        }
+        @if (@ViewBag.AdicionalAZ8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalAZ8
+        </th>
+        }
+        @if (@ViewBag.AdicionalBA8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalBA8
+        </th>
+        }
+        @if (@ViewBag.AdicionalBB8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalBB8
+        </th>
+        }
+        @if (@ViewBag.AdicionalBC8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalBC8
+        </th>
+        }
+        @if (@ViewBag.AdicionalBD8 != "")
+        {
+        <th>
+            @ViewBag.AdicionalBD8
+        </th>
+        }
+        <th>
+            Importado
+        </th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td align="center">
+            @item.CodigoApolo
+        </td>
+        <td align="center">
+            @item.CodFormula
+        </td>
+        <td>
+            @item.TipoRacao
+        </td>
+        <td align="center">
+            @String.Format("{0:F}", item.TotalProduzido)
+        </td>
+        <td align="center">
+            @item.OrdemProducao
+        </td>
+        <td align="center">
+            @item.Responsavel
+        </td>
+        <td align="center">
+            @item.NucleoGalpao
+        </td>
+        @if (@ViewBag.AdicionalN8 != "")
+        {
+            if (item.Adicional01 == "Não Baixado")
+            {
+                <td align="center">
+                    <font color="red">@item.Adicional01</font>
+                </td>
+            }
+            else
+            {
+                <td align="center">
+                    @item.Adicional01
+                </td>
+            }
+        }
+        @if (@ViewBag.AdicionalO8 != "")
+        {
+            if (item.Adicional02 == "Não Baixado")
+            {
+                <td align="center">
+                   <font color="red">@item.Adicional02</font>
+                </td>
+            }
+            else
+            {
+                <td align="center">
+                    @item.Adicional02
+                </td>
+            }
+        }
+        @if (@ViewBag.AdicionalP8 != "")
+        {
+            if (item.Adicional03 == "Não Baixado")
+            {
+                <td align="center">
+                    <font color="red">@item.Adicional03</font>
+                </td>
+            }
+            else
+            {
+                <td align="center">
+                    @item.Adicional03
+                </td>
+            }
+        }
+        @if (@ViewBag.AdicionalQ8 != "")
+        {
+            if (item.Adicional04 == "Não Baixado")
+            {
+                <td align="center">
+                    <font color="red">@item.Adicional04</font>
+                </td>
+            }
+            else
+            {
+                <td align="center">
+                    @item.Adicional04
+                </td>
+            }
+        }
+        @if (@ViewBag.AdicionalR8 != "")
+        {
+            if (item.Adicional05 == "Não Baixado")
+            {
+                <td align="center">
+                    <font color="red">@item.Adicional05</font>
+                </td>
+            }
+            else
+            {
+                <td align="center">
+                    @item.Adicional05
+                </td>
+            }
+        }
+        @if (@ViewBag.AdicionalS8 != "")
+        {
+            if (item.Adicional06 == "Não Baixado")
+            {
+                <td align="center">
+                    <font color="red">@item.Adicional06</font>
+                </td>
+            }
+            else
+            {
+                <td align="center">
+                    @item.Adicional06
+                </td>
+            }
+        }
+        @if (@ViewBag.AdicionalT8 != "")
+        {
+            if (item.Adicional07 == "Não Baixado")
+            {
+                <td align="center">
+                    <font color="red">@item.Adicional07</font>
+                </td>
+            }
+            else
+            {
+                <td align="center">
+                    @item.Adicional07
+                </td>
+            }
+        }
+        @if (@ViewBag.AdicionalU8 != "")
+        {
+            if (item.Adicional08 == "Não Baixado")
+            {
+                <td align="center">
+                    <font color="red">@item.Adicional08</font>
+                </td>
+            }
+            else
+            {
+                <td align="center">
+                    @item.Adicional08
+                </td>
+            }
+        }
+        @if (@ViewBag.AdicionalV8 != "")
+        {
+            if (item.Adicional09 == "Não Baixado")
+            {
+            <td align="center">
+                <font color="red">@item.Adicional09</font>
+            </td>
+            }
+            else
+            {
+            <td align="center">
+                @item.Adicional09
+            </td>
+            }
+        }
+        @if (@ViewBag.AdicionalW8 != "")
+        {
+            if (item.Adicional10 == "Não Baixado")
+            {
+            <td align="center">
+                <font color="red">@item.Adicional10</font>
+            </td>
+            }
+            else
+            {
+            <td align="center">
+                @item.Adicional10
+            </td>
+            }
+        }
+        @if (@ViewBag.AdicionalX8 != "")
+        {
+            if (item.Adicional11 == "Não Baixado")
+            {
+            <td align="center">
+                <font color="red">@item.Adicional11</font>
+            </td>
+            }
+            else
+            {
+            <td align="center">
+                @item.Adicional11
+            </td>
+            }
+        }
+        @if (@ViewBag.AdicionalY8 != "")
+        {
+            if (item.Adicional12 == "Não Baixado")
+            {
+            <td align="center">
+                <font color="red">@item.Adicional12</font>
+            </td>
+            }
+            else
+            {
+            <td align="center">
+                @item.Adicional12
+            </td>
+            }
+        }
+        @if (@ViewBag.AdicionalZ8 != "")
+        {
+            if (item.Adicional13 == "Não Baixado")
+            {
+            <td align="center">
+                <font color="red">@item.Adicional13</font>
+            </td>
+            }
+            else
+            {
+            <td align="center">
+                @item.Adicional13
+            </td>
+            }
+        }
+        @if (@ViewBag.AdicionalAA8 != "")
+        {
+            if (item.Adicional14 == "Não Baixado")
+            {
+            <td align="center">
+                <font color="red">@item.Adicional14</font>
+            </td>
+            }
+            else
+            {
+            <td align="center">
+                @item.Adicional14
+            </td>
+            }
+        }
+        @if (@ViewBag.AdicionalAB8 != "")
+        {
+            if (item.Adicional15 == "Não Baixado")
+            {
+            <td align="center">
+                <font color="red">@item.Adicional15</font>
+            </td>
+            }
+            else
+            {
+            <td align="center">
+                @item.Adicional15
+            </td>
+            }
+        }
+        @if (@ViewBag.AdicionalAC8 != "")
+        {
+            if (item.Adicional16 == "Não Baixado")
+            {
+            <td align="center">
+                <font color="red">@item.Adicional16</font>
+            </td>
+            }
+            else
+            {
+            <td align="center">
+                @item.Adicional16
+            </td>
+            }
+        }
+        @if (@ViewBag.AdicionalAD8 != "")
+        {
+            if (item.Adicional17 == "Não Baixado")
+            {
+            <td align="center">
+                <font color="red">@item.Adicional17</font>
+            </td>
+            }
+            else
+            {
+            <td align="center">
+                @item.Adicional17
+            </td>
+            }
+        }
+        @if (@ViewBag.AdicionalAE8 != "")
+        {
+            if (item.Adicional18 == "Não Baixado")
+            {
+            <td align="center">
+                <font color="red">@item.Adicional18</font>
+            </td>
+            }
+            else
+            {
+            <td align="center">
+                @item.Adicional18
+            </td>
+            }
+        }
+        @if (@ViewBag.AdicionalAF8 != "")
+        {
+            if (item.Adicional19 == "Não Baixado")
+            {
+            <td align="center">
+                <font color="red">@item.Adicional19</font>
+            </td>
+            }
+            else
+            {
+            <td align="center">
+                @item.Adicional19
+            </td>
+            }
+        }
+        @if (@ViewBag.AdicionalAG8 != "")
+        {
+            if (item.Adicional20 == "Não Baixado")
+            {
+            <td align="center">
+                <font color="red">@item.Adicional20</font>
+            </td>
+            }
+            else
+            {
+            <td align="center">
+                @item.Adicional20
+            </td>
+            }
+        }
+        @if (@ViewBag.AdicionalAH8 != "")
+        {
+            if (item.Adicional21 == "Não Baixado")
+            {
+            <td align="center">
+                <font color="red">@item.Adicional21</font>
+            </td>
+            }
+            else
+            {
+            <td align="center">
+                @item.Adicional21
+            </td>
+            }
+        }
+        @if (@ViewBag.AdicionalAI8 != "")
+        {
+            if (item.Adicional22 == "Não Baixado")
+            {
+            <td align="center">
+                <font color="red">@item.Adicional22</font>
+            </td>
+            }
+            else
+            {
+            <td align="center">
+                @item.Adicional22
+            </td>
+            }
+        }
+        @if (@ViewBag.AdicionalAJ8 != "")
+        {
+            if (item.Adicional23 == "Não Baixado")
+            {
+            <td align="center">
+                <font color="red">@item.Adicional23</font>
+            </td>
+            }
+            else
+            {
+            <td align="center">
+                @item.Adicional23
+            </td>
+            }
+        }
+        @if (@ViewBag.AdicionalAK8 != "")
+        {
+            if (item.Adicional24 == "Não Baixado")
+            {
+            <td align="center">
+                <font color="red">@item.Adicional24</font>
+            </td>
+            }
+            else
+            {
+            <td align="center">
+                @item.Adicional24
+            </td>
+            }
+        }
+        @if (@ViewBag.AdicionalAL8 != "")
+        {
+            if (item.Adicional25 == "Não Baixado")
+            {
+            <td align="center">
+                <font color="red">@item.Adicional25</font>
+            </td>
+            }
+            else
+            {
+            <td align="center">
+                @item.Adicional25
+            </td>
+            }
+        }
+        @if (@ViewBag.AdicionalAM8 != "")
+        {
+            if (item.Adicional26 == "Não Baixado")
+            {
+            <td align="center">
+                <font color="red">@item.Adicional26</font>
+            </td>
+            }
+            else
+            {
+            <td align="center">
+                @item.Adicional26
+            </td>
+            }
+        }
+        @if (@ViewBag.AdicionalAN8 != "")
+        {
+            if (item.Adicional27 == "Não Baixado")
+            {
+            <td align="center">
+                <font color="red">@item.Adicional27</font>
+            </td>
+            }
+            else
+            {
+            <td align="center">
+                @item.Adicional27
+            </td>
+            }
+        }
+         @if (@ViewBag.AdicionalAO8 != "")
+         {
+             if (item.Adicional28 == "Não Baixado")
+             {
+            <td align="center">
+                <font color="red">@item.Adicional28</font>
+            </td>
+             }
+             else
+             {
+            <td align="center">
+                @item.Adicional28
+            </td>
+             }
+         }
+         @if (@ViewBag.AdicionalAP8 != "")
+         {
+             if (item.Adicional29 == "Não Baixado")
+             {
+            <td align="center">
+                <font color="red">@item.Adicional29</font>
+            </td>
+             }
+             else
+             {
+            <td align="center">
+                @item.Adicional29
+            </td>
+             }
+         }
+         @if (@ViewBag.AdicionalAQ8 != "")
+         {
+             if (item.Adicional30 == "Não Baixado")
+             {
+            <td align="center">
+                <font color="red">@item.Adicional30</font>
+            </td>
+             }
+             else
+             {
+            <td align="center">
+                @item.Adicional30
+            </td>
+             }
+         }
+         @if (@ViewBag.AdicionalAR8 != "")
+         {
+             if (item.Adicional31 == "Não Baixado")
+             {
+            <td align="center">
+                <font color="red">@item.Adicional31</font>
+            </td>
+             }
+             else
+             {
+            <td align="center">
+                @item.Adicional31
+            </td>
+             }
+         }
+         @if (@ViewBag.AdicionalAS8 != "")
+         {
+             if (item.Adicional32 == "Não Baixado")
+             {
+            <td align="center">
+                <font color="red">@item.Adicional32</font>
+            </td>
+             }
+             else
+             {
+            <td align="center">
+                @item.Adicional32
+            </td>
+             }
+         }
+         @if (@ViewBag.AdicionalAT8 != "")
+         {
+             if (item.Adicional33 == "Não Baixado")
+             {
+            <td align="center">
+                <font color="red">@item.Adicional33</font>
+            </td>
+             }
+             else
+             {
+            <td align="center">
+                @item.Adicional33
+            </td>
+             }
+         }
+         @if (@ViewBag.AdicionalAU8 != "")
+         {
+             if (item.Adicional34 == "Não Baixado")
+             {
+            <td align="center">
+                <font color="red">@item.Adicional34</font>
+            </td>
+             }
+             else
+             {
+            <td align="center">
+                @item.Adicional34
+            </td>
+             }
+         }
+         @if (@ViewBag.AdicionalAV8 != "")
+         {
+             if (item.Adicional35 == "Não Baixado")
+             {
+            <td align="center">
+                <font color="red">@item.Adicional35</font>
+            </td>
+             }
+             else
+             {
+            <td align="center">
+                @item.Adicional35
+            </td>
+             }
+         }
+         @if (@ViewBag.AdicionalAW8 != "")
+         {
+             if (item.Adicional36 == "Não Baixado")
+             {
+            <td align="center">
+                <font color="red">@item.Adicional36</font>
+            </td>
+             }
+             else
+             {
+            <td align="center">
+                @item.Adicional36
+            </td>
+             }
+         }
+         @if (@ViewBag.AdicionalAX8 != "")
+         {
+             if (item.Adicional37 == "Não Baixado")
+             {
+            <td align="center">
+                <font color="red">@item.Adicional37</font>
+            </td>
+             }
+             else
+             {
+            <td align="center">
+                @item.Adicional37
+            </td>
+             }
+         }
+         @if (@ViewBag.AdicionalAY8 != "")
+         {
+             if (item.Adicional38 == "Não Baixado")
+             {
+            <td align="center">
+                <font color="red">@item.Adicional38</font>
+            </td>
+             }
+             else
+             {
+            <td align="center">
+                @item.Adicional38
+            </td>
+             }
+         }
+         @if (@ViewBag.AdicionalAZ8 != "")
+         {
+             if (item.Adicional39 == "Não Baixado")
+             {
+            <td align="center">
+                <font color="red">@item.Adicional39</font>
+            </td>
+             }
+             else
+             {
+            <td align="center">
+                @item.Adicional39
+            </td>
+             }
+         }
+         @if (@ViewBag.AdicionalBA8 != "")
+         {
+             if (item.Adicional40 == "Não Baixado")
+             {
+            <td align="center">
+                <font color="red">@item.Adicional40</font>
+            </td>
+             }
+             else
+             {
+            <td align="center">
+                @item.Adicional40
+            </td>
+             }
+         }
+         @if (@ViewBag.AdicionalBB8 != "")
+         {
+             if (item.Adicional41 == "Não Baixado")
+             {
+            <td align="center">
+                <font color="red">@item.Adicional41</font>
+            </td>
+             }
+             else
+             {
+            <td align="center">
+                @item.Adicional41
+            </td>
+             }
+         }
+         @if (@ViewBag.AdicionalBC8 != "")
+         {
+             if (item.Adicional42 == "Não Baixado")
+             {
+            <td align="center">
+                <font color="red">@item.Adicional42</font>
+            </td>
+             }
+             else
+             {
+            <td align="center">
+                @item.Adicional42
+            </td>
+             }
+         }
+         @if (@ViewBag.AdicionalBD8 != "")
+         {
+             if (item.Adicional43 == "Não Baixado")
+             {
+            <td align="center">
+                <font color="red">@item.Adicional43</font>
+            </td>
+             }
+             else
+             {
+            <td align="center">
+                @item.Adicional43
+            </td>
+             }
+         }
+         <td align="center">
+            @Html.Image(@Url.Content("~/Content/images/" + item.Importado + ".png"), "Importado")
+         </td>
+    </tr>
+}
+
+</table>
+</div>
+}

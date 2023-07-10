@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="fluigModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+  <EntityContainer Name="fluigEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+    <EntitySet Name="FF40F29A5F_3F17F927" EntityType="fluigModel.FF40F29A5F_3F17F927" />
+    <EntitySet Name="FF40F29A5F_77708420" EntityType="fluigModel.FF40F29A5F_77708420" />
+    <EntitySet Name="VU_Mort_07" EntityType="fluigModel.VU_Mort_07" />
+    <EntitySet Name="VU_RRC_Fluig_Only" EntityType="fluigModel.VU_RRC_Fluig_Only" />
+    <EntitySet Name="VU_Roteiro_Entrega_Fluig" EntityType="fluigModel.VU_Roteiro_Entrega_Fluig" />
+    <EntitySet Name="VU_Formulas_Racao_Fluig" EntityType="fluigModel.VU_Formulas_Racao_Fluig" />
+    <EntitySet Name="VU_Formulas_Racao_Fluig_FT" EntityType="fluigModel.VU_Formulas_Racao_Fluig_FT" />
+  </EntityContainer>
+  <EntityType Name="FF40F29A5F_3F17F927">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" Nullable="false" MaxLength="36" Unicode="false" FixedLength="false" />
+    <Property Name="RECORD_CODE" Type="String" Nullable="false" MaxLength="36" Unicode="false" FixedLength="false" />
+    <Property Name="VERSION" Type="Int32" Nullable="false" />
+    <Property Name="DELETED" Type="Boolean" Nullable="false" />
+    <Property Name="PARENT_FORM_VERSION" Type="Int32" Nullable="false" />
+    <Property Name="CREATED_BY" Type="String" MaxLength="36" Unicode="false" FixedLength="false" />
+    <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UPDATED_BY" Type="String" MaxLength="36" Unicode="false" FixedLength="false" />
+    <Property Name="UPDATED_DATE" Type="DateTime" Precision="3" />
+    <Property Name="LINHAGENS_BLOQU_CHK_11" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="LINHAGENS_BLOQU_CHK_12" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="LINHAGENS_BLOQU_CHK_13" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="LINHAGENS_BLOQU_CHK_14" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="LINHAGENS_BLOQU_CHK_15" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="LINHAGENS_BLOQU_CHK_16" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="LINHAGENS_BLOQU_CHK_17" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="LINHAGENS_BLOQU_CHK_18" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="LINHAGENS_BLOQU_CHK_19" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="LINHAGENS_BLOQU_CHK_110" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="LINHAGENS_BLOQU_CHK_111" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="LINHAGENS_BLOQU_CHK_112" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="LINHAGENS_BLOQU_CHK_113" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="LINHAGENS_BLOQU_CHK_114" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="LINHAGENS_BLOQU_CHK_115" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="PERMITIR_PEDIDO_DT_1" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="FF40F29A5F_77708420">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="String" Name="ID" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="RECORD_CODE" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="VERSION" Nullable="false" />
+    <Property Type="Boolean" Name="DELETED" Nullable="false" />
+    <Property Type="Int32" Name="PARENT_FORM_VERSION" Nullable="false" />
+    <Property Type="String" Name="CREATED_BY" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="CREATED_DATE" Nullable="false" Precision="3" />
+    <Property Type="String" Name="UPDATED_BY" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="UPDATED_DATE" Precision="3" />
+    <Property Type="String" Name="LINHAGEM_SEL_1" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="PRIMEIRO_DIA_DO_DT_1" Precision="0" />
+    <Property Type="Decimal" Name="SALDO_DE_PINTOS_NR_1" Precision="20" Scale="11" />
+  </EntityType>
+  <EntityType Name="VU_Mort_07">
+    <Key>
+      <PropertyRef Name="NumSolicitacao" />
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="NumSolicitacao" Type="Int32" Nullable="false" />
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="companyid" Type="Int32" />
+    <Property Name="cardid" Type="Int32" />
+    <Property Name="documentid" Type="Int32" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="tableid" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="identificador" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="prazo_coleta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="nome_cliente" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="codigo_cliente" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="dados_pedido" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="chave_pedido" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="chicnums" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="primeira_entrega" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ultima_entrega" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="nf_mae" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="incubatorios" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="cod_incubatorios" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="cod_transporte" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="qtde" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="perc_doa" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="pesquisa_coletor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="nome_coletor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="grupo_coletor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="data_coleta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="coletor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="usuario_coleta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="dia_01" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="dia_02" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="dia_03" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="dia_04" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="dia_05" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="dia_06" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="dia_07" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="dia_08" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="dia_09" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="dia_10" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="total_m07" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="perc_m07" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="peso_M07" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="uniformidade_M07" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="tipo_reclamacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="tipo_reclamacao_depto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="obs_m07_acima_meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="gera_RRC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="descricao_RRC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="motivo_retorno" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="StatusProcesso" Type="Int32" />
+    <Property Name="m07_coletada" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="obs_m07_nao_coletada" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="peso_DOA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="uniformidade_DOA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="cond_estr_granja" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="cond_alojamento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="luz" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="temperatura" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="agua" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="sanidade" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="qtde_rrc_aberta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ANONYMIZATION_DATE" Type="DateTime" Precision="0" />
+    <Property Name="ANONYMIZATION_USER_ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="obs_m07" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="cliente_reclamando" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="VU_RRC_Fluig_Only">
+    <Key>
+      <PropertyRef Name="Reclamação_Por" />
+      <PropertyRef Name="Nº_Reclamação" />
+      <PropertyRef Name="Status" />
+    </Key>
+    <Property Name="NomeSolicitante" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="DataSolicitacao" Type="DateTime" Precision="7" />
+    <Property Name="DataConclusao" Type="DateTime" Precision="7" />
+    <Property Name="Reclamação_Por" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Name="Nº_Reclamação" Type="Int32" Nullable="false" />
+    <Property Name="descricao_fatos" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="tipo_reclamacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="tipo_problema_incubatorio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="tipo_problema_transporte" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="analise_granja" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="analise_qualidade" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="qtde_bonificada" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="chave_pedido" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="data_bonificada_programacao" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="qtde_bonificada_programacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="idweb_bonificada_programacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="analise_programacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="status_programacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="motivo_bonificacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="causa" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="porque_ocorre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="problema_cliente" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="VU_Roteiro_Entrega_Fluig">
+    <Key>
+      <PropertyRef Name="NUM_PROCES" />
+      <PropertyRef Name="EMAIL" />
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="NUM_PROCES" Type="Int32" Nullable="false" />
+    <Property Name="LoginSolicitante" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="NomeSolicitante" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="DataSolicitacao" Type="DateTime" Precision="7" />
+    <Property Name="STATUS" Type="Int32" />
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="companyid" Type="Int32" />
+    <Property Name="cardid" Type="Int32" />
+    <Property Name="documentid" Type="Int32" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="tableid" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="filtra_roteiro" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="responsavel_preenchimento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="data_nascimento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="nome_cliente" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="codigo_cliente" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="cidade_uf" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="representante" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="nfnum" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="distancia_percorrida_km" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="horario_chegada_granja" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="horario_saida_granja" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="data_entrega" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="motorista_01" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="motorista_02" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="observacoes_motorista" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="recebedor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="recebedor_cpf" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="recebedor_celular" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="avaliacao_transporte" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="avaliacao_motorista" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="avaliacao_pintinho" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="observacoes_cliente" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="data_hora_esperada_granja" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="horas_atraso_adiantado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="placa" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="horario_carregamento_esperado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="horario_carregamento_real" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="horas_atraso_adiantado_carreg" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="fechamento_logistica" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ANONYMIZATION_DATE" Type="DateTime" Precision="0" />
+    <Property Name="ANONYMIZATION_USER_ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="motivo_atraso" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="motivo_DOA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="VU_Formulas_Racao_Fluig">
+    <Key>
+      <PropertyRef Name="EMAIL" />
+      <PropertyRef Name="NUM_PROCES" />
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="LoginSolicitante" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="NomeSolicitante" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="DataSolicitacao" Type="DateTime" Precision="7" />
+    <Property Name="DataConclusao" Type="DateTime" Precision="7" />
+    <Property Name="NUM_PROCES" Type="Int32" Nullable="false" />
+    <Property Name="STATUS" Type="Int32" />
+    <Property Name="Atividade" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="companyid" Type="Int32" />
+    <Property Name="cardid" Type="Int32" />
+    <Property Name="documentid" Type="Int32" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="tableid" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ANONYMIZATION_DATE" Type="DateTime" Precision="0" />
+    <Property Name="ANONYMIZATION_USER_ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="identificador" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="data_solicitacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="solicitante" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="usuario_solicitante" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="tipo_cadastro" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="codigo_formula" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="pesquisa_formula" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="descricao_formula" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="data_necessidade" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="tipo_alteracao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="observacao_alteracao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="data_analise" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="analisador" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="usuario_analisador" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="pesquisa_insumo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="data_inicio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="data_fim" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="observacao_configuracao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="data_aprovacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="aprovador" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="usuario_aprovador" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="descricao_aprovacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="data_configuracao_apolo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="configurador_apolo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="usuario_configurador_apolo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="pesquisa_formula_apolo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="descricao_formula_apolo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="codEstr_formula" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="obs_configuracao_apolo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="motivo_retorno" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="VU_Formulas_Racao_Fluig_FT">
+    <Key>
+      <PropertyRef Name="NUM_PROCES" />
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="NUM_PROCES" Type="Int32" Nullable="false" />
+    <Property Name="STATUS" Type="Int32" />
+    <Property Name="Atividade" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="codigo_formula" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="codEstr_formula" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="descricao_formula" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="companyid" Type="Int32" />
+    <Property Name="cardid" Type="Int32" />
+    <Property Name="documentid" Type="Int32" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="tableid" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ANONYMIZATION_DATE" Type="DateTime" Precision="0" />
+    <Property Name="ANONYMIZATION_USER_ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="codigo_ft" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="descricao_ft" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="qtde_ft" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="quebra_ft" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="masterid" Type="Int32" />
+  </EntityType>
+</Schema>

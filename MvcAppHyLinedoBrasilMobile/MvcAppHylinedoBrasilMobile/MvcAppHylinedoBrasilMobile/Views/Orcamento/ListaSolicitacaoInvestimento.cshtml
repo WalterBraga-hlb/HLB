@@ -1,0 +1,256 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+    
+    List<MvcAppHylinedoBrasilMobile.Models.Investimento_Solicitacao> listaSolicitacoesInvestimento =
+        (List<MvcAppHylinedoBrasilMobile.Models.Investimento_Solicitacao>)Session["ListaSolicitacaoInvestimento"];
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities apolo = new MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities();
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+}
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para o Menu de Orçamentos", "MenuOrcamento", "Orcamento", 
+                null,
+                new { @title = "Clique aqui para voltar para o Menu de Orçamentos", @class = "budget" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/sol_invest.png"), "Investimento")
+    <h2>Lista de Solicitações de Investimentos</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+@using (Html.BeginForm("SearchSolicitacaoInvestimento", "Orcamento"))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <b>Data de Início:</b>
+            <div class="editor-field">
+                @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+                {
+                    @Html.TextBox("dataInicialSolInv", Convert.ToDateTime(Session["dataInicialSolInv"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+                }
+                else
+                {
+                    @Html.TextBox("dataInicialSolInv", Convert.ToDateTime(Session["dataInicialSolInv"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+                }
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Data de Término:</b>
+            <div class="editor-field">
+                @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+                {
+                    @Html.TextBox("dataFimSolInv", Convert.ToDateTime(Session["dataFimSolInv"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+                }
+                else
+                {
+                    @Html.TextBox("dataFimSolInv", Convert.ToDateTime(Session["dataFimSolInv"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+                }
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Informe parte do nome do investimento:</b>
+            <div class="editor-field">
+                @Html.TextBox("nome", Session["nomeSolInv"])
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Pesquisar" />
+        </li>
+    </ul>
+}
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Solicitação de Investimento</li>
+    <li>
+        @Html.ActionLink("Adicionar Nova Solicitação de Investimento", "CreateSolicitacaoInvestimento", "Orcamento",
+            null,
+            new { @class = "add", @title = "Clique aqui para inserir uma nova solicitação de investimento." })
+    </li>
+</ul>
+<br />
+<div class="editor-label"  align="center">
+    <table style="width: 90%">
+        <tr style="font-size: xx-small; background-color:Gray">
+            <th colspan="6" style="font-size: xx-small; background-color:Gray">
+                <u>Legenda de Ações:</u>
+            </th>
+        </tr>
+        <tr style="font-size: xx-small">
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/kjots.png"), "")
+                <i>Alterar Solicitação de Investimento</i>
+            </td>
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/button_cancel.png"), "")
+                <i>Excluir Solicitação de Investimento</i>
+            </td>
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/log.png"), "")
+                <i>Histórico da Solicitação de Investimento</i>
+            </td>
+            @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                            .GetGroup("HLBAPPM-OrcamentoInvestimentoSolicitacaoCompras", (System.Collections.ArrayList)Session["Direitos"]))
+            {
+                <td style="font-size: xx-small">
+                    @Html.Image(@Url.Content("~/Content/icons/back.png"), "")
+                    <i>Voltar Solicitação de Investimento para Pendente</i>
+                </td>
+                <td style="font-size: xx-small">
+                    @Html.Image(@Url.Content("~/Content/icons/next.png"), "")
+                    <i>Enviar Solicitação de Investimento para Aprovação</i>
+                </td>
+            }
+        </tr>
+    </table>
+</div>
+<br />
+<div id="divTabelaIndexPV" style="overflow:auto" >
+<table id="tabelaSolicitacaoInvestimento" class="ajustetabelaSolicitacaoInvestimento">
+    <tbody class="ajustetabelaSolicitacaoInvestimento">
+    <tr class="ajustetabelaSolicitacaoInvestimento">
+        <th class="ajustetabelaSolicitacaoInvestimento">
+            Departamento
+        </th>
+        <th class="ajustetabelaSolicitacaoInvestimento">
+            Responsável
+        </th>
+        <th class="ajustetabelaSolicitacaoInvestimento">
+            Investimento
+        </th>
+        <th class="ajustetabelaSolicitacaoInvestimento">
+            Descrição
+        </th>
+        <th class="ajustetabelaSolicitacaoInvestimento">
+            Data Início
+        </th>
+        <th class="ajustetabelaSolicitacaoInvestimento">
+            Data Término
+        </th>
+        <th class="ajustetabelaSolicitacaoInvestimento">
+            Valor
+        </th>
+        <th class="ajustetabelaSolicitacaoInvestimento">
+            Status
+        </th>
+        <th class="ajustetabelaSolicitacaoInvestimento">
+            Ações
+        </th>
+    </tr>
+@foreach (var item in listaSolicitacoesInvestimento)
+{
+    MvcAppHylinedoBrasilMobile.Models.Investimento investimento = hlbapp.Investimento.Where(w => w.ID == item.IDInvestimento).FirstOrDefault();
+    string nomeDepartamento = apolo.FUNCIONARIO.Where(w => w.FuncCod == investimento.Departamento).FirstOrDefault().FuncNome;
+    string responsavelDepartamento = apolo.FUNCIONARIO.Where(w => w.FuncCod == investimento.Responsavel).FirstOrDefault().FuncNome;
+
+    decimal totalSolicitacaoProjeto = 0;
+    List<MvcAppHylinedoBrasilMobile.Models.Investimento_Solicitacao_Projecao_Pagamento> listaProjPag = hlbapp
+        .Investimento_Solicitacao_Projecao_Pagamento.Where(w => w.IDInvestimentoSolicitacao == item.ID
+            && w.Valor > 0).ToList();
+
+    if (listaProjPag.Count > 0)
+    {
+        totalSolicitacaoProjeto = listaProjPag.Sum(s => s.Valor);
+    }
+    
+    <tr class="ajustetabelaSolicitacaoInvestimento">
+        <td class="ajustetabelaSolicitacaoInvestimento">
+            @(nomeDepartamento)
+        </td>
+        <td class="ajustetabelaSolicitacaoInvestimento">
+            @(responsavelDepartamento)
+        </td>
+        <td class="ajustetabelaSolicitacaoInvestimento">
+            @(item.NomeProjeto)
+        </td>
+        <td class="ajustetabelaSolicitacaoInvestimento">
+            @Html.Raw(item.Descricao.Replace("\r\n", "<br />"))
+        </td>
+        <td class="ajustetabelaSolicitacaoInvestimento">
+            @(item.DataInicio.ToShortDateString())
+        </td>
+        <td class="ajustetabelaSolicitacaoInvestimento">
+            @(item.DataTermino.ToShortDateString())
+        </td>
+        <td class="ajustetabelaSolicitacaoInvestimento">
+            @(String.Format("{0:C}", totalSolicitacaoProjeto))
+        </td>
+        <td class="ajustetabelaSolicitacaoInvestimento">
+            @(item.Status)
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td align="center">
+                        @Html.ActionLink("Edit", "EditSolicitacaoInvestimento",
+                            new { id = item.ID },
+                                new { @class = "edit", @title = "Clique aqui para alterar a solicitação de investimento." })
+                    </td>
+                    <td align="center">
+                        @Html.ActionLink("Log", "HistoricoSolicitacaoInvestimento",
+                            new { id = item.ID },
+                                new { @class = "log", @title = "Clique aqui para verificar o histórico da solicitação de investimento." })
+                    </td>
+                    @if (item.Status == "Pendente")
+                    {
+                        <td align="center">
+                            @Html.ActionLink("Delete", "ConfirmaDeleteSolicitacaoInvestimento",
+                                new { id = item.ID },
+                                         new { @class = "delete", @title = "Clique aqui para excluir a solicitação de investimento." })
+                        </td>
+                    }
+                    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                            .GetGroup("HLBAPPM-OrcamentoInvestimentoSolicitacaoCompras", (System.Collections.ArrayList)Session["Direitos"])
+                            && item.Status == "Em Cotação")
+                    {
+                        <td align="center">
+                            @Html.ActionLink("Voltar para Pendente", "ConfirmaAcao",
+                                new { id = item.ID, acao = "VoltarParaPendente", msg = "CONFIRMA VOLTAR A SOLICITAÇÃO PARA PENDENTE" },
+                                new { @class = "back1", @title = "Clique aqui para voltar a solicitação para pendente." })
+                        </td>
+                        var listaCotacao = hlbapp.Investimento_Solicitacao_Item_Cotacao
+                            .Where(w => hlbapp.Investimento_Solicitacao_Item.Any(a => a.ID == w.IDInvestimentoSolicitacaoItem
+                                    && a.IDInvestimentoSolicitacao == item.ID && a.IDCotacaoEscolhida == w.Sequencia))
+                            .ToList();
+                        var listaCotacaoSemSelecao = hlbapp.Investimento_Solicitacao_Item_Cotacao
+                            .Where(w => hlbapp.Investimento_Solicitacao_Item.Any(a => a.ID == w.IDInvestimentoSolicitacaoItem
+                                && a.IDInvestimentoSolicitacao == item.ID && a.IDCotacaoEscolhida == 0))
+                            .ToList();
+                        var listaProgPag = hlbapp.Investimento_Solicitacao_Projecao_Pagamento
+                            .Where(w => w.IDInvestimentoSolicitacao == item.ID && w.Valor > 0)
+                            .ToList();
+                        if (listaCotacao.Sum(s => s.Valor) == listaProgPag.Sum(s => s.Valor) && listaProgPag.Sum(s => s.Valor) != 0
+                            && listaCotacaoSemSelecao.Count == 0)
+                        {
+                        <td align="center">
+                            @Html.ActionLink("Enviar para Aprovação", "ConfirmaAcao",
+                                new { id = item.ID, acao = "EnviarParaAprovacaoGerencia", msg = "CONFIRMA ENVIAR A SOLICITAÇÃO PARA APROVAÇÃO" },
+                                new { @class = "next1", @title = "Clique aqui para enviar a solicitação para aprovação." })
+                        </td>
+                        }
+                    }
+                    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                            .GetGroup("HLBAPPM-OrcamentoInvestimentoSolicitacaoCompras", (System.Collections.ArrayList)Session["Direitos"])
+                            && (item.Status == "Aprovado Diretoria" || item.Status == "Pedido Parcial" || item.Status == "Pedido Total"))
+                    {
+                        <td align="center">
+                            @Html.ActionLink("Gerar Pedido de Compra", "GeraPedidoCompra",
+                                new { id = item.ID },
+                                new { @class = "cart", @title = "Clique aqui para gerar os pedidos de compra." })
+                        </td>
+                    }
+                </tr>
+            </table>
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

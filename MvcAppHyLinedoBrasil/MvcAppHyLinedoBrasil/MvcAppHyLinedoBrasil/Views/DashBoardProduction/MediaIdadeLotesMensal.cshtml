@@ -1,0 +1,35 @@
+﻿<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = new google.visualization.DataTable(@(Html.Raw(ViewBag.mediaIdadePorMesAno)));
+
+            var options = {
+                title: 'Média da Idade dos Lotes p/ descarte p/ Mês/Ano',
+                hAxis: {gridlines: {count: @ViewBag.QtdeRegistrosEixoXmediaIdadeMesAno }, format: 'yyyy/MM'},
+                height: 400,
+                chartArea: {width:'75%',height:'80%'},
+                legend: {position: 'bottom'},
+                trendlines: { 2: {} }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('chartMediaIdadeLotesMesAno'));
+            chart.draw(data, options);
+        }
+    </script>
+<div>
+    @if (ViewBag.QtdeRegistrosEixoXmediaIdadeMesAno != 0)
+    {
+    <div id="chartMediaIdadeLotesMesAno" style="width: 100%; height: 100%;"></div>
+    }
+    else
+    {
+    <h3>
+        Média da Idade dos Lotes p/ descarte p/ Mês/Ano
+        <br />
+        Não existem dados para os parâmetros selecionados!
+    </h3>
+    }
+</div>

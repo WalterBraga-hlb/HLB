@@ -1,0 +1,262 @@
+﻿@model IEnumerable<MvcAppHyLinedoBrasil.Data.CHICDataSet.ordersConfRow>
+
+@{
+    ViewBag.Title = "Confirmações de Pedidos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("Abas")
+
+<link href="@Url.Content("//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("//code.jquery.com/jquery-1.10.2.js")" type="text/javascript"></script>
+<script src="@Url.Content("//code.jquery.com/ui/1.11.0/jquery-ui.js")" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#dataIni").datepicker({ dateFormat: "dd/mm/yy" });
+    });
+    $(function () {
+        $("#dataFim").datepicker({ dateFormat: "dd/mm/yy" });
+    });
+    $(function () {
+        $("#dataIniFat").datepicker({ dateFormat: "dd/mm/yy" });
+    });
+    $(function () {
+        $("#dataFimFat").datepicker({ dateFormat: "dd/mm/yy" });
+    });
+</script>
+
+<h2>Confirmações de Pedidos</h2>
+
+    @using (Html.BeginForm("EnviarConfirmacoesFaturamento", "ImportaPedidosCHIC", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <fieldset>
+            <h3>Envio das Confirmações p/ Faturamento e Financeiro</h3>
+            <h3 style="color:red;">* SÓ SERÃO ENVIADOS SE O STATUS ESTIVER COMO "SENT"</h3>
+            @if (Session["empresa"].ToString().Length > 2)
+            {
+            <b>Selecione a Empresa: </b>
+            @Html.DropDownList(
+                "Empresa",
+                (IEnumerable<SelectListItem>)Session["ListaEmpresasRelComercial"])
+            <br />
+            }
+            Período: @Html.TextBox("dataIniFat", Session["sDataInicialFat"]) à @Html.TextBox("dataFimFat", Session["sDataInicialFat"])
+            <input type="submit" value="Enviar" />
+            <p>
+            <h4>@ViewBag.fileNameFat</h4>
+        </fieldset>
+    }
+
+    @using (Html.BeginForm("ListaClientesConferencia", "ImportaPedidosCHIC", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {    
+        <fieldset>
+        <p align="center">
+        <b>Informe parte da Razão Social ou Nome Fantasia ou / e Estado que pertence o cliente. Caso queira todos, deixa o campo em branco.</b>
+        <br />
+        Razão Social / Nome Fantasia: @Html.TextBox("descricao", Session["descricaoConf"].ToString())
+        U.F.: @Html.DropDownList("Text", (List<SelectListItem>)Session["ListaEstadosConf"])
+        <input type="submit" value="Pesquisar" />
+        </p>
+        </fieldset>
+    }
+
+@using (Html.BeginForm("ListaPedidos", "ImportaPedidosCHIC", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_ListaClientes")    
+    <fieldset>
+        <p align="center">
+        Selecione a Empresa:
+        @if (Session["empresa"].ToString().Length == 8)
+        {
+            @Html.RadioButton("empresa", "", Session["sEmpresaConf"].ToString() == "" ? true : false) <i>(Todas)</i>
+        }
+        @if (Session["empresa"].ToString().Contains("BR"))
+        {
+            @Html.RadioButton("empresa", "BR", Session["sEmpresaConf"].ToString() == "BR" ? true : false) <i>HYLINE</i>
+        }
+        @if (Session["empresa"].ToString().Contains("LB"))
+        {
+            @Html.RadioButton("empresa", "LB", Session["sEmpresaConf"].ToString() == "LB" ? true : false) <i>LOHMANN</i>
+        }
+        @if (Session["empresa"].ToString().Contains("HN"))
+        {    
+            @Html.RadioButton("empresa", "HN", Session["sEmpresaConf"].ToString() == "HN" ? true : false) <i>H&N</i>
+        }
+        @if (Session["empresa"].ToString().Contains("PL"))
+        {
+            @Html.RadioButton("empresa", "PL", Session["sEmpresaConf"].ToString() == "PL" ? true : false) <i>PLANALTO</i>
+        }
+        <br />
+        <br />
+        Selecione o Vendedor / Representante: @Html.DropDownList("Text", (List<SelectListItem>)Session["ListaVendedoresConf"])
+        <br />
+        <br />
+        Período: @Html.TextBox("dataIni", Session["sDataInicialConf"]) à @Html.TextBox("dataFim", Session["sDataFinalConf"])
+        <br />
+        <br />
+        Tipo de Data: 
+        @Html.RadioButton("tipoData", "Nascimento", Session["sTipoDataConf"].ToString() == "Nascimento" ? true : false) Data de Nascimento
+        @Html.RadioButton("tipoData", "Incubação", Session["sTipoDataConf"].ToString() == "Incubação" ? true : false) Data de Incubação
+        </p>
+    </fieldset>
+
+    <div id="divUltimaReview">
+        <h4>@ViewBag.fileName</h4>
+        <h4 style="color:red;">@ViewBag.erro</h4>
+    </div>
+    <p align="center">
+        <input type="submit" value="Pesquisar" id="importar"/>
+    </p>
+}
+
+<br />
+@if ((Model != null) && (Model.Count() > 0))
+{
+    using (Html.BeginForm("EnviaConfirmacoes", "ImportaPedidosCHIC", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {    
+        <table>
+            <tr>
+                <th>
+                    Pedido
+                </th>
+                <th>
+                    Empresa
+                </th>
+                <th>
+                    Data Nasc.
+                </th>
+                <th>
+                    Data Inc.
+                </th>
+                <th>
+                    Cliente
+                </th>
+                <th>
+                    Cidade
+                </th>
+                <th>
+                    Estado
+                </th>
+                <th>
+                    Cond. Pag.
+                </th>
+                <th>
+                    Vendedor / Representante
+                </th>
+                <th>
+                    Observações
+                </th>
+                <th>
+                </th>
+            </tr>
+
+            @*@foreach (var item in Model.Where(w => (w.form.Substring(0, 1) == "H" || w.form.Substring(0, 1) == "D") && w.price > 0).GroupBy(g => new { g.empresa, g.hatchdate, g.setdate, g.name, g.orderno, g.delivery, g.com1, g.com2, g.com3, g.sl_code, g.salesman, g.city, g.state, g.form }).Select(s => new { s.Key.empresa, s.Key.hatchdate, s.Key.setdate, s.Key.name, s.Key.orderno, s.Key.delivery, s.Key.com1, s.Key.com2, s.Key.com3, s.Key.sl_code, s.Key.salesman, s.Key.city, s.Key.state, s.Key.form }).ToList())*@
+            @foreach (var item in Model.GroupBy(g => new { g.empresa, g.hatchdate, g.setdate, g.name, g.orderno, g.delivery, g.com1, g.com2, g.com3, g.sl_code, g.salesman, g.city, g.state }).Select(s => new { s.Key.empresa, s.Key.hatchdate, s.Key.setdate, s.Key.name, s.Key.orderno, s.Key.delivery, s.Key.com1, s.Key.com2, s.Key.com3, s.Key.sl_code, s.Key.salesman, s.Key.city, s.Key.state }).ToList())
+            {
+                <tr style="font-weight:bold">
+                    <td align="center" style="background-color:#F8F8F8">
+                        @item.orderno
+                    </td>
+                    <td align="center" style="background-color:#F8F8F8">
+                        @item.empresa
+                    </td>
+                    <td align="center" style="background-color:#F8F8F8">
+                        @*@(item.form.Substring(0, 1).Equals("H") ? String.Format("{0:dd/MM/yyyy}", item.setdate) : String.Format("{0:dd/MM/yyyy}", item.hatchdate))*@
+                        @String.Format("{0:dd/MM/yyyy}", item.hatchdate)
+                    </td>
+                    <td align="center" style="background-color:#F8F8F8">
+                        @String.Format("{0:dd/MM/yyyy}", item.setdate)
+                    </td>
+                    <td style="background-color:#F8F8F8">
+                        @item.name
+                    </td>
+                    <td style="background-color:#F8F8F8">
+                        @item.city
+                    </td>
+                    <td style="background-color:#F8F8F8">
+                        @item.state
+                    </td>
+                    <td style="background-color:#F8F8F8">
+                        @item.delivery
+                    </td>
+                    <td style="background-color:#F8F8F8">
+                        @item.salesman
+                    </td>
+                    <td style="background-color:#F8F8F8">
+                        @(item.com1.Trim() + item.com2.Trim() + item.com3.Trim())
+                    </td>
+                    <td align="center" style="background-color:#F8F8F8">
+                        @Html.CheckBox("importa")
+                        @Html.Hidden("id", item.orderno)
+                    </td>
+                </tr>
+                <tr style="border-style:none">
+                    <td style="border-style:none" align="center"><b></b></td>
+                    <td colspan="10" align="right" style="border-style:none">
+                    <table style="border-style:none">
+                        <tr style="border-style:none">
+                            <th style="background-color:#E4E1DC;border-style:none">
+                                Item
+                            </th>
+                            <th style="background-color:#E4E1DC;border-style:none">
+                                Incubatório
+                            </th>
+                            <th style="background-color:#E4E1DC;border-style:none">
+                                Qtde.
+                            </th>
+                            <th style="background-color:#E4E1DC;border-style:none">
+                                Valor Unit.
+                            </th>
+                            <th style="background-color:#E4E1DC;border-style:none">
+                                Valor Total
+                            </th>
+                        </tr>
+
+                        @foreach (var item2 in Model.Where(m => m.orderno == item.orderno).ToList())
+                        {
+                            <tr style="border-style:none">
+                                <td align="left" style="border-style:none">
+                                    @if (item2.alt_desc.Trim().Equals(""))
+                                    { 
+                                        @item2.item_desc;
+                                    }
+                                    else
+                                    { 
+                                        @item2.alt_desc;
+                                    }
+                                </td>
+                                <td align="center" style="border-style:none">
+                                    @item2.location
+                                </td>
+                                <td align="center" style="border-style:none">
+                                    @String.Format("{0:N0}", item2.quantity)
+                                </td>
+                                <td style="border-style:none" align="center">
+                                    R$ @String.Format("{0:N4}", item2.price)
+                                </td>
+                                <td align="center" style="border-style:none">
+                                    @String.Format("{0:C}", item2.price * item2.quantity)
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                    </td>
+                </tr>
+            }
+        </table>
+        <br />
+        <p align="center">
+        Agrupar pedidos no e-mail por:
+        @Html.RadioButton("tipoAgrupamentoPedidos", "Pedido", Session["sTipoAgrupamentoPedidos"].ToString() == "Pedido" ? true : false) Pedido
+        @Html.RadioButton("tipoAgrupamentoPedidos", "Vendedor", Session["sTipoAgrupamentoPedidos"].ToString() == "Vendedor" ? true : false) Vendedor
+        @Html.RadioButton("tipoAgrupamentoPedidos", "Empresa", Session["sTipoAgrupamentoPedidos"].ToString() == "Empresa" ? true : false) Empresa
+        <br />
+        Enviar e-mail(s) para:
+        @Html.CheckBox("enviarEmailEmpresa", Session["sEnviarEmailEmpresa"].ToString() == "true" ? true : false) Empresa (Grupo de e-mails - somente se parâmetro de empresa estiver selecionada)
+        @Html.CheckBox("enviarEmailVendedor", Session["sEnviarEmailVendedor"].ToString() == "true" ? true : false) Vendedor
+        <br />
+        <input type="submit" value="Confirmar Selecionados"/>
+        </p>
+    }
+}

@@ -1,0 +1,293 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+
+    List<MvcAppHylinedoBrasilMobile.Models.Auditoria_Visita_Requisito> lista =
+        (List<MvcAppHylinedoBrasilMobile.Models.Auditoria_Visita_Requisito>)Session["ListaRequisitosVisita"];
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+
+    List<MvcAppHylinedoBrasilMobile.Models.Auditoria_Grupo> listaGrupo = 
+        new List<MvcAppHylinedoBrasilMobile.Models.Auditoria_Grupo>();
+
+    List<MvcAppHylinedoBrasilMobile.Models.Auditoria_Requisito> listaRequisito =
+        new List<MvcAppHylinedoBrasilMobile.Models.Auditoria_Requisito>();
+
+    foreach (var item in lista)
+    {
+        MvcAppHylinedoBrasilMobile.Models.Auditoria_Requisito requisito =
+            hlbapp.Auditoria_Requisito.Where(w => w.ID == item.IDRequisito)
+        .FirstOrDefault();
+        
+        if (requisito != null)
+        {
+            listaRequisito.Add(requisito);
+
+            MvcAppHylinedoBrasilMobile.Models.Auditoria_Grupo grupo =
+                hlbapp.Auditoria_Grupo
+                    .Where(w => w.Descricao == requisito.Grupo
+                        && w.TipoUnidade == requisito.TipoUnidade)
+                .FirstOrDefault();
+            
+            if (grupo != null && 
+                listaGrupo.Where(w => w.ID == grupo.ID).Count() == 0)
+            {
+                listaGrupo.Add(grupo);   
+            }
+        }
+    }
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities apolo = new MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities();
+
+    int idSelecionado = Convert.ToInt32(Session["idSelecionado"]);
+
+    int qtdeTotal = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == idSelecionado).Count();
+    int qtdePendente = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == idSelecionado && w.StatusResolucao == "Pendente").Count();
+    int qtdeEnviado = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == idSelecionado && w.StatusResolucao == "Enviado").Count();
+    int qtdeResolvido = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == idSelecionado && w.StatusResolucao == "Resolvido").Count();
+    int qtdeAprovado = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == idSelecionado && w.StatusResolucao == "Aprovado").Count();
+
+    int qtdeNaoAuditado = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == idSelecionado && w.Status == "Não Auditado").Count();
+    int qtdeNaoConforme = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == idSelecionado && w.Status == "Não Conforme").Count();
+
+    string status = "Pendente";
+    if (qtdeAprovado == qtdeNaoConforme && qtdePendente == 0)
+    {
+        status = "Aprovada";
+    }
+    else if (qtdeResolvido > 0 && qtdeResolvido < qtdeNaoConforme)
+    {
+        status = "Resolvida Parcial";
+    }
+    else if (qtdeResolvido == qtdeNaoConforme && qtdePendente == 0)
+    {
+        status = "Resolvida Total";
+    }
+    else if (qtdeEnviado > 0)
+    {
+        status = "Enviada";
+    }
+}
+<div id="divTabelaRV">
+<table id="tabelaGrupoRequisito" class="ajustetabelaRequisitoVisita">
+    <tbody class="ajustetabelaRequisitoVisita">
+        @foreach (var grupo in listaGrupo.OrderBy(o => o.ID).ToList())
+        {
+            <tr>
+                <th colspan="7">
+                    @grupo.Descricao
+                </th>
+            </tr>
+            
+            <tr class="ajustetabelaRequisitoVisita">
+                <th class="ajustetabelaRequisitoVisita">
+                    Requisito
+                </th>
+                <th class="ajustetabelaRequisitoVisita">
+                    Status
+                </th>
+                <th class="ajustetabelaRequisitoVisita">
+                    Prazo
+                </th>
+                @if (status != "Pendente")
+                {
+                <th class="ajustetabelaRequisitoVisita">
+                    Avaliação
+                </th>
+                <th class="ajustetabelaRequisitoVisita">
+                    Resolução
+                </th>
+                <th class="ajustetabelaRequisitoVisita">
+                    Reprovação
+                </th>
+                }
+                <th class="ajustetabelaRequisitoVisita">
+                </th>
+            </tr>
+
+                foreach (var requisito in listaRequisito
+                    .Where(w => w.Grupo == grupo.Descricao && w.TipoUnidade == grupo.TipoUnidade)
+                    .OrderBy(o => o.Codigo).ToList())
+                {
+                    //MvcAppHylinedoBrasilMobile.Models.Auditoria_Visita_Requisito requisitoVisita =
+                    //    hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDRequisito == requisito.ID).FirstOrDefault();
+
+                    MvcAppHylinedoBrasilMobile.Models.Auditoria_Visita_Requisito requisitoVisita =
+                        lista.Where(w => w.IDRequisito == requisito.ID).FirstOrDefault();
+                <tr class="ajustetabelaRequisitoVisita">
+                    <td class="ajustetabelaRequisitoVisita">
+                        @Html.Hidden("id", requisitoVisita.ID)
+                        @(requisito.Codigo + " - " + requisito.Descricao)
+                    </td>
+                    <td class="ajustetabelaRequisitoVisita">
+                        @if (requisitoVisita.Status == "Não Conforme")
+                        {
+                            <b style="color:red; background-color:Yellow">@(requisitoVisita.Status)</b>
+                        }
+                        else if (requisitoVisita.Status == "Conforme")
+                        {
+                            <b style="color:Green; background-color:White">@(requisitoVisita.Status)</b>
+                        }
+                        else if (requisitoVisita.Status == "Não Aplicável")
+                        {
+                            <b style="color:Blue; background-color:White">@(requisitoVisita.Status)</b>
+                        }
+                        else if (requisitoVisita.Status == "Não Auditado")
+                        {
+                            <b style="color:Silver; background-color:White">@(requisitoVisita.Status)</b>
+                        }
+                    </td>
+                    <td class="ajustetabelaRequisitoVisita">
+                        @(requisitoVisita.SolucaoNaoConforme)
+                    </td>
+                    @if (requisitoVisita.StatusResolucao == "Pendente")
+                    {
+                    <td class="ajustetabelaRequisitoVisita" align="center">    
+                        <table style="background-color:transparent; border:none">
+                            <tr style="background-color:transparent; border:none">
+                                <td style="background-color:transparent; border:none" align="center">
+                                    <div class="tooltip">
+                                            @Html.ActionLink("Conforme", "RequisitoNaoConforme",
+                                                new { id = requisitoVisita.ID, chamada = "Conforme" },
+                                                new
+                                                {
+                                                    @class = "check"
+                                                })
+                                        <span class="tooltiptext">Clique aqui para marcar o requisito como CONFORME.</span>
+                                    </div>
+                                </td>
+                                <td style="background-color:transparent; border:none" align="center">
+                                    <div class="tooltip">
+                                        @Html.ActionLink("Não Conforme", "RequisitoNaoConforme",
+                                            new { id = requisitoVisita.ID, chamada = "Não Conforme" },
+                                            new
+                                            {
+                                                @class = "uncheck"
+                                            })
+                                        <span class="tooltiptext">Clique aqui para marcar o requisito como NÃO CONFORME.</span>
+                                    </div>
+                                </td>
+                                <td style="background-color:transparent; border:none" align="center">
+                                    <div class="tooltip">
+                                        @Html.ActionLink("Não Aplicável", "RequisitoNaoConforme",
+                                            new { id = requisitoVisita.ID, chamada = "Não Aplicável" },
+                                            new
+                                            {
+                                                @class = "na"
+                                            })
+                                        <span class="tooltiptext">Clique aqui para marcar o requisito como NÃO APLICÁVEL.</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    }
+                    else
+                    {
+                    <td class="ajustetabelaRequisitoVisita" align="center">    
+                        @if (requisitoVisita.Observacao != "" && requisitoVisita.Observacao != null)
+                        {
+                            @Html.Raw(requisitoVisita.Observacao.Replace("\r\n", "<br />"))
+                        }
+                    </td>
+                    <td class="ajustetabelaRequisitoVisita" align="center">
+                        @if (requisitoVisita.Status == "Não Conforme")
+                        {
+                            @*string dataResolucao = "";
+                            if (requisitoVisita.DataHoraResolucao != null)
+                            {
+                                dataResolucao = Convert.ToDateTime(requisitoVisita.DataHoraResolucao).ToShortDateString();
+                            }
+                            string observacaoResolucao = "";
+                            if (requisitoVisita.ObservacaoResolucao != null)
+                            {
+                                observacaoResolucao = requisitoVisita.ObservacaoResolucao.Replace("\r\n", "<br />");
+                            }
+                            @Html.Label(dataResolucao + " - " + requisitoVisita.UsuarioResolucao)
+                            <br />
+                            @Html.Raw(observacaoResolucao)*@
+                            MvcAppHylinedoBrasilMobile.Models.LOG_Auditoria_Visita_Requisito log = hlbapp
+                                .LOG_Auditoria_Visita_Requisito
+                                .Where(w => w.IDVisitaRequisito == requisitoVisita.ID
+                                    && w.StatusResolucao == "Resolvido")
+                                .OrderByDescending(o => o.DataHora).FirstOrDefault();
+
+                            if (log != null)
+                            {
+                                @Html.Label(log.DataHora.ToShortDateString() + " - " + log.Usuario)
+                                <br />
+                                @Html.Raw(log.ObservacaoResolucao)
+                            }
+                        }
+                    </td>
+                    <td class="ajustetabelaRequisitoVisita" align="center">
+                        @if (requisitoVisita.StatusResolucao == "Reprovado")
+                        {
+                            if (requisitoVisita.StatusResolucao == "Reprovado")
+                            {
+                                MvcAppHylinedoBrasilMobile.Models.LOG_Auditoria_Visita_Requisito log = hlbapp
+                                    .LOG_Auditoria_Visita_Requisito
+                                    .Where(w => w.IDVisitaRequisito == requisitoVisita.ID
+                                        && w.StatusResolucao == "Reprovado")
+                                    .OrderByDescending(o => o.DataHora).FirstOrDefault();
+
+                                if (log != null)
+                                {
+                                    @Html.Label(log.DataHora.ToShortDateString() + " - " + log.Usuario)
+                                    <br />
+                                    @Html.Raw(log.ObservacaoResolucao)
+                                }
+                            }
+                        }
+                    </td>
+                    <td class="ajustetabelaRequisitoVisita" align="center">
+                        <table style="background-color:transparent; border:none">
+                            <tr style="background-color:transparent; border:none">
+                                <td style="background-color:transparent; border:none" align="center">
+                                    @if (requisitoVisita.StatusResolucao == "Resolvido")
+                                    {
+                                    <div class="tooltip">
+                                        @Html.ActionLink("Aprovar Resolução", "AprovarResolucaoRequisito",
+                                            new { id = requisitoVisita.ID },
+                                            new
+                                            {
+                                                @class = "aprovar"
+                                            })
+                                        <span class="tooltiptext">Clique aqui para Aprovar a resolução do Requisito.</span>
+                                    </div>
+                                    }
+                                </td>
+                                <td style="background-color:transparent; border:none" align="center">
+                                    @if (requisitoVisita.StatusResolucao == "Resolvido")
+                                    {
+                                    <div class="tooltip">
+                                        @Html.ActionLink("Reprovar Resolução", "RequisitoNaoConforme",
+                                            new { id = requisitoVisita.ID, chamada = "Reprovado" },
+                                            new
+                                            {
+                                                @class = "reprovar"
+                                            })
+                                        <span class="tooltiptext">Clique aqui para Reprovar a resolução do Requisito.</span>
+                                    </div>
+                                    }
+                                </td>
+                                <td style="background-color:transparent; border:none" align="center">
+                                    <div class="tooltip">
+                                        @Html.ActionLink("Histórico", "HistoricoRequisito",
+                                            new { id = requisitoVisita.ID },
+                                            new
+                                            {
+                                                @class = "log"
+                                            })
+                                        <span class="tooltiptext">Clique aqui para visualizar o Histórico de Eventos do Requisito.</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    }
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+</div>

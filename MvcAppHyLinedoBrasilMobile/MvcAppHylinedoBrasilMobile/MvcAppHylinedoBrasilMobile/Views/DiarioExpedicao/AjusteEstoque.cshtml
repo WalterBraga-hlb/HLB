@@ -1,0 +1,308 @@
+﻿@using am = MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController;
+
+@{
+    ViewBag.Title = "";
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+    string lg = Session["language"].ToString();
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities bd = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+
+    var lista = (List<MvcAppHylinedoBrasilMobile.Models.LayoutDiarioExpedicaos>)Session["ListaItensAjusteEstoque"];
+
+    var status = lista.FirstOrDefault().Importado;
+
+    var listaClassificado = lista
+        .GroupBy(g => new
+        {
+            g.ResponsavelCarreg
+        }).ToList();
+}
+<script type='text/javascript'>
+    function atualizaSessionQtdeInformada(valor, pQtdOvosGranja, pLote, dataProducao) {
+        var value = valor.value;
+        $.ajax({
+            url: '/DiarioExpedicao/AtualizaSessionQtdeInformadaAjusteEstoque',
+            type: 'POST',
+            data: JSON.stringify({ valor: value, qtdOvosGranja: pQtdOvosGranja, lote: pLote, data: dataProducao }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                    //$('#saveConfereDEO').button('enable');
+                    //$('[type="submit"]').button('refresh');
+                    document.getElementById('hdQtdeErrosSaldo_' + pLote + '|' + dataProducao).value = 0;
+                } else {
+                    document.getElementById('hdQtdeErrosSaldo_' + pLote + '|' + dataProducao).value = 1;
+                    //var erro = document.getElementById('hdQtdeErrosSaldo_' + pLote + '|' + dataProducao).value;
+                    //alert(erro);
+                    alert(data.toString());
+                    //$('#saveConfereDEO').button('disable');
+                    //$('[type="submit"]').button('refresh');
+                }
+                verificaCampos();
+            }
+        });
+    }
+
+    function verificaCampos() {
+        var existe = 0;
+        $('#tabelaConfereDEO tr').each(function () {
+            $(this).find('td').each(function () {
+                var lote = '';
+                $(this).find('input').each(function () {
+                    if ($(this).attr("id") == "lblid") {
+                        loteData = $(this).val();
+                        //alert(loteData);
+                        //var existeErroSaldo = $("#hdQtdeErrosSaldo_" + loteData).val();
+                        var existeErroSaldo = document.getElementById('hdQtdeErrosSaldo_' + loteData).value;
+                        //alert(existeErroSaldo);
+                        if (existeErroSaldo == 1) {
+                            var errorSaldo = document.getElementById('errorSaldo_' + loteData);
+                            errorSaldo.innerHTML = 'Qtde. sem saldo! Por favor, verifique!';
+                            existe = existe + existeErroSaldo;
+                        } else {
+                            var errorSaldo = document.getElementById('errorSaldo_' + loteData);
+                            errorSaldo.innerHTML = '';
+                        }
+                    }
+                });
+            });
+        });
+        //alert('existe ' + existe);
+        if (existe > 0) {
+            $('#saveConfereDEO').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        } else {
+            $('#saveConfereDEO').button('enable');
+            $('[type="submit"]').button('refresh');
+            return false;
+        }
+    }
+
+    //    $('#saveConfereDEO').click(function () {
+    //        verificaCampos();
+    //        
+    //        //        if (verificaCampos()) {
+    //        //            alert('Existem saldos incorretos! Verifique!');
+    //        //            return;
+    //        //        }
+    //    });
+</script>
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Ajuste de DEO", "ListaAjusteEstoque", "DiarioExpedicao")
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/box_32.png"), "DEO")
+    <h2>Solicitação de Ajuste de Estoque nº @Session["numIdentificacaoSelecionado"]</h2>
+    <br />
+    <h2>Local do Ajuste: @Html.Label(Session["incubatorioSelecionadoNome"].ToString())</h2>
+</div>
+<br />
+<h4 style="color:red;">* Campos com o (*) são obrigatórios!</h4>
+<br />
+@if (ViewBag.Erro != null)
+{
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<br />
+}
+@*<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Menu do Ajuste do Estoque</li>
+    <li>
+        @(Html.ActionLink("Adicionar Lote Divergente no Ajuste", "Create", new { origem = "Ajuste" }, new { @class = "add" }))
+    </li>
+</ul>*@
+@using (Html.BeginForm("SaveAjusteEstoque", "DiarioExpedicao", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        <div class="editor-label">
+            <b>Data do Ajuste do Estoque:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("dataAjusteEstq",
+                (Session["dataAjusteEstq"] != "" && Session["dataAjusteEstq"] != null ?
+                 Convert.ToDateTime(Session["dataAjusteEstq"]).ToString("yyyy-MM-dd") : ""),
+                new
+                {
+                    @type = "date",
+                    @required = "true"
+                })
+        </div>
+        <div class="editor-label">
+            <b>Hora do Ajuste do Estoque:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("horaAjusteEstq", (Session["dataAjusteEstq"] != "" && Session["dataAjusteEstq"] != null ?
+                 Convert.ToDateTime(Session["dataAjusteEstq"]).ToString("HH:mm") : ""),
+             new
+             {
+                 @type = "time",
+                 @required = "true"
+             })
+        </div>
+    </fieldset>
+    <br />
+    <div style="overflow:auto;">
+    <table id="tabelaConfereDEO" class="ajuste">
+        <tbody class="ajuste">
+        <tr class="ajuste">
+            <th class="ajuste">
+                Tipo Ovo
+            </th>
+            <th class="ajuste">
+                Lote
+            </th>
+            <th class="ajuste">
+                Linhagem
+            </th>
+            <th class="ajuste">
+                Data Produção
+            </th>
+            @if (status == "Inserindo")
+            {
+            <th class="ajuste">
+                Qtd. (Ovos) *
+            </th>
+            }
+            else
+            {
+                <th class="ajuste">
+                    Qtde. Estq. Anterior
+                </th>
+                    <th class="ajuste">
+                    Qtde. Estq. Atual
+                </th>
+                    <th class="ajuste">
+                    Qtde. Ajustada
+                </th>
+            }
+        </tr>
+
+    @foreach (var classificado in listaClassificado)
+    {
+        var listaExibeAgrupada = lista
+            .Where(w => w.ResponsavelCarreg == classificado.Key.ResponsavelCarreg)
+            .OrderBy(o => o.Granja).ThenBy(t => t.Lote).ThenBy(t => t.DataProducao)
+            .ToList();
+        var classTitle = "msgSucesso";
+        if (classificado.Key.ResponsavelCarreg == "1 - Sem Classificar")
+        {
+            classTitle = "msgErro";
+        }
+        <tr class="ajuste">
+            <td class="ajuste" colspan="7">
+                <h4 class="@classTitle ui-li ui-li-static">
+                    @classificado.Key.ResponsavelCarreg
+                </h4>
+            </td>
+        </tr>
+        foreach (var item in listaExibeAgrupada)
+        {
+           <tr class="ajuste">
+            <td class="ajuste">
+                @Html.DisplayFor(modelItem => item.Granja)
+            </td>
+            <td class="ajuste">
+                @Html.DisplayFor(modelItem => item.Lote)
+            </td>
+            <td class="ajuste">
+                @Html.DisplayFor(modelItem => item.Linhagem)
+            </td>
+            <td class="ajuste">
+                @String.Format("{0:dd/MM/yyyy}", item.DataProducao)
+            </td>
+            @if (item.Importado == "Inserindo")
+            {
+            <td>
+                <div align="center" style="width: 98%">
+                    @Html.TextBox("qtdAjuste_"
+                            + item.Granja + "|"
+                            + item.LoteCompleto.ToString() + "|"
+                            + item.DataProducao.ToShortDateString(),
+                        Session["qtdAjuste_"
+                            + item.Granja + "|"
+                            + item.LoteCompleto.ToString() + "|"
+                            + item.DataProducao.ToShortDateString()].ToString(),
+                        new
+                        {
+                            @min = "0",
+                            @type = "number",
+                            @required = "true",
+                            @onchange = "atualizaSessionQtdeInformada(this,'"
+                                + item.QtdeOvos.ToString() + "','"
+                                + item.LoteCompleto.ToString() + "','"
+                                + item.DataProducao.ToShortDateString() + "')"
+                        })
+                    @Html.Hidden("id", item.LoteCompleto.ToString() + "|"
+                        + item.DataProducao.ToShortDateString(), new { @id = "lblid" })
+                    @Html.Hidden("hdLoteCompleto", item.LoteCompleto)
+                    @Html.Hidden("hdDataProducao", item.DataProducao)
+                    @Html.Hidden("hdQtdeErrosSaldo_" + item.Lote.ToString() + "|"
+                         + item.DataProducao.ToShortDateString(), 0,
+                          new
+                          {
+                              @id = "hdQtdeErrosSaldo_" + item.LoteCompleto.ToString() + "|"
+                                  + item.DataProducao.ToShortDateString()
+                          })
+                </div>
+                <div class="editor-label" id="errorSaldo_@(item.LoteCompleto.ToString() + "|"
+                         + item.DataProducao.ToShortDateString())" style="color: Red; font-weight:bold;"></div>
+            </td>
+            }
+            else
+            {
+                <td class="ajuste">
+                    @String.Format("{0:N0}", item.QtdeBandejas)
+                </td>
+                <td class="ajuste">
+                    @String.Format("{0:N0}", item.QtdeConferencia)
+                </td>
+                <td class="ajuste">
+                    @String.Format("{0:N0}", item.QtdeOvos)
+                </td>
+            }
+        </tr>
+        }
+    }
+    </tbody>
+    </table>
+    </div>
+    <br />
+    <label>
+        @Html.CheckBox("enviarAnalise") Enviar para Análise?
+    </label>
+    if (status == "Inserindo")
+    {
+        <p>
+            <input type="submit" value="Salvar Solicitacao Ajuste de Estoque" id="saveConfereDEO" />
+        </p>
+    }
+}
+        
+@if (status == "Em Análise" && MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-AjusteEstoqueAnalise",
+    (System.Collections.ArrayList)Session["Direitos"]))
+{
+    using (Html.BeginForm("AprovaAjusteEstoque", "DiarioExpedicao", FormMethod.Post))
+    {
+        <input type="submit" value="Aprovar Ajuste de Estoque" name="btnAprovaAjusteEstoque" />
+    }
+        
+    <br />
+    
+    <h4 id="lblMsgErro" class="msgWarning ui-li ui-li-static">
+        * CASO NÃO ESTEJA DE ACORDO COM O AJUSTE DE ESTOQUE, INFORME O MOTIVO NO CAMPO ABAIXO
+            E CLIQUE EM "REPROVAR PEDIDO"! O RESPONSÁVEL PELO PEDIDO
+            RECEBERÁ UM E-MAIL COM O MOTIVO DO RETORNO PARA QUE ELE VERIFIQUE!
+            O STATUS DO PEDIDO FICARÁ COMO "REPROVADO PELA GERÊNCIA" PARA O RESPONSÁVEL AJUSTAR!
+    </h4>
+    
+    <br />
+    
+    using (Html.BeginForm("ReprovaAjusteEstoque", "DiarioExpedicao", FormMethod.Post))
+    {
+        <b>Motivo da Reprovação:</b>
+        @Html.TextArea("motivoReprovaAjusteEstoque", null, new { @required = true })
+            
+        <input type="submit" value="Reprovar Ajuste de Estoque" name="btnReprovaAjusteEstoque" />
+    }
+}

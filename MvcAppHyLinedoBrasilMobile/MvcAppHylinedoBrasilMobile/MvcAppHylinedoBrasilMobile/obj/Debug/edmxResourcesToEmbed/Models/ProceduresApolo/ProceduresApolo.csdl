@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProceduresApoloModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ProceduresApolo" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="USER_Insere_RDV">
+      <Parameter Name="pMatricula" Mode="In" Type="Int32" />
+      <Parameter Name="pNumRDV" Mode="In" Type="Int32" />
+      <Parameter Name="pAnoMes" Mode="In" Type="String" />
+      <Parameter Name="pValorReembolso" Mode="In" Type="Decimal" />
+      <Parameter Name="pAprovador" Mode="In" Type="String" />
+      <Parameter Name="pDataHoraAprov" Mode="In" Type="String" />
+      <Parameter Name="pDataLancamento" Mode="In" Type="DateTime" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="USER_Insere_RDV_Result">
+    <Property Type="Int32" Name="ErrorNumber" Nullable="true" />
+    <Property Type="String" Name="ErrorMessage" Nullable="true" MaxLength="4000" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,8 @@
+﻿@using am = MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController;
+<h3>@am.GetTextOnLanguage("Confirma a exclusão da Transferênica de Ovos Classificados Número", Session["language"].ToString()) @Html.Label(Session["numIdentificacaoSelecionado"].ToString())?</h3>
+<p>
+    @Html.ActionLink(am.GetTextOnLanguage("Sim", Session["language"].ToString()), "DeleteTransferenciaOvosClassificadosConfirma")
+    <br />
+    <br />
+    @Html.ActionLink(am.GetTextOnLanguage("Não", Session["language"].ToString()), "ListaTransferenciasOvosClassificados")
+</p>

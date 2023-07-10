@@ -1,0 +1,18 @@
+﻿@if(Session["usuario"] != "0") {
+    <text>@MvcAppHyLinedoBrasil.Controllers.AccountController.GetTextOnLanguage("Title_Welcome_WebDesktop", Session["language"].ToString()) <b>@Session["usuario"].ToString()</b>!
+    [ @Html.ActionLink("Log Off", "LogOff", "Account") ]</text>
+    if (Convert.ToInt32(Session["QtdListaEmpresas"]) > 1)
+    {
+        using (@Html.BeginForm("SelecionaEmpresa", "Account"))
+        {
+            @Html.DropDownList(
+                "Text",
+                (List<SelectListItem>)Session["ListaEmpresas"]);
+            <input type="submit" value="Trocar Empresa" />
+        }
+    }
+}
+else
+{
+    @:[ @Html.ActionLink("Log On", "LogOn", "Account") ]
+}

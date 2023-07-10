@@ -1,0 +1,680 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Apolo10Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityType Name="FISCAL_ITEM_NF">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="FiscalNFChv" />
+      <PropertyRef Name="FiscalItNFSeq" />
+    </Key>
+    <Property Name="EmpCod" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="FiscalNFChv" Type="int" Nullable="false" />
+    <Property Name="FiscalItNFSeq" Type="int" Nullable="false" />
+    <Property Name="FiscalItNFIndServ" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="ProdCodEstr" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="FiscalItNFUnidMedCod" Type="varchar" MaxLength="7" />
+    <Property Name="FiscalItNFUnidMedPos" Type="smallint" Nullable="false" />
+    <Property Name="FiscalItNFNomeProd" Type="varchar" MaxLength="255" />
+    <Property Name="CCtrlCodEstr" Type="varchar" MaxLength="30" />
+    <Property Name="NatOpCodEstr" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="ClasFiscCod" Type="varchar" MaxLength="7" />
+    <Property Name="TribCod" Type="varchar" MaxLength="3" />
+    <Property Name="FiscalItNFTribIpi" Type="varchar" MaxLength="15" />
+    <Property Name="FiscalItNFQtd" Type="numeric" Precision="24" Scale="9" Nullable="false" />
+    <Property Name="FiscalItNFPesoLiq" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FiscalItNFValUnit" Type="numeric" Precision="24" Scale="9" Nullable="false" />
+    <Property Name="FiscalItNFValTotal" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValDesc" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFPercDesc" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="FiscalItNFNumRom" Type="varchar" MaxLength="12" />
+    <Property Name="FiscalItNFDataRom" Type="datetime" />
+    <Property Name="FiscalItNFValFrete" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValSeguro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNfValOutrasDesp" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFAliqIpi" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="FiscalItNFBaseIpi" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValIpi" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFIpiEmValor" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="FiscalItNFAliqIcms" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="FiscalItNFBaseIcms" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValIcms" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFBaseIcmsST" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValIcmsRetST" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFAliqIcmsDif" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="FiscalItNFValRedBaseIcms" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFAliqRedBaseIcms" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="FiscalItNFAliqIss" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="FiscalItNFBaseIss" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValIss" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFCodNCM" Type="varchar" MaxLength="10" />
+    <Property Name="FiscalItNFIncluiIpiBaseIcms" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="FiscalItNFValFreteDestST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsFrete" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIpiFrete" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValBaseSTFrete" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsSTFrete" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsSeguro" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIpiSeguro" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValBaseSTSeguro" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsSTSeguro" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsOutras" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIpiOutras" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValBaseSTOutras" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsSTOutras" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsFreteDestST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFBaseSTFreteDestST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsSTFreteDestST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFAliqIcmsST" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFQtdBaseIpiEmValor" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FiscalItNFValDescZFM" Type="decimal" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValIcmsDif" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFCredIpiCompCom" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalItNFPercCredIpiCompCom" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFValIcmsIsentas" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValIcmsOutrasDesp" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValIpiIsentas" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValIpiOutrasDesp" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFIcmsCod" Type="char" MaxLength="1" />
+    <Property Name="FiscalItNFIpiCod" Type="char" MaxLength="1" />
+    <Property Name="FiscalItNFIcmsIsenFrete" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFIcmsIsenSeguro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFIcmsIsenOutrasDesp" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFIcmsOutFrete" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFIcmsOutSeguro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFIcmsOutOutrasDesp" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFIpiIsenFrete" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFIpiIsenSeguro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFIpiIsenOutrasDesp" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFIpiOutFrete" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFIpiOutSeguro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFIpiOutOutrasDesp" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValBasePis" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValPis" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValBaseCofins" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValCofins" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFNatOpCodEstr" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="FiscalItNFPercRecIcms" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="FiscalItNFPercRecIpi" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="FiscalItNFBaseCalcIcmsLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFAliqIcmsLivro" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="FiscalItNFValIcmsLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFBaseCalcIpiLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFAliqIpiLivro" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="FiscalItNFValIpiLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFBaseCalcIcmsSTLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValIcmsSTLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFBaseIpiFrete" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFBaseIpiSeguro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFBaseIpiOutrasDesp" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFBaseIcmsFrete" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFBaseIcmsSeguro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFBaseIcmsOutrasDesp" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFBaseIpiFreteLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFBaseIpiSeguroLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFBaseIpiOutDespLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValIpiFreteLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValIpiSeguroLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValIpiOutDespLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFBaseIcmsFreteLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFBaseIcmsSeguroLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFBaseIcmsOutDespLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValIcmsFreteLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValIcmsSeguroLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValIcmsOutDespLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFBaseSTFreteLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFBaseSTSeguroLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFBaseSTOutDespLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValIcmsSTFreteLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValIcmsSTSeguroLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFValIcmsSTOutDesLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalItNFOrigMod" Type="varchar" MaxLength="15" />
+    <Property Name="FiscalItNFOrigEspec" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalItNFOrigSerie" Type="varchar" MaxLength="3" />
+    <Property Name="FiscalItNFOrigNum" Type="varchar" MaxLength="20" />
+    <Property Name="FiscalItNFOrigChv" Type="int" />
+    <Property Name="FiscalItNFOrigSeq" Type="int" />
+    <Property Name="FiscalItNFProdDivCod" Type="varchar" MaxLength="7" />
+    <Property Name="ProdDivNome" Type="varchar" MaxLength="80" />
+    <Property Name="FiscalItNFBaseII" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFAliqII" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFValII" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIIEmbalagem" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIIFrete" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIISeguro" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIIOutrasDesp" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="TribACod" Type="char" MaxLength="1" />
+    <Property Name="TribBCod" Type="varchar" MaxLength="2" />
+    <Property Name="FiscalItNFValSiscomex" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsSiscomex" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFBaseIcmsSiscomex" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFIcmsIsenSiscomex" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFIcmsOutSiscomex" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFBaseIcmsSiscomexLiv" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsSiscomexLiv" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValCalcIssDedTot" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValDescIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFIpiDataVenc" Type="datetime" />
+    <Property Name="FiscalItNFServDivCod" Type="varchar" MaxLength="10" />
+    <Property Name="FiscalItNFValCalcIrrfDedTot" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ImpTipoIpi" Type="varchar" MaxLength="25" />
+    <Property Name="ImpCodReceitaIpi" Type="varchar" MaxLength="10" />
+    <Property Name="FiscalItNFMultaIpi" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFJuroIpi" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFAliqPis" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFValBasePisRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValPisRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFAliqCofins" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFValBaseCofinsRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValCofinsRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValBaseCsllRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValCsllRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFAliqIrrf" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFValBaseIrpjRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIrpjRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ImpTipoPisCofinsCsllIrRF" Type="varchar" MaxLength="25" />
+    <Property Name="ImpCodReceitaPisCofinsCsllIrRF" Type="varchar" MaxLength="10" />
+    <Property Name="FiscalItNFPisCofCsIrRFDataVenc" Type="datetime" />
+    <Property Name="FiscalItNfAliqCofinsRF" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFAliqPisRF" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFAliqCsllRF" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFValDifBasePis" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValDifBaseCofins" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValDescPisZFM" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValDescCofinsZFM" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValCap" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsCap" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIpiCap" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValBaseSTCap" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsSTCap" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValPisCap" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValCofinsCap" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFIcmsIsenCap" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFIcmsOutCap" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFIpiIsenCap" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFIpiOutCap" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFBaseIcmsCap" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFBaseIpiCap" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFBaseIpiCapLivro" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIpiCapLivro" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFBaseIcmsCapLivro" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsCapLivro" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFBaseSTCapLivro" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsSTCapLivro" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIICap" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFIpiPerApur" Type="datetime" />
+    <Property Name="FiscalItNFPisCofCsIrrfPerApur" Type="datetime" />
+    <Property Name="FiscalItNFValIcmsRetSTRec" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValPisRec" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValCofinsRec" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="CodGiaRSCod" Type="varchar" MaxLength="3" />
+    <Property Name="FiscalItNFPercRedInss" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FISCALITNFSERVDIVNOME" Type="varchar" MaxLength="255" />
+    <Property Name="FiscalItNFPercRedIcms" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFRedIcms" Type="varchar" MaxLength="20" />
+    <Property Name="FiscalItNFPercRedIcmsST" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFRedIcmsST" Type="varchar" MaxLength="20" />
+    <Property Name="FiscalItNFPercRedPis" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFRedPis" Type="varchar" MaxLength="20" />
+    <Property Name="FiscalItNFPercRedCofins" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFRedCofins" Type="varchar" MaxLength="20" />
+    <Property Name="FiscalItNFPercRedIPI" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFRedIPI" Type="varchar" MaxLength="20" />
+    <Property Name="FiscalItNFPercRedII" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFRedII" Type="varchar" MaxLength="20" />
+    <Property Name="FiscalItNFPercRedISS" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFRedISS" Type="varchar" MaxLength="20" />
+    <Property Name="FiscalItNFValDescISS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFPercDiferimICMS" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFValDiferimICMS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValICMSDevido" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValCredPresumICMS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValICMSRecolher" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFDaeGnrePago" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalItNFDeduzValIcmsRetSt" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalItNFValPedagio" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="TribBModBCCod" Type="varchar" MaxLength="2" />
+    <Property Name="TribBModBCSTCod" Type="varchar" MaxLength="2" />
+    <Property Name="FiscalItNFConfTribTipoIpi" Type="varchar" MaxLength="10" />
+    <Property Name="FiscalItNFConfTribTipoPis" Type="varchar" MaxLength="10" />
+    <Property Name="FiscalItNFConfTribTipoCofins" Type="varchar" MaxLength="10" />
+    <Property Name="FiscalItNFConfTribIpiCod" Type="varchar" MaxLength="2" />
+    <Property Name="FiscalItNFConfTribPisCod" Type="varchar" MaxLength="2" />
+    <Property Name="FiscalItNFConfTribCofinsCod" Type="varchar" MaxLength="2" />
+    <Property Name="FiscalItNFValBaseIcmsOper" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFPercIcmsOper" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFValIcmsOper" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFPrecoVendaVarejo" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FiscalItNFSeloCtrl" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FiscalItNFRepIcmsDifPercDesc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFRepIcmsDifValDesc" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItBaseDifIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItBaseFECP" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItAliqFECP" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItValFECP" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFPercIcmsExonerado" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNfValPisRFProdFrete" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNfValPisRFProdSeguro" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNfValPisRFOutrasDesp" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNfValCofinsRFProdFrete" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNfValCofinsRFProdSeg" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNfValCofinsRFOutDesp" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFQtdBasePisEmValor" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FiscalItNFQtdBaseCofinsEmVlr" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ConfTribSimpNacCod" Type="varchar" MaxLength="3" />
+    <Property Name="FiscalItNFQtdMes" Type="int" />
+    <Property Name="FiscalItNFFatCalComodato" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFBaseIcmsSTDaeGnre" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFAliqIcmsSTDaeGnre" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFValIcmsRetSTDG" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFAcresBenSimples" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FiscalItNfValBaseINSS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNfAliqINSS" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNfValINSS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="CidCod" Type="varchar" MaxLength="8" />
+    <Property Name="FiscalItNFNumAdic" Type="varchar" MaxLength="3" />
+    <Property Name="FiscalItNFAdicSeq" Type="int" />
+    <Property Name="FiscalItNFEntCodFabEst" Type="varchar" MaxLength="7" />
+    <Property Name="FiscalItNFAdicDesc" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="EFDBaseCalcCredCod" Type="varchar" MaxLength="2" />
+    <Property Name="FiscalItNFCodNBS" Type="varchar" MaxLength="20" />
+    <Property Name="FiscalItNFTxaMaMerc" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsTxaMarMerc" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFNatFrete" Type="char" MaxLength="1" />
+    <Property Name="FiscalItNFTribICMSEnfDecl" Type="varchar" MaxLength="2" />
+    <Property Name="FiscalItNFImpTipoIrrfPJ" Type="varchar" MaxLength="25" />
+    <Property Name="FiscalItNFPerApurIrrfPJ" Type="datetime" />
+    <Property Name="FiscalItNFDataVencIrrfPJ" Type="datetime" />
+    <Property Name="FiscalItNFImpCodRecIrrfPJ" Type="varchar" MaxLength="10" />
+    <Property Name="FiscalItNFBaseIcmsInter" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsOrig" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFBaseIcmsDest" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFAliqIntDest" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFValIcmsAliqDest" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsDest" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsDifalDest" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsTotal" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsPart1" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValIcmsPart2" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValContabil" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValTotBaseICMS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValTotBaseICMSLiv" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValTotICMS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValTotICMSLiv" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValTotICMSIsen" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValTotICMSOut" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValTotBaseIPI" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValTotBaseIPILiv" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValTotIPI" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValTotIPILiv" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValTotIPIIsen" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValTotIPIOut" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValTotBaseICMSST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValTotBaseICMSSTLiv" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValTotICMSST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValTotICMSSTLiv" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="MotEnqLegIPICod" Type="varchar" MaxLength="3" />
+    <Property Name="FiscalItNFCEST" Type="varchar" MaxLength="7" />
+    <Property Name="FiscalItNFNrMemo" Type="varchar" MaxLength="255" />
+    <Property Name="PlanoCtaEmpCod" Type="varchar" MaxLength="20" />
+    <Property Name="PlanoCtaCodRed" Type="varchar" MaxLength="7" />
+    <Property Name="IDTipoServReinf" Type="int" />
+    <Property Name="FiscalItNFBaseFCPICMS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFPercFCPICMS" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFValFCPICMS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFBaseFCPICMSST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFPercFCPICMSST" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFValFCPICMSST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFVlrServicos15" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFVlrServicos20" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFVlrServicos25" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFVlrAdicional" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFVlrNRetAdic" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFNaoDevBsINSS" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FiscalItNFNaoDevAliqINSS" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFNaoDevVlrINSS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFNaoDevBsIR" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FiscalItNFNaoDevAliqIR" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFNaoDevVlrIR" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFNaoDevBsPIS" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FiscalItNFNaoDevAliqPIS" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFNaoDevVlrPIS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFNaoDevBsCOFINS" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FiscalItNFNaoDevAliqCOFINS" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFNaoDevVlrCOFINS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFNaoDevBsCSLL" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FiscalItNFNaoDevAliqCSLL" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FiscalItNFNaoDevVlrCSLL" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValCalcINSSDedTot" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFValFCPRetST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalItNFOperacao" Type="varchar" MaxLength="15" />
+    <Property Name="FiscalItNFEspecie" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="FISCAL_NF">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="FiscalNFChv" />
+    </Key>
+    <Property Name="EmpCod" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="FiscalNFChv" Type="int" Nullable="false" />
+    <Property Name="FiscalNFDataEmis" Type="datetime" Nullable="false" />
+    <Property Name="FiscalNFEspec" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="FiscalNFSerie" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="FiscalNFNum" Type="varchar" MaxLength="20" />
+    <Property Name="FiscalNFIndMov" Type="varchar" MaxLength="10" />
+    <Property Name="FiscalNFCategEnt" Type="varchar" MaxLength="30" />
+    <Property Name="EntCod" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="FiscalNFRazaoSocial" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="FiscalNFCnpj" Type="varchar" MaxLength="14" Nullable="false" />
+    <Property Name="FiscalNFInscEst" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="PaisSigla" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="UfSigla" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="FiscalNFDataSaiEnt" Type="datetime" Nullable="false" />
+    <Property Name="FiscalNFCancelada" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="FiscalNFValTotProd" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValTotServ" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFPercDescProd" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="FiscalNFPercDescServ" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="FiscalNFValDescProd" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValDescServ" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValTotNota" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValFrete" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValSeguro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValOutrasDesp" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFBaseIpi" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValIpi" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFBaseIcms" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValIcms" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFIESubTrib" Type="varchar" MaxLength="14" />
+    <Property Name="FiscalNFBaseIcmsST" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValIcmsST" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFBaseIss" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValIss" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFBaseIrrf" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValIrrf" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFViaTransp" Type="varchar" MaxLength="20" />
+    <Property Name="FiscalNFModFrete" Type="varchar" MaxLength="15" />
+    <Property Name="FiscalNFTranspCod" Type="varchar" MaxLength="7" />
+    <Property Name="FiscalNFIdentVeic" Type="varchar" MaxLength="17" />
+    <Property Name="FiscalNFQtdVol" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FiscalNFVolume" Type="varchar" MaxLength="20" />
+    <Property Name="FiscalNFPesoBruto" Type="numeric" Precision="24" Scale="9" Nullable="false" />
+    <Property Name="FiscalNFPesoLiq" Type="numeric" Precision="24" Scale="9" Nullable="false" />
+    <Property Name="PlanoCtaEmpCod" Type="varchar" MaxLength="20" />
+    <Property Name="PlanoCtaCodRed" Type="varchar" MaxLength="7" />
+    <Property Name="UsuCod" Type="varchar" MaxLength="31" Nullable="false" />
+    <Property Name="FiscalNFOrigDoc" Type="varchar" MaxLength="20" />
+    <Property Name="FiscalNFValFreteDestST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFComplem" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalNFValIssDedTot" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalNFValBaseInss" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValInss" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValInssDedTot" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalNFValDescZFM" Type="decimal" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValCalcInss" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValCalcIrrf" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValIcmsIsentas" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValIcmsOutras" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValIpiIsentas" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValIpiOutras" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValBasePis" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValPis" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValBaseCofins" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValCofins" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFBaseCalcIcmsLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValIcmsLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFBaseCalcIpiLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValIpiLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFBaseCalcIcmsSTLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFValIcmsSTLivro" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="FiscalNFDedIrrfValServ" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalNFDocEmitEmp" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="FiscalNFBaseII" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValII" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFNumRegExport" Type="varchar" MaxLength="15" />
+    <Property Name="FiscalNFDataRegExport" Type="datetime" />
+    <Property Name="FiscalNFNumDespachoExport" Type="varchar" MaxLength="12" />
+    <Property Name="FiscalNFValSiscomex" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValCalcCofinsRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValCofinsRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFDedCofinsValServ" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalNFValBaseCsll" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValCalcCsllRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFDedCsllValServ" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalNFValCsllRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValCalcPisRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValPisRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFDedPisValServ" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalNFValCalcIssDedTot" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="CidCod" Type="varchar" MaxLength="8" />
+    <Property Name="FiscalNFValDescIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFDataVencCofins" Type="datetime" />
+    <Property Name="FiscalNFDataVencCsll" Type="datetime" />
+    <Property Name="FiscalNFDataVencIcms" Type="datetime" />
+    <Property Name="FiscalNFDataVencIcmsST" Type="datetime" />
+    <Property Name="FiscalNFDataVencInss" Type="datetime" />
+    <Property Name="FiscalNFDataVencIrrfPJ" Type="datetime" />
+    <Property Name="FiscalNFDataVencIss" Type="datetime" />
+    <Property Name="FiscalNFDataVencPis" Type="datetime" />
+    <Property Name="FiscalNFOrigChv" Type="int" />
+    <Property Name="FiscalNFOrigSeq" Type="smallint" />
+    <Property Name="FiscalNFOrigDesm" Type="smallint" />
+    <Property Name="FiscalNFOrigSeq2" Type="smallint" />
+    <Property Name="FiscalNFOrigNum" Type="varchar" MaxLength="20" />
+    <Property Name="TipoDocCod" Type="varchar" MaxLength="3" />
+    <Property Name="FiscalNFDataVencDifIcms" Type="datetime" />
+    <Property Name="FiscalNFDataVencIssRF" Type="datetime" />
+    <Property Name="FiscalNFValCalcIrrfDedTot" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ImpTipoPis" Type="varchar" MaxLength="25" />
+    <Property Name="ImpCodReceitaPis" Type="varchar" MaxLength="10" />
+    <Property Name="ImpTipoIssRF" Type="varchar" MaxLength="25" />
+    <Property Name="ImpCodReceitaIssRF" Type="varchar" MaxLength="10" />
+    <Property Name="ImpTipoIss" Type="varchar" MaxLength="25" />
+    <Property Name="ImpCodReceitaIss" Type="varchar" MaxLength="10" />
+    <Property Name="ImpTipoIrrfPJ" Type="varchar" MaxLength="25" />
+    <Property Name="ImpCodReceitaIrrfPJ" Type="varchar" MaxLength="10" />
+    <Property Name="ImpTipoInss" Type="varchar" MaxLength="25" />
+    <Property Name="ImpCodReceitaInss" Type="varchar" MaxLength="10" />
+    <Property Name="ImpTipoIcmsST" Type="varchar" MaxLength="25" />
+    <Property Name="ImpCodReceitaIcmsST" Type="varchar" MaxLength="10" />
+    <Property Name="ImpTipoIcmsDifAliq" Type="varchar" MaxLength="25" />
+    <Property Name="ImpCodReceitaIcmsDifAliq" Type="varchar" MaxLength="10" />
+    <Property Name="ImpTipoIcms" Type="varchar" MaxLength="25" />
+    <Property Name="ImpCodReceitaIcms" Type="varchar" MaxLength="10" />
+    <Property Name="ImpTipoCsll" Type="varchar" MaxLength="25" />
+    <Property Name="ImpCodReceitaCsll" Type="varchar" MaxLength="10" />
+    <Property Name="ImpTipoCofins" Type="varchar" MaxLength="25" />
+    <Property Name="ImpCodReceitaCofins" Type="varchar" MaxLength="10" />
+    <Property Name="FiscalNFValMultaIssRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValJuroIssRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValMultaIss" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValJuroIss" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValMultaIrrfPJ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValJuroIrrfPJ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValMultaInss" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValJuroInss" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValMultaIcmsST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValJuroIcmsST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValMultaIcmsDifAliq" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValJuroIcmsDifAliq" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValMultaIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValJuroIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValMultaCsll" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValJuroCsll" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFTareGerado" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalNFTareDataHora" Type="datetime" />
+    <Property Name="FiscalNFTareFinalidade" Type="varchar" MaxLength="15" />
+    <Property Name="FISCALNFVALBASEPISSERV" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FISCALNFVALPISSERV" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FISCALNFVALBASECOFINSSERV" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FISCALNFVALCOFINSSERV" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="EntCodRem" Type="varchar" MaxLength="7" />
+    <Property Name="FiscalNFRazaoSocialRem" Type="varchar" MaxLength="100" />
+    <Property Name="FiscalNFCnpjRem" Type="varchar" MaxLength="14" />
+    <Property Name="FiscalNFInscEstRem" Type="varchar" MaxLength="15" />
+    <Property Name="PaisSiglaRem" Type="varchar" MaxLength="3" />
+    <Property Name="UfSiglaRem" Type="varchar" MaxLength="2" />
+    <Property Name="FiscalNFSubSerie" Type="varchar" MaxLength="3" />
+    <Property Name="IMPTIPOSimpEstadual" Type="varchar" MaxLength="25" />
+    <Property Name="FiscalNFDataVencSimpEstadual" Type="datetime" />
+    <Property Name="ImpCodReceitaSimpEstadual" Type="varchar" MaxLength="10" />
+    <Property Name="IMPTIPOSimpFederal" Type="varchar" MaxLength="25" />
+    <Property Name="FiscalNFDataVencSimpFederal" Type="datetime" />
+    <Property Name="ImpCodReceitaSimpFederal" Type="varchar" MaxLength="10" />
+    <Property Name="FiscalNFValDescPisZFM" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValDescCofinsZFM" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValCap" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFRateioCapPorPeso" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalNFPerApurIcms" Type="datetime" />
+    <Property Name="FiscalNFPerApurIcmsST" Type="datetime" />
+    <Property Name="FiscalNFPerApurDifIcms" Type="datetime" />
+    <Property Name="FiscalNFPerApurCofins" Type="datetime" />
+    <Property Name="FiscalNFPerApurIrrfPJ" Type="datetime" />
+    <Property Name="FiscalNFPerApurInss" Type="datetime" />
+    <Property Name="FiscalNFPerApurCsll" Type="datetime" />
+    <Property Name="FiscalNFPerApurPis" Type="datetime" />
+    <Property Name="FiscalNFPerApurIss" Type="datetime" />
+    <Property Name="FiscalNFPerApurIssRF" Type="datetime" />
+    <Property Name="FiscalNFPerApurSimpEstadual" Type="datetime" />
+    <Property Name="FiscalNFPerApurSimpFederal" Type="datetime" />
+    <Property Name="FiscalNfCEI" Type="varchar" MaxLength="30" />
+    <Property Name="FiscalNFValRecAntIcmsST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValPagRecAntIcmsST" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalNFDivergencia" Type="varchar" MaxLength="5" />
+    <Property Name="ImpTipoGnreST" Type="varchar" MaxLength="25" />
+    <Property Name="ImpCodReceitaGnreST" Type="varchar" MaxLength="10" />
+    <Property Name="FiscalNFPerApurGnreST" Type="datetime" />
+    <Property Name="FiscalNFDataVencGnreST" Type="datetime" />
+    <Property Name="FiscalNFDataDespachoExport" Type="datetime" />
+    <Property Name="FiscalNFNumConhecEmb" Type="varchar" MaxLength="15" />
+    <Property Name="FiscalNFDataConhecEmb" Type="datetime" />
+    <Property Name="FiscalNFTipoConhecEmb" Type="varchar" MaxLength="30" />
+    <Property Name="FISCALNFDataAverbDecExport" Type="datetime" />
+    <Property Name="FiscalNFValDescISS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValDiferimIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValICMSDevido" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValCredPresumICMS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValICMSRecolher" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFOrigEmpCod" Type="varchar" MaxLength="20" />
+    <Property Name="TipoLancCod" Type="varchar" MaxLength="10" />
+    <Property Name="ImpTipoCSLLPJLP" Type="varchar" MaxLength="25" />
+    <Property Name="FiscalNfPerApurCSLLPJLP" Type="datetime" />
+    <Property Name="FiscalNFDataVencCSLLPJLP" Type="datetime" />
+    <Property Name="ImpCodReceitaCSLLPJLP" Type="varchar" MaxLength="10" />
+    <Property Name="ImpTipoIRRFPJLP" Type="varchar" MaxLength="25" />
+    <Property Name="FiscalNfPerApurIRRFPJLP" Type="datetime" />
+    <Property Name="FiscalNFDataVencIRRFPJLP" Type="datetime" />
+    <Property Name="ImpCodReceitaIRRFPJLP" Type="varchar" MaxLength="10" />
+    <Property Name="FiscalNFBaseIcmsServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValIcmsServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValPedagio" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFVeicPlaca" Type="varchar" MaxLength="20" />
+    <Property Name="FiscalNFVeicUfSigla" Type="varchar" MaxLength="2" />
+    <Property Name="FiscalNFVeicPaisSigla" Type="varchar" MaxLength="3" />
+    <Property Name="FiscalNFVeic2Placa" Type="varchar" MaxLength="20" />
+    <Property Name="FiscalNFVeic2UfSigla" Type="varchar" MaxLength="2" />
+    <Property Name="FiscalNFVeic2PaisSigla" Type="varchar" MaxLength="3" />
+    <Property Name="FiscalNFVeic3Placa" Type="varchar" MaxLength="20" />
+    <Property Name="FiscalNFVeic3UfSigla" Type="varchar" MaxLength="2" />
+    <Property Name="FiscalNFVeic3PaisSigla" Type="varchar" MaxLength="3" />
+    <Property Name="FISCALNFDOCCONTORCCHV" Type="int" />
+    <Property Name="FiscalNFValBaseIcmsOper" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValIcmsOper" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFPrecoVendaVarejo" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FiscalNFSeloCtrl" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FiscalNFValBasePisProdRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValPisProdRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValBaseCofinsProdRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValCofinsProdRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFRepIcmsDifValDesc" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFBaseDifIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFBaseFECP" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValFECP" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFDenegada" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalNFNumDocDI" Type="varchar" MaxLength="20" />
+    <Property Name="FiscalNFDataDI" Type="datetime" />
+    <Property Name="FiscalNFCidCodDI" Type="varchar" MaxLength="8" />
+    <Property Name="FiscalNFDataDesembDI" Type="datetime" />
+    <Property Name="FiscalNFCodExportDI" Type="varchar" MaxLength="60" />
+    <Property Name="FiscalNFNumAcDraw" Type="varchar" MaxLength="15" />
+    <Property Name="FiscalNFBaseIcmsSTDaeGnre" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValIcmsSTDaeGnre" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValCalcINSSDedTot" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFNumFim" Type="varchar" MaxLength="20" />
+    <Property Name="FiscalNFChvNfse" Type="varchar" MaxLength="60" />
+    <Property Name="FiscalNFTxaMarMerc" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFRatTxaMarMercPorPeso" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalNFRatSiscomexPorPeso" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalNFRatDespImportPorPeso" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalNFDataMovimento" Type="datetime" Nullable="false" />
+    <Property Name="FiscalNFExtemporaneo" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalNFDataEntrega" Type="datetime" />
+    <Property Name="FiscalNFCancExtemp" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalNFBaseIcmsInter" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValIcmsOrig" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFBaseIcmsDest" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValIcmsAliqDest" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValIcmsDifalDest" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValIcmsTotal" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValIcmsPart1" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValIcmsPart2" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFCnoCeiIndPrestServ" Type="varchar" MaxLength="1" />
+    <Property Name="FiscalNFCnoCeiCodObra" Type="varchar" MaxLength="30" />
+    <Property Name="FiscalNFCanceladaData" Type="datetime" />
+    <Property Name="CidCodInicPrestServ" Type="varchar" MaxLength="8" />
+    <Property Name="CidCodFinalPrestServ" Type="varchar" MaxLength="8" />
+    <Property Name="FiscalNFBaseFCPICMS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValFCPICMS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFBaseFCPICMSST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValFCPICMSST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFVlrServicos15" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFVlrServicos20" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFVlrServicos25" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFVlrAdicional" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFVlrNRetAdic" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFNaoDevBsINSS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFNaoDevVlrINSS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFNaoDevBsIR" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFNaoDevVlrIR" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFNaoDevBsPIS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFNaoDevVlrPIS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFNaoDevBsCOFINS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFNaoDevVlrCOFINS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFNaoDevBsCSLL" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFNaoDevVlrCSLL" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="REINFReg2010ID" Type="varchar" MaxLength="36" />
+    <Property Name="REINFReg2020ID" Type="varchar" MaxLength="36" />
+    <Property Name="REINFReg2050ID" Type="varchar" MaxLength="36" />
+    <Property Name="ImpTipoFECP" Type="varchar" MaxLength="25" />
+    <Property Name="ImpCodReceitaFECP" Type="varchar" MaxLength="10" />
+    <Property Name="FiscalNFPerApurFECP" Type="datetime" />
+    <Property Name="FiscalNFDataVencFECP" Type="datetime" />
+    <Property Name="REINFReg2040ID" Type="varchar" MaxLength="36" />
+    <Property Name="FiscalNFValFCPRetST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFValDifIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FiscalNFDtHrDig" Type="datetime" />
+    <Property Name="FiscalNFSubstituida" Type="varchar" MaxLength="5" />
+    <Property Name="FiscalNFSubstituidaData" Type="datetime" />
+    <Property Name="FiscalNFNatOpProd" Type="varchar" MaxLength="15" />
+    <Property Name="FiscalNFNatOpServ" Type="varchar" MaxLength="15" />
+    <Property Name="FiscalNFObs" Type="text" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6030: The relationship 'FK__MOV_ESTQ__78886DB4' uses the set of foreign keys '{EmpCod,MovEstqChvRef}' that are partially contained in the set of primary keys '{EmpCod,MovEstqChv}' of the table 'MOV_ESTQ'.  The set of foreign keys must be fully contained in the set of primary keys, or fully not contained in the set of primary keys to be mapped to a model.
+        <Association Name="FK__MOV_ESTQ__78886DB4">
+          <End Role="MOV_ESTQ" Type="Self.MOV_ESTQ" Multiplicity="0..1" />
+          <End Role="MOV_ESTQ1" Type="Self.MOV_ESTQ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MOV_ESTQ">
+              <PropertyRef Name="EmpCod" />
+              <PropertyRef Name="MovEstqChv" />
+            </Principal>
+            <Dependent Role="MOV_ESTQ1">
+              <PropertyRef Name="EmpCod" />
+              <PropertyRef Name="MovEstqChvRef" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>-->
+  <EntityContainer Name="Apolo10ModelStoreContainer">
+    <EntitySet Name="FISCAL_ITEM_NF" EntityType="Self.FISCAL_ITEM_NF" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FISCAL_NF" EntityType="Self.FISCAL_NF" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

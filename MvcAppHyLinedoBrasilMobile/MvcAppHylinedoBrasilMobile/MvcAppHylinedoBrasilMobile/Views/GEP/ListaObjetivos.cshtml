@@ -1,0 +1,142 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+    
+    List<MvcAppHylinedoBrasilMobile.Models.GEP_Objetivo> listaObjetivos =
+        (List<MvcAppHylinedoBrasilMobile.Models.GEP_Objetivo>)Session["ListaObjetivos"];
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+}
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para o Menu do GEP", "MenuGEP", "GEP", 
+                null,
+                new { @title = "Clique aqui para voltar para o Menu do GEP", @class = "gep" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/alvo.png"), "Objetivo")
+    <h2>Lista de Objetivos</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+@using (Html.BeginForm("SearchObjetivo", "GEP"))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <b>Pilar:</b>
+            <div class="editor-field">
+                @Html.DropDownList(
+                    "Pilar",
+                    (List<SelectListItem>)Session["FiltroDDLListaPilares"])
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Informe parte da descrição:</b>
+            <div class="editor-field">
+                @Html.TextBox("pesquisa", Session["pesquisaSession"])
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Pesquisar" />
+        </li>
+    </ul>
+}
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Pilar</li>
+    <li>
+        @Html.ActionLink("Adicionar Novo Objetivo", "CreateObjetivo", "GEP",
+            null,
+            new { @class = "add", @title = "Clique aqui para inserir um novo objetivo" })
+    </li>
+</ul>
+<br />
+<div class="editor-label"  align="center">
+    <table style="width: 90%">
+        <tr style="font-size: xx-small; background-color:Gray">
+            <th colspan="6" style="font-size: xx-small; background-color:Gray">
+                <u>Legenda de Ações:</u>
+            </th>
+        </tr>
+        <tr style="font-size: xx-small">
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/kjots.png"), "")
+                <i>Alterar Objetivo</i>
+            </td>
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/button_cancel.png"), "")
+                <i>Excluir Objetivo</i>
+            </td>
+        </tr>
+    </table>
+</div>
+<br />
+<div id="divTabelaIndexPV" style="overflow:auto" >
+<table id="tabelaIndexPV" class="ajustetabelaIndexPV">
+    <tbody class="ajustetabelaIndexPV">
+    <tr class="ajustetabelaIndexPV">
+        <th class="ajustetabelaIndexPV">
+            ID
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Pilar
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Objetivo
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Usuário
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Data Cadastro
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Ações
+        </th>
+    </tr>
+@foreach (var item in listaObjetivos)
+{
+    MvcAppHylinedoBrasilMobile.Models.GEP_Pilar pilar = hlbapp.GEP_Pilar.Where(w => w.ID == item.IDPilar).FirstOrDefault();
+    
+    <tr class="ajustetabelaIndexPV">
+        <td class="ajustetabelaIndexPV">
+            @(item.ID)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(pilar.Descricao)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(item.Descricao)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(item.Usuario)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(Convert.ToDateTime(item.DataHoraCadastro).ToString("dd/MM/yy HH:ss"))
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td align="center">
+                        @Html.ActionLink("Edit", "EditObjetivo",
+                            new { id = item.ID },
+                                new { @class = "edit", @title = "Clique aqui para alterar o objetivo." })
+                    </td>
+                    <td align="center">
+                        @Html.ActionLink("Delete", "ConfirmaDeleteObjetivo",
+                            new { id = item.ID },
+                                     new { @class = "delete", @title = "Clique aqui para excluir o objetivo." })
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

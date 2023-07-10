@@ -1,0 +1,11 @@
+﻿@model MvcAppHyLinedoBrasil.Models.SequenciaLinha
+<div>
+    @if (Model.ID == 0)
+    {
+        <div style="color:Red;"><b>@Html.DisplayFor(model => Model.Importado)</b></div>
+    }
+    else
+    {
+        <b>@Html.DisplayFor(model => Model.Importado)</b>
+    }
+</div>

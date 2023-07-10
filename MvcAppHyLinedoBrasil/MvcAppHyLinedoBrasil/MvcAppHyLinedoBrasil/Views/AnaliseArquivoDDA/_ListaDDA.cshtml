@@ -1,0 +1,180 @@
+﻿@model IEnumerable<MvcAppHyLinedoBrasil.Models.LayoutDDASegmentoG>
+           
+@if (Model.Count() != 0)
+{
+<br />
+<legend>Arquivo: @ViewBag.fileName</legend>
+<br />
+<legend>CNPJ: @ViewBag.CNPJ</legend>
+<br />
+
+using (Html.BeginForm("GerarAcoesSelecionados", "AnaliseArquivoDDA", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    
+<table style="width: 102%">
+    <tr>
+        <th colspan="5">
+            Legenda
+        </th>
+    </tr>
+    <tr>
+        <td>
+            1 - Informações sobre Importação do documento no Apolo
+        </td>
+        <td>
+            2 - Selecionar o Documento p/ Importar no Apolo
+        </td>
+        <td colspan="3">
+            3 - Selecionar o Documento p/ Enviar e-mail p/ Fiscal pois o documento não está digitado.
+            OBS.: Só será exibida a opção caso o Vencimento seja menor ou igual a 5 dias.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.Image(@Url.Content("~/Content/images/Sim.png"), "Importado com Sucesso!")
+            Documento Importado no Apolo / Enviado E-mail
+        </td>
+        <td>
+            @Html.Image(@Url.Content("~/Content/images/Nao.png"), "Importado com Sucesso!")
+            Documento NÃO Localizado no Apolo
+        </td>
+        <td>
+            @Html.Image(@Url.Content("~/Content/images/aviso.png"), "Importado com Sucesso!")
+            Documento Localizado no Apolo, porém com Entidade diferente ou Empresa diferente
+        </td>
+        <td>
+            @Html.Image(@Url.Content("~/Content/images/cifrao.png"), "Importado com Sucesso!")
+            Documento Localizado no Apolo e PAGO
+        </td>
+        <td>
+            @Html.Image(@Url.Content("~/Content/images/duplicar.png"), "Importado com Sucesso!")
+            Documento Localizado no Apolo, porém encontrado mais de 01 (A verificação é realizada por Data de Vencimento, Valor, Entidade e Filial)
+        </td>
+    </tr>
+</table>
+
+    <br />
+
+@*<div style="overflow:auto">*@
+<table style="width: 102%">
+    <tr>
+        <th>
+            Emp
+        </th>
+        <th>
+            BCN
+        </th>
+        <th>
+            Inscrição
+        </th>
+        <th>
+            Cedente
+        </th>
+        <th>
+            Sacador
+        </th>
+        <th>
+            Vencto
+        </th>
+        <th>
+            Valor
+        </th>
+        <th>
+            Docto
+        </th>
+        <th>
+            Linha Digitável
+        </th>
+        <th>
+            1
+        </th>
+        <th>
+            2
+        </th>
+        <th>
+            3
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td align="center">
+                @item.Empresa
+            </td>
+            <td align="center">
+                @item.BancoCedente
+                @*if (Model.Count() > 0) { Html.TextBoxFor(m => m.Where(w => w.Inscricao == item.Inscricao && w.DataVencimento == item.DataVencimento && w.ValorTitulo == item.ValorTitulo).First().NomeCedente); }*@
+            </td>
+            <td align="center">
+                @String.Format(@"{0:00\.000\.000\/0000\-00}", long.Parse(item.Inscricao))
+            </td>
+            <td>
+                @item.NomeCedente
+            </td>
+            <td>
+                @item.Sacador
+            </td>
+            <td align="center">
+                @String.Format("{0:dd/MM/yyyy}", item.DataVencimento)
+            </td>
+            <td align="right">
+                @String.Format("{0:N}", item.ValorTitulo)
+            </td>
+            <td align="center">
+                @item.NumeroDocumento
+            </td>
+            <td align="center">
+                @item.LinhaDigitavel
+            </td>
+            <td align="center">
+                @Html.Image(@Url.Content("~/Content/images/" + item.TituloNoApolo + ".png"), "Título No Apolo")
+                    @if (item.TituloNoApolo.Equals("Aviso"))
+                {
+                    @(item.EmpresaApolo + " - " + item.ChaveDocApolo.ToString())
+                }
+            </td>
+            <td>
+                @if (item.ImportaNoApolo == "Sim")
+                {
+                    @Html.CheckBox("importa");
+                    @*Html.Hidden("importa", item.ImportaNoApolo);*@
+                    @Html.Hidden("id", item.ID)
+                }
+                else if (item.ImportaNoApolo == "OK")
+                {
+                    @Html.Image(@Url.Content("~/Content/images/Sim.png"), "Importado com Sucesso!")
+                }
+                else if (item.ImportaNoApolo == "Sem")
+                {
+                    @Html.Image(@Url.Content("~/Content/images/Nao.png"), "Parcela já paga!")
+                }
+            </td>
+            <td>
+                @if (item.EnviaEmailFiscal == "Sim")
+                {
+                    @Html.CheckBox("emailFiscal");
+                    @*Html.Hidden("importa", item.ImportaNoApolo);*@
+                    @Html.Hidden("idEmailFiscal", item.ID)
+                }
+                else if (item.EnviaEmailFiscal == "Enviado")
+                {
+                    @Html.Image(@Url.Content("~/Content/images/Sim.png"), "E-mail p/ Fiscal Enviado!")
+                }
+                else if (item.EnviaEmailFiscal == "Nao")
+                {
+                    @Html.Image(@Url.Content("~/Content/images/Nao.png"), "Documento Vencido!")
+                }
+            </td>
+        </tr>
+    }
+</table>
+@*</div>*@
+<br />
+<div align="center">
+    <input type="submit" value="Gerar Ações dos Itens Selecionados"/>
+</div>
+}
+<br />
+<legend>@ViewBag.mensagemImportacao</legend>
+}

@@ -1,0 +1,655 @@
+﻿@{
+    ViewBag.Title = "";
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+
+    bool viewAll = (MvcAppHyLinedoBrasil.Controllers.AccountController
+                .GetGroup("HLBAPPM-PedidoVendaVisualizarTodosPedidos",
+                (System.Collections.ArrayList)Session["Direitos"]));
+}
+
+<script type='text/javascript'>
+    window.onbeforeunload = function () {
+        return "Se a página for atualizada, os dados serão perdidos! Caso queira voltar, clique no botão 'Voltar' no final da pagina!";
+    }
+
+    function mascaraPrecoPinto(o) {
+        var linhagem = $('#Text option:selected').text();
+        if (linhagem.indexOf('- Ovos') > -1) {
+            mascara(o, mvalor4);
+        } else {
+            mascara(o, mvalor);
+        }
+    }
+
+    function verificaDataTabelaPreco(data, tipoData) {
+        var linhagem = $('#Text option:selected').text();
+        var errorHolder = document.getElementById('error' + tipoData);
+        $.ajax({
+            url: '/PedidoVenda/VerificaDataTabelaPreco',
+            type: 'POST',
+            data: JSON.stringify({ data: data, linhagem: linhagem }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data != "") {
+                    errorHolder.innerHTML = data;
+                    $('#' + tipoData).focus();
+                    $('#add').button('disable');
+                    $('[type="submit"]').button('refresh');
+                } else {
+                    errorHolder.innerHTML = '';
+                    $('#add').button('enable');
+                    $('[type="submit"]').button('refresh');
+                }
+            }
+        });
+    }
+
+    function carregaPrecoTabelaPreco() {
+        var linhagem = $('#Text option:selected').text();
+        var dataEntregaInicial = $('#dataEntregaInicial').val();
+        var dataEntregaFinal = $('#dataEntregaFinal').val();
+        var qtdeLiquida = $('#qtdeLiquida').val();
+        $.ajax({
+            url: '/PedidoVenda/CarregaPrecoTabelaPreco',
+            type: 'POST',
+            data: JSON.stringify({ id: linhagem, dataI: dataEntregaInicial, dataF: dataEntregaFinal, qtde: qtdeLiquida }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                var replaceqtd = data.replace(',', '.');
+                var floatqtd = parseFloat(replaceqtd);
+
+                var replaceqtdLiquida = qtdeLiquida.replace(',', '.');
+                var floatqtdLiquida = parseFloat(replaceqtdLiquida);
+
+                if (floatqtd >= 0) {
+                    $('#preco').val(data);
+                    if (linhagem.indexOf('- Ovos') > -1 || floatqtdLiquida == 0 ) {
+                        //$('#percBonificacao').val('disabled');
+                        $('#percBonificacao').val(0);
+                    } else {
+                        $('#percBonificacao').val(2);
+                    }
+                }
+            }
+        });
+    }
+
+    function calculaValorTotal() {
+        var qtd = $('#qtdeLiquida').val();
+        var replaceqtd = qtd.replace(',', '.');
+        var floatqtd = parseFloat(replaceqtd);
+
+        var qtdReposicao = $('#qtdeReposicao').val();
+        var replaceqtdReposicao = qtdReposicao.replace(',', '.');
+        var floatqtdReposicao = parseFloat(replaceqtdReposicao);
+
+        var qtdCalculo = floatqtd;
+        if (floatqtd == 0) {
+            qtdCalculo = floatqtdReposicao;
+        }
+
+        var preco = $('#preco').val();
+        var replacepreco = preco.replace(',', '.');
+        var floatpreco = parseFloat(replacepreco);
+
+        var re = qtdCalculo * floatpreco;
+        var result = parseFloat(re).toFixed(2);
+
+        $('#valorTotal').val(result.replace('.', ','));
+    }
+
+    function verificaMotivoReposicaoInicial() {
+        var value = $('#qtdeReposicao').val();
+        if (value > 0) {
+            $('#pnlMotivoReposicao').show();
+        } else {
+            $('#pnlMotivoReposicao').hide();
+        }
+    }
+
+    function verificaMotivoReposicao() {
+        var value = $('#qtdeReposicao').val();
+        var tipoReposicao = $('#ddlMotivoReposicao option:selected').val();
+        var errorHolder = document.getElementById('errorTipoReposicao');
+        if (value > 0) {
+            $('#pnlMotivoReposicao').show();
+            if (tipoReposicao == "") {
+                errorHolder.innerHTML = 'Obrigatório selecionar um Tipo de Reposição!';
+                $('#ddlMotivoReposicao').focus();
+                $('#add').button('disable');
+                $('[type="submit"]').button('refresh');
+                return true;
+            } else {
+                errorHolder.innerHTML = '';
+                $('#add').button('enable');
+                $('[type="submit"]').button('refresh');
+                return false;
+            }
+        } else {
+            $('#pnlMotivoReposicao').hide();
+            errorHolder.innerHTML = '';
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+            return false;
+        }    
+    }
+
+    function verficaDataEntregaInicial() {
+        var dataEntregaInicial = $('#dataEntregaInicial').val();
+        verificaDataTabelaPreco(dataEntregaInicial, 'dataEntregaInicial');
+        carregaPrecoTabelaPreco();
+        calculaValorTotal();
+    }
+
+    function verificaDataEntregaFinal() {
+        var dataEntregaFinal = $('#dataEntregaFinal').val();
+        verificaDataTabelaPreco(dataEntregaFinal, 'dataEntregaFinal');
+        carregaPrecoTabelaPreco();
+        calculaValorTotal();
+    }
+
+    function verificaQtdeLiquida() {
+        carregaPrecoTabelaPreco();
+        calculaValorTotal();
+        var value = $('#qtdeLiquida').val();
+        var errorHolder = document.getElementById('errorQtdeLiquida');
+        if (value == "") {
+            errorHolder.innerHTML = 'O campo Qtde. Líquida não pode ser VAZIO!';
+            $('#qtdeLiquida').focus();
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+        } else {
+            errorHolder.innerHTML = '';
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+        }
+    }
+
+    function verificaLinhagem() {
+        carregaPrecoTabelaPreco();
+        calculaValorTotal();
+    }
+
+    function verificaQtdeReposicao() {
+        var value = $('#qtdeReposicao').val();
+        var errorHolder = document.getElementById('errorQtdeReposicao');
+        if (value == "") {
+            errorHolder.innerHTML = 'O campo Qtde. de Reposição não pode ser VAZIO!';
+            $('#qtdeReposicao').focus();
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+        } else { 
+            var preco = value;
+            var replacepreco = preco.replace(',', '.');
+            var floatpreco = parseFloat(replacepreco);
+            if (floatpreco < 0) {
+                errorHolder.innerHTML = 'A quantidade de reposição mínima permitida é de 0!';
+                $('#qtdeReposicao').focus();
+                $('#add').button('disable');
+                $('[type="submit"]').button('refresh');
+            }
+            else {
+                errorHolder.innerHTML = '';
+                $('#add').button('enable');
+                $('[type="submit"]').button('refresh');
+            }
+        }
+        carregaPrecoTabelaPreco();
+        calculaValorTotal();
+        verificaItemVendidoPV();
+    }
+
+    function verificaDDLMotivoReposicao() {
+        verificaMotivoReposicao();
+    }
+
+    function verificaSaveItem() {
+        if (verificaMotivoReposicao()) { return; }
+    }
+
+    function verificaPreco() {
+        calculaValorTotal();
+        var value = $('#preco').val();
+        var errorHolder = document.getElementById('errorPreco');
+        var linhagem = $('#Text option:selected').text();
+        if (value == "") {
+            errorHolder.innerHTML = 'O campo Preço não pode ser VAZIO!';
+            $('#preco').focus();
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+        } else {
+            var preco = value;
+            var replacepreco = preco.replace(',', '.');
+            var floatpreco = parseFloat(replacepreco);
+            if (floatpreco < 1.8 && linhagem.indexOf('- Ovos') == -1 && linhagem.indexOf('- Machos') == -1) {
+                errorHolder.innerHTML = 'O preço mínimo permitido é de R$ 1,80!';
+                $('#preco').focus();
+                $('#add').button('disable');
+                $('[type="submit"]').button('refresh');
+            }
+            else {
+                errorHolder.innerHTML = '';
+                $('#add').button('enable');
+                $('[type="submit"]').button('refresh');
+            }
+        }
+    }
+
+    function verificaPercBonificacao() {
+        var value = $('#percBonificacao').val();
+        var errorHolder = document.getElementById('errorPercBonificacao');
+        var linhagem = $('#Text option:selected').text();
+        var qtdeLiquida = $('#qtdeLiquida').val();
+        if (value == "") {
+            errorHolder.innerHTML = 'O campo % de Bonificação não pode ser VAZIO!';
+            $('#percBonificacao').focus();
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+        } else {
+            var preco = value;
+            var replacepreco = preco.replace(',', '.');
+            var floatpreco = parseFloat(replacepreco);
+            if (floatpreco == 2 || floatpreco == 0 && linhagem.indexOf('- Ovos') == -1 && qtdeLiquida > 0) {
+                errorHolder.innerHTML = 'O % de Bonificação permitido é de 0% ou 2,00%!';
+                $('#percBonificacao').focus();
+                $('#add').button('disable');
+                $('[type="submit"]').button('refresh');
+            }
+            if (linhagem.indexOf('- Ovos') > 1 || linhagem.indexOf('- Machos') > 1){
+                errorHolder.innerHTML = 'O % de Bonificação permitido é de 0% ou 2,00%!';
+                $('#percBonificacao').focus();
+                $('#add').button('disable');
+                $('[type="submit"]').button('refresh');
+            }
+            else {
+                errorHolder.innerHTML = '';
+                $('#add').button('enable');
+                $('[type="submit"]').button('refresh');
+            }
+        }
+    }
+
+    var qtdeItensPVVendido = null;
+
+    function carregaItensPV() {
+        $.ajax({
+            url: '/PedidoVenda/CarregaItensPV',
+            type: 'POST',
+            data: '',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                qtdeItensPVVendido = data;
+            }
+        });
+    }
+
+    function verificaItemVendidoPV() {
+        var value = $('#qtdeLiquida').val();
+        var errorHolder = document.getElementById('errorQtdeReposicao');
+        if (qtdeItensPVVendido > 0 && (value == 0 || value == "")) {
+            errorHolder.innerHTML = 'Não é possível informar Qtde. de Reposição sem Qtde. Líquida (vendida) nesse pedido pois já existe um item inserido como venda!'
+                + ' Nesse caso, é necessário criar um novo pedido somente para essa reposição!';
+            $('#qtdeReposicao').focus();
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+        } else {
+            errorHolder.innerHTML = '';
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+            verificaMotivoReposicao();
+        }
+    }
+
+    function verificaFechamentoDO() {
+        var existeFDO = $('#hdverificaFechamentoDO').val();
+        if (existeFDO == "True") {
+            $('#Text').attr('disabled', 'true');
+            $('#dataEntregaInicial').attr('disabled', 'true');
+            $('#dataEntregaFinal').attr('disabled', 'true');
+            $('#qtdeLiquida').attr('disabled', 'true');
+            $('#qtdeReposicao').attr('disabled', 'true');
+        } else {
+            $('#Text').removeAttr('disabled');
+            $('#dataEntregaInicial').removeAttr('disabled');
+            $('#dataEntregaFinal').removeAttr('disabled');
+            $('#qtdeLiquida').removeAttr('disabled');
+            $('#qtdeReposicao').removeAttr('disabled');
+        }
+    }
+
+    $(document).ready(function () {
+        verificaMotivoReposicaoInicial();
+        carregaItensPV();
+        verificaFechamentoDO();
+    });
+
+    /* Máscaras ER */
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mcep(v) {
+        v = v.replace(/\D/g, "")                    //Remove tudo o que não é dígito
+        v = v.replace(/^(\d{5})(\d)/, "$1-$2")         //Esse é tão fácil que não merece explicações
+        return v
+    }
+    function mtel(v) {
+        v = v.replace(/\D/g, "");             //Remove tudo o que não é dígito
+        v = v.replace(/^(\d{2})(\d)/g, "($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+        v = v.replace(/(\d)(\d{4})$/, "$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
+        return v;
+    }
+    function cnpj(v) {
+        v = v.replace(/\D/g, "")                           //Remove tudo o que não é dígito
+        v = v.replace(/^(\d{2})(\d)/, "$1.$2")             //Coloca ponto entre o segundo e o terceiro dígitos
+        v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3") //Coloca ponto entre o quinto e o sexto dígitos
+        v = v.replace(/\.(\d{3})(\d)/, ".$1/$2")           //Coloca uma barra entre o oitavo e o nono dígitos
+        v = v.replace(/(\d{4})(\d)/, "$1-$2")              //Coloca um hífen depois do bloco de quatro dígitos
+        return v
+    }
+    function mcpf(v) {
+        v = v.replace(/\D/g, "")                    //Remove tudo o que não é dígito
+        v = v.replace(/(\d{3})(\d)/, "$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+        v = v.replace(/(\d{3})(\d)/, "$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+        //de novo (para o segundo bloco de números)
+        v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2") //Coloca um hífen entre o terceiro e o quarto dígitos
+        return v
+    }
+    function mdata(v) {
+        v = v.replace(/\D/g, "");                    //Remove tudo o que não é dígito
+        v = v.replace(/(\d{2})(\d)/, "$1/$2");
+        v = v.replace(/(\d{2})(\d)/, "$1/$2");
+
+        v = v.replace(/(\d{2})(\d{2})$/, "$1$2");
+        return v;
+    }
+    function mtempo(v) {
+        v = v.replace(/\D/g, "");                    //Remove tudo o que não é dígito
+        v = v.replace(/(\d{1})(\d{2})(\d{2})/, "$1:$2.$3");
+        return v;
+    }
+    function mhora(v) {
+        v = v.replace(/\D/g, "");                    //Remove tudo o que não é dígito
+        v = v.replace(/(\d{2})(\d)/, "$1h$2");
+        return v;
+    }
+    function mrg(v) {
+        v = v.replace(/\D/g, "");                                      //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{7})$/, "$1.$2");    //Coloca o . antes dos últimos 3 dígitos, e antes do verificador
+        v = v.replace(/(\d)(\d{4})$/, "$1.$2");    //Coloca o . antes dos últimos 3 dígitos, e antes do verificador
+        v = v.replace(/(\d)(\d)$/, "$1-$2");               //Coloca o - antes do último dígito
+        return v;
+    }
+    function mnum(v) {
+        v = v.replace(/\D/g, "");                                      //Remove tudo o que não é dígito
+        return v;
+    }
+    function mvalor(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{8})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{5})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{2})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+    function mvalor4(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{10})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{7})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{4})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+    function mvalor6(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{12})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{9})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{6})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+    function mvalorperc(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        //v = v.replace(/(\d)(\d{8})$/, "$1.$2"); //coloca o ponto dos milhões
+        //v = v.replace(/(\d)(\d{5})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{2})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+    function mvalor8(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{8})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{5})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{8})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+</script>
+
+<div align="center">
+    @*<p>
+        @Html.ActionLink("Voltar p/ Lista de Itens do Pedido de Venda - Passo 02", "ListItensPVReturn", "PedidoVenda")
+    </p>*@
+    @Html.Image(@Url.Content("~/Content/icons/pedidoVenda.png"), "Pedido de Venda")
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+
+<h2>Passo 02.01: Insira uma Linhagem para o Pedido de Venda</h2>
+<br />
+@using (Html.BeginForm("SaveItemPV", "PedidoVenda", FormMethod.Post))
+{
+<fieldset>
+    @Html.Hidden("verificaFechamentoDO", Convert.ToBoolean(Session["verificaFechamentoDO"]), new { @id = "hdverificaFechamentoDO" })
+    <div class="editor-label">
+        <b>Linhagem:</b>
+    </div>
+    <div class="editor-field">
+        @Html.DropDownList(
+            "Text",
+            (List<SelectListItem>
+    )Session["ListaLinhagens"],
+    new
+    {
+    @onchange = "verificaLinhagem()",
+    })
+</div>
+    @if (!MvcAppHyLinedoBrasil.Controllers.AccountController
+            .GetGroup("HLBAPPM-PedidoVendaDadosExportacao",
+            (System.Collections.ArrayList)Session["Direitos"])
+        || viewAll)
+    {
+        <div class="editor-label">
+            <h3>ENTREGA:</h3>
+        </div>
+        <div class="editor-label">
+            <b>DE:</b>
+        </div>
+        <div class="editor-field">
+            @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+            {
+                @Html.TextBox("dataEntregaInicial",
+                    Convert.ToDateTime(Session["dataEntregaInicial"]).ToString("yyyy-MM-dd"),
+                    //new { @type = "date", @min= "" + DateTime.Today.ToString("yyyy-MM-dd") + "" })
+                    new
+                    {
+                        @type = "date",
+                        @onfocusout = "verficaDataEntregaInicial()"
+                    })
+            }
+            else
+            {
+                @Html.TextBox("dataEntregaInicial",
+                    Convert.ToDateTime(Session["dataEntregaInicial"]).ToString("dd/MM/yyyy"),
+                         new
+                         {
+                             @type = "date",
+                             @onfocusout = "verificaDataEntregaFinal()"
+                         })
+            }
+            <div class="editor-label" id="errordataEntregaInicial" style="color: Red; font-weight:bold;"></div>
+        </div>
+        <div class="editor-label">
+            <b>A:</b>
+        </div>
+        <div class="editor-field">
+            @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+            {
+                @Html.TextBox("dataEntregaFinal",
+                    Convert.ToDateTime(Session["dataEntregaFinal"]).ToString("yyyy-MM-dd"),
+                    //new { @type = "date", @min = "" + DateTime.Today.ToString("yyyy-MM-dd") + "" })
+                    new
+                    {
+                        @type = "date",
+                        @onfocusout = "verficaDataEntregaInicial()"
+                    })
+            }
+            else
+            {
+                @Html.TextBox("dataEntregaFinal",
+                    Convert.ToDateTime(Session["dataEntregaFinal"]).ToString("dd/MM/yyyy"),
+                    new
+                    {
+                        @type = "date",
+                        @onfocusout = "verificaDataEntregaFinal()"
+                    })
+            }
+            <div class="editor-label" id="errordataEntregaFinal" style="color: Red; font-weight:bold;"></div>
+        </div>
+    }
+    <div class="editor-label">
+        <b>Qtde. Líquida:</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox("qtdeLiquida", Session["qtdeLiquida"].ToString(),
+         new
+         {
+             @type = "number",
+             @onkeyup = "mascara(this, mnum)",
+             @onchange = "verificaQtdeLiquida()"
+         })
+    </div>
+    <div class="editor-label" id="errorQtdeLiquida" style="color: Red; font-weight:bold;"></div>
+    @if (!MvcAppHyLinedoBrasil.Controllers.AccountController
+            .GetGroup("HLBAPPM-PedidoVendaDadosExportacao",
+            (System.Collections.ArrayList)Session["Direitos"])
+        || viewAll)
+    {
+        <div class="editor-label">
+            <b>Qtde. Reposição:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("qtdeReposicao", Session["qtdeReposicao"].ToString(), new
+       {
+           @type = "number",
+           @onblur = "verificaQtdeReposicao()"
+       })
+        </div>
+        <div class="editor-label" id="errorQtdeReposicao" style="color: Red; font-weight:bold;"></div>
+        <div id="pnlMotivoReposicao">
+            <div class="editor-label">
+                <b>Motivo da Reposição:</b>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList(
+                    "ddlMotivoReposicao",
+                    (List<SelectListItem>)Session["ListaMotivoReposicao"],
+                    "(Selecione um Tipo de Reposição)",
+                    new
+                    {
+                        @onfocusout = "verificaDDLMotivoReposicao()"
+                    })
+            </div>
+            <div class="editor-label" id="errorTipoReposicao" style="color: Red; font-weight:bold;"></div>
+        </div>
+        <div class="editor-label">
+            <b>Preço do Pinto:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("preco", Convert.ToDecimal(Session["precoDE"]),
+            //new { @onkeyup = "mascara(this, mvalor);" })
+                new
+                {
+                    @onkeyup = "mascaraPrecoPinto(this)",
+                    @onfocusout = "verificaPreco()"
+                })
+        </div>
+        <div class="editor-label" id="errorPreco" style="color: Red; font-weight:bold;"></div>
+        <div class="editor-label">
+            <b>Valor Total do Pinto:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("valorTotal", Convert.ToDecimal(Session["valorTotalDE"]),
+                new { @onkeyup = "mascara(this, mvalor);" })
+        </div>
+        <div class="editor-label">
+            <b>% Bonificação:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("percBonificacao", Convert.ToDecimal(Session["percBonificacao"]),
+                new
+                {
+                    @onkeyup = "mascara(this, mvalorperc)",
+                    @onfocusout = "verificaPercBonificacao()"
+                })
+        </div>
+        <div class="editor-label" id="errorPercBonificacao" style="color: Red; font-weight:bold;"></div>
+        if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPPM-PedidoVendaSobra", (System.Collections.ArrayList)Session["Direitos"]))
+        {
+            <br />
+            <div class="editor-field">
+                <label style="width: 100%">
+                    @Html.CheckBox("sobra", Convert.ToBoolean(Session["sobra"]))
+                    É Sobra?
+                </label>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="editor-label">
+            <b>Preço:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("preco", Convert.ToDecimal(Session["precoDE"]),
+                new { @onkeyup = "mascara(this, mvalor6);" })
+        </div>
+        <div class="editor-label">
+            <b>Valor Total:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("valorTotal", Convert.ToDecimal(Session["valorTotalDE"]),
+            new { @onkeyup = "mascara(this, mvalor);" })
+        </div>
+    }
+    <p>
+        <input type="submit" value="Salvar Item" id="add" onclick="verificaSaveItem()" disabled="disabled" />
+    </p>
+</fieldset>
+}
+
+@if (Session["origemPVForm"].ToString().Equals("Form"))
+{
+    using (Html.BeginForm("AlterPVReturn", "PedidoVenda", FormMethod.Post))
+    {
+        <input type="submit" value="Voltar" />
+    }
+}
+else
+{
+    using (Html.BeginForm("ListItensPVReturn", "PedidoVenda", FormMethod.Post))
+    {
+        <input type="submit" value="Voltar" />
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,12 @@
+﻿<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">MANUTENÇÃO</li>
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+    .GetGroup("HLBAPPM-AssistenciaTecnicaSolucaoRRC", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+    <li>
+        @Html.ActionLink("Lista das Soluções da RRC", "ListaRRC", "AssistenciaTecnica",
+            null,
+            new { @class = "reclamacao", @title = "Clique aqui para abrir a Lista das Soluções das RRC." })
+    </li>
+    }
+</ul>

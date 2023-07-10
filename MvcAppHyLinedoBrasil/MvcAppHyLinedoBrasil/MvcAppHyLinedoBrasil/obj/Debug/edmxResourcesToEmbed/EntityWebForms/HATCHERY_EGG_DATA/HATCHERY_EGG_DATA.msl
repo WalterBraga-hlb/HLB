@@ -1,0 +1,515 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HLBAPPModelStoreContainer" CdmEntityContainer="HLBAPPEntities">
+    <EntitySetMapping Name="HATCHERY_EGG_DATA">
+      <EntityTypeMapping TypeName="HLBAPPModel.HATCHERY_EGG_DATA">
+        <MappingFragment StoreEntitySet="HATCHERY_EGG_DATA">
+          <ScalarProperty Name="ClassOvo" ColumnName="ClassOvo" />
+          <ScalarProperty Name="ImportadoFLIP" ColumnName="ImportadoFLIP" />
+          <ScalarProperty Name="ImportadoApolo" ColumnName="ImportadoApolo" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Set_date" ColumnName="Set_date" />
+          <ScalarProperty Name="Hatch_loc" ColumnName="Hatch_loc" />
+          <ScalarProperty Name="Flock_id" ColumnName="Flock_id" />
+          <ScalarProperty Name="Lay_date" ColumnName="Lay_date" />
+          <ScalarProperty Name="Eggs_rcvd" ColumnName="Eggs_rcvd" />
+          <ScalarProperty Name="Egg_key" ColumnName="Egg_key" />
+          <ScalarProperty Name="Machine" ColumnName="Machine" />
+          <ScalarProperty Name="Track_no" ColumnName="Track_no" />
+          <ScalarProperty Name="Estimate" ColumnName="Estimate" />
+          <ScalarProperty Name="Variety" ColumnName="Variety" />
+          <ScalarProperty Name="Posicao" ColumnName="Posicao" />
+          <ScalarProperty Name="Bandejas" ColumnName="Bandejas" />
+          <ScalarProperty Name="Horario" ColumnName="Horario" />
+          <ScalarProperty Name="Peso_Ovo" ColumnName="Peso_Ovo" />
+          <ScalarProperty Name="Peso_Ent_Inv" ColumnName="Peso_Ent_Inv" />
+          <ScalarProperty Name="Peso_Transf" ColumnName="Peso_Transf" />
+          <ScalarProperty Name="Peso_Rentab" ColumnName="Peso_Rentab" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOG_LayoutPedidoPlanilhas">
+      <EntityTypeMapping TypeName="HLBAPPModel.LOG_LayoutPedidoPlanilhas">
+        <MappingFragment StoreEntitySet="LOG_LayoutPedidoPlanilhas">
+          <ScalarProperty Name="CaminhoArquivo" ColumnName="CaminhoArquivo" />
+          <ScalarProperty Name="MotivoOperacao" ColumnName="MotivoOperacao" />
+          <ScalarProperty Name="EmailVendedor" ColumnName="EmailVendedor" />
+          <ScalarProperty Name="ValorTotal" ColumnName="ValorTotal" />
+          <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
+          <ScalarProperty Name="QtdeTotal" ColumnName="QtdeTotal" />
+          <ScalarProperty Name="QtdeReposicao" ColumnName="QtdeReposicao" />
+          <ScalarProperty Name="QtdeBonificacao" ColumnName="QtdeBonificacao" />
+          <ScalarProperty Name="PercBonificacao" ColumnName="PercBonificacao" />
+          <ScalarProperty Name="QtdeLiquida" ColumnName="QtdeLiquida" />
+          <ScalarProperty Name="Linhagem" ColumnName="Linhagem" />
+          <ScalarProperty Name="DataFinal" ColumnName="DataFinal" />
+          <ScalarProperty Name="DataInicial" ColumnName="DataInicial" />
+          <ScalarProperty Name="NumeroPedidoCHIC" ColumnName="NumeroPedidoCHIC" />
+          <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+          <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+          <ScalarProperty Name="CondicaoPagamento" ColumnName="CondicaoPagamento" />
+          <ScalarProperty Name="Embalagem" ColumnName="Embalagem" />
+          <ScalarProperty Name="OvosBrasil" ColumnName="OvosBrasil" />
+          <ScalarProperty Name="QtdePintinhosTratInfraVerm" ColumnName="QtdePintinhosTratInfraVerm" />
+          <ScalarProperty Name="TratamentoInfravermelho" ColumnName="TratamentoInfravermelho" />
+          <ScalarProperty Name="Salmonela" ColumnName="Salmonela" />
+          <ScalarProperty Name="Laringo" ColumnName="Laringo" />
+          <ScalarProperty Name="Coccidiose" ColumnName="Coccidiose" />
+          <ScalarProperty Name="Gombouro" ColumnName="Gombouro" />
+          <ScalarProperty Name="Bouba" ColumnName="Bouba" />
+          <ScalarProperty Name="Vacina" ColumnName="Vacina" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+          <ScalarProperty Name="DescricaoCliente" ColumnName="DescricaoCliente" />
+          <ScalarProperty Name="CodigoCliente" ColumnName="CodigoCliente" />
+          <ScalarProperty Name="Operacao" ColumnName="Operacao" />
+          <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+          <ScalarProperty Name="DataHora" ColumnName="DataHora" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HATCHERY_TRAN_DATA">
+      <EntityTypeMapping TypeName="HLBAPPModel.HATCHERY_TRAN_DATA">
+        <MappingFragment StoreEntitySet="HATCHERY_TRAN_DATA">
+          <ScalarProperty Name="Claros" ColumnName="Claros" />
+          <ScalarProperty Name="Variety" ColumnName="Variety" />
+          <ScalarProperty Name="Qtde_Ovos_Transferidos" ColumnName="Qtde_Ovos_Transferidos" />
+          <ScalarProperty Name="Hora_Termino" ColumnName="Hora_Termino" />
+          <ScalarProperty Name="Perdidos_Rodizio" ColumnName="Perdidos_Rodizio" />
+          <ScalarProperty Name="Perdidos_Transferencia" ColumnName="Perdidos_Transferencia" />
+          <ScalarProperty Name="Pintos_Nascidos" ColumnName="Pintos_Nascidos" />
+          <ScalarProperty Name="Num_Grudados" ColumnName="Num_Grudados" />
+          <ScalarProperty Name="Trincados_Rodizio" ColumnName="Trincados_Rodizio" />
+          <ScalarProperty Name="Trincados_Transferencia" ColumnName="Trincados_Transferencia" />
+          <ScalarProperty Name="Bicados" ColumnName="Bicados" />
+          <ScalarProperty Name="Contaminado_Rodizio" ColumnName="Contaminado_Rodizio" />
+          <ScalarProperty Name="Contaminado_Transferencia" ColumnName="Contaminado_Transferencia" />
+          <ScalarProperty Name="Hora_Inicio" ColumnName="Hora_Inicio" />
+          <ScalarProperty Name="Transf_date" ColumnName="Transf_date" />
+          <ScalarProperty Name="ClassOvo" ColumnName="ClassOvo" />
+          <ScalarProperty Name="Hatcher" ColumnName="Hatcher" />
+          <ScalarProperty Name="Setter" ColumnName="Setter" />
+          <ScalarProperty Name="Lay_date" ColumnName="Lay_date" />
+          <ScalarProperty Name="NumLote" ColumnName="NumLote" />
+          <ScalarProperty Name="Flock_id" ColumnName="Flock_id" />
+          <ScalarProperty Name="Set_date" ColumnName="Set_date" />
+          <ScalarProperty Name="Hatch_Loc" ColumnName="Hatch_Loc" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HATCHERY_FLOCK_SETTER_DATA">
+      <EntityTypeMapping TypeName="HLBAPPModel.HATCHERY_FLOCK_SETTER_DATA">
+        <MappingFragment StoreEntitySet="HATCHERY_FLOCK_SETTER_DATA">
+          <ScalarProperty Name="Uniformidade" ColumnName="Uniformidade" />
+          <ScalarProperty Name="Peso" ColumnName="Peso" />
+          <ScalarProperty Name="QtdeNascidos" ColumnName="QtdeNascidos" />
+          <ScalarProperty Name="HatcherEmbrio" ColumnName="HatcherEmbrio" />
+          <ScalarProperty Name="SetterEmbrio" ColumnName="SetterEmbrio" />
+          <ScalarProperty Name="QuebradoTrincado" ColumnName="QuebradoTrincado" />
+          <ScalarProperty Name="OvoVirado" ColumnName="OvoVirado" />
+          <ScalarProperty Name="TempCloaca" ColumnName="TempCloaca" />
+          <ScalarProperty Name="ChickYeld" ColumnName="ChickYeld" />
+          <ScalarProperty Name="PerdaUmidade" ColumnName="PerdaUmidade" />
+          <ScalarProperty Name="EliminadoCancelamento" ColumnName="EliminadoCancelamento" />
+          <ScalarProperty Name="Infertilidade10Dias" ColumnName="Infertilidade10Dias" />
+          <ScalarProperty Name="Amostra" ColumnName="Amostra" />
+          <ScalarProperty Name="Anormalidade" ColumnName="Anormalidade" />
+          <ScalarProperty Name="Hemorragico" ColumnName="Hemorragico" />
+          <ScalarProperty Name="MaFormacaoVisceras" ColumnName="MaFormacaoVisceras" />
+          <ScalarProperty Name="MaFormacaoCerebro" ColumnName="MaFormacaoCerebro" />
+          <ScalarProperty Name="Tardia19a21" ColumnName="Tardia19a21" />
+          <ScalarProperty Name="Tardia15a18" ColumnName="Tardia15a18" />
+          <ScalarProperty Name="Media8a14" ColumnName="Media8a14" />
+          <ScalarProperty Name="Inicial4a7" ColumnName="Inicial4a7" />
+          <ScalarProperty Name="Inicial0a3" ColumnName="Inicial0a3" />
+          <ScalarProperty Name="Infertil" ColumnName="Infertil" />
+          <ScalarProperty Name="MalFormado" ColumnName="MalFormado" />
+          <ScalarProperty Name="MalPosicionado" ColumnName="MalPosicionado" />
+          <ScalarProperty Name="Fungo" ColumnName="Fungo" />
+          <ScalarProperty Name="ContaminacaoBacteriana" ColumnName="ContaminacaoBacteriana" />
+          <ScalarProperty Name="BicadoMorto" ColumnName="BicadoMorto" />
+          <ScalarProperty Name="BicadoVivo" ColumnName="BicadoVivo" />
+          <ScalarProperty Name="De18a21" ColumnName="De18a21" />
+          <ScalarProperty Name="De13a17" ColumnName="De13a17" />
+          <ScalarProperty Name="De5a12" ColumnName="De5a12" />
+          <ScalarProperty Name="De0a4" ColumnName="De0a4" />
+          <ScalarProperty Name="Variety" ColumnName="Variety" />
+          <ScalarProperty Name="Qtde_02_Retirada" ColumnName="Qtde_02_Retirada" />
+          <ScalarProperty Name="Horario_02_Retirada" ColumnName="Horario_02_Retirada" />
+          <ScalarProperty Name="Qtde_01_Retirada" ColumnName="Qtde_01_Retirada" />
+          <ScalarProperty Name="Horario_01_Retirada" ColumnName="Horario_01_Retirada" />
+          <ScalarProperty Name="DataRetiradaReal" ColumnName="DataRetiradaReal" />
+          <ScalarProperty Name="Qtde_Incubada" ColumnName="Qtde_Incubada" />
+          <ScalarProperty Name="Pinto_Terceira" ColumnName="Pinto_Terceira" />
+          <ScalarProperty Name="Refugo" ColumnName="Refugo" />
+          <ScalarProperty Name="Pintos_Vendaveis" ColumnName="Pintos_Vendaveis" />
+          <ScalarProperty Name="Macho" ColumnName="Macho" />
+          <ScalarProperty Name="Morto" ColumnName="Morto" />
+          <ScalarProperty Name="Eliminado" ColumnName="Eliminado" />
+          <ScalarProperty Name="ClassOvo" ColumnName="ClassOvo" />
+          <ScalarProperty Name="Hatcher" ColumnName="Hatcher" />
+          <ScalarProperty Name="Setter" ColumnName="Setter" />
+          <ScalarProperty Name="NumLote" ColumnName="NumLote" />
+          <ScalarProperty Name="Flock_id" ColumnName="Flock_id" />
+          <ScalarProperty Name="Set_date" ColumnName="Set_date" />
+          <ScalarProperty Name="Hatch_Loc" ColumnName="Hatch_Loc" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HATCHERY_ORDER_DATA">
+      <EntityTypeMapping TypeName="HLBAPPModel.HATCHERY_ORDER_DATA">
+        <MappingFragment StoreEntitySet="HATCHERY_ORDER_DATA">
+          <ScalarProperty Name="NumeroRNC" ColumnName="NumeroRNC" />
+          <ScalarProperty Name="Variety" ColumnName="Variety" />
+          <ScalarProperty Name="DisposicaoRNC" ColumnName="DisposicaoRNC" />
+          <ScalarProperty Name="RNC" ColumnName="RNC" />
+          <ScalarProperty Name="QtdeErroSelecao" ColumnName="QtdeErroSelecao" />
+          <ScalarProperty Name="RespLiberacaoVeiculo" ColumnName="RespLiberacaoVeiculo" />
+          <ScalarProperty Name="RespExpedicaoCarga" ColumnName="RespExpedicaoCarga" />
+          <ScalarProperty Name="RespInspecaoFinal" ColumnName="RespInspecaoFinal" />
+          <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+          <ScalarProperty Name="QtdeErroSexagem" ColumnName="QtdeErroSexagem" />
+          <ScalarProperty Name="QtdeErroContagem" ColumnName="QtdeErroContagem" />
+          <ScalarProperty Name="QtdePesTortosDedosCurvos" ColumnName="QtdePesTortosDedosCurvos" />
+          <ScalarProperty Name="QtdePontoFioPretoUmbigo" ColumnName="QtdePontoFioPretoUmbigo" />
+          <ScalarProperty Name="QtdeVacinada" ColumnName="QtdeVacinada" />
+          <ScalarProperty Name="QtdeAmostra" ColumnName="QtdeAmostra" />
+          <ScalarProperty Name="SaidaReal" ColumnName="SaidaReal" />
+          <ScalarProperty Name="SaidaProgramada" ColumnName="SaidaProgramada" />
+          <ScalarProperty Name="UniformidadePerc" ColumnName="UniformidadePerc" />
+          <ScalarProperty Name="PesoMedio" ColumnName="PesoMedio" />
+          <ScalarProperty Name="OrderNoCHIC" ColumnName="OrderNoCHIC" />
+          <ScalarProperty Name="Set_date" ColumnName="Set_date" />
+          <ScalarProperty Name="Hatch_Loc" ColumnName="Hatch_Loc" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HATCHERY_ORDER_FLOCK_DATA">
+      <EntityTypeMapping TypeName="HLBAPPModel.HATCHERY_ORDER_FLOCK_DATA">
+        <MappingFragment StoreEntitySet="HATCHERY_ORDER_FLOCK_DATA">
+          <ScalarProperty Name="Uniformidade" ColumnName="Uniformidade" />
+          <ScalarProperty Name="Peso" ColumnName="Peso" />
+          <ScalarProperty Name="FaltaMotivo" ColumnName="FaltaMotivo" />
+          <ScalarProperty Name="FaltaQtde" ColumnName="FaltaQtde" />
+          <ScalarProperty Name="TIMascara" ColumnName="TIMascara" />
+          <ScalarProperty Name="TIPoderLampada" ColumnName="TIPoderLampada" />
+          <ScalarProperty Name="Rotulo" ColumnName="Rotulo" />
+          <ScalarProperty Name="Variety" ColumnName="Variety" />
+          <ScalarProperty Name="Qtde" ColumnName="Qtde" />
+          <ScalarProperty Name="ClassOvo" ColumnName="ClassOvo" />
+          <ScalarProperty Name="NumLote" ColumnName="NumLote" />
+          <ScalarProperty Name="Flock_id" ColumnName="Flock_id" />
+          <ScalarProperty Name="OrderNoCHIC" ColumnName="OrderNoCHIC" />
+          <ScalarProperty Name="Set_date" ColumnName="Set_date" />
+          <ScalarProperty Name="Hatch_Loc" ColumnName="Hatch_Loc" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HATCHERY_ORDER_VACC_DATA">
+      <EntityTypeMapping TypeName="HLBAPPModel.HATCHERY_ORDER_VACC_DATA">
+        <MappingFragment StoreEntitySet="HATCHERY_ORDER_VACC_DATA">
+          <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+          <ScalarProperty Name="QtdeDosesPorAmpola" ColumnName="QtdeDosesPorAmpola" />
+          <ScalarProperty Name="QtdeAmpolas" ColumnName="QtdeAmpolas" />
+          <ScalarProperty Name="Variety" ColumnName="Variety" />
+          <ScalarProperty Name="DataValidade" ColumnName="DataValidade" />
+          <ScalarProperty Name="DataFabricacao" ColumnName="DataFabricacao" />
+          <ScalarProperty Name="Partida" ColumnName="Partida" />
+          <ScalarProperty Name="Laboratorio" ColumnName="Laboratorio" />
+          <ScalarProperty Name="Vacina" ColumnName="Vacina" />
+          <ScalarProperty Name="OrderNoCHIC" ColumnName="OrderNoCHIC" />
+          <ScalarProperty Name="Set_date" ColumnName="Set_date" />
+          <ScalarProperty Name="Hatch_Loc" ColumnName="Hatch_Loc" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CTRL_LOTE_LOC_ARMAZ_WEB">
+      <EntityTypeMapping TypeName="HLBAPPModel.CTRL_LOTE_LOC_ARMAZ_WEB">
+        <MappingFragment StoreEntitySet="CTRL_LOTE_LOC_ARMAZ_WEB">
+          <ScalarProperty Name="PercMediaIncUlt4SemFLIP" ColumnName="PercMediaIncUlt4SemFLIP" />
+          <ScalarProperty Name="IdadeLote" ColumnName="IdadeLote" />
+          <ScalarProperty Name="Nucleo" ColumnName="Nucleo" />
+          <ScalarProperty Name="Qtde" ColumnName="Qtde" />
+          <ScalarProperty Name="DataProducao" ColumnName="DataProducao" />
+          <ScalarProperty Name="NumLote" ColumnName="NumLote" />
+          <ScalarProperty Name="LoteCompleto" ColumnName="LoteCompleto" />
+          <ScalarProperty Name="Linhagem" ColumnName="Linhagem" />
+          <ScalarProperty Name="Local" ColumnName="Local" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HATCHERY_ORDER_ROTULO_DATA">
+      <EntityTypeMapping TypeName="HLBAPPModel.HATCHERY_ORDER_ROTULO_DATA">
+        <MappingFragment StoreEntitySet="HATCHERY_ORDER_ROTULO_DATA">
+          <ScalarProperty Name="Variety" ColumnName="Variety" />
+          <ScalarProperty Name="Uniformidade" ColumnName="Uniformidade" />
+          <ScalarProperty Name="PesoMedio" ColumnName="PesoMedio" />
+          <ScalarProperty Name="Cor" ColumnName="Cor" />
+          <ScalarProperty Name="OrderNoCHIC" ColumnName="OrderNoCHIC" />
+          <ScalarProperty Name="Set_date" ColumnName="Set_date" />
+          <ScalarProperty Name="Hatch_Loc" ColumnName="Hatch_Loc" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOG_HATCHERY_EGG_DATA">
+      <EntityTypeMapping TypeName="HLBAPPModel.LOG_HATCHERY_EGG_DATA">
+        <MappingFragment StoreEntitySet="LOG_HATCHERY_EGG_DATA">
+          <ScalarProperty Name="Opercao" ColumnName="Opercao" />
+          <ScalarProperty Name="Data_Hora" ColumnName="Data_Hora" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Peso_Rentab" ColumnName="Peso_Rentab" />
+          <ScalarProperty Name="Peso_Transf" ColumnName="Peso_Transf" />
+          <ScalarProperty Name="Peso_Ent_Inv" ColumnName="Peso_Ent_Inv" />
+          <ScalarProperty Name="Peso_Ovo" ColumnName="Peso_Ovo" />
+          <ScalarProperty Name="Horario" ColumnName="Horario" />
+          <ScalarProperty Name="Bandejas" ColumnName="Bandejas" />
+          <ScalarProperty Name="Posicao" ColumnName="Posicao" />
+          <ScalarProperty Name="Variety" ColumnName="Variety" />
+          <ScalarProperty Name="Estimate" ColumnName="Estimate" />
+          <ScalarProperty Name="Track_no" ColumnName="Track_no" />
+          <ScalarProperty Name="Machine" ColumnName="Machine" />
+          <ScalarProperty Name="Egg_key" ColumnName="Egg_key" />
+          <ScalarProperty Name="Eggs_rcvd" ColumnName="Eggs_rcvd" />
+          <ScalarProperty Name="Lay_date" ColumnName="Lay_date" />
+          <ScalarProperty Name="Flock_id" ColumnName="Flock_id" />
+          <ScalarProperty Name="Hatch_loc" ColumnName="Hatch_loc" />
+          <ScalarProperty Name="Set_date" ColumnName="Set_date" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOG_HATCHERY_FLOCK_SETTER_DATA">
+      <EntityTypeMapping TypeName="HLBAPPModel.LOG_HATCHERY_FLOCK_SETTER_DATA">
+        <MappingFragment StoreEntitySet="LOG_HATCHERY_FLOCK_SETTER_DATA">
+          <ScalarProperty Name="EliminadoCancelamento" ColumnName="EliminadoCancelamento" />
+          <ScalarProperty Name="Infertilidade10Dias" ColumnName="Infertilidade10Dias" />
+          <ScalarProperty Name="Amostra" ColumnName="Amostra" />
+          <ScalarProperty Name="Anormalidade" ColumnName="Anormalidade" />
+          <ScalarProperty Name="Hemorragico" ColumnName="Hemorragico" />
+          <ScalarProperty Name="MaFormacaoVisceras" ColumnName="MaFormacaoVisceras" />
+          <ScalarProperty Name="MaFormacaoCerebro" ColumnName="MaFormacaoCerebro" />
+          <ScalarProperty Name="Tardia19a21" ColumnName="Tardia19a21" />
+          <ScalarProperty Name="Tardia15a18" ColumnName="Tardia15a18" />
+          <ScalarProperty Name="Media8a14" ColumnName="Media8a14" />
+          <ScalarProperty Name="Inicial4a7" ColumnName="Inicial4a7" />
+          <ScalarProperty Name="Inicial0a3" ColumnName="Inicial0a3" />
+          <ScalarProperty Name="Infertil" ColumnName="Infertil" />
+          <ScalarProperty Name="MalFormado" ColumnName="MalFormado" />
+          <ScalarProperty Name="MalPosicionado" ColumnName="MalPosicionado" />
+          <ScalarProperty Name="Fungo" ColumnName="Fungo" />
+          <ScalarProperty Name="ContaminacaoBacteriana" ColumnName="ContaminacaoBacteriana" />
+          <ScalarProperty Name="BicadoMorto" ColumnName="BicadoMorto" />
+          <ScalarProperty Name="BicadoVivo" ColumnName="BicadoVivo" />
+          <ScalarProperty Name="De18a21" ColumnName="De18a21" />
+          <ScalarProperty Name="De13a17" ColumnName="De13a17" />
+          <ScalarProperty Name="De5a12" ColumnName="De5a12" />
+          <ScalarProperty Name="De0a4" ColumnName="De0a4" />
+          <ScalarProperty Name="Variety" ColumnName="Variety" />
+          <ScalarProperty Name="Qtde_02_Retirada" ColumnName="Qtde_02_Retirada" />
+          <ScalarProperty Name="Horario_02_Retirada" ColumnName="Horario_02_Retirada" />
+          <ScalarProperty Name="Qtde_01_Retirada" ColumnName="Qtde_01_Retirada" />
+          <ScalarProperty Name="Horario_01_Retirada" ColumnName="Horario_01_Retirada" />
+          <ScalarProperty Name="DataRetiradaReal" ColumnName="DataRetiradaReal" />
+          <ScalarProperty Name="Qtde_Incubada" ColumnName="Qtde_Incubada" />
+          <ScalarProperty Name="Pinto_Terceira" ColumnName="Pinto_Terceira" />
+          <ScalarProperty Name="Refugo" ColumnName="Refugo" />
+          <ScalarProperty Name="Pintos_Vendaveis" ColumnName="Pintos_Vendaveis" />
+          <ScalarProperty Name="Macho" ColumnName="Macho" />
+          <ScalarProperty Name="Morto" ColumnName="Morto" />
+          <ScalarProperty Name="Eliminado" ColumnName="Eliminado" />
+          <ScalarProperty Name="ClassOvo" ColumnName="ClassOvo" />
+          <ScalarProperty Name="Hatcher" ColumnName="Hatcher" />
+          <ScalarProperty Name="Setter" ColumnName="Setter" />
+          <ScalarProperty Name="NumLote" ColumnName="NumLote" />
+          <ScalarProperty Name="Flock_id" ColumnName="Flock_id" />
+          <ScalarProperty Name="Set_date" ColumnName="Set_date" />
+          <ScalarProperty Name="Hatch_Loc" ColumnName="Hatch_Loc" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Operacao" ColumnName="Operacao" />
+          <ScalarProperty Name="Data_Hora" ColumnName="Data_Hora" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LayoutDiarioExpedicaos">
+      <EntityTypeMapping TypeName="HLBAPPModel.LayoutDiarioExpedicaos">
+        <MappingFragment StoreEntitySet="LayoutDiarioExpedicaos">
+          <ScalarProperty Name="Obs" ColumnName="Obs" />
+          <ScalarProperty Name="TemperaturaOvoInternaFim" ColumnName="TemperaturaOvoInternaFim" />
+          <ScalarProperty Name="TemperaturaOvoInternaMeio" ColumnName="TemperaturaOvoInternaMeio" />
+          <ScalarProperty Name="TemperaturaOvoInterna" ColumnName="TemperaturaOvoInterna" />
+          <ScalarProperty Name="QtdeConferencia" ColumnName="QtdeConferencia" />
+          <ScalarProperty Name="QtdDiferenca" ColumnName="QtdDiferenca" />
+          <ScalarProperty Name="TipoOvo" ColumnName="TipoOvo" />
+          <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+          <ScalarProperty Name="CodItemDEO" ColumnName="CodItemDEO" />
+          <ScalarProperty Name="NumIdentificacao" ColumnName="NumIdentificacao" />
+          <ScalarProperty Name="Lacre" ColumnName="Lacre" />
+          <ScalarProperty Name="GTANum" ColumnName="GTANum" />
+          <ScalarProperty Name="TipoDEO" ColumnName="TipoDEO" />
+          <ScalarProperty Name="Incubatorio" ColumnName="Incubatorio" />
+          <ScalarProperty Name="Importado" ColumnName="Importado" />
+          <ScalarProperty Name="Granja" ColumnName="Granja" />
+          <ScalarProperty Name="NFNum" ColumnName="NFNum" />
+          <ScalarProperty Name="ResponsavelReceb" ColumnName="ResponsavelReceb" />
+          <ScalarProperty Name="ResponsavelCarreg" ColumnName="ResponsavelCarreg" />
+          <ScalarProperty Name="DataHoraRecebInc" ColumnName="DataHoraRecebInc" />
+          <ScalarProperty Name="DataHoraCarreg" ColumnName="DataHoraCarreg" />
+          <ScalarProperty Name="DataHora" ColumnName="DataHora" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="QtdeBandejas" ColumnName="QtdeBandejas" />
+          <ScalarProperty Name="QtdeOvos" ColumnName="QtdeOvos" />
+          <ScalarProperty Name="NumeroReferencia" ColumnName="NumeroReferencia" />
+          <ScalarProperty Name="DataProducao" ColumnName="DataProducao" />
+          <ScalarProperty Name="LoteCompleto" ColumnName="LoteCompleto" />
+          <ScalarProperty Name="Linhagem" ColumnName="Linhagem" />
+          <ScalarProperty Name="Idade" ColumnName="Idade" />
+          <ScalarProperty Name="Lote" ColumnName="Lote" />
+          <ScalarProperty Name="Galpao" ColumnName="Galpao" />
+          <ScalarProperty Name="Nucleo" ColumnName="Nucleo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONF_MOV_ESTQ">
+      <EntityTypeMapping TypeName="HLBAPPModel.CONF_MOV_ESTQ">
+        <MappingFragment StoreEntitySet="CONF_MOV_ESTQ">
+          <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+          <ScalarProperty Name="UsuarioConferencia" ColumnName="UsuarioConferencia" />
+          <ScalarProperty Name="DataHoraConferencia" ColumnName="DataHoraConferencia" />
+          <ScalarProperty Name="MovEstqChv" ColumnName="MovEstqChv" />
+          <ScalarProperty Name="EmpCod" ColumnName="EmpCod" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONF_MOV_ESTQ_VALORES">
+      <EntityTypeMapping TypeName="HLBAPPModel.CONF_MOV_ESTQ_VALORES">
+        <MappingFragment StoreEntitySet="CONF_MOV_ESTQ_VALORES">
+          <ScalarProperty Name="ValorNovo" ColumnName="ValorNovo" />
+          <ScalarProperty Name="ValorAntigo" ColumnName="ValorAntigo" />
+          <ScalarProperty Name="Campo" ColumnName="Campo" />
+          <ScalarProperty Name="Operacao" ColumnName="Operacao" />
+          <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+          <ScalarProperty Name="ItMovEstqSeq" ColumnName="ItMovEstqSeq" />
+          <ScalarProperty Name="Tabela" ColumnName="Tabela" />
+          <ScalarProperty Name="IDConfItemMovEstq" ColumnName="IDConfItemMovEstq" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPO_CLASSFICACAO_OVO_02">
+      <EntityTypeMapping TypeName="HLBAPPModel.TIPO_CLASSFICACAO_OVO_02">
+        <MappingFragment StoreEntitySet="TIPO_CLASSFICACAO_OVO">
+          <ScalarProperty Name="Origem" ColumnName="Origem" />
+          <ScalarProperty Name="AproveitamentoOvo" ColumnName="AproveitamentoOvo" />
+          <ScalarProperty Name="DescricaoTipo" ColumnName="DescricaoTipo" />
+          <ScalarProperty Name="CodigoTipo" ColumnName="CodigoTipo" />
+          <ScalarProperty Name="Unidade" ColumnName="Unidade" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VU_Pedidos_Vendas_CHIC_Matrizes">
+      <EntityTypeMapping TypeName="HLBAPPModel.VU_Pedidos_Vendas_CHIC_Matrizes">
+        <MappingFragment StoreEntitySet="VU_Pedidos_Vendas_CHIC_Matrizes">
+          <ScalarProperty Name="InicioCarregamentoEsperado" ColumnName="InicioCarregamentoEsperado" />
+          <ScalarProperty Name="ExisteConfEnvFat" ColumnName="ExisteConfEnvFat" />
+          <ScalarProperty Name="ExisteConfAss" ColumnName="ExisteConfAss" />
+          <ScalarProperty Name="ExisteConfEnv" ColumnName="ExisteConfEnv" />
+          <ScalarProperty Name="VendNome" ColumnName="VendNome" />
+          <ScalarProperty Name="CondicaoPagamento" ColumnName="CondicaoPagamento" />
+          <ScalarProperty Name="ObsFaturamento" ColumnName="ObsFaturamento" />
+          <ScalarProperty Name="ObservacaoCHIC" ColumnName="ObservacaoCHIC" />
+          <ScalarProperty Name="ObsProgramacao" ColumnName="ObsProgramacao" />
+          <ScalarProperty Name="EntFone" ColumnName="EntFone" />
+          <ScalarProperty Name="StatusEntidadeCor" ColumnName="StatusEntidadeCor" />
+          <ScalarProperty Name="StatusEntidade" ColumnName="StatusEntidade" />
+          <ScalarProperty Name="NomeFantasia" ColumnName="NomeFantasia" />
+          <ScalarProperty Name="pais" ColumnName="pais" />
+          <ScalarProperty Name="UfRegGeog" ColumnName="UfRegGeog" />
+          <ScalarProperty Name="uf" ColumnName="uf" />
+          <ScalarProperty Name="cidade" ColumnName="cidade" />
+          <ScalarProperty Name="EntCpfCgc" ColumnName="EntCpfCgc" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnderEntSeq" ColumnName="EnderEntSeq" />
+          <ScalarProperty Name="IDPedidoVenda" ColumnName="IDPedidoVenda" />
+          <ScalarProperty Name="Descricaro" ColumnName="Descricaro" />
+          <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+          <ScalarProperty Name="EmpresaTranportador" ColumnName="EmpresaTranportador" />
+          <ScalarProperty Name="RepresentanteCompleto" ColumnName="RepresentanteCompleto" />
+          <ScalarProperty Name="NomeRepresentante" ColumnName="NomeRepresentante" />
+          <ScalarProperty Name="CodigoRepresentante" ColumnName="CodigoRepresentante" />
+          <ScalarProperty Name="DataEntrega" ColumnName="DataEntrega" />
+          <ScalarProperty Name="LocalNascimento" ColumnName="LocalNascimento" />
+          <ScalarProperty Name="Embalagem" ColumnName="Embalagem" />
+          <ScalarProperty Name="CorExibe" ColumnName="CorExibe" />
+          <ScalarProperty Name="LinhagemComercial" ColumnName="LinhagemComercial" />
+          <ScalarProperty Name="Linhagem" ColumnName="Linhagem" />
+          <ScalarProperty Name="Produto" ColumnName="Produto" />
+          <ScalarProperty Name="LocalEntrega" ColumnName="LocalEntrega" />
+          <ScalarProperty Name="NumVeiculo" ColumnName="NumVeiculo" />
+          <ScalarProperty Name="ClienteCompleto" ColumnName="ClienteCompleto" />
+          <ScalarProperty Name="NomeCliente" ColumnName="NomeCliente" />
+          <ScalarProperty Name="CodigoCliente" ColumnName="CodigoCliente" />
+          <ScalarProperty Name="DataProgramacao" ColumnName="DataProgramacao" />
+          <ScalarProperty Name="ValorTotalPrdStr" ColumnName="ValorTotalPrdStr" />
+          <ScalarProperty Name="ValorTotalPrd" ColumnName="ValorTotalPrd" />
+          <ScalarProperty Name="PrecoProdutoStr" ColumnName="PrecoProdutoStr" />
+          <ScalarProperty Name="PrecoProduto" ColumnName="PrecoProduto" />
+          <ScalarProperty Name="MotivoSobra" ColumnName="MotivoSobra" />
+          <ScalarProperty Name="QtdeSobra" ColumnName="QtdeSobra" />
+          <ScalarProperty Name="CHICNumReposicao" ColumnName="CHICNumReposicao" />
+          <ScalarProperty Name="MotivoReposicao" ColumnName="MotivoReposicao" />
+          <ScalarProperty Name="QtdeReposicaoStr" ColumnName="QtdeReposicaoStr" />
+          <ScalarProperty Name="QtdeReposicao" ColumnName="QtdeReposicao" />
+          <ScalarProperty Name="PercBonificacaoStr" ColumnName="PercBonificacaoStr" />
+          <ScalarProperty Name="PercBonificacao" ColumnName="PercBonificacao" />
+          <ScalarProperty Name="QtdeBonificadaStr" ColumnName="QtdeBonificadaStr" />
+          <ScalarProperty Name="QtdeBonificada" ColumnName="QtdeBonificada" />
+          <ScalarProperty Name="QtdeVendidaStr" ColumnName="QtdeVendidaStr" />
+          <ScalarProperty Name="QtdeVendida" ColumnName="QtdeVendida" />
+          <ScalarProperty Name="QtdeTotalStr" ColumnName="QtdeTotalStr" />
+          <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+          <ScalarProperty Name="CHICNum" ColumnName="CHICNum" />
+          <ScalarProperty Name="QtdeCxsOvosStr" ColumnName="QtdeCxsOvosStr" />
+          <ScalarProperty Name="QtdeOvosStr" ColumnName="QtdeOvosStr" />
+          <ScalarProperty Name="DataIncubacao" ColumnName="DataIncubacao" />
+          <ScalarProperty Name="Genero" ColumnName="Genero" />
+          <ScalarProperty Name="TipoProduto" ColumnName="TipoProduto" />
+          <ScalarProperty Name="TipoMatriz" ColumnName="TipoMatriz" />
+          <ScalarProperty Name="LinhagemFLIP" ColumnName="LinhagemFLIP" />
+          <ScalarProperty Name="PercEclosaoConfigStr" ColumnName="PercEclosaoConfigStr" />
+          <ScalarProperty Name="PercEclosaoConfig" ColumnName="PercEclosaoConfig" />
+          <ScalarProperty Name="ValorTot" ColumnName="ValorTot" />
+          <ScalarProperty Name="Qtde" ColumnName="Qtde" />
+          <ScalarProperty Name="DataProgramacaoStr" ColumnName="DataProgramacaoStr" />
+          <ScalarProperty Name="AnoMes" ColumnName="AnoMes" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

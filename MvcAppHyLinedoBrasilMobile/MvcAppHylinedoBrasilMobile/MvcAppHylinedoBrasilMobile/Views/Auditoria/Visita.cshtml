@@ -1,0 +1,130 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+
+    string departamento = ((List<SelectListItem>)Session["DLListaDepartamentos"]).Where(w => w.Selected == true).FirstOrDefault().Text;
+    string responsavel = ((List<SelectListItem>)Session["DLListaResponsaveis"]).Where(w => w.Selected == true).FirstOrDefault().Text;
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+
+    int idSelecionado = Convert.ToInt32(Session["idSelecionado"]);
+    
+    int qtdeTotal = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == idSelecionado).Count();
+    int qtdePendente = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == idSelecionado && w.StatusResolucao == "Pendente").Count();
+    int qtdeEnviado = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == idSelecionado && w.StatusResolucao == "Enviado").Count();
+    int qtdeResolvido = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == idSelecionado && w.StatusResolucao == "Resolvido").Count();
+    int qtdeAprovado = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == idSelecionado && w.StatusResolucao == "Aprovado").Count();
+
+    int qtdeNaoAuditado = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == idSelecionado && w.Status == "Não Auditado").Count();
+    int qtdeNaoConforme = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == idSelecionado && w.Status == "Não Conforme").Count();
+
+    string status = "Pendente";
+    if (qtdeAprovado > 0)
+    {
+        status = "Aprovada";
+    }
+    else if (qtdeResolvido > 0 && qtdeResolvido < qtdeNaoConforme)
+    {
+        status = "Resolvida Parcial";
+    }
+    else if (qtdeResolvido == qtdeNaoConforme)
+    {
+        status = "Resolvida Total";
+    }
+    else if (qtdeEnviado > 0)
+    {
+        status = "Enviada";
+    }
+}
+
+<script src="../../Scripts/jquery.maskedinput.js" type="text/javascript"></script>
+
+<script language="javascript" type="text/javascript">
+    //    window.onbeforeunload = function () {
+    //        return "Não é possível atualizar a página porque os dados serão perdidos! Sendo assim, a página será fechada!";
+    //    }
+
+    window.onkeydown = function (e) {
+        if (e.keyCode === 116) {
+            alert("Função não permitida");
+            e.keyCode = 0;
+            e.returnValue = false;
+            return false;
+        }
+    }
+</script>
+
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para a Lista de Visitas", "ListaVisitas", "Auditoria", 
+                null, new { @title = "Clique aqui para voltar para a Lista de Visitas", @class = "visita" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/visita_32.png"), "Visita")
+    <h2>Visita</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+    <fieldset>
+        <div class="editor-label">
+            <b>Data da Visita:</b>
+            @Html.Label("dataVisita", Convert.ToDateTime(Session["dataVisita"]).ToShortDateString())
+        </div>
+        <div class="editor-label">
+            <b>Departamento:</b>
+            @(departamento)
+        </div>
+        @if (Session["nucleoVisita"] != "")
+        {
+        <div class="editor-label">
+            <b>Núcleo:</b>
+            @(Session["nucleoVisita"].ToString())
+        </div>
+        }
+        <div class="editor-label">
+            <b>Responsável:</b>
+            @(responsavel)
+        </div>
+        @using (Html.BeginForm("SearchRequisitosVisitaPorGrupo", "Auditoria"))
+        {
+        <div class="editor-label">
+            <b>Grupo de Requisitos:</b>
+            @Html.DropDownList(
+                "Grupo",
+                (List<SelectListItem>)Session["FiltraDDLGrupoRequisito"],
+                new { @id = "ddlFiltraDDLGrupoRequisito" })
+        </div>
+        <div class="editor-label">
+            <b>Status:</b>
+            @Html.DropDownList(
+                "Status",
+                (List<SelectListItem>)Session["FiltraDDLStatus"],
+                new { @id = "ddlFiltraDDLStatus" })
+        </div>
+         <input type="submit" value="Pesquisar" />
+        }
+    </fieldset>
+    <br />
+    @Html.Partial("_ListaRequisitosVisita")
+    <br />
+@using (Html.BeginForm("SavePreencheVisita", "Auditoria", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        <div class="editor-label">
+            <b>Comentário Geral da Visita:</b>
+            @Html.TextArea("comentarioGeralVis", Session["comentariosGeralVisita"].ToString(),
+                new { @required = true })
+        </div>
+        @if (status == "Pendente")
+        {
+        <p>
+            <input type="submit" value="Salvar Preenchimento" id="add" />
+        </p>
+        }
+    </fieldset>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,30 @@
+﻿@using (Html.BeginForm("LoadNavOrdersAgendaView", "NavisionIntegrationApp",
+    new { initialDate = Convert.ToDateTime(Session["initialDateSearchNav"]),
+        finalDate = Convert.ToDateTime(Session["finalDateSearchNav"])},
+    FormMethod.Post))
+{
+    <ul data-role="listview" data-inset="true">
+         <li data-role="fieldcontain">
+            <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_InitialDate", Session["language"].ToString())</b>
+            <div class="editor-label">
+                @Html.TextBox("initialDate", Convert.ToDateTime(Session["initialDateSearchNav"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_FinalDate", Session["language"].ToString())</b>
+            <div class="editor-label">
+                @Html.TextBox("finalDate", Convert.ToDateTime(Session["finalDateSearchNav"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+            </div>
+        </li>
+        @*<li data-role="list-divider">
+            <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_VisitorList", Session["language"].ToString())</b>
+            @Html.DropDownList(
+                "Visitor",
+                (List<SelectListItem>)Session["VisitorList"],
+                new { @id = "dropBoxVisitorList" })
+        </li>*@
+        <li data-role="fieldcontain">
+            <input type="submit" value="@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_SeachButton", Session["language"].ToString())" />
+        </li>
+    </ul>
+}

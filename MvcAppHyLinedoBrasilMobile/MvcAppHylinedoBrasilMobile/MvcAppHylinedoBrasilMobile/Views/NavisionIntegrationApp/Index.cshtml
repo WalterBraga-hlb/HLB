@@ -1,0 +1,24 @@
+﻿@model IEnumerable<MvcAppHylinedoBrasilMobile.Models.NavOrders>
+
+@{
+    ViewBag.Title = "";
+}
+<div align="center">
+    <p>
+        @Html.ActionLink(@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Link_Back_Home", Session["language"].ToString()), "Index", "HomeMobile")
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/list.png"), MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Title_List_NavisionIntegrationApp", Session["language"].ToString()))
+    <h2>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Title_List_NavisionIntegrationApp", Session["language"].ToString())</h2>
+</div>
+<br />
+<h4 style="color:Red; background-color:White">@Html.Raw(ViewBag.Error)</h4>
+
+@Html.Partial("_SearchOrders")
+
+@Html.Partial("_OrdersList")
+
+@Html.Partial("_Menu")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

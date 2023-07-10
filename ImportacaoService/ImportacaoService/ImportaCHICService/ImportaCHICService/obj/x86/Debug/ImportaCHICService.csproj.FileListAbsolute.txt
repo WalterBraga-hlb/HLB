@@ -1,0 +1,15 @@
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICService\ImportaCHICService\bin\Debug\Data\HLBAPP.Designer.cs
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICService\ImportaCHICService\bin\Debug\ImportaCHICService.exe.config
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICService\ImportaCHICService\bin\Debug\ImportaCHICService.exe.manifest
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICService\ImportaCHICService\bin\Debug\ImportaCHICService.application
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICService\ImportaCHICService\bin\Debug\ImportaCHICService.exe
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICService\ImportaCHICService\bin\Debug\ImportaCHICService.pdb
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICService\ImportaCHICService\obj\x86\Debug\ImportaCHICService.csproj.AssemblyReference.cache
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICService\ImportaCHICService\obj\x86\Debug\ImportaCHICService.ImportaCHIC.resources
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICService\ImportaCHICService\obj\x86\Debug\ImportaCHICService.ProjectInstaller.resources
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICService\ImportaCHICService\obj\x86\Debug\ImportaCHICService.csproj.GenerateResource.cache
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICService\ImportaCHICService\obj\x86\Debug\ImportaCHICService.csproj.CoreCompileInputs.cache
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICService\ImportaCHICService\obj\x86\Debug\ImportaCHICService.exe.manifest
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICService\ImportaCHICService\obj\x86\Debug\ImportaCHICService.application
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICService\ImportaCHICService\obj\x86\Debug\ImportaCHICService.exe
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICService\ImportaCHICService\obj\x86\Debug\ImportaCHICService.pdb

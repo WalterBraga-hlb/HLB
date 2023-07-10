@@ -1,0 +1,2323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MixModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="MixModelStoreContainer">
+          <EntitySet Name="BS_ESTRUTURA" EntityType="MixModel.Store.BS_ESTRUTURA" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="FO_FUNCIONARIO" EntityType="MixModel.Store.FO_FUNCIONARIO" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="FO_PESSOA" EntityType="MixModel.Store.FO_PESSOA" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <AssociationSet Name="FK_ESTRUTURA_ESTRUTURA" Association="MixModel.Store.FK_ESTRUTURA_ESTRUTURA">
+            <End Role="BS_ESTRUTURA" EntitySet="BS_ESTRUTURA" />
+            <End Role="BS_ESTRUTURA1" EntitySet="BS_ESTRUTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNC_PESSOA_SUP_ESTAGIO" Association="MixModel.Store.FK_FUNC_PESSOA_SUP_ESTAGIO">
+            <End Role="FO_PESSOA" EntitySet="FO_PESSOA" />
+            <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNCIONARIO_ESTRUTURA" Association="MixModel.Store.FK_FUNCIONARIO_ESTRUTURA">
+            <End Role="BS_ESTRUTURA" EntitySet="BS_ESTRUTURA" />
+            <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNCIONARIO_ESTRUTURAEMP" Association="MixModel.Store.FK_FUNCIONARIO_ESTRUTURAEMP">
+            <End Role="BS_ESTRUTURA" EntitySet="BS_ESTRUTURA" />
+            <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNCIONARIO_ESTRUTURAFIL" Association="MixModel.Store.FK_FUNCIONARIO_ESTRUTURAFIL">
+            <End Role="BS_ESTRUTURA" EntitySet="BS_ESTRUTURA" />
+            <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNCIONARIO_FUNCPENS" Association="MixModel.Store.FK_FUNCIONARIO_FUNCPENS">
+            <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+            <End Role="FO_FUNCIONARIO1" EntitySet="FO_FUNCIONARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNCIONARIO_PESSOA" Association="MixModel.Store.FK_FUNCIONARIO_PESSOA">
+            <End Role="FO_PESSOA" EntitySet="FO_PESSOA" />
+            <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNCIONARIO_TUTOR" Association="MixModel.Store.FK_FUNCIONARIO_TUTOR">
+            <End Role="FO_PESSOA" EntitySet="FO_PESSOA" />
+            <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BS_ESTRUTURA">
+          <Key>
+            <PropertyRef Name="DOM_CODIGO" />
+            <PropertyRef Name="ES_ID_ESTRUTURA" />
+          </Key>
+          <Property Name="DOM_CODIGO" Type="int" Nullable="false" />
+          <Property Name="ES_ID_ESTRUTURA" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="ES_RAZAO_SOCIAL" Type="varchar" Nullable="false" MaxLength="120" />
+          <Property Name="ES_NOME" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="ES_CONTATO" Type="varchar" MaxLength="40" />
+          <Property Name="ES_INSCR_ESTADUAL" Type="varchar" MaxLength="20" />
+          <Property Name="ES_INSCR_MUNICIPAL" Type="varchar" MaxLength="20" />
+          <Property Name="ES_EMAIL" Type="varchar" MaxLength="120" />
+          <Property Name="ES_SITE" Type="varchar" MaxLength="40" />
+          <Property Name="ES_LOGRADOURO" Type="varchar" MaxLength="60" />
+          <Property Name="ES_NUMERO" Type="varchar" MaxLength="10" />
+          <Property Name="ES_COMPLEMENTO" Type="varchar" MaxLength="25" />
+          <Property Name="BA_CODIGO" Type="int" />
+          <Property Name="CI_CODIGO" Type="int" />
+          <Property Name="PA_SIGLA" Type="varchar" MaxLength="10" />
+          <Property Name="UF_SIGLA" Type="char" MaxLength="2" />
+          <Property Name="ES_CEP" Type="varchar" MaxLength="10" />
+          <Property Name="ES_DDDFONE1" Type="varchar" MaxLength="10" />
+          <Property Name="ES_TELEFONE1" Type="varchar" MaxLength="15" />
+          <Property Name="ES_RAMAL1" Type="varchar" MaxLength="10" />
+          <Property Name="ES_DDDFONE2" Type="varchar" MaxLength="10" />
+          <Property Name="ES_TELEFONE2" Type="varchar" MaxLength="15" />
+          <Property Name="ES_RAMAL2" Type="varchar" MaxLength="10" />
+          <Property Name="ES_FAX" Type="varchar" MaxLength="15" />
+          <Property Name="ES_DDDFAX" Type="varchar" MaxLength="10" />
+          <Property Name="ES_RAMALFAX" Type="varchar" MaxLength="10" />
+          <Property Name="TI_SIGLA" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="NE_CODIGO" Type="varchar" MaxLength="10" />
+          <Property Name="CT_CODIGO" Type="varchar" MaxLength="10" />
+          <Property Name="AEC_CODIGO" Type="varchar" MaxLength="7" />
+          <Property Name="ES_CGC_CEI" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="MCG_CODIGO" Type="varchar" MaxLength="2" />
+          <Property Name="ES_ALT_CGCCEI" Type="char" MaxLength="1" />
+          <Property Name="ES_ALT_ENDERECO" Type="char" MaxLength="1" />
+          <Property Name="ES_CGC_ANTERIOR" Type="varchar" MaxLength="15" />
+          <Property Name="ES_PREFIXO" Type="varchar" MaxLength="2" />
+          <Property Name="ES_ANOBASE" Type="int" />
+          <Property Name="ES_CODMUNICIPIO" Type="varchar" MaxLength="7" />
+          <Property Name="ES_MES_DT_BASE" Type="int" />
+          <Property Name="ES_FPAS" Type="varchar" MaxLength="10" />
+          <Property Name="ES_SAT" Type="varchar" MaxLength="10" />
+          <Property Name="ES_PERC_ACIDENTE" Type="numeric" Precision="15" Scale="4" />
+          <Property Name="ES_COD_TERCEIROS" Type="varchar" MaxLength="10" />
+          <Property Name="ES_PERC_INSS" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_ID_SESI_SENAI" Type="char" MaxLength="1" />
+          <Property Name="ES_ID_FISICA_JURIDICA" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="ES_ID_CGC_CPF_CEI" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="ES_CC_CODBACEN" Type="varchar" MaxLength="3" />
+          <Property Name="ES_CC_AGENCIA" Type="varchar" MaxLength="6" />
+          <Property Name="ES_CC_NUMERO" Type="varchar" MaxLength="10" />
+          <Property Name="ES_CC_DIGITO_VERIF" Type="varchar" MaxLength="5" />
+          <Property Name="ES_CC_TITULAR" Type="varchar" MaxLength="30" />
+          <Property Name="ES_CC_DT_ABERTURA" Type="datetime" />
+          <Property Name="ES_CC_GERENTE" Type="varchar" MaxLength="30" />
+          <Property Name="ES_PIS_CODBACEN" Type="varchar" MaxLength="3" />
+          <Property Name="ES_PIS_AGENCIA" Type="varchar" MaxLength="6" />
+          <Property Name="ES_VT_COD_ENTREGA" Type="varchar" MaxLength="10" />
+          <Property Name="ES_VT_COD_DEP" Type="varchar" MaxLength="10" />
+          <Property Name="ES_VT_CONT_ENTREGA" Type="varchar" MaxLength="40" />
+          <Property Name="ES_IDENT_FUNC_CEF" Type="char" MaxLength="1" />
+          <Property Name="ES_COD_EMPRESA_CEF" Type="varchar" MaxLength="14" />
+          <Property Name="ES_OBS_INSS" Type="varchar" MaxLength="60" />
+          <Property Name="ES_OBS_DARF" Type="varchar" MaxLength="60" />
+          <Property Name="ES_NRO_LIC_FO" Type="varchar" MaxLength="50" />
+          <Property Name="ES_NMAX_FUNC" Type="int" />
+          <Property Name="ES_PERC_EMPRESA" Type="numeric" Precision="20" Scale="8" />
+          <Property Name="ES_PERC_AUTONOMO" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_FGTS_CENTRAL" Type="int" />
+          <Property Name="ES_RECOL_SIMPLES" Type="int" />
+          <Property Name="ES_CPGTO_GPS" Type="int" />
+          <Property Name="ES_REC_EVDESPORT" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_ORIGEM_REC" Type="char" MaxLength="1" />
+          <Property Name="ES_PROD_RURALPF" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_PROD_RURALPJ" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_VR_COMPENSARGPS" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_VR_MESANT" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_VR_MESANT_OUTROS" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_MASC_CCUSTO" Type="varchar" MaxLength="25" />
+          <Property Name="ES_DIGVER_CONTAS" Type="char" MaxLength="1" />
+          <Property Name="ES_CCUSTO_CONTA" Type="char" MaxLength="1" />
+          <Property Name="ES_CCUSTO_OBRIG" Type="char" MaxLength="1" />
+          <Property Name="ES_REDUZIDO_ATIVO" Type="char" MaxLength="1" />
+          <Property Name="ES_FILIAL_ATIVADA" Type="char" MaxLength="1" />
+          <Property Name="ES_NRO_LIC_CO" Type="varchar" MaxLength="50" />
+          <Property Name="ES_NMAX_LANC_CO" Type="int" />
+          <Property Name="ES_NRO_LIC_AF" Type="varchar" MaxLength="50" />
+          <Property Name="ES_NMAX_LANC_AF" Type="int" />
+          <Property Name="ES_INTEGR_CONTABIL" Type="varchar" MaxLength="15" />
+          <Property Name="ES_RED_AUTOMATICO" Type="char" MaxLength="1" />
+          <Property Name="ES_M_INI_COMPENSAGPS" Type="varchar" MaxLength="2" />
+          <Property Name="ES_A_INI_COMPENSAGPS" Type="varchar" MaxLength="4" />
+          <Property Name="ES_M_FIM_COMPENSAGPS" Type="varchar" MaxLength="2" />
+          <Property Name="ES_A_FIM_COMPENSAGPS" Type="varchar" MaxLength="4" />
+          <Property Name="ES_PERC_ISFILANTROP" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_MASC_CTCTB" Type="varchar" MaxLength="40" />
+          <Property Name="ES_MASC_CTGER" Type="varchar" MaxLength="40" />
+          <Property Name="ES_VR_COOP_TRAB" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_CNAE" Type="varchar" MaxLength="7" />
+          <Property Name="ES_PAT" Type="varchar" MaxLength="1" />
+          <Property Name="ES_PORTE" Type="varchar" MaxLength="1" />
+          <Property Name="RAC_CODIGO" Type="int" />
+          <Property Name="ES_VR_GPS13" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="CPG_CODIGO" Type="varchar" MaxLength="4" />
+          <Property Name="ES_INTEGR_CONTABIL_DEB" Type="varchar" MaxLength="15" />
+          <Property Name="CCU_CODIGO" Type="varchar" MaxLength="15" />
+          <Property Name="ES_AUTORIZ_CAGED" Type="varchar" MaxLength="10" />
+          <Property Name="ES_FOR_JORNADA_CAGED" Type="int" />
+          <Property Name="ES_FOR_REMUNER_CAGED" Type="int" />
+          <Property Name="ES_PREPOSTO" Type="varchar" MaxLength="50" />
+          <Property Name="ES_VALORNF_SERVICO" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_VR_AUTONOMOS" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_PERC15_SAT_APESP" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_PERC20_SAT_APESP" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_PERC25_SAT_APESP" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_PAT_ATE5SAL" Type="int" />
+          <Property Name="ES_PAT_ACIMA5SAL" Type="int" />
+          <Property Name="ES_DATA_ENCERRAMENTO" Type="datetime" />
+          <Property Name="ES_PERC_SERVICO_PROP" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_PERC_ADM_COZINHA" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_PERC_REFEICAO_CONV" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_PERC_REFEICAO_TRANSP" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_PERC_CESTA_ALIMENTO" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_PERC_ALIMENTA_CONV" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_CPF_CONTATO" Type="varchar" MaxLength="20" />
+          <Property Name="ES_NRO_PROPRIETARIOS" Type="int" />
+          <Property Name="ES_MODELO_RECIBO_PAGTO" Type="int" />
+          <Property Name="ES_ID_SENAI_SENAT" Type="char" MaxLength="1" />
+          <Property Name="ES_ID_SALARIO_EDUC" Type="char" MaxLength="1" />
+          <Property Name="ES_INSALUBRIDADE" Type="varchar" MaxLength="1" />
+          <Property Name="ES_PERICULOSIDADE" Type="varchar" MaxLength="1" />
+          <Property Name="ES_SINDICATO_BASE" Type="int" />
+          <Property Name="ES_ATIVA" Type="varchar" MaxLength="1" />
+          <Property Name="CLD_CODIGO" Type="int" />
+          <Property Name="ID_MIX" Type="int" />
+          <Property Name="ES_CENTRO_CTRL_APOLO" Type="varchar" MaxLength="30" />
+          <Property Name="ES_CEI_VINCULADO" Type="varchar" MaxLength="20" />
+          <Property Name="REG_CODIGO" Type="int" />
+          <Property Name="ES_NAO_USA_ESTRUTURA" Type="char" MaxLength="1" />
+          <Property Name="TOM_CODIGO" Type="int" />
+          <Property Name="ES_DT_INI_LICENCA" Type="datetime" />
+          <Property Name="LTB_CODIGO" Type="int" />
+          <Property Name="ES_MODALIDADE_ARQ_SEFIP" Type="varchar" MaxLength="10" />
+          <Property Name="ES_ID_SENAI_ADICIONAL" Type="varchar" MaxLength="1" />
+          <Property Name="CNT_CODIGO" Type="varchar" MaxLength="15" />
+          <Property Name="NVA_CODIGO_DIAUTIL" Type="varchar" MaxLength="7" />
+          <Property Name="NVA_CODIGO_DIANUTIL" Type="varchar" MaxLength="7" />
+          <Property Name="NVA_CODIGO_VISITA" Type="varchar" MaxLength="7" />
+          <Property Name="GRE_CODIGO" Type="int" />
+          <Property Name="ES_TIPO_SOCIO" Type="char" MaxLength="1" />
+          <Property Name="ES_VT_NOME_DEP" Type="varchar" MaxLength="30" />
+          <Property Name="ES_VALOR_CAPITAL_SOCIAL" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="SGL_CODIGO" Type="int" />
+          <Property Name="ES_SIGLA" Type="varchar" MaxLength="40" />
+          <Property Name="ES_CNAE_PREPONDERANTE" Type="varchar" MaxLength="1" />
+          <Property Name="ES_FGTS_CODBACEN" Type="varchar" MaxLength="3" />
+          <Property Name="ES_FGTS_AGENCIA" Type="varchar" MaxLength="6" />
+          <Property Name="ESC_CODIGO" Type="int" />
+          <Property Name="ES_DATA_NASC_CONTATO" Type="datetime" />
+          <Property Name="ES_PERC_RAT" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_FAP" Type="numeric" Precision="15" Scale="4" />
+          <Property Name="ES_NOME_PPP" Type="varchar" MaxLength="40" />
+          <Property Name="ES_PERC_PIS_SOBRE_FOLHA" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_DT_INI_DESONERACAO_FOLHA" Type="datetime" />
+          <Property Name="ES_DT_FIM_DESONERACAO_FOLHA" Type="datetime" />
+          <Property Name="ES_DESONERACAO_PARCIAL" Type="varchar" MaxLength="1" />
+          <Property Name="ES_VAL_MAX_SALARIO" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_VAL_MAX_DIARIO_VT" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ES_JORNADA_MENSAL_MAX" Type="int" />
+          <Property Name="ES_BLOQUEIA_EXCEDE_CONTRATO" Type="varchar" MaxLength="1" />
+          <Property Name="ES_INDIC_COOPERATIVA" Type="int" />
+          <Property Name="ES_INDIC_CONSTRUTORA" Type="int" />
+          <Property Name="TRI_CODIGO" Type="varchar" MaxLength="10" />
+          <Property Name="TLO_CODIGO" Type="varchar" MaxLength="10" />
+          <Property Name="TLG_CODIGO" Type="varchar" MaxLength="10" />
+          <Property Name="ES_TP_SIS_CONTROLE_PONTO" Type="varchar" MaxLength="4" />
+          <Property Name="ES_NUM_MAX_FUNC" Type="int" />
+          <Property Name="ES_RECIBO_RELATORIO" Type="int" />
+          <Property Name="ES_INDIC_DESONERACAO_FOLHA" Type="int" />
+          <Property Name="ES_INDIC_SITUACAO_PJ" Type="int" />
+          <Property Name="ES_INDIC_SITUACAO_PF" Type="int" />
+          <Property Name="ES_INDIC_SUBST_CONTRIB_PATR" Type="int" />
+          <Property Name="ES_DT_ADESAO_ESOCIAL" Type="datetime" />
+          <Property Name="ES_ADESAO_ANTECIPADA_ESOCIAL" Type="char" MaxLength="1" />
+          <Property Name="ES_CENTRALIZADORA_CNPJ_MANAD" Type="char" MaxLength="1" />
+          <Property Name="DCR_CODIGO" Type="int" />
+          <Property Name="ES_CPF_DIRF" Type="varchar" MaxLength="20" />
+          <Property Name="ES_INDIC_ENTIDADE_EDUC" Type="char" MaxLength="1" />
+          <Property Name="ES_INDIC_TRABALHO_TEMP" Type="char" MaxLength="1" />
+          <Property Name="ES_NUMERO_REG_TRAB_TEMP" Type="varchar" MaxLength="30" />
+          <Property Name="ES_INDIC_CONTRATA_DEFICIENTE" Type="int" />
+          <Property Name="ES_INDIC_CONTRATA_APRENDIZ" Type="int" />
+          <Property Name="ES_INDIC_APRENDIZ_ENTIDADE" Type="char" MaxLength="1" />
+          <Property Name="ES_INDIC_REG_ELETRONICO" Type="int" />
+          <Property Name="CPE_CODIGO_APRENDIZ" Type="int" />
+          <Property Name="CPE_CODIGO_PCD" Type="int" />
+          <Property Name="ES_OBRA_PROPRIA" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="FO_FUNCIONARIO">
+          <Key>
+            <PropertyRef Name="DOM_CODIGO" />
+            <PropertyRef Name="FU_MATRICULA" />
+          </Key>
+          <Property Name="DOM_CODIGO" Type="int" Nullable="false" />
+          <Property Name="PE_CODIGO" Type="int" Nullable="false" />
+          <Property Name="FU_MATRICULA" Type="int" Nullable="false" />
+          <Property Name="FU_CHAPA" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="FU_TFU_CODIGO" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="FU_TRE_CODIGO" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="FU_TAD_CODIGO" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="FU_STF_CODIGO" Type="varchar" Nullable="false" MaxLength="5" />
+          <Property Name="FU_CTS_CODIGO" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="FU_OCS_CODIGO" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="FU_DT_BASE" Type="datetime" />
+          <Property Name="FU_DT_DETERM" Type="datetime" />
+          <Property Name="FU_NDIAS_DETERM" Type="int" />
+          <Property Name="FU_DT_OPCAO" Type="datetime" />
+          <Property Name="FU_PERC_FGTS" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="FU_ADMISSAO" Type="datetime" Nullable="false" />
+          <Property Name="FU_DT_TRANSF" Type="datetime" />
+          <Property Name="FU_SIT_OPCAO" Type="char" MaxLength="1" />
+          <Property Name="FU_PERC_ADIANT" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="FU_DEDUZIR_M65" Type="char" MaxLength="1" />
+          <Property Name="FU_NUM_REGISTRO" Type="int" />
+          <Property Name="FU_VALOR_ARRED" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="FU_ANO_COMP" Type="int" Nullable="false" />
+          <Property Name="FU_MES_COMP" Type="int" Nullable="false" />
+          <Property Name="FU_SALARIO" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="FU_JORNADA" Type="int" Nullable="false" />
+          <Property Name="FU_DU_PMES" Type="int" />
+          <Property Name="FU_DU_MES" Type="int" />
+          <Property Name="FU_VIC_CODIGO" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="FU_SRA_CODIGO" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="FU_CAF_CODIGO" Type="varchar" MaxLength="2" />
+          <Property Name="FU_CSA_CODIGO" Type="varchar" MaxLength="2" />
+          <Property Name="FU_DT_AVISO_PREVIO" Type="datetime" />
+          <Property Name="FU_NDIAS_AVISO" Type="int" />
+          <Property Name="FU_DT_DEMISSAO" Type="datetime" />
+          <Property Name="FU_DT_ULTMOV" Type="datetime" />
+          <Property Name="FU_PG_AVISO" Type="char" MaxLength="1" />
+          <Property Name="FU_DESC_AVISO" Type="char" MaxLength="1" />
+          <Property Name="FU_DT_PAG_RESC" Type="datetime" />
+          <Property Name="FU_SIN_CODIGO" Type="int" Nullable="false" />
+          <Property Name="FU_PG_CONTRIB" Type="char" MaxLength="1" />
+          <Property Name="FU_ES_COD_EMPRESA" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="FU_ES_ID_ESTRUTURA" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="FU_CAC_CODIGO" Type="int" Nullable="false" />
+          <Property Name="FU_BA_CODBACEN_FGTS" Type="varchar" MaxLength="3" />
+          <Property Name="FU_AG_NUMERO_FGTS" Type="varchar" MaxLength="6" />
+          <Property Name="FU_NRO_CTA_FGTS" Type="varchar" MaxLength="15" />
+          <Property Name="FU_DVERIF_CTA_FGTS" Type="varchar" MaxLength="5" />
+          <Property Name="FU_ABERTURA_CTA_FGTS" Type="datetime" />
+          <Property Name="FU_BA_CODBACEN_CC" Type="varchar" MaxLength="3" />
+          <Property Name="FU_AG_NUMERO_CC" Type="varchar" MaxLength="6" />
+          <Property Name="FU_NRO_CTA_CC" Type="varchar" MaxLength="15" />
+          <Property Name="FU_DVERIF_CTA_CC" Type="varchar" MaxLength="5" />
+          <Property Name="FU_ABERTURA_CTA_CC" Type="datetime" />
+          <Property Name="FU_TITULAR_CTA_CC" Type="varchar" MaxLength="50" />
+          <Property Name="FU_DT_VENC_FERIAS" Type="datetime" Nullable="false" />
+          <Property Name="FU_SALDO_FERIAS" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="FU_DT_INIGOZO_FERIAS" Type="datetime" />
+          <Property Name="FU_DT_FIMGOZO_FERIAS" Type="datetime" />
+          <Property Name="FU_NDIAS_FERIAS" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="FU_DT_PAGTO_FERIAS" Type="datetime" />
+          <Property Name="FU_DT_AVISO_FERIAS" Type="datetime" />
+          <Property Name="FU_QUER_ABONO_FERIAS" Type="char" MaxLength="1" />
+          <Property Name="FU_NDIAS_ABONO_FERIAS" Type="int" />
+          <Property Name="FU_QUER_PRIM_PARCELA13" Type="char" MaxLength="1" />
+          <Property Name="FU_OBS_FERIAS" Type="varchar" MaxLength="100" />
+          <Property Name="FU_SALDO_FERIAS_ANTERIOR" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="FU_TOTAL_FALTAS_ACUM" Type="numeric" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="FU_ES_COD_FILIAL" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="FU_MOT_RESCISAO" Type="int" />
+          <Property Name="FU_SLD_FGTS" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ITF_CODIGO" Type="varchar" MaxLength="15" />
+          <Property Name="FU_NDIAS_NUTEIS" Type="int" />
+          <Property Name="FU_RAC_CODIGO" Type="int" />
+          <Property Name="FU_TSL_CODIGO" Type="varchar" MaxLength="5" />
+          <Property Name="FU_NTS_CODIGO" Type="varchar" MaxLength="5" />
+          <Property Name="FU_FTS_CODIGO" Type="varchar" MaxLength="5" />
+          <Property Name="FU_CLD_CODIGO" Type="int" />
+          <Property Name="FU_MATRICULA_CHEFE" Type="int" />
+          <Property Name="FU_VALOR_DEVE" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="FU_FERIAS_COLETIVAS" Type="char" MaxLength="1" />
+          <Property Name="FU_DIAS_LIC_REM" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="FU_USU_SISTEMA" Type="varchar" MaxLength="1" />
+          <Property Name="FU_FER_ABONA_FALTAS" Type="char" MaxLength="1" />
+          <Property Name="FU_CTRL_SALDO_NEG" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="FU_DT_ABONO_FERIAS" Type="datetime" />
+          <Property Name="FU_HOR_INDICE_INICIAL" Type="int" />
+          <Property Name="FU_FUNCAO" Type="varchar" MaxLength="50" />
+          <Property Name="FU_SALDO_FER_PROP" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="FU_SALARIO_HORA" Type="numeric" Precision="15" Scale="3" />
+          <Property Name="FU_JORNADA_DIARIA" Type="int" />
+          <Property Name="FU_DIA_DEMISSAO_TRAB" Type="varchar" MaxLength="1" />
+          <Property Name="FU_MULTIPL_SAL_HORA" Type="int" />
+          <Property Name="FU_FER_ANO_COMP" Type="int" />
+          <Property Name="FU_FER_MES_COMP" Type="int" />
+          <Property Name="FU_DIAS_PERDIDOS_FER" Type="int" />
+          <Property Name="FU_DIRIGENTE_SINDICAL" Type="varchar" MaxLength="1" />
+          <Property Name="FU_INICIO_ESTAB_DS" Type="datetime" />
+          <Property Name="FU_FIM_ESTAB_DS" Type="datetime" />
+          <Property Name="FU_POSSUI_ALVARA" Type="varchar" MaxLength="1" />
+          <Property Name="FU_FER_DATA_LIMITE" Type="datetime" />
+          <Property Name="FU_FER_DATA_RETORNO" Type="datetime" />
+          <Property Name="FU_FER_REF_PER_ANT" Type="varchar" MaxLength="1" />
+          <Property Name="PE_NOME" Type="varchar" MaxLength="50" />
+          <Property Name="FU_AM_LIMITE_COMPRA" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="FU_AM_COD_USU" Type="varchar" MaxLength="31" />
+          <Property Name="FU_AM_NEC_AUT_VEIC" Type="varchar" MaxLength="1" />
+          <Property Name="CNT_CODIGO" Type="varchar" MaxLength="15" />
+          <Property Name="FU_PERC_INSALUBRIDADE" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="FU_PERC_PERICULOSIDADE" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="FU_NAO_CONTRIBUI_INSS" Type="varchar" MaxLength="1" />
+          <Property Name="FU_CC_FILIAL" Type="varchar" MaxLength="15" />
+          <Property Name="FU_FICHA_TRANSFERIDA" Type="varchar" MaxLength="1" />
+          <Property Name="FU_FER_QTDE_PARCELAS" Type="int" />
+          <Property Name="LTB_CODIGO" Type="int" />
+          <Property Name="FU_USA_CARTAO_PONTO" Type="varchar" MaxLength="1" />
+          <Property Name="FU_NUM_CONTRIB_INDIVIDUAL" Type="varchar" MaxLength="30" />
+          <Property Name="FU_FER_FALTAS_INTEIRA" Type="varchar" MaxLength="1" />
+          <Property Name="FPG_CODIGO" Type="int" />
+          <Property Name="FU_PERC_COMISSAO" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="FU_DT_REINTEGRACAO" Type="datetime" />
+          <Property Name="FU_NRO_CARTAO_SALARIO" Type="varchar" MaxLength="20" />
+          <Property Name="FU_SINDICALIZADO" Type="varchar" MaxLength="1" />
+          <Property Name="FU_ESC_CODIGO" Type="int" />
+          <Property Name="FU_DT_PRORROGADA" Type="datetime" />
+          <Property Name="FU_NDIAS_PRORROGADO" Type="int" />
+          <Property Name="FU_DATA_DEMISSAO" Type="datetime" />
+          <Property Name="FU_DATA_SMT" Type="datetime" />
+          <Property Name="FU_SIN_FER_PART_AUT" Type="char" MaxLength="1" />
+          <Property Name="FU_PERCENTUAL_ISS" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="FU_PROF_LIBERAL" Type="char" MaxLength="1" />
+          <Property Name="FU_FERIAS_LOGISTICA" Type="varchar" MaxLength="1" />
+          <Property Name="FU_USA_ENCARGOS_DEP" Type="char" MaxLength="1" />
+          <Property Name="FU_COMP_PG_RESC_BANCO_HORAS" Type="int" />
+          <Property Name="FU_COMP_PG_RESC_GRATIFICACOES" Type="int" />
+          <Property Name="FU_COMP_PG_RESC_DIF_SALARIAL" Type="int" />
+          <Property Name="ID_MIX" Type="int" />
+          <Property Name="FU_ESC_IND_REF" Type="int" />
+          <Property Name="FU_ESC_DATA_REF" Type="datetime" Nullable="false" />
+          <Property Name="FU_CAC_CODIGO_CONTRATACAO" Type="int" />
+          <Property Name="FU_FALTAS_ACUM" Type="int" />
+          <Property Name="FU_AVERBACOES_ACUM" Type="int" />
+          <Property Name="FU_AFAST_ACUM" Type="int" />
+          <Property Name="FU_COD_OPERACAO_CTA_CC" Type="varchar" MaxLength="5" />
+          <Property Name="FU_NAO_DESC_CONTR_ASSIST" Type="varchar" MaxLength="1" />
+          <Property Name="FU_NAO_DESC_CONTR_CONFED" Type="varchar" MaxLength="1" />
+          <Property Name="FU_UNID_ENTREGA_BEN" Type="varchar" MaxLength="40" />
+          <Property Name="FU_GERA_CAGED" Type="varchar" MaxLength="1" />
+          <Property Name="TSL_DT_INICIO" Type="datetime" />
+          <Property Name="FU_DATA_NOMEACAO" Type="datetime" />
+          <Property Name="FU_DATA_POSSE" Type="datetime" />
+          <Property Name="FU_ADMISSAO_NOM" Type="datetime" />
+          <Property Name="FU_GRUPO_CARGO_NOM" Type="int" />
+          <Property Name="FU_CAC_CODIGO_NOM" Type="int" />
+          <Property Name="FU_ES_ID_ESTRUTURA_NOM" Type="varchar" MaxLength="40" />
+          <Property Name="FU_ING_CODIGO_NOM" Type="int" />
+          <Property Name="FU_SIAPE_NOM" Type="varchar" MaxLength="20" />
+          <Property Name="FU_CHAPA_NOM" Type="varchar" MaxLength="20" />
+          <Property Name="FU_DT_DEMISSAO_NOM" Type="datetime" />
+          <Property Name="FU_QLT_ID_VAGA_NOM" Type="int" />
+          <Property Name="FU_RAC_CODIGO_NOM" Type="int" />
+          <Property Name="FU_AAD_CODIGO_NOM" Type="int" />
+          <Property Name="FU_FSP_DT_INI_PER_AQUISITIVO" Type="datetime" />
+          <Property Name="FU_DT_LICENCA_PREMIO" Type="datetime" />
+          <Property Name="FU_DT_LICENCA_CAPACITACAO" Type="datetime" />
+          <Property Name="STA_CODIGO" Type="int" />
+          <Property Name="FU_DT_REQUERIMENTO" Type="datetime" />
+          <Property Name="FU_DT_CONCESSAO" Type="datetime" />
+          <Property Name="FU_NUM_PROCESSO" Type="varchar" MaxLength="20" />
+          <Property Name="FU_NUM_PROCESSO_TCU" Type="varchar" MaxLength="20" />
+          <Property Name="FU_PERC_PROPORCIONALIDADE" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="FU_DT_OBITO" Type="datetime" />
+          <Property Name="FU_NUM_REGISTRO_OBITO" Type="varchar" MaxLength="32" />
+          <Property Name="FU_NUM_LIVRO" Type="varchar" MaxLength="15" />
+          <Property Name="FU_NUM_FOLHA" Type="varchar" MaxLength="15" />
+          <Property Name="FU_NOME_CARTORIO" Type="varchar" MaxLength="50" />
+          <Property Name="FU_SALDOLICENCA_1998" Type="int" />
+          <Property Name="FU_SALDOLICENCA_2003" Type="int" />
+          <Property Name="FU_SALDOLICENCA_2005" Type="int" />
+          <Property Name="FU_SALDOLICENCA_GERAL" Type="int" />
+          <Property Name="FU_VALOR_BENEFICIO" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="FU_MATRICULA_PENS" Type="int" />
+          <Property Name="FU_PENS_NATUREZA" Type="char" MaxLength="1" />
+          <Property Name="TPD_CODIGO" Type="varchar" MaxLength="2" />
+          <Property Name="FU_PENS_DT_INI_VALIDADE" Type="datetime" />
+          <Property Name="FU_PENS_DT_FIM_VALIDADE" Type="datetime" />
+          <Property Name="PE_CODIGO_TUTOR" Type="int" />
+          <Property Name="FU_TUTOR_BA_CODBACEN_CC" Type="varchar" MaxLength="3" />
+          <Property Name="FU_TUTOR_AG_NUMERO_CC" Type="varchar" MaxLength="6" />
+          <Property Name="FU_TUTOR_NRO_CTA_CC" Type="varchar" MaxLength="15" />
+          <Property Name="FU_TUTOR_DVERIF_CTA_CC" Type="varchar" MaxLength="5" />
+          <Property Name="FU_PROC_DT_INICIO" Type="datetime" />
+          <Property Name="FU_PROC_DT_FIM" Type="datetime" />
+          <Property Name="FU_PROC_NUM_REGISTRO" Type="varchar" MaxLength="15" />
+          <Property Name="FU_PROC_NUM_LIVRO" Type="varchar" MaxLength="15" />
+          <Property Name="FU_PROC_NOME_CARTORIO" Type="varchar" MaxLength="50" />
+          <Property Name="FU_PROC_NUM_FOLHA" Type="varchar" MaxLength="15" />
+          <Property Name="SIT_CODIGO" Type="int" />
+          <Property Name="FU_BENEFNUM" Type="int" />
+          <Property Name="FU_BENEFDEN" Type="int" />
+          <Property Name="FU_SIN_RETROAGIU_MEDIA" Type="varchar" MaxLength="1" />
+          <Property Name="FU_TMO_CODIGO" Type="int" />
+          <Property Name="FU_PENDENCIAS" Type="char" MaxLength="1" />
+          <Property Name="FU_SALARIO_ADICIONAL1" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="FU_SALARIO_ADICIONAL2" Type="numeric" Precision="15" Scale="2" />
+          <Property Name="ORG_CODIGO" Type="int" />
+          <Property Name="FU_CHAPA_ALT" Type="varchar" MaxLength="20" />
+          <Property Name="FU_ID_CHEFE" Type="varchar" MaxLength="20" />
+          <Property Name="FU_TSL_CODIGO_NOM" Type="varchar" MaxLength="5" />
+          <Property Name="FU_NTS_CODIGO_NOM" Type="varchar" MaxLength="5" />
+          <Property Name="FU_FTS_CODIGO_NOM" Type="varchar" MaxLength="5" />
+          <Property Name="FU_AVIS_PREV_DT_COMPAREC" Type="datetime" />
+          <Property Name="FU_AVIS_PREV_HR_COMPAREC" Type="int" />
+          <Property Name="FU_AVIS_PREV_NOMELOC_COMPAREC" Type="varchar" MaxLength="60" />
+          <Property Name="FU_AVIS_PREV_ENDERLOC_COMPAREC" Type="varchar" MaxLength="60" />
+          <Property Name="FU_AVIS_PREV_OBS" Type="varchar" MaxLength="60" />
+          <Property Name="FU_AVIS_PREV_TIPO" Type="varchar" MaxLength="1" />
+          <Property Name="FU_AVIS_PREV_OPCAO_JORNADA" Type="varchar" MaxLength="1" />
+          <Property Name="FU_AVIS_PREV_NDIAS_AUSENCIA" Type="int" />
+          <Property Name="FU_AVIS_PREV_DIAS_AVISO_REAL" Type="int" />
+          <Property Name="FU_AVIS_PREV_COMPLLOC_COMPAREC" Type="varchar" MaxLength="25" />
+          <Property Name="FU_AVIS_PREV_NUMLOC_COMPAREC" Type="varchar" MaxLength="10" />
+          <Property Name="FU_AVIS_PREV_CIDADE_COMPAREC" Type="int" />
+          <Property Name="FU_AVIS_PREV_BAIRRO_COMPAREC" Type="int" />
+          <Property Name="FU_AVIS_PREV_UF_COMPAREC" Type="char" MaxLength="2" />
+          <Property Name="FU_AVIS_PREV_PAIS_COMPAREC" Type="varchar" MaxLength="10" />
+          <Property Name="FU_AVIS_PREV_CEP_COMPAREC" Type="varchar" MaxLength="10" />
+          <Property Name="FU_SCF_CODIGO" Type="varchar" MaxLength="1" />
+          <Property Name="FU_RPA_CODIGO" Type="int" />
+          <Property Name="FU_INICIO_ESTAB_CAND" Type="datetime" />
+          <Property Name="FU_FIM_ESTAB_CAND" Type="datetime" />
+          <Property Name="FU_ESTAB_CANDIDATURA" Type="varchar" MaxLength="1" />
+          <Property Name="FU_VIM_CODIGO" Type="int" />
+          <Property Name="FU_TNO_CODIGO" Type="int" />
+          <Property Name="FU_ATO_NOMEACAO" Type="varchar" MaxLength="30" />
+          <Property Name="FU_PG_TXCONFED" Type="varchar" MaxLength="1" />
+          <Property Name="FU_PG_TXASSIST" Type="varchar" MaxLength="1" />
+          <Property Name="FNC_CODIGO" Type="int" />
+          <Property Name="FU_CONSIDERA_DTREINTEGRACAO" Type="char" MaxLength="1" />
+          <Property Name="FU_DT_AVISO_PREVIO_PROJETADO" Type="datetime" />
+          <Property Name="FU_JORN_SEM_AFA_INTEGRAL" Type="varchar" MaxLength="1" />
+          <Property Name="FU_JORN_SEM_AFA_CUMP_INTEGRAL" Type="varchar" MaxLength="1" />
+          <Property Name="FU_JORN_SAB_COMP_SEM_AFA" Type="varchar" MaxLength="1" />
+          <Property Name="FU_COMPR_NOVO_EMPREGO_AVISO" Type="varchar" MaxLength="1" />
+          <Property Name="FU_ORIGEM_FERIAS" Type="int" />
+          <Property Name="FU_TIPO_CONTA" Type="int" />
+          <Property Name="FU_INDICATIVO_ADMISSAO" Type="int" />
+          <Property Name="FU_CTT_CODIGO" Type="varchar" MaxLength="4" />
+          <Property Name="FU_ESTAG_NATUREZA" Type="char" MaxLength="1" />
+          <Property Name="FU_ESTAG_NIVEL" Type="char" MaxLength="1" />
+          <Property Name="FU_ESTAG_AREA_ATUACAO" Type="varchar" MaxLength="50" />
+          <Property Name="FU_ESTAG_NR_APOLICE" Type="varchar" MaxLength="30" />
+          <Property Name="FU_ESTAG_DT_PREV_TERMINO" Type="datetime" />
+          <Property Name="FU_ESTAG_INST_ENSINO" Type="int" />
+          <Property Name="FU_ESTAG_AGENTE_INTEGRACAO" Type="int" />
+          <Property Name="FU_ESTAG_COORDENADOR" Type="int" />
+          <Property Name="FU_RESC_NRO_PROC_TRABALHISTA" Type="varchar" MaxLength="20" />
+          <Property Name="FUR_OBSERVACAO" Type="varchar" MaxLength="255" />
+          <Property Name="FU_RESC_CNPJ_SUCESSORA" Type="varchar" MaxLength="20" />
+          <Property Name="FU_TIPO_CAGED" Type="varchar" MaxLength="3" />
+          <Property Name="FU_CAGED_DATA_REGISTRO" Type="datetime" />
+          <Property Name="FU_TIPO_REGIME_JORNADA" Type="int" />
+          <Property Name="FU_DESCRICAO_SALARIO_VARIAVEL" Type="varchar" MaxLength="90" />
+          <Property Name="FU_AVISO_PREVIO_MISTO" Type="char" MaxLength="1" />
+          <Property Name="FU_NDIAS_ESTABILIDADE" Type="int" />
+          <Property Name="FU_PREENCHE_COTA_DEFICIENTE" Type="char" MaxLength="1" />
+          <Property Name="FU_MATRICULA_ESOCIAL" Type="varchar" MaxLength="30" />
+          <Property Name="FU_CONTRATO_DETERM_CLAU_ASSEC" Type="char" MaxLength="1" />
+          <Property Name="FU_AVIS_PREV_DT_PREV_DESLIG" Type="datetime" />
+          <Property Name="FU_AVIS_PREV_TIPO_ESOCIAL" Type="int" />
+          <Property Name="FU_AVIS_PREV_OBSERVACAO" Type="varchar" MaxLength="255" />
+          <Property Name="CPE_CODIGO_MENORIDADE" Type="int" />
+          <Property Name="CLI_CODIGO_ENT_EDUC" Type="int" />
+          <Property Name="FU_MATRICULA_TRANSF" Type="int" />
+          <Property Name="FU_CNPJ_EMPREGADOR" Type="varchar" MaxLength="20" />
+          <Property Name="FU_OBSERVACAO_TRANSF" Type="varchar" MaxLength="255" />
+          <Property Name="CPA_CODIGO" Type="int" />
+          <Property Name="FU_AUTORIZA_DESC_CONTR_SIND" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="FU_FER_FERIAS_EM_DIAS_UTEIS" Type="varchar" MaxLength="1" />
+          <Property Name="FU_QUER_ADIANT_FERIAS" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="FO_PESSOA">
+          <Key>
+            <PropertyRef Name="PE_CODIGO" />
+          </Key>
+          <Property Name="PE_CODIGO" Type="int" Nullable="false" />
+          <Property Name="PE_ESTRANG_CONJ_BRASIL" Type="char" MaxLength="1" />
+          <Property Name="PE_ESTRANG_VENC_IDENT" Type="datetime" />
+          <Property Name="PE_ESTRANG_CART_HAB" Type="varchar" MaxLength="20" />
+          <Property Name="PE_ESTRANG_NRO_REG" Type="varchar" MaxLength="20" />
+          <Property Name="PE_ESTRANG_FILHOS_BRASIL" Type="int" />
+          <Property Name="PE_ESTRANG_VENC_CTPS" Type="datetime" />
+          <Property Name="PE_ESTRANG_CART_MOD19" Type="varchar" MaxLength="15" />
+          <Property Name="PE_ESTRANG_DT_CHEGADA" Type="datetime" />
+          <Property Name="PE_ESTRANG_NRO_DECRETO" Type="varchar" MaxLength="15" />
+          <Property Name="PE_ESTRANG_NATURALIZADO" Type="char" MaxLength="1" />
+          <Property Name="PE_NOME" Type="varchar" MaxLength="50" />
+          <Property Name="PE_SEXO" Type="varchar" Nullable="false" MaxLength="1" />
+          <Property Name="PE_DT_NASC" Type="datetime" Nullable="false" />
+          <Property Name="PE_APOS_INSS" Type="char" MaxLength="1" />
+          <Property Name="PE_RG_NUMERO" Type="varchar" MaxLength="20" />
+          <Property Name="PE_RG_DTEMISSAO" Type="datetime" />
+          <Property Name="PE_RG_ORGAO" Type="varchar" MaxLength="10" />
+          <Property Name="PE_CPF" Type="varchar" MaxLength="20" />
+          <Property Name="PE_PIS" Type="varchar" MaxLength="20" />
+          <Property Name="PE_DT_PIS" Type="datetime" />
+          <Property Name="PE_EC_CODIGO" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="PE_CIDADE_NATAL" Type="int" />
+          <Property Name="PE_ESTADO_NATAL" Type="char" MaxLength="2" />
+          <Property Name="PE_PAIS_NATAL" Type="varchar" MaxLength="10" />
+          <Property Name="PE_NACIONAL1" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="PE_NACIONAL2" Type="varchar" MaxLength="10" />
+          <Property Name="PE_NACIONAL3" Type="varchar" MaxLength="10" />
+          <Property Name="PE_PAIS_END" Type="varchar" MaxLength="10" />
+          <Property Name="PE_UF_END" Type="char" MaxLength="2" />
+          <Property Name="PE_CIDADE_END" Type="int" />
+          <Property Name="PE_BAIRRO_END" Type="int" />
+          <Property Name="PE_LOGRADOURO_END" Type="varchar" MaxLength="60" />
+          <Property Name="PE_NUMERO_END" Type="varchar" MaxLength="10" />
+          <Property Name="PE_COMPLEMENTO_END" Type="varchar" MaxLength="25" />
+          <Property Name="PE_CEP" Type="varchar" MaxLength="10" />
+          <Property Name="PE_EMAIL" Type="varchar" MaxLength="100" />
+          <Property Name="PE_GRI_CODIGO" Type="varchar" MaxLength="5" />
+          <Property Name="PE_CURSO" Type="varchar" MaxLength="30" />
+          <Property Name="PE_DOUTORADO" Type="varchar" MaxLength="30" />
+          <Property Name="PE_MESTRADO" Type="varchar" MaxLength="30" />
+          <Property Name="PE_OBSERVACOES" Type="varchar" MaxLength="60" />
+          <Property Name="PE_BA_CODBACEN_PIS" Type="varchar" MaxLength="3" />
+          <Property Name="PE_AG_NUMERO_PIS" Type="varchar" MaxLength="6" />
+          <Property Name="PE_NRO_CTA_PIS" Type="varchar" MaxLength="15" />
+          <Property Name="PE_DVERIF_CTA_PIS" Type="varchar" MaxLength="5" />
+          <Property Name="PE_ABERTURA_CTA_PIS" Type="datetime" />
+          <Property Name="PE_TIT_ELEITOR_NRO" Type="varchar" MaxLength="15" />
+          <Property Name="PE_TIT_ELEITOR_ZONA" Type="varchar" MaxLength="5" />
+          <Property Name="PE_TIT_ELEITOR_SECAO" Type="varchar" MaxLength="5" />
+          <Property Name="PE_CERT_RESERV_NRO" Type="varchar" MaxLength="40" />
+          <Property Name="PE_CERT_RESERV_CATEGORIA" Type="varchar" MaxLength="15" />
+          <Property Name="PE_CTPS_NRO" Type="varchar" MaxLength="8" />
+          <Property Name="PE_CTPS_SERIE" Type="varchar" MaxLength="5" />
+          <Property Name="PE_CTPS_DTEMISSAO" Type="datetime" />
+          <Property Name="PE_CTPS_ESTADOEM" Type="char" MaxLength="2" />
+          <Property Name="PE_CTPS_PAISEM" Type="varchar" MaxLength="10" />
+          <Property Name="PE_CART_HAB_NRO" Type="varchar" MaxLength="15" />
+          <Property Name="PE_CART_HAB_TIPO" Type="varchar" MaxLength="5" />
+          <Property Name="PE_REG_PROFISSIONAL" Type="varchar" MaxLength="15" />
+          <Property Name="PE_RC_CODIGO" Type="char" MaxLength="1" />
+          <Property Name="PE_DEFICIENTE_FISICO" Type="char" MaxLength="1" />
+          <Property Name="USU_USERNAME" Type="varchar" MaxLength="10" />
+          <Property Name="PE_RG_PAISEM" Type="varchar" MaxLength="10" />
+          <Property Name="PE_RG_ESTADOEM" Type="char" MaxLength="2" />
+          <Property Name="PE_NRO_PASSAPORTE" Type="varchar" MaxLength="12" />
+          <Property Name="PE_LOCALIZACAO" Type="varchar" MaxLength="100" />
+          <Property Name="PE_APELIDO" Type="varchar" MaxLength="30" />
+          <Property Name="PE_PARTICIPA_SELECAO_INT" Type="varchar" Nullable="false" MaxLength="1" />
+          <Property Name="PE_PARTICIPA_SELECAO_EXT" Type="varchar" Nullable="false" MaxLength="1" />
+          <Property Name="PE_CADASTRO_WEB" Type="varchar" Nullable="false" MaxLength="1" />
+          <Property Name="PE_WEB_ATIVO" Type="varchar" Nullable="false" MaxLength="1" />
+          <Property Name="PE_TIPO_APOSENTADORIA" Type="varchar" MaxLength="1" />
+          <Property Name="PE_DATA_APOSENTADORIA" Type="datetime" />
+          <Property Name="PE_PAGINA_INTERNET" Type="varchar" MaxLength="150" />
+          <Property Name="PE_DT_ULT_EMISSAO_ASO" Type="datetime" />
+          <Property Name="PE_DT_ULT_EMISSAO_PPP" Type="datetime" />
+          <Property Name="PE_NOME_PAI" Type="varchar" MaxLength="50" />
+          <Property Name="PE_NOME_MAE" Type="varchar" MaxLength="60" />
+          <Property Name="PE_DT_VENCTO_ASO" Type="datetime" />
+          <Property Name="PE_TIT_ELEITOR_MUNICIPIO" Type="int" />
+          <Property Name="PE_TIT_ELEITOR_ESTADOEM" Type="char" MaxLength="2" />
+          <Property Name="PE_TIT_ELEITOR_PAISEM" Type="varchar" MaxLength="10" />
+          <Property Name="PE_AUT_RECEB_EMAIL" Type="varchar" MaxLength="1" />
+          <Property Name="PE_TIPO_DEFICIENCIA" Type="char" MaxLength="1" />
+          <Property Name="PE_FUMANTE" Type="char" MaxLength="1" />
+          <Property Name="PE_DISPONIVEL_VIAGEM" Type="char" MaxLength="1" />
+          <Property Name="PE_RECURSO_ESPECIAL" Type="varchar" MaxLength="250" />
+          <Property Name="PE_VEICULO_PROPRIO" Type="char" MaxLength="1" />
+          <Property Name="PE_RESIDE_OUTRO_LOCAL" Type="char" MaxLength="1" />
+          <Property Name="PE_ZONA" Type="varchar" MaxLength="1" />
+          <Property Name="PE_CART_HAB_VENC" Type="datetime" />
+          <Property Name="PE_PERFIL" Type="text" />
+          <Property Name="PET_CODIGO" Type="int" />
+          <Property Name="PE_DT_CADASTRO" Type="datetime" />
+          <Property Name="PE_PARTICIPA_SELECAO" Type="varchar" MaxLength="1" />
+          <Property Name="MOT_CODIGO" Type="int" />
+          <Property Name="PE_ENDERECO_PERFIL" Type="varchar" MaxLength="200" />
+          <Property Name="PE_INSTRUTOR" Type="varchar" MaxLength="1" />
+          <Property Name="PE_MONITOR" Type="varchar" MaxLength="1" />
+          <Property Name="EQE_CODIGO" Type="int" />
+          <Property Name="PE_DATAHORA_ULTALTERACAO" Type="datetime" />
+          <Property Name="PE_RESUMO_QUALIFICACOES" Type="text" />
+          <Property Name="PE_CV_ATIVO" Type="varchar" MaxLength="1" />
+          <Property Name="PE_CNS_NUMERO" Type="varchar" MaxLength="15" />
+          <Property Name="PE_DECL_NASC_VIVO_NUMERO" Type="varchar" MaxLength="15" />
+          <Property Name="PE_RESP_EVENTO" Type="char" MaxLength="1" />
+          <Property Name="PE_EMISSOR_PASSAPORTE" Type="varchar" MaxLength="10" />
+          <Property Name="PE_UF_PAIS_PASSAPORTE" Type="varchar" MaxLength="10" />
+          <Property Name="PE_UF_PASSAPORTE" Type="char" MaxLength="2" />
+          <Property Name="PE_DT_EMISSAO_PASSAPORTE" Type="datetime" />
+          <Property Name="PE_DT_VALIDADE_PASSAPORTE" Type="datetime" />
+          <Property Name="PE_PAIS_EMISSAO_PASSAPORTE" Type="varchar" MaxLength="10" />
+          <Property Name="PE_TP_CERTIDAO_CIVIL" Type="varchar" MaxLength="60" />
+          <Property Name="PE_DT_EMISSAO_CERTIDAO_CIVIL" Type="datetime" />
+          <Property Name="PE_TERMO_CERTIDAO_CIVIL" Type="varchar" MaxLength="20" />
+          <Property Name="PE_LIVRO_CERTIDAO_CIVIL" Type="varchar" MaxLength="10" />
+          <Property Name="PE_FOLHA_CERTIDAO_CIVIL" Type="varchar" MaxLength="10" />
+          <Property Name="PE_CARTORIO_CERTIDAO_CIVIL" Type="varchar" MaxLength="20" />
+          <Property Name="PE_UF_PAIS_CERTIDAO_CIVIL" Type="varchar" MaxLength="10" />
+          <Property Name="PE_UF_CERTIDAO_CIVIL" Type="char" MaxLength="2" />
+          <Property Name="PE_MUNICIPIO_CERTIDAO_CIVIL" Type="int" />
+          <Property Name="PE_DT_NATURALIZACAO" Type="datetime" />
+          <Property Name="PE_NRO_RIC" Type="varchar" MaxLength="11" />
+          <Property Name="PE_UF_PAIS_RIC" Type="varchar" MaxLength="10" />
+          <Property Name="PE_UF_RIC" Type="char" MaxLength="2" />
+          <Property Name="PE_EMISSOR_RIC" Type="varchar" MaxLength="10" />
+          <Property Name="PE_MUNICIPIO_RIC" Type="int" />
+          <Property Name="PE_DT_EXPEDICAO_RIC" Type="datetime" />
+          <Property Name="PE_CERT_RESERV_DT_EMISS" Type="datetime" />
+          <Property Name="PE_CERT_RESERV_EMISSOR" Type="varchar" MaxLength="60" />
+          <Property Name="PE_TIT_ELEITOR_DT_EMISS" Type="datetime" />
+          <Property Name="TLG_CODIGO" Type="varchar" MaxLength="10" />
+          <Property Name="PE_RNE_EMISSOR" Type="varchar" MaxLength="20" />
+          <Property Name="PE_RNE_DT_EXPEDICAO" Type="datetime" />
+          <Property Name="PE_OC_NUMERO" Type="varchar" MaxLength="14" />
+          <Property Name="PE_OC_EMISSOR" Type="varchar" MaxLength="20" />
+          <Property Name="PE_OC_DT_EXPEDICAO" Type="datetime" />
+          <Property Name="PE_OC_DT_VALIDADE" Type="datetime" />
+          <Property Name="PE_CART_HAB_EMISSOR" Type="varchar" MaxLength="20" />
+          <Property Name="PE_CART_HAB_DT_EXPEDICAO" Type="datetime" />
+          <Property Name="PE_CASA_PROPRIA_POSSUI" Type="varchar" MaxLength="1" />
+          <Property Name="PE_CASA_PROPRIA_USOU_FGTS" Type="varchar" MaxLength="1" />
+          <Property Name="PE_USERNAME_SGI" Type="varchar" MaxLength="30" />
+          <Property Name="PE_ORG_EM_PASSAPORTE" Type="int" />
+          <Property Name="PE_ORG_EM_RG" Type="int" />
+          <Property Name="COE_CODIGO" Type="int" />
+          <Property Name="PE_CART_HAB_ESTADOEMISSOR" Type="char" MaxLength="2" />
+          <Property Name="PE_CART_HAB_DT_PRIMEIRA_HAB" Type="datetime" />
+          <Property Name="PE_DATA_REABILITACAO" Type="datetime" />
+          <Property Name="PE_DATA_INICIO_PNE" Type="datetime" />
+          <Property Name="PE_NOME_COMPLETO" Type="varchar" MaxLength="70" />
+          <Property Name="PE_NOME_SOCIAL" Type="varchar" MaxLength="70" />
+        </EntityType>
+        <Association Name="FK_ESTRUTURA_ESTRUTURA">
+          <End Role="BS_ESTRUTURA" Type="MixModel.Store.BS_ESTRUTURA" Multiplicity="1" />
+          <End Role="BS_ESTRUTURA1" Type="MixModel.Store.BS_ESTRUTURA" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BS_ESTRUTURA">
+              <PropertyRef Name="DOM_CODIGO" />
+              <PropertyRef Name="ES_ID_ESTRUTURA" />
+            </Principal>
+            <Dependent Role="BS_ESTRUTURA1">
+              <PropertyRef Name="DOM_CODIGO" />
+              <PropertyRef Name="ES_ID_ESTRUTURA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUNC_PESSOA_SUP_ESTAGIO">
+          <End Role="FO_PESSOA" Type="MixModel.Store.FO_PESSOA" Multiplicity="0..1" />
+          <End Role="FO_FUNCIONARIO" Type="MixModel.Store.FO_FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FO_PESSOA">
+              <PropertyRef Name="PE_CODIGO" />
+            </Principal>
+            <Dependent Role="FO_FUNCIONARIO">
+              <PropertyRef Name="FU_ESTAG_COORDENADOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUNCIONARIO_ESTRUTURA">
+          <End Role="BS_ESTRUTURA" Type="MixModel.Store.BS_ESTRUTURA" Multiplicity="1" />
+          <End Role="FO_FUNCIONARIO" Type="MixModel.Store.FO_FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BS_ESTRUTURA">
+              <PropertyRef Name="DOM_CODIGO" />
+              <PropertyRef Name="ES_ID_ESTRUTURA" />
+            </Principal>
+            <Dependent Role="FO_FUNCIONARIO">
+              <PropertyRef Name="DOM_CODIGO" />
+              <PropertyRef Name="FU_ES_ID_ESTRUTURA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUNCIONARIO_ESTRUTURAEMP">
+          <End Role="BS_ESTRUTURA" Type="MixModel.Store.BS_ESTRUTURA" Multiplicity="1" />
+          <End Role="FO_FUNCIONARIO" Type="MixModel.Store.FO_FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BS_ESTRUTURA">
+              <PropertyRef Name="DOM_CODIGO" />
+              <PropertyRef Name="ES_ID_ESTRUTURA" />
+            </Principal>
+            <Dependent Role="FO_FUNCIONARIO">
+              <PropertyRef Name="DOM_CODIGO" />
+              <PropertyRef Name="FU_ES_COD_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUNCIONARIO_ESTRUTURAFIL">
+          <End Role="BS_ESTRUTURA" Type="MixModel.Store.BS_ESTRUTURA" Multiplicity="1" />
+          <End Role="FO_FUNCIONARIO" Type="MixModel.Store.FO_FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BS_ESTRUTURA">
+              <PropertyRef Name="DOM_CODIGO" />
+              <PropertyRef Name="ES_ID_ESTRUTURA" />
+            </Principal>
+            <Dependent Role="FO_FUNCIONARIO">
+              <PropertyRef Name="DOM_CODIGO" />
+              <PropertyRef Name="FU_ES_COD_FILIAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUNCIONARIO_FUNCPENS">
+          <End Role="FO_FUNCIONARIO" Type="MixModel.Store.FO_FUNCIONARIO" Multiplicity="0..1" />
+          <End Role="FO_FUNCIONARIO1" Type="MixModel.Store.FO_FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FO_FUNCIONARIO">
+              <PropertyRef Name="DOM_CODIGO" />
+              <PropertyRef Name="FU_MATRICULA" />
+            </Principal>
+            <Dependent Role="FO_FUNCIONARIO1">
+              <PropertyRef Name="DOM_CODIGO" />
+              <PropertyRef Name="FU_MATRICULA_PENS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUNCIONARIO_PESSOA">
+          <End Role="FO_PESSOA" Type="MixModel.Store.FO_PESSOA" Multiplicity="1" />
+          <End Role="FO_FUNCIONARIO" Type="MixModel.Store.FO_FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FO_PESSOA">
+              <PropertyRef Name="PE_CODIGO" />
+            </Principal>
+            <Dependent Role="FO_FUNCIONARIO">
+              <PropertyRef Name="PE_CODIGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUNCIONARIO_TUTOR">
+          <End Role="FO_PESSOA" Type="MixModel.Store.FO_PESSOA" Multiplicity="0..1" />
+          <End Role="FO_FUNCIONARIO" Type="MixModel.Store.FO_FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FO_PESSOA">
+              <PropertyRef Name="PE_CODIGO" />
+            </Principal>
+            <Dependent Role="FO_FUNCIONARIO">
+              <PropertyRef Name="PE_CODIGO_TUTOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MixModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="MixEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="FO_FUNCIONARIO" EntityType="MixModel.FO_FUNCIONARIO" />
+          <EntitySet Name="FO_PESSOA" EntityType="MixModel.FO_PESSOA" />
+          <AssociationSet Name="FK_FUNC_PESSOA_SUP_ESTAGIO" Association="MixModel.FK_FUNC_PESSOA_SUP_ESTAGIO">
+            <End Role="FO_PESSOA" EntitySet="FO_PESSOA" />
+            <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNCIONARIO_FUNCPENS" Association="MixModel.FK_FUNCIONARIO_FUNCPENS">
+            <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+            <End Role="FO_FUNCIONARIO1" EntitySet="FO_FUNCIONARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNCIONARIO_PESSOA" Association="MixModel.FK_FUNCIONARIO_PESSOA">
+            <End Role="FO_PESSOA" EntitySet="FO_PESSOA" />
+            <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNCIONARIO_TUTOR" Association="MixModel.FK_FUNCIONARIO_TUTOR">
+            <End Role="FO_PESSOA" EntitySet="FO_PESSOA" />
+            <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+          </AssociationSet>
+          <EntitySet Name="BS_ESTRUTURA" EntityType="MixModel.BS_ESTRUTURA" />
+          <AssociationSet Name="FK_ESTRUTURA_ESTRUTURA" Association="MixModel.FK_ESTRUTURA_ESTRUTURA">
+            <End Role="BS_ESTRUTURA" EntitySet="BS_ESTRUTURA" />
+            <End Role="BS_ESTRUTURA1" EntitySet="BS_ESTRUTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNCIONARIO_ESTRUTURA" Association="MixModel.FK_FUNCIONARIO_ESTRUTURA">
+            <End Role="BS_ESTRUTURA" EntitySet="BS_ESTRUTURA" />
+            <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNCIONARIO_ESTRUTURAEMP" Association="MixModel.FK_FUNCIONARIO_ESTRUTURAEMP">
+            <End Role="BS_ESTRUTURA" EntitySet="BS_ESTRUTURA" />
+            <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNCIONARIO_ESTRUTURAFIL" Association="MixModel.FK_FUNCIONARIO_ESTRUTURAFIL">
+            <End Role="BS_ESTRUTURA" EntitySet="BS_ESTRUTURA" />
+            <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="FO_FUNCIONARIO">
+          <Key>
+            <PropertyRef Name="DOM_CODIGO" />
+            <PropertyRef Name="FU_MATRICULA" />
+          </Key>
+          <Property Name="DOM_CODIGO" Type="Int32" Nullable="false" />
+          <Property Name="PE_CODIGO" Type="Int32" Nullable="false" />
+          <Property Name="FU_MATRICULA" Type="Int32" Nullable="false" />
+          <Property Name="FU_CHAPA" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="FU_TFU_CODIGO" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="FU_TRE_CODIGO" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="FU_TAD_CODIGO" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_STF_CODIGO" Type="String" Nullable="false" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="FU_CTS_CODIGO" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="FU_OCS_CODIGO" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="FU_DT_BASE" Type="DateTime" />
+          <Property Name="FU_DT_DETERM" Type="DateTime" />
+          <Property Name="FU_NDIAS_DETERM" Type="Int32" />
+          <Property Name="FU_DT_OPCAO" Type="DateTime" />
+          <Property Name="FU_PERC_FGTS" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="FU_ADMISSAO" Type="DateTime" Nullable="false" />
+          <Property Name="FU_DT_TRANSF" Type="DateTime" />
+          <Property Name="FU_SIT_OPCAO" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_PERC_ADIANT" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="FU_DEDUZIR_M65" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_NUM_REGISTRO" Type="Int32" />
+          <Property Name="FU_VALOR_ARRED" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="FU_ANO_COMP" Type="Int32" Nullable="false" />
+          <Property Name="FU_MES_COMP" Type="Int32" Nullable="false" />
+          <Property Name="FU_SALARIO" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="FU_JORNADA" Type="Int32" Nullable="false" />
+          <Property Name="FU_DU_PMES" Type="Int32" />
+          <Property Name="FU_DU_MES" Type="Int32" />
+          <Property Name="FU_VIC_CODIGO" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="FU_SRA_CODIGO" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="FU_CAF_CODIGO" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="FU_CSA_CODIGO" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="FU_DT_AVISO_PREVIO" Type="DateTime" />
+          <Property Name="FU_NDIAS_AVISO" Type="Int32" />
+          <Property Name="FU_DT_DEMISSAO" Type="DateTime" />
+          <Property Name="FU_DT_ULTMOV" Type="DateTime" />
+          <Property Name="FU_PG_AVISO" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_DESC_AVISO" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_DT_PAG_RESC" Type="DateTime" />
+          <Property Name="FU_SIN_CODIGO" Type="Int32" Nullable="false" />
+          <Property Name="FU_PG_CONTRIB" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_ES_COD_EMPRESA" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="FU_ES_ID_ESTRUTURA" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="FU_CAC_CODIGO" Type="Int32" Nullable="false" />
+          <Property Name="FU_BA_CODBACEN_FGTS" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+          <Property Name="FU_AG_NUMERO_FGTS" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
+          <Property Name="FU_NRO_CTA_FGTS" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="FU_DVERIF_CTA_FGTS" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="FU_ABERTURA_CTA_FGTS" Type="DateTime" />
+          <Property Name="FU_BA_CODBACEN_CC" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+          <Property Name="FU_AG_NUMERO_CC" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
+          <Property Name="FU_NRO_CTA_CC" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="FU_DVERIF_CTA_CC" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="FU_ABERTURA_CTA_CC" Type="DateTime" />
+          <Property Name="FU_TITULAR_CTA_CC" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="FU_DT_VENC_FERIAS" Type="DateTime" Nullable="false" />
+          <Property Name="FU_SALDO_FERIAS" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="FU_DT_INIGOZO_FERIAS" Type="DateTime" />
+          <Property Name="FU_DT_FIMGOZO_FERIAS" Type="DateTime" />
+          <Property Name="FU_NDIAS_FERIAS" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="FU_DT_PAGTO_FERIAS" Type="DateTime" />
+          <Property Name="FU_DT_AVISO_FERIAS" Type="DateTime" />
+          <Property Name="FU_QUER_ABONO_FERIAS" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_NDIAS_ABONO_FERIAS" Type="Int32" />
+          <Property Name="FU_QUER_PRIM_PARCELA13" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_OBS_FERIAS" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="FU_SALDO_FERIAS_ANTERIOR" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="FU_TOTAL_FALTAS_ACUM" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="FU_ES_COD_FILIAL" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="FU_MOT_RESCISAO" Type="Int32" />
+          <Property Name="FU_SLD_FGTS" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="ITF_CODIGO" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="FU_NDIAS_NUTEIS" Type="Int32" />
+          <Property Name="FU_RAC_CODIGO" Type="Int32" />
+          <Property Name="FU_TSL_CODIGO" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="FU_NTS_CODIGO" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="FU_FTS_CODIGO" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="FU_CLD_CODIGO" Type="Int32" />
+          <Property Name="FU_MATRICULA_CHEFE" Type="Int32" />
+          <Property Name="FU_VALOR_DEVE" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="FU_FERIAS_COLETIVAS" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_DIAS_LIC_REM" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="FU_USU_SISTEMA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_FER_ABONA_FALTAS" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_CTRL_SALDO_NEG" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="FU_DT_ABONO_FERIAS" Type="DateTime" />
+          <Property Name="FU_HOR_INDICE_INICIAL" Type="Int32" />
+          <Property Name="FU_FUNCAO" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="FU_SALDO_FER_PROP" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="FU_SALARIO_HORA" Type="Decimal" Precision="15" Scale="3" />
+          <Property Name="FU_JORNADA_DIARIA" Type="Int32" />
+          <Property Name="FU_DIA_DEMISSAO_TRAB" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_MULTIPL_SAL_HORA" Type="Int32" />
+          <Property Name="FU_FER_ANO_COMP" Type="Int32" />
+          <Property Name="FU_FER_MES_COMP" Type="Int32" />
+          <Property Name="FU_DIAS_PERDIDOS_FER" Type="Int32" />
+          <Property Name="FU_DIRIGENTE_SINDICAL" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_INICIO_ESTAB_DS" Type="DateTime" />
+          <Property Name="FU_FIM_ESTAB_DS" Type="DateTime" />
+          <Property Name="FU_POSSUI_ALVARA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_FER_DATA_LIMITE" Type="DateTime" />
+          <Property Name="FU_FER_DATA_RETORNO" Type="DateTime" />
+          <Property Name="FU_FER_REF_PER_ANT" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="PE_NOME" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="FU_AM_LIMITE_COMPRA" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="FU_AM_COD_USU" Type="String" MaxLength="31" Unicode="false" FixedLength="false" />
+          <Property Name="FU_AM_NEC_AUT_VEIC" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="CNT_CODIGO" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="FU_PERC_INSALUBRIDADE" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="FU_PERC_PERICULOSIDADE" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="FU_NAO_CONTRIBUI_INSS" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_CC_FILIAL" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="FU_FICHA_TRANSFERIDA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_FER_QTDE_PARCELAS" Type="Int32" />
+          <Property Name="LTB_CODIGO" Type="Int32" />
+          <Property Name="FU_USA_CARTAO_PONTO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_NUM_CONTRIB_INDIVIDUAL" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="FU_FER_FALTAS_INTEIRA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FPG_CODIGO" Type="Int32" />
+          <Property Name="FU_PERC_COMISSAO" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="FU_DT_REINTEGRACAO" Type="DateTime" />
+          <Property Name="FU_NRO_CARTAO_SALARIO" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="FU_SINDICALIZADO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_ESC_CODIGO" Type="Int32" />
+          <Property Name="FU_DT_PRORROGADA" Type="DateTime" />
+          <Property Name="FU_NDIAS_PRORROGADO" Type="Int32" />
+          <Property Name="FU_DATA_DEMISSAO" Type="DateTime" />
+          <Property Name="FU_DATA_SMT" Type="DateTime" />
+          <Property Name="FU_SIN_FER_PART_AUT" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_PERCENTUAL_ISS" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="FU_PROF_LIBERAL" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_FERIAS_LOGISTICA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_USA_ENCARGOS_DEP" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_COMP_PG_RESC_BANCO_HORAS" Type="Int32" />
+          <Property Name="FU_COMP_PG_RESC_GRATIFICACOES" Type="Int32" />
+          <Property Name="FU_COMP_PG_RESC_DIF_SALARIAL" Type="Int32" />
+          <Property Name="ID_MIX" Type="Int32" />
+          <Property Name="FU_ESC_IND_REF" Type="Int32" />
+          <Property Name="FU_ESC_DATA_REF" Type="DateTime" Nullable="false" />
+          <Property Name="FU_CAC_CODIGO_CONTRATACAO" Type="Int32" />
+          <Property Name="FU_FALTAS_ACUM" Type="Int32" />
+          <Property Name="FU_AVERBACOES_ACUM" Type="Int32" />
+          <Property Name="FU_AFAST_ACUM" Type="Int32" />
+          <Property Name="FU_COD_OPERACAO_CTA_CC" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="FU_NAO_DESC_CONTR_ASSIST" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_NAO_DESC_CONTR_CONFED" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_UNID_ENTREGA_BEN" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="FU_GERA_CAGED" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="TSL_DT_INICIO" Type="DateTime" />
+          <Property Name="FU_DATA_NOMEACAO" Type="DateTime" />
+          <Property Name="FU_DATA_POSSE" Type="DateTime" />
+          <Property Name="FU_ADMISSAO_NOM" Type="DateTime" />
+          <Property Name="FU_GRUPO_CARGO_NOM" Type="Int32" />
+          <Property Name="FU_CAC_CODIGO_NOM" Type="Int32" />
+          <Property Name="FU_ES_ID_ESTRUTURA_NOM" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="FU_ING_CODIGO_NOM" Type="Int32" />
+          <Property Name="FU_SIAPE_NOM" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="FU_CHAPA_NOM" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="FU_DT_DEMISSAO_NOM" Type="DateTime" />
+          <Property Name="FU_QLT_ID_VAGA_NOM" Type="Int32" />
+          <Property Name="FU_RAC_CODIGO_NOM" Type="Int32" />
+          <Property Name="FU_AAD_CODIGO_NOM" Type="Int32" />
+          <Property Name="FU_FSP_DT_INI_PER_AQUISITIVO" Type="DateTime" />
+          <Property Name="FU_DT_LICENCA_PREMIO" Type="DateTime" />
+          <Property Name="FU_DT_LICENCA_CAPACITACAO" Type="DateTime" />
+          <Property Name="STA_CODIGO" Type="Int32" />
+          <Property Name="FU_DT_REQUERIMENTO" Type="DateTime" />
+          <Property Name="FU_DT_CONCESSAO" Type="DateTime" />
+          <Property Name="FU_NUM_PROCESSO" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="FU_NUM_PROCESSO_TCU" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="FU_PERC_PROPORCIONALIDADE" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="FU_DT_OBITO" Type="DateTime" />
+          <Property Name="FU_NUM_REGISTRO_OBITO" Type="String" MaxLength="32" Unicode="false" FixedLength="false" />
+          <Property Name="FU_NUM_LIVRO" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="FU_NUM_FOLHA" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="FU_NOME_CARTORIO" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="FU_SALDOLICENCA_1998" Type="Int32" />
+          <Property Name="FU_SALDOLICENCA_2003" Type="Int32" />
+          <Property Name="FU_SALDOLICENCA_2005" Type="Int32" />
+          <Property Name="FU_SALDOLICENCA_GERAL" Type="Int32" />
+          <Property Name="FU_VALOR_BENEFICIO" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="FU_MATRICULA_PENS" Type="Int32" />
+          <Property Name="FU_PENS_NATUREZA" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="TPD_CODIGO" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="FU_PENS_DT_INI_VALIDADE" Type="DateTime" />
+          <Property Name="FU_PENS_DT_FIM_VALIDADE" Type="DateTime" />
+          <Property Name="PE_CODIGO_TUTOR" Type="Int32" />
+          <Property Name="FU_TUTOR_BA_CODBACEN_CC" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+          <Property Name="FU_TUTOR_AG_NUMERO_CC" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
+          <Property Name="FU_TUTOR_NRO_CTA_CC" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="FU_TUTOR_DVERIF_CTA_CC" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="FU_PROC_DT_INICIO" Type="DateTime" />
+          <Property Name="FU_PROC_DT_FIM" Type="DateTime" />
+          <Property Name="FU_PROC_NUM_REGISTRO" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="FU_PROC_NUM_LIVRO" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="FU_PROC_NOME_CARTORIO" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="FU_PROC_NUM_FOLHA" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="SIT_CODIGO" Type="Int32" />
+          <Property Name="FU_BENEFNUM" Type="Int32" />
+          <Property Name="FU_BENEFDEN" Type="Int32" />
+          <Property Name="FU_SIN_RETROAGIU_MEDIA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_TMO_CODIGO" Type="Int32" />
+          <Property Name="FU_PENDENCIAS" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_SALARIO_ADICIONAL1" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="FU_SALARIO_ADICIONAL2" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="ORG_CODIGO" Type="Int32" />
+          <Property Name="FU_CHAPA_ALT" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="FU_ID_CHEFE" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="FU_TSL_CODIGO_NOM" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="FU_NTS_CODIGO_NOM" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="FU_FTS_CODIGO_NOM" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="FU_AVIS_PREV_DT_COMPAREC" Type="DateTime" />
+          <Property Name="FU_AVIS_PREV_HR_COMPAREC" Type="Int32" />
+          <Property Name="FU_AVIS_PREV_NOMELOC_COMPAREC" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="FU_AVIS_PREV_ENDERLOC_COMPAREC" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="FU_AVIS_PREV_OBS" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="FU_AVIS_PREV_TIPO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_AVIS_PREV_OPCAO_JORNADA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_AVIS_PREV_NDIAS_AUSENCIA" Type="Int32" />
+          <Property Name="FU_AVIS_PREV_DIAS_AVISO_REAL" Type="Int32" />
+          <Property Name="FU_AVIS_PREV_COMPLLOC_COMPAREC" Type="String" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="FU_AVIS_PREV_NUMLOC_COMPAREC" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="FU_AVIS_PREV_CIDADE_COMPAREC" Type="Int32" />
+          <Property Name="FU_AVIS_PREV_BAIRRO_COMPAREC" Type="Int32" />
+          <Property Name="FU_AVIS_PREV_UF_COMPAREC" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+          <Property Name="FU_AVIS_PREV_PAIS_COMPAREC" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="FU_AVIS_PREV_CEP_COMPAREC" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="FU_SCF_CODIGO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_RPA_CODIGO" Type="Int32" />
+          <Property Name="FU_INICIO_ESTAB_CAND" Type="DateTime" />
+          <Property Name="FU_FIM_ESTAB_CAND" Type="DateTime" />
+          <Property Name="FU_ESTAB_CANDIDATURA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_VIM_CODIGO" Type="Int32" />
+          <Property Name="FU_TNO_CODIGO" Type="Int32" />
+          <Property Name="FU_ATO_NOMEACAO" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="FU_PG_TXCONFED" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_PG_TXASSIST" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FNC_CODIGO" Type="Int32" />
+          <Property Name="FU_CONSIDERA_DTREINTEGRACAO" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_DT_AVISO_PREVIO_PROJETADO" Type="DateTime" />
+          <Property Name="FU_JORN_SEM_AFA_INTEGRAL" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_JORN_SEM_AFA_CUMP_INTEGRAL" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_JORN_SAB_COMP_SEM_AFA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_COMPR_NOVO_EMPREGO_AVISO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_ORIGEM_FERIAS" Type="Int32" />
+          <Property Name="FU_TIPO_CONTA" Type="Int32" />
+          <Property Name="FU_INDICATIVO_ADMISSAO" Type="Int32" />
+          <Property Name="FU_CTT_CODIGO" Type="String" MaxLength="4" Unicode="false" FixedLength="false" />
+          <Property Name="FU_ESTAG_NATUREZA" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_ESTAG_NIVEL" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_ESTAG_AREA_ATUACAO" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="FU_ESTAG_NR_APOLICE" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="FU_ESTAG_DT_PREV_TERMINO" Type="DateTime" />
+          <Property Name="FU_ESTAG_INST_ENSINO" Type="Int32" />
+          <Property Name="FU_ESTAG_AGENTE_INTEGRACAO" Type="Int32" />
+          <Property Name="FU_ESTAG_COORDENADOR" Type="Int32" />
+          <Property Name="FU_RESC_NRO_PROC_TRABALHISTA" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="FUR_OBSERVACAO" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="FU_RESC_CNPJ_SUCESSORA" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="FU_TIPO_CAGED" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+          <Property Name="FU_CAGED_DATA_REGISTRO" Type="DateTime" />
+          <Property Name="FU_TIPO_REGIME_JORNADA" Type="Int32" />
+          <Property Name="FU_DESCRICAO_SALARIO_VARIAVEL" Type="String" MaxLength="90" Unicode="false" FixedLength="false" />
+          <Property Name="FU_AVISO_PREVIO_MISTO" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_NDIAS_ESTABILIDADE" Type="Int32" />
+          <Property Name="FU_PREENCHE_COTA_DEFICIENTE" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_MATRICULA_ESOCIAL" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="FU_CONTRATO_DETERM_CLAU_ASSEC" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_AVIS_PREV_DT_PREV_DESLIG" Type="DateTime" />
+          <Property Name="FU_AVIS_PREV_TIPO_ESOCIAL" Type="Int32" />
+          <Property Name="FU_AVIS_PREV_OBSERVACAO" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="CPE_CODIGO_MENORIDADE" Type="Int32" />
+          <Property Name="CLI_CODIGO_ENT_EDUC" Type="Int32" />
+          <Property Name="FU_MATRICULA_TRANSF" Type="Int32" />
+          <Property Name="FU_CNPJ_EMPREGADOR" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="FU_OBSERVACAO_TRANSF" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="CPA_CODIGO" Type="Int32" />
+          <Property Name="FU_AUTORIZA_DESC_CONTR_SIND" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FU_FER_FERIAS_EM_DIAS_UTEIS" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="FU_QUER_ADIANT_FERIAS" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="FO_PESSOA" Relationship="MixModel.FK_FUNC_PESSOA_SUP_ESTAGIO" FromRole="FO_FUNCIONARIO" ToRole="FO_PESSOA" />
+          <NavigationProperty Name="FO_FUNCIONARIO1" Relationship="MixModel.FK_FUNCIONARIO_FUNCPENS" FromRole="FO_FUNCIONARIO" ToRole="FO_FUNCIONARIO1" />
+          <NavigationProperty Name="FO_FUNCIONARIO2" Relationship="MixModel.FK_FUNCIONARIO_FUNCPENS" FromRole="FO_FUNCIONARIO1" ToRole="FO_FUNCIONARIO" />
+          <NavigationProperty Name="FO_PESSOA1" Relationship="MixModel.FK_FUNCIONARIO_PESSOA" FromRole="FO_FUNCIONARIO" ToRole="FO_PESSOA" />
+          <NavigationProperty Name="FO_PESSOA2" Relationship="MixModel.FK_FUNCIONARIO_TUTOR" FromRole="FO_FUNCIONARIO" ToRole="FO_PESSOA" />
+          <NavigationProperty Name="BS_ESTRUTURA" Relationship="MixModel.FK_FUNCIONARIO_ESTRUTURA" FromRole="FO_FUNCIONARIO" ToRole="BS_ESTRUTURA" />
+          <NavigationProperty Name="BS_ESTRUTURA1" Relationship="MixModel.FK_FUNCIONARIO_ESTRUTURAEMP" FromRole="FO_FUNCIONARIO" ToRole="BS_ESTRUTURA" />
+          <NavigationProperty Name="BS_ESTRUTURA2" Relationship="MixModel.FK_FUNCIONARIO_ESTRUTURAFIL" FromRole="FO_FUNCIONARIO" ToRole="BS_ESTRUTURA" />
+        </EntityType>
+        <EntityType Name="FO_PESSOA">
+          <Key>
+            <PropertyRef Name="PE_CODIGO" />
+          </Key>
+          <Property Name="PE_CODIGO" Type="Int32" Nullable="false" />
+          <Property Name="PE_ESTRANG_CONJ_BRASIL" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="PE_ESTRANG_VENC_IDENT" Type="DateTime" />
+          <Property Name="PE_ESTRANG_CART_HAB" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="PE_ESTRANG_NRO_REG" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="PE_ESTRANG_FILHOS_BRASIL" Type="Int32" />
+          <Property Name="PE_ESTRANG_VENC_CTPS" Type="DateTime" />
+          <Property Name="PE_ESTRANG_CART_MOD19" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PE_ESTRANG_DT_CHEGADA" Type="DateTime" />
+          <Property Name="PE_ESTRANG_NRO_DECRETO" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PE_ESTRANG_NATURALIZADO" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="PE_NOME" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="PE_SEXO" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="PE_DT_NASC" Type="DateTime" Nullable="false" />
+          <Property Name="PE_APOS_INSS" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="PE_RG_NUMERO" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="PE_RG_DTEMISSAO" Type="DateTime" />
+          <Property Name="PE_RG_ORGAO" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_CPF" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="PE_PIS" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="PE_DT_PIS" Type="DateTime" />
+          <Property Name="PE_EC_CODIGO" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="PE_CIDADE_NATAL" Type="Int32" />
+          <Property Name="PE_ESTADO_NATAL" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+          <Property Name="PE_PAIS_NATAL" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_NACIONAL1" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_NACIONAL2" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_NACIONAL3" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_PAIS_END" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_UF_END" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+          <Property Name="PE_CIDADE_END" Type="Int32" />
+          <Property Name="PE_BAIRRO_END" Type="Int32" />
+          <Property Name="PE_LOGRADOURO_END" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="PE_NUMERO_END" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_COMPLEMENTO_END" Type="String" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="PE_CEP" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_EMAIL" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="PE_GRI_CODIGO" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="PE_CURSO" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="PE_DOUTORADO" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="PE_MESTRADO" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="PE_OBSERVACOES" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="PE_BA_CODBACEN_PIS" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+          <Property Name="PE_AG_NUMERO_PIS" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
+          <Property Name="PE_NRO_CTA_PIS" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PE_DVERIF_CTA_PIS" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="PE_ABERTURA_CTA_PIS" Type="DateTime" />
+          <Property Name="PE_TIT_ELEITOR_NRO" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PE_TIT_ELEITOR_ZONA" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="PE_TIT_ELEITOR_SECAO" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="PE_CERT_RESERV_NRO" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="PE_CERT_RESERV_CATEGORIA" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PE_CTPS_NRO" Type="String" MaxLength="8" Unicode="false" FixedLength="false" />
+          <Property Name="PE_CTPS_SERIE" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="PE_CTPS_DTEMISSAO" Type="DateTime" />
+          <Property Name="PE_CTPS_ESTADOEM" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+          <Property Name="PE_CTPS_PAISEM" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_CART_HAB_NRO" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PE_CART_HAB_TIPO" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="PE_REG_PROFISSIONAL" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PE_RC_CODIGO" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="PE_DEFICIENTE_FISICO" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="USU_USERNAME" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_RG_PAISEM" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_RG_ESTADOEM" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+          <Property Name="PE_NRO_PASSAPORTE" Type="String" MaxLength="12" Unicode="false" FixedLength="false" />
+          <Property Name="PE_LOCALIZACAO" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="PE_APELIDO" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="PE_PARTICIPA_SELECAO_INT" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="PE_PARTICIPA_SELECAO_EXT" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="PE_CADASTRO_WEB" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="PE_WEB_ATIVO" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="PE_TIPO_APOSENTADORIA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="PE_DATA_APOSENTADORIA" Type="DateTime" />
+          <Property Name="PE_PAGINA_INTERNET" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="PE_DT_ULT_EMISSAO_ASO" Type="DateTime" />
+          <Property Name="PE_DT_ULT_EMISSAO_PPP" Type="DateTime" />
+          <Property Name="PE_NOME_PAI" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="PE_NOME_MAE" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="PE_DT_VENCTO_ASO" Type="DateTime" />
+          <Property Name="PE_TIT_ELEITOR_MUNICIPIO" Type="Int32" />
+          <Property Name="PE_TIT_ELEITOR_ESTADOEM" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+          <Property Name="PE_TIT_ELEITOR_PAISEM" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_AUT_RECEB_EMAIL" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="PE_TIPO_DEFICIENCIA" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="PE_FUMANTE" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="PE_DISPONIVEL_VIAGEM" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="PE_RECURSO_ESPECIAL" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="PE_VEICULO_PROPRIO" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="PE_RESIDE_OUTRO_LOCAL" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="PE_ZONA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="PE_CART_HAB_VENC" Type="DateTime" />
+          <Property Name="PE_PERFIL" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="PET_CODIGO" Type="Int32" />
+          <Property Name="PE_DT_CADASTRO" Type="DateTime" />
+          <Property Name="PE_PARTICIPA_SELECAO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="MOT_CODIGO" Type="Int32" />
+          <Property Name="PE_ENDERECO_PERFIL" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="PE_INSTRUTOR" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="PE_MONITOR" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="EQE_CODIGO" Type="Int32" />
+          <Property Name="PE_DATAHORA_ULTALTERACAO" Type="DateTime" />
+          <Property Name="PE_RESUMO_QUALIFICACOES" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="PE_CV_ATIVO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="PE_CNS_NUMERO" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PE_DECL_NASC_VIVO_NUMERO" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PE_RESP_EVENTO" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="PE_EMISSOR_PASSAPORTE" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_UF_PAIS_PASSAPORTE" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_UF_PASSAPORTE" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+          <Property Name="PE_DT_EMISSAO_PASSAPORTE" Type="DateTime" />
+          <Property Name="PE_DT_VALIDADE_PASSAPORTE" Type="DateTime" />
+          <Property Name="PE_PAIS_EMISSAO_PASSAPORTE" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_TP_CERTIDAO_CIVIL" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="PE_DT_EMISSAO_CERTIDAO_CIVIL" Type="DateTime" />
+          <Property Name="PE_TERMO_CERTIDAO_CIVIL" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="PE_LIVRO_CERTIDAO_CIVIL" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_FOLHA_CERTIDAO_CIVIL" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_CARTORIO_CERTIDAO_CIVIL" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="PE_UF_PAIS_CERTIDAO_CIVIL" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_UF_CERTIDAO_CIVIL" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+          <Property Name="PE_MUNICIPIO_CERTIDAO_CIVIL" Type="Int32" />
+          <Property Name="PE_DT_NATURALIZACAO" Type="DateTime" />
+          <Property Name="PE_NRO_RIC" Type="String" MaxLength="11" Unicode="false" FixedLength="false" />
+          <Property Name="PE_UF_PAIS_RIC" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_UF_RIC" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+          <Property Name="PE_EMISSOR_RIC" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_MUNICIPIO_RIC" Type="Int32" />
+          <Property Name="PE_DT_EXPEDICAO_RIC" Type="DateTime" />
+          <Property Name="PE_CERT_RESERV_DT_EMISS" Type="DateTime" />
+          <Property Name="PE_CERT_RESERV_EMISSOR" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="PE_TIT_ELEITOR_DT_EMISS" Type="DateTime" />
+          <Property Name="TLG_CODIGO" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PE_RNE_EMISSOR" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="PE_RNE_DT_EXPEDICAO" Type="DateTime" />
+          <Property Name="PE_OC_NUMERO" Type="String" MaxLength="14" Unicode="false" FixedLength="false" />
+          <Property Name="PE_OC_EMISSOR" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="PE_OC_DT_EXPEDICAO" Type="DateTime" />
+          <Property Name="PE_OC_DT_VALIDADE" Type="DateTime" />
+          <Property Name="PE_CART_HAB_EMISSOR" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="PE_CART_HAB_DT_EXPEDICAO" Type="DateTime" />
+          <Property Name="PE_CASA_PROPRIA_POSSUI" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="PE_CASA_PROPRIA_USOU_FGTS" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="PE_USERNAME_SGI" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="PE_ORG_EM_PASSAPORTE" Type="Int32" />
+          <Property Name="PE_ORG_EM_RG" Type="Int32" />
+          <Property Name="COE_CODIGO" Type="Int32" />
+          <Property Name="PE_CART_HAB_ESTADOEMISSOR" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+          <Property Name="PE_CART_HAB_DT_PRIMEIRA_HAB" Type="DateTime" />
+          <Property Name="PE_DATA_REABILITACAO" Type="DateTime" />
+          <Property Name="PE_DATA_INICIO_PNE" Type="DateTime" />
+          <Property Name="PE_NOME_COMPLETO" Type="String" MaxLength="70" Unicode="false" FixedLength="false" />
+          <Property Name="PE_NOME_SOCIAL" Type="String" MaxLength="70" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="FO_FUNCIONARIO" Relationship="MixModel.FK_FUNC_PESSOA_SUP_ESTAGIO" FromRole="FO_PESSOA" ToRole="FO_FUNCIONARIO" />
+          <NavigationProperty Name="FO_FUNCIONARIO1" Relationship="MixModel.FK_FUNCIONARIO_PESSOA" FromRole="FO_PESSOA" ToRole="FO_FUNCIONARIO" />
+          <NavigationProperty Name="FO_FUNCIONARIO2" Relationship="MixModel.FK_FUNCIONARIO_TUTOR" FromRole="FO_PESSOA" ToRole="FO_FUNCIONARIO" />
+        </EntityType>
+        <Association Name="FK_FUNC_PESSOA_SUP_ESTAGIO">
+          <End Role="FO_PESSOA" Type="MixModel.FO_PESSOA" Multiplicity="0..1" />
+          <End Role="FO_FUNCIONARIO" Type="MixModel.FO_FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FO_PESSOA">
+              <PropertyRef Name="PE_CODIGO" />
+            </Principal>
+            <Dependent Role="FO_FUNCIONARIO">
+              <PropertyRef Name="FU_ESTAG_COORDENADOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUNCIONARIO_FUNCPENS">
+          <End Role="FO_FUNCIONARIO" Type="MixModel.FO_FUNCIONARIO" Multiplicity="0..1" />
+          <End Role="FO_FUNCIONARIO1" Type="MixModel.FO_FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FO_FUNCIONARIO">
+              <PropertyRef Name="DOM_CODIGO" />
+              <PropertyRef Name="FU_MATRICULA" />
+            </Principal>
+            <Dependent Role="FO_FUNCIONARIO1">
+              <PropertyRef Name="DOM_CODIGO" />
+              <PropertyRef Name="FU_MATRICULA_PENS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUNCIONARIO_PESSOA">
+          <End Role="FO_PESSOA" Type="MixModel.FO_PESSOA" Multiplicity="1" />
+          <End Role="FO_FUNCIONARIO" Type="MixModel.FO_FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FO_PESSOA">
+              <PropertyRef Name="PE_CODIGO" />
+            </Principal>
+            <Dependent Role="FO_FUNCIONARIO">
+              <PropertyRef Name="PE_CODIGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUNCIONARIO_TUTOR">
+          <End Role="FO_PESSOA" Type="MixModel.FO_PESSOA" Multiplicity="0..1" />
+          <End Role="FO_FUNCIONARIO" Type="MixModel.FO_FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FO_PESSOA">
+              <PropertyRef Name="PE_CODIGO" />
+            </Principal>
+            <Dependent Role="FO_FUNCIONARIO">
+              <PropertyRef Name="PE_CODIGO_TUTOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BS_ESTRUTURA">
+          <Key>
+            <PropertyRef Name="DOM_CODIGO" />
+            <PropertyRef Name="ES_ID_ESTRUTURA" />
+          </Key>
+          <Property Type="Int32" Name="DOM_CODIGO" Nullable="false" />
+          <Property Type="String" Name="ES_ID_ESTRUTURA" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_RAZAO_SOCIAL" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_NOME" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_CONTATO" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_INSCR_ESTADUAL" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_INSCR_MUNICIPAL" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_EMAIL" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_SITE" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_LOGRADOURO" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_NUMERO" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_COMPLEMENTO" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="BA_CODIGO" />
+          <Property Type="Int32" Name="CI_CODIGO" />
+          <Property Type="String" Name="PA_SIGLA" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UF_SIGLA" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ES_CEP" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_DDDFONE1" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_TELEFONE1" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_RAMAL1" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_DDDFONE2" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_TELEFONE2" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_RAMAL2" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_FAX" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_DDDFAX" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_RAMALFAX" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TI_SIGLA" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NE_CODIGO" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CT_CODIGO" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AEC_CODIGO" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_CGC_CEI" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MCG_CODIGO" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_ALT_CGCCEI" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ES_ALT_ENDERECO" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ES_CGC_ANTERIOR" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_PREFIXO" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ES_ANOBASE" />
+          <Property Type="String" Name="ES_CODMUNICIPIO" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ES_MES_DT_BASE" />
+          <Property Type="String" Name="ES_FPAS" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_SAT" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ES_PERC_ACIDENTE" Precision="15" Scale="4" />
+          <Property Type="String" Name="ES_COD_TERCEIROS" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ES_PERC_INSS" Precision="15" Scale="2" />
+          <Property Type="String" Name="ES_ID_SESI_SENAI" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ES_ID_FISICA_JURIDICA" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ES_ID_CGC_CPF_CEI" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ES_CC_CODBACEN" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_CC_AGENCIA" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_CC_NUMERO" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_CC_DIGITO_VERIF" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_CC_TITULAR" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="ES_CC_DT_ABERTURA" />
+          <Property Type="String" Name="ES_CC_GERENTE" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_PIS_CODBACEN" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_PIS_AGENCIA" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_VT_COD_ENTREGA" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_VT_COD_DEP" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_VT_CONT_ENTREGA" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_IDENT_FUNC_CEF" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ES_COD_EMPRESA_CEF" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_OBS_INSS" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_OBS_DARF" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_NRO_LIC_FO" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ES_NMAX_FUNC" />
+          <Property Type="Decimal" Name="ES_PERC_EMPRESA" Precision="20" Scale="8" />
+          <Property Type="Decimal" Name="ES_PERC_AUTONOMO" Precision="15" Scale="2" />
+          <Property Type="Int32" Name="ES_FGTS_CENTRAL" />
+          <Property Type="Int32" Name="ES_RECOL_SIMPLES" />
+          <Property Type="Int32" Name="ES_CPGTO_GPS" />
+          <Property Type="Decimal" Name="ES_REC_EVDESPORT" Precision="15" Scale="2" />
+          <Property Type="String" Name="ES_ORIGEM_REC" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Decimal" Name="ES_PROD_RURALPF" Precision="15" Scale="2" />
+          <Property Type="Decimal" Name="ES_PROD_RURALPJ" Precision="15" Scale="2" />
+          <Property Type="Decimal" Name="ES_VR_COMPENSARGPS" Precision="15" Scale="2" />
+          <Property Type="Decimal" Name="ES_VR_MESANT" Precision="15" Scale="2" />
+          <Property Type="Decimal" Name="ES_VR_MESANT_OUTROS" Precision="15" Scale="2" />
+          <Property Type="String" Name="ES_MASC_CCUSTO" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_DIGVER_CONTAS" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ES_CCUSTO_CONTA" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ES_CCUSTO_OBRIG" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ES_REDUZIDO_ATIVO" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ES_FILIAL_ATIVADA" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ES_NRO_LIC_CO" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ES_NMAX_LANC_CO" />
+          <Property Type="String" Name="ES_NRO_LIC_AF" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ES_NMAX_LANC_AF" />
+          <Property Type="String" Name="ES_INTEGR_CONTABIL" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_RED_AUTOMATICO" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ES_M_INI_COMPENSAGPS" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_A_INI_COMPENSAGPS" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_M_FIM_COMPENSAGPS" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_A_FIM_COMPENSAGPS" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ES_PERC_ISFILANTROP" Precision="15" Scale="2" />
+          <Property Type="String" Name="ES_MASC_CTCTB" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_MASC_CTGER" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ES_VR_COOP_TRAB" Precision="15" Scale="2" />
+          <Property Type="String" Name="ES_CNAE" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_PAT" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_PORTE" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="RAC_CODIGO" />
+          <Property Type="Decimal" Name="ES_VR_GPS13" Precision="15" Scale="2" />
+          <Property Type="String" Name="CPG_CODIGO" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_INTEGR_CONTABIL_DEB" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CCU_CODIGO" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_AUTORIZ_CAGED" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ES_FOR_JORNADA_CAGED" />
+          <Property Type="Int32" Name="ES_FOR_REMUNER_CAGED" />
+          <Property Type="String" Name="ES_PREPOSTO" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ES_VALORNF_SERVICO" Precision="15" Scale="2" />
+          <Property Type="Decimal" Name="ES_VR_AUTONOMOS" Precision="15" Scale="2" />
+          <Property Type="Decimal" Name="ES_PERC15_SAT_APESP" Precision="15" Scale="2" />
+          <Property Type="Decimal" Name="ES_PERC20_SAT_APESP" Precision="15" Scale="2" />
+          <Property Type="Decimal" Name="ES_PERC25_SAT_APESP" Precision="15" Scale="2" />
+          <Property Type="Int32" Name="ES_PAT_ATE5SAL" />
+          <Property Type="Int32" Name="ES_PAT_ACIMA5SAL" />
+          <Property Type="DateTime" Name="ES_DATA_ENCERRAMENTO" />
+          <Property Type="Decimal" Name="ES_PERC_SERVICO_PROP" Precision="15" Scale="2" />
+          <Property Type="Decimal" Name="ES_PERC_ADM_COZINHA" Precision="15" Scale="2" />
+          <Property Type="Decimal" Name="ES_PERC_REFEICAO_CONV" Precision="15" Scale="2" />
+          <Property Type="Decimal" Name="ES_PERC_REFEICAO_TRANSP" Precision="15" Scale="2" />
+          <Property Type="Decimal" Name="ES_PERC_CESTA_ALIMENTO" Precision="15" Scale="2" />
+          <Property Type="Decimal" Name="ES_PERC_ALIMENTA_CONV" Precision="15" Scale="2" />
+          <Property Type="String" Name="ES_CPF_CONTATO" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ES_NRO_PROPRIETARIOS" />
+          <Property Type="Int32" Name="ES_MODELO_RECIBO_PAGTO" />
+          <Property Type="String" Name="ES_ID_SENAI_SENAT" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ES_ID_SALARIO_EDUC" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ES_INSALUBRIDADE" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_PERICULOSIDADE" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ES_SINDICATO_BASE" />
+          <Property Type="String" Name="ES_ATIVA" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CLD_CODIGO" />
+          <Property Type="Int32" Name="ID_MIX" />
+          <Property Type="String" Name="ES_CENTRO_CTRL_APOLO" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_CEI_VINCULADO" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="REG_CODIGO" />
+          <Property Type="String" Name="ES_NAO_USA_ESTRUTURA" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="TOM_CODIGO" />
+          <Property Type="DateTime" Name="ES_DT_INI_LICENCA" />
+          <Property Type="Int32" Name="LTB_CODIGO" />
+          <Property Type="String" Name="ES_MODALIDADE_ARQ_SEFIP" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_ID_SENAI_ADICIONAL" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CNT_CODIGO" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NVA_CODIGO_DIAUTIL" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NVA_CODIGO_DIANUTIL" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NVA_CODIGO_VISITA" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="GRE_CODIGO" />
+          <Property Type="String" Name="ES_TIPO_SOCIO" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ES_VT_NOME_DEP" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ES_VALOR_CAPITAL_SOCIAL" Precision="15" Scale="2" />
+          <Property Type="Int32" Name="SGL_CODIGO" />
+          <Property Type="String" Name="ES_SIGLA" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_CNAE_PREPONDERANTE" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_FGTS_CODBACEN" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_FGTS_AGENCIA" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ESC_CODIGO" />
+          <Property Type="DateTime" Name="ES_DATA_NASC_CONTATO" />
+          <Property Type="Decimal" Name="ES_PERC_RAT" Precision="15" Scale="2" />
+          <Property Type="Decimal" Name="ES_FAP" Precision="15" Scale="4" />
+          <Property Type="String" Name="ES_NOME_PPP" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ES_PERC_PIS_SOBRE_FOLHA" Precision="15" Scale="2" />
+          <Property Type="DateTime" Name="ES_DT_INI_DESONERACAO_FOLHA" />
+          <Property Type="DateTime" Name="ES_DT_FIM_DESONERACAO_FOLHA" />
+          <Property Type="String" Name="ES_DESONERACAO_PARCIAL" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ES_VAL_MAX_SALARIO" Precision="15" Scale="2" />
+          <Property Type="Decimal" Name="ES_VAL_MAX_DIARIO_VT" Precision="15" Scale="2" />
+          <Property Type="Int32" Name="ES_JORNADA_MENSAL_MAX" />
+          <Property Type="String" Name="ES_BLOQUEIA_EXCEDE_CONTRATO" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ES_INDIC_COOPERATIVA" />
+          <Property Type="Int32" Name="ES_INDIC_CONSTRUTORA" />
+          <Property Type="String" Name="TRI_CODIGO" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TLO_CODIGO" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TLG_CODIGO" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_TP_SIS_CONTROLE_PONTO" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ES_NUM_MAX_FUNC" />
+          <Property Type="Int32" Name="ES_RECIBO_RELATORIO" />
+          <Property Type="Int32" Name="ES_INDIC_DESONERACAO_FOLHA" />
+          <Property Type="Int32" Name="ES_INDIC_SITUACAO_PJ" />
+          <Property Type="Int32" Name="ES_INDIC_SITUACAO_PF" />
+          <Property Type="Int32" Name="ES_INDIC_SUBST_CONTRIB_PATR" />
+          <Property Type="DateTime" Name="ES_DT_ADESAO_ESOCIAL" />
+          <Property Type="String" Name="ES_ADESAO_ANTECIPADA_ESOCIAL" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ES_CENTRALIZADORA_CNPJ_MANAD" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="DCR_CODIGO" />
+          <Property Type="String" Name="ES_CPF_DIRF" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ES_INDIC_ENTIDADE_EDUC" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ES_INDIC_TRABALHO_TEMP" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ES_NUMERO_REG_TRAB_TEMP" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ES_INDIC_CONTRATA_DEFICIENTE" />
+          <Property Type="Int32" Name="ES_INDIC_CONTRATA_APRENDIZ" />
+          <Property Type="String" Name="ES_INDIC_APRENDIZ_ENTIDADE" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="ES_INDIC_REG_ELETRONICO" />
+          <Property Type="Int32" Name="CPE_CODIGO_APRENDIZ" />
+          <Property Type="Int32" Name="CPE_CODIGO_PCD" />
+          <Property Type="String" Name="ES_OBRA_PROPRIA" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="BS_ESTRUTURA1" Relationship="MixModel.FK_ESTRUTURA_ESTRUTURA" FromRole="BS_ESTRUTURA" ToRole="BS_ESTRUTURA1" />
+          <NavigationProperty Name="BS_ESTRUTURA2" Relationship="MixModel.FK_ESTRUTURA_ESTRUTURA" FromRole="BS_ESTRUTURA1" ToRole="BS_ESTRUTURA" />
+          <NavigationProperty Name="FO_FUNCIONARIO" Relationship="MixModel.FK_FUNCIONARIO_ESTRUTURA" FromRole="BS_ESTRUTURA" ToRole="FO_FUNCIONARIO" />
+          <NavigationProperty Name="FO_FUNCIONARIO1" Relationship="MixModel.FK_FUNCIONARIO_ESTRUTURAEMP" FromRole="BS_ESTRUTURA" ToRole="FO_FUNCIONARIO" />
+          <NavigationProperty Name="FO_FUNCIONARIO2" Relationship="MixModel.FK_FUNCIONARIO_ESTRUTURAFIL" FromRole="BS_ESTRUTURA" ToRole="FO_FUNCIONARIO" />
+        </EntityType>
+        <Association Name="FK_ESTRUTURA_ESTRUTURA">
+          <End Type="MixModel.BS_ESTRUTURA" Role="BS_ESTRUTURA" Multiplicity="1" />
+          <End Type="MixModel.BS_ESTRUTURA" Role="BS_ESTRUTURA1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BS_ESTRUTURA">
+              <PropertyRef Name="DOM_CODIGO" />
+              <PropertyRef Name="ES_ID_ESTRUTURA" />
+            </Principal>
+            <Dependent Role="BS_ESTRUTURA1">
+              <PropertyRef Name="DOM_CODIGO" />
+              <PropertyRef Name="ES_ID_ESTRUTURA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUNCIONARIO_ESTRUTURA">
+          <End Type="MixModel.BS_ESTRUTURA" Role="BS_ESTRUTURA" Multiplicity="1" />
+          <End Type="MixModel.FO_FUNCIONARIO" Role="FO_FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BS_ESTRUTURA">
+              <PropertyRef Name="DOM_CODIGO" />
+              <PropertyRef Name="ES_ID_ESTRUTURA" />
+            </Principal>
+            <Dependent Role="FO_FUNCIONARIO">
+              <PropertyRef Name="DOM_CODIGO" />
+              <PropertyRef Name="FU_ES_ID_ESTRUTURA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUNCIONARIO_ESTRUTURAEMP">
+          <End Type="MixModel.BS_ESTRUTURA" Role="BS_ESTRUTURA" Multiplicity="1" />
+          <End Type="MixModel.FO_FUNCIONARIO" Role="FO_FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BS_ESTRUTURA">
+              <PropertyRef Name="DOM_CODIGO" />
+              <PropertyRef Name="ES_ID_ESTRUTURA" />
+            </Principal>
+            <Dependent Role="FO_FUNCIONARIO">
+              <PropertyRef Name="DOM_CODIGO" />
+              <PropertyRef Name="FU_ES_COD_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUNCIONARIO_ESTRUTURAFIL">
+          <End Type="MixModel.BS_ESTRUTURA" Role="BS_ESTRUTURA" Multiplicity="1" />
+          <End Type="MixModel.FO_FUNCIONARIO" Role="FO_FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BS_ESTRUTURA">
+              <PropertyRef Name="DOM_CODIGO" />
+              <PropertyRef Name="ES_ID_ESTRUTURA" />
+            </Principal>
+            <Dependent Role="FO_FUNCIONARIO">
+              <PropertyRef Name="DOM_CODIGO" />
+              <PropertyRef Name="FU_ES_COD_FILIAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MixModelStoreContainer" CdmEntityContainer="MixEntities">
+          <EntitySetMapping Name="FO_FUNCIONARIO">
+            <EntityTypeMapping TypeName="MixModel.FO_FUNCIONARIO">
+              <MappingFragment StoreEntitySet="FO_FUNCIONARIO">
+                <ScalarProperty Name="DOM_CODIGO" ColumnName="DOM_CODIGO" />
+                <ScalarProperty Name="PE_CODIGO" ColumnName="PE_CODIGO" />
+                <ScalarProperty Name="FU_MATRICULA" ColumnName="FU_MATRICULA" />
+                <ScalarProperty Name="FU_CHAPA" ColumnName="FU_CHAPA" />
+                <ScalarProperty Name="FU_TFU_CODIGO" ColumnName="FU_TFU_CODIGO" />
+                <ScalarProperty Name="FU_TRE_CODIGO" ColumnName="FU_TRE_CODIGO" />
+                <ScalarProperty Name="FU_TAD_CODIGO" ColumnName="FU_TAD_CODIGO" />
+                <ScalarProperty Name="FU_STF_CODIGO" ColumnName="FU_STF_CODIGO" />
+                <ScalarProperty Name="FU_CTS_CODIGO" ColumnName="FU_CTS_CODIGO" />
+                <ScalarProperty Name="FU_OCS_CODIGO" ColumnName="FU_OCS_CODIGO" />
+                <ScalarProperty Name="FU_DT_BASE" ColumnName="FU_DT_BASE" />
+                <ScalarProperty Name="FU_DT_DETERM" ColumnName="FU_DT_DETERM" />
+                <ScalarProperty Name="FU_NDIAS_DETERM" ColumnName="FU_NDIAS_DETERM" />
+                <ScalarProperty Name="FU_DT_OPCAO" ColumnName="FU_DT_OPCAO" />
+                <ScalarProperty Name="FU_PERC_FGTS" ColumnName="FU_PERC_FGTS" />
+                <ScalarProperty Name="FU_ADMISSAO" ColumnName="FU_ADMISSAO" />
+                <ScalarProperty Name="FU_DT_TRANSF" ColumnName="FU_DT_TRANSF" />
+                <ScalarProperty Name="FU_SIT_OPCAO" ColumnName="FU_SIT_OPCAO" />
+                <ScalarProperty Name="FU_PERC_ADIANT" ColumnName="FU_PERC_ADIANT" />
+                <ScalarProperty Name="FU_DEDUZIR_M65" ColumnName="FU_DEDUZIR_M65" />
+                <ScalarProperty Name="FU_NUM_REGISTRO" ColumnName="FU_NUM_REGISTRO" />
+                <ScalarProperty Name="FU_VALOR_ARRED" ColumnName="FU_VALOR_ARRED" />
+                <ScalarProperty Name="FU_ANO_COMP" ColumnName="FU_ANO_COMP" />
+                <ScalarProperty Name="FU_MES_COMP" ColumnName="FU_MES_COMP" />
+                <ScalarProperty Name="FU_SALARIO" ColumnName="FU_SALARIO" />
+                <ScalarProperty Name="FU_JORNADA" ColumnName="FU_JORNADA" />
+                <ScalarProperty Name="FU_DU_PMES" ColumnName="FU_DU_PMES" />
+                <ScalarProperty Name="FU_DU_MES" ColumnName="FU_DU_MES" />
+                <ScalarProperty Name="FU_VIC_CODIGO" ColumnName="FU_VIC_CODIGO" />
+                <ScalarProperty Name="FU_SRA_CODIGO" ColumnName="FU_SRA_CODIGO" />
+                <ScalarProperty Name="FU_CAF_CODIGO" ColumnName="FU_CAF_CODIGO" />
+                <ScalarProperty Name="FU_CSA_CODIGO" ColumnName="FU_CSA_CODIGO" />
+                <ScalarProperty Name="FU_DT_AVISO_PREVIO" ColumnName="FU_DT_AVISO_PREVIO" />
+                <ScalarProperty Name="FU_NDIAS_AVISO" ColumnName="FU_NDIAS_AVISO" />
+                <ScalarProperty Name="FU_DT_DEMISSAO" ColumnName="FU_DT_DEMISSAO" />
+                <ScalarProperty Name="FU_DT_ULTMOV" ColumnName="FU_DT_ULTMOV" />
+                <ScalarProperty Name="FU_PG_AVISO" ColumnName="FU_PG_AVISO" />
+                <ScalarProperty Name="FU_DESC_AVISO" ColumnName="FU_DESC_AVISO" />
+                <ScalarProperty Name="FU_DT_PAG_RESC" ColumnName="FU_DT_PAG_RESC" />
+                <ScalarProperty Name="FU_SIN_CODIGO" ColumnName="FU_SIN_CODIGO" />
+                <ScalarProperty Name="FU_PG_CONTRIB" ColumnName="FU_PG_CONTRIB" />
+                <ScalarProperty Name="FU_ES_COD_EMPRESA" ColumnName="FU_ES_COD_EMPRESA" />
+                <ScalarProperty Name="FU_ES_ID_ESTRUTURA" ColumnName="FU_ES_ID_ESTRUTURA" />
+                <ScalarProperty Name="FU_CAC_CODIGO" ColumnName="FU_CAC_CODIGO" />
+                <ScalarProperty Name="FU_BA_CODBACEN_FGTS" ColumnName="FU_BA_CODBACEN_FGTS" />
+                <ScalarProperty Name="FU_AG_NUMERO_FGTS" ColumnName="FU_AG_NUMERO_FGTS" />
+                <ScalarProperty Name="FU_NRO_CTA_FGTS" ColumnName="FU_NRO_CTA_FGTS" />
+                <ScalarProperty Name="FU_DVERIF_CTA_FGTS" ColumnName="FU_DVERIF_CTA_FGTS" />
+                <ScalarProperty Name="FU_ABERTURA_CTA_FGTS" ColumnName="FU_ABERTURA_CTA_FGTS" />
+                <ScalarProperty Name="FU_BA_CODBACEN_CC" ColumnName="FU_BA_CODBACEN_CC" />
+                <ScalarProperty Name="FU_AG_NUMERO_CC" ColumnName="FU_AG_NUMERO_CC" />
+                <ScalarProperty Name="FU_NRO_CTA_CC" ColumnName="FU_NRO_CTA_CC" />
+                <ScalarProperty Name="FU_DVERIF_CTA_CC" ColumnName="FU_DVERIF_CTA_CC" />
+                <ScalarProperty Name="FU_ABERTURA_CTA_CC" ColumnName="FU_ABERTURA_CTA_CC" />
+                <ScalarProperty Name="FU_TITULAR_CTA_CC" ColumnName="FU_TITULAR_CTA_CC" />
+                <ScalarProperty Name="FU_DT_VENC_FERIAS" ColumnName="FU_DT_VENC_FERIAS" />
+                <ScalarProperty Name="FU_SALDO_FERIAS" ColumnName="FU_SALDO_FERIAS" />
+                <ScalarProperty Name="FU_DT_INIGOZO_FERIAS" ColumnName="FU_DT_INIGOZO_FERIAS" />
+                <ScalarProperty Name="FU_DT_FIMGOZO_FERIAS" ColumnName="FU_DT_FIMGOZO_FERIAS" />
+                <ScalarProperty Name="FU_NDIAS_FERIAS" ColumnName="FU_NDIAS_FERIAS" />
+                <ScalarProperty Name="FU_DT_PAGTO_FERIAS" ColumnName="FU_DT_PAGTO_FERIAS" />
+                <ScalarProperty Name="FU_DT_AVISO_FERIAS" ColumnName="FU_DT_AVISO_FERIAS" />
+                <ScalarProperty Name="FU_QUER_ABONO_FERIAS" ColumnName="FU_QUER_ABONO_FERIAS" />
+                <ScalarProperty Name="FU_NDIAS_ABONO_FERIAS" ColumnName="FU_NDIAS_ABONO_FERIAS" />
+                <ScalarProperty Name="FU_QUER_PRIM_PARCELA13" ColumnName="FU_QUER_PRIM_PARCELA13" />
+                <ScalarProperty Name="FU_OBS_FERIAS" ColumnName="FU_OBS_FERIAS" />
+                <ScalarProperty Name="FU_SALDO_FERIAS_ANTERIOR" ColumnName="FU_SALDO_FERIAS_ANTERIOR" />
+                <ScalarProperty Name="FU_TOTAL_FALTAS_ACUM" ColumnName="FU_TOTAL_FALTAS_ACUM" />
+                <ScalarProperty Name="FU_ES_COD_FILIAL" ColumnName="FU_ES_COD_FILIAL" />
+                <ScalarProperty Name="FU_MOT_RESCISAO" ColumnName="FU_MOT_RESCISAO" />
+                <ScalarProperty Name="FU_SLD_FGTS" ColumnName="FU_SLD_FGTS" />
+                <ScalarProperty Name="ITF_CODIGO" ColumnName="ITF_CODIGO" />
+                <ScalarProperty Name="FU_NDIAS_NUTEIS" ColumnName="FU_NDIAS_NUTEIS" />
+                <ScalarProperty Name="FU_RAC_CODIGO" ColumnName="FU_RAC_CODIGO" />
+                <ScalarProperty Name="FU_TSL_CODIGO" ColumnName="FU_TSL_CODIGO" />
+                <ScalarProperty Name="FU_NTS_CODIGO" ColumnName="FU_NTS_CODIGO" />
+                <ScalarProperty Name="FU_FTS_CODIGO" ColumnName="FU_FTS_CODIGO" />
+                <ScalarProperty Name="FU_CLD_CODIGO" ColumnName="FU_CLD_CODIGO" />
+                <ScalarProperty Name="FU_MATRICULA_CHEFE" ColumnName="FU_MATRICULA_CHEFE" />
+                <ScalarProperty Name="FU_VALOR_DEVE" ColumnName="FU_VALOR_DEVE" />
+                <ScalarProperty Name="FU_FERIAS_COLETIVAS" ColumnName="FU_FERIAS_COLETIVAS" />
+                <ScalarProperty Name="FU_DIAS_LIC_REM" ColumnName="FU_DIAS_LIC_REM" />
+                <ScalarProperty Name="FU_USU_SISTEMA" ColumnName="FU_USU_SISTEMA" />
+                <ScalarProperty Name="FU_FER_ABONA_FALTAS" ColumnName="FU_FER_ABONA_FALTAS" />
+                <ScalarProperty Name="FU_CTRL_SALDO_NEG" ColumnName="FU_CTRL_SALDO_NEG" />
+                <ScalarProperty Name="FU_DT_ABONO_FERIAS" ColumnName="FU_DT_ABONO_FERIAS" />
+                <ScalarProperty Name="FU_HOR_INDICE_INICIAL" ColumnName="FU_HOR_INDICE_INICIAL" />
+                <ScalarProperty Name="FU_FUNCAO" ColumnName="FU_FUNCAO" />
+                <ScalarProperty Name="FU_SALDO_FER_PROP" ColumnName="FU_SALDO_FER_PROP" />
+                <ScalarProperty Name="FU_SALARIO_HORA" ColumnName="FU_SALARIO_HORA" />
+                <ScalarProperty Name="FU_JORNADA_DIARIA" ColumnName="FU_JORNADA_DIARIA" />
+                <ScalarProperty Name="FU_DIA_DEMISSAO_TRAB" ColumnName="FU_DIA_DEMISSAO_TRAB" />
+                <ScalarProperty Name="FU_MULTIPL_SAL_HORA" ColumnName="FU_MULTIPL_SAL_HORA" />
+                <ScalarProperty Name="FU_FER_ANO_COMP" ColumnName="FU_FER_ANO_COMP" />
+                <ScalarProperty Name="FU_FER_MES_COMP" ColumnName="FU_FER_MES_COMP" />
+                <ScalarProperty Name="FU_DIAS_PERDIDOS_FER" ColumnName="FU_DIAS_PERDIDOS_FER" />
+                <ScalarProperty Name="FU_DIRIGENTE_SINDICAL" ColumnName="FU_DIRIGENTE_SINDICAL" />
+                <ScalarProperty Name="FU_INICIO_ESTAB_DS" ColumnName="FU_INICIO_ESTAB_DS" />
+                <ScalarProperty Name="FU_FIM_ESTAB_DS" ColumnName="FU_FIM_ESTAB_DS" />
+                <ScalarProperty Name="FU_POSSUI_ALVARA" ColumnName="FU_POSSUI_ALVARA" />
+                <ScalarProperty Name="FU_FER_DATA_LIMITE" ColumnName="FU_FER_DATA_LIMITE" />
+                <ScalarProperty Name="FU_FER_DATA_RETORNO" ColumnName="FU_FER_DATA_RETORNO" />
+                <ScalarProperty Name="FU_FER_REF_PER_ANT" ColumnName="FU_FER_REF_PER_ANT" />
+                <ScalarProperty Name="PE_NOME" ColumnName="PE_NOME" />
+                <ScalarProperty Name="FU_AM_LIMITE_COMPRA" ColumnName="FU_AM_LIMITE_COMPRA" />
+                <ScalarProperty Name="FU_AM_COD_USU" ColumnName="FU_AM_COD_USU" />
+                <ScalarProperty Name="FU_AM_NEC_AUT_VEIC" ColumnName="FU_AM_NEC_AUT_VEIC" />
+                <ScalarProperty Name="CNT_CODIGO" ColumnName="CNT_CODIGO" />
+                <ScalarProperty Name="FU_PERC_INSALUBRIDADE" ColumnName="FU_PERC_INSALUBRIDADE" />
+                <ScalarProperty Name="FU_PERC_PERICULOSIDADE" ColumnName="FU_PERC_PERICULOSIDADE" />
+                <ScalarProperty Name="FU_NAO_CONTRIBUI_INSS" ColumnName="FU_NAO_CONTRIBUI_INSS" />
+                <ScalarProperty Name="FU_CC_FILIAL" ColumnName="FU_CC_FILIAL" />
+                <ScalarProperty Name="FU_FICHA_TRANSFERIDA" ColumnName="FU_FICHA_TRANSFERIDA" />
+                <ScalarProperty Name="FU_FER_QTDE_PARCELAS" ColumnName="FU_FER_QTDE_PARCELAS" />
+                <ScalarProperty Name="LTB_CODIGO" ColumnName="LTB_CODIGO" />
+                <ScalarProperty Name="FU_USA_CARTAO_PONTO" ColumnName="FU_USA_CARTAO_PONTO" />
+                <ScalarProperty Name="FU_NUM_CONTRIB_INDIVIDUAL" ColumnName="FU_NUM_CONTRIB_INDIVIDUAL" />
+                <ScalarProperty Name="FU_FER_FALTAS_INTEIRA" ColumnName="FU_FER_FALTAS_INTEIRA" />
+                <ScalarProperty Name="FPG_CODIGO" ColumnName="FPG_CODIGO" />
+                <ScalarProperty Name="FU_PERC_COMISSAO" ColumnName="FU_PERC_COMISSAO" />
+                <ScalarProperty Name="FU_DT_REINTEGRACAO" ColumnName="FU_DT_REINTEGRACAO" />
+                <ScalarProperty Name="FU_NRO_CARTAO_SALARIO" ColumnName="FU_NRO_CARTAO_SALARIO" />
+                <ScalarProperty Name="FU_SINDICALIZADO" ColumnName="FU_SINDICALIZADO" />
+                <ScalarProperty Name="FU_ESC_CODIGO" ColumnName="FU_ESC_CODIGO" />
+                <ScalarProperty Name="FU_DT_PRORROGADA" ColumnName="FU_DT_PRORROGADA" />
+                <ScalarProperty Name="FU_NDIAS_PRORROGADO" ColumnName="FU_NDIAS_PRORROGADO" />
+                <ScalarProperty Name="FU_DATA_DEMISSAO" ColumnName="FU_DATA_DEMISSAO" />
+                <ScalarProperty Name="FU_DATA_SMT" ColumnName="FU_DATA_SMT" />
+                <ScalarProperty Name="FU_SIN_FER_PART_AUT" ColumnName="FU_SIN_FER_PART_AUT" />
+                <ScalarProperty Name="FU_PERCENTUAL_ISS" ColumnName="FU_PERCENTUAL_ISS" />
+                <ScalarProperty Name="FU_PROF_LIBERAL" ColumnName="FU_PROF_LIBERAL" />
+                <ScalarProperty Name="FU_FERIAS_LOGISTICA" ColumnName="FU_FERIAS_LOGISTICA" />
+                <ScalarProperty Name="FU_USA_ENCARGOS_DEP" ColumnName="FU_USA_ENCARGOS_DEP" />
+                <ScalarProperty Name="FU_COMP_PG_RESC_BANCO_HORAS" ColumnName="FU_COMP_PG_RESC_BANCO_HORAS" />
+                <ScalarProperty Name="FU_COMP_PG_RESC_GRATIFICACOES" ColumnName="FU_COMP_PG_RESC_GRATIFICACOES" />
+                <ScalarProperty Name="FU_COMP_PG_RESC_DIF_SALARIAL" ColumnName="FU_COMP_PG_RESC_DIF_SALARIAL" />
+                <ScalarProperty Name="ID_MIX" ColumnName="ID_MIX" />
+                <ScalarProperty Name="FU_ESC_IND_REF" ColumnName="FU_ESC_IND_REF" />
+                <ScalarProperty Name="FU_ESC_DATA_REF" ColumnName="FU_ESC_DATA_REF" />
+                <ScalarProperty Name="FU_CAC_CODIGO_CONTRATACAO" ColumnName="FU_CAC_CODIGO_CONTRATACAO" />
+                <ScalarProperty Name="FU_FALTAS_ACUM" ColumnName="FU_FALTAS_ACUM" />
+                <ScalarProperty Name="FU_AVERBACOES_ACUM" ColumnName="FU_AVERBACOES_ACUM" />
+                <ScalarProperty Name="FU_AFAST_ACUM" ColumnName="FU_AFAST_ACUM" />
+                <ScalarProperty Name="FU_COD_OPERACAO_CTA_CC" ColumnName="FU_COD_OPERACAO_CTA_CC" />
+                <ScalarProperty Name="FU_NAO_DESC_CONTR_ASSIST" ColumnName="FU_NAO_DESC_CONTR_ASSIST" />
+                <ScalarProperty Name="FU_NAO_DESC_CONTR_CONFED" ColumnName="FU_NAO_DESC_CONTR_CONFED" />
+                <ScalarProperty Name="FU_UNID_ENTREGA_BEN" ColumnName="FU_UNID_ENTREGA_BEN" />
+                <ScalarProperty Name="FU_GERA_CAGED" ColumnName="FU_GERA_CAGED" />
+                <ScalarProperty Name="TSL_DT_INICIO" ColumnName="TSL_DT_INICIO" />
+                <ScalarProperty Name="FU_DATA_NOMEACAO" ColumnName="FU_DATA_NOMEACAO" />
+                <ScalarProperty Name="FU_DATA_POSSE" ColumnName="FU_DATA_POSSE" />
+                <ScalarProperty Name="FU_ADMISSAO_NOM" ColumnName="FU_ADMISSAO_NOM" />
+                <ScalarProperty Name="FU_GRUPO_CARGO_NOM" ColumnName="FU_GRUPO_CARGO_NOM" />
+                <ScalarProperty Name="FU_CAC_CODIGO_NOM" ColumnName="FU_CAC_CODIGO_NOM" />
+                <ScalarProperty Name="FU_ES_ID_ESTRUTURA_NOM" ColumnName="FU_ES_ID_ESTRUTURA_NOM" />
+                <ScalarProperty Name="FU_ING_CODIGO_NOM" ColumnName="FU_ING_CODIGO_NOM" />
+                <ScalarProperty Name="FU_SIAPE_NOM" ColumnName="FU_SIAPE_NOM" />
+                <ScalarProperty Name="FU_CHAPA_NOM" ColumnName="FU_CHAPA_NOM" />
+                <ScalarProperty Name="FU_DT_DEMISSAO_NOM" ColumnName="FU_DT_DEMISSAO_NOM" />
+                <ScalarProperty Name="FU_QLT_ID_VAGA_NOM" ColumnName="FU_QLT_ID_VAGA_NOM" />
+                <ScalarProperty Name="FU_RAC_CODIGO_NOM" ColumnName="FU_RAC_CODIGO_NOM" />
+                <ScalarProperty Name="FU_AAD_CODIGO_NOM" ColumnName="FU_AAD_CODIGO_NOM" />
+                <ScalarProperty Name="FU_FSP_DT_INI_PER_AQUISITIVO" ColumnName="FU_FSP_DT_INI_PER_AQUISITIVO" />
+                <ScalarProperty Name="FU_DT_LICENCA_PREMIO" ColumnName="FU_DT_LICENCA_PREMIO" />
+                <ScalarProperty Name="FU_DT_LICENCA_CAPACITACAO" ColumnName="FU_DT_LICENCA_CAPACITACAO" />
+                <ScalarProperty Name="STA_CODIGO" ColumnName="STA_CODIGO" />
+                <ScalarProperty Name="FU_DT_REQUERIMENTO" ColumnName="FU_DT_REQUERIMENTO" />
+                <ScalarProperty Name="FU_DT_CONCESSAO" ColumnName="FU_DT_CONCESSAO" />
+                <ScalarProperty Name="FU_NUM_PROCESSO" ColumnName="FU_NUM_PROCESSO" />
+                <ScalarProperty Name="FU_NUM_PROCESSO_TCU" ColumnName="FU_NUM_PROCESSO_TCU" />
+                <ScalarProperty Name="FU_PERC_PROPORCIONALIDADE" ColumnName="FU_PERC_PROPORCIONALIDADE" />
+                <ScalarProperty Name="FU_DT_OBITO" ColumnName="FU_DT_OBITO" />
+                <ScalarProperty Name="FU_NUM_REGISTRO_OBITO" ColumnName="FU_NUM_REGISTRO_OBITO" />
+                <ScalarProperty Name="FU_NUM_LIVRO" ColumnName="FU_NUM_LIVRO" />
+                <ScalarProperty Name="FU_NUM_FOLHA" ColumnName="FU_NUM_FOLHA" />
+                <ScalarProperty Name="FU_NOME_CARTORIO" ColumnName="FU_NOME_CARTORIO" />
+                <ScalarProperty Name="FU_SALDOLICENCA_1998" ColumnName="FU_SALDOLICENCA_1998" />
+                <ScalarProperty Name="FU_SALDOLICENCA_2003" ColumnName="FU_SALDOLICENCA_2003" />
+                <ScalarProperty Name="FU_SALDOLICENCA_2005" ColumnName="FU_SALDOLICENCA_2005" />
+                <ScalarProperty Name="FU_SALDOLICENCA_GERAL" ColumnName="FU_SALDOLICENCA_GERAL" />
+                <ScalarProperty Name="FU_VALOR_BENEFICIO" ColumnName="FU_VALOR_BENEFICIO" />
+                <ScalarProperty Name="FU_MATRICULA_PENS" ColumnName="FU_MATRICULA_PENS" />
+                <ScalarProperty Name="FU_PENS_NATUREZA" ColumnName="FU_PENS_NATUREZA" />
+                <ScalarProperty Name="TPD_CODIGO" ColumnName="TPD_CODIGO" />
+                <ScalarProperty Name="FU_PENS_DT_INI_VALIDADE" ColumnName="FU_PENS_DT_INI_VALIDADE" />
+                <ScalarProperty Name="FU_PENS_DT_FIM_VALIDADE" ColumnName="FU_PENS_DT_FIM_VALIDADE" />
+                <ScalarProperty Name="PE_CODIGO_TUTOR" ColumnName="PE_CODIGO_TUTOR" />
+                <ScalarProperty Name="FU_TUTOR_BA_CODBACEN_CC" ColumnName="FU_TUTOR_BA_CODBACEN_CC" />
+                <ScalarProperty Name="FU_TUTOR_AG_NUMERO_CC" ColumnName="FU_TUTOR_AG_NUMERO_CC" />
+                <ScalarProperty Name="FU_TUTOR_NRO_CTA_CC" ColumnName="FU_TUTOR_NRO_CTA_CC" />
+                <ScalarProperty Name="FU_TUTOR_DVERIF_CTA_CC" ColumnName="FU_TUTOR_DVERIF_CTA_CC" />
+                <ScalarProperty Name="FU_PROC_DT_INICIO" ColumnName="FU_PROC_DT_INICIO" />
+                <ScalarProperty Name="FU_PROC_DT_FIM" ColumnName="FU_PROC_DT_FIM" />
+                <ScalarProperty Name="FU_PROC_NUM_REGISTRO" ColumnName="FU_PROC_NUM_REGISTRO" />
+                <ScalarProperty Name="FU_PROC_NUM_LIVRO" ColumnName="FU_PROC_NUM_LIVRO" />
+                <ScalarProperty Name="FU_PROC_NOME_CARTORIO" ColumnName="FU_PROC_NOME_CARTORIO" />
+                <ScalarProperty Name="FU_PROC_NUM_FOLHA" ColumnName="FU_PROC_NUM_FOLHA" />
+                <ScalarProperty Name="SIT_CODIGO" ColumnName="SIT_CODIGO" />
+                <ScalarProperty Name="FU_BENEFNUM" ColumnName="FU_BENEFNUM" />
+                <ScalarProperty Name="FU_BENEFDEN" ColumnName="FU_BENEFDEN" />
+                <ScalarProperty Name="FU_SIN_RETROAGIU_MEDIA" ColumnName="FU_SIN_RETROAGIU_MEDIA" />
+                <ScalarProperty Name="FU_TMO_CODIGO" ColumnName="FU_TMO_CODIGO" />
+                <ScalarProperty Name="FU_PENDENCIAS" ColumnName="FU_PENDENCIAS" />
+                <ScalarProperty Name="FU_SALARIO_ADICIONAL1" ColumnName="FU_SALARIO_ADICIONAL1" />
+                <ScalarProperty Name="FU_SALARIO_ADICIONAL2" ColumnName="FU_SALARIO_ADICIONAL2" />
+                <ScalarProperty Name="ORG_CODIGO" ColumnName="ORG_CODIGO" />
+                <ScalarProperty Name="FU_CHAPA_ALT" ColumnName="FU_CHAPA_ALT" />
+                <ScalarProperty Name="FU_ID_CHEFE" ColumnName="FU_ID_CHEFE" />
+                <ScalarProperty Name="FU_TSL_CODIGO_NOM" ColumnName="FU_TSL_CODIGO_NOM" />
+                <ScalarProperty Name="FU_NTS_CODIGO_NOM" ColumnName="FU_NTS_CODIGO_NOM" />
+                <ScalarProperty Name="FU_FTS_CODIGO_NOM" ColumnName="FU_FTS_CODIGO_NOM" />
+                <ScalarProperty Name="FU_AVIS_PREV_DT_COMPAREC" ColumnName="FU_AVIS_PREV_DT_COMPAREC" />
+                <ScalarProperty Name="FU_AVIS_PREV_HR_COMPAREC" ColumnName="FU_AVIS_PREV_HR_COMPAREC" />
+                <ScalarProperty Name="FU_AVIS_PREV_NOMELOC_COMPAREC" ColumnName="FU_AVIS_PREV_NOMELOC_COMPAREC" />
+                <ScalarProperty Name="FU_AVIS_PREV_ENDERLOC_COMPAREC" ColumnName="FU_AVIS_PREV_ENDERLOC_COMPAREC" />
+                <ScalarProperty Name="FU_AVIS_PREV_OBS" ColumnName="FU_AVIS_PREV_OBS" />
+                <ScalarProperty Name="FU_AVIS_PREV_TIPO" ColumnName="FU_AVIS_PREV_TIPO" />
+                <ScalarProperty Name="FU_AVIS_PREV_OPCAO_JORNADA" ColumnName="FU_AVIS_PREV_OPCAO_JORNADA" />
+                <ScalarProperty Name="FU_AVIS_PREV_NDIAS_AUSENCIA" ColumnName="FU_AVIS_PREV_NDIAS_AUSENCIA" />
+                <ScalarProperty Name="FU_AVIS_PREV_DIAS_AVISO_REAL" ColumnName="FU_AVIS_PREV_DIAS_AVISO_REAL" />
+                <ScalarProperty Name="FU_AVIS_PREV_COMPLLOC_COMPAREC" ColumnName="FU_AVIS_PREV_COMPLLOC_COMPAREC" />
+                <ScalarProperty Name="FU_AVIS_PREV_NUMLOC_COMPAREC" ColumnName="FU_AVIS_PREV_NUMLOC_COMPAREC" />
+                <ScalarProperty Name="FU_AVIS_PREV_CIDADE_COMPAREC" ColumnName="FU_AVIS_PREV_CIDADE_COMPAREC" />
+                <ScalarProperty Name="FU_AVIS_PREV_BAIRRO_COMPAREC" ColumnName="FU_AVIS_PREV_BAIRRO_COMPAREC" />
+                <ScalarProperty Name="FU_AVIS_PREV_UF_COMPAREC" ColumnName="FU_AVIS_PREV_UF_COMPAREC" />
+                <ScalarProperty Name="FU_AVIS_PREV_PAIS_COMPAREC" ColumnName="FU_AVIS_PREV_PAIS_COMPAREC" />
+                <ScalarProperty Name="FU_AVIS_PREV_CEP_COMPAREC" ColumnName="FU_AVIS_PREV_CEP_COMPAREC" />
+                <ScalarProperty Name="FU_SCF_CODIGO" ColumnName="FU_SCF_CODIGO" />
+                <ScalarProperty Name="FU_RPA_CODIGO" ColumnName="FU_RPA_CODIGO" />
+                <ScalarProperty Name="FU_INICIO_ESTAB_CAND" ColumnName="FU_INICIO_ESTAB_CAND" />
+                <ScalarProperty Name="FU_FIM_ESTAB_CAND" ColumnName="FU_FIM_ESTAB_CAND" />
+                <ScalarProperty Name="FU_ESTAB_CANDIDATURA" ColumnName="FU_ESTAB_CANDIDATURA" />
+                <ScalarProperty Name="FU_VIM_CODIGO" ColumnName="FU_VIM_CODIGO" />
+                <ScalarProperty Name="FU_TNO_CODIGO" ColumnName="FU_TNO_CODIGO" />
+                <ScalarProperty Name="FU_ATO_NOMEACAO" ColumnName="FU_ATO_NOMEACAO" />
+                <ScalarProperty Name="FU_PG_TXCONFED" ColumnName="FU_PG_TXCONFED" />
+                <ScalarProperty Name="FU_PG_TXASSIST" ColumnName="FU_PG_TXASSIST" />
+                <ScalarProperty Name="FNC_CODIGO" ColumnName="FNC_CODIGO" />
+                <ScalarProperty Name="FU_CONSIDERA_DTREINTEGRACAO" ColumnName="FU_CONSIDERA_DTREINTEGRACAO" />
+                <ScalarProperty Name="FU_DT_AVISO_PREVIO_PROJETADO" ColumnName="FU_DT_AVISO_PREVIO_PROJETADO" />
+                <ScalarProperty Name="FU_JORN_SEM_AFA_INTEGRAL" ColumnName="FU_JORN_SEM_AFA_INTEGRAL" />
+                <ScalarProperty Name="FU_JORN_SEM_AFA_CUMP_INTEGRAL" ColumnName="FU_JORN_SEM_AFA_CUMP_INTEGRAL" />
+                <ScalarProperty Name="FU_JORN_SAB_COMP_SEM_AFA" ColumnName="FU_JORN_SAB_COMP_SEM_AFA" />
+                <ScalarProperty Name="FU_COMPR_NOVO_EMPREGO_AVISO" ColumnName="FU_COMPR_NOVO_EMPREGO_AVISO" />
+                <ScalarProperty Name="FU_ORIGEM_FERIAS" ColumnName="FU_ORIGEM_FERIAS" />
+                <ScalarProperty Name="FU_TIPO_CONTA" ColumnName="FU_TIPO_CONTA" />
+                <ScalarProperty Name="FU_INDICATIVO_ADMISSAO" ColumnName="FU_INDICATIVO_ADMISSAO" />
+                <ScalarProperty Name="FU_CTT_CODIGO" ColumnName="FU_CTT_CODIGO" />
+                <ScalarProperty Name="FU_ESTAG_NATUREZA" ColumnName="FU_ESTAG_NATUREZA" />
+                <ScalarProperty Name="FU_ESTAG_NIVEL" ColumnName="FU_ESTAG_NIVEL" />
+                <ScalarProperty Name="FU_ESTAG_AREA_ATUACAO" ColumnName="FU_ESTAG_AREA_ATUACAO" />
+                <ScalarProperty Name="FU_ESTAG_NR_APOLICE" ColumnName="FU_ESTAG_NR_APOLICE" />
+                <ScalarProperty Name="FU_ESTAG_DT_PREV_TERMINO" ColumnName="FU_ESTAG_DT_PREV_TERMINO" />
+                <ScalarProperty Name="FU_ESTAG_INST_ENSINO" ColumnName="FU_ESTAG_INST_ENSINO" />
+                <ScalarProperty Name="FU_ESTAG_AGENTE_INTEGRACAO" ColumnName="FU_ESTAG_AGENTE_INTEGRACAO" />
+                <ScalarProperty Name="FU_ESTAG_COORDENADOR" ColumnName="FU_ESTAG_COORDENADOR" />
+                <ScalarProperty Name="FU_RESC_NRO_PROC_TRABALHISTA" ColumnName="FU_RESC_NRO_PROC_TRABALHISTA" />
+                <ScalarProperty Name="FUR_OBSERVACAO" ColumnName="FUR_OBSERVACAO" />
+                <ScalarProperty Name="FU_RESC_CNPJ_SUCESSORA" ColumnName="FU_RESC_CNPJ_SUCESSORA" />
+                <ScalarProperty Name="FU_TIPO_CAGED" ColumnName="FU_TIPO_CAGED" />
+                <ScalarProperty Name="FU_CAGED_DATA_REGISTRO" ColumnName="FU_CAGED_DATA_REGISTRO" />
+                <ScalarProperty Name="FU_TIPO_REGIME_JORNADA" ColumnName="FU_TIPO_REGIME_JORNADA" />
+                <ScalarProperty Name="FU_DESCRICAO_SALARIO_VARIAVEL" ColumnName="FU_DESCRICAO_SALARIO_VARIAVEL" />
+                <ScalarProperty Name="FU_AVISO_PREVIO_MISTO" ColumnName="FU_AVISO_PREVIO_MISTO" />
+                <ScalarProperty Name="FU_NDIAS_ESTABILIDADE" ColumnName="FU_NDIAS_ESTABILIDADE" />
+                <ScalarProperty Name="FU_PREENCHE_COTA_DEFICIENTE" ColumnName="FU_PREENCHE_COTA_DEFICIENTE" />
+                <ScalarProperty Name="FU_MATRICULA_ESOCIAL" ColumnName="FU_MATRICULA_ESOCIAL" />
+                <ScalarProperty Name="FU_CONTRATO_DETERM_CLAU_ASSEC" ColumnName="FU_CONTRATO_DETERM_CLAU_ASSEC" />
+                <ScalarProperty Name="FU_AVIS_PREV_DT_PREV_DESLIG" ColumnName="FU_AVIS_PREV_DT_PREV_DESLIG" />
+                <ScalarProperty Name="FU_AVIS_PREV_TIPO_ESOCIAL" ColumnName="FU_AVIS_PREV_TIPO_ESOCIAL" />
+                <ScalarProperty Name="FU_AVIS_PREV_OBSERVACAO" ColumnName="FU_AVIS_PREV_OBSERVACAO" />
+                <ScalarProperty Name="CPE_CODIGO_MENORIDADE" ColumnName="CPE_CODIGO_MENORIDADE" />
+                <ScalarProperty Name="CLI_CODIGO_ENT_EDUC" ColumnName="CLI_CODIGO_ENT_EDUC" />
+                <ScalarProperty Name="FU_MATRICULA_TRANSF" ColumnName="FU_MATRICULA_TRANSF" />
+                <ScalarProperty Name="FU_CNPJ_EMPREGADOR" ColumnName="FU_CNPJ_EMPREGADOR" />
+                <ScalarProperty Name="FU_OBSERVACAO_TRANSF" ColumnName="FU_OBSERVACAO_TRANSF" />
+                <ScalarProperty Name="CPA_CODIGO" ColumnName="CPA_CODIGO" />
+                <ScalarProperty Name="FU_AUTORIZA_DESC_CONTR_SIND" ColumnName="FU_AUTORIZA_DESC_CONTR_SIND" />
+                <ScalarProperty Name="FU_FER_FERIAS_EM_DIAS_UTEIS" ColumnName="FU_FER_FERIAS_EM_DIAS_UTEIS" />
+                <ScalarProperty Name="FU_QUER_ADIANT_FERIAS" ColumnName="FU_QUER_ADIANT_FERIAS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FO_PESSOA">
+            <EntityTypeMapping TypeName="MixModel.FO_PESSOA">
+              <MappingFragment StoreEntitySet="FO_PESSOA">
+                <ScalarProperty Name="PE_CODIGO" ColumnName="PE_CODIGO" />
+                <ScalarProperty Name="PE_ESTRANG_CONJ_BRASIL" ColumnName="PE_ESTRANG_CONJ_BRASIL" />
+                <ScalarProperty Name="PE_ESTRANG_VENC_IDENT" ColumnName="PE_ESTRANG_VENC_IDENT" />
+                <ScalarProperty Name="PE_ESTRANG_CART_HAB" ColumnName="PE_ESTRANG_CART_HAB" />
+                <ScalarProperty Name="PE_ESTRANG_NRO_REG" ColumnName="PE_ESTRANG_NRO_REG" />
+                <ScalarProperty Name="PE_ESTRANG_FILHOS_BRASIL" ColumnName="PE_ESTRANG_FILHOS_BRASIL" />
+                <ScalarProperty Name="PE_ESTRANG_VENC_CTPS" ColumnName="PE_ESTRANG_VENC_CTPS" />
+                <ScalarProperty Name="PE_ESTRANG_CART_MOD19" ColumnName="PE_ESTRANG_CART_MOD19" />
+                <ScalarProperty Name="PE_ESTRANG_DT_CHEGADA" ColumnName="PE_ESTRANG_DT_CHEGADA" />
+                <ScalarProperty Name="PE_ESTRANG_NRO_DECRETO" ColumnName="PE_ESTRANG_NRO_DECRETO" />
+                <ScalarProperty Name="PE_ESTRANG_NATURALIZADO" ColumnName="PE_ESTRANG_NATURALIZADO" />
+                <ScalarProperty Name="PE_NOME" ColumnName="PE_NOME" />
+                <ScalarProperty Name="PE_SEXO" ColumnName="PE_SEXO" />
+                <ScalarProperty Name="PE_DT_NASC" ColumnName="PE_DT_NASC" />
+                <ScalarProperty Name="PE_APOS_INSS" ColumnName="PE_APOS_INSS" />
+                <ScalarProperty Name="PE_RG_NUMERO" ColumnName="PE_RG_NUMERO" />
+                <ScalarProperty Name="PE_RG_DTEMISSAO" ColumnName="PE_RG_DTEMISSAO" />
+                <ScalarProperty Name="PE_RG_ORGAO" ColumnName="PE_RG_ORGAO" />
+                <ScalarProperty Name="PE_CPF" ColumnName="PE_CPF" />
+                <ScalarProperty Name="PE_PIS" ColumnName="PE_PIS" />
+                <ScalarProperty Name="PE_DT_PIS" ColumnName="PE_DT_PIS" />
+                <ScalarProperty Name="PE_EC_CODIGO" ColumnName="PE_EC_CODIGO" />
+                <ScalarProperty Name="PE_CIDADE_NATAL" ColumnName="PE_CIDADE_NATAL" />
+                <ScalarProperty Name="PE_ESTADO_NATAL" ColumnName="PE_ESTADO_NATAL" />
+                <ScalarProperty Name="PE_PAIS_NATAL" ColumnName="PE_PAIS_NATAL" />
+                <ScalarProperty Name="PE_NACIONAL1" ColumnName="PE_NACIONAL1" />
+                <ScalarProperty Name="PE_NACIONAL2" ColumnName="PE_NACIONAL2" />
+                <ScalarProperty Name="PE_NACIONAL3" ColumnName="PE_NACIONAL3" />
+                <ScalarProperty Name="PE_PAIS_END" ColumnName="PE_PAIS_END" />
+                <ScalarProperty Name="PE_UF_END" ColumnName="PE_UF_END" />
+                <ScalarProperty Name="PE_CIDADE_END" ColumnName="PE_CIDADE_END" />
+                <ScalarProperty Name="PE_BAIRRO_END" ColumnName="PE_BAIRRO_END" />
+                <ScalarProperty Name="PE_LOGRADOURO_END" ColumnName="PE_LOGRADOURO_END" />
+                <ScalarProperty Name="PE_NUMERO_END" ColumnName="PE_NUMERO_END" />
+                <ScalarProperty Name="PE_COMPLEMENTO_END" ColumnName="PE_COMPLEMENTO_END" />
+                <ScalarProperty Name="PE_CEP" ColumnName="PE_CEP" />
+                <ScalarProperty Name="PE_EMAIL" ColumnName="PE_EMAIL" />
+                <ScalarProperty Name="PE_GRI_CODIGO" ColumnName="PE_GRI_CODIGO" />
+                <ScalarProperty Name="PE_CURSO" ColumnName="PE_CURSO" />
+                <ScalarProperty Name="PE_DOUTORADO" ColumnName="PE_DOUTORADO" />
+                <ScalarProperty Name="PE_MESTRADO" ColumnName="PE_MESTRADO" />
+                <ScalarProperty Name="PE_OBSERVACOES" ColumnName="PE_OBSERVACOES" />
+                <ScalarProperty Name="PE_BA_CODBACEN_PIS" ColumnName="PE_BA_CODBACEN_PIS" />
+                <ScalarProperty Name="PE_AG_NUMERO_PIS" ColumnName="PE_AG_NUMERO_PIS" />
+                <ScalarProperty Name="PE_NRO_CTA_PIS" ColumnName="PE_NRO_CTA_PIS" />
+                <ScalarProperty Name="PE_DVERIF_CTA_PIS" ColumnName="PE_DVERIF_CTA_PIS" />
+                <ScalarProperty Name="PE_ABERTURA_CTA_PIS" ColumnName="PE_ABERTURA_CTA_PIS" />
+                <ScalarProperty Name="PE_TIT_ELEITOR_NRO" ColumnName="PE_TIT_ELEITOR_NRO" />
+                <ScalarProperty Name="PE_TIT_ELEITOR_ZONA" ColumnName="PE_TIT_ELEITOR_ZONA" />
+                <ScalarProperty Name="PE_TIT_ELEITOR_SECAO" ColumnName="PE_TIT_ELEITOR_SECAO" />
+                <ScalarProperty Name="PE_CERT_RESERV_NRO" ColumnName="PE_CERT_RESERV_NRO" />
+                <ScalarProperty Name="PE_CERT_RESERV_CATEGORIA" ColumnName="PE_CERT_RESERV_CATEGORIA" />
+                <ScalarProperty Name="PE_CTPS_NRO" ColumnName="PE_CTPS_NRO" />
+                <ScalarProperty Name="PE_CTPS_SERIE" ColumnName="PE_CTPS_SERIE" />
+                <ScalarProperty Name="PE_CTPS_DTEMISSAO" ColumnName="PE_CTPS_DTEMISSAO" />
+                <ScalarProperty Name="PE_CTPS_ESTADOEM" ColumnName="PE_CTPS_ESTADOEM" />
+                <ScalarProperty Name="PE_CTPS_PAISEM" ColumnName="PE_CTPS_PAISEM" />
+                <ScalarProperty Name="PE_CART_HAB_NRO" ColumnName="PE_CART_HAB_NRO" />
+                <ScalarProperty Name="PE_CART_HAB_TIPO" ColumnName="PE_CART_HAB_TIPO" />
+                <ScalarProperty Name="PE_REG_PROFISSIONAL" ColumnName="PE_REG_PROFISSIONAL" />
+                <ScalarProperty Name="PE_RC_CODIGO" ColumnName="PE_RC_CODIGO" />
+                <ScalarProperty Name="PE_DEFICIENTE_FISICO" ColumnName="PE_DEFICIENTE_FISICO" />
+                <ScalarProperty Name="USU_USERNAME" ColumnName="USU_USERNAME" />
+                <ScalarProperty Name="PE_RG_PAISEM" ColumnName="PE_RG_PAISEM" />
+                <ScalarProperty Name="PE_RG_ESTADOEM" ColumnName="PE_RG_ESTADOEM" />
+                <ScalarProperty Name="PE_NRO_PASSAPORTE" ColumnName="PE_NRO_PASSAPORTE" />
+                <ScalarProperty Name="PE_LOCALIZACAO" ColumnName="PE_LOCALIZACAO" />
+                <ScalarProperty Name="PE_APELIDO" ColumnName="PE_APELIDO" />
+                <ScalarProperty Name="PE_PARTICIPA_SELECAO_INT" ColumnName="PE_PARTICIPA_SELECAO_INT" />
+                <ScalarProperty Name="PE_PARTICIPA_SELECAO_EXT" ColumnName="PE_PARTICIPA_SELECAO_EXT" />
+                <ScalarProperty Name="PE_CADASTRO_WEB" ColumnName="PE_CADASTRO_WEB" />
+                <ScalarProperty Name="PE_WEB_ATIVO" ColumnName="PE_WEB_ATIVO" />
+                <ScalarProperty Name="PE_TIPO_APOSENTADORIA" ColumnName="PE_TIPO_APOSENTADORIA" />
+                <ScalarProperty Name="PE_DATA_APOSENTADORIA" ColumnName="PE_DATA_APOSENTADORIA" />
+                <ScalarProperty Name="PE_PAGINA_INTERNET" ColumnName="PE_PAGINA_INTERNET" />
+                <ScalarProperty Name="PE_DT_ULT_EMISSAO_ASO" ColumnName="PE_DT_ULT_EMISSAO_ASO" />
+                <ScalarProperty Name="PE_DT_ULT_EMISSAO_PPP" ColumnName="PE_DT_ULT_EMISSAO_PPP" />
+                <ScalarProperty Name="PE_NOME_PAI" ColumnName="PE_NOME_PAI" />
+                <ScalarProperty Name="PE_NOME_MAE" ColumnName="PE_NOME_MAE" />
+                <ScalarProperty Name="PE_DT_VENCTO_ASO" ColumnName="PE_DT_VENCTO_ASO" />
+                <ScalarProperty Name="PE_TIT_ELEITOR_MUNICIPIO" ColumnName="PE_TIT_ELEITOR_MUNICIPIO" />
+                <ScalarProperty Name="PE_TIT_ELEITOR_ESTADOEM" ColumnName="PE_TIT_ELEITOR_ESTADOEM" />
+                <ScalarProperty Name="PE_TIT_ELEITOR_PAISEM" ColumnName="PE_TIT_ELEITOR_PAISEM" />
+                <ScalarProperty Name="PE_AUT_RECEB_EMAIL" ColumnName="PE_AUT_RECEB_EMAIL" />
+                <ScalarProperty Name="PE_TIPO_DEFICIENCIA" ColumnName="PE_TIPO_DEFICIENCIA" />
+                <ScalarProperty Name="PE_FUMANTE" ColumnName="PE_FUMANTE" />
+                <ScalarProperty Name="PE_DISPONIVEL_VIAGEM" ColumnName="PE_DISPONIVEL_VIAGEM" />
+                <ScalarProperty Name="PE_RECURSO_ESPECIAL" ColumnName="PE_RECURSO_ESPECIAL" />
+                <ScalarProperty Name="PE_VEICULO_PROPRIO" ColumnName="PE_VEICULO_PROPRIO" />
+                <ScalarProperty Name="PE_RESIDE_OUTRO_LOCAL" ColumnName="PE_RESIDE_OUTRO_LOCAL" />
+                <ScalarProperty Name="PE_ZONA" ColumnName="PE_ZONA" />
+                <ScalarProperty Name="PE_CART_HAB_VENC" ColumnName="PE_CART_HAB_VENC" />
+                <ScalarProperty Name="PE_PERFIL" ColumnName="PE_PERFIL" />
+                <ScalarProperty Name="PET_CODIGO" ColumnName="PET_CODIGO" />
+                <ScalarProperty Name="PE_DT_CADASTRO" ColumnName="PE_DT_CADASTRO" />
+                <ScalarProperty Name="PE_PARTICIPA_SELECAO" ColumnName="PE_PARTICIPA_SELECAO" />
+                <ScalarProperty Name="MOT_CODIGO" ColumnName="MOT_CODIGO" />
+                <ScalarProperty Name="PE_ENDERECO_PERFIL" ColumnName="PE_ENDERECO_PERFIL" />
+                <ScalarProperty Name="PE_INSTRUTOR" ColumnName="PE_INSTRUTOR" />
+                <ScalarProperty Name="PE_MONITOR" ColumnName="PE_MONITOR" />
+                <ScalarProperty Name="EQE_CODIGO" ColumnName="EQE_CODIGO" />
+                <ScalarProperty Name="PE_DATAHORA_ULTALTERACAO" ColumnName="PE_DATAHORA_ULTALTERACAO" />
+                <ScalarProperty Name="PE_RESUMO_QUALIFICACOES" ColumnName="PE_RESUMO_QUALIFICACOES" />
+                <ScalarProperty Name="PE_CV_ATIVO" ColumnName="PE_CV_ATIVO" />
+                <ScalarProperty Name="PE_CNS_NUMERO" ColumnName="PE_CNS_NUMERO" />
+                <ScalarProperty Name="PE_DECL_NASC_VIVO_NUMERO" ColumnName="PE_DECL_NASC_VIVO_NUMERO" />
+                <ScalarProperty Name="PE_RESP_EVENTO" ColumnName="PE_RESP_EVENTO" />
+                <ScalarProperty Name="PE_EMISSOR_PASSAPORTE" ColumnName="PE_EMISSOR_PASSAPORTE" />
+                <ScalarProperty Name="PE_UF_PAIS_PASSAPORTE" ColumnName="PE_UF_PAIS_PASSAPORTE" />
+                <ScalarProperty Name="PE_UF_PASSAPORTE" ColumnName="PE_UF_PASSAPORTE" />
+                <ScalarProperty Name="PE_DT_EMISSAO_PASSAPORTE" ColumnName="PE_DT_EMISSAO_PASSAPORTE" />
+                <ScalarProperty Name="PE_DT_VALIDADE_PASSAPORTE" ColumnName="PE_DT_VALIDADE_PASSAPORTE" />
+                <ScalarProperty Name="PE_PAIS_EMISSAO_PASSAPORTE" ColumnName="PE_PAIS_EMISSAO_PASSAPORTE" />
+                <ScalarProperty Name="PE_TP_CERTIDAO_CIVIL" ColumnName="PE_TP_CERTIDAO_CIVIL" />
+                <ScalarProperty Name="PE_DT_EMISSAO_CERTIDAO_CIVIL" ColumnName="PE_DT_EMISSAO_CERTIDAO_CIVIL" />
+                <ScalarProperty Name="PE_TERMO_CERTIDAO_CIVIL" ColumnName="PE_TERMO_CERTIDAO_CIVIL" />
+                <ScalarProperty Name="PE_LIVRO_CERTIDAO_CIVIL" ColumnName="PE_LIVRO_CERTIDAO_CIVIL" />
+                <ScalarProperty Name="PE_FOLHA_CERTIDAO_CIVIL" ColumnName="PE_FOLHA_CERTIDAO_CIVIL" />
+                <ScalarProperty Name="PE_CARTORIO_CERTIDAO_CIVIL" ColumnName="PE_CARTORIO_CERTIDAO_CIVIL" />
+                <ScalarProperty Name="PE_UF_PAIS_CERTIDAO_CIVIL" ColumnName="PE_UF_PAIS_CERTIDAO_CIVIL" />
+                <ScalarProperty Name="PE_UF_CERTIDAO_CIVIL" ColumnName="PE_UF_CERTIDAO_CIVIL" />
+                <ScalarProperty Name="PE_MUNICIPIO_CERTIDAO_CIVIL" ColumnName="PE_MUNICIPIO_CERTIDAO_CIVIL" />
+                <ScalarProperty Name="PE_DT_NATURALIZACAO" ColumnName="PE_DT_NATURALIZACAO" />
+                <ScalarProperty Name="PE_NRO_RIC" ColumnName="PE_NRO_RIC" />
+                <ScalarProperty Name="PE_UF_PAIS_RIC" ColumnName="PE_UF_PAIS_RIC" />
+                <ScalarProperty Name="PE_UF_RIC" ColumnName="PE_UF_RIC" />
+                <ScalarProperty Name="PE_EMISSOR_RIC" ColumnName="PE_EMISSOR_RIC" />
+                <ScalarProperty Name="PE_MUNICIPIO_RIC" ColumnName="PE_MUNICIPIO_RIC" />
+                <ScalarProperty Name="PE_DT_EXPEDICAO_RIC" ColumnName="PE_DT_EXPEDICAO_RIC" />
+                <ScalarProperty Name="PE_CERT_RESERV_DT_EMISS" ColumnName="PE_CERT_RESERV_DT_EMISS" />
+                <ScalarProperty Name="PE_CERT_RESERV_EMISSOR" ColumnName="PE_CERT_RESERV_EMISSOR" />
+                <ScalarProperty Name="PE_TIT_ELEITOR_DT_EMISS" ColumnName="PE_TIT_ELEITOR_DT_EMISS" />
+                <ScalarProperty Name="TLG_CODIGO" ColumnName="TLG_CODIGO" />
+                <ScalarProperty Name="PE_RNE_EMISSOR" ColumnName="PE_RNE_EMISSOR" />
+                <ScalarProperty Name="PE_RNE_DT_EXPEDICAO" ColumnName="PE_RNE_DT_EXPEDICAO" />
+                <ScalarProperty Name="PE_OC_NUMERO" ColumnName="PE_OC_NUMERO" />
+                <ScalarProperty Name="PE_OC_EMISSOR" ColumnName="PE_OC_EMISSOR" />
+                <ScalarProperty Name="PE_OC_DT_EXPEDICAO" ColumnName="PE_OC_DT_EXPEDICAO" />
+                <ScalarProperty Name="PE_OC_DT_VALIDADE" ColumnName="PE_OC_DT_VALIDADE" />
+                <ScalarProperty Name="PE_CART_HAB_EMISSOR" ColumnName="PE_CART_HAB_EMISSOR" />
+                <ScalarProperty Name="PE_CART_HAB_DT_EXPEDICAO" ColumnName="PE_CART_HAB_DT_EXPEDICAO" />
+                <ScalarProperty Name="PE_CASA_PROPRIA_POSSUI" ColumnName="PE_CASA_PROPRIA_POSSUI" />
+                <ScalarProperty Name="PE_CASA_PROPRIA_USOU_FGTS" ColumnName="PE_CASA_PROPRIA_USOU_FGTS" />
+                <ScalarProperty Name="PE_USERNAME_SGI" ColumnName="PE_USERNAME_SGI" />
+                <ScalarProperty Name="PE_ORG_EM_PASSAPORTE" ColumnName="PE_ORG_EM_PASSAPORTE" />
+                <ScalarProperty Name="PE_ORG_EM_RG" ColumnName="PE_ORG_EM_RG" />
+                <ScalarProperty Name="COE_CODIGO" ColumnName="COE_CODIGO" />
+                <ScalarProperty Name="PE_CART_HAB_ESTADOEMISSOR" ColumnName="PE_CART_HAB_ESTADOEMISSOR" />
+                <ScalarProperty Name="PE_CART_HAB_DT_PRIMEIRA_HAB" ColumnName="PE_CART_HAB_DT_PRIMEIRA_HAB" />
+                <ScalarProperty Name="PE_DATA_REABILITACAO" ColumnName="PE_DATA_REABILITACAO" />
+                <ScalarProperty Name="PE_DATA_INICIO_PNE" ColumnName="PE_DATA_INICIO_PNE" />
+                <ScalarProperty Name="PE_NOME_COMPLETO" ColumnName="PE_NOME_COMPLETO" />
+                <ScalarProperty Name="PE_NOME_SOCIAL" ColumnName="PE_NOME_SOCIAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BS_ESTRUTURA">
+            <EntityTypeMapping TypeName="MixModel.BS_ESTRUTURA">
+              <MappingFragment StoreEntitySet="BS_ESTRUTURA">
+                <ScalarProperty Name="ES_OBRA_PROPRIA" ColumnName="ES_OBRA_PROPRIA" />
+                <ScalarProperty Name="CPE_CODIGO_PCD" ColumnName="CPE_CODIGO_PCD" />
+                <ScalarProperty Name="CPE_CODIGO_APRENDIZ" ColumnName="CPE_CODIGO_APRENDIZ" />
+                <ScalarProperty Name="ES_INDIC_REG_ELETRONICO" ColumnName="ES_INDIC_REG_ELETRONICO" />
+                <ScalarProperty Name="ES_INDIC_APRENDIZ_ENTIDADE" ColumnName="ES_INDIC_APRENDIZ_ENTIDADE" />
+                <ScalarProperty Name="ES_INDIC_CONTRATA_APRENDIZ" ColumnName="ES_INDIC_CONTRATA_APRENDIZ" />
+                <ScalarProperty Name="ES_INDIC_CONTRATA_DEFICIENTE" ColumnName="ES_INDIC_CONTRATA_DEFICIENTE" />
+                <ScalarProperty Name="ES_NUMERO_REG_TRAB_TEMP" ColumnName="ES_NUMERO_REG_TRAB_TEMP" />
+                <ScalarProperty Name="ES_INDIC_TRABALHO_TEMP" ColumnName="ES_INDIC_TRABALHO_TEMP" />
+                <ScalarProperty Name="ES_INDIC_ENTIDADE_EDUC" ColumnName="ES_INDIC_ENTIDADE_EDUC" />
+                <ScalarProperty Name="ES_CPF_DIRF" ColumnName="ES_CPF_DIRF" />
+                <ScalarProperty Name="DCR_CODIGO" ColumnName="DCR_CODIGO" />
+                <ScalarProperty Name="ES_CENTRALIZADORA_CNPJ_MANAD" ColumnName="ES_CENTRALIZADORA_CNPJ_MANAD" />
+                <ScalarProperty Name="ES_ADESAO_ANTECIPADA_ESOCIAL" ColumnName="ES_ADESAO_ANTECIPADA_ESOCIAL" />
+                <ScalarProperty Name="ES_DT_ADESAO_ESOCIAL" ColumnName="ES_DT_ADESAO_ESOCIAL" />
+                <ScalarProperty Name="ES_INDIC_SUBST_CONTRIB_PATR" ColumnName="ES_INDIC_SUBST_CONTRIB_PATR" />
+                <ScalarProperty Name="ES_INDIC_SITUACAO_PF" ColumnName="ES_INDIC_SITUACAO_PF" />
+                <ScalarProperty Name="ES_INDIC_SITUACAO_PJ" ColumnName="ES_INDIC_SITUACAO_PJ" />
+                <ScalarProperty Name="ES_INDIC_DESONERACAO_FOLHA" ColumnName="ES_INDIC_DESONERACAO_FOLHA" />
+                <ScalarProperty Name="ES_RECIBO_RELATORIO" ColumnName="ES_RECIBO_RELATORIO" />
+                <ScalarProperty Name="ES_NUM_MAX_FUNC" ColumnName="ES_NUM_MAX_FUNC" />
+                <ScalarProperty Name="ES_TP_SIS_CONTROLE_PONTO" ColumnName="ES_TP_SIS_CONTROLE_PONTO" />
+                <ScalarProperty Name="TLG_CODIGO" ColumnName="TLG_CODIGO" />
+                <ScalarProperty Name="TLO_CODIGO" ColumnName="TLO_CODIGO" />
+                <ScalarProperty Name="TRI_CODIGO" ColumnName="TRI_CODIGO" />
+                <ScalarProperty Name="ES_INDIC_CONSTRUTORA" ColumnName="ES_INDIC_CONSTRUTORA" />
+                <ScalarProperty Name="ES_INDIC_COOPERATIVA" ColumnName="ES_INDIC_COOPERATIVA" />
+                <ScalarProperty Name="ES_BLOQUEIA_EXCEDE_CONTRATO" ColumnName="ES_BLOQUEIA_EXCEDE_CONTRATO" />
+                <ScalarProperty Name="ES_JORNADA_MENSAL_MAX" ColumnName="ES_JORNADA_MENSAL_MAX" />
+                <ScalarProperty Name="ES_VAL_MAX_DIARIO_VT" ColumnName="ES_VAL_MAX_DIARIO_VT" />
+                <ScalarProperty Name="ES_VAL_MAX_SALARIO" ColumnName="ES_VAL_MAX_SALARIO" />
+                <ScalarProperty Name="ES_DESONERACAO_PARCIAL" ColumnName="ES_DESONERACAO_PARCIAL" />
+                <ScalarProperty Name="ES_DT_FIM_DESONERACAO_FOLHA" ColumnName="ES_DT_FIM_DESONERACAO_FOLHA" />
+                <ScalarProperty Name="ES_DT_INI_DESONERACAO_FOLHA" ColumnName="ES_DT_INI_DESONERACAO_FOLHA" />
+                <ScalarProperty Name="ES_PERC_PIS_SOBRE_FOLHA" ColumnName="ES_PERC_PIS_SOBRE_FOLHA" />
+                <ScalarProperty Name="ES_NOME_PPP" ColumnName="ES_NOME_PPP" />
+                <ScalarProperty Name="ES_FAP" ColumnName="ES_FAP" />
+                <ScalarProperty Name="ES_PERC_RAT" ColumnName="ES_PERC_RAT" />
+                <ScalarProperty Name="ES_DATA_NASC_CONTATO" ColumnName="ES_DATA_NASC_CONTATO" />
+                <ScalarProperty Name="ESC_CODIGO" ColumnName="ESC_CODIGO" />
+                <ScalarProperty Name="ES_FGTS_AGENCIA" ColumnName="ES_FGTS_AGENCIA" />
+                <ScalarProperty Name="ES_FGTS_CODBACEN" ColumnName="ES_FGTS_CODBACEN" />
+                <ScalarProperty Name="ES_CNAE_PREPONDERANTE" ColumnName="ES_CNAE_PREPONDERANTE" />
+                <ScalarProperty Name="ES_SIGLA" ColumnName="ES_SIGLA" />
+                <ScalarProperty Name="SGL_CODIGO" ColumnName="SGL_CODIGO" />
+                <ScalarProperty Name="ES_VALOR_CAPITAL_SOCIAL" ColumnName="ES_VALOR_CAPITAL_SOCIAL" />
+                <ScalarProperty Name="ES_VT_NOME_DEP" ColumnName="ES_VT_NOME_DEP" />
+                <ScalarProperty Name="ES_TIPO_SOCIO" ColumnName="ES_TIPO_SOCIO" />
+                <ScalarProperty Name="GRE_CODIGO" ColumnName="GRE_CODIGO" />
+                <ScalarProperty Name="NVA_CODIGO_VISITA" ColumnName="NVA_CODIGO_VISITA" />
+                <ScalarProperty Name="NVA_CODIGO_DIANUTIL" ColumnName="NVA_CODIGO_DIANUTIL" />
+                <ScalarProperty Name="NVA_CODIGO_DIAUTIL" ColumnName="NVA_CODIGO_DIAUTIL" />
+                <ScalarProperty Name="CNT_CODIGO" ColumnName="CNT_CODIGO" />
+                <ScalarProperty Name="ES_ID_SENAI_ADICIONAL" ColumnName="ES_ID_SENAI_ADICIONAL" />
+                <ScalarProperty Name="ES_MODALIDADE_ARQ_SEFIP" ColumnName="ES_MODALIDADE_ARQ_SEFIP" />
+                <ScalarProperty Name="LTB_CODIGO" ColumnName="LTB_CODIGO" />
+                <ScalarProperty Name="ES_DT_INI_LICENCA" ColumnName="ES_DT_INI_LICENCA" />
+                <ScalarProperty Name="TOM_CODIGO" ColumnName="TOM_CODIGO" />
+                <ScalarProperty Name="ES_NAO_USA_ESTRUTURA" ColumnName="ES_NAO_USA_ESTRUTURA" />
+                <ScalarProperty Name="REG_CODIGO" ColumnName="REG_CODIGO" />
+                <ScalarProperty Name="ES_CEI_VINCULADO" ColumnName="ES_CEI_VINCULADO" />
+                <ScalarProperty Name="ES_CENTRO_CTRL_APOLO" ColumnName="ES_CENTRO_CTRL_APOLO" />
+                <ScalarProperty Name="ID_MIX" ColumnName="ID_MIX" />
+                <ScalarProperty Name="CLD_CODIGO" ColumnName="CLD_CODIGO" />
+                <ScalarProperty Name="ES_ATIVA" ColumnName="ES_ATIVA" />
+                <ScalarProperty Name="ES_SINDICATO_BASE" ColumnName="ES_SINDICATO_BASE" />
+                <ScalarProperty Name="ES_PERICULOSIDADE" ColumnName="ES_PERICULOSIDADE" />
+                <ScalarProperty Name="ES_INSALUBRIDADE" ColumnName="ES_INSALUBRIDADE" />
+                <ScalarProperty Name="ES_ID_SALARIO_EDUC" ColumnName="ES_ID_SALARIO_EDUC" />
+                <ScalarProperty Name="ES_ID_SENAI_SENAT" ColumnName="ES_ID_SENAI_SENAT" />
+                <ScalarProperty Name="ES_MODELO_RECIBO_PAGTO" ColumnName="ES_MODELO_RECIBO_PAGTO" />
+                <ScalarProperty Name="ES_NRO_PROPRIETARIOS" ColumnName="ES_NRO_PROPRIETARIOS" />
+                <ScalarProperty Name="ES_CPF_CONTATO" ColumnName="ES_CPF_CONTATO" />
+                <ScalarProperty Name="ES_PERC_ALIMENTA_CONV" ColumnName="ES_PERC_ALIMENTA_CONV" />
+                <ScalarProperty Name="ES_PERC_CESTA_ALIMENTO" ColumnName="ES_PERC_CESTA_ALIMENTO" />
+                <ScalarProperty Name="ES_PERC_REFEICAO_TRANSP" ColumnName="ES_PERC_REFEICAO_TRANSP" />
+                <ScalarProperty Name="ES_PERC_REFEICAO_CONV" ColumnName="ES_PERC_REFEICAO_CONV" />
+                <ScalarProperty Name="ES_PERC_ADM_COZINHA" ColumnName="ES_PERC_ADM_COZINHA" />
+                <ScalarProperty Name="ES_PERC_SERVICO_PROP" ColumnName="ES_PERC_SERVICO_PROP" />
+                <ScalarProperty Name="ES_DATA_ENCERRAMENTO" ColumnName="ES_DATA_ENCERRAMENTO" />
+                <ScalarProperty Name="ES_PAT_ACIMA5SAL" ColumnName="ES_PAT_ACIMA5SAL" />
+                <ScalarProperty Name="ES_PAT_ATE5SAL" ColumnName="ES_PAT_ATE5SAL" />
+                <ScalarProperty Name="ES_PERC25_SAT_APESP" ColumnName="ES_PERC25_SAT_APESP" />
+                <ScalarProperty Name="ES_PERC20_SAT_APESP" ColumnName="ES_PERC20_SAT_APESP" />
+                <ScalarProperty Name="ES_PERC15_SAT_APESP" ColumnName="ES_PERC15_SAT_APESP" />
+                <ScalarProperty Name="ES_VR_AUTONOMOS" ColumnName="ES_VR_AUTONOMOS" />
+                <ScalarProperty Name="ES_VALORNF_SERVICO" ColumnName="ES_VALORNF_SERVICO" />
+                <ScalarProperty Name="ES_PREPOSTO" ColumnName="ES_PREPOSTO" />
+                <ScalarProperty Name="ES_FOR_REMUNER_CAGED" ColumnName="ES_FOR_REMUNER_CAGED" />
+                <ScalarProperty Name="ES_FOR_JORNADA_CAGED" ColumnName="ES_FOR_JORNADA_CAGED" />
+                <ScalarProperty Name="ES_AUTORIZ_CAGED" ColumnName="ES_AUTORIZ_CAGED" />
+                <ScalarProperty Name="CCU_CODIGO" ColumnName="CCU_CODIGO" />
+                <ScalarProperty Name="ES_INTEGR_CONTABIL_DEB" ColumnName="ES_INTEGR_CONTABIL_DEB" />
+                <ScalarProperty Name="CPG_CODIGO" ColumnName="CPG_CODIGO" />
+                <ScalarProperty Name="ES_VR_GPS13" ColumnName="ES_VR_GPS13" />
+                <ScalarProperty Name="RAC_CODIGO" ColumnName="RAC_CODIGO" />
+                <ScalarProperty Name="ES_PORTE" ColumnName="ES_PORTE" />
+                <ScalarProperty Name="ES_PAT" ColumnName="ES_PAT" />
+                <ScalarProperty Name="ES_CNAE" ColumnName="ES_CNAE" />
+                <ScalarProperty Name="ES_VR_COOP_TRAB" ColumnName="ES_VR_COOP_TRAB" />
+                <ScalarProperty Name="ES_MASC_CTGER" ColumnName="ES_MASC_CTGER" />
+                <ScalarProperty Name="ES_MASC_CTCTB" ColumnName="ES_MASC_CTCTB" />
+                <ScalarProperty Name="ES_PERC_ISFILANTROP" ColumnName="ES_PERC_ISFILANTROP" />
+                <ScalarProperty Name="ES_A_FIM_COMPENSAGPS" ColumnName="ES_A_FIM_COMPENSAGPS" />
+                <ScalarProperty Name="ES_M_FIM_COMPENSAGPS" ColumnName="ES_M_FIM_COMPENSAGPS" />
+                <ScalarProperty Name="ES_A_INI_COMPENSAGPS" ColumnName="ES_A_INI_COMPENSAGPS" />
+                <ScalarProperty Name="ES_M_INI_COMPENSAGPS" ColumnName="ES_M_INI_COMPENSAGPS" />
+                <ScalarProperty Name="ES_RED_AUTOMATICO" ColumnName="ES_RED_AUTOMATICO" />
+                <ScalarProperty Name="ES_INTEGR_CONTABIL" ColumnName="ES_INTEGR_CONTABIL" />
+                <ScalarProperty Name="ES_NMAX_LANC_AF" ColumnName="ES_NMAX_LANC_AF" />
+                <ScalarProperty Name="ES_NRO_LIC_AF" ColumnName="ES_NRO_LIC_AF" />
+                <ScalarProperty Name="ES_NMAX_LANC_CO" ColumnName="ES_NMAX_LANC_CO" />
+                <ScalarProperty Name="ES_NRO_LIC_CO" ColumnName="ES_NRO_LIC_CO" />
+                <ScalarProperty Name="ES_FILIAL_ATIVADA" ColumnName="ES_FILIAL_ATIVADA" />
+                <ScalarProperty Name="ES_REDUZIDO_ATIVO" ColumnName="ES_REDUZIDO_ATIVO" />
+                <ScalarProperty Name="ES_CCUSTO_OBRIG" ColumnName="ES_CCUSTO_OBRIG" />
+                <ScalarProperty Name="ES_CCUSTO_CONTA" ColumnName="ES_CCUSTO_CONTA" />
+                <ScalarProperty Name="ES_DIGVER_CONTAS" ColumnName="ES_DIGVER_CONTAS" />
+                <ScalarProperty Name="ES_MASC_CCUSTO" ColumnName="ES_MASC_CCUSTO" />
+                <ScalarProperty Name="ES_VR_MESANT_OUTROS" ColumnName="ES_VR_MESANT_OUTROS" />
+                <ScalarProperty Name="ES_VR_MESANT" ColumnName="ES_VR_MESANT" />
+                <ScalarProperty Name="ES_VR_COMPENSARGPS" ColumnName="ES_VR_COMPENSARGPS" />
+                <ScalarProperty Name="ES_PROD_RURALPJ" ColumnName="ES_PROD_RURALPJ" />
+                <ScalarProperty Name="ES_PROD_RURALPF" ColumnName="ES_PROD_RURALPF" />
+                <ScalarProperty Name="ES_ORIGEM_REC" ColumnName="ES_ORIGEM_REC" />
+                <ScalarProperty Name="ES_REC_EVDESPORT" ColumnName="ES_REC_EVDESPORT" />
+                <ScalarProperty Name="ES_CPGTO_GPS" ColumnName="ES_CPGTO_GPS" />
+                <ScalarProperty Name="ES_RECOL_SIMPLES" ColumnName="ES_RECOL_SIMPLES" />
+                <ScalarProperty Name="ES_FGTS_CENTRAL" ColumnName="ES_FGTS_CENTRAL" />
+                <ScalarProperty Name="ES_PERC_AUTONOMO" ColumnName="ES_PERC_AUTONOMO" />
+                <ScalarProperty Name="ES_PERC_EMPRESA" ColumnName="ES_PERC_EMPRESA" />
+                <ScalarProperty Name="ES_NMAX_FUNC" ColumnName="ES_NMAX_FUNC" />
+                <ScalarProperty Name="ES_NRO_LIC_FO" ColumnName="ES_NRO_LIC_FO" />
+                <ScalarProperty Name="ES_OBS_DARF" ColumnName="ES_OBS_DARF" />
+                <ScalarProperty Name="ES_OBS_INSS" ColumnName="ES_OBS_INSS" />
+                <ScalarProperty Name="ES_COD_EMPRESA_CEF" ColumnName="ES_COD_EMPRESA_CEF" />
+                <ScalarProperty Name="ES_IDENT_FUNC_CEF" ColumnName="ES_IDENT_FUNC_CEF" />
+                <ScalarProperty Name="ES_VT_CONT_ENTREGA" ColumnName="ES_VT_CONT_ENTREGA" />
+                <ScalarProperty Name="ES_VT_COD_DEP" ColumnName="ES_VT_COD_DEP" />
+                <ScalarProperty Name="ES_VT_COD_ENTREGA" ColumnName="ES_VT_COD_ENTREGA" />
+                <ScalarProperty Name="ES_PIS_AGENCIA" ColumnName="ES_PIS_AGENCIA" />
+                <ScalarProperty Name="ES_PIS_CODBACEN" ColumnName="ES_PIS_CODBACEN" />
+                <ScalarProperty Name="ES_CC_GERENTE" ColumnName="ES_CC_GERENTE" />
+                <ScalarProperty Name="ES_CC_DT_ABERTURA" ColumnName="ES_CC_DT_ABERTURA" />
+                <ScalarProperty Name="ES_CC_TITULAR" ColumnName="ES_CC_TITULAR" />
+                <ScalarProperty Name="ES_CC_DIGITO_VERIF" ColumnName="ES_CC_DIGITO_VERIF" />
+                <ScalarProperty Name="ES_CC_NUMERO" ColumnName="ES_CC_NUMERO" />
+                <ScalarProperty Name="ES_CC_AGENCIA" ColumnName="ES_CC_AGENCIA" />
+                <ScalarProperty Name="ES_CC_CODBACEN" ColumnName="ES_CC_CODBACEN" />
+                <ScalarProperty Name="ES_ID_CGC_CPF_CEI" ColumnName="ES_ID_CGC_CPF_CEI" />
+                <ScalarProperty Name="ES_ID_FISICA_JURIDICA" ColumnName="ES_ID_FISICA_JURIDICA" />
+                <ScalarProperty Name="ES_ID_SESI_SENAI" ColumnName="ES_ID_SESI_SENAI" />
+                <ScalarProperty Name="ES_PERC_INSS" ColumnName="ES_PERC_INSS" />
+                <ScalarProperty Name="ES_COD_TERCEIROS" ColumnName="ES_COD_TERCEIROS" />
+                <ScalarProperty Name="ES_PERC_ACIDENTE" ColumnName="ES_PERC_ACIDENTE" />
+                <ScalarProperty Name="ES_SAT" ColumnName="ES_SAT" />
+                <ScalarProperty Name="ES_FPAS" ColumnName="ES_FPAS" />
+                <ScalarProperty Name="ES_MES_DT_BASE" ColumnName="ES_MES_DT_BASE" />
+                <ScalarProperty Name="ES_CODMUNICIPIO" ColumnName="ES_CODMUNICIPIO" />
+                <ScalarProperty Name="ES_ANOBASE" ColumnName="ES_ANOBASE" />
+                <ScalarProperty Name="ES_PREFIXO" ColumnName="ES_PREFIXO" />
+                <ScalarProperty Name="ES_CGC_ANTERIOR" ColumnName="ES_CGC_ANTERIOR" />
+                <ScalarProperty Name="ES_ALT_ENDERECO" ColumnName="ES_ALT_ENDERECO" />
+                <ScalarProperty Name="ES_ALT_CGCCEI" ColumnName="ES_ALT_CGCCEI" />
+                <ScalarProperty Name="MCG_CODIGO" ColumnName="MCG_CODIGO" />
+                <ScalarProperty Name="ES_CGC_CEI" ColumnName="ES_CGC_CEI" />
+                <ScalarProperty Name="AEC_CODIGO" ColumnName="AEC_CODIGO" />
+                <ScalarProperty Name="CT_CODIGO" ColumnName="CT_CODIGO" />
+                <ScalarProperty Name="NE_CODIGO" ColumnName="NE_CODIGO" />
+                <ScalarProperty Name="TI_SIGLA" ColumnName="TI_SIGLA" />
+                <ScalarProperty Name="ES_RAMALFAX" ColumnName="ES_RAMALFAX" />
+                <ScalarProperty Name="ES_DDDFAX" ColumnName="ES_DDDFAX" />
+                <ScalarProperty Name="ES_FAX" ColumnName="ES_FAX" />
+                <ScalarProperty Name="ES_RAMAL2" ColumnName="ES_RAMAL2" />
+                <ScalarProperty Name="ES_TELEFONE2" ColumnName="ES_TELEFONE2" />
+                <ScalarProperty Name="ES_DDDFONE2" ColumnName="ES_DDDFONE2" />
+                <ScalarProperty Name="ES_RAMAL1" ColumnName="ES_RAMAL1" />
+                <ScalarProperty Name="ES_TELEFONE1" ColumnName="ES_TELEFONE1" />
+                <ScalarProperty Name="ES_DDDFONE1" ColumnName="ES_DDDFONE1" />
+                <ScalarProperty Name="ES_CEP" ColumnName="ES_CEP" />
+                <ScalarProperty Name="UF_SIGLA" ColumnName="UF_SIGLA" />
+                <ScalarProperty Name="PA_SIGLA" ColumnName="PA_SIGLA" />
+                <ScalarProperty Name="CI_CODIGO" ColumnName="CI_CODIGO" />
+                <ScalarProperty Name="BA_CODIGO" ColumnName="BA_CODIGO" />
+                <ScalarProperty Name="ES_COMPLEMENTO" ColumnName="ES_COMPLEMENTO" />
+                <ScalarProperty Name="ES_NUMERO" ColumnName="ES_NUMERO" />
+                <ScalarProperty Name="ES_LOGRADOURO" ColumnName="ES_LOGRADOURO" />
+                <ScalarProperty Name="ES_SITE" ColumnName="ES_SITE" />
+                <ScalarProperty Name="ES_EMAIL" ColumnName="ES_EMAIL" />
+                <ScalarProperty Name="ES_INSCR_MUNICIPAL" ColumnName="ES_INSCR_MUNICIPAL" />
+                <ScalarProperty Name="ES_INSCR_ESTADUAL" ColumnName="ES_INSCR_ESTADUAL" />
+                <ScalarProperty Name="ES_CONTATO" ColumnName="ES_CONTATO" />
+                <ScalarProperty Name="ES_NOME" ColumnName="ES_NOME" />
+                <ScalarProperty Name="ES_RAZAO_SOCIAL" ColumnName="ES_RAZAO_SOCIAL" />
+                <ScalarProperty Name="ES_ID_ESTRUTURA" ColumnName="ES_ID_ESTRUTURA" />
+                <ScalarProperty Name="DOM_CODIGO" ColumnName="DOM_CODIGO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="MIXModel" ZoomLevel="10">
+        <EntityTypeShape EntityType="MixModel.FO_FUNCIONARIO" Width="1.5" PointX="3" PointY="3.625" Height="55.824687499999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="MixModel.FO_PESSOA" Width="1.5" PointX="0.75" PointY="16" Height="31.017802734375003" IsExpanded="true" />
+        <AssociationConnector Association="MixModel.FK_FUNC_PESSOA_SUP_ESTAGIO" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="31.5089013671875" />
+          <ConnectorPoint PointX="3" PointY="31.5089013671875" />
+        </AssociationConnector>
+        <AssociationConnector Association="MixModel.FK_FUNCIONARIO_FUNCPENS" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.5319230769230767" PointY="60.026591796874996" />
+          <ConnectorPoint PointX="3.5319230769230767" PointY="60.276591796874996" />
+          <ConnectorPoint PointX="3.9784615384615383" PointY="60.276591796874996" />
+          <ConnectorPoint PointX="3.9784615384615383" PointY="60.026591796874996" />
+        </AssociationConnector>
+        <AssociationConnector Association="MixModel.FK_FUNCIONARIO_PESSOA" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="23.691950683593753" />
+          <ConnectorPoint PointX="3" PointY="23.691950683593753" />
+        </AssociationConnector>
+        <AssociationConnector Association="MixModel.FK_FUNCIONARIO_TUTOR" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="39.325852050781251" />
+          <ConnectorPoint PointX="3" PointY="39.325852050781251" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="MixModel.BS_ESTRUTURA" Width="1.5" PointX="5.375" PointY="2.75" Height="39.671367187499996" />
+        <AssociationConnector Association="MixModel.FK_ESTRUTURA_ESTRUTURA">
+          <ConnectorPoint PointX="5.9069230769230767" PointY="42.421367187499996" />
+          <ConnectorPoint PointX="5.9069230769230767" PointY="42.671367187499996" />
+          <ConnectorPoint PointX="6.3534615384615378" PointY="42.671367187499996" />
+          <ConnectorPoint PointX="6.3534615384615378" PointY="42.421367187499996" />
+        </AssociationConnector>
+        <AssociationConnector Association="MixModel.FK_FUNCIONARIO_ESTRUTURA">
+          <ConnectorPoint PointX="5.375" PointY="23.023183593749998" />
+          <ConnectorPoint PointX="4.5" PointY="23.023183593749998" />
+        </AssociationConnector>
+        <AssociationConnector Association="MixModel.FK_FUNCIONARIO_ESTRUTURAEMP">
+          <ConnectorPoint PointX="5.375" PointY="13.261591796874999" />
+          <ConnectorPoint PointX="4.5" PointY="13.261591796874999" />
+        </AssociationConnector>
+        <AssociationConnector Association="MixModel.FK_FUNCIONARIO_ESTRUTURAFIL">
+          <ConnectorPoint PointX="5.375" PointY="32.784775390625" />
+          <ConnectorPoint PointX="4.5" PointY="32.784775390625" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

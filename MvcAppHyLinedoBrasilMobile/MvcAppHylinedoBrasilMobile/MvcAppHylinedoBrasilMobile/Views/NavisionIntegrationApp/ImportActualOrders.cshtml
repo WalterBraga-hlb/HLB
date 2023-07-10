@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "";
+}
+
+<div align="center">
+    @Html.ActionLink(@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Link_Back_Home", Session["language"].ToString()), "Index", "HomeMobile")
+</div>
+<br />
+<div align="center">
+    @Html.Image(@Url.Content("~/Content/icons/ImportExcel32.png"), MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Title_ImportActualOrders_NavisionIntegrationApp", Session["language"].ToString()))
+    <h2>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Title_ImportActualOrders_NavisionIntegrationApp", Session["language"].ToString())</h2>
+</div>
+<h3 style="color:Red; background-color:White"><b>@ViewBag.Erro</b></h3>
+<h3 style="color:Blue;">@ViewBag.fileName</h3>
+
+@using (Html.BeginForm("ImportActualOrders", "NavisionIntegrationApp", FormMethod.Post, new { enctype = "multipart/form-data", data_ajax = "false" }))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("ImportCHICExternal_Header", Session["language"].ToString())</b>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="file" name="file" />
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("ImportCHICExternal_ImportButton", Session["language"].ToString())"/>
+        </li>
+    </ul>
+}
+
+@Html.Partial("_Menu")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

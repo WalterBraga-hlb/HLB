@@ -1,0 +1,47 @@
+﻿@model MvcAppHyLinedoBrasil.Models.DropDownListParametros
+@using MvcAppHyLinedoBrasil.Models
+
+@{
+    ViewBag.Title = "Relatório de Visitas Técnicas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="@Url.Content("//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("//code.jquery.com/jquery-1.10.2.js")" type="text/javascript"></script>
+<script src="@Url.Content("//code.jquery.com/ui/1.11.0/jquery-ui.js")" type="text/javascript"></script>
+
+<script type="text/javascript">
+    //$(function () {
+    //    $("#dataIni").datepicker({ dateFormat: "dd/mm/yy" });
+    //});
+    //$(function () {
+    //    $("#dataFim").datepicker({ dateFormat: "dd/mm/yy" });
+    //});
+</script>
+
+@Html.Partial("MenuDadosAssistenciaTecnica")
+
+<h3>Relatório de Visitas Técnicas</h3>
+
+@using (Html.BeginForm("DownloadRelVisitaTecnicaFluig", "ImportaDadosAssistTecnica",
+    FormMethod.Post, new { enctype = "multipart/form-data", target = "_blank" }))
+{
+    <fieldset>
+        <p align="center">
+        Informe os parâmetros a seguir:
+        <br />
+        <br />
+        <b>Período das Visitas: @Html.TextBox("dataIni", Session["sDataInicial"], new { @required = "true", @type = "date" }) 
+            à @Html.TextBox("dataFim", Session["sDataFinal"], new { @required = "true", @type = "date" })</b>
+        </p>
+    </fieldset>
+
+    <div id="divUltimaReview">
+        <h4>@Html.Raw(ViewBag.fileName)</h4>
+        <h4 style="color:red;">@ViewBag.erro</h4>
+    </div>
+    <div class="editor-field">
+        <input type="submit" value="Download Relatório" id="importar"/>
+    </div>
+}
+

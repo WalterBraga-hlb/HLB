@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HLBAPPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityType Name="CTRL_LOTE_LOC_ARMAZ_WEB">
+    <Key>
+      <PropertyRef Name="Local" />
+      <PropertyRef Name="LoteCompleto" />
+      <PropertyRef Name="DataProducao" />
+    </Key>
+    <Property Name="Local" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Linhagem" Type="varchar" MaxLength="20" />
+    <Property Name="LoteCompleto" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="NumLote" Type="varchar" MaxLength="50" />
+    <Property Name="DataProducao" Type="datetime" Nullable="false" />
+    <Property Name="Qtde" Type="int" />
+    <Property Name="Nucleo" Type="varchar" MaxLength="20" />
+    <Property Name="IdadeLote" Type="int" />
+    <Property Name="PercMediaIncUlt4SemFLIP" Type="numeric" Precision="14" Scale="2" />
+  </EntityType>
+  <EntityType Name="Estq_Planalto">
+    <Key>
+      <PropertyRef Name="Data_Producao" />
+      <PropertyRef Name="Lote_Completo" />
+    </Key>
+    <Property Name="Data_Producao" Type="datetime" Nullable="false" />
+    <Property Name="Idade" Type="int" />
+    <Property Name="T0" Type="int" />
+    <Property Name="T1" Type="int" />
+    <Property Name="COD_LOTE_NUM" Type="int" />
+    <Property Name="Lote_Completo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Nucleo" Type="varchar" MaxLength="50" />
+    <Property Name="Linha" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="FLOCK_DATA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Farm_ID" Type="varchar" MaxLength="20" />
+    <Property Name="Flock_ID" Type="varchar" MaxLength="50" />
+    <Property Name="NumLote" Type="varchar" MaxLength="20" />
+    <Property Name="Variety" Type="varchar" MaxLength="20" />
+    <Property Name="Active" Type="int" />
+    <Property Name="Age" Type="int" />
+    <Property Name="Trx_Date" Type="datetime" />
+    <Property Name="Hen_Mort" Type="int" />
+    <Property Name="Hen_Wt" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="Male_Mort" Type="int" />
+    <Property Name="Hen_Feed_Del" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="Total_Eggs_Prod" Type="int" />
+    <Property Name="Egg_Wt" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="Hatch_Eggs" Type="int" />
+    <Property Name="Comentarios" Type="varchar(max)" />
+    <Property Name="farm_name" Type="varchar" MaxLength="100" />
+    <Property Name="count_females" Type="int" />
+    <Property Name="count_males" Type="int" />
+    <Property Name="broken" Type="int" />
+    <Property Name="dirty" Type="int" />
+    <Property Name="consume" Type="int" />
+    <Property Name="floor" Type="int" />
+    <Property Name="destroyed" Type="int" />
+    <Property Name="uniformity" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="water_consumption" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="num_galpao" Type="int" />
+    <Property Name="Company" Type="varchar" MaxLength="10" />
+    <Property Name="Region" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="HATCHERY_EGG_DATA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Company" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="Region" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="Location" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="Set_date" Type="datetime" Nullable="false" />
+    <Property Name="Hatch_loc" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="Flock_id" Type="varchar" MaxLength="26" />
+    <Property Name="Lay_date" Type="datetime" Nullable="false" />
+    <Property Name="Eggs_rcvd" Type="int" />
+    <Property Name="Egg_key" Type="varchar" MaxLength="44" />
+    <Property Name="Machine" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Track_no" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Estimate" Type="decimal" Precision="14" Scale="2" />
+    <Property Name="Variety" Type="varchar" MaxLength="10" />
+    <Property Name="Posicao" Type="int" Nullable="false" />
+    <Property Name="Bandejas" Type="int" />
+    <Property Name="Horario" Type="varchar" MaxLength="20" />
+    <Property Name="Peso_Ovo" Type="decimal" Precision="19" Scale="6" />
+    <Property Name="Peso_Ent_Inv" Type="decimal" Precision="19" Scale="6" />
+    <Property Name="Peso_Transf" Type="decimal" Precision="19" Scale="6" />
+    <Property Name="Peso_Rentab" Type="decimal" Precision="19" Scale="6" />
+    <Property Name="Age" Type="int" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Observacao" Type="varchar(max)" />
+    <Property Name="Status" Type="varchar" MaxLength="15" />
+    <Property Name="Usuario" Type="varchar" MaxLength="80" />
+    <Property Name="ImportadoApolo" Type="varchar" MaxLength="50" />
+    <Property Name="ImportadoFLIP" Type="varchar" MaxLength="50" />
+    <Property Name="ClassOvo" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="HATCHERY_FLOCK_SETTER_DATA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Hatch_Loc" Type="varchar" MaxLength="2" />
+    <Property Name="Set_date" Type="datetime" />
+    <Property Name="Flock_id" Type="varchar" MaxLength="26" />
+    <Property Name="NumLote" Type="varchar" MaxLength="26" />
+    <Property Name="Setter" Type="varchar" MaxLength="10" />
+    <Property Name="Hatcher" Type="varchar" MaxLength="10" />
+    <Property Name="ClassOvo" Type="varchar" MaxLength="10" />
+    <Property Name="Eliminado" Type="int" />
+    <Property Name="Morto" Type="int" />
+    <Property Name="Macho" Type="int" />
+    <Property Name="Pintos_Vendaveis" Type="int" />
+    <Property Name="Refugo" Type="int" />
+    <Property Name="Pinto_Terceira" Type="int" />
+    <Property Name="Qtde_Incubada" Type="int" />
+    <Property Name="DataRetiradaReal" Type="datetime" />
+    <Property Name="Horario_01_Retirada" Type="varchar" MaxLength="10" />
+    <Property Name="Qtde_01_Retirada" Type="int" />
+    <Property Name="Horario_02_Retirada" Type="varchar" MaxLength="10" />
+    <Property Name="Qtde_02_Retirada" Type="int" />
+    <Property Name="Variety" Type="varchar" MaxLength="50" />
+    <Property Name="De0a4" Type="int" />
+    <Property Name="De5a12" Type="int" />
+    <Property Name="De13a17" Type="int" />
+    <Property Name="De18a21" Type="int" />
+    <Property Name="BicadoVivo" Type="int" />
+    <Property Name="BicadoMorto" Type="int" />
+    <Property Name="ContaminacaoBacteriana" Type="int" />
+    <Property Name="Fungo" Type="int" />
+    <Property Name="MalPosicionado" Type="int" />
+    <Property Name="MalFormado" Type="int" />
+    <Property Name="Infertil" Type="int" />
+    <Property Name="Inicial0a3" Type="int" />
+    <Property Name="Inicial4a7" Type="int" />
+    <Property Name="Media8a14" Type="int" />
+    <Property Name="Tardia15a18" Type="int" />
+    <Property Name="Tardia19a21" Type="int" />
+    <Property Name="MaFormacaoCerebro" Type="int" />
+    <Property Name="MaFormacaoVisceras" Type="int" />
+    <Property Name="Hemorragico" Type="int" />
+    <Property Name="Anormalidade" Type="int" />
+    <Property Name="Amostra" Type="int" />
+    <Property Name="Infertilidade10Dias" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="EliminadoCancelamento" Type="int" />
+    <Property Name="PerdaUmidade" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ChickYeld" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="TempCloaca" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="OvoVirado" Type="int" />
+    <Property Name="QuebradoTrincado" Type="int" />
+    <Property Name="SetterEmbrio" Type="varchar" MaxLength="10" />
+    <Property Name="HatcherEmbrio" Type="varchar" MaxLength="10" />
+    <Property Name="QtdeNascidos" Type="int" />
+  </EntityType>
+  <EntityType Name="HATCHERY_TRAN_DATA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Hatch_Loc" Type="varchar" MaxLength="2" />
+    <Property Name="Set_date" Type="datetime" />
+    <Property Name="Flock_id" Type="varchar" MaxLength="26" />
+    <Property Name="NumLote" Type="varchar" MaxLength="26" />
+    <Property Name="Lay_date" Type="datetime" />
+    <Property Name="Setter" Type="varchar" MaxLength="10" />
+    <Property Name="Hatcher" Type="varchar" MaxLength="10" />
+    <Property Name="ClassOvo" Type="varchar" MaxLength="10" />
+    <Property Name="Transf_date" Type="datetime" />
+    <Property Name="Hora_Inicio" Type="varchar" MaxLength="20" />
+    <Property Name="Contaminado_Transferencia" Type="int" />
+    <Property Name="Contaminado_Rodizio" Type="int" />
+    <Property Name="Bicados" Type="int" />
+    <Property Name="Trincados_Transferencia" Type="int" />
+    <Property Name="Trincados_Rodizio" Type="int" />
+    <Property Name="Num_Grudados" Type="int" />
+    <Property Name="Pintos_Nascidos" Type="int" />
+    <Property Name="Perdidos_Transferencia" Type="int" />
+    <Property Name="Perdidos_Rodizio" Type="int" />
+    <Property Name="Hora_Termino" Type="varchar" MaxLength="20" />
+    <Property Name="Qtde_Ovos_Transferidos" Type="int" />
+    <Property Name="Variety" Type="varchar" MaxLength="50" />
+    <Property Name="Claros" Type="int" />
+  </EntityType>
+  <EntityType Name="ImportaDiarioExpedicao">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nucleo" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Galpao" Type="varchar" MaxLength="20" />
+    <Property Name="Lote" Type="varchar" MaxLength="50" />
+    <Property Name="Idade" Type="int" Nullable="false" />
+    <Property Name="Linhagem" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="LoteCompleto" Type="varchar" MaxLength="100" />
+    <Property Name="DataProducao" Type="datetime" Nullable="false" />
+    <Property Name="NumeroReferencia" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="QtdeOvos" Type="decimal" Precision="14" Scale="0" Nullable="false" />
+    <Property Name="QtdeBandejas" Type="decimal" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="Usuario" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="DataHora" Type="datetime" Nullable="false" />
+    <Property Name="DataHoraCarreg" Type="datetime" Nullable="false" />
+    <Property Name="DataHoraRecebInc" Type="datetime" Nullable="false" />
+    <Property Name="ResponsavelCarreg" Type="varchar" MaxLength="200" />
+    <Property Name="ResponsavelReceb" Type="varchar" MaxLength="200" />
+    <Property Name="NFNum" Type="varchar(max)" />
+    <Property Name="Granja" Type="varchar" MaxLength="50" />
+    <Property Name="Importado" Type="varchar" MaxLength="50" />
+    <Property Name="Incubatorio" Type="varchar" MaxLength="10" />
+    <Property Name="TipoDEO" Type="varchar" MaxLength="30" />
+    <Property Name="GTANum" Type="varchar" MaxLength="100" />
+    <Property Name="Lacre" Type="varchar" MaxLength="100" />
+    <Property Name="NumIdentificacao" Type="varchar" MaxLength="50" />
+    <Property Name="CodItemImportaDEO" Type="int" />
+    <Property Name="TipoOvo" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Inv_Ovos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Linhagem" Type="varchar" MaxLength="10" />
+    <Property Name="LoteCompleto" Type="varchar" MaxLength="50" />
+    <Property Name="Total" Type="int" />
+    <Property Name="DataProducao" Type="datetime" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LayoutDEO_X_ImportaDEO">
+    <Key>
+      <PropertyRef Name="CodItemDEO" />
+      <PropertyRef Name="CodItemImportaDEO" />
+    </Key>
+    <Property Name="CodItemDEO" Type="int" Nullable="false" />
+    <Property Name="CodItemImportaDEO" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LayoutDiarioExpedicaos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nucleo" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Galpao" Type="varchar" MaxLength="20" />
+    <Property Name="Lote" Type="varchar" MaxLength="50" />
+    <Property Name="Idade" Type="int" Nullable="false" />
+    <Property Name="Linhagem" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="LoteCompleto" Type="varchar" MaxLength="100" />
+    <Property Name="DataProducao" Type="datetime" Nullable="false" />
+    <Property Name="NumeroReferencia" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="QtdeOvos" Type="decimal" Precision="14" Scale="0" Nullable="false" />
+    <Property Name="QtdeBandejas" Type="decimal" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="Usuario" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="DataHora" Type="datetime" Nullable="false" />
+    <Property Name="DataHoraCarreg" Type="datetime" Nullable="false" />
+    <Property Name="DataHoraRecebInc" Type="datetime" Nullable="false" />
+    <Property Name="ResponsavelCarreg" Type="varchar" MaxLength="200" />
+    <Property Name="ResponsavelReceb" Type="varchar" MaxLength="200" />
+    <Property Name="NFNum" Type="varchar(max)" />
+    <Property Name="Granja" Type="varchar" MaxLength="50" />
+    <Property Name="Importado" Type="varchar" MaxLength="50" />
+    <Property Name="Incubatorio" Type="varchar" MaxLength="10" />
+    <Property Name="TipoDEO" Type="varchar" MaxLength="30" />
+    <Property Name="GTANum" Type="varchar" MaxLength="100" />
+    <Property Name="Lacre" Type="varchar" MaxLength="100" />
+    <Property Name="NumIdentificacao" Type="varchar" MaxLength="50" />
+    <Property Name="CodItemDEO" Type="int" />
+    <Property Name="Observacao" Type="varchar(max)" />
+    <Property Name="TipoOvo" Type="varchar" MaxLength="50" />
+    <Property Name="QtdDiferenca" Type="int" />
+    <Property Name="QtdeConferencia" Type="int" />
+    <Property Name="TemperaturaOvoInterna" Type="numeric" Precision="14" Scale="2" />
+  </EntityType>
+  <EntityType Name="LOG_HATCHERY_EGG_DATA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Company" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="Region" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="Location" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="Set_date" Type="datetime" Nullable="false" />
+    <Property Name="Hatch_loc" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="Flock_id" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="Lay_date" Type="datetime" Nullable="false" />
+    <Property Name="Eggs_rcvd" Type="int" />
+    <Property Name="Egg_key" Type="varchar" MaxLength="34" />
+    <Property Name="Machine" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Track_no" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Estimate" Type="decimal" Precision="14" Scale="2" />
+    <Property Name="Variety" Type="varchar" MaxLength="10" />
+    <Property Name="Posicao" Type="int" Nullable="false" />
+    <Property Name="Bandejas" Type="int" />
+    <Property Name="Horario" Type="varchar" MaxLength="20" />
+    <Property Name="Peso_Ovo" Type="decimal" Precision="19" Scale="6" />
+    <Property Name="Peso_Ent_Inv" Type="decimal" Precision="19" Scale="6" />
+    <Property Name="Peso_Transf" Type="decimal" Precision="19" Scale="6" />
+    <Property Name="Peso_Rentab" Type="decimal" Precision="19" Scale="6" />
+    <Property Name="Age" Type="int" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Observacao" Type="varchar(max)" />
+    <Property Name="Status" Type="varchar" MaxLength="15" />
+    <Property Name="Usuario" Type="varchar" MaxLength="80" />
+    <Property Name="Data_Hora" Type="datetime" />
+    <Property Name="Opercao" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="LOG_HATCHERY_FLOCK_SETTER_DATA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Data_Hora" Type="datetime" />
+    <Property Name="Operacao" Type="varchar" MaxLength="50" />
+    <Property Name="Usuario" Type="varchar" MaxLength="100" />
+    <Property Name="Hatch_Loc" Type="varchar" MaxLength="2" />
+    <Property Name="Set_date" Type="datetime" />
+    <Property Name="Flock_id" Type="varchar" MaxLength="26" />
+    <Property Name="NumLote" Type="varchar" MaxLength="26" />
+    <Property Name="Setter" Type="varchar" MaxLength="10" />
+    <Property Name="Hatcher" Type="varchar" MaxLength="10" />
+    <Property Name="ClassOvo" Type="varchar" MaxLength="10" />
+    <Property Name="Eliminado" Type="int" />
+    <Property Name="Morto" Type="int" />
+    <Property Name="Macho" Type="int" />
+    <Property Name="Pintos_Vendaveis" Type="int" />
+    <Property Name="Refugo" Type="int" />
+    <Property Name="Pinto_Terceira" Type="int" />
+    <Property Name="Qtde_Incubada" Type="int" />
+    <Property Name="DataRetiradaReal" Type="datetime" />
+    <Property Name="Horario_01_Retirada" Type="varchar" MaxLength="10" />
+    <Property Name="Qtde_01_Retirada" Type="int" />
+    <Property Name="Horario_02_Retirada" Type="varchar" MaxLength="10" />
+    <Property Name="Qtde_02_Retirada" Type="int" />
+    <Property Name="Variety" Type="varchar" MaxLength="50" />
+    <Property Name="De0a4" Type="int" />
+    <Property Name="De5a12" Type="int" />
+    <Property Name="De13a17" Type="int" />
+    <Property Name="De18a21" Type="int" />
+    <Property Name="BicadoVivo" Type="int" />
+    <Property Name="BicadoMorto" Type="int" />
+    <Property Name="ContaminacaoBacteriana" Type="int" />
+    <Property Name="Fungo" Type="int" />
+    <Property Name="MalPosicionado" Type="int" />
+    <Property Name="MalFormado" Type="int" />
+    <Property Name="Infertil" Type="int" />
+    <Property Name="Inicial0a3" Type="int" />
+    <Property Name="Inicial4a7" Type="int" />
+    <Property Name="Media8a14" Type="int" />
+    <Property Name="Tardia15a18" Type="int" />
+    <Property Name="Tardia19a21" Type="int" />
+    <Property Name="MaFormacaoCerebro" Type="int" />
+    <Property Name="MaFormacaoVisceras" Type="int" />
+    <Property Name="Hemorragico" Type="int" />
+    <Property Name="Anormalidade" Type="int" />
+    <Property Name="Amostra" Type="int" />
+    <Property Name="Infertilidade10Dias" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="EliminadoCancelamento" Type="int" />
+  </EntityType>
+  <EntityType Name="PedidoRacao">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Empresa" Type="varchar" MaxLength="30" />
+    <Property Name="Usuario" Type="varchar" MaxLength="50" />
+    <Property Name="DataPedido" Type="datetime" />
+    <Property Name="DataInicial" Type="datetime" />
+    <Property Name="DataFinal" Type="datetime" />
+    <Property Name="StatusPedido" Type="varchar" MaxLength="50" />
+    <Property Name="RotaEntregaCod" Type="varchar" MaxLength="7" />
+    <Property Name="Ordem" Type="int" />
+  </EntityType>
+  <EntityType Name="PedidoRacao_Item">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDPedidoRacao" Type="int" Nullable="false" />
+    <Property Name="Nucleo" Type="varchar" MaxLength="10" />
+    <Property Name="Galpao" Type="varchar" MaxLength="5" />
+    <Property Name="Linhagem" Type="varchar" MaxLength="10" />
+    <Property Name="CodFormulaRacao" Type="int" />
+    <Property Name="ProdCodEstr" Type="varchar" MaxLength="30" />
+    <Property Name="QtdeKg" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="IDOrdemProducaoRacao" Type="int" />
+    <Property Name="Sequencia" Type="int" />
+    <Property Name="IDConfigFormulaRacao" Type="int" />
+    <Property Name="UltimoLoteGalpaoPorLinhagem" Type="varchar" MaxLength="30" />
+    <Property Name="IdadeLote" Type="int" />
+  </EntityType>
+  <Association Name="FK__PedidoRac__IDPed__55009F39">
+    <End Role="PedidoRacao" Type="Self.PedidoRacao" Multiplicity="1" />
+    <End Role="PedidoRacao_Item" Type="Self.PedidoRacao_Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PedidoRacao">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PedidoRacao_Item">
+        <PropertyRef Name="IDPedidoRacao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HLBAPPModelStoreContainer">
+    <EntitySet Name="CTRL_LOTE_LOC_ARMAZ_WEB" EntityType="Self.CTRL_LOTE_LOC_ARMAZ_WEB" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Estq_Planalto" EntityType="Self.Estq_Planalto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FLOCK_DATA" EntityType="Self.FLOCK_DATA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HATCHERY_EGG_DATA" EntityType="Self.HATCHERY_EGG_DATA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HATCHERY_FLOCK_SETTER_DATA" EntityType="Self.HATCHERY_FLOCK_SETTER_DATA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HATCHERY_TRAN_DATA" EntityType="Self.HATCHERY_TRAN_DATA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ImportaDiarioExpedicao" EntityType="Self.ImportaDiarioExpedicao" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Inv_Ovos" EntityType="Self.Inv_Ovos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LayoutDEO_X_ImportaDEO" EntityType="Self.LayoutDEO_X_ImportaDEO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LayoutDiarioExpedicaos" EntityType="Self.LayoutDiarioExpedicaos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LOG_HATCHERY_EGG_DATA" EntityType="Self.LOG_HATCHERY_EGG_DATA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LOG_HATCHERY_FLOCK_SETTER_DATA" EntityType="Self.LOG_HATCHERY_FLOCK_SETTER_DATA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PedidoRacao" EntityType="Self.PedidoRacao" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PedidoRacao_Item" EntityType="Self.PedidoRacao_Item" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__PedidoRac__IDPed__55009F39" Association="Self.FK__PedidoRac__IDPed__55009F39">
+      <End Role="PedidoRacao" EntitySet="PedidoRacao" />
+      <End Role="PedidoRacao_Item" EntitySet="PedidoRacao_Item" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

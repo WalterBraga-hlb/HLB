@@ -1,0 +1,792 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MixModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="MixModelStoreContainer">
+    <EntitySet Name="BS_ESTRUTURA" EntityType="MixModel.Store.BS_ESTRUTURA" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="FO_FUNCIONARIO" EntityType="MixModel.Store.FO_FUNCIONARIO" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="FO_PESSOA" EntityType="MixModel.Store.FO_PESSOA" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <AssociationSet Name="FK_ESTRUTURA_ESTRUTURA" Association="MixModel.Store.FK_ESTRUTURA_ESTRUTURA">
+      <End Role="BS_ESTRUTURA" EntitySet="BS_ESTRUTURA" />
+      <End Role="BS_ESTRUTURA1" EntitySet="BS_ESTRUTURA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FUNC_PESSOA_SUP_ESTAGIO" Association="MixModel.Store.FK_FUNC_PESSOA_SUP_ESTAGIO">
+      <End Role="FO_PESSOA" EntitySet="FO_PESSOA" />
+      <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FUNCIONARIO_ESTRUTURA" Association="MixModel.Store.FK_FUNCIONARIO_ESTRUTURA">
+      <End Role="BS_ESTRUTURA" EntitySet="BS_ESTRUTURA" />
+      <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FUNCIONARIO_ESTRUTURAEMP" Association="MixModel.Store.FK_FUNCIONARIO_ESTRUTURAEMP">
+      <End Role="BS_ESTRUTURA" EntitySet="BS_ESTRUTURA" />
+      <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FUNCIONARIO_ESTRUTURAFIL" Association="MixModel.Store.FK_FUNCIONARIO_ESTRUTURAFIL">
+      <End Role="BS_ESTRUTURA" EntitySet="BS_ESTRUTURA" />
+      <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FUNCIONARIO_FUNCPENS" Association="MixModel.Store.FK_FUNCIONARIO_FUNCPENS">
+      <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+      <End Role="FO_FUNCIONARIO1" EntitySet="FO_FUNCIONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FUNCIONARIO_PESSOA" Association="MixModel.Store.FK_FUNCIONARIO_PESSOA">
+      <End Role="FO_PESSOA" EntitySet="FO_PESSOA" />
+      <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FUNCIONARIO_TUTOR" Association="MixModel.Store.FK_FUNCIONARIO_TUTOR">
+      <End Role="FO_PESSOA" EntitySet="FO_PESSOA" />
+      <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="BS_ESTRUTURA">
+    <Key>
+      <PropertyRef Name="DOM_CODIGO" />
+      <PropertyRef Name="ES_ID_ESTRUTURA" />
+    </Key>
+    <Property Name="DOM_CODIGO" Type="int" Nullable="false" />
+    <Property Name="ES_ID_ESTRUTURA" Type="varchar" Nullable="false" MaxLength="40" />
+    <Property Name="ES_RAZAO_SOCIAL" Type="varchar" Nullable="false" MaxLength="120" />
+    <Property Name="ES_NOME" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="ES_CONTATO" Type="varchar" MaxLength="40" />
+    <Property Name="ES_INSCR_ESTADUAL" Type="varchar" MaxLength="20" />
+    <Property Name="ES_INSCR_MUNICIPAL" Type="varchar" MaxLength="20" />
+    <Property Name="ES_EMAIL" Type="varchar" MaxLength="120" />
+    <Property Name="ES_SITE" Type="varchar" MaxLength="40" />
+    <Property Name="ES_LOGRADOURO" Type="varchar" MaxLength="60" />
+    <Property Name="ES_NUMERO" Type="varchar" MaxLength="10" />
+    <Property Name="ES_COMPLEMENTO" Type="varchar" MaxLength="25" />
+    <Property Name="BA_CODIGO" Type="int" />
+    <Property Name="CI_CODIGO" Type="int" />
+    <Property Name="PA_SIGLA" Type="varchar" MaxLength="10" />
+    <Property Name="UF_SIGLA" Type="char" MaxLength="2" />
+    <Property Name="ES_CEP" Type="varchar" MaxLength="10" />
+    <Property Name="ES_DDDFONE1" Type="varchar" MaxLength="10" />
+    <Property Name="ES_TELEFONE1" Type="varchar" MaxLength="15" />
+    <Property Name="ES_RAMAL1" Type="varchar" MaxLength="10" />
+    <Property Name="ES_DDDFONE2" Type="varchar" MaxLength="10" />
+    <Property Name="ES_TELEFONE2" Type="varchar" MaxLength="15" />
+    <Property Name="ES_RAMAL2" Type="varchar" MaxLength="10" />
+    <Property Name="ES_FAX" Type="varchar" MaxLength="15" />
+    <Property Name="ES_DDDFAX" Type="varchar" MaxLength="10" />
+    <Property Name="ES_RAMALFAX" Type="varchar" MaxLength="10" />
+    <Property Name="TI_SIGLA" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="NE_CODIGO" Type="varchar" MaxLength="10" />
+    <Property Name="CT_CODIGO" Type="varchar" MaxLength="10" />
+    <Property Name="AEC_CODIGO" Type="varchar" MaxLength="7" />
+    <Property Name="ES_CGC_CEI" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="MCG_CODIGO" Type="varchar" MaxLength="2" />
+    <Property Name="ES_ALT_CGCCEI" Type="char" MaxLength="1" />
+    <Property Name="ES_ALT_ENDERECO" Type="char" MaxLength="1" />
+    <Property Name="ES_CGC_ANTERIOR" Type="varchar" MaxLength="15" />
+    <Property Name="ES_PREFIXO" Type="varchar" MaxLength="2" />
+    <Property Name="ES_ANOBASE" Type="int" />
+    <Property Name="ES_CODMUNICIPIO" Type="varchar" MaxLength="7" />
+    <Property Name="ES_MES_DT_BASE" Type="int" />
+    <Property Name="ES_FPAS" Type="varchar" MaxLength="10" />
+    <Property Name="ES_SAT" Type="varchar" MaxLength="10" />
+    <Property Name="ES_PERC_ACIDENTE" Type="numeric" Precision="15" Scale="4" />
+    <Property Name="ES_COD_TERCEIROS" Type="varchar" MaxLength="10" />
+    <Property Name="ES_PERC_INSS" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_ID_SESI_SENAI" Type="char" MaxLength="1" />
+    <Property Name="ES_ID_FISICA_JURIDICA" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="ES_ID_CGC_CPF_CEI" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="ES_CC_CODBACEN" Type="varchar" MaxLength="3" />
+    <Property Name="ES_CC_AGENCIA" Type="varchar" MaxLength="6" />
+    <Property Name="ES_CC_NUMERO" Type="varchar" MaxLength="10" />
+    <Property Name="ES_CC_DIGITO_VERIF" Type="varchar" MaxLength="5" />
+    <Property Name="ES_CC_TITULAR" Type="varchar" MaxLength="30" />
+    <Property Name="ES_CC_DT_ABERTURA" Type="datetime" />
+    <Property Name="ES_CC_GERENTE" Type="varchar" MaxLength="30" />
+    <Property Name="ES_PIS_CODBACEN" Type="varchar" MaxLength="3" />
+    <Property Name="ES_PIS_AGENCIA" Type="varchar" MaxLength="6" />
+    <Property Name="ES_VT_COD_ENTREGA" Type="varchar" MaxLength="10" />
+    <Property Name="ES_VT_COD_DEP" Type="varchar" MaxLength="10" />
+    <Property Name="ES_VT_CONT_ENTREGA" Type="varchar" MaxLength="40" />
+    <Property Name="ES_IDENT_FUNC_CEF" Type="char" MaxLength="1" />
+    <Property Name="ES_COD_EMPRESA_CEF" Type="varchar" MaxLength="14" />
+    <Property Name="ES_OBS_INSS" Type="varchar" MaxLength="60" />
+    <Property Name="ES_OBS_DARF" Type="varchar" MaxLength="60" />
+    <Property Name="ES_NRO_LIC_FO" Type="varchar" MaxLength="50" />
+    <Property Name="ES_NMAX_FUNC" Type="int" />
+    <Property Name="ES_PERC_EMPRESA" Type="numeric" Precision="20" Scale="8" />
+    <Property Name="ES_PERC_AUTONOMO" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_FGTS_CENTRAL" Type="int" />
+    <Property Name="ES_RECOL_SIMPLES" Type="int" />
+    <Property Name="ES_CPGTO_GPS" Type="int" />
+    <Property Name="ES_REC_EVDESPORT" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_ORIGEM_REC" Type="char" MaxLength="1" />
+    <Property Name="ES_PROD_RURALPF" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_PROD_RURALPJ" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_VR_COMPENSARGPS" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_VR_MESANT" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_VR_MESANT_OUTROS" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_MASC_CCUSTO" Type="varchar" MaxLength="25" />
+    <Property Name="ES_DIGVER_CONTAS" Type="char" MaxLength="1" />
+    <Property Name="ES_CCUSTO_CONTA" Type="char" MaxLength="1" />
+    <Property Name="ES_CCUSTO_OBRIG" Type="char" MaxLength="1" />
+    <Property Name="ES_REDUZIDO_ATIVO" Type="char" MaxLength="1" />
+    <Property Name="ES_FILIAL_ATIVADA" Type="char" MaxLength="1" />
+    <Property Name="ES_NRO_LIC_CO" Type="varchar" MaxLength="50" />
+    <Property Name="ES_NMAX_LANC_CO" Type="int" />
+    <Property Name="ES_NRO_LIC_AF" Type="varchar" MaxLength="50" />
+    <Property Name="ES_NMAX_LANC_AF" Type="int" />
+    <Property Name="ES_INTEGR_CONTABIL" Type="varchar" MaxLength="15" />
+    <Property Name="ES_RED_AUTOMATICO" Type="char" MaxLength="1" />
+    <Property Name="ES_M_INI_COMPENSAGPS" Type="varchar" MaxLength="2" />
+    <Property Name="ES_A_INI_COMPENSAGPS" Type="varchar" MaxLength="4" />
+    <Property Name="ES_M_FIM_COMPENSAGPS" Type="varchar" MaxLength="2" />
+    <Property Name="ES_A_FIM_COMPENSAGPS" Type="varchar" MaxLength="4" />
+    <Property Name="ES_PERC_ISFILANTROP" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_MASC_CTCTB" Type="varchar" MaxLength="40" />
+    <Property Name="ES_MASC_CTGER" Type="varchar" MaxLength="40" />
+    <Property Name="ES_VR_COOP_TRAB" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_CNAE" Type="varchar" MaxLength="7" />
+    <Property Name="ES_PAT" Type="varchar" MaxLength="1" />
+    <Property Name="ES_PORTE" Type="varchar" MaxLength="1" />
+    <Property Name="RAC_CODIGO" Type="int" />
+    <Property Name="ES_VR_GPS13" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="CPG_CODIGO" Type="varchar" MaxLength="4" />
+    <Property Name="ES_INTEGR_CONTABIL_DEB" Type="varchar" MaxLength="15" />
+    <Property Name="CCU_CODIGO" Type="varchar" MaxLength="15" />
+    <Property Name="ES_AUTORIZ_CAGED" Type="varchar" MaxLength="10" />
+    <Property Name="ES_FOR_JORNADA_CAGED" Type="int" />
+    <Property Name="ES_FOR_REMUNER_CAGED" Type="int" />
+    <Property Name="ES_PREPOSTO" Type="varchar" MaxLength="50" />
+    <Property Name="ES_VALORNF_SERVICO" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_VR_AUTONOMOS" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_PERC15_SAT_APESP" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_PERC20_SAT_APESP" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_PERC25_SAT_APESP" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_PAT_ATE5SAL" Type="int" />
+    <Property Name="ES_PAT_ACIMA5SAL" Type="int" />
+    <Property Name="ES_DATA_ENCERRAMENTO" Type="datetime" />
+    <Property Name="ES_PERC_SERVICO_PROP" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_PERC_ADM_COZINHA" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_PERC_REFEICAO_CONV" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_PERC_REFEICAO_TRANSP" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_PERC_CESTA_ALIMENTO" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_PERC_ALIMENTA_CONV" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_CPF_CONTATO" Type="varchar" MaxLength="20" />
+    <Property Name="ES_NRO_PROPRIETARIOS" Type="int" />
+    <Property Name="ES_MODELO_RECIBO_PAGTO" Type="int" />
+    <Property Name="ES_ID_SENAI_SENAT" Type="char" MaxLength="1" />
+    <Property Name="ES_ID_SALARIO_EDUC" Type="char" MaxLength="1" />
+    <Property Name="ES_INSALUBRIDADE" Type="varchar" MaxLength="1" />
+    <Property Name="ES_PERICULOSIDADE" Type="varchar" MaxLength="1" />
+    <Property Name="ES_SINDICATO_BASE" Type="int" />
+    <Property Name="ES_ATIVA" Type="varchar" MaxLength="1" />
+    <Property Name="CLD_CODIGO" Type="int" />
+    <Property Name="ID_MIX" Type="int" />
+    <Property Name="ES_CENTRO_CTRL_APOLO" Type="varchar" MaxLength="30" />
+    <Property Name="ES_CEI_VINCULADO" Type="varchar" MaxLength="20" />
+    <Property Name="REG_CODIGO" Type="int" />
+    <Property Name="ES_NAO_USA_ESTRUTURA" Type="char" MaxLength="1" />
+    <Property Name="TOM_CODIGO" Type="int" />
+    <Property Name="ES_DT_INI_LICENCA" Type="datetime" />
+    <Property Name="LTB_CODIGO" Type="int" />
+    <Property Name="ES_MODALIDADE_ARQ_SEFIP" Type="varchar" MaxLength="10" />
+    <Property Name="ES_ID_SENAI_ADICIONAL" Type="varchar" MaxLength="1" />
+    <Property Name="CNT_CODIGO" Type="varchar" MaxLength="15" />
+    <Property Name="NVA_CODIGO_DIAUTIL" Type="varchar" MaxLength="7" />
+    <Property Name="NVA_CODIGO_DIANUTIL" Type="varchar" MaxLength="7" />
+    <Property Name="NVA_CODIGO_VISITA" Type="varchar" MaxLength="7" />
+    <Property Name="GRE_CODIGO" Type="int" />
+    <Property Name="ES_TIPO_SOCIO" Type="char" MaxLength="1" />
+    <Property Name="ES_VT_NOME_DEP" Type="varchar" MaxLength="30" />
+    <Property Name="ES_VALOR_CAPITAL_SOCIAL" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="SGL_CODIGO" Type="int" />
+    <Property Name="ES_SIGLA" Type="varchar" MaxLength="40" />
+    <Property Name="ES_CNAE_PREPONDERANTE" Type="varchar" MaxLength="1" />
+    <Property Name="ES_FGTS_CODBACEN" Type="varchar" MaxLength="3" />
+    <Property Name="ES_FGTS_AGENCIA" Type="varchar" MaxLength="6" />
+    <Property Name="ESC_CODIGO" Type="int" />
+    <Property Name="ES_DATA_NASC_CONTATO" Type="datetime" />
+    <Property Name="ES_PERC_RAT" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_FAP" Type="numeric" Precision="15" Scale="4" />
+    <Property Name="ES_NOME_PPP" Type="varchar" MaxLength="40" />
+    <Property Name="ES_PERC_PIS_SOBRE_FOLHA" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_DT_INI_DESONERACAO_FOLHA" Type="datetime" />
+    <Property Name="ES_DT_FIM_DESONERACAO_FOLHA" Type="datetime" />
+    <Property Name="ES_DESONERACAO_PARCIAL" Type="varchar" MaxLength="1" />
+    <Property Name="ES_VAL_MAX_SALARIO" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_VAL_MAX_DIARIO_VT" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ES_JORNADA_MENSAL_MAX" Type="int" />
+    <Property Name="ES_BLOQUEIA_EXCEDE_CONTRATO" Type="varchar" MaxLength="1" />
+    <Property Name="ES_INDIC_COOPERATIVA" Type="int" />
+    <Property Name="ES_INDIC_CONSTRUTORA" Type="int" />
+    <Property Name="TRI_CODIGO" Type="varchar" MaxLength="10" />
+    <Property Name="TLO_CODIGO" Type="varchar" MaxLength="10" />
+    <Property Name="TLG_CODIGO" Type="varchar" MaxLength="10" />
+    <Property Name="ES_TP_SIS_CONTROLE_PONTO" Type="varchar" MaxLength="4" />
+    <Property Name="ES_NUM_MAX_FUNC" Type="int" />
+    <Property Name="ES_RECIBO_RELATORIO" Type="int" />
+    <Property Name="ES_INDIC_DESONERACAO_FOLHA" Type="int" />
+    <Property Name="ES_INDIC_SITUACAO_PJ" Type="int" />
+    <Property Name="ES_INDIC_SITUACAO_PF" Type="int" />
+    <Property Name="ES_INDIC_SUBST_CONTRIB_PATR" Type="int" />
+    <Property Name="ES_DT_ADESAO_ESOCIAL" Type="datetime" />
+    <Property Name="ES_ADESAO_ANTECIPADA_ESOCIAL" Type="char" MaxLength="1" />
+    <Property Name="ES_CENTRALIZADORA_CNPJ_MANAD" Type="char" MaxLength="1" />
+    <Property Name="DCR_CODIGO" Type="int" />
+    <Property Name="ES_CPF_DIRF" Type="varchar" MaxLength="20" />
+    <Property Name="ES_INDIC_ENTIDADE_EDUC" Type="char" MaxLength="1" />
+    <Property Name="ES_INDIC_TRABALHO_TEMP" Type="char" MaxLength="1" />
+    <Property Name="ES_NUMERO_REG_TRAB_TEMP" Type="varchar" MaxLength="30" />
+    <Property Name="ES_INDIC_CONTRATA_DEFICIENTE" Type="int" />
+    <Property Name="ES_INDIC_CONTRATA_APRENDIZ" Type="int" />
+    <Property Name="ES_INDIC_APRENDIZ_ENTIDADE" Type="char" MaxLength="1" />
+    <Property Name="ES_INDIC_REG_ELETRONICO" Type="int" />
+    <Property Name="CPE_CODIGO_APRENDIZ" Type="int" />
+    <Property Name="CPE_CODIGO_PCD" Type="int" />
+    <Property Name="ES_OBRA_PROPRIA" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="FO_FUNCIONARIO">
+    <Key>
+      <PropertyRef Name="DOM_CODIGO" />
+      <PropertyRef Name="FU_MATRICULA" />
+    </Key>
+    <Property Name="DOM_CODIGO" Type="int" Nullable="false" />
+    <Property Name="PE_CODIGO" Type="int" Nullable="false" />
+    <Property Name="FU_MATRICULA" Type="int" Nullable="false" />
+    <Property Name="FU_CHAPA" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="FU_TFU_CODIGO" Type="varchar" Nullable="false" MaxLength="2" />
+    <Property Name="FU_TRE_CODIGO" Type="varchar" Nullable="false" MaxLength="2" />
+    <Property Name="FU_TAD_CODIGO" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="FU_STF_CODIGO" Type="varchar" Nullable="false" MaxLength="5" />
+    <Property Name="FU_CTS_CODIGO" Type="varchar" Nullable="false" MaxLength="2" />
+    <Property Name="FU_OCS_CODIGO" Type="varchar" Nullable="false" MaxLength="2" />
+    <Property Name="FU_DT_BASE" Type="datetime" />
+    <Property Name="FU_DT_DETERM" Type="datetime" />
+    <Property Name="FU_NDIAS_DETERM" Type="int" />
+    <Property Name="FU_DT_OPCAO" Type="datetime" />
+    <Property Name="FU_PERC_FGTS" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="FU_ADMISSAO" Type="datetime" Nullable="false" />
+    <Property Name="FU_DT_TRANSF" Type="datetime" />
+    <Property Name="FU_SIT_OPCAO" Type="char" MaxLength="1" />
+    <Property Name="FU_PERC_ADIANT" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="FU_DEDUZIR_M65" Type="char" MaxLength="1" />
+    <Property Name="FU_NUM_REGISTRO" Type="int" />
+    <Property Name="FU_VALOR_ARRED" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="FU_ANO_COMP" Type="int" Nullable="false" />
+    <Property Name="FU_MES_COMP" Type="int" Nullable="false" />
+    <Property Name="FU_SALARIO" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="FU_JORNADA" Type="int" Nullable="false" />
+    <Property Name="FU_DU_PMES" Type="int" />
+    <Property Name="FU_DU_MES" Type="int" />
+    <Property Name="FU_VIC_CODIGO" Type="varchar" Nullable="false" MaxLength="2" />
+    <Property Name="FU_SRA_CODIGO" Type="varchar" Nullable="false" MaxLength="2" />
+    <Property Name="FU_CAF_CODIGO" Type="varchar" MaxLength="2" />
+    <Property Name="FU_CSA_CODIGO" Type="varchar" MaxLength="2" />
+    <Property Name="FU_DT_AVISO_PREVIO" Type="datetime" />
+    <Property Name="FU_NDIAS_AVISO" Type="int" />
+    <Property Name="FU_DT_DEMISSAO" Type="datetime" />
+    <Property Name="FU_DT_ULTMOV" Type="datetime" />
+    <Property Name="FU_PG_AVISO" Type="char" MaxLength="1" />
+    <Property Name="FU_DESC_AVISO" Type="char" MaxLength="1" />
+    <Property Name="FU_DT_PAG_RESC" Type="datetime" />
+    <Property Name="FU_SIN_CODIGO" Type="int" Nullable="false" />
+    <Property Name="FU_PG_CONTRIB" Type="char" MaxLength="1" />
+    <Property Name="FU_ES_COD_EMPRESA" Type="varchar" Nullable="false" MaxLength="40" />
+    <Property Name="FU_ES_ID_ESTRUTURA" Type="varchar" Nullable="false" MaxLength="40" />
+    <Property Name="FU_CAC_CODIGO" Type="int" Nullable="false" />
+    <Property Name="FU_BA_CODBACEN_FGTS" Type="varchar" MaxLength="3" />
+    <Property Name="FU_AG_NUMERO_FGTS" Type="varchar" MaxLength="6" />
+    <Property Name="FU_NRO_CTA_FGTS" Type="varchar" MaxLength="15" />
+    <Property Name="FU_DVERIF_CTA_FGTS" Type="varchar" MaxLength="5" />
+    <Property Name="FU_ABERTURA_CTA_FGTS" Type="datetime" />
+    <Property Name="FU_BA_CODBACEN_CC" Type="varchar" MaxLength="3" />
+    <Property Name="FU_AG_NUMERO_CC" Type="varchar" MaxLength="6" />
+    <Property Name="FU_NRO_CTA_CC" Type="varchar" MaxLength="15" />
+    <Property Name="FU_DVERIF_CTA_CC" Type="varchar" MaxLength="5" />
+    <Property Name="FU_ABERTURA_CTA_CC" Type="datetime" />
+    <Property Name="FU_TITULAR_CTA_CC" Type="varchar" MaxLength="50" />
+    <Property Name="FU_DT_VENC_FERIAS" Type="datetime" Nullable="false" />
+    <Property Name="FU_SALDO_FERIAS" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="FU_DT_INIGOZO_FERIAS" Type="datetime" />
+    <Property Name="FU_DT_FIMGOZO_FERIAS" Type="datetime" />
+    <Property Name="FU_NDIAS_FERIAS" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="FU_DT_PAGTO_FERIAS" Type="datetime" />
+    <Property Name="FU_DT_AVISO_FERIAS" Type="datetime" />
+    <Property Name="FU_QUER_ABONO_FERIAS" Type="char" MaxLength="1" />
+    <Property Name="FU_NDIAS_ABONO_FERIAS" Type="int" />
+    <Property Name="FU_QUER_PRIM_PARCELA13" Type="char" MaxLength="1" />
+    <Property Name="FU_OBS_FERIAS" Type="varchar" MaxLength="100" />
+    <Property Name="FU_SALDO_FERIAS_ANTERIOR" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="FU_TOTAL_FALTAS_ACUM" Type="numeric" Nullable="false" Precision="15" Scale="2" />
+    <Property Name="FU_ES_COD_FILIAL" Type="varchar" Nullable="false" MaxLength="40" />
+    <Property Name="FU_MOT_RESCISAO" Type="int" />
+    <Property Name="FU_SLD_FGTS" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ITF_CODIGO" Type="varchar" MaxLength="15" />
+    <Property Name="FU_NDIAS_NUTEIS" Type="int" />
+    <Property Name="FU_RAC_CODIGO" Type="int" />
+    <Property Name="FU_TSL_CODIGO" Type="varchar" MaxLength="5" />
+    <Property Name="FU_NTS_CODIGO" Type="varchar" MaxLength="5" />
+    <Property Name="FU_FTS_CODIGO" Type="varchar" MaxLength="5" />
+    <Property Name="FU_CLD_CODIGO" Type="int" />
+    <Property Name="FU_MATRICULA_CHEFE" Type="int" />
+    <Property Name="FU_VALOR_DEVE" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="FU_FERIAS_COLETIVAS" Type="char" MaxLength="1" />
+    <Property Name="FU_DIAS_LIC_REM" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="FU_USU_SISTEMA" Type="varchar" MaxLength="1" />
+    <Property Name="FU_FER_ABONA_FALTAS" Type="char" MaxLength="1" />
+    <Property Name="FU_CTRL_SALDO_NEG" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="FU_DT_ABONO_FERIAS" Type="datetime" />
+    <Property Name="FU_HOR_INDICE_INICIAL" Type="int" />
+    <Property Name="FU_FUNCAO" Type="varchar" MaxLength="50" />
+    <Property Name="FU_SALDO_FER_PROP" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="FU_SALARIO_HORA" Type="numeric" Precision="15" Scale="3" />
+    <Property Name="FU_JORNADA_DIARIA" Type="int" />
+    <Property Name="FU_DIA_DEMISSAO_TRAB" Type="varchar" MaxLength="1" />
+    <Property Name="FU_MULTIPL_SAL_HORA" Type="int" />
+    <Property Name="FU_FER_ANO_COMP" Type="int" />
+    <Property Name="FU_FER_MES_COMP" Type="int" />
+    <Property Name="FU_DIAS_PERDIDOS_FER" Type="int" />
+    <Property Name="FU_DIRIGENTE_SINDICAL" Type="varchar" MaxLength="1" />
+    <Property Name="FU_INICIO_ESTAB_DS" Type="datetime" />
+    <Property Name="FU_FIM_ESTAB_DS" Type="datetime" />
+    <Property Name="FU_POSSUI_ALVARA" Type="varchar" MaxLength="1" />
+    <Property Name="FU_FER_DATA_LIMITE" Type="datetime" />
+    <Property Name="FU_FER_DATA_RETORNO" Type="datetime" />
+    <Property Name="FU_FER_REF_PER_ANT" Type="varchar" MaxLength="1" />
+    <Property Name="PE_NOME" Type="varchar" MaxLength="50" />
+    <Property Name="FU_AM_LIMITE_COMPRA" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="FU_AM_COD_USU" Type="varchar" MaxLength="31" />
+    <Property Name="FU_AM_NEC_AUT_VEIC" Type="varchar" MaxLength="1" />
+    <Property Name="CNT_CODIGO" Type="varchar" MaxLength="15" />
+    <Property Name="FU_PERC_INSALUBRIDADE" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="FU_PERC_PERICULOSIDADE" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="FU_NAO_CONTRIBUI_INSS" Type="varchar" MaxLength="1" />
+    <Property Name="FU_CC_FILIAL" Type="varchar" MaxLength="15" />
+    <Property Name="FU_FICHA_TRANSFERIDA" Type="varchar" MaxLength="1" />
+    <Property Name="FU_FER_QTDE_PARCELAS" Type="int" />
+    <Property Name="LTB_CODIGO" Type="int" />
+    <Property Name="FU_USA_CARTAO_PONTO" Type="varchar" MaxLength="1" />
+    <Property Name="FU_NUM_CONTRIB_INDIVIDUAL" Type="varchar" MaxLength="30" />
+    <Property Name="FU_FER_FALTAS_INTEIRA" Type="varchar" MaxLength="1" />
+    <Property Name="FPG_CODIGO" Type="int" />
+    <Property Name="FU_PERC_COMISSAO" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="FU_DT_REINTEGRACAO" Type="datetime" />
+    <Property Name="FU_NRO_CARTAO_SALARIO" Type="varchar" MaxLength="20" />
+    <Property Name="FU_SINDICALIZADO" Type="varchar" MaxLength="1" />
+    <Property Name="FU_ESC_CODIGO" Type="int" />
+    <Property Name="FU_DT_PRORROGADA" Type="datetime" />
+    <Property Name="FU_NDIAS_PRORROGADO" Type="int" />
+    <Property Name="FU_DATA_DEMISSAO" Type="datetime" />
+    <Property Name="FU_DATA_SMT" Type="datetime" />
+    <Property Name="FU_SIN_FER_PART_AUT" Type="char" MaxLength="1" />
+    <Property Name="FU_PERCENTUAL_ISS" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="FU_PROF_LIBERAL" Type="char" MaxLength="1" />
+    <Property Name="FU_FERIAS_LOGISTICA" Type="varchar" MaxLength="1" />
+    <Property Name="FU_USA_ENCARGOS_DEP" Type="char" MaxLength="1" />
+    <Property Name="FU_COMP_PG_RESC_BANCO_HORAS" Type="int" />
+    <Property Name="FU_COMP_PG_RESC_GRATIFICACOES" Type="int" />
+    <Property Name="FU_COMP_PG_RESC_DIF_SALARIAL" Type="int" />
+    <Property Name="ID_MIX" Type="int" />
+    <Property Name="FU_ESC_IND_REF" Type="int" />
+    <Property Name="FU_ESC_DATA_REF" Type="datetime" Nullable="false" />
+    <Property Name="FU_CAC_CODIGO_CONTRATACAO" Type="int" />
+    <Property Name="FU_FALTAS_ACUM" Type="int" />
+    <Property Name="FU_AVERBACOES_ACUM" Type="int" />
+    <Property Name="FU_AFAST_ACUM" Type="int" />
+    <Property Name="FU_COD_OPERACAO_CTA_CC" Type="varchar" MaxLength="5" />
+    <Property Name="FU_NAO_DESC_CONTR_ASSIST" Type="varchar" MaxLength="1" />
+    <Property Name="FU_NAO_DESC_CONTR_CONFED" Type="varchar" MaxLength="1" />
+    <Property Name="FU_UNID_ENTREGA_BEN" Type="varchar" MaxLength="40" />
+    <Property Name="FU_GERA_CAGED" Type="varchar" MaxLength="1" />
+    <Property Name="TSL_DT_INICIO" Type="datetime" />
+    <Property Name="FU_DATA_NOMEACAO" Type="datetime" />
+    <Property Name="FU_DATA_POSSE" Type="datetime" />
+    <Property Name="FU_ADMISSAO_NOM" Type="datetime" />
+    <Property Name="FU_GRUPO_CARGO_NOM" Type="int" />
+    <Property Name="FU_CAC_CODIGO_NOM" Type="int" />
+    <Property Name="FU_ES_ID_ESTRUTURA_NOM" Type="varchar" MaxLength="40" />
+    <Property Name="FU_ING_CODIGO_NOM" Type="int" />
+    <Property Name="FU_SIAPE_NOM" Type="varchar" MaxLength="20" />
+    <Property Name="FU_CHAPA_NOM" Type="varchar" MaxLength="20" />
+    <Property Name="FU_DT_DEMISSAO_NOM" Type="datetime" />
+    <Property Name="FU_QLT_ID_VAGA_NOM" Type="int" />
+    <Property Name="FU_RAC_CODIGO_NOM" Type="int" />
+    <Property Name="FU_AAD_CODIGO_NOM" Type="int" />
+    <Property Name="FU_FSP_DT_INI_PER_AQUISITIVO" Type="datetime" />
+    <Property Name="FU_DT_LICENCA_PREMIO" Type="datetime" />
+    <Property Name="FU_DT_LICENCA_CAPACITACAO" Type="datetime" />
+    <Property Name="STA_CODIGO" Type="int" />
+    <Property Name="FU_DT_REQUERIMENTO" Type="datetime" />
+    <Property Name="FU_DT_CONCESSAO" Type="datetime" />
+    <Property Name="FU_NUM_PROCESSO" Type="varchar" MaxLength="20" />
+    <Property Name="FU_NUM_PROCESSO_TCU" Type="varchar" MaxLength="20" />
+    <Property Name="FU_PERC_PROPORCIONALIDADE" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="FU_DT_OBITO" Type="datetime" />
+    <Property Name="FU_NUM_REGISTRO_OBITO" Type="varchar" MaxLength="32" />
+    <Property Name="FU_NUM_LIVRO" Type="varchar" MaxLength="15" />
+    <Property Name="FU_NUM_FOLHA" Type="varchar" MaxLength="15" />
+    <Property Name="FU_NOME_CARTORIO" Type="varchar" MaxLength="50" />
+    <Property Name="FU_SALDOLICENCA_1998" Type="int" />
+    <Property Name="FU_SALDOLICENCA_2003" Type="int" />
+    <Property Name="FU_SALDOLICENCA_2005" Type="int" />
+    <Property Name="FU_SALDOLICENCA_GERAL" Type="int" />
+    <Property Name="FU_VALOR_BENEFICIO" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="FU_MATRICULA_PENS" Type="int" />
+    <Property Name="FU_PENS_NATUREZA" Type="char" MaxLength="1" />
+    <Property Name="TPD_CODIGO" Type="varchar" MaxLength="2" />
+    <Property Name="FU_PENS_DT_INI_VALIDADE" Type="datetime" />
+    <Property Name="FU_PENS_DT_FIM_VALIDADE" Type="datetime" />
+    <Property Name="PE_CODIGO_TUTOR" Type="int" />
+    <Property Name="FU_TUTOR_BA_CODBACEN_CC" Type="varchar" MaxLength="3" />
+    <Property Name="FU_TUTOR_AG_NUMERO_CC" Type="varchar" MaxLength="6" />
+    <Property Name="FU_TUTOR_NRO_CTA_CC" Type="varchar" MaxLength="15" />
+    <Property Name="FU_TUTOR_DVERIF_CTA_CC" Type="varchar" MaxLength="5" />
+    <Property Name="FU_PROC_DT_INICIO" Type="datetime" />
+    <Property Name="FU_PROC_DT_FIM" Type="datetime" />
+    <Property Name="FU_PROC_NUM_REGISTRO" Type="varchar" MaxLength="15" />
+    <Property Name="FU_PROC_NUM_LIVRO" Type="varchar" MaxLength="15" />
+    <Property Name="FU_PROC_NOME_CARTORIO" Type="varchar" MaxLength="50" />
+    <Property Name="FU_PROC_NUM_FOLHA" Type="varchar" MaxLength="15" />
+    <Property Name="SIT_CODIGO" Type="int" />
+    <Property Name="FU_BENEFNUM" Type="int" />
+    <Property Name="FU_BENEFDEN" Type="int" />
+    <Property Name="FU_SIN_RETROAGIU_MEDIA" Type="varchar" MaxLength="1" />
+    <Property Name="FU_TMO_CODIGO" Type="int" />
+    <Property Name="FU_PENDENCIAS" Type="char" MaxLength="1" />
+    <Property Name="FU_SALARIO_ADICIONAL1" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="FU_SALARIO_ADICIONAL2" Type="numeric" Precision="15" Scale="2" />
+    <Property Name="ORG_CODIGO" Type="int" />
+    <Property Name="FU_CHAPA_ALT" Type="varchar" MaxLength="20" />
+    <Property Name="FU_ID_CHEFE" Type="varchar" MaxLength="20" />
+    <Property Name="FU_TSL_CODIGO_NOM" Type="varchar" MaxLength="5" />
+    <Property Name="FU_NTS_CODIGO_NOM" Type="varchar" MaxLength="5" />
+    <Property Name="FU_FTS_CODIGO_NOM" Type="varchar" MaxLength="5" />
+    <Property Name="FU_AVIS_PREV_DT_COMPAREC" Type="datetime" />
+    <Property Name="FU_AVIS_PREV_HR_COMPAREC" Type="int" />
+    <Property Name="FU_AVIS_PREV_NOMELOC_COMPAREC" Type="varchar" MaxLength="60" />
+    <Property Name="FU_AVIS_PREV_ENDERLOC_COMPAREC" Type="varchar" MaxLength="60" />
+    <Property Name="FU_AVIS_PREV_OBS" Type="varchar" MaxLength="60" />
+    <Property Name="FU_AVIS_PREV_TIPO" Type="varchar" MaxLength="1" />
+    <Property Name="FU_AVIS_PREV_OPCAO_JORNADA" Type="varchar" MaxLength="1" />
+    <Property Name="FU_AVIS_PREV_NDIAS_AUSENCIA" Type="int" />
+    <Property Name="FU_AVIS_PREV_DIAS_AVISO_REAL" Type="int" />
+    <Property Name="FU_AVIS_PREV_COMPLLOC_COMPAREC" Type="varchar" MaxLength="25" />
+    <Property Name="FU_AVIS_PREV_NUMLOC_COMPAREC" Type="varchar" MaxLength="10" />
+    <Property Name="FU_AVIS_PREV_CIDADE_COMPAREC" Type="int" />
+    <Property Name="FU_AVIS_PREV_BAIRRO_COMPAREC" Type="int" />
+    <Property Name="FU_AVIS_PREV_UF_COMPAREC" Type="char" MaxLength="2" />
+    <Property Name="FU_AVIS_PREV_PAIS_COMPAREC" Type="varchar" MaxLength="10" />
+    <Property Name="FU_AVIS_PREV_CEP_COMPAREC" Type="varchar" MaxLength="10" />
+    <Property Name="FU_SCF_CODIGO" Type="varchar" MaxLength="1" />
+    <Property Name="FU_RPA_CODIGO" Type="int" />
+    <Property Name="FU_INICIO_ESTAB_CAND" Type="datetime" />
+    <Property Name="FU_FIM_ESTAB_CAND" Type="datetime" />
+    <Property Name="FU_ESTAB_CANDIDATURA" Type="varchar" MaxLength="1" />
+    <Property Name="FU_VIM_CODIGO" Type="int" />
+    <Property Name="FU_TNO_CODIGO" Type="int" />
+    <Property Name="FU_ATO_NOMEACAO" Type="varchar" MaxLength="30" />
+    <Property Name="FU_PG_TXCONFED" Type="varchar" MaxLength="1" />
+    <Property Name="FU_PG_TXASSIST" Type="varchar" MaxLength="1" />
+    <Property Name="FNC_CODIGO" Type="int" />
+    <Property Name="FU_CONSIDERA_DTREINTEGRACAO" Type="char" MaxLength="1" />
+    <Property Name="FU_DT_AVISO_PREVIO_PROJETADO" Type="datetime" />
+    <Property Name="FU_JORN_SEM_AFA_INTEGRAL" Type="varchar" MaxLength="1" />
+    <Property Name="FU_JORN_SEM_AFA_CUMP_INTEGRAL" Type="varchar" MaxLength="1" />
+    <Property Name="FU_JORN_SAB_COMP_SEM_AFA" Type="varchar" MaxLength="1" />
+    <Property Name="FU_COMPR_NOVO_EMPREGO_AVISO" Type="varchar" MaxLength="1" />
+    <Property Name="FU_ORIGEM_FERIAS" Type="int" />
+    <Property Name="FU_TIPO_CONTA" Type="int" />
+    <Property Name="FU_INDICATIVO_ADMISSAO" Type="int" />
+    <Property Name="FU_CTT_CODIGO" Type="varchar" MaxLength="4" />
+    <Property Name="FU_ESTAG_NATUREZA" Type="char" MaxLength="1" />
+    <Property Name="FU_ESTAG_NIVEL" Type="char" MaxLength="1" />
+    <Property Name="FU_ESTAG_AREA_ATUACAO" Type="varchar" MaxLength="50" />
+    <Property Name="FU_ESTAG_NR_APOLICE" Type="varchar" MaxLength="30" />
+    <Property Name="FU_ESTAG_DT_PREV_TERMINO" Type="datetime" />
+    <Property Name="FU_ESTAG_INST_ENSINO" Type="int" />
+    <Property Name="FU_ESTAG_AGENTE_INTEGRACAO" Type="int" />
+    <Property Name="FU_ESTAG_COORDENADOR" Type="int" />
+    <Property Name="FU_RESC_NRO_PROC_TRABALHISTA" Type="varchar" MaxLength="20" />
+    <Property Name="FUR_OBSERVACAO" Type="varchar" MaxLength="255" />
+    <Property Name="FU_RESC_CNPJ_SUCESSORA" Type="varchar" MaxLength="20" />
+    <Property Name="FU_TIPO_CAGED" Type="varchar" MaxLength="3" />
+    <Property Name="FU_CAGED_DATA_REGISTRO" Type="datetime" />
+    <Property Name="FU_TIPO_REGIME_JORNADA" Type="int" />
+    <Property Name="FU_DESCRICAO_SALARIO_VARIAVEL" Type="varchar" MaxLength="90" />
+    <Property Name="FU_AVISO_PREVIO_MISTO" Type="char" MaxLength="1" />
+    <Property Name="FU_NDIAS_ESTABILIDADE" Type="int" />
+    <Property Name="FU_PREENCHE_COTA_DEFICIENTE" Type="char" MaxLength="1" />
+    <Property Name="FU_MATRICULA_ESOCIAL" Type="varchar" MaxLength="30" />
+    <Property Name="FU_CONTRATO_DETERM_CLAU_ASSEC" Type="char" MaxLength="1" />
+    <Property Name="FU_AVIS_PREV_DT_PREV_DESLIG" Type="datetime" />
+    <Property Name="FU_AVIS_PREV_TIPO_ESOCIAL" Type="int" />
+    <Property Name="FU_AVIS_PREV_OBSERVACAO" Type="varchar" MaxLength="255" />
+    <Property Name="CPE_CODIGO_MENORIDADE" Type="int" />
+    <Property Name="CLI_CODIGO_ENT_EDUC" Type="int" />
+    <Property Name="FU_MATRICULA_TRANSF" Type="int" />
+    <Property Name="FU_CNPJ_EMPREGADOR" Type="varchar" MaxLength="20" />
+    <Property Name="FU_OBSERVACAO_TRANSF" Type="varchar" MaxLength="255" />
+    <Property Name="CPA_CODIGO" Type="int" />
+    <Property Name="FU_AUTORIZA_DESC_CONTR_SIND" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="FU_FER_FERIAS_EM_DIAS_UTEIS" Type="varchar" MaxLength="1" />
+    <Property Name="FU_QUER_ADIANT_FERIAS" Type="varchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="FO_PESSOA">
+    <Key>
+      <PropertyRef Name="PE_CODIGO" />
+    </Key>
+    <Property Name="PE_CODIGO" Type="int" Nullable="false" />
+    <Property Name="PE_ESTRANG_CONJ_BRASIL" Type="char" MaxLength="1" />
+    <Property Name="PE_ESTRANG_VENC_IDENT" Type="datetime" />
+    <Property Name="PE_ESTRANG_CART_HAB" Type="varchar" MaxLength="20" />
+    <Property Name="PE_ESTRANG_NRO_REG" Type="varchar" MaxLength="20" />
+    <Property Name="PE_ESTRANG_FILHOS_BRASIL" Type="int" />
+    <Property Name="PE_ESTRANG_VENC_CTPS" Type="datetime" />
+    <Property Name="PE_ESTRANG_CART_MOD19" Type="varchar" MaxLength="15" />
+    <Property Name="PE_ESTRANG_DT_CHEGADA" Type="datetime" />
+    <Property Name="PE_ESTRANG_NRO_DECRETO" Type="varchar" MaxLength="15" />
+    <Property Name="PE_ESTRANG_NATURALIZADO" Type="char" MaxLength="1" />
+    <Property Name="PE_NOME" Type="varchar" MaxLength="50" />
+    <Property Name="PE_SEXO" Type="varchar" Nullable="false" MaxLength="1" />
+    <Property Name="PE_DT_NASC" Type="datetime" Nullable="false" />
+    <Property Name="PE_APOS_INSS" Type="char" MaxLength="1" />
+    <Property Name="PE_RG_NUMERO" Type="varchar" MaxLength="20" />
+    <Property Name="PE_RG_DTEMISSAO" Type="datetime" />
+    <Property Name="PE_RG_ORGAO" Type="varchar" MaxLength="10" />
+    <Property Name="PE_CPF" Type="varchar" MaxLength="20" />
+    <Property Name="PE_PIS" Type="varchar" MaxLength="20" />
+    <Property Name="PE_DT_PIS" Type="datetime" />
+    <Property Name="PE_EC_CODIGO" Type="varchar" Nullable="false" MaxLength="2" />
+    <Property Name="PE_CIDADE_NATAL" Type="int" />
+    <Property Name="PE_ESTADO_NATAL" Type="char" MaxLength="2" />
+    <Property Name="PE_PAIS_NATAL" Type="varchar" MaxLength="10" />
+    <Property Name="PE_NACIONAL1" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="PE_NACIONAL2" Type="varchar" MaxLength="10" />
+    <Property Name="PE_NACIONAL3" Type="varchar" MaxLength="10" />
+    <Property Name="PE_PAIS_END" Type="varchar" MaxLength="10" />
+    <Property Name="PE_UF_END" Type="char" MaxLength="2" />
+    <Property Name="PE_CIDADE_END" Type="int" />
+    <Property Name="PE_BAIRRO_END" Type="int" />
+    <Property Name="PE_LOGRADOURO_END" Type="varchar" MaxLength="60" />
+    <Property Name="PE_NUMERO_END" Type="varchar" MaxLength="10" />
+    <Property Name="PE_COMPLEMENTO_END" Type="varchar" MaxLength="25" />
+    <Property Name="PE_CEP" Type="varchar" MaxLength="10" />
+    <Property Name="PE_EMAIL" Type="varchar" MaxLength="100" />
+    <Property Name="PE_GRI_CODIGO" Type="varchar" MaxLength="5" />
+    <Property Name="PE_CURSO" Type="varchar" MaxLength="30" />
+    <Property Name="PE_DOUTORADO" Type="varchar" MaxLength="30" />
+    <Property Name="PE_MESTRADO" Type="varchar" MaxLength="30" />
+    <Property Name="PE_OBSERVACOES" Type="varchar" MaxLength="60" />
+    <Property Name="PE_BA_CODBACEN_PIS" Type="varchar" MaxLength="3" />
+    <Property Name="PE_AG_NUMERO_PIS" Type="varchar" MaxLength="6" />
+    <Property Name="PE_NRO_CTA_PIS" Type="varchar" MaxLength="15" />
+    <Property Name="PE_DVERIF_CTA_PIS" Type="varchar" MaxLength="5" />
+    <Property Name="PE_ABERTURA_CTA_PIS" Type="datetime" />
+    <Property Name="PE_TIT_ELEITOR_NRO" Type="varchar" MaxLength="15" />
+    <Property Name="PE_TIT_ELEITOR_ZONA" Type="varchar" MaxLength="5" />
+    <Property Name="PE_TIT_ELEITOR_SECAO" Type="varchar" MaxLength="5" />
+    <Property Name="PE_CERT_RESERV_NRO" Type="varchar" MaxLength="40" />
+    <Property Name="PE_CERT_RESERV_CATEGORIA" Type="varchar" MaxLength="15" />
+    <Property Name="PE_CTPS_NRO" Type="varchar" MaxLength="8" />
+    <Property Name="PE_CTPS_SERIE" Type="varchar" MaxLength="5" />
+    <Property Name="PE_CTPS_DTEMISSAO" Type="datetime" />
+    <Property Name="PE_CTPS_ESTADOEM" Type="char" MaxLength="2" />
+    <Property Name="PE_CTPS_PAISEM" Type="varchar" MaxLength="10" />
+    <Property Name="PE_CART_HAB_NRO" Type="varchar" MaxLength="15" />
+    <Property Name="PE_CART_HAB_TIPO" Type="varchar" MaxLength="5" />
+    <Property Name="PE_REG_PROFISSIONAL" Type="varchar" MaxLength="15" />
+    <Property Name="PE_RC_CODIGO" Type="char" MaxLength="1" />
+    <Property Name="PE_DEFICIENTE_FISICO" Type="char" MaxLength="1" />
+    <Property Name="USU_USERNAME" Type="varchar" MaxLength="10" />
+    <Property Name="PE_RG_PAISEM" Type="varchar" MaxLength="10" />
+    <Property Name="PE_RG_ESTADOEM" Type="char" MaxLength="2" />
+    <Property Name="PE_NRO_PASSAPORTE" Type="varchar" MaxLength="12" />
+    <Property Name="PE_LOCALIZACAO" Type="varchar" MaxLength="100" />
+    <Property Name="PE_APELIDO" Type="varchar" MaxLength="30" />
+    <Property Name="PE_PARTICIPA_SELECAO_INT" Type="varchar" Nullable="false" MaxLength="1" />
+    <Property Name="PE_PARTICIPA_SELECAO_EXT" Type="varchar" Nullable="false" MaxLength="1" />
+    <Property Name="PE_CADASTRO_WEB" Type="varchar" Nullable="false" MaxLength="1" />
+    <Property Name="PE_WEB_ATIVO" Type="varchar" Nullable="false" MaxLength="1" />
+    <Property Name="PE_TIPO_APOSENTADORIA" Type="varchar" MaxLength="1" />
+    <Property Name="PE_DATA_APOSENTADORIA" Type="datetime" />
+    <Property Name="PE_PAGINA_INTERNET" Type="varchar" MaxLength="150" />
+    <Property Name="PE_DT_ULT_EMISSAO_ASO" Type="datetime" />
+    <Property Name="PE_DT_ULT_EMISSAO_PPP" Type="datetime" />
+    <Property Name="PE_NOME_PAI" Type="varchar" MaxLength="50" />
+    <Property Name="PE_NOME_MAE" Type="varchar" MaxLength="60" />
+    <Property Name="PE_DT_VENCTO_ASO" Type="datetime" />
+    <Property Name="PE_TIT_ELEITOR_MUNICIPIO" Type="int" />
+    <Property Name="PE_TIT_ELEITOR_ESTADOEM" Type="char" MaxLength="2" />
+    <Property Name="PE_TIT_ELEITOR_PAISEM" Type="varchar" MaxLength="10" />
+    <Property Name="PE_AUT_RECEB_EMAIL" Type="varchar" MaxLength="1" />
+    <Property Name="PE_TIPO_DEFICIENCIA" Type="char" MaxLength="1" />
+    <Property Name="PE_FUMANTE" Type="char" MaxLength="1" />
+    <Property Name="PE_DISPONIVEL_VIAGEM" Type="char" MaxLength="1" />
+    <Property Name="PE_RECURSO_ESPECIAL" Type="varchar" MaxLength="250" />
+    <Property Name="PE_VEICULO_PROPRIO" Type="char" MaxLength="1" />
+    <Property Name="PE_RESIDE_OUTRO_LOCAL" Type="char" MaxLength="1" />
+    <Property Name="PE_ZONA" Type="varchar" MaxLength="1" />
+    <Property Name="PE_CART_HAB_VENC" Type="datetime" />
+    <Property Name="PE_PERFIL" Type="text" />
+    <Property Name="PET_CODIGO" Type="int" />
+    <Property Name="PE_DT_CADASTRO" Type="datetime" />
+    <Property Name="PE_PARTICIPA_SELECAO" Type="varchar" MaxLength="1" />
+    <Property Name="MOT_CODIGO" Type="int" />
+    <Property Name="PE_ENDERECO_PERFIL" Type="varchar" MaxLength="200" />
+    <Property Name="PE_INSTRUTOR" Type="varchar" MaxLength="1" />
+    <Property Name="PE_MONITOR" Type="varchar" MaxLength="1" />
+    <Property Name="EQE_CODIGO" Type="int" />
+    <Property Name="PE_DATAHORA_ULTALTERACAO" Type="datetime" />
+    <Property Name="PE_RESUMO_QUALIFICACOES" Type="text" />
+    <Property Name="PE_CV_ATIVO" Type="varchar" MaxLength="1" />
+    <Property Name="PE_CNS_NUMERO" Type="varchar" MaxLength="15" />
+    <Property Name="PE_DECL_NASC_VIVO_NUMERO" Type="varchar" MaxLength="15" />
+    <Property Name="PE_RESP_EVENTO" Type="char" MaxLength="1" />
+    <Property Name="PE_EMISSOR_PASSAPORTE" Type="varchar" MaxLength="10" />
+    <Property Name="PE_UF_PAIS_PASSAPORTE" Type="varchar" MaxLength="10" />
+    <Property Name="PE_UF_PASSAPORTE" Type="char" MaxLength="2" />
+    <Property Name="PE_DT_EMISSAO_PASSAPORTE" Type="datetime" />
+    <Property Name="PE_DT_VALIDADE_PASSAPORTE" Type="datetime" />
+    <Property Name="PE_PAIS_EMISSAO_PASSAPORTE" Type="varchar" MaxLength="10" />
+    <Property Name="PE_TP_CERTIDAO_CIVIL" Type="varchar" MaxLength="60" />
+    <Property Name="PE_DT_EMISSAO_CERTIDAO_CIVIL" Type="datetime" />
+    <Property Name="PE_TERMO_CERTIDAO_CIVIL" Type="varchar" MaxLength="20" />
+    <Property Name="PE_LIVRO_CERTIDAO_CIVIL" Type="varchar" MaxLength="10" />
+    <Property Name="PE_FOLHA_CERTIDAO_CIVIL" Type="varchar" MaxLength="10" />
+    <Property Name="PE_CARTORIO_CERTIDAO_CIVIL" Type="varchar" MaxLength="20" />
+    <Property Name="PE_UF_PAIS_CERTIDAO_CIVIL" Type="varchar" MaxLength="10" />
+    <Property Name="PE_UF_CERTIDAO_CIVIL" Type="char" MaxLength="2" />
+    <Property Name="PE_MUNICIPIO_CERTIDAO_CIVIL" Type="int" />
+    <Property Name="PE_DT_NATURALIZACAO" Type="datetime" />
+    <Property Name="PE_NRO_RIC" Type="varchar" MaxLength="11" />
+    <Property Name="PE_UF_PAIS_RIC" Type="varchar" MaxLength="10" />
+    <Property Name="PE_UF_RIC" Type="char" MaxLength="2" />
+    <Property Name="PE_EMISSOR_RIC" Type="varchar" MaxLength="10" />
+    <Property Name="PE_MUNICIPIO_RIC" Type="int" />
+    <Property Name="PE_DT_EXPEDICAO_RIC" Type="datetime" />
+    <Property Name="PE_CERT_RESERV_DT_EMISS" Type="datetime" />
+    <Property Name="PE_CERT_RESERV_EMISSOR" Type="varchar" MaxLength="60" />
+    <Property Name="PE_TIT_ELEITOR_DT_EMISS" Type="datetime" />
+    <Property Name="TLG_CODIGO" Type="varchar" MaxLength="10" />
+    <Property Name="PE_RNE_EMISSOR" Type="varchar" MaxLength="20" />
+    <Property Name="PE_RNE_DT_EXPEDICAO" Type="datetime" />
+    <Property Name="PE_OC_NUMERO" Type="varchar" MaxLength="14" />
+    <Property Name="PE_OC_EMISSOR" Type="varchar" MaxLength="20" />
+    <Property Name="PE_OC_DT_EXPEDICAO" Type="datetime" />
+    <Property Name="PE_OC_DT_VALIDADE" Type="datetime" />
+    <Property Name="PE_CART_HAB_EMISSOR" Type="varchar" MaxLength="20" />
+    <Property Name="PE_CART_HAB_DT_EXPEDICAO" Type="datetime" />
+    <Property Name="PE_CASA_PROPRIA_POSSUI" Type="varchar" MaxLength="1" />
+    <Property Name="PE_CASA_PROPRIA_USOU_FGTS" Type="varchar" MaxLength="1" />
+    <Property Name="PE_USERNAME_SGI" Type="varchar" MaxLength="30" />
+    <Property Name="PE_ORG_EM_PASSAPORTE" Type="int" />
+    <Property Name="PE_ORG_EM_RG" Type="int" />
+    <Property Name="COE_CODIGO" Type="int" />
+    <Property Name="PE_CART_HAB_ESTADOEMISSOR" Type="char" MaxLength="2" />
+    <Property Name="PE_CART_HAB_DT_PRIMEIRA_HAB" Type="datetime" />
+    <Property Name="PE_DATA_REABILITACAO" Type="datetime" />
+    <Property Name="PE_DATA_INICIO_PNE" Type="datetime" />
+    <Property Name="PE_NOME_COMPLETO" Type="varchar" MaxLength="70" />
+    <Property Name="PE_NOME_SOCIAL" Type="varchar" MaxLength="70" />
+  </EntityType>
+  <Association Name="FK_ESTRUTURA_ESTRUTURA">
+    <End Role="BS_ESTRUTURA" Type="MixModel.Store.BS_ESTRUTURA" Multiplicity="1" />
+    <End Role="BS_ESTRUTURA1" Type="MixModel.Store.BS_ESTRUTURA" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="BS_ESTRUTURA">
+        <PropertyRef Name="DOM_CODIGO" />
+        <PropertyRef Name="ES_ID_ESTRUTURA" />
+      </Principal>
+      <Dependent Role="BS_ESTRUTURA1">
+        <PropertyRef Name="DOM_CODIGO" />
+        <PropertyRef Name="ES_ID_ESTRUTURA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FUNC_PESSOA_SUP_ESTAGIO">
+    <End Role="FO_PESSOA" Type="MixModel.Store.FO_PESSOA" Multiplicity="0..1" />
+    <End Role="FO_FUNCIONARIO" Type="MixModel.Store.FO_FUNCIONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FO_PESSOA">
+        <PropertyRef Name="PE_CODIGO" />
+      </Principal>
+      <Dependent Role="FO_FUNCIONARIO">
+        <PropertyRef Name="FU_ESTAG_COORDENADOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FUNCIONARIO_ESTRUTURA">
+    <End Role="BS_ESTRUTURA" Type="MixModel.Store.BS_ESTRUTURA" Multiplicity="1" />
+    <End Role="FO_FUNCIONARIO" Type="MixModel.Store.FO_FUNCIONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BS_ESTRUTURA">
+        <PropertyRef Name="DOM_CODIGO" />
+        <PropertyRef Name="ES_ID_ESTRUTURA" />
+      </Principal>
+      <Dependent Role="FO_FUNCIONARIO">
+        <PropertyRef Name="DOM_CODIGO" />
+        <PropertyRef Name="FU_ES_ID_ESTRUTURA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FUNCIONARIO_ESTRUTURAEMP">
+    <End Role="BS_ESTRUTURA" Type="MixModel.Store.BS_ESTRUTURA" Multiplicity="1" />
+    <End Role="FO_FUNCIONARIO" Type="MixModel.Store.FO_FUNCIONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BS_ESTRUTURA">
+        <PropertyRef Name="DOM_CODIGO" />
+        <PropertyRef Name="ES_ID_ESTRUTURA" />
+      </Principal>
+      <Dependent Role="FO_FUNCIONARIO">
+        <PropertyRef Name="DOM_CODIGO" />
+        <PropertyRef Name="FU_ES_COD_EMPRESA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FUNCIONARIO_ESTRUTURAFIL">
+    <End Role="BS_ESTRUTURA" Type="MixModel.Store.BS_ESTRUTURA" Multiplicity="1" />
+    <End Role="FO_FUNCIONARIO" Type="MixModel.Store.FO_FUNCIONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BS_ESTRUTURA">
+        <PropertyRef Name="DOM_CODIGO" />
+        <PropertyRef Name="ES_ID_ESTRUTURA" />
+      </Principal>
+      <Dependent Role="FO_FUNCIONARIO">
+        <PropertyRef Name="DOM_CODIGO" />
+        <PropertyRef Name="FU_ES_COD_FILIAL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FUNCIONARIO_FUNCPENS">
+    <End Role="FO_FUNCIONARIO" Type="MixModel.Store.FO_FUNCIONARIO" Multiplicity="0..1" />
+    <End Role="FO_FUNCIONARIO1" Type="MixModel.Store.FO_FUNCIONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FO_FUNCIONARIO">
+        <PropertyRef Name="DOM_CODIGO" />
+        <PropertyRef Name="FU_MATRICULA" />
+      </Principal>
+      <Dependent Role="FO_FUNCIONARIO1">
+        <PropertyRef Name="DOM_CODIGO" />
+        <PropertyRef Name="FU_MATRICULA_PENS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FUNCIONARIO_PESSOA">
+    <End Role="FO_PESSOA" Type="MixModel.Store.FO_PESSOA" Multiplicity="1" />
+    <End Role="FO_FUNCIONARIO" Type="MixModel.Store.FO_FUNCIONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FO_PESSOA">
+        <PropertyRef Name="PE_CODIGO" />
+      </Principal>
+      <Dependent Role="FO_FUNCIONARIO">
+        <PropertyRef Name="PE_CODIGO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FUNCIONARIO_TUTOR">
+    <End Role="FO_PESSOA" Type="MixModel.Store.FO_PESSOA" Multiplicity="0..1" />
+    <End Role="FO_FUNCIONARIO" Type="MixModel.Store.FO_FUNCIONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FO_PESSOA">
+        <PropertyRef Name="PE_CODIGO" />
+      </Principal>
+      <Dependent Role="FO_FUNCIONARIO">
+        <PropertyRef Name="PE_CODIGO_TUTOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

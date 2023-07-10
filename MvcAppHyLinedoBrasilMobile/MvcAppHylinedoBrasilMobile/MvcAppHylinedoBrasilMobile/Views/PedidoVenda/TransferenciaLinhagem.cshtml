@@ -1,0 +1,278 @@
+﻿@using am = MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController;
+
+@{
+    ViewBag.Title = "";
+    string lg = Session["language"].ToString();
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities bd = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+
+    var lista = (List<MvcAppHylinedoBrasilMobile.Models.Item_Transf_Ovos_Linha>)Session["ListaItensTransferenciaLinhagem"];
+
+    int totalTransferencia = 0;
+    if (lista.Count > 0)
+    {
+        totalTransferencia = lista.Sum(s => s.Qtde);
+    }
+}
+<script type="text/javascript">
+    function atualizaSession(value, field, type) {
+        $.ajax({
+            url: '/PedidoVenda/AtualizaSession',
+            type: 'POST',
+            data: JSON.stringify({ valor: value, campo: field, tipo: type }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                var listaLinhagens = data[0];
+                var listaEmpresas = data[1];
+                if (field == 'ListaEmpresasOrigem') {
+                    // Atualiza Linhagens de Origem
+                    $('select#ddlLinhagemOrigem').empty();
+                    $('select#ddlLinhagemOrigem').selectmenu('refresh');
+
+                    $('select#ddlLinhagemOrigem').empty();
+                    //$('select#ddlLinhagemOrigem').append('<option value="" selected="selected">(Selecione a Linhagem de Origem)</option>');
+                    $.each(listaLinhagens, function (key, SelectListItem) {
+                        $('select#ddlLinhagemOrigem').append('<option value="' + SelectListItem.Text + '">' + SelectListItem.Text + '</option>');
+                    });
+                    $('select#ddlLinhagemOrigem').selectmenu('refresh');
+
+                    // Atualiza Empresas de Destino
+                    $('select#ddlEmpresasDestino').empty();
+                    $('select#ddlEmpresasDestino').selectmenu('refresh');
+
+                    $('select#ddlEmpresasDestino').empty();
+                    $.each(listaEmpresas, function (key, SelectListItem) {
+                        $('select#ddlEmpresasDestino').append('<option value="' + SelectListItem.Value + '">' + SelectListItem.Text + '</option>');
+                    });
+                    $('select#ddlEmpresasDestino').selectmenu('refresh');
+
+                    $('select#ddlLinhagemDestino').empty();
+                    $('select#ddlLinhagemDestino').selectmenu('refresh');
+                } else if (field == 'ListaEmpresasDestino') {
+                    // Atualiza Linhagens de Destino
+                    $('select#ddlLinhagemDestino').empty();
+                    $('select#ddlLinhagemDestino').selectmenu('refresh');
+
+                    $('select#ddlLinhagemDestino').empty();
+                    //$('select#ddlLinhagemDestino').append('<option value="" selected="selected">(Selecione a Linhagem de Destino)</option>');
+                    $.each(listaLinhagens, function (key, SelectListItem) {
+                        $('select#ddlLinhagemDestino').append('<option value="' + SelectListItem.Text + '">' + SelectListItem.Text + '</option>');
+                    });
+                    $('select#ddlLinhagemDestino').selectmenu('refresh');
+
+                    // Atualiza Empresas de Origem
+                    //$('select#ddlEmpresasOrigem').empty();
+                    //$('select#ddlEmpresasOrigem').selectmenu('refresh');
+
+                    //$('select#ddlEmpresasOrigem').empty();
+                    //$.each(listaEmpresas, function (key, SelectListItem) {
+                    //    $('select#ddlEmpresasOrigem').append('<option value="' + SelectListItem.Value + '">' + SelectListItem.Text + '</option>');
+                    //});
+                    //$('select#ddlEmpresasOrigem').selectmenu('refresh');
+                }
+            }
+        });
+    }
+</script>
+
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink(am.GetTextOnLanguage("Voltar p/ Lista de Transferências de Ovos entre Empresas", lg), "ListaTransferenciaLinhagens", "PedidoVenda",
+                null, new { @class = "transferenciaLinhagens" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/transferencia_32x32.png"), "")
+    <h2>@am.GetTextOnLanguage("Transferência de Ovos entre Empresas", lg)</h2>
+    @if (ViewBag.Erro != null)
+    {
+        <h4 id="lblMsgErro" class="@(ViewBag.ClasseMsg) ui-li ui-li-static">
+            @Html.Raw(ViewBag.Erro)
+        </h4>
+    }
+    <br />
+    <div class="editor-label">
+        <b>@am.GetTextOnLanguage("Data da Transferência", lg):</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox("dataTransferencia", Convert.ToDateTime(Session["dataTransferencia"]).ToString("yyyy-MM-dd"),
+            new { @type = "date", @required = "true", @onchange = "atualizaSession(this.value, 'dataTransferencia', 'Text')" })
+    </div>
+    <br />
+    @if (lista.Count == 0)
+    {
+        <div class="editor-label">
+            <b>@am.GetTextOnLanguage("Empresa de Origem", lg):</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("empresaOrigem", (List<SelectListItem>)Session["ListaEmpresasOrigem"],
+                new { @required = "true", @onchange = "atualizaSession(this.value, 'ListaEmpresasOrigem', 'List')", @id = "ddlEmpresasOrigem" })
+        </div>
+    }
+    else
+    {
+        var empresaOrigemNome = ((List<SelectListItem>)Session["ListaEmpresasOrigem"]).Where(w => w.Selected == true).FirstOrDefault().Text;
+        <h2>@am.GetTextOnLanguage("Empresa de Origem", lg): @Html.Label(empresaOrigemNome)</h2>
+    }
+    <br />
+    @if (lista.Count == 0)
+    {
+        <div class="editor-label">
+            <b>@am.GetTextOnLanguage("Empresa de Destino", lg):</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("empresaDestino", (List<SelectListItem>)Session["ListaEmpresasDestino"],
+                new { @required = "true", @onchange = "atualizaSession(this.value, 'ListaEmpresasDestino', 'List')", @id = "ddlEmpresasDestino" })
+        </div>
+    }
+    else
+    {
+        var empresaDestinoNome = ((List<SelectListItem>)Session["ListaEmpresasDestino"]).Where(w => w.Selected == true).FirstOrDefault().Text;
+        <h2>@am.GetTextOnLanguage("Empresa de Destino", lg): @Html.Label(empresaDestinoNome)</h2>
+    }
+    <br />
+    <div class="editor-label">
+        <b>@am.GetTextOnLanguage("Incubatório de Origem", lg):</b>
+    </div>
+    <div class="editor-field">
+        @Html.DropDownList("incubatorio", (List<SelectListItem>)Session["ListaIncubatorios"],
+            new { @required = "true", @onchange = "atualizaSession(this.value, 'ListaIncubatorios', 'List')" })
+    </div>
+    <div class="editor-label">
+        <b>@am.GetTextOnLanguage("Incubatório de Destino", lg):</b>
+    </div>
+    <div class="editor-field">
+        @Html.DropDownList("incubatorioDestino", (List<SelectListItem>)Session["ListaIncubatoriosDestino"],
+            new { @required = "true", @onchange = "atualizaSession(this.value, 'ListaIncubatoriosDestino', 'List')" })
+    </div>
+    <div class="editor-label">
+        <b>@am.GetTextOnLanguage("Motivo", lg):</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextArea("motivo", Session["motivo"].ToString(), new { @required = "true", @onchange = "atualizaSession(this.value, 'motivo', 'Text')" })
+    </div>
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @using (Html.BeginForm("SaveTransferenciaLinhagemItem", "PedidoVenda", FormMethod.Post,
+                new { enctype = "multipart/form-data" }))
+            {
+                <table style="border:none; background: none;" class="ajusteWithoutHeader">
+                    <tbody class="ajusteWithoutHeader">
+                        <tr style="border:none; background: none;" class="ajusteWithoutHeader">
+                            <td style="border:none; background: none;" class="ajusteWithoutHeader">
+                                <b>@am.GetTextOnLanguage("Tipo da Matriz", lg):</b>
+                                @Html.DropDownList(
+                                "TipoMatriz",
+                                (List<SelectListItem>)Session["ListaTipoMatriz"],
+                                "(Selecione um Tipo de Matriz)",
+                                new
+                                {
+                                    @id = "ddlTipoMatriz",
+                                    @required = "true"
+                                })
+                            </td>
+                            <td style="border:none; background: none;" class="ajusteWithoutHeader">
+                                <b>@am.GetTextOnLanguage("Linhagem de Origem", lg):</b>
+                                @Html.DropDownList(
+                                "LinhagemOrigem",
+                                (List<SelectListItem>)Session["ListaLinhagemOrigem"],
+                                new
+                                {
+                                    @id = "ddlLinhagemOrigem",
+                                    @required = "true"
+                                })
+                            </td>
+                            <td style="border:none; background: none;" class="ajusteWithoutHeader">
+                                <b>@am.GetTextOnLanguage("Linhagem de Destino", lg):</b>
+                                @Html.DropDownList(
+                                "LinhagemDestino",
+                                (List<SelectListItem>)Session["ListaLinhagemDestino"],
+                                new
+                                {
+                                    @id = "ddlLinhagemDestino",
+                                    @required = "true"
+                                })
+                            </td>
+                            <td style="border:none; background: none;" class="ajusteWithoutHeader">
+                                <b>@am.GetTextOnLanguage("Qtde.", lg):</b>
+                                @Html.TextBox("Qtde", null, new
+                                   {
+                                       @id = "txtQtde",
+                                       @type = "number",
+                                       @required = "true",
+                                       @placeholder = "Informar qtde. de ovos."
+                                   })
+                                <div class="editor-label" id="errorQtdeKg" style="color: Red; font-weight:bold;"></div>
+                            </td>
+                            <td style="border:none; background: none;" class="ajusteWithoutHeader">
+                                <input type="submit" value="+" id="saveItem" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+        </li>
+    </ul>
+    <br />
+    @if (ViewBag.ErroItens != null)
+    {
+        <h4 id="lblMsgErro" class="@(ViewBag.ClasseMsg) ui-li ui-li-static">
+            @Html.Raw(ViewBag.ErroItens)
+        </h4>
+        <br />
+    }
+    <div id="tabelaDEO" style="overflow:auto;">
+        <table id="tabela">
+            <tr>
+                <th></th>
+                <th>
+                    @am.GetTextOnLanguage("Tipo de Matriz", lg)
+                </th>
+                <th>
+                    @am.GetTextOnLanguage("Origem", lg)
+                </th>
+                <th>
+                    @am.GetTextOnLanguage("Destino", lg)
+                </th>
+                <th>
+                    @am.GetTextOnLanguage("Qtde.", lg)
+                </th>
+            </tr>
+
+            @foreach (var item in lista)
+            {
+                <tr>
+                    <td class="ajuste">
+                        <div align="center">
+                            @Html.ActionLink("Delete", "DeleteClassificacaoOvoItem",
+                                new { sequencia = item.Sequencia }, new { @class = "delete" })
+                        </div>
+                    </td>
+                    <td>
+                        @item.TipoMatriz
+                    </td>
+                    <td>
+                        @item.LinhagemOrigem
+                    </td>
+                    <td>
+                        @item.LinhagemDestino
+                    </td>
+                    <td>
+                        <b>@String.Format("{0:N0}", item.Qtde)</b>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <p>
+            <h2>@am.GetTextOnLanguage("Qtde. Total da Transferência", lg): @String.Format("{0:N0}", totalTransferencia)</h2>
+        </p>
+    </div>
+    @using (Html.BeginForm("SaveTransferenciaLinhagem", "PedidoVenda", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <p>
+            <input type="submit" value="@am.GetTextOnLanguage("Salvar Transferência de Ovos", lg)" name="saveTransfOvo" />
+        </p>
+    }
+</div>

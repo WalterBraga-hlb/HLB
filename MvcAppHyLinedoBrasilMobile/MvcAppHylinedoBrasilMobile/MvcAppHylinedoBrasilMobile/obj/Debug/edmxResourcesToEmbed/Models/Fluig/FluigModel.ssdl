@@ -1,0 +1,519 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="fluigModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="FF40F29A5F_3F17F927">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" MaxLength="36" Nullable="false" />
+    <Property Name="RECORD_CODE" Type="varchar" MaxLength="36" Nullable="false" />
+    <Property Name="VERSION" Type="int" Nullable="false" />
+    <Property Name="DELETED" Type="bit" Nullable="false" />
+    <Property Name="PARENT_FORM_VERSION" Type="int" Nullable="false" />
+    <Property Name="CREATED_BY" Type="varchar" MaxLength="36" />
+    <Property Name="CREATED_DATE" Type="datetime" Nullable="false" />
+    <Property Name="UPDATED_BY" Type="varchar" MaxLength="36" />
+    <Property Name="UPDATED_DATE" Type="datetime" />
+    <Property Name="LINHAGENS_BLOQU_CHK_11" Type="varchar" MaxLength="255" />
+    <Property Name="LINHAGENS_BLOQU_CHK_12" Type="varchar" MaxLength="255" />
+    <Property Name="LINHAGENS_BLOQU_CHK_13" Type="varchar" MaxLength="255" />
+    <Property Name="LINHAGENS_BLOQU_CHK_14" Type="varchar" MaxLength="255" />
+    <Property Name="LINHAGENS_BLOQU_CHK_15" Type="varchar" MaxLength="255" />
+    <Property Name="LINHAGENS_BLOQU_CHK_16" Type="varchar" MaxLength="255" />
+    <Property Name="LINHAGENS_BLOQU_CHK_17" Type="varchar" MaxLength="255" />
+    <Property Name="LINHAGENS_BLOQU_CHK_18" Type="varchar" MaxLength="255" />
+    <Property Name="LINHAGENS_BLOQU_CHK_19" Type="varchar" MaxLength="255" />
+    <Property Name="LINHAGENS_BLOQU_CHK_110" Type="varchar" MaxLength="255" />
+    <Property Name="LINHAGENS_BLOQU_CHK_111" Type="varchar" MaxLength="255" />
+    <Property Name="LINHAGENS_BLOQU_CHK_112" Type="varchar" MaxLength="255" />
+    <Property Name="LINHAGENS_BLOQU_CHK_113" Type="varchar" MaxLength="255" />
+    <Property Name="LINHAGENS_BLOQU_CHK_114" Type="varchar" MaxLength="255" />
+    <Property Name="LINHAGENS_BLOQU_CHK_115" Type="varchar" MaxLength="255" />
+    <Property Name="PERMITIR_PEDIDO_DT_1" Type="date" />
+  </EntityType>
+  <EntityType Name="FF40F29A5F_77708420">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" MaxLength="36" Nullable="false" />
+    <Property Name="RECORD_CODE" Type="varchar" MaxLength="36" Nullable="false" />
+    <Property Name="VERSION" Type="int" Nullable="false" />
+    <Property Name="DELETED" Type="bit" Nullable="false" />
+    <Property Name="PARENT_FORM_VERSION" Type="int" Nullable="false" />
+    <Property Name="CREATED_BY" Type="varchar" MaxLength="36" />
+    <Property Name="CREATED_DATE" Type="datetime" Nullable="false" />
+    <Property Name="UPDATED_BY" Type="varchar" MaxLength="36" />
+    <Property Name="UPDATED_DATE" Type="datetime" />
+    <Property Name="LINHAGEM_SEL_1" Type="varchar" MaxLength="255" />
+    <Property Name="PRIMEIRO_DIA_DO_DT_1" Type="date" />
+    <Property Name="SALDO_DE_PINTOS_NR_1" Type="numeric" Precision="20" Scale="11" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'fluig.dbo.VU_Formulas_Racao_Fluig' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VU_Formulas_Racao_Fluig">
+    <Key>
+      <PropertyRef Name="EMAIL" />
+      <PropertyRef Name="NUM_PROCES" />
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="LoginSolicitante" Type="varchar" MaxLength="150" />
+    <Property Name="NomeSolicitante" Type="varchar" MaxLength="255" />
+    <Property Name="EMAIL" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="DataSolicitacao" Type="datetime2" Precision="7" />
+    <Property Name="DataConclusao" Type="datetime2" Precision="7" />
+    <Property Name="NUM_PROCES" Type="int" Nullable="false" />
+    <Property Name="STATUS" Type="int" />
+    <Property Name="Atividade" Type="varchar(max)" />
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="companyid" Type="int" />
+    <Property Name="cardid" Type="int" />
+    <Property Name="documentid" Type="int" />
+    <Property Name="version" Type="int" />
+    <Property Name="tableid" Type="varchar(max)" />
+    <Property Name="ANONYMIZATION_DATE" Type="date" />
+    <Property Name="ANONYMIZATION_USER_ID" Type="varchar(max)" />
+    <Property Name="identificador" Type="varchar(max)" />
+    <Property Name="data_solicitacao" Type="varchar(max)" />
+    <Property Name="solicitante" Type="varchar(max)" />
+    <Property Name="usuario_solicitante" Type="varchar(max)" />
+    <Property Name="tipo_cadastro" Type="varchar(max)" />
+    <Property Name="codigo_formula" Type="varchar(max)" />
+    <Property Name="pesquisa_formula" Type="varchar(max)" />
+    <Property Name="descricao_formula" Type="varchar(max)" />
+    <Property Name="data_necessidade" Type="varchar(max)" />
+    <Property Name="tipo_alteracao" Type="varchar(max)" />
+    <Property Name="observacao_alteracao" Type="varchar(max)" />
+    <Property Name="data_analise" Type="varchar(max)" />
+    <Property Name="analisador" Type="varchar(max)" />
+    <Property Name="usuario_analisador" Type="varchar(max)" />
+    <Property Name="pesquisa_insumo" Type="varchar(max)" />
+    <Property Name="data_inicio" Type="varchar(max)" />
+    <Property Name="data_fim" Type="varchar(max)" />
+    <Property Name="observacao_configuracao" Type="varchar(max)" />
+    <Property Name="data_aprovacao" Type="varchar(max)" />
+    <Property Name="aprovador" Type="varchar(max)" />
+    <Property Name="usuario_aprovador" Type="varchar(max)" />
+    <Property Name="descricao_aprovacao" Type="varchar(max)" />
+    <Property Name="data_configuracao_apolo" Type="varchar(max)" />
+    <Property Name="configurador_apolo" Type="varchar(max)" />
+    <Property Name="usuario_configurador_apolo" Type="varchar(max)" />
+    <Property Name="pesquisa_formula_apolo" Type="varchar(max)" />
+    <Property Name="descricao_formula_apolo" Type="varchar(max)" />
+    <Property Name="codEstr_formula" Type="varchar(max)" />
+    <Property Name="obs_configuracao_apolo" Type="varchar(max)" />
+    <Property Name="motivo_retorno" Type="varchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'fluig.dbo.VU_Formulas_Racao_Fluig_Ativas' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="VU_Formulas_Racao_Fluig_Ativas">
+          <Property Name="codigo_formula" Type="varchar(max)" />
+          <Property Name="descricao_formula" Type="varchar(max)" />
+          <Property Name="codEstr_formula" Type="varchar(max)" />
+          <Property Name="UltimaAlteracao" Type="int" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'fluig.dbo.VU_Formulas_Racao_Fluig_FT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VU_Formulas_Racao_Fluig_FT">
+    <Key>
+      <PropertyRef Name="NUM_PROCES" />
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="NUM_PROCES" Type="int" Nullable="false" />
+    <Property Name="STATUS" Type="int" />
+    <Property Name="Atividade" Type="varchar(max)" />
+    <Property Name="codigo_formula" Type="varchar(max)" />
+    <Property Name="codEstr_formula" Type="varchar(max)" />
+    <Property Name="descricao_formula" Type="varchar(max)" />
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="companyid" Type="int" />
+    <Property Name="cardid" Type="int" />
+    <Property Name="documentid" Type="int" />
+    <Property Name="version" Type="int" />
+    <Property Name="tableid" Type="varchar(max)" />
+    <Property Name="ANONYMIZATION_DATE" Type="date" />
+    <Property Name="ANONYMIZATION_USER_ID" Type="varchar(max)" />
+    <Property Name="codigo_ft" Type="varchar(max)" />
+    <Property Name="descricao_ft" Type="varchar(max)" />
+    <Property Name="qtde_ft" Type="varchar(max)" />
+    <Property Name="quebra_ft" Type="varchar(max)" />
+    <Property Name="masterid" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'fluig.dbo.VU_Mort_07' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VU_Mort_07">
+    <Key>
+      <PropertyRef Name="NumSolicitacao" />
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="NumSolicitacao" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="companyid" Type="int" />
+    <Property Name="cardid" Type="int" />
+    <Property Name="documentid" Type="int" />
+    <Property Name="version" Type="int" />
+    <Property Name="tableid" Type="varchar(max)" />
+    <Property Name="identificador" Type="varchar(max)" />
+    <Property Name="prazo_coleta" Type="varchar(max)" />
+    <Property Name="nome_cliente" Type="varchar(max)" />
+    <Property Name="codigo_cliente" Type="varchar(max)" />
+    <Property Name="dados_pedido" Type="varchar(max)" />
+    <Property Name="chave_pedido" Type="varchar(max)" />
+    <Property Name="chicnums" Type="varchar(max)" />
+    <Property Name="primeira_entrega" Type="varchar(max)" />
+    <Property Name="ultima_entrega" Type="varchar(max)" />
+    <Property Name="nf_mae" Type="varchar(max)" />
+    <Property Name="incubatorios" Type="varchar(max)" />
+    <Property Name="cod_incubatorios" Type="varchar(max)" />
+    <Property Name="cod_transporte" Type="varchar(max)" />
+    <Property Name="qtde" Type="varchar(max)" />
+    <Property Name="perc_doa" Type="varchar(max)" />
+    <Property Name="pesquisa_coletor" Type="varchar(max)" />
+    <Property Name="nome_coletor" Type="varchar(max)" />
+    <Property Name="grupo_coletor" Type="varchar(max)" />
+    <Property Name="data_coleta" Type="varchar(max)" />
+    <Property Name="coletor" Type="varchar(max)" />
+    <Property Name="usuario_coleta" Type="varchar(max)" />
+    <Property Name="dia_01" Type="varchar(max)" />
+    <Property Name="dia_02" Type="varchar(max)" />
+    <Property Name="dia_03" Type="varchar(max)" />
+    <Property Name="dia_04" Type="varchar(max)" />
+    <Property Name="dia_05" Type="varchar(max)" />
+    <Property Name="dia_06" Type="varchar(max)" />
+    <Property Name="dia_07" Type="varchar(max)" />
+    <Property Name="dia_08" Type="varchar(max)" />
+    <Property Name="dia_09" Type="varchar(max)" />
+    <Property Name="dia_10" Type="varchar(max)" />
+    <Property Name="total_m07" Type="varchar(max)" />
+    <Property Name="perc_m07" Type="varchar(max)" />
+    <Property Name="peso_M07" Type="varchar(max)" />
+    <Property Name="uniformidade_M07" Type="varchar(max)" />
+    <Property Name="tipo_reclamacao" Type="varchar(max)" />
+    <Property Name="tipo_reclamacao_depto" Type="varchar(max)" />
+    <Property Name="obs_m07_acima_meta" Type="varchar(max)" />
+    <Property Name="gera_RRC" Type="varchar(max)" />
+    <Property Name="descricao_RRC" Type="varchar(max)" />
+    <Property Name="motivo_retorno" Type="varchar(max)" />
+    <Property Name="m07_coletada" Type="varchar(max)" />
+    <Property Name="obs_m07_nao_coletada" Type="varchar(max)" />
+    <Property Name="peso_DOA" Type="varchar(max)" />
+    <Property Name="uniformidade_DOA" Type="varchar(max)" />
+    <Property Name="cond_estr_granja" Type="varchar(max)" />
+    <Property Name="cond_alojamento" Type="varchar(max)" />
+    <Property Name="luz" Type="varchar(max)" />
+    <Property Name="temperatura" Type="varchar(max)" />
+    <Property Name="agua" Type="varchar(max)" />
+    <Property Name="sanidade" Type="varchar(max)" />
+    <Property Name="qtde_rrc_aberta" Type="varchar(max)" />
+    <Property Name="ANONYMIZATION_DATE" Type="date" />
+    <Property Name="ANONYMIZATION_USER_ID" Type="varchar(max)" />
+    <Property Name="obs_m07" Type="varchar(max)" />
+    <Property Name="cliente_reclamando" Type="varchar(max)" />
+    <Property Name="StatusProcesso" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'fluig.dbo.VU_Roteiro_Entrega_Fluig' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VU_Roteiro_Entrega_Fluig">
+    <Key>
+      <PropertyRef Name="NUM_PROCES" />
+      <PropertyRef Name="EMAIL" />
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="NUM_PROCES" Type="int" Nullable="false" />
+    <Property Name="LoginSolicitante" Type="varchar" MaxLength="150" />
+    <Property Name="NomeSolicitante" Type="varchar" MaxLength="255" />
+    <Property Name="EMAIL" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="DataSolicitacao" Type="datetime2" Precision="7" />
+    <Property Name="STATUS" Type="int" />
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="companyid" Type="int" />
+    <Property Name="cardid" Type="int" />
+    <Property Name="documentid" Type="int" />
+    <Property Name="version" Type="int" />
+    <Property Name="tableid" Type="varchar(max)" />
+    <Property Name="filtra_roteiro" Type="varchar(max)" />
+    <Property Name="responsavel_preenchimento" Type="varchar(max)" />
+    <Property Name="data_nascimento" Type="varchar(max)" />
+    <Property Name="nome_cliente" Type="varchar(max)" />
+    <Property Name="codigo_cliente" Type="varchar(max)" />
+    <Property Name="cidade_uf" Type="varchar(max)" />
+    <Property Name="representante" Type="varchar(max)" />
+    <Property Name="nfnum" Type="varchar(max)" />
+    <Property Name="distancia_percorrida_km" Type="varchar(max)" />
+    <Property Name="horario_chegada_granja" Type="varchar(max)" />
+    <Property Name="horario_saida_granja" Type="varchar(max)" />
+    <Property Name="data_entrega" Type="varchar(max)" />
+    <Property Name="motorista_01" Type="varchar(max)" />
+    <Property Name="motorista_02" Type="varchar(max)" />
+    <Property Name="observacoes_motorista" Type="varchar(max)" />
+    <Property Name="recebedor" Type="varchar(max)" />
+    <Property Name="recebedor_cpf" Type="varchar(max)" />
+    <Property Name="recebedor_celular" Type="varchar(max)" />
+    <Property Name="avaliacao_transporte" Type="varchar(max)" />
+    <Property Name="avaliacao_motorista" Type="varchar(max)" />
+    <Property Name="avaliacao_pintinho" Type="varchar(max)" />
+    <Property Name="observacoes_cliente" Type="varchar(max)" />
+    <Property Name="data_hora_esperada_granja" Type="varchar(max)" />
+    <Property Name="horas_atraso_adiantado" Type="varchar(max)" />
+    <Property Name="placa" Type="varchar(max)" />
+    <Property Name="horario_carregamento_esperado" Type="varchar(max)" />
+    <Property Name="horario_carregamento_real" Type="varchar(max)" />
+    <Property Name="horas_atraso_adiantado_carreg" Type="varchar(max)" />
+    <Property Name="fechamento_logistica" Type="varchar(max)" />
+    <Property Name="ANONYMIZATION_DATE" Type="date" />
+    <Property Name="ANONYMIZATION_USER_ID" Type="varchar(max)" />
+    <Property Name="motivo_atraso" Type="varchar(max)" />
+    <Property Name="motivo_DOA" Type="varchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'fluig.dbo.VU_RRC_Fluig_Only' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VU_RRC_Fluig_Only">
+    <Key>
+      <PropertyRef Name="Reclamação Por" />
+      <PropertyRef Name="Nº Reclamação" />
+      <PropertyRef Name="Status" />
+    </Key>
+    <Property Name="NomeSolicitante" Type="varchar" MaxLength="255" />
+    <Property Name="DataSolicitacao" Type="datetime2" Precision="7" />
+    <Property Name="DataConclusao" Type="datetime2" Precision="7" />
+    <Property Name="Reclamação Por" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="Nº Reclamação" Type="int" Nullable="false" />
+    <Property Name="descricao_fatos" Type="varchar(max)" />
+    <Property Name="tipo_reclamacao" Type="varchar(max)" />
+    <Property Name="tipo_problema_incubatorio" Type="varchar(max)" />
+    <Property Name="tipo_problema_transporte" Type="varchar(max)" />
+    <Property Name="analise_granja" Type="varchar(max)" />
+    <Property Name="analise_qualidade" Type="varchar(max)" />
+    <Property Name="qtde_bonificada" Type="varchar(max)" />
+    <Property Name="Status" Type="varchar(max)" Nullable="false" />
+    <Property Name="chave_pedido" Type="varchar(max)" />
+    <Property Name="data_bonificada_programacao" Type="varchar" MaxLength="30" />
+    <Property Name="qtde_bonificada_programacao" Type="varchar(max)" />
+    <Property Name="idweb_bonificada_programacao" Type="varchar(max)" />
+    <Property Name="analise_programacao" Type="varchar(max)" />
+    <Property Name="status_programacao" Type="varchar(max)" />
+    <Property Name="motivo_bonificacao" Type="varchar(max)" />
+    <Property Name="causa" Type="varchar(max)" />
+    <Property Name="porque_ocorre" Type="varchar(max)" />
+    <Property Name="problema_cliente" Type="varchar(max)" />
+  </EntityType>
+  <EntityContainer Name="fluigModelStoreContainer">
+    <EntitySet Name="FF40F29A5F_3F17F927" EntityType="Self.FF40F29A5F_3F17F927" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="FF40F29A5F_77708420" EntityType="Self.FF40F29A5F_77708420" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="VU_Formulas_Racao_Fluig" EntityType="Self.VU_Formulas_Racao_Fluig" store:Type="Views" store:Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
+      <DefiningQuery>SELECT 
+[VU_Formulas_Racao_Fluig].[LoginSolicitante] AS [LoginSolicitante], 
+[VU_Formulas_Racao_Fluig].[NomeSolicitante] AS [NomeSolicitante], 
+[VU_Formulas_Racao_Fluig].[EMAIL] AS [EMAIL], 
+[VU_Formulas_Racao_Fluig].[DataSolicitacao] AS [DataSolicitacao], 
+[VU_Formulas_Racao_Fluig].[DataConclusao] AS [DataConclusao], 
+[VU_Formulas_Racao_Fluig].[NUM_PROCES] AS [NUM_PROCES], 
+[VU_Formulas_Racao_Fluig].[STATUS] AS [STATUS], 
+[VU_Formulas_Racao_Fluig].[Atividade] AS [Atividade], 
+[VU_Formulas_Racao_Fluig].[ID] AS [ID], 
+[VU_Formulas_Racao_Fluig].[companyid] AS [companyid], 
+[VU_Formulas_Racao_Fluig].[cardid] AS [cardid], 
+[VU_Formulas_Racao_Fluig].[documentid] AS [documentid], 
+[VU_Formulas_Racao_Fluig].[version] AS [version], 
+[VU_Formulas_Racao_Fluig].[tableid] AS [tableid], 
+[VU_Formulas_Racao_Fluig].[ANONYMIZATION_DATE] AS [ANONYMIZATION_DATE], 
+[VU_Formulas_Racao_Fluig].[ANONYMIZATION_USER_ID] AS [ANONYMIZATION_USER_ID], 
+[VU_Formulas_Racao_Fluig].[identificador] AS [identificador], 
+[VU_Formulas_Racao_Fluig].[data_solicitacao] AS [data_solicitacao], 
+[VU_Formulas_Racao_Fluig].[solicitante] AS [solicitante], 
+[VU_Formulas_Racao_Fluig].[usuario_solicitante] AS [usuario_solicitante], 
+[VU_Formulas_Racao_Fluig].[tipo_cadastro] AS [tipo_cadastro], 
+[VU_Formulas_Racao_Fluig].[codigo_formula] AS [codigo_formula], 
+[VU_Formulas_Racao_Fluig].[pesquisa_formula] AS [pesquisa_formula], 
+[VU_Formulas_Racao_Fluig].[descricao_formula] AS [descricao_formula], 
+[VU_Formulas_Racao_Fluig].[data_necessidade] AS [data_necessidade], 
+[VU_Formulas_Racao_Fluig].[tipo_alteracao] AS [tipo_alteracao], 
+[VU_Formulas_Racao_Fluig].[observacao_alteracao] AS [observacao_alteracao], 
+[VU_Formulas_Racao_Fluig].[data_analise] AS [data_analise], 
+[VU_Formulas_Racao_Fluig].[analisador] AS [analisador], 
+[VU_Formulas_Racao_Fluig].[usuario_analisador] AS [usuario_analisador], 
+[VU_Formulas_Racao_Fluig].[pesquisa_insumo] AS [pesquisa_insumo], 
+[VU_Formulas_Racao_Fluig].[data_inicio] AS [data_inicio], 
+[VU_Formulas_Racao_Fluig].[data_fim] AS [data_fim], 
+[VU_Formulas_Racao_Fluig].[observacao_configuracao] AS [observacao_configuracao], 
+[VU_Formulas_Racao_Fluig].[data_aprovacao] AS [data_aprovacao], 
+[VU_Formulas_Racao_Fluig].[aprovador] AS [aprovador], 
+[VU_Formulas_Racao_Fluig].[usuario_aprovador] AS [usuario_aprovador], 
+[VU_Formulas_Racao_Fluig].[descricao_aprovacao] AS [descricao_aprovacao], 
+[VU_Formulas_Racao_Fluig].[data_configuracao_apolo] AS [data_configuracao_apolo], 
+[VU_Formulas_Racao_Fluig].[configurador_apolo] AS [configurador_apolo], 
+[VU_Formulas_Racao_Fluig].[usuario_configurador_apolo] AS [usuario_configurador_apolo], 
+[VU_Formulas_Racao_Fluig].[pesquisa_formula_apolo] AS [pesquisa_formula_apolo], 
+[VU_Formulas_Racao_Fluig].[descricao_formula_apolo] AS [descricao_formula_apolo], 
+[VU_Formulas_Racao_Fluig].[codEstr_formula] AS [codEstr_formula], 
+[VU_Formulas_Racao_Fluig].[obs_configuracao_apolo] AS [obs_configuracao_apolo], 
+[VU_Formulas_Racao_Fluig].[motivo_retorno] AS [motivo_retorno]
+FROM [dbo].[VU_Formulas_Racao_Fluig] AS [VU_Formulas_Racao_Fluig]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VU_Formulas_Racao_Fluig_FT" EntityType="Self.VU_Formulas_Racao_Fluig_FT" store:Type="Views" store:Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
+      <DefiningQuery>SELECT 
+[VU_Formulas_Racao_Fluig_FT].[NUM_PROCES] AS [NUM_PROCES], 
+[VU_Formulas_Racao_Fluig_FT].[STATUS] AS [STATUS], 
+[VU_Formulas_Racao_Fluig_FT].[Atividade] AS [Atividade], 
+[VU_Formulas_Racao_Fluig_FT].[codigo_formula] AS [codigo_formula], 
+[VU_Formulas_Racao_Fluig_FT].[codEstr_formula] AS [codEstr_formula], 
+[VU_Formulas_Racao_Fluig_FT].[descricao_formula] AS [descricao_formula], 
+[VU_Formulas_Racao_Fluig_FT].[ID] AS [ID], 
+[VU_Formulas_Racao_Fluig_FT].[companyid] AS [companyid], 
+[VU_Formulas_Racao_Fluig_FT].[cardid] AS [cardid], 
+[VU_Formulas_Racao_Fluig_FT].[documentid] AS [documentid], 
+[VU_Formulas_Racao_Fluig_FT].[version] AS [version], 
+[VU_Formulas_Racao_Fluig_FT].[tableid] AS [tableid], 
+[VU_Formulas_Racao_Fluig_FT].[ANONYMIZATION_DATE] AS [ANONYMIZATION_DATE], 
+[VU_Formulas_Racao_Fluig_FT].[ANONYMIZATION_USER_ID] AS [ANONYMIZATION_USER_ID], 
+[VU_Formulas_Racao_Fluig_FT].[codigo_ft] AS [codigo_ft], 
+[VU_Formulas_Racao_Fluig_FT].[descricao_ft] AS [descricao_ft], 
+[VU_Formulas_Racao_Fluig_FT].[qtde_ft] AS [qtde_ft], 
+[VU_Formulas_Racao_Fluig_FT].[quebra_ft] AS [quebra_ft], 
+[VU_Formulas_Racao_Fluig_FT].[masterid] AS [masterid]
+FROM [dbo].[VU_Formulas_Racao_Fluig_FT] AS [VU_Formulas_Racao_Fluig_FT]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VU_Mort_07" EntityType="Self.VU_Mort_07" store:Type="Views" store:Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
+      <DefiningQuery>SELECT 
+[VU_Mort_07].[NumSolicitacao] AS [NumSolicitacao], 
+[VU_Mort_07].[ID] AS [ID], 
+[VU_Mort_07].[companyid] AS [companyid], 
+[VU_Mort_07].[cardid] AS [cardid], 
+[VU_Mort_07].[documentid] AS [documentid], 
+[VU_Mort_07].[version] AS [version], 
+[VU_Mort_07].[tableid] AS [tableid], 
+[VU_Mort_07].[identificador] AS [identificador], 
+[VU_Mort_07].[prazo_coleta] AS [prazo_coleta], 
+[VU_Mort_07].[nome_cliente] AS [nome_cliente], 
+[VU_Mort_07].[codigo_cliente] AS [codigo_cliente], 
+[VU_Mort_07].[dados_pedido] AS [dados_pedido], 
+[VU_Mort_07].[chave_pedido] AS [chave_pedido], 
+[VU_Mort_07].[chicnums] AS [chicnums], 
+[VU_Mort_07].[primeira_entrega] AS [primeira_entrega], 
+[VU_Mort_07].[ultima_entrega] AS [ultima_entrega], 
+[VU_Mort_07].[nf_mae] AS [nf_mae], 
+[VU_Mort_07].[incubatorios] AS [incubatorios], 
+[VU_Mort_07].[cod_incubatorios] AS [cod_incubatorios], 
+[VU_Mort_07].[cod_transporte] AS [cod_transporte], 
+[VU_Mort_07].[qtde] AS [qtde], 
+[VU_Mort_07].[perc_doa] AS [perc_doa], 
+[VU_Mort_07].[pesquisa_coletor] AS [pesquisa_coletor], 
+[VU_Mort_07].[nome_coletor] AS [nome_coletor], 
+[VU_Mort_07].[grupo_coletor] AS [grupo_coletor], 
+[VU_Mort_07].[data_coleta] AS [data_coleta], 
+[VU_Mort_07].[coletor] AS [coletor], 
+[VU_Mort_07].[usuario_coleta] AS [usuario_coleta], 
+[VU_Mort_07].[dia_01] AS [dia_01], 
+[VU_Mort_07].[dia_02] AS [dia_02], 
+[VU_Mort_07].[dia_03] AS [dia_03], 
+[VU_Mort_07].[dia_04] AS [dia_04], 
+[VU_Mort_07].[dia_05] AS [dia_05], 
+[VU_Mort_07].[dia_06] AS [dia_06], 
+[VU_Mort_07].[dia_07] AS [dia_07], 
+[VU_Mort_07].[dia_08] AS [dia_08], 
+[VU_Mort_07].[dia_09] AS [dia_09], 
+[VU_Mort_07].[dia_10] AS [dia_10], 
+[VU_Mort_07].[total_m07] AS [total_m07], 
+[VU_Mort_07].[perc_m07] AS [perc_m07], 
+[VU_Mort_07].[peso_M07] AS [peso_M07], 
+[VU_Mort_07].[uniformidade_M07] AS [uniformidade_M07], 
+[VU_Mort_07].[tipo_reclamacao] AS [tipo_reclamacao], 
+[VU_Mort_07].[tipo_reclamacao_depto] AS [tipo_reclamacao_depto], 
+[VU_Mort_07].[obs_m07_acima_meta] AS [obs_m07_acima_meta], 
+[VU_Mort_07].[gera_RRC] AS [gera_RRC], 
+[VU_Mort_07].[descricao_RRC] AS [descricao_RRC], 
+[VU_Mort_07].[motivo_retorno] AS [motivo_retorno], 
+[VU_Mort_07].[m07_coletada] AS [m07_coletada], 
+[VU_Mort_07].[obs_m07_nao_coletada] AS [obs_m07_nao_coletada], 
+[VU_Mort_07].[peso_DOA] AS [peso_DOA], 
+[VU_Mort_07].[uniformidade_DOA] AS [uniformidade_DOA], 
+[VU_Mort_07].[cond_estr_granja] AS [cond_estr_granja], 
+[VU_Mort_07].[cond_alojamento] AS [cond_alojamento], 
+[VU_Mort_07].[luz] AS [luz], 
+[VU_Mort_07].[temperatura] AS [temperatura], 
+[VU_Mort_07].[agua] AS [agua], 
+[VU_Mort_07].[sanidade] AS [sanidade], 
+[VU_Mort_07].[qtde_rrc_aberta] AS [qtde_rrc_aberta], 
+[VU_Mort_07].[ANONYMIZATION_DATE] AS [ANONYMIZATION_DATE], 
+[VU_Mort_07].[ANONYMIZATION_USER_ID] AS [ANONYMIZATION_USER_ID], 
+[VU_Mort_07].[obs_m07] AS [obs_m07], 
+[VU_Mort_07].[cliente_reclamando] AS [cliente_reclamando], 
+[VU_Mort_07].[StatusProcesso] AS [StatusProcesso]
+FROM [dbo].[VU_Mort_07] AS [VU_Mort_07]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VU_Roteiro_Entrega_Fluig" EntityType="Self.VU_Roteiro_Entrega_Fluig" store:Type="Views" store:Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
+      <DefiningQuery>SELECT 
+[VU_Roteiro_Entrega_Fluig].[NUM_PROCES] AS [NUM_PROCES], 
+[VU_Roteiro_Entrega_Fluig].[LoginSolicitante] AS [LoginSolicitante], 
+[VU_Roteiro_Entrega_Fluig].[NomeSolicitante] AS [NomeSolicitante], 
+[VU_Roteiro_Entrega_Fluig].[EMAIL] AS [EMAIL], 
+[VU_Roteiro_Entrega_Fluig].[DataSolicitacao] AS [DataSolicitacao], 
+[VU_Roteiro_Entrega_Fluig].[STATUS] AS [STATUS], 
+[VU_Roteiro_Entrega_Fluig].[ID] AS [ID], 
+[VU_Roteiro_Entrega_Fluig].[companyid] AS [companyid], 
+[VU_Roteiro_Entrega_Fluig].[cardid] AS [cardid], 
+[VU_Roteiro_Entrega_Fluig].[documentid] AS [documentid], 
+[VU_Roteiro_Entrega_Fluig].[version] AS [version], 
+[VU_Roteiro_Entrega_Fluig].[tableid] AS [tableid], 
+[VU_Roteiro_Entrega_Fluig].[filtra_roteiro] AS [filtra_roteiro], 
+[VU_Roteiro_Entrega_Fluig].[responsavel_preenchimento] AS [responsavel_preenchimento], 
+[VU_Roteiro_Entrega_Fluig].[data_nascimento] AS [data_nascimento], 
+[VU_Roteiro_Entrega_Fluig].[nome_cliente] AS [nome_cliente], 
+[VU_Roteiro_Entrega_Fluig].[codigo_cliente] AS [codigo_cliente], 
+[VU_Roteiro_Entrega_Fluig].[cidade_uf] AS [cidade_uf], 
+[VU_Roteiro_Entrega_Fluig].[representante] AS [representante], 
+[VU_Roteiro_Entrega_Fluig].[nfnum] AS [nfnum], 
+[VU_Roteiro_Entrega_Fluig].[distancia_percorrida_km] AS [distancia_percorrida_km], 
+[VU_Roteiro_Entrega_Fluig].[horario_chegada_granja] AS [horario_chegada_granja], 
+[VU_Roteiro_Entrega_Fluig].[horario_saida_granja] AS [horario_saida_granja], 
+[VU_Roteiro_Entrega_Fluig].[data_entrega] AS [data_entrega], 
+[VU_Roteiro_Entrega_Fluig].[motorista_01] AS [motorista_01], 
+[VU_Roteiro_Entrega_Fluig].[motorista_02] AS [motorista_02], 
+[VU_Roteiro_Entrega_Fluig].[observacoes_motorista] AS [observacoes_motorista], 
+[VU_Roteiro_Entrega_Fluig].[recebedor] AS [recebedor], 
+[VU_Roteiro_Entrega_Fluig].[recebedor_cpf] AS [recebedor_cpf], 
+[VU_Roteiro_Entrega_Fluig].[recebedor_celular] AS [recebedor_celular], 
+[VU_Roteiro_Entrega_Fluig].[avaliacao_transporte] AS [avaliacao_transporte], 
+[VU_Roteiro_Entrega_Fluig].[avaliacao_motorista] AS [avaliacao_motorista], 
+[VU_Roteiro_Entrega_Fluig].[avaliacao_pintinho] AS [avaliacao_pintinho], 
+[VU_Roteiro_Entrega_Fluig].[observacoes_cliente] AS [observacoes_cliente], 
+[VU_Roteiro_Entrega_Fluig].[data_hora_esperada_granja] AS [data_hora_esperada_granja], 
+[VU_Roteiro_Entrega_Fluig].[horas_atraso_adiantado] AS [horas_atraso_adiantado], 
+[VU_Roteiro_Entrega_Fluig].[placa] AS [placa], 
+[VU_Roteiro_Entrega_Fluig].[horario_carregamento_esperado] AS [horario_carregamento_esperado], 
+[VU_Roteiro_Entrega_Fluig].[horario_carregamento_real] AS [horario_carregamento_real], 
+[VU_Roteiro_Entrega_Fluig].[horas_atraso_adiantado_carreg] AS [horas_atraso_adiantado_carreg], 
+[VU_Roteiro_Entrega_Fluig].[fechamento_logistica] AS [fechamento_logistica], 
+[VU_Roteiro_Entrega_Fluig].[ANONYMIZATION_DATE] AS [ANONYMIZATION_DATE], 
+[VU_Roteiro_Entrega_Fluig].[ANONYMIZATION_USER_ID] AS [ANONYMIZATION_USER_ID], 
+[VU_Roteiro_Entrega_Fluig].[motivo_atraso] AS [motivo_atraso], 
+[VU_Roteiro_Entrega_Fluig].[motivo_DOA] AS [motivo_DOA]
+FROM [dbo].[VU_Roteiro_Entrega_Fluig] AS [VU_Roteiro_Entrega_Fluig]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VU_RRC_Fluig_Only" EntityType="Self.VU_RRC_Fluig_Only" store:Type="Views" store:Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
+      <DefiningQuery>SELECT 
+[VU_RRC_Fluig_Only].[NomeSolicitante] AS [NomeSolicitante], 
+[VU_RRC_Fluig_Only].[DataSolicitacao] AS [DataSolicitacao], 
+[VU_RRC_Fluig_Only].[DataConclusao] AS [DataConclusao], 
+[VU_RRC_Fluig_Only].[Reclamação Por] AS [Reclamação Por], 
+[VU_RRC_Fluig_Only].[Nº Reclamação] AS [Nº Reclamação], 
+[VU_RRC_Fluig_Only].[descricao_fatos] AS [descricao_fatos], 
+[VU_RRC_Fluig_Only].[tipo_reclamacao] AS [tipo_reclamacao], 
+[VU_RRC_Fluig_Only].[tipo_problema_incubatorio] AS [tipo_problema_incubatorio], 
+[VU_RRC_Fluig_Only].[tipo_problema_transporte] AS [tipo_problema_transporte], 
+[VU_RRC_Fluig_Only].[analise_granja] AS [analise_granja], 
+[VU_RRC_Fluig_Only].[analise_qualidade] AS [analise_qualidade], 
+[VU_RRC_Fluig_Only].[qtde_bonificada] AS [qtde_bonificada], 
+[VU_RRC_Fluig_Only].[Status] AS [Status], 
+[VU_RRC_Fluig_Only].[chave_pedido] AS [chave_pedido], 
+[VU_RRC_Fluig_Only].[data_bonificada_programacao] AS [data_bonificada_programacao], 
+[VU_RRC_Fluig_Only].[qtde_bonificada_programacao] AS [qtde_bonificada_programacao], 
+[VU_RRC_Fluig_Only].[idweb_bonificada_programacao] AS [idweb_bonificada_programacao], 
+[VU_RRC_Fluig_Only].[analise_programacao] AS [analise_programacao], 
+[VU_RRC_Fluig_Only].[status_programacao] AS [status_programacao], 
+[VU_RRC_Fluig_Only].[motivo_bonificacao] AS [motivo_bonificacao], 
+[VU_RRC_Fluig_Only].[causa] AS [causa], 
+[VU_RRC_Fluig_Only].[porque_ocorre] AS [porque_ocorre], 
+[VU_RRC_Fluig_Only].[problema_cliente] AS [problema_cliente]
+FROM [dbo].[VU_RRC_Fluig_Only] AS [VU_RRC_Fluig_Only]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

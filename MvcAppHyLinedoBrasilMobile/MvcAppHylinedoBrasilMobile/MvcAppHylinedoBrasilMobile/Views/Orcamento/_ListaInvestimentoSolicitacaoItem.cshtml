@@ -1,0 +1,182 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+    
+    List<MvcAppHylinedoBrasilMobile.Models.Investimento_Solicitacao_Item> listaItens =
+        (List<MvcAppHylinedoBrasilMobile.Models.Investimento_Solicitacao_Item>)Session["ListaInvestimentoSolicitacaoItem"];
+
+    List<MvcAppHylinedoBrasilMobile.Models.Investimento_Solicitacao_Item_Cotacao> listaCotacaoesSolicitacaoGeral =
+        (List<MvcAppHylinedoBrasilMobile.Models.Investimento_Solicitacao_Item_Cotacao>)Session["ListaInvestimentoSolicitacaoItemCotacao"];
+        
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities apolo = new MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities();
+    
+    decimal qtdTotalCotacaoEscolhida = 0;
+
+    foreach (var item in listaItens)
+    {
+        var listTotalCotacaoEscolhida = listaCotacaoesSolicitacaoGeral.Where(w => w.Sequencia == item.IDCotacaoEscolhida
+            && w.SequenciaItem == item.Sequencia).ToList();
+        if (listTotalCotacaoEscolhida.Count > 0)
+        {
+            qtdTotalCotacaoEscolhida = qtdTotalCotacaoEscolhida 
+                + (listTotalCotacaoEscolhida.Sum(s => s.Valor) * item.Qtde);
+        }   
+    }
+}
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">DETALHES DO CUSTO DO PROJETO</li>
+    @if (Session["Status"].ToString() == "Pendente")
+    {
+    <li>
+        @Html.ActionLink("Adicionar Novo Item da Solicitação de Investimento", "CreateSolicitacaoInvestimentoItem", "Orcamento",
+            null,
+            new { @class = "add", @title = "Clique aqui para inserir um novo item da Solicitação de Investimento" })
+    </li>
+    }
+</ul>
+<br />
+@Html.Hidden("qtdTotalCotacoes", String.Format("{0:N2}", qtdTotalCotacaoEscolhida), new { @id = "hdQtdTotalCotacoes" })
+@Html.Hidden("qtdeItens", String.Format("{0:N2}", listaItens.Count), new { @id = "hdQtdItens" })
+<div id="divItensSolInv" style="overflow:auto" >
+<table id="tabelaItensSolInv" class="ajusteTabelaItensSolInv">
+    <tbody class="ajusteTabelaItensSolInv">
+    <tr class="ajusteTabelaItensSolInv">
+        @if (Session["Status"].ToString() != "Pendente")
+        {
+            <th class="ajusteTabelaItensSolInv" rowspan="2">
+                Categoria
+            </th>
+            <th class="ajusteTabelaItensSolInv" rowspan="2">
+                Descrição
+            </th>
+            <th class="ajusteTabelaItensSolInv" rowspan="2">
+                Quantidade
+            </th>
+            <th class="ajusteTabelaItensSolInv" colspan="2">
+                Cotação #1
+            </th>
+            <th class="ajusteTabelaItensSolInv" colspan="2">
+                Cotação #2
+            </th>
+            <th class="ajusteTabelaItensSolInv" colspan="2">
+                Cotação #3
+            </th>
+            <th class="ajusteTabelaItensSolInv" rowspan="2">
+                Cotação Escolhida
+            </th>
+            <th class="ajusteTabelaItensSolInv" rowspan="2">
+            </th>
+        }
+        else
+        {
+            <th class="ajusteTabelaItensSolInv">
+                Categoria
+            </th>
+            <th class="ajusteTabelaItensSolInv">
+                Descrição
+            </th>
+            <th class="ajusteTabelaItensSolInv">
+                Quantidade
+            </th>
+            <th class="ajusteTabelaItensSolInv">
+            </th>
+        }
+    </tr>
+    @if (Session["Status"].ToString() != "Pendente")
+    {
+        <tr class="ajusteTabelaItensSolInv">
+            <th class="ajusteTabelaItensSolInv">
+                Empresa
+            </th>
+            <th class="ajusteTabelaItensSolInv">
+                Valor
+            </th>
+            <th class="ajusteTabelaItensSolInv">
+                Empresa
+            </th>
+            <th class="ajusteTabelaItensSolInv">
+                Valor
+            </th>
+            <th class="ajusteTabelaItensSolInv">
+                Empresa
+            </th>
+            <th class="ajusteTabelaItensSolInv">
+                Valor
+            </th>
+        </tr>
+    }
+@foreach (var item in listaItens)
+{
+    List<MvcAppHylinedoBrasilMobile.Models.Investimento_Solicitacao_Item_Cotacao> cotacoes =
+        //hlbapp.Investimento_Solicitacao_Item_Cotacao
+        listaCotacaoesSolicitacaoGeral
+        .Where(w => w.SequenciaItem == item.Sequencia).ToList();
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.PRODUTO produto = apolo.PRODUTO.Where(w => w.ProdCodEstr == item.CodigoProdutoApolo).FirstOrDefault();
+
+    <tr class="ajusteTabelaItensSolInv">
+        <td class="ajusteTabelaItensSolInv">
+            @(item.Categoria)
+        </td>
+        <td class="ajusteTabelaItensSolInv">
+            @(item.Descricao)
+            @if (produto != null && MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                    .GetGroup("HLBAPPM-OrcamentoInvestimentoSolicitacaoCompras", (System.Collections.ArrayList)Session["Direitos"]))
+            {
+                <br />
+                <i>Cod. Apolo: @(produto.ProdCodEstr + " - " + produto.ProdNome)</i>
+            }
+        </td>
+        <td class="ajusteTabelaItensSolInv">
+            @(item.Qtde)
+        </td>
+        @if (Session["Status"].ToString() != "Pendente")
+        {
+            foreach (var cotacao in cotacoes)
+            {
+                <td class="ajusteTabelaItensSolInv">
+                    @(cotacao.FornecedorDescricao)
+                </td>
+                <td class="ajusteTabelaItensSolInv">
+                    @String.Format("{0:N2}", cotacao.Valor)
+                </td>
+            }
+            <td class="ajusteTabelaItensSolInv">
+                @(item.IDCotacaoEscolhida.ToString())
+            </td>
+        }
+        <td>
+            
+            <table>
+                <tr>
+                    @if (Session["Status"].ToString() == "Pendente" ||
+                        (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                            .GetGroup("HLBAPPM-OrcamentoInvestimentoSolicitacaoCompras", (System.Collections.ArrayList)Session["Direitos"])
+                        && Session["Status"].ToString() == "Em Cotação"))
+                    {
+                        <td align="center">
+                            @Html.ActionLink("Edit", "EditSolicitacaoInvestimentoItem",
+                                    new { sequencia = item.Sequencia },
+                                    new { @class = "edit", @title = "Clique aqui para alterar o item da solicitação de investimento." })
+                        </td>
+                    }
+                    @if (Session["Status"].ToString() == "Pendente")
+                    {
+                        <td align="center">
+                            @Html.ActionLink("Delete", "ConfirmaDeleteSolicitacaoInvestimentoItem",
+                                    new { sequencia = item.Sequencia },
+                                    new { @class = "delete", @title = "Clique aqui para excluir o item da solicitação de investimento" })
+                        </td>
+                    }
+                </tr>
+            </table>
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

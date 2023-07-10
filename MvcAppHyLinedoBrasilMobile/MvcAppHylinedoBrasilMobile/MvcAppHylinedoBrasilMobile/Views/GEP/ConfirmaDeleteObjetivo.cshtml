@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "";
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+
+    int id = Convert.ToInt32(Session["idSelecionado"]);
+    
+    string descricao = "";
+    MvcAppHylinedoBrasilMobile.Models.GEP_Objetivo objetivoObj =
+        hlbapp.GEP_Objetivo.Where(w => w.ID == id).FirstOrDefault();
+    if (objetivoObj != null)
+    {
+        descricao = objetivoObj.Descricao;
+    }
+}
+
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+<h1 style="color:red; background-color:Yellow">
+        * CONFIRMA A EXCLUSÃO DO OBJETIVO @(descricao)???
+</h1>
+<br />
+@using (Html.BeginForm("ListaObjetivos", "GEP", FormMethod.Post))
+{
+    <input type="submit" value="Não" />
+}
+
+@using (Html.BeginForm("DeleteObjetivo", "GEP", FormMethod.Post))
+{
+    <input type="submit" value="Sim" />
+}

@@ -1,0 +1,4638 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_131" class="java.beans.XMLDecoder">
+ <object class="java.util.HashMap">
+  <void method="put">
+   <string>volume</string>
+   <array class="java.lang.String" length="1">
+    <void index="0">
+     <string>Default</string>
+    </void>
+   </array>
+  </void>
+  <void method="put">
+   <string>camposFormulario, documentoId = 215</string>
+   <array class="java.lang.String" length="21">
+    <void index="0">
+     <string>cod_diretor</string>
+    </void>
+    <void index="1">
+     <string>data_aprov_diretor</string>
+    </void>
+    <void index="2">
+     <string>data_pagamento</string>
+    </void>
+    <void index="3">
+     <string>diretor</string>
+    </void>
+    <void index="4">
+     <string>fu_cargo</string>
+    </void>
+    <void index="5">
+     <string>fu_cargoConf</string>
+    </void>
+    <void index="6">
+     <string>fu_codCurso</string>
+    </void>
+    <void index="7">
+     <string>fu_CodigoFilial</string>
+    </void>
+    <void index="8">
+     <string>fu_cpf</string>
+    </void>
+    <void index="9">
+     <string>fu_curso</string>
+    </void>
+    <void index="10">
+     <string>fu_depto</string>
+    </void>
+    <void index="11">
+     <string>fu_diretor</string>
+    </void>
+    <void index="12">
+     <string>fu_filial</string>
+    </void>
+    <void index="13">
+     <string>fu_lider</string>
+    </void>
+    <void index="14">
+     <string>fu_liderMatric</string>
+    </void>
+    <void index="15">
+     <string>fu_matricula</string>
+    </void>
+    <void index="16">
+     <string>fu_nome</string>
+    </void>
+    <void index="17">
+     <string>mes_ano</string>
+    </void>
+    <void index="18">
+     <string>mes_ano_2</string>
+    </void>
+    <void index="19">
+     <string>valor_mensalidade</string>
+    </void>
+    <void index="20">
+     <string>valor_reembolso</string>
+    </void>
+   </array>
+  </void>
+  <void method="put">
+   <string>mecanismoGrupo</string>
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Administrativo</string>
+      </void>
+      <void property="groupId">
+       <string>ADM</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Moderator group TI</string>
+      </void>
+      <void property="groupId">
+       <string>MODERATOR_TI</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Member group TI</string>
+      </void>
+      <void property="groupId">
+       <string>MEMBER_TI</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de SAC da Hy-Line.</string>
+      </void>
+      <void property="groupId">
+       <string>SAC - Hy-Line</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Aprovadores de Ações Emergências Tomadas - Hy-Line</string>
+      </void>
+      <void property="groupId">
+       <string>APROVETRRCHLB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Departamento de TI</string>
+      </void>
+      <void property="groupId">
+       <string>TI</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Fiscal</string>
+      </void>
+      <void property="groupId">
+       <string>FISCAL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Recursos Humanos</string>
+      </void>
+      <void property="groupId">
+       <string>RH</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Departamento Pessoal</string>
+      </void>
+      <void property="groupId">
+       <string>DP</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Departamento Pessoal - Planalto</string>
+      </void>
+      <void property="groupId">
+       <string>DPPL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Departamento Financeiro</string>
+      </void>
+      <void property="groupId">
+       <string>DEPFIN</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Departamento Técnico</string>
+      </void>
+      <void property="groupId">
+       <string>TECNICO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Departamento Comercial</string>
+      </void>
+      <void property="groupId">
+       <string>COMERCIAL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Vendas - Hy-Line</string>
+      </void>
+      <void property="groupId">
+       <string>VENDASHLB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Vendas - Lohmann</string>
+      </void>
+      <void property="groupId">
+       <string>VENDASLTZ</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Vendas - H&amp;N</string>
+      </void>
+      <void property="groupId">
+       <string>VENDASHEN</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Vendas - Planalto</string>
+      </void>
+      <void property="groupId">
+       <string>VENDASPPA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Equipe de Manutenção do Incubatório de Matrizes de Nova Granada</string>
+      </void>
+      <void property="groupId">
+       <string>MANUTINCMATNG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Segurança do Trabalho</string>
+      </void>
+      <void property="groupId">
+       <string>SEGTRABALHO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso ao fluig Messaging</string>
+      </void>
+      <void property="groupId">
+       <string>MESSAGING</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Relatórios</string>
+      </void>
+      <void property="groupId">
+       <string>ECMRELATORIOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Relatórios\Logística</string>
+      </void>
+      <void property="groupId">
+       <string>ECMLOGISTICA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Vendas - HLB</string>
+      </void>
+      <void property="groupId">
+       <string>ECMVENDASHLB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Vendas - HLB / Departamento Técnico - Escrita</string>
+      </void>
+      <void property="groupId">
+       <string>ECMDEPTOTECNICOHLB-RW</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Vendas - HLB / Marketing - Escrita</string>
+      </void>
+      <void property="groupId">
+       <string>ECMMARKETING-RW</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Vendas - HLB / Documentos Marketing - Leitura</string>
+      </void>
+      <void property="groupId">
+       <string>ECMDOCSMKT-R</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Vendas - HLB / Documentos Marketing - Escrita</string>
+      </void>
+      <void property="groupId">
+       <string>ECMDOCSMKT-RW</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Relatórios\Financeiro</string>
+      </void>
+      <void property="groupId">
+       <string>ECMFINANCEIRO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Aprovadores de Impressão de Documentos das RQs das Granjas Matrizes</string>
+      </void>
+      <void property="groupId">
+       <string>APROVIMPDOCRQGMATRIZ</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Solicita Aprovação de Impressão de Documentos</string>
+      </void>
+      <void property="groupId">
+       <string>SOLICITAAPROVIMPDOC</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Producao</string>
+      </void>
+      <void property="groupId">
+       <string>ECMPRODUCAO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Vendas - Geral</string>
+      </void>
+      <void property="groupId">
+       <string>ECMVENDASGERAL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Vendas - Geral / JOX - Leitura</string>
+      </void>
+      <void property="groupId">
+       <string>ECMJOX-R</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Vendas - Geral / JOX - Escrita</string>
+      </void>
+      <void property="groupId">
+       <string>ECMJOX-RW</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Administracao - Leitura</string>
+      </void>
+      <void property="groupId">
+       <string>ECMADM</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Administração / Auditoria - Leitura</string>
+      </void>
+      <void property="groupId">
+       <string>ECMADMAUDITORIA-R</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Administracao / Auditoria / Auditoria - 2019 - Leitura</string>
+      </void>
+      <void property="groupId">
+       <string>ECMADMAUDITORIA2019-R</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Administracao / Auditoria / Auditoria - 2019 - Escrita</string>
+      </void>
+      <void property="groupId">
+       <string>ECMADMAUDITORIA2019-RW</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Administracao / Auditoria / Auditoria - 2019 / Trabalhista - Escrita</string>
+      </void>
+      <void property="groupId">
+       <string>ECMADMAUDITORIA2019TRABALHISTA-RW</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Qualidade - Leitura</string>
+      </void>
+      <void property="groupId">
+       <string>ECMQUALIDADE-R</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Qualidade - Escrita</string>
+      </void>
+      <void property="groupId">
+       <string>ECMQUALIDADE-RW</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Administração \ Contrato Sociais - Escrita</string>
+      </void>
+      <void property="groupId">
+       <string>ECMADMCONTRATOSSOCIAIS-RW</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Qualidade \ Manual da Qualidade - Alteração Somente Arquivos</string>
+      </void>
+      <void property="groupId">
+       <string>ECMQUALIDADEMANUAL-RW</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Qualidade \ POP. SGQ - Alteração Somente Arquivos</string>
+      </void>
+      <void property="groupId">
+       <string>ECMQUALIDADEPOPSGQ-RW</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Qualidade \ POP. GRM - Alteração Somente Arquivos</string>
+      </void>
+      <void property="groupId">
+       <string>ECMQUALIDADEPOPGRM-RW</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Qualidade \ POP. GRM - Leitura</string>
+      </void>
+      <void property="groupId">
+       <string>ECMQUALIDADEPOPGRM-R</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Qualidade \ POP. ICM - Alteração Somente Arquivos</string>
+      </void>
+      <void property="groupId">
+       <string>ECMQUALIDADEPOPICM-RW</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Qualidade \ POP. ICM - Leitura</string>
+      </void>
+      <void property="groupId">
+       <string>ECMQUALIDADEPOPICM-R</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Abre solicitações em nome de outros usuários da mesma filial</string>
+      </void>
+      <void property="groupId">
+       <string>SOLUSUMESMAFILIAL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Gestores do Check List de Ovos Classificados</string>
+      </void>
+      <void property="groupId">
+       <string>GESTORCHECKLISTOVOSCLASSIFICADOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Relatórios\Qualidade</string>
+      </void>
+      <void property="groupId">
+       <string>ECMRELQUALIDADE</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Módulo Fiscal</string>
+      </void>
+      <void property="groupId">
+       <string>WCMFISCAL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Fiscal - Conferência de Notas Fiscais</string>
+      </void>
+      <void property="groupId">
+       <string>WCMFISCALCONFNF</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Gestores do Tratamento de Lote</string>
+      </void>
+      <void property="groupId">
+       <string>TRATLOTEGES</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Solicita Tratamento de Lote</string>
+      </void>
+      <void property="groupId">
+       <string>TRATLOTEINS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Análise do Tratamento do Lote</string>
+      </void>
+      <void property="groupId">
+       <string>TRATLOTEANALISE</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Módulo para Granjas</string>
+      </void>
+      <void property="groupId">
+       <string>WCMGRANJAS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Configurações dos Processos de Granjas</string>
+      </void>
+      <void property="groupId">
+       <string>WCMGRANJASCONF</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Relatórios \ Granjas</string>
+      </void>
+      <void property="groupId">
+       <string>ECMRELGRANJAS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Módulo de Qualidade</string>
+      </void>
+      <void property="groupId">
+       <string>WCMQUALIDADE</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Configurações do Módulo de Qualidade</string>
+      </void>
+      <void property="groupId">
+       <string>WCMQUALIDADECONF</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Análise da Qualidade</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEQUALIDADE</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários para Análise do Incubatório para Todos os Incubatórios</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEINCTODOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários para Análise do Incubatório de Matrizes de Nova Granada</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEINCCH</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários para Análise do Incubatório de Matrizes de Novo Mundo - Uberlândia</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEINCNM</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários para Análise da Logística da Trans Ema</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISELGTR</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários para Análise da Logística da Planalto</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISELGPL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários para Análise da Logística da H&amp;N</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISELGHN</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários para Análise da Granja de Comendador Gomes</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEGRANJACG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários para Análise da Granja de Onda Branca</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEGRANJAHL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários para Análise da Granja Europa - Uberlândia</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEGRANJAGE</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários para Análise da Granja de Barro Preto</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEGRANJABP</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários para Análise da Granja de Jardinópolis</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEGRANJAJD</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários para Análise da Granja de 2 Irmãos</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEGRANJA2I</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários para Análise da Granja de São José I e II</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEGRANJASJ</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários para Análise da Granja de São Judas Tadeu</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEGRANJASD</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários para Análise da Gerência Técnica - Hy-Line</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEGTBR</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários para Análise da Gerência Técnica - Lohmann</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEGTLB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários para Análise da Gerência Técnica -  H&amp;N</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEGTHN</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários para Análise da Gerência Técnica - Planalto</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEGTPL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários que podem abrir Nova RRC - Hy-Line</string>
+      </void>
+      <void property="groupId">
+       <string>RRCABERTURABR</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários que podem abrir Nova RRC - Lohmann</string>
+      </void>
+      <void property="groupId">
+       <string>RRCABERTURALB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários que podem abrir Nova RRC - H&amp;N</string>
+      </void>
+      <void property="groupId">
+       <string>RRCABERTURAHN</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários que podem abrir Nova RRC - Planalto</string>
+      </void>
+      <void property="groupId">
+       <string>RRCABERTURAPL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários para Análise do Incubatório de Ajapi - Rio Claro</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEINCAJ</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários do Departamento Técnico da Hy-Line</string>
+      </void>
+      <void property="groupId">
+       <string>TECNICOHLB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários do Departamento Técnico da Lohmann</string>
+      </void>
+      <void property="groupId">
+       <string>TECNICOLTZ</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários do Departamento Técnico da H&amp;N</string>
+      </void>
+      <void property="groupId">
+       <string>TECNICOH&amp;N</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários do Departamento Técnico da Planalto</string>
+      </void>
+      <void property="groupId">
+       <string>TECNICOPPA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Gestores dos Processos de RRC</string>
+      </void>
+      <void property="groupId">
+       <string>RRCGESTOR</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuário para Análise Comercial - Hy-Line </string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISECOMBR</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuário para Análise Comercial -  Lohmann</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISECOMLB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuário para Análise Comercial - H&amp;N</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISECOMHN</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuário para Análise Comercial - Planalto</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISECOMPL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Relatórios / Manutenção</string>
+      </void>
+      <void property="groupId">
+       <string>ECMMANUTENCAO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Gestor da Equipe de Manutenção do Incubatório de Matrizes de Nova Granada</string>
+      </void>
+      <void property="groupId">
+       <string>GTMANUTINCMATNG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Análises da ILD LATAM</string>
+      </void>
+      <void property="groupId">
+       <string>WCMANALISEILDLATAM</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>PEER - Production Data Comparison</string>
+      </void>
+      <void property="groupId">
+       <string>WCMANALISEILDLTAMPEER</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Equipe de Manutenção do Incubatório de Matrizes de Novo Mundo</string>
+      </void>
+      <void property="groupId">
+       <string>MANUTINCMATNM</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Gestor da Equipe de Manutenção do Incubatório de Matrizes de Novo Mundo</string>
+      </void>
+      <void property="groupId">
+       <string>GTMANUTINCMATNM</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Relatórios / Manutenção / Incubatórios - Nova Granada</string>
+      </void>
+      <void property="groupId">
+       <string>ECMMANUTENCAOINCSNG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Relatórios / Manutenção / Incubatório de Matrizes - Nova Granada</string>
+      </void>
+      <void property="groupId">
+       <string>ECMMANUTENCAOINCMATNG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Equipe de Manutenção dos Incubatórios de Nova Granada</string>
+      </void>
+      <void property="groupId">
+       <string>MANUTINCSNG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Equipe de Manutenção do Incubatório de Bisavós de Nova Granada</string>
+      </void>
+      <void property="groupId">
+       <string>MANUTINCAVONG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias dos Grandes Clientes da HLB - 01</string>
+      </void>
+      <void property="groupId">
+       <string>M07HLBGCL01</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Visualiza todas as RRCS de todos os processos</string>
+      </void>
+      <void property="groupId">
+       <string>VISUALIZARRCS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias por Estado da HLB - Cesar Gamboa</string>
+      </void>
+      <void property="groupId">
+       <string>M07HLBGUF01</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias por Estado da HLB - Bruno Guastalli</string>
+      </void>
+      <void property="groupId">
+       <string>M07HLBGUF02</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias por Estado da HLB - Minas Gerais</string>
+      </void>
+      <void property="groupId">
+       <string>M07HLBGUF03</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias por Estado da HLB - Márcio Santos</string>
+      </void>
+      <void property="groupId">
+       <string>M07HLBGUF04</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias por Estado da HLB - São Paulo</string>
+      </void>
+      <void property="groupId">
+       <string>M07HLBGUF05</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias por Estado da LTZ - Matheus Fraga</string>
+      </void>
+      <void property="groupId">
+       <string>M07LTZGUF01</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias por Estado da LTZ - Anderson Silva</string>
+      </void>
+      <void property="groupId">
+       <string>M07LTZGUF02</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias por Estado da LTZ - Charles Lima</string>
+      </void>
+      <void property="groupId">
+       <string>M07LTZGUF03</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias da Planalto para Outros Estados</string>
+      </void>
+      <void property="groupId">
+       <string>M07PPAGUF01</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias por Estado da H&amp;N - VICTOR HUGO</string>
+      </void>
+      <void property="groupId">
+       <string>M07HENGUF01</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias por Estado da H&amp;N - Rafael Kuiavski</string>
+      </void>
+      <void property="groupId">
+       <string>M07HENGUF02</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias por Estado da H&amp;N - Otávio Olivieri</string>
+      </void>
+      <void property="groupId">
+       <string>M07HENGUF03</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias por Estado da H&amp;N - Seme Alexandre</string>
+      </void>
+      <void property="groupId">
+       <string>M07HENGUF04</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Gestores do Processo de Roteiro de Entrega da Planalto</string>
+      </void>
+      <void property="groupId">
+       <string>ROTENTPPAGESTOR</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Excelência Operacional</string>
+      </void>
+      <void property="groupId">
+       <string>EXCELENCIAOPERACIONAL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários para abrir nova OS de Manutenção Corretiva do Inc. Matrizes NG</string>
+      </void>
+      <void property="groupId">
+       <string>MANUTINCMATNGNOVAOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias da Planalto do Estado da Bahia</string>
+      </void>
+      <void property="groupId">
+       <string>M07PPAGUFBA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias da Planalto do Estado do Ceará</string>
+      </void>
+      <void property="groupId">
+       <string>M07PPAGUFCE</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias da Planalto do Distrito Federal</string>
+      </void>
+      <void property="groupId">
+       <string>M07PPAGUFDF</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias da Planalto do Estado de Goiás</string>
+      </void>
+      <void property="groupId">
+       <string>M07PPAGUFGO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias da Planalto do Estado do Maranhão</string>
+      </void>
+      <void property="groupId">
+       <string>M07PPAGUFMA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias da Planalto do Estado de Minas Gerais</string>
+      </void>
+      <void property="groupId">
+       <string>M07PPAGUFMG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias da Planalto do Estado da Paraíba</string>
+      </void>
+      <void property="groupId">
+       <string>M07PPAGUFPB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias da Planalto do Estado de Pernambuco</string>
+      </void>
+      <void property="groupId">
+       <string>M07PPAGUFPE</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias da Planalto do Estado do Paraná</string>
+      </void>
+      <void property="groupId">
+       <string>M07PPAGUFPR</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias da Planalto do Estado do Rio Grande do Norte</string>
+      </void>
+      <void property="groupId">
+       <string>M07PPAGUFRN</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias da Planalto do Estado do Rio Grande do Sul</string>
+      </void>
+      <void property="groupId">
+       <string>M07PPAGUFRS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias da Planalto do Estado de Santa Catarina</string>
+      </void>
+      <void property="groupId">
+       <string>M07PPAGUFSC</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias da Planalto do Estado de Sergipe</string>
+      </void>
+      <void property="groupId">
+       <string>M07PPAGUFSE</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias da Planalto do Estado de São Paulo</string>
+      </void>
+      <void property="groupId">
+       <string>M07PPAGUFSP</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Visualiza DataSet de Solicitação de Férias</string>
+      </void>
+      <void property="groupId">
+       <string>DSVISUALIZAFERIAS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Gestor da Equipe de Manutenção do Incubatório de Bisavós de Nova Granada</string>
+      </void>
+      <void property="groupId">
+       <string>GTMANUTINCAVONG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários para abrir nova OS de Manutenção Corretiva do Inc. Matrizes Novo Mundo</string>
+      </void>
+      <void property="groupId">
+       <string>MANUTINCMATNMNOVAOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Relatórios / Manutenção / Incubatório de Matrizes - Novo Mundo</string>
+      </void>
+      <void property="groupId">
+       <string>ECMMANUTENCAOINCMATNM</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de usuários da Programação da Hy-Line</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEPRBR</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de usuários da Programação da Lohmann</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEPRLB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de usuários da Programação da H&amp;N</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEPRHN</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de usuários da Programação da Planalto</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEPRPL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Gestores do Processo de Roteiro de Entrega da H&amp;N</string>
+      </void>
+      <void property="groupId">
+       <string>ROTENTHENGESTOR</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuário do Financeiro da Lohmann</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEFINLB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários para abrir nova OS de Manutenção Corretiva do Inc. Bisavós</string>
+      </void>
+      <void property="groupId">
+       <string>MANUTINCAVONGNOVAOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Gestor da Equipe de Manutenção da Fábrica de Ração</string>
+      </void>
+      <void property="groupId">
+       <string>GTMANUTINCFABRACAO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Equipe de Manutenção da Fábrica de Ração</string>
+      </void>
+      <void property="groupId">
+       <string>MANUTINCFABRACAO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários para abrir nova OS de Manutenção Corretiva da Fábrica de Ração</string>
+      </void>
+      <void property="groupId">
+       <string>MANUTINCFABRACAONOVAOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Administracao / Auditoria / Auditoria - 2020 - Leitura</string>
+      </void>
+      <void property="groupId">
+       <string>ECMADMAUDITORIA2020-R</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Administracao / Auditoria / Auditoria Folha - 2020 - Leitura</string>
+      </void>
+      <void property="groupId">
+       <string>ECMADMAUDITORIAFOLHA2020-R</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Administracao / Auditoria / Auditoria Folha - 2020 - Escrita</string>
+      </void>
+      <void property="groupId">
+       <string>ECMADMAUDITORIAFOLHA2020-RW</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários da Fábrica de Ração</string>
+      </void>
+      <void property="groupId">
+       <string>FABRICARACAO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários com acesso a tela de Aproveitamento de Espaço de Incubação</string>
+      </void>
+      <void property="groupId">
+       <string>APROVESPINC</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Check List dos Requisitos do Caminhão</string>
+      </void>
+      <void property="groupId">
+       <string>CHECKLISTCAMINHAO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso a Ferramenta Tasks</string>
+      </void>
+      <void property="groupId">
+       <string>TASKS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Gestores de TI</string>
+      </void>
+      <void property="groupId">
+       <string>TIGESTOR</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Gestor da Segurança do Trabalho</string>
+      </void>
+      <void property="groupId">
+       <string>GESTORROTASEGTRAB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Farm Report - Poultry System</string>
+      </void>
+      <void property="groupId">
+       <string>FARMREPORTPS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso ao Painel de Manutenções Preventivas e Corretivas</string>
+      </void>
+      <void property="groupId">
+       <string>PAINELMANUTENCAO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Relatórios \ Avós</string>
+      </void>
+      <void property="groupId">
+       <string>ECMRELAVOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo que fornece acesso para visualização do Widget da análise dos pontos de ronda</string>
+      </void>
+      <void property="groupId">
+       <string>PAINELANALISERONDAS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo para Iniciar a Avaliação Operacional</string>
+      </void>
+      <void property="groupId">
+       <string>AVALIACAOOPERACIONAL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Gestor da Equipe de Manutenção das Granjas</string>
+      </void>
+      <void property="groupId">
+       <string>GTMANUTINCGRANJAS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Equipe de Manutenção da Granja de Onda Branca</string>
+      </void>
+      <void property="groupId">
+       <string>MANUTINCGROB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Gestor da Equipe de Manutenção da Granja de Onda Branca</string>
+      </void>
+      <void property="groupId">
+       <string>GTMANUTINCGROB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários para abrir nova OS de Manutenção Corretiva da Granja de Onda Branca</string>
+      </void>
+      <void property="groupId">
+       <string>MANUTINCGROBNOVAOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Permissão para Resetar Status da OP para ABERTO</string>
+      </void>
+      <void property="groupId">
+       <string>OPRUPDSTATUSOP</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Gestor de solicitação de abastecimento</string>
+      </void>
+      <void property="groupId">
+       <string>GESTORABASTECIMENTO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Gestores da Avaliação Operacional</string>
+      </void>
+      <void property="groupId">
+       <string>GESTORAVALIAOPERACIONAL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Programação de Pedidos e Roteirização</string>
+      </void>
+      <void property="groupId">
+       <string>BIPROGRACAMAOTRANSP</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Share EW Group</string>
+      </void>
+      <void property="groupId">
+       <string>BISHAREEW</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de usuários que podem iniciar um processo de Admissão</string>
+      </void>
+      <void property="groupId">
+       <string>INICIAPROCESSOADMISSAO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de pessoas que podem aprovar o início do processo de seleção de admissão</string>
+      </void>
+      <void property="groupId">
+       <string>APROVAINICIO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de pessoas que enviam e recebem atividades durante o processo de Admissão</string>
+      </void>
+      <void property="groupId">
+       <string>EXECUTAADMISSAO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários para Acesso ao BI dos Incubatório</string>
+      </void>
+      <void property="groupId">
+       <string>BIINCUBATORIOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>WCM - Incubatórios</string>
+      </void>
+      <void property="groupId">
+       <string>WCMINCUBATORIOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de usuários para acesso do BI de Mort. de 07 dias</string>
+      </void>
+      <void property="groupId">
+       <string>BIMORT07DIAS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>BI Vendas - Hy-Line</string>
+      </void>
+      <void property="groupId">
+       <string>BIVENDASHLB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso ao BI das Granjas de Matrizes</string>
+      </void>
+      <void property="groupId">
+       <string>BIGRANJASMATRIZES</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Relatórios \ RH</string>
+      </void>
+      <void property="groupId">
+       <string>ECMRH</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Módulo de Logística</string>
+      </void>
+      <void property="groupId">
+       <string>WCMLOGISTICA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso as Configurações do Módulo de Logística</string>
+      </void>
+      <void property="groupId">
+       <string>WCMLOGISTICACFG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de usuários para acesso do BI de Logística</string>
+      </void>
+      <void property="groupId">
+       <string>BILOGISTICA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Módulo de Compras</string>
+      </void>
+      <void property="groupId">
+       <string>WCMCOMPRAS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários para a Análise de BI do Compras</string>
+      </void>
+      <void property="groupId">
+       <string>BICOMPRAS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Gestores do Processo de Fechamento Mensal</string>
+      </void>
+      <void property="groupId">
+       <string>FECHAMENTOADMGESTOR</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de usuários que podem alterar os prazos do processo</string>
+      </void>
+      <void property="groupId">
+       <string>FECHAMENTOADMGESTORALTERAPRAZO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Aprovadores do processo de Fechamento</string>
+      </void>
+      <void property="groupId">
+       <string>FECHAMENTOADMAPROVACAO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso a selecionar integração dos outros módulos no módulo de Conferência de NFs</string>
+      </void>
+      <void property="groupId">
+       <string>CONFNFALTERARSEMINTEGRAR</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso para o Ajuste de Insumos da Gestão da Fábrica de Ração</string>
+      </void>
+      <void property="groupId">
+       <string>OPRACESSOAJUSTEINSUMO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso ao Processo de Configuração e Projeção de Lotes do AniPlan.</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANPROJLOTES</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Acesso aos Processos de Programação do AniPlan.</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANPROG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso a alteração de Pedidos de Venda do AniPlan</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANALTERAPEDIDO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso a ajustar as Configurações de Eclosões.</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANCONFIGECLOSOES</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso a Alteração das Transferências do AniPlan</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANTRANSF</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso a Alteração dos Ovos p/ Comércio do AniPlan</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANOVOSCOMERCIO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso a visualização dos valores de todas as empresas no Espaço de Incubação</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANEIVISUALIZATODOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso ao Fechamento da Disponibilidade de Ovos</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANFECHAMENTODO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso as Configurações dos Clientes para o AniPlan</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANCONFIGCLIENTES</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários que possam inserir Saldo Inicial no AniPlan.</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANSALDOINICIAL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários com Acesso a configuração dos Lotes Planejados do AniPlan.</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANPROJLOTESPLAN</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários com Acesso a configuração dos Lotes de Recria do AniPlan.</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANPROJLOTESRECRIA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários com Acesso a configuração dos Lotes de Produção do AniPlan.</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANPROJLOTESPRD</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários com Acesso a atualização da Qtde. Real dos Lotes do AniPlan.</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANPROJUPDREAL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários com Acesso a oficialização dos lotes simulados do AniPlan.</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANPROJOFICIALSIMUL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso a Tela de Faturamento de Pedidos.</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANFATURAMENTO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso ao módulo de Orçamento e Distribuição de Vendas</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANORCAMENTODISTRIB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso a realizar ações na Tela de Faturamento do AniPlan.</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANFATURAMENTOACOES</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso a alterar os dados do Orçamento de Vendas no AniPlan.</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANORCAMENTODISTRIBALTERA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Depto. de Compras do Processo de Gestão de NFs</string>
+      </void>
+      <void property="groupId">
+       <string>GNFDEPTOCOMPRAS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Depto. Fiscal na Gestão de NFs.</string>
+      </void>
+      <void property="groupId">
+       <string>GNFPREFISCAL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Responsáveis pelas NFs da Granja Onda Branca / Fábrica de Ração</string>
+      </void>
+      <void property="groupId">
+       <string>GNFEMPOB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo com acesso a fazer alterações nos ranges do processo de lançamento de dados diários do Lote</string>
+      </void>
+      <void property="groupId">
+       <string>ALTERACAORANGES</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso ao relatório do B.I de Frete terceirizado de ração</string>
+      </void>
+      <void property="groupId">
+       <string>ACESSOBIFRETERACAO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Gestão de Análises</string>
+      </void>
+      <void property="groupId">
+       <string>GESTAOANALISE</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários para acesso aos Dados utilizados para o Fechamento Mensal</string>
+      </void>
+      <void property="groupId">
+       <string>DADOSFECHAMENTO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Gestores do processo de Comunicado de Desligamento</string>
+      </void>
+      <void property="groupId">
+       <string>GESTORCOMUNICADODESLIGAMENTO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários para Acesso as Configurações da Fábrica de Ração</string>
+      </void>
+      <void property="groupId">
+       <string>FABRICARACAOCONFIG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários que solicitam alteração de Fórmula de Ração</string>
+      </void>
+      <void property="groupId">
+       <string>FORMULARACAOSOLICITA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários que configuram alteração de Fórmula de Ração</string>
+      </void>
+      <void property="groupId">
+       <string>FORMULARACAOCONFIG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários que aprovam a alteração de Fórmula de Ração</string>
+      </void>
+      <void property="groupId">
+       <string>FORMULARACAOAPROV</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Grupo de Usuários com Acesso a Publicar nas pastar do Power BI</string>
+      </void>
+      <void property="groupId">
+       <string>ECMPOWERBIPUBLICADOR</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Grupo de Usuários com Acesso a Aprovação das pastas do Power BI</string>
+      </void>
+      <void property="groupId">
+       <string>ECMPOWERBIAPROVADOR</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários que podem visualizar a Widget de gestão de Análises e Acções</string>
+      </void>
+      <void property="groupId">
+       <string>VISUALIZAGESTAOANALISEACOES</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo com acessos ao BI de pesquisa de Clima</string>
+      </void>
+      <void property="groupId">
+       <string>PESQUISACLIMA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Administração / Auditoria 2021 - Leitura</string>
+      </void>
+      <void property="groupId">
+       <string>AUDITORIA2021-R</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Administração / Auditoria Folha 2021 - Leitura</string>
+      </void>
+      <void property="groupId">
+       <string>AUDITORIAFOLHA2021-R</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Administração / Auditoria 2021 - Leitura e Escrita</string>
+      </void>
+      <void property="groupId">
+       <string>AUDITORIA2021-RW</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ECM - Administração / Auditoria Folha 2021 - Leitura e Escrita</string>
+      </void>
+      <void property="groupId">
+       <string>AUDITORIAFOLHA2021-RW</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso ao BI de Frete de Pintos</string>
+      </void>
+      <void property="groupId">
+       <string>ACESSOBIFRETEPINTOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Responsáveis pelas NFs da Granja de Avós</string>
+      </void>
+      <void property="groupId">
+       <string>GNFEMPGRAVOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Recebimento das Mercadorias da Granja de Avós</string>
+      </void>
+      <void property="groupId">
+       <string>GNFRMGRAVOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Coleta das Mercadorias da Granja de Avós</string>
+      </void>
+      <void property="groupId">
+       <string>GNFCMGRAVOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso a Lista das Solicitações da Gestão de NFs</string>
+      </void>
+      <void property="groupId">
+       <string>GNFLISTA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo para ver a Rastreabilidade e Composição dos Lotes dos clientes</string>
+      </void>
+      <void property="groupId">
+       <string>RASTREABILIDADE</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de usuário que conseguem visualizar as pendências do processo de gestão de análise.</string>
+      </void>
+      <void property="groupId">
+       <string>VISUALIZAGESTAOANALISE</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Responsáveis pelas NFs do Escritório Central</string>
+      </void>
+      <void property="groupId">
+       <string>GNFEMPESCCENTRAL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Recebimento das Mercadorias do Escritório Central</string>
+      </void>
+      <void property="groupId">
+       <string>GNFRMESCCENTRAL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Coleta das Mercadorias do Escritório Central</string>
+      </void>
+      <void property="groupId">
+       <string>GNFCMESCCENTRAL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Responsáveis pelas NFs da Granja de Comendador Gomes</string>
+      </void>
+      <void property="groupId">
+       <string>GNFEMPGRGOMES</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Recebimento das Mercadorias da Granja de Comendador Gomes</string>
+      </void>
+      <void property="groupId">
+       <string>GNFRMGRGOMES</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Coleta das Mercadorias da Granja de Comendador Gomes</string>
+      </void>
+      <void property="groupId">
+       <string>GNFCMGRGOMES</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso a Exclusão de Saldo Inicial da Disponibilidade de Ovos do AniPlan</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANEXCLUISALDOINICIAL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso as Configurações de Preço do AniPlan</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANTABELAPRECO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso a tela dos Dados da ABPA no AniPlan</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANDADOSAPBA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso ao Dashboard de Programação x Planejado x Orçado</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANDASHBOARDPPO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>BI - Análise Gerencial de Todos os Processos</string>
+      </void>
+      <void property="groupId">
+       <string>BIANALISEGERENCIAL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de colaboradores que recebem os tickets de T.I</string>
+      </void>
+      <void property="groupId">
+       <string>TICKETTI</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de colaboradores que recebem tickets do Fiscal</string>
+      </void>
+      <void property="groupId">
+       <string>TICKETFISCAL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de colaboradores que recebem os tickets do Financeiro</string>
+      </void>
+      <void property="groupId">
+       <string>TICKETFINANCEIRO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de usuários que recebem os tickets do Faturamento</string>
+      </void>
+      <void property="groupId">
+       <string>TICKETFATURAMENTO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Responsáveis pelas NFs do Incubatório </string>
+      </void>
+      <void property="groupId">
+       <string>GNFEMPINCMATRIZ</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Responsáveis da Granja de Matrizes</string>
+      </void>
+      <void property="groupId">
+       <string>GNFEMPGRAMATRIZ</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de responsáveis da empresa H&amp;N</string>
+      </void>
+      <void property="groupId">
+       <string>GNFEMPHEN</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de responsáveis da Empresa Lohmann</string>
+      </void>
+      <void property="groupId">
+       <string>GNFEMPLTZ</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Recebimento das Mercadorias do Incubatório de Matrizes</string>
+      </void>
+      <void property="groupId">
+       <string>GNFRMINCMATRIZ</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Recebimento das Mercadorias da Granja de Matrizes</string>
+      </void>
+      <void property="groupId">
+       <string>GNFRMGRAMATRIZ</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Recebimento das Mercadorias da H&amp;N</string>
+      </void>
+      <void property="groupId">
+       <string>GNFRMHEN</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Recebimento das Mercadorias da LTZ</string>
+      </void>
+      <void property="groupId">
+       <string>GNFRMLTZ</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo para acesso ao Power BI de custos</string>
+      </void>
+      <void property="groupId">
+       <string>BICUSTOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Usuários que configuram a Fórmula de Ração no Apolo</string>
+      </void>
+      <void property="groupId">
+       <string>FORMULARACAOCONFIGAPOLO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Recebimento de Mercadorias da Granja de Matrizes</string>
+      </void>
+      <void property="groupId">
+       <string>GNFRMGRAEUROPA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de Responsáveis pelas NFs da Granja Europa</string>
+      </void>
+      <void property="groupId">
+       <string>GNFEMPGRAEUROPA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de usuários que fazem o recebimento das NFs da Planalto</string>
+      </void>
+      <void property="groupId">
+       <string>GNFRMPLANALTO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de responsáveis pelas NF&apos;s da Planalto</string>
+      </void>
+      <void property="groupId">
+       <string>GNFEMPPLANALTO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso ao relatório de Posição de Estoque de Ovos</string>
+      </void>
+      <void property="groupId">
+       <string>ANIPLANPOSICAOESTQ</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de usuário com acesso de leitura e escrita na pasta Workspace</string>
+      </void>
+      <void property="groupId">
+       <string>ECMWORKSPACE-RW</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de responsáveis pelas NF&apos;s da Planalto na empresa 30</string>
+      </void>
+      <void property="groupId">
+       <string>GNFEMPPLANALTO2</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso aos Relatórios das Granjas</string>
+      </void>
+      <void property="groupId">
+       <string>RELGRANJAS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Recebimento das Mercadorias da Granja de Tabapuã</string>
+      </void>
+      <void property="groupId">
+       <string>GNFRMGRATABAPUA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Responsáveis pelas NFs da Granja de Tabapuã</string>
+      </void>
+      <void property="groupId">
+       <string>GNFEMPGRATABAPUA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Programação diária de transportes</string>
+      </void>
+      <void property="groupId">
+       <string>PROGDIARIATRANSP</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso a Widget de pedidos de compra</string>
+      </void>
+      <void property="groupId">
+       <string>VISUALIZAPEDIDOSCOMPRA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo com acesso no relatório de vacinas</string>
+      </void>
+      <void property="groupId">
+       <string>INCVACINAS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Acesso ao BI de envio de e-mails aos clientes.</string>
+      </void>
+      <void property="groupId">
+       <string>ENVIACONFIRMACOES</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Responsáveis pelas NFs do Incubatório Avós (LAYERS)</string>
+      </void>
+      <void property="groupId">
+       <string>GNFEMPINCLAYERS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Recebimento das Mercadorias do Incubatório de Avós (LAYERS)</string>
+      </void>
+      <void property="groupId">
+       <string>GNFRMINCLAYERS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de usuário da Manutenção da Granja de Comendador Gomes</string>
+      </void>
+      <void property="groupId">
+       <string>MANUTINCCG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>GNFTESTE para empresas que não tem grupo</string>
+      </void>
+      <void property="groupId">
+       <string>GNFTESTE</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>GNFTESTE para recebimento</string>
+      </void>
+      <void property="groupId">
+       <string>GNFTESTERECEBIMENTO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários para Análise da Gerência Técnica - NovoGen</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEGTNG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuários que podem abrir Nova RRC - NovoGen</string>
+      </void>
+      <void property="groupId">
+       <string>RRCABERTURANG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de usuários da Programação da NovoGen</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISEPRNG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RRC - Grupo de Usuário para Análise Comercial - NovoGen</string>
+      </void>
+      <void property="groupId">
+       <string>RRCANALISECOMNG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo de usuários com acesso aos testes na ativdade de Pré-Prenchimento Fiscal</string>
+      </void>
+      <void property="groupId">
+       <string>TESTEFISCAL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Responsáveis pelas NFs da Novogen</string>
+      </void>
+      <void property="groupId">
+       <string>GNFEMPNG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Recebimento das Mercadorias da Novogen</string>
+      </void>
+      <void property="groupId">
+       <string>GNFRMNOVOGEN</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias da Novogen BRASIL</string>
+      </void>
+      <void property="groupId">
+       <string>M07NGGUFBR</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias por Estado da HLB - Luis Henrique Ferreira</string>
+      </void>
+      <void property="groupId">
+       <string>M07HLBGUF06</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias da Planalto do Estado de Espírito Santo</string>
+      </void>
+      <void property="groupId">
+       <string>M07PPAGUFES</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias da Planalto do Estado de Mato Grosso do Sul</string>
+      </void>
+      <void property="groupId">
+       <string>M07PPAGUFMS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Grupo dos Responsáveis pela coleta de Mort. 07 dias por Estado da H&amp;N - Patricia Alves</string>
+      </void>
+      <void property="groupId">
+       <string>M07HENGUF05</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>expediente</string>
+   <array class="java.lang.String" length="1">
+    <void index="0">
+     <string>Default</string>
+    </void>
+   </array>
+  </void>
+  <void method="put">
+   <string>mecanismoPapel</string>
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>admin</string>
+      </void>
+      <void property="roleId">
+       <string>admin</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Diretores</string>
+      </void>
+      <void property="roleId">
+       <string>DIR</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Gerentes</string>
+      </void>
+      <void property="roleId">
+       <string>GER</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Supervisores</string>
+      </void>
+      <void property="roleId">
+       <string>SUP</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Auxiliar Administrativo</string>
+      </void>
+      <void property="roleId">
+       <string>AUA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Auxiliar de Incubatório</string>
+      </void>
+      <void property="roleId">
+       <string>AUI</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Auxiliar de Granja</string>
+      </void>
+      <void property="roleId">
+       <string>AUG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Controle de Documentos</string>
+      </void>
+      <void property="roleId">
+       <string>ECM</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Social</string>
+      </void>
+      <void property="roleId">
+       <string>SOC</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Social - Documentos</string>
+      </void>
+      <void property="roleId">
+       <string>SOD</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Aprendizado</string>
+      </void>
+      <void property="roleId">
+       <string>LMS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Avaliações</string>
+      </void>
+      <void property="roleId">
+       <string>AVL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Abertura de Chamados de TI</string>
+      </void>
+      <void property="roleId">
+       <string>ACHTI</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Solicitar Férias</string>
+      </void>
+      <void property="roleId">
+       <string>SOLFERIAS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Análise da Solicitação de Férias</string>
+      </void>
+      <void property="roleId">
+       <string>ALSOLFER</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Cancelamento de Solicitação de Dias</string>
+      </void>
+      <void property="roleId">
+       <string>CANCSOLDIAS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Cadastra Recibo de Educação</string>
+      </void>
+      <void property="roleId">
+       <string>RECEDU</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Solicitar Dias</string>
+      </void>
+      <void property="roleId">
+       <string>SOLDIAS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>CRM</string>
+      </void>
+      <void property="roleId">
+       <string>CRM</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Insere Relatório de Visita Técnica / Comercial</string>
+      </void>
+      <void property="roleId">
+       <string>VISTECCOM</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Insere Relatório de Visita Técnica - Hy-Line</string>
+      </void>
+      <void property="roleId">
+       <string>VISITACLIENTEHLB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Insere Relatório de Visita Técnica - Lohmann</string>
+      </void>
+      <void property="roleId">
+       <string>VISITACLIENTELTZ</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Insere Relatório de Visita Técnica - H&amp;N</string>
+      </void>
+      <void property="roleId">
+       <string>VISITACLIENTEHEN</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Insere Relatório de Visita Técnica - Planalto</string>
+      </void>
+      <void property="roleId">
+       <string>VISITACLIENTEPPA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Agendamento Sala de Reunião</string>
+      </void>
+      <void property="roleId">
+       <string>AGSLREUNIAO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Agendamento do Carro do Depto. Administrativo.</string>
+      </void>
+      <void property="roleId">
+       <string>AGCARRODEPTOADM</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Aprovação das Manutenções do Incubatório de Matrizes NG</string>
+      </void>
+      <void property="roleId">
+       <string>APROVAMANUTINCMATNG</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Inicia Comunicado de Desligamento</string>
+      </void>
+      <void property="roleId">
+       <string>INICIACOMUNICADODESLIGAMENTO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Conciliação do Faturamento (HLB, LTZ, H&amp;N e PPA)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH01</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Contabilização da FOPA (HLB, LTZ e H&amp;N)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH02</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Contabilização da FOPA (PPA)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH03</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Preencher Relatório de Vendas (HLB, LTZ, H&amp;N e PPA)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH04</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Lançamento de Todos os Documentos de Entrada (HLB, LTZ e H&amp;N)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH05</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Lançamento de Todos os Documentos de Entrada (PPA)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH06</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Conferência de Livros Fiscais (HLB, LTZ, H&amp;N e PPA)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH07</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Verificação e Conciliação das contas de Obras em Andamento (HLB)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH08</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Verificação e Conciliação das contas de Obras em Andamento (PPA)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH09</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Conciliação da conta de Adiantamento para Imobilizado (HLB)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH10</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Conciliação da conta de Adiantamento para Imobilizado (PPA)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH11</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Contabilização e Conciliação do CIAP (HLB)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH12</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Contabilização e Conciliação de Estoque e Consumo de Vacinas Incubatórios (HLB)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH13</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Apuração e Conciliação do ICMS (HLB)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH14</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Apuração e Conciliação do ICMS (LTZ e H&amp;N)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH15</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Apuração e Conciliação do ICMS (PPA)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH16</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Base de Cálculo do PIS/ COFINS s/ Depreciação do Imobilizado (HLB e PPA)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH17</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Contabilizações envolv. Receitas Financeiras p/ Cálculo do PIS/ COFINS (HLB)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH18</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Contabilizações envolv. Receitas Financeiras p/ Cálculo do PIS/ COFINS (LTZ)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH19</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Contabilizações envolv. Receitas Financeiras p/ Cálculo do PIS/ COFINS (H&amp;N)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH20</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Contabilizações envolv. Receitas Financeiras p/ Cálculo do PIS/ COFINS (PPA)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH21</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Apuração e Conciliação das contas de PIS/ COFINS (HLB)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH22</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Apuração e Conciliação das contas de PIS/ COFINS (LTZ)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH23</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Apuração e Conciliação das contas de PIS/ COFINS (H&amp;N)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH24</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Apuração e Conciliação das contas de PIS/ COFINS (PPA)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH25</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Contabilização e Conciliação de Estoque de Insumo e Consumo de Ração (HLB)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH26</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Contabilização e Conciliação das demais contas do Dpto Financeiro (HLB)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH27</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Contabilização e Conciliação das demais contas do Dpto Financeiro (LTZ)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH28</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Contabilização e Conciliação das demais contas do Dpto Financeiro (H&amp;N)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH29</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Contabilização e Conciliação das demais contas do Dpto Financeiro (PPA)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH30</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Verificar Contas de Resultado x Rateios (Rodar RateGer) - HLB</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH31</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Verificar Contas de Resultado x Rateios (Rodar RateGer) - H&amp;N</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH32</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Verificar Contas de Resultado x Rateios (Rodar RateGer) - LTZ</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH33</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Verificar Contas de Resultado x Rateios (Rodar RateGer) - PPA</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH34</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Contabilizar AL ref. despesas Administrativas Rateadas entre as Coligadas (HLB)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH35</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Emitir Recibo e Realizar os Lançamento ref. o AL (LTZ, H&amp;N e PPA)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH36</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Verificar Contas de Custos/Despesas x Rateios de Custos/Despesas (HLB)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH37</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Verificar Contas de Custos/Despesas x Rateios de Custos/Despesas (PPA)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH38</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Contabilização e Conciliação do Estoque de Ovos (PPA)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH39</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Cálculo da Variação Cambial - Regime de Caixa (HLB)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH40</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Fechamento do Balancete Mensal (H&amp;N)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH41</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Fechamento do Balancete Mensal (PPA)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH42</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Fechamento do Balancete Mensal (LTZ)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH43</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Fechamento do Balancete Mensal (HLB)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH44</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Preenchimento da Planilha de Análise Mensal (H&amp;N)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH45</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Preenchimento da Planilha de Análise Mensal (PPA)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH46</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Preenchimento da Planilha de Análise Mensal (LTZ)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH47</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Preenchimento da Planilha de Análise Mensal (HLB)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH48</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Fechamento do Resultado (P&amp;L - all entities)  - HLB, LTZ, H&amp;N e PPA</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH49</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Preench. dos Detalham. dos custos/ despesas e dispon. aos Gerentes (HLB, LTZ e H&amp;N)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH50</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Preench. dos Detalham. dos custos/ despesas e dispon. aos Gerentes (PPA)</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH51</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Preenchimento da Planilha Financial (Total) e disponib. dos Result. aos Gerentes</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH52</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Preenchimento do IDL (Alemanha) - HLB, LTZ, H&amp;N e PPA</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH53</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Conciliação dos Valores Intercompany BR - IDL</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH54</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Envio das informações - Cost Report &amp; Sales Report - Alemanha</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH55</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Preenchimento da Planilha &quot;Aging Analysis&quot;</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH56</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Conclusão da Análise de Resultado (Receitas/ Custos/ Despesas x Orçamento) - Financial</string>
+      </void>
+      <void property="roleId">
+       <string>ATVFECH57</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Abertura de OS de Manutenção Corretiva</string>
+      </void>
+      <void property="roleId">
+       <string>AMANUTOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Classificar Ovos</string>
+      </void>
+      <void property="roleId">
+       <string>CLASSOVOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Aprovar Classificação de Ovos</string>
+      </void>
+      <void property="roleId">
+       <string>APROVACLASSOVOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Inserir Roteiro de Entrega</string>
+      </void>
+      <void property="roleId">
+       <string>INSROTEIROENTREGA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Informar os dados da sobra / falta de pinto</string>
+      </void>
+      <void property="roleId">
+       <string>INSFALTAPINTO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Solucionar Sobra / Falta de Pintos</string>
+      </void>
+      <void property="roleId">
+       <string>SOLFALTAPINTOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Insere Check List de Ovos Classificados</string>
+      </void>
+      <void property="roleId">
+       <string>INSCHECKLISTOVOSCLASSIFICADOS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Configurações do Pedido de Venda WEB</string>
+      </void>
+      <void property="roleId">
+       <string>CONFIGPEDVENDAWEB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Realiza Tomada de Decisão sobre Exceção no Pedido de Venda Web - Hy-Line</string>
+      </void>
+      <void property="roleId">
+       <string>TOMDECEXCECAOPVWEBHLB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Realiza Tomada de Decisão sobre Exceção no Pedido de Venda Web - Lohmann</string>
+      </void>
+      <void property="roleId">
+       <string>TOMDECEXCECAOPVWEBLTZ</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Realiza Tomada de Decisão sobre Exceção no Pedido de Venda Web - Planalto</string>
+      </void>
+      <void property="roleId">
+       <string>TOMDECEXCECAOPVWEBPPA</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Realiza Tomada de Decisão sobre Exceção no Pedido de Venda Web - H&amp;N</string>
+      </void>
+      <void property="roleId">
+       <string>TOMDECEXCECAOPVWEBHEN</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Indicador de Lotes com 80 semanas ou mais</string>
+      </void>
+      <void property="roleId">
+       <string>INDLOTE80SEM</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Gestor do Processo de RRC</string>
+      </void>
+      <void property="roleId">
+       <string>GSTRRC</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Insere RRC - Hy-Line</string>
+      </void>
+      <void property="roleId">
+       <string>RRCINSHLB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Análise do Gerente Técnico - Hy-Line</string>
+      </void>
+      <void property="roleId">
+       <string>RRCAGTHLB</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Dashboard de Visitas Técnicas / Comerciais - Planalto</string>
+      </void>
+      <void property="roleId">
+       <string>INDDASHBOARDVISITATECCOMPL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Página de Dashboards de Vendas da Planalto</string>
+      </void>
+      <void property="roleId">
+       <string>INDDASHBOARDSVENDASPL</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Papel de iniciar uma solicitação de abastecimento</string>
+      </void>
+      <void property="roleId">
+       <string>INICIAABASTECIMENTO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Usuários com permissão de iniciar uma Avaliação de Desempenho</string>
+      </void>
+      <void property="roleId">
+       <string>INICIAAVALIACAODESEMPENHO</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Insere / Altera Agendamento do Carro do Depto. Administrativo</string>
+      </void>
+      <void property="roleId">
+       <string>AGCARRODEPTOADMINS</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.WorkflowRoleDto">
+      <void property="companyId">
+       <long>1</long>
+      </void>
+      <void property="roleDescription">
+       <string>Realiza Tomada de Decisão sobre Exceção no Pedido de Venda - Novogen</string>
+      </void>
+      <void property="roleId">
+       <string>TOMDECEXCECAOPVWEBNG</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>mecanismo</string>
+   <array class="[Ljava.lang.Object;" length="9">
+    <void index="0">
+     <array class="java.lang.Object" length="2">
+      <void index="0">
+       <string>Atribuição por Associação</string>
+      </void>
+      <void index="1">
+       <string>Associado</string>
+      </void>
+     </array>
+    </void>
+    <void index="1">
+     <array class="java.lang.Object" length="2">
+      <void index="0">
+       <string>Atribuição por Campo de Formulário</string>
+      </void>
+      <void index="1">
+       <string>Campo Formulário</string>
+      </void>
+     </array>
+    </void>
+    <void index="2">
+     <array class="java.lang.Object" length="2">
+      <void index="0">
+       <string>Atribuição por Executor de Atividade</string>
+      </void>
+      <void index="1">
+       <string>Executor Atividade</string>
+      </void>
+     </array>
+    </void>
+    <void index="3">
+     <array class="java.lang.Object" length="2">
+      <void index="0">
+       <string>Atribuição por Grupo</string>
+      </void>
+      <void index="1">
+       <string>Grupo</string>
+      </void>
+     </array>
+    </void>
+    <void index="4">
+     <array class="java.lang.Object" length="2">
+      <void index="0">
+       <string>Atribuição por Grupos do Colaborador</string>
+      </void>
+      <void index="1">
+       <string>Grupos Colaborador</string>
+      </void>
+     </array>
+    </void>
+    <void index="5">
+     <array class="java.lang.Object" length="2">
+      <void index="0">
+       <string>Atribuição por Papel</string>
+      </void>
+      <void index="1">
+       <string>Papel</string>
+      </void>
+     </array>
+    </void>
+    <void index="6">
+     <array class="java.lang.Object" length="2">
+      <void index="0">
+       <string>Atribuição para um Grupo</string>
+      </void>
+      <void index="1">
+       <string>Pool Grupo</string>
+      </void>
+     </array>
+    </void>
+    <void index="7">
+     <array class="java.lang.Object" length="2">
+      <void index="0">
+       <string>Atribuição para um Papel</string>
+      </void>
+      <void index="1">
+       <string>Pool Papel</string>
+      </void>
+     </array>
+    </void>
+    <void index="8">
+     <array class="java.lang.Object" length="2">
+      <void index="0">
+       <string>Atribuição por Usuário</string>
+      </void>
+      <void index="1">
+       <string>Usuário</string>
+      </void>
+     </array>
+    </void>
+   </array>
+  </void>
+  <void method="put">
+   <string>camposFormulario, documentoId = 22288</string>
+   <array class="java.lang.String" length="36">
+    <void index="0">
+     <string>cidade</string>
+    </void>
+    <void index="1">
+     <string>codigo_cliente</string>
+    </void>
+    <void index="2">
+     <string>codigo_representante</string>
+    </void>
+    <void index="3">
+     <string>condicao_pagamento</string>
+    </void>
+    <void index="4">
+     <string>data_decisao</string>
+    </void>
+    <void index="5">
+     <string>data_final_entrega_ipv</string>
+    </void>
+    <void index="6">
+     <string>data_inicial_entrega_ipv</string>
+    </void>
+    <void index="7">
+     <string>data_solicitacao</string>
+    </void>
+    <void index="8">
+     <string>decisor</string>
+    </void>
+    <void index="9">
+     <string>descricao_vs</string>
+    </void>
+    <void index="10">
+     <string>email_representante</string>
+    </void>
+    <void index="11">
+     <string>empresa</string>
+    </void>
+    <void index="12">
+     <string>endereco_entrega</string>
+    </void>
+    <void index="13">
+     <string>id_web</string>
+    </void>
+    <void index="14">
+     <string>linha_ipv</string>
+    </void>
+    <void index="15">
+     <string>mensagem</string>
+    </void>
+    <void index="16">
+     <string>nome_cliente</string>
+    </void>
+    <void index="17">
+     <string>nome_representante</string>
+    </void>
+    <void index="18">
+     <string>observacoes</string>
+    </void>
+    <void index="19">
+     <string>perc_bonificada_ipv</string>
+    </void>
+    <void index="20">
+     <string>preco_total_ipv</string>
+    </void>
+    <void index="21">
+     <string>preco_unit_vs</string>
+    </void>
+    <void index="22">
+     <string>qtde_liquida_ipv</string>
+    </void>
+    <void index="23">
+     <string>qtde_total_ipv</string>
+    </void>
+    <void index="24">
+     <string>sequencia_ipv</string>
+    </void>
+    <void index="25">
+     <string>solicitante</string>
+    </void>
+    <void index="26">
+     <string>status</string>
+    </void>
+    <void index="27">
+     <string>status_pedido</string>
+    </void>
+    <void index="28">
+     <string>tipo_cobranca_vs</string>
+    </void>
+    <void index="29">
+     <string>tipo_excecao</string>
+    </void>
+    <void index="30">
+     <string>tratamento_infravermelho</string>
+    </void>
+    <void index="31">
+     <string>uf</string>
+    </void>
+    <void index="32">
+     <string>usuario_decisor</string>
+    </void>
+    <void index="33">
+     <string>usuario_solicitante</string>
+    </void>
+    <void index="34">
+     <string>vacina_primaria</string>
+    </void>
+    <void index="35">
+     <string>valor_total_ipv</string>
+    </void>
+   </array>
+  </void>
+ </object>
+</java>

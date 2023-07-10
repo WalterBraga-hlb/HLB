@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "";
+    var listaLotes = (List<MvcAppHylinedoBrasilMobile.Models.Lote_Item_Pedido_Venda>)Session["ListaLotesItemViewPV"];
+}
+
+<div align="center">
+    @Html.Image(@Url.Content("~/Content/icons/pedidoVenda.png"), "Pedido de Venda")
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+
+<h2>Passo 02.01.01: Lista de Lotes do Item do Pedido de Venda</h2>
+
+<br />
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Menu da Composição dos Lotes</li>
+    <li>
+        @Html.ActionLink("Adicionar Novo Lote", "AddLote", "PedidoVenda", null,
+            new { @class = "add", @title = "Clique aqui para Inserir novo Lote" })
+    </li>
+</ul>
+    
+<div id="tabelaVacinasSecundariaPV" style="overflow:auto;">
+<table id="tabela">
+    <tr>
+        <th>
+            Seq.
+        </th>
+        <th>
+            Núcleo
+        </th>
+        <th>
+            Lote
+        </th>
+        <th>
+            Data Produção
+        </th>
+        <th>
+            Idade
+        </th>
+        <th>
+            Peso
+        </th>
+        <th>
+            Quantidade
+        </th>
+        <th></th>
+    </tr>
+@foreach (var item in listaLotes)
+{
+    <tr>
+        <td>
+            @(item.Sequencia)
+        </td>
+        <td>
+            @(item.Nucleo)
+        </td>
+        <td>
+            @(item.Lote)
+        </td>
+        <td>
+            @String.Format("{0:dd/MM/yy}",item.DataProducao)
+        </td>
+        <td>
+            @(item.IdadeLote)
+        </td>
+        <td>
+            @(item.PesoOvo)
+        </td>
+        <td>
+            @String.Format("{0:N0}", item.Qtde)
+        </td>
+        <td class="ajuste">
+            <div align="center">
+                @Html.ActionLink("Delete", "DeleteLotePV",
+                    new { sequencia = item.Sequencia },
+                        new { @class = "delete", @title = "Clique aqui para Excluir este Lote" })
+            </div>
+        </td>
+    </tr>
+}
+</table>
+</div>
+<br />
+@using (Html.BeginForm("ListItensPVReturn", "PedidoVenda", FormMethod.Post))
+{
+    <input type="submit" value="Voltar p/ Itens do Pedido" />
+}

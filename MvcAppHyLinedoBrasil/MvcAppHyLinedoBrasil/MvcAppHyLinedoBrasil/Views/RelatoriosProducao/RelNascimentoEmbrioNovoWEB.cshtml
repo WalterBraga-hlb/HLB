@@ -1,0 +1,47 @@
+﻿@using am = MvcAppHyLinedoBrasil.Controllers.AccountController;
+@{
+    string lg = Session["language"].ToString();
+
+    ViewBag.Title = am.Translate("Relatório de Nascimento e Embriodiagnóstico Novo - WEB", lg);
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@am.Translate("Relatório de Nascimento e Embriodiagnóstico Novo - WEB", lg)</h2>
+
+@using (Html.BeginForm("DownloadRelNascimentoEmbrioNovoWEB", "RelatoriosProducao",
+    FormMethod.Post, new { enctype = "multipart/form-data", target = "_blank" }))
+{
+    <table>
+        <tr>
+            <td align="right">
+                <b>@am.Translate("Incubatório:", lg)</b>
+            </td>
+            <td>
+                @Html.DropDownList("incubatorio", (List<SelectListItem>)Session["ListaIncubatorios"])
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <b>@am.Translate("Data de Nascimento Inicial:", lg)</b>
+            </td>
+            <td>
+                @Html.TextBox("dataInicialRelPrd", Session["dataInicialRelPrd"], new { @type = "date", @required = "true" })
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <b>@am.Translate("Data de Nascimento Final:", lg)</b>
+            </td>
+            <td>
+                @Html.TextBox("dataFinalRelPrd", Session["dataFinalRelPrd"], new { @type = "date", @required = "true" })
+            </td>
+        </tr>
+    </table>
+    <div id="divUltimaReview">
+        <h4>@Html.Raw(ViewBag.fileName)</h4>
+        <h4 style="color:red;">@ViewBag.erro</h4>
+    </div>
+    <div class="editor-field" align="center">
+        <input type="submit" value="@am.Translate("Gerar Relatório", lg)" id="importar" />
+    </div>
+}

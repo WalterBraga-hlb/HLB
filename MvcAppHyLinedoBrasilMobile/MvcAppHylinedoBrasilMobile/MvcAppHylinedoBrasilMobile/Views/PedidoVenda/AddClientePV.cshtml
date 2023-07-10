@@ -1,0 +1,155 @@
+﻿@{
+    ViewBag.Title = "";
+}
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Pedidos de Venda", "Index", "PedidoVenda")
+        <br />
+        <br />
+        <b style="color:red; background-color:Yellow">
+            * CUIDADO!!! CASO CLIQUE NO LINK ACIMA, OS DADOS INFORMADOS DO PEDIDO
+            ANTES DA FINALIZAÇÃO SERÃO PERDIDOS!!!
+        </b>
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/pedidoVenda.png"), "Pedido de Venda")
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+
+<h2>Passo 01: Selecione o Cliente que será utilizado no Pedido de Venda</h2>
+<br />
+@using (Html.BeginForm("SearchCustomersPV", "PedidoVenda", FormMethod.Post))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <b>Informe parte do nome do Cliente</b>
+            <div class="editor-label">
+                @Html.TextBox("customerName", Session["customerNameSearchPedVenda"].ToString())
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Pesquisar" />
+        </li>
+    </ul>
+}
+@{
+    List<MvcAppHylinedoBrasilMobile.Models.bdApolo.ENTIDADE> customerList = 
+        (List<MvcAppHylinedoBrasilMobile.Models.bdApolo.ENTIDADE>)Session["CustomerList"];
+}
+@using (Html.BeginForm("SelectShipAddress", "PedidoVenda", FormMethod.Post))
+{
+    if (customerList.Count > 0)
+    {
+        <div id="customerTable" style="overflow:auto;">
+        <table id="tabela">
+            <tr>
+                <th></th>
+                <th>
+                    Código
+                </th>
+                <th>
+                    Nome
+                </th>
+                <th>
+                    Endereço
+                </th>
+                <th>
+                    Cidade
+                </th>
+                <th>
+                    Estado
+                </th>
+                <th>
+                    País
+                </th>
+            </tr>
+
+        @foreach (var item in customerList)
+        {
+            <tr>
+                <td class="ajuste">
+                    <div align="center" style="width: 50%;">
+                        <label style="width: 45px">
+                            @Html.RadioButton("selectedCustomer", item.EntCod, Session["selectedCustomer"].ToString() == item.EntCod ? true : false)
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntCod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntNome)
+                </td>
+                <td>
+                    @(item.EntEnder + " "
+                        + item.EntEnderNo + " - " + item.EntEnderComp + " - " + item.EntBair)
+                </td>
+                <td>
+                    @{
+            MvcAppHylinedoBrasilMobile.Models.bdApolo.CIDADE cidade =
+                MvcAppHylinedoBrasilMobile.Controllers.PedidoVendaController.apoloStatic
+                .CIDADE.Where(w => w.CidCod == item.CidCod).FirstOrDefault();
+                    }
+                    @if (cidade != null)
+                    {
+                        <label>@(cidade.CidNomeComp)</label>
+                    }
+                </td>
+                <td>
+                    @if (cidade != null)
+                    {
+                        <label>@(cidade.UfSigla)</label>
+                    }
+                </td>
+                <td>
+                    @if (cidade != null)
+                    {
+                        <label>@(cidade.PaisSigla)</label>
+                    }
+                </td>
+            </tr>
+        }
+
+        </table>
+        </div>
+    
+        <ul data-role="listview" data-inset="true">
+            <li data-role="list-divider">
+                <label style="width: 100%">
+                    @Html.RadioButton("selectedTypeAddress", "Faturamento",
+                        Session["selectedTypeAddress"].ToString() == "Faturamento" ? true : false)
+                    <b>Mesmo Endereço de Entrega do Faturamento</b>
+                </label>
+            </li>
+            <li data-role="list-divider">
+                <label style="width: 100%">
+                    @Html.RadioButton("selectedTypeAddress", "Outro",
+                        Session["selectedTypeAddress"].ToString() == "Outro" ? true : false)
+                    <b>Outro Endereço de Entrega</b>
+                </label>
+            </li>
+        </ul>
+    }
+
+    if (Session["origemPV"].ToString().Equals("Alteração"))
+    {   
+        <input type="submit" value="Salvar" name="AddClientePV" />
+    }
+    else
+    {
+        <input type="submit" value="Próximo" name="AddClientePV" />
+    }
+}
+
+@if (Session["origemPV"].ToString().Equals("Alteração"))
+{
+    using (Html.BeginForm("FinalizaPV", "PedidoVenda", FormMethod.Post))
+    {
+        <input type="submit" value="Voltar para a Visualização do Pedido" />
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

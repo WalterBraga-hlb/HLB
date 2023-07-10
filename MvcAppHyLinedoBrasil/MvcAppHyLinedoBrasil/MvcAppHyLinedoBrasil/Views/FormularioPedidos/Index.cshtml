@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Downloads de Formulários";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Downloads de Formulários</h2>
+
+@*@Ajax.ActionLink("Formulário para preenchimento de Pedidos", "BaixarFormulario", "FormularioPedidos", null, new AjaxOptions { LoadingElementId = "spinner" }, null)*@
+@if (DateTime.Today <= Convert.ToDateTime("08/02/2016"))
+{
+@Html.Image(@Url.Content("~/Content/images/kjots.png"), "Logo")
+@Html.ActionLink("Formulário para preenchimento de Pedidos", "BaixarFormulario")
+}
+else
+{
+    <label>PEDIDOS POR FORMULÁRIOS DESCONTINUADO! ACESSE VIA http://m.hlbapp.hyline.com.br PELO NOVO MÓDULO!!!</label>
+}
+
+@*<br />
+<img id="spinner" src="../../Content/images/ajax-loading.gif" alt="" style="display: none;">
+<br />*@
+

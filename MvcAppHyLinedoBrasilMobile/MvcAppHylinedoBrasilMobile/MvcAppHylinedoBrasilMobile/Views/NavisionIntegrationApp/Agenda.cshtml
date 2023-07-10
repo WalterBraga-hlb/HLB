@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MvcAppHylinedoBrasilMobile.Models.Nav_Agenda>
+
+<div align="center">
+    @Html.ActionLink(@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Link_Back_Home", Session["language"].ToString()), "Index", "HomeMobile")
+</div>
+<br />
+<div align="center">
+    @Html.Image(@Url.Content("~/Content/icons/agenda.png"), MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Title_Agenda_NavisionIntegrationApp", Session["language"].ToString()))
+    <h2>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Title_Agenda_NavisionIntegrationApp", Session["language"].ToString())</h2>
+</div>
+<br />
+<h4 style="color:Red; background-color:White">@Html.Raw(ViewBag.Error)</h4>
+
+@Html.Partial("_SearchOrdersAgenda")
+
+@Html.Partial("_AgendaList")
+
+<br />
+@{
+    var legend = MvcAppHylinedoBrasilMobile.Controllers.NavisionIntegrationAppController.hlbappStatic
+        .NavLocations.OrderBy(o => o.Location).ToList();    
+}
+<div align="center">
+    <h3>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Title_Calendar_Legend_NavisionIntegrationApp", Session["language"].ToString())</h3>
+<br />
+<table style="width: 20%">
+    <tr style="font-size: xx-small">
+        <th style="font-size: xx-small">
+            @MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_Location", Session["language"].ToString())
+        </th>
+        <th>
+        </th>
+    </tr>
+    @foreach (var item in legend)
+    {
+        <tr style="font-size: xx-small">
+            <td style="font-size: xx-small">
+                <b>@item.Location</b>
+            </td>
+            <td style="font-size: xx-small; background-color: @item.LocationColor; border-color: @item.LocationColor;">
+            </td>
+        </tr>
+    }
+</table>
+</div>
+<br />
+
+@Html.Partial("_Menu")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

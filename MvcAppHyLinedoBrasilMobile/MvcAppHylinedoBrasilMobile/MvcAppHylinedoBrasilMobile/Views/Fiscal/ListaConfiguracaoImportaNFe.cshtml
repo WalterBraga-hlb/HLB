@@ -1,0 +1,144 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+
+    List<MvcAppHylinedoBrasilMobile.Models.Configuracao_Importa_NFe> listaConfiguracaoImportaNFe =
+        (List<MvcAppHylinedoBrasilMobile.Models.Configuracao_Importa_NFe>)Session["ListaConfiguracaoImportaNFe"];
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+}
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para o Menu do Módulo Fiscal", "MenuFiscal", "Fiscal", 
+                null,
+                new { @title = "Clique aqui para voltar para o Menu do Módulo Fiscal", @class = "fiscal_32" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/rec_doc_32x32.png"), "Documentos")
+    <h2>Lista de Configurações de Importação de NF-e</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+@using (Html.BeginForm("SearchConfiguracaoImportaNFe", "Fiscal"))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <b>Informe parte da descrição:</b>
+            <div class="editor-label">
+                @Html.TextBox("pesquisaDescricao", Session["pesquisaDescricao"])
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Pesquisar" />
+        </li>
+    </ul>
+}
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Configuração de Importação de NF-e</li>
+    <li>
+        @Html.ActionLink("Adicionar Nova Configuração de Importação de NF-e", "CreateConfiguracaoImportaNFe", "Fiscal",
+            null,
+            new { @class = "add", @title = "Clique aqui para inserir uma novoa Configuração de Importação de NF-e." })
+    </li>
+</ul>
+<br />
+<div class="editor-label"  align="center">
+    <table style="width: 90%">
+        <tr style="font-size: xx-small; background-color:Gray">
+            <th colspan="6" style="font-size: xx-small; background-color:Gray">
+                <u>Legenda de Ações:</u>
+            </th>
+        </tr>
+        <tr style="font-size: xx-small">
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/kjots.png"), "")
+                <i>Alterar Configuração de Importação de NF-e</i>
+            </td>
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/button_cancel.png"), "")
+                <i>Excluir Configuração de Importação de NF-e</i>
+            </td>
+        </tr>
+    </table>
+</div>
+<br />
+<div id="divTabelaIndexPV">
+<table id="tabelaIndexPV" class="ajustetabelaIndexPV">
+    <tbody class="ajustetabelaIndexPV">
+    <tr class="ajustetabelaIndexPV">
+        <th class="ajustetabelaIndexPV">
+            Descrição
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Tipo de Lançamento
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Classificação Fiscal
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Data do Movimento
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Natureza de Operação
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Local de Armazenagem
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Conta Débito
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Ações
+        </th>
+    </tr>
+@foreach (var item in listaConfiguracaoImportaNFe)
+{
+    <tr class="ajustetabelaIndexPV">
+        <td class="ajustetabelaIndexPV">
+            @(item.Descricao)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(item.TipoLancCod)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(item.ClasFiscCod)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(item.DataMovimento)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(item.NaturezaOperacao)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(item.LocArmazCod)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(item.ContaDebito)
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td align="center">
+                        @Html.ActionLink("Edit", "EditConfiguracaoImportaNFe",
+                            new { id = item.ID },
+                            new { @class = "edit", @title = "Clique aqui para Alterar a Configuração de Importação de NF-e." })
+                    </td>
+                    <td align="center">
+                        @Html.ActionLink("Delete", "ConfirmaDeleteConfiguracaoImportaNFe",
+                            new { id = item.ID },
+                            new { @class = "delete", @title = "Clique aqui para Excluir a Configuração de Importação de NF-e." })
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

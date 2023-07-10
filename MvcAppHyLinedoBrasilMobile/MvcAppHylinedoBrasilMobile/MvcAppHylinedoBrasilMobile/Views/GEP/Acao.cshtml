@@ -1,0 +1,246 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+
+    DateTime data = DateTime.Today;
+    if (DateTime.Today.DayOfWeek == DayOfWeek.Sunday)
+    {
+        data = data.AddDays(7);   
+    }
+    
+    int semanaAno = System.Globalization.CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(
+        data, System.Globalization.CalendarWeekRule.FirstDay, DayOfWeek.Sunday);
+
+    string semanaAnoStr = data.Year.ToString() + "-W" + semanaAno.ToString();
+}
+
+<script src="../../Scripts/jquery.maskedinput.js" type="text/javascript"></script>
+
+<script language="javascript" type="text/javascript">
+//    window.onbeforeunload = function () {
+//        return "Não é possível atualizar a página porque os dados serão perdidos! Sendo assim, a página será fechada!";
+//    }
+
+    window.onkeydown = function (e) {
+        if (e.keyCode === 116) {
+            alert("Função não permitida");
+            e.keyCode = 0;
+            e.returnValue = false;
+            return false;
+        }
+    }
+
+    $(document).ready(function () {
+        exibeObjetivoAcao();
+        verificaQtdeAcaoSemana();
+    });
+
+    $('#ddlPilarAcao').change(function () {
+        var descPilar = $('#ddlPilarAcao option:selected').text();
+        $.ajax({
+            url: '/GEP/CarregaObjetivos',
+            type: 'POST',
+            data: JSON.stringify({ pilar: descPilar, todos: "false" }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                exibeObjetivoAcao();
+                verificaObjetivoDDL();
+                if (descPilar != "OUTROS") {
+                    $('select#ddlObjetivoAcao').empty();
+                    $('select#ddlObjetivoAcao').append('<option value="" selected="selected">(Selecione um Objetivo)</option>');
+                    $.each(data, function (key, SelectListItem) {
+                        $('select#ddlObjetivoAcao').append('<option value="' + SelectListItem.Value + '">' + SelectListItem.Text + '</option>');
+                    });
+                    $('select#ddlObjetivoAcao').selectmenu('refresh');
+                }
+            }
+        });
+    });
+
+    function exibeObjetivoAcao() {
+        var descPilar = $('#ddlPilarAcao option:selected').text();
+        if (descPilar != "OUTROS") {
+            document.getElementById("txtObjetivoAcao").required = false;
+            $('#pnlObjetivoText').hide();
+            $('#pnlObjetivoDDL').show();
+        } else {
+            $('select#ddlObjetivoAcao').empty();
+            $('#pnlObjetivoDDL').hide();
+            $('#pnlObjetivoText').show();
+            document.getElementById("txtObjetivoAcao").required = true;
+        }
+    }
+
+    function verificaQtdeAcaoSemana() {
+        var vSemanaAno = $('#txtSemanaAno').val();
+        var errorHolder = document.getElementById('errorSemanaAno');
+        $.ajax({
+            url: '/GEP/VerificaQtdeAcaoSemana',
+            type: 'POST',
+            data: JSON.stringify({ semanaAno: vSemanaAno }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('#msgRetornoVerificaSemanaAno').val(data);
+                if (data != "") {
+                    errorHolder.innerHTML = data;
+                    $('#add').button('disable');
+                    $('[type="submit"]').button('refresh');
+                    return true;
+                } else {
+                    errorHolder.innerHTML = '';
+                    $('#add').button('enable');
+                    $('[type="submit"]').button('refresh');
+                    return false;
+                }
+            }
+        });
+    }
+
+    function verificaSemana() {
+        var msgRetorno = $('#msgRetornoVerificaSemanaAno').val();
+        var errorHolder = document.getElementById('errorSemanaAno');
+        if (msgRetorno != "") {
+            errorHolder.innerHTML = msgRetorno;
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        } else {
+            errorHolder.innerHTML = '';
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+            return false;
+        }
+    }
+
+    function verificaObjetivoDDL() {
+        var descObjetivo = $('#ddlObjetivoAcao option:selected').val();
+        //alert(descObjetivo);
+        var descPilar = $('#ddlPilarAcao option:selected').text();
+        var errorHolder = document.getElementById('errorDDLObjetivoAcao');
+        if ((descObjetivo == "" || descObjetivo == undefined) && descPilar != "OUTROS") {
+            errorHolder.innerHTML = 'Obrigatório selecionar um objetivo!';
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        } else {
+            errorHolder.innerHTML = '';
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+            return false;
+        }
+    }
+
+    $('#txtSemanaAno').change(function () {
+        verificaQtdeAcaoSemana();
+    });
+
+    $('#ddlObjetivoAcao').change(function () {
+        verificaObjetivoDDL();
+    });
+
+    $('#add').click(function () {
+        if (verificaSemana()) { return; }
+        if (verificaObjetivoDDL()) { return; }
+    });
+
+</script>
+
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para a Lista de Ações", "ListaAcoes", "GEP", 
+                null,
+                new { @class = "acao_02", @title = "Clique aqui para voltar para a Lista de Ações" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/acao_02.png"), "Ação")
+    <h2>Ação</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+@using (Html.BeginForm("SaveAcao", "GEP", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        <div class="editor-label">
+            <b>Semana do Ano:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("semanaAno", Session["semanaAno"].ToString(), 
+                new { @type = "week", @id = "txtSemanaAno", @min = semanaAnoStr })
+            @Html.Hidden("msgRetornoVerificaSemanaAno")
+        </div>
+        <div class="editor-label" id="errorSemanaAno" style="color: Red; font-weight:bold;"></div>
+        <div class="editor-label">
+            <b>Ação:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("descricao", Session["descricaoAcao"], 
+                new { @required = true, @onkeyup = "this.value = this.value.toUpperCase();",
+                      @placeholder = "Insira a descrição da ação." })
+        </div>
+        <div class="editor-label">
+            <b>Pilar:</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList(
+                "Pilar",
+                (List<SelectListItem>)Session["DLListaPilares"],
+                "(Selecione um Pilar)",
+                new { @id = "ddlPilarAcao", @required = true })
+        </div>
+        <div class="editor-label">
+            <b>Objetivo:</b>
+        </div>
+        <div class="editor-field">
+            <div id="pnlObjetivoDDL">
+                @Html.DropDownList(
+                 "Objetivo",
+                    (List<SelectListItem>)Session["DLListaObjetivos"],
+                    new { @id = "ddlObjetivoAcao" })
+                <div class="editor-label" id="errorDDLObjetivoAcao" style="color: Red; font-weight:bold;"></div>
+            </div>
+            <div id="pnlObjetivoText">
+                @Html.TextBox("Objetivo", Session["objetivoAcao"],
+                new
+                {
+                    @onkeyup = "this.value = this.value.toUpperCase();",
+                    @placeholder = "Insira o objetivo da ação.",
+                    @id = "txtObjetivoAcao"
+                })
+            </div>
+        </div>
+        <div class="editor-label">
+            <b>Comentários:</b>
+        </div>
+        <div class="editor-field">
+           @Html.TextArea("comentarios", Session["comentariosAcao"].ToString(), 
+                new { @required = true,
+                      @placeholder = "Insira os comentário da ação." })
+        </div>
+        <div class="editor-label">
+            <b>Prazo:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("prazo", Convert.ToDateTime(Session["prazoAcao"]).ToString("yyyy-MM-dd"), 
+                new { @type = "date", @required = true, @min = DateTime.Today.ToString("yyyy-MM-dd") })
+        </div>
+        @*<div class="editor-label">
+            <b>Status:</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList(
+                "Status",
+                (List<SelectListItem>)Session["DLListaStatusAcao"],
+                "(Selecione um Status)",
+                new { @id = "ddlStatus", @required = true })
+        </div>*@
+        <p>
+            <input type="submit" value="Salvar Ação" id="add" />
+        </p>
+    </fieldset>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

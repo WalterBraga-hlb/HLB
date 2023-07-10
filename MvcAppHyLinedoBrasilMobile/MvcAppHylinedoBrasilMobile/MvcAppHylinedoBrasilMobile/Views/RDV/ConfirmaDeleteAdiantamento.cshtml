@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "";
+}
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ RDV - Adiantamentos", "ListaAdiantamentos", "RDV")
+    </p>
+    @Html.Image(@Url.Content("~/Content/images/Amil-Reembolso-Icon.png"), "RDV")
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+<h1 style="color:red; background-color:Yellow">
+        * CONFIRMA A EXCLUSÃO DO ADIANTAMENTO???
+</h1>
+<br />
+@using (Html.BeginForm("ListaAdiantamentos", "RDV", FormMethod.Post))
+{
+    <input type="submit" value="Não" />
+}
+
+@using (Html.BeginForm("DeleteAdiantamento", "RDV", FormMethod.Post))
+{
+    <input type="submit" value="Sim" />
+}

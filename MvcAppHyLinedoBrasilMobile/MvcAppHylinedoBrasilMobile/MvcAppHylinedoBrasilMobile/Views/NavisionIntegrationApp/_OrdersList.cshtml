@@ -1,0 +1,126 @@
+﻿@model IEnumerable<MvcAppHylinedoBrasilMobile.Models.NavOrders>
+
+<div id="tabelaNavisionOrders" style="overflow:auto;">
+<table id="tabelaNavision">
+    <tr>
+        @if (Session["sourceClick"].ToString() != "Index")
+        {
+        <th>
+        </th>
+        }
+        <th>
+            @MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_Location", Session["language"].ToString())
+        </th>
+        <th>
+            @MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_CustomerName", Session["language"].ToString())
+        </th>
+        <th>
+            @MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_Country", Session["language"].ToString())
+        </th>
+        <th>
+            @MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_Hatch_Date", Session["language"].ToString())
+        </th>
+        <th>
+            @MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_Set_Date", Session["language"].ToString())
+        </th>
+        <th>
+            @MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_Delivery_Date", Session["language"].ToString())
+        </th>
+        <th>
+            @MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_CHIC_Order_No", Session["language"].ToString())
+        </th>
+        <th>
+            @MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_Nav_Order_No", Session["language"].ToString())
+        </th>
+    </tr>
+
+@foreach (var item in Model.GroupBy(g => new { g.Location, g.CustomerName, g.Country, g.HatchDate, g.SetDate, g.DeliveryDate, g.OrderNo, g.NavOrderNo }).Select(s => new { s.Key.Location, s.Key.CustomerName, s.Key.Country, s.Key.HatchDate, s.Key.SetDate, s.Key.DeliveryDate, s.Key.OrderNo, s.Key.NavOrderNo }).ToList())
+{
+    <tr style="background-color: @MvcAppHylinedoBrasilMobile.Controllers.NavisionIntegrationAppController.GetColorLocation(item.Location)">
+        @if (Session["sourceClick"].ToString() != "Index")
+        {
+        <td>
+            <div align="center" style="width: 98%;">
+                <label style="width: 70%; text-align:center;">
+                    @Html.CheckBox("OrderSelected")
+                </label>
+                @Html.Hidden("CHICorderNo", item.OrderNo)
+            </div>
+        </td>    
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country)
+        </td>
+        <td>
+            @String.Format("{0:" + MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Format_Date", Session["language"].ToString()) + "}", item.HatchDate)
+        </td>
+        <td>
+            @String.Format("{0:" + MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Format_Date", Session["language"].ToString()) + "}", item.SetDate)
+        </td>
+        <td>
+            @String.Format("{0:" + MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Format_Date", Session["language"].ToString()) + "}", item.DeliveryDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NavOrderNo)
+        </td>
+    </tr>
+    if (Convert.ToBoolean(Session["showDetailsSearchNav"]))
+    {
+    <tr style="border-style:none; background-color:#E4E4E4;">
+        <td style="border-style:none" align="center"><b></b></td>
+        <td colspan="7" align="right" style="border-style:none">
+            <table style="border-style:none">
+                <tr style="border-style:none">
+                    <th style="background-color:#B3B2B2;border-style:none; font-size:xx-small;">
+                        @MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_Line", Session["language"].ToString())
+                    </th>
+                    <th style="background-color:#B3B2B2;border-style:none; font-size:xx-small;">
+                        @MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_Qty", Session["language"].ToString())
+                    </th>
+                </tr>
+                @foreach (var itemOrder in Model.Where(w => (w.OrderNo == item.OrderNo && w.NavOrderNo == item.NavOrderNo) && w.Location == item.Location && w.Quantity > 0).ToList())
+                {
+                <tr style="border-style:none">
+                    <td style="border-style:none; font-size:xx-small;">
+                        @Html.DisplayFor(modelItem => itemOrder.Description)
+                    </td>
+                    <td align="right" style="border-style:none; font-size:xx-small;">
+                        @String.Format("{0:N0}", itemOrder.Quantity)
+                    </td>
+                </tr>
+                }
+            </table>
+            @if (Model.Where(w => w.OrderNo == item.OrderNo && w.Location == item.Location && w.Quantity == 0).Count() > 0)
+            {
+            <table style="border-style:none">
+                <tr style="border-style:none">
+                    <th style="background-color:#B3B2B2;border-style:none; font-size:xx-small;">
+                    @MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_Description", Session["language"].ToString())
+                    </th>
+                </tr>
+                <tr style="border-style:none">
+                    <td rowspan="100" style="border-style:none; font-size:xx-small;">
+                        @foreach (var itemOrder02 in Model.Where(w => w.OrderNo == item.OrderNo && w.Location == item.Location && w.Quantity == 0).ToList())
+                        {
+                            @(Html.DisplayFor(modelItem => itemOrder02.Description) + " | ");
+                        }
+                    </td>
+                </tr>
+            </table>
+            }
+        </td>
+    </tr>
+    }
+}
+
+</table>
+</div>

@@ -1,0 +1,155 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+
+    int idSelecionado = Convert.ToInt32(Session["idSelecionadoMes"]);
+    
+    MvcAppHylinedoBrasilMobile.Models.Investimento_Mes invMes = hlbapp.Investimento_Mes
+        .Where(w => w.ID == idSelecionado).FirstOrDefault();
+
+    MvcAppHylinedoBrasilMobile.Models.Investimento inv = hlbapp.Investimento
+        .Where(w => w.ID == invMes.IDInvestimento).FirstOrDefault();
+
+    DateTime data = new DateTime(Convert.ToInt32(invMes.AnoMes.ToString().Substring(0, 4)),
+        Convert.ToInt32(invMes.AnoMes.ToString().Substring(4, 2)), 1);
+}
+
+<script src="../../Scripts/jquery.maskedinput.js" type="text/javascript"></script>
+
+<script language="javascript" type="text/javascript">
+    function verifyZero(o, error) {
+        var errorHolder = document.getElementById(error);
+        var replaceValor = o.value.replace(/\./g, '').replace(',', '.');
+        var floatValor = parseFloat(replaceValor);
+        if (floatValor == 0) {
+            errorHolder.innerHTML = 'Não pode inserir zero!';
+            o.focus();
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        } else {
+            return verifySaldo(o, error);
+//            errorHolder.innerHTML = '';
+//            $('#add').button('enable');
+//            $('[type="submit"]').button('refresh');
+//            return false;
+        }
+    }
+
+    function verifySaldo(o, error) {
+        var errorHolder = document.getElementById(error);
+        var replaceValor = o.value.replace(/\./g, '').replace(',', '.');
+        var floatValor = parseFloat(replaceValor);
+
+        var saldo = $('#saldo').val();
+        var replaceValorSaldo = saldo.replace(/\./g, '').replace(',', '.');
+        var floatValorSaldo = parseFloat(replaceValorSaldo);
+        if (floatValor > floatValorSaldo) {
+            errorHolder.innerHTML = 'O valor não pode ser maior que ' + saldo.toString() + '!';
+            o.focus();
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        } else {
+            errorHolder.innerHTML = '';
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+            return false;
+        }
+    }
+
+    /* Máscaras ER */
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mvalor(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{8})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{5})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{2})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+</script>
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para a Tabela de Investimentos", "TabelaInvestimentoMes", "Orcamento", 
+                null,
+                new { @class = "table_invest", @title = "Clique aqui para voltar para a Tabela de Investimentos" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/transferencia_32x32.png"), "Transferência")
+    <h2>Transferir Saldo - Investimento: @inv.NomeProjeto - @data.ToString("MMM/yyyy")</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+@using (Html.BeginForm("ConfirmaSolicitacaoTransferenciaSaldoInvestimentoMes", "Orcamento", FormMethod.Post, new { id = "form-accountedit-appt" }))
+{
+    <fieldset>
+        <div class="editor-label">
+            <b>Valor a Transferir:</b>
+        </div>
+        <div class="editor-field">
+            @Html.Hidden("saldo", invMes.Saldo)
+            @if (Request.Browser.IsMobileDevice)
+            {
+                @Html.TextBox("valorTransferir", Session["valorTransferirInv"].ToString().Replace(",", "."),
+                    new
+                    {
+                        @required = true,
+                        @placeholder = "Exemplo: 10,54",
+                        @type = "number",
+                        @step = "0.01",
+                        @lang = "pt-BR",
+                        @min = "0.01",
+                        @max = invMes.Saldo,
+                        @id = "txtValorTransferir"
+                    })
+            }
+            else
+            {
+                @Html.TextBox("valorTransferir", Session["valorTransferirInv"],
+                    new
+                    {
+                        @required = true,
+                        @placeholder = "Informe somente os números. A vírgula e ponto serão adicionados automaticamente.",
+                        @id = "txtValorTransferir",
+                        @onkeyup = "mascara(this, mvalor);",
+                        @onblur = "verifyZero(this, \"errorValor\")"
+                    })
+            }
+        </div>
+        <div class="editor-label" id="errorValor" style="color: Red; font-weight:bold;"></div>
+        <div class="editor-label">
+            <b>Selecione o investimento a receber o valor:</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList(
+                "InvestimentoReceber",
+                (List<SelectListItem>)Session["ListaInvestimentosTransf"],
+                "(Selecione o investimento a Receber o Valor)",
+                new { @id = "ddlInvestimentoReceber", @required = true })
+        </div>
+        <div class="editor-label">
+            <b>Selecione o ano mês do investimento a receber o valor:</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList(
+                "AnoMesReceber",
+                (List<SelectListItem>)Session["ListaAnoMesTransf"],
+                "(Selecione o ano mês do investimento a receber o valor)",
+                new { @id = "ddlInvestimentoReceber", @required = true })
+        </div>
+        <p>
+            <input type="submit" value="Salvar Solicitação de Transferência" id="add" />
+        </p>
+    </fieldset>
+}

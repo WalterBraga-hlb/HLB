@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "";
+}
+
+<h2 class="msgErro ui-li ui-li-static">
+    @Html.Raw(ViewBag.Mensagem.Replace("\r\n", "<br />"))
+</h2>
+
+@using (Html.BeginForm("AlterPVReturn", "PedidoVenda", FormMethod.Post))
+{
+    <input type="submit" value="OK" />
+}

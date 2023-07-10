@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "";
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+    MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities apolo = new MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities();
+
+    int id = Convert.ToInt32(Session["idSelecionado"]);
+
+    string descricao = "";
+    MvcAppHylinedoBrasilMobile.Models.Investimento_Solicitacao solInvObj =
+        hlbapp.Investimento_Solicitacao.Where(w => w.ID == id).FirstOrDefault();
+    if (solInvObj != null)
+    {
+        descricao = solInvObj.NomeProjeto + " - " + solInvObj.Descricao;
+    }
+}
+
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+<h1 style="color:red; background-color:Yellow">
+        * CONFIRMA A EXCLUSÃO DA SOLICITAÇÃO DO INVESTIMENTO @(descricao)???
+</h1>
+<br />
+@using (Html.BeginForm("ListaSolicitacaoInvestimento", "Orcamento", FormMethod.Post))
+{
+    <input type="submit" value="Não" />
+}
+
+@using (Html.BeginForm("DeleteSolicitacaoInvestimento", "Orcamento", FormMethod.Post))
+{
+    <input type="submit" value="Sim" />
+}

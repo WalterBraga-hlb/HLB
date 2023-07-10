@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcAppHyLinedoBrasil", "MvcAppHyLinedoBrasil\MvcAppHyLinedoBrasil.csproj", "{8A184B2F-20FB-4DA6-97FC-55AA5A7943AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImportaIncubacao", "ImportaIncubacao\ImportaIncubacao.csproj", "{E50C46AE-91D1-4850-AC91-EB890E4FBB03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTeste", "ConsoleTeste\ConsoleTeste.csproj", "{ECC94703-9510-4575-A073-768CD34F3EC0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A184B2F-20FB-4DA6-97FC-55AA5A7943AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A184B2F-20FB-4DA6-97FC-55AA5A7943AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A184B2F-20FB-4DA6-97FC-55AA5A7943AF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8A184B2F-20FB-4DA6-97FC-55AA5A7943AF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8A184B2F-20FB-4DA6-97FC-55AA5A7943AF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8A184B2F-20FB-4DA6-97FC-55AA5A7943AF}.Debug|x86.Build.0 = Debug|Any CPU
+		{8A184B2F-20FB-4DA6-97FC-55AA5A7943AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A184B2F-20FB-4DA6-97FC-55AA5A7943AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A184B2F-20FB-4DA6-97FC-55AA5A7943AF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8A184B2F-20FB-4DA6-97FC-55AA5A7943AF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8A184B2F-20FB-4DA6-97FC-55AA5A7943AF}.Release|x86.ActiveCfg = Release|Any CPU
+		{E50C46AE-91D1-4850-AC91-EB890E4FBB03}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{E50C46AE-91D1-4850-AC91-EB890E4FBB03}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{E50C46AE-91D1-4850-AC91-EB890E4FBB03}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{E50C46AE-91D1-4850-AC91-EB890E4FBB03}.Debug|x86.ActiveCfg = Debug|x86
+		{E50C46AE-91D1-4850-AC91-EB890E4FBB03}.Debug|x86.Build.0 = Debug|x86
+		{E50C46AE-91D1-4850-AC91-EB890E4FBB03}.Release|Any CPU.ActiveCfg = Release|x86
+		{E50C46AE-91D1-4850-AC91-EB890E4FBB03}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{E50C46AE-91D1-4850-AC91-EB890E4FBB03}.Release|Mixed Platforms.Build.0 = Release|x86
+		{E50C46AE-91D1-4850-AC91-EB890E4FBB03}.Release|x86.ActiveCfg = Release|x86
+		{E50C46AE-91D1-4850-AC91-EB890E4FBB03}.Release|x86.Build.0 = Release|x86
+		{ECC94703-9510-4575-A073-768CD34F3EC0}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{ECC94703-9510-4575-A073-768CD34F3EC0}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{ECC94703-9510-4575-A073-768CD34F3EC0}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{ECC94703-9510-4575-A073-768CD34F3EC0}.Debug|x86.ActiveCfg = Debug|x86
+		{ECC94703-9510-4575-A073-768CD34F3EC0}.Debug|x86.Build.0 = Debug|x86
+		{ECC94703-9510-4575-A073-768CD34F3EC0}.Release|Any CPU.ActiveCfg = Release|x86
+		{ECC94703-9510-4575-A073-768CD34F3EC0}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{ECC94703-9510-4575-A073-768CD34F3EC0}.Release|Mixed Platforms.Build.0 = Release|x86
+		{ECC94703-9510-4575-A073-768CD34F3EC0}.Release|x86.ActiveCfg = Release|x86
+		{ECC94703-9510-4575-A073-768CD34F3EC0}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {28328124-3D1E-4B1A-BE60-4BDAEBD38B7F}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://hlbapp.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ConsoleTeste\\ConsoleTeste.csproj
+		SccProjectName1 = ConsoleTeste
+		SccLocalPath1 = ConsoleTeste
+		SccProjectUniqueName2 = ImportaIncubacao\\ImportaIncubacao.csproj
+		SccProjectName2 = ImportaIncubacao
+		SccLocalPath2 = ImportaIncubacao
+		SccProjectUniqueName3 = MvcAppHyLinedoBrasil\\MvcAppHyLinedoBrasil.csproj
+		SccProjectName3 = MvcAppHyLinedoBrasil
+		SccLocalPath3 = MvcAppHyLinedoBrasil
+	EndGlobalSection
+EndGlobal

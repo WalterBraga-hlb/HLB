@@ -1,0 +1,11 @@
+﻿<ul data-role="listview" data-inset="true">
+    <li>
+        @Html.ActionLink("Voltar para Menu Principal", "Index", "HomeMobile", 
+            null,
+            new { @title = "Clique aqui para Voltar para o Menu Principal" })
+    </li>
+</ul>
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">MENU ASSISTÊNCIA TÉCNICA</li>
+</ul>
+@Html.Partial("_MenuManutencao")

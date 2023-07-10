@@ -1,0 +1,56 @@
+﻿@{
+    
+}
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Pedidos de Venda", "Index", "PedidoVenda")
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/pedidoVenda.png"), "Informe os campos abaixo para Filtrar Pesquisa")
+    <h2>Selecione os documentos que deseja gerar e clique em Gerar. Após isso, clique em download para baixar.</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+@using (Html.BeginForm("PrintSelectDocExportation", "PedidoVenda"))
+{
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">
+        <b>Documentos de Exportação:</b>
+        <div id="tabelaDocExport" style="overflow:auto;">
+            @foreach (var item in (List<SelectListItem>)Session["ListaDocExp"])
+            {
+                <label style="width: 99%">
+                    @if (item.Selected)
+                    {
+                        @Html.CheckBox("docExpSelect", true)
+                        @item.Text
+                        @Html.Hidden("name", item.Value)
+                    }
+                    else
+                    {
+                        @Html.CheckBox("docExpSelect")
+                        @item.Text
+                        @Html.Hidden("name", item.Value)
+                    }    
+                </label>
+            }
+        </div>
+    </li>
+    <li data-role="list-divider">
+        <b>Gerar Arquivo em qual tipo?</b>
+        @Html.DropDownList(
+            "TipoExportacaoRelatorio",
+            (List<SelectListItem>)Session["ListaTipoExportacaoRelatorio"])
+    </li>
+    <li data-role="fieldcontain">
+        <input type="submit" value="Gerar Documentos" name="ButtonGerarDocumentos" />
+    </li>
+    @*@if (!Session["DocExportationPath"].ToString().Equals(""))
+    {
+    <li data-role="fieldcontain">
+        <input type="submit" value="Download Documentos" />
+    </li>
+    }*@
+</ul>
+}

@@ -1,0 +1,300 @@
+﻿@using am = MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController;
+
+@{
+    ViewBag.Title = "";
+    string lg = Session["language"].ToString();
+    string incubatorio = Session["incubatorioSelecionado"].ToString();
+    MvcAppHylinedoBrasilMobile.Models.FLIPDataSetMobileTableAdapters.HATCHERY_CODESTableAdapter hcTA =
+        new MvcAppHylinedoBrasilMobile.Models.FLIPDataSetMobileTableAdapters.HATCHERY_CODESTableAdapter();
+    MvcAppHylinedoBrasilMobile.Models.FLIPDataSetMobile.HATCHERY_CODESDataTable hcDT = new MvcAppHylinedoBrasilMobile.Models.FLIPDataSetMobile.HATCHERY_CODESDataTable();
+    hcTA.FillByHatchLoc(hcDT, incubatorio);
+    string classificacaoPorPeriodo = hcDT.FirstOrDefault().PERIOD_LAY_DATE_CLAS;
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities bd = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+
+    var lista = (List<MvcAppHylinedoBrasilMobile.Models.LayoutDiarioExpedicaos>)Session["ListaItensClassificacaoOvos"];
+
+    var listaAgrupada = lista
+        .GroupBy(g => new
+        {
+            g.Granja,
+            g.DataHoraCarreg,
+            g.NumIdentificacao,
+            g.LoteCompleto,
+            g.Lote,
+            Data = g.DataProducao
+        })
+        .ToList();
+
+    //if (classificacaoPorPeriodo == "YES")
+    //{
+    //    listaAgrupada = lista
+    //        .GroupBy(g => new
+    //        {
+    //            g.Granja,
+    //            g.DataHoraCarreg,
+    //            g.NumIdentificacao,
+    //            g.LoteCompleto,
+    //            g.Lote,
+    //            Data = g.DataHoraCarreg
+    //        })
+    //        .ToList();
+    //}
+
+    var listaTipoClassficacaoOvo = bd.TIPO_CLASSFICACAO_OVO
+        .Where(w => w.Unidade == incubatorio && w.Origem == "Interna")
+        .OrderBy(o => o.ID)
+        .ToList();
+}
+
+@using (Html.BeginForm("SaveClassificacaoOvo", "DiarioExpedicao", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink(am.GetTextOnLanguage("Voltar p/ Lista de Classificação de Ovos", lg), "ListaClassificacaoOvos", "DiarioExpedicao",
+                null, new { @class = "transferenciaLinhagens" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/transferencia_32x32.png"), "")
+    <h2>@am.GetTextOnLanguage("Classificações de Ovos", lg)</h2>
+    <br />
+    <h2>@am.GetTextOnLanguage("Local da Classificação", lg): @Html.Label(Session["incubatorioSelecionadoNome"].ToString())</h2>
+    @if (ViewBag.Erro != null)
+    {
+        <h4 id="lblMsgErro" class="@(ViewBag.ClasseMsg) ui-li ui-li-static">
+            @Html.Raw(ViewBag.Erro)
+        </h4>
+    }
+    <br />
+    <div class="editor-label">
+        <b>@am.GetTextOnLanguage("Data da Classificação", lg):</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox("dataClassificacao", Convert.ToDateTime(Session["dataClassificacao"]).ToString("yyyy-MM-ddTHH:mm:ss"),
+            new { @type = "datetime-local" })
+    </div>
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @if (classificacaoPorPeriodo == "YES")
+            {
+                @Html.ActionLink(am.GetTextOnLanguage("Novo Lote da Classificação de Ovos", lg), "CreateClassificacaoOvoItemPorPeriodo", "DiarioExpedicao",
+                         null,
+                         new { @class = "AQO" })
+            }
+            else
+            {
+                @Html.ActionLink(am.GetTextOnLanguage("Novo Lote da Classificação de Ovos", lg), "CreateClassificacaoOvoItem", "DiarioExpedicao",
+                         null,
+                         new { @class = "AQO" })
+            }
+        </li>
+    </ul>
+    <br />
+    <div id="tabelaDEO" style="overflow:auto;">
+        <table id="tabela">
+            <tr>
+                <th></th>
+                <th></th>
+                <th>
+                    @am.GetTextOnLanguage("Lote", lg)
+                </th>
+                @*@if (classificacaoPorPeriodo == "YES")
+                    {
+                        <th>
+                            @am.GetTextOnLanguage("Data de Produção Inicial", lg)
+                        </th>
+                        <th>
+                            @am.GetTextOnLanguage("Data de Produção Final", lg)
+                        </th>
+                    }
+                    else
+                    {*@
+                <th>
+                    @am.GetTextOnLanguage("Data de Produção", lg)
+                </th>
+                @*}*@
+                @foreach (var tipoOvo in listaTipoClassficacaoOvo)
+                {
+                    <th>
+                        @tipoOvo.DescricaoTipo
+                    </th>
+                }
+                <th>
+                    @am.GetTextOnLanguage("Total Classificado", lg)
+                </th>
+            </tr>
+
+            @foreach (var item in listaAgrupada)
+            {
+                int qtdeExisteSaldoTipoClasOvo = 0;
+                int qtdTipoClasOvo = listaTipoClassficacaoOvo.Where(w => w.AproveitamentoOvo == "Incubável").Count();
+
+                DateTime dataIni = item.Key.Data;
+                DateTime dataFim = item.Key.Data;
+
+                int qtdeTotaClassificada = 0;
+
+                //if (classificacaoPorPeriodo == "YES")
+                //{
+                //    dataIni = lista.Where(w => w.NumIdentificacao == item.Key.NumIdentificacao && w.Lote == item.Key.Lote).Min(m => m.DataProducao);
+                //    dataFim = lista.Where(w => w.NumIdentificacao == item.Key.NumIdentificacao && w.Lote == item.Key.Lote).Max(m => m.DataProducao);
+                //}
+
+                foreach (var tipoOvo in listaTipoClassficacaoOvo.Where(w => w.AproveitamentoOvo == "Incubável").ToList())
+                {
+                    var listaItensTO = lista.Where(w => w.NumIdentificacao == item.Key.NumIdentificacao
+                                && w.Granja == item.Key.Granja
+                                && w.Lote == item.Key.Lote
+                                && w.DataProducao >= dataIni && w.DataProducao <= dataFim
+                                && w.TipoOvo == tipoOvo.CodigoTipo)
+                            .ToList();
+                    int qtdeExisteSaldoTipoClasOvoPorData = 0;
+                    int qtdePorTipoClasOvoPorData = listaItensTO.Count();
+                    foreach (var itemTO in listaItensTO)
+                    {
+                        int qtd = (int)lista.Where(w => w.NumIdentificacao == item.Key.NumIdentificacao
+                                && w.Granja == item.Key.Granja
+                                && w.Lote == item.Key.Lote
+                                && w.DataProducao == itemTO.DataProducao
+                                && w.TipoOvo == tipoOvo.CodigoTipo)
+                            .Sum(s => s.QtdeOvos);
+
+                        bool existeSaldoPorData = MvcAppHylinedoBrasilMobile.Controllers.DiarioExpedicaoController
+                            .ExisteSaldo(tipoOvo.CodigoTipo, item.Key.DataHoraCarreg, item.Key.LoteCompleto,
+                                itemTO.DataProducao, qtd);
+
+                        if (existeSaldoPorData)
+                        {
+                            qtdeExisteSaldoTipoClasOvoPorData++;
+                        }
+                    }
+
+                    if (qtdeExisteSaldoTipoClasOvoPorData == qtdePorTipoClasOvoPorData)
+                    {
+                        qtdeExisteSaldoTipoClasOvo++;
+                    }
+                }
+
+                <tr>
+                    <td class="ajuste">
+                        <div align="center">
+                            @if (classificacaoPorPeriodo == "YES")
+                            {
+                                var dataIniEdit = lista.Where(w => w.NumIdentificacao == item.Key.NumIdentificacao && w.Lote == item.Key.Lote).Min(m => m.DataProducao);
+                                var dataFimEdit = lista.Where(w => w.NumIdentificacao == item.Key.NumIdentificacao && w.Lote == item.Key.Lote).Max(m => m.DataProducao);
+
+                                @Html.ActionLink("Edit", "EditClassificacaoOvoItemPorPeriodo",
+                                         new
+                                         {
+                                             incubatorio = item.Key.Granja,
+                                             numIdentificacao = item.Key.NumIdentificacao,
+                                             lote = item.Key.LoteCompleto,
+                                             dataProducaoInicial = dataIniEdit,
+                                             dataProducaoFinal = dataFimEdit
+                                         },
+                                         new { @class = "edit" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Edit", "EditClassificacaoOvoItem",
+                                         new
+                                         {
+                                             incubatorio = item.Key.Granja,
+                                             numIdentificacao = item.Key.NumIdentificacao,
+                                             lote = item.Key.LoteCompleto,
+                                             dataProducao = dataIni
+                                         },
+                                         new { @class = "edit" })
+                            }
+                        </div>
+                    </td>
+                    <td class="ajuste">
+                        <div align="center">
+                            @if (qtdeExisteSaldoTipoClasOvo == qtdTipoClasOvo)
+                            {
+                                if (classificacaoPorPeriodo == "YES")
+                                {
+                                    @Html.ActionLink("Delete", "DeleteClassificacaoOvoItemPorPeriodo",
+                                             new
+                                             {
+                                                 incubatorio = item.Key.Granja,
+                                                 numIdentificacao = item.Key.NumIdentificacao,
+                                                 lote = item.Key.LoteCompleto,
+                                                 dataProducaoInicial = dataIni,
+                                                 dataProducaoFinal = dataFim
+                                             },
+                                             new { @class = "delete" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Delete", "DeleteClassificacaoOvoItem",
+                                             new
+                                             {
+                                                 incubatorio = item.Key.Granja,
+                                                 numIdentificacao = item.Key.NumIdentificacao,
+                                                 lote = item.Key.LoteCompleto,
+                                                 dataProducao = dataIni,
+
+                                                  },
+                                             new { @class = "delete" })
+                                }
+                            }
+                        </div>
+                    </td>
+                    <td>
+                        @item.Key.Lote
+                    </td>
+                    <td>
+                        @dataIni.ToString("dd/MM/yyyy")
+                    </td>
+                    @*@if (classificacaoPorPeriodo == "YES")
+                        {
+                            <td>
+                                @dataFim.ToString("dd/MM/yyyy")
+                            </td>
+                        }*@
+                    @foreach (var tipoOvo in listaTipoClassficacaoOvo)
+                    {
+                        var qtd = lista.Where(w => w.NumIdentificacao == item.Key.NumIdentificacao
+                                && w.Granja == item.Key.Granja
+                                && w.Lote == item.Key.Lote
+                                && w.DataProducao >= dataIni && w.DataProducao <= dataFim
+                                && w.TipoOvo == tipoOvo.CodigoTipo)
+                            .Sum(s => s.QtdeOvos);
+
+                        qtdeTotaClassificada = qtdeTotaClassificada + (int)qtd;
+
+                        <td>
+                            @String.Format("{0:N0}", qtd)
+                        </td>
+                    }
+                    <td>
+                        <b>@String.Format("{0:N0}", qtdeTotaClassificada)</b>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <br />
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-DiarioExpedicaoRecebimentoClassificacao",(System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <div class="editor-label">
+            <b>Data do Recebimento no Incubatório:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("dataRecebInc", (Session["dataRecebInc"].ToString() != "" && Session["dataRecebInc"] != null ?
+                    Convert.ToDateTime(Session["dataRecebInc"]).ToString("yyyy-MM-dd") : ""),
+                new
+                {
+                    @type = "date",
+                    @required = "true",
+                    @id = "txtDataRecebInc"
+                })
+        </div>
+    }
+    <p>
+        <input type="submit" value="@am.GetTextOnLanguage("Salvar Classificação de Ovos", lg)" id="add" />
+    </p>
+</div>
+}

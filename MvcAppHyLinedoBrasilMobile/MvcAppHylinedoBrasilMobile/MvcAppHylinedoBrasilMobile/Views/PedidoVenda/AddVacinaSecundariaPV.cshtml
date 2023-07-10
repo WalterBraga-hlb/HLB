@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "";
+}
+
+<div align="center">
+    @*<p>
+        @Html.ActionLink("Voltar p/ Lista de Vacinas do Pedido de Venda - Passo 03", "ListSecVacinas", "PedidoVenda")
+    </p>*@
+    @Html.Image(@Url.Content("~/Content/icons/pedidoVenda.png"), "Pedido de Venda")
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+
+<h2>Passo 03.01.01: Insira uma Vacina para combinar com a Vacina Primária</h2>
+<br />
+@using (Html.BeginForm("SaveVacSecPV", "PedidoVenda", FormMethod.Post))
+{
+    <fieldset>
+        <div class="editor-label">
+            <b>Vacina:</b>
+        </div>        
+        <div class="editor-field">
+            @Html.DropDownList(
+                "Text",
+                (List<SelectListItem>)Session["ListaVacinasSecundarias"])
+        </div>
+        <p>
+            <input type="submit" value="Inserir Vacina" id="add" />
+        </p>
+    </fieldset>
+}
+
+@using (Html.BeginForm("ListSecVacinas", "PedidoVenda", FormMethod.Post))
+{
+    <input type="submit" value="Voltar" />
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

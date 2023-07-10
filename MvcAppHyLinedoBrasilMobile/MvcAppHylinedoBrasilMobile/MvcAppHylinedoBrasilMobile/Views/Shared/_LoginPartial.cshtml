@@ -1,0 +1,15 @@
+﻿@{
+    string usuario = "0";
+    if (Session["usuario"] != null)
+    {
+        usuario = Session["usuario"].ToString();
+    }
+}
+    @if (usuario != "0")
+    {
+    @Html.ActionLink(@usuario, "Login", "AccountMobile", routeValues: null, htmlAttributes: new { data_icon = "gear" })
+}
+else {
+    @Html.ActionLink("Log Off", "Login", "AccountMobile", routeValues: null, htmlAttributes: new { data_icon = "gear" })
+    @*@Html.ActionLink("Log Off", "Login", "AccountMobile", htmlAttributes: new { data_icon = "gear" })*@
+}

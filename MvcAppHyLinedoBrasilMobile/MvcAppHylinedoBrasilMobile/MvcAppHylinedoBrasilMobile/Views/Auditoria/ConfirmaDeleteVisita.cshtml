@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "";
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+    MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities apolo = new MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities();
+
+    int id = Convert.ToInt32(Session["idSelecionado"]);
+    
+    string descricao = "";
+    MvcAppHylinedoBrasilMobile.Models.Auditoria_Visita visitaObj =
+        hlbapp.Auditoria_Visita.Where(w => w.ID == id).FirstOrDefault();
+    if (visitaObj != null)
+    {
+        MvcAppHylinedoBrasilMobile.Models.bdApolo2.FUNCIONARIO departamento = apolo.FUNCIONARIO
+            .Where(w => w.FuncCod == visitaObj.Departamento).FirstOrDefault();
+        MvcAppHylinedoBrasilMobile.Models.bdApolo2.FUNCIONARIO responsavel = apolo.FUNCIONARIO
+            .Where(w => w.FuncCod == visitaObj.Responsavel).FirstOrDefault();
+
+        descricao = visitaObj.DataVisita.ToShortDateString() + " - " + departamento.FuncNome
+            + " - " + responsavel.FuncNome;
+    }
+}
+
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+<h1 style="color:red; background-color:Yellow">
+        * CONFIRMA A EXCLUSÃO DA VISITA @(descricao)???
+</h1>
+<br />
+@using (Html.BeginForm("ListaVisitas", "Auditoria", FormMethod.Post))
+{
+    <input type="submit" value="Não" />
+}
+
+@using (Html.BeginForm("DeleteVisita", "Auditoria", FormMethod.Post))
+{
+    <input type="submit" value="Sim" />
+}

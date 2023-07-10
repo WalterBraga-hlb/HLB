@@ -1,0 +1,218 @@
+﻿@model IEnumerable<MvcAppHylinedoBrasilMobile.Models.VU_Verifica_Pedidos_Num_CHIC_Duplicados>
+
+@{
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities apolo = new MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities();
+    MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities apolo2 = new MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities();
+
+    ViewBag.Title = "";
+}
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Pedidos de Venda", "Index", "PedidoVenda")
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/pedidoVenda.png"), "Pedido de Venda")
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+
+<h2>
+    Segue abaixo a Lista de IDs com Nº do CHIC Duplicados:
+</h2>
+
+<div id="divTabelaIndexPV" style="overflow:auto" >
+<table id="tabelaIndexPV" class="ajustetabelaIndexPV">
+    <tbody class="ajustetabelaIndexPV">
+    <tr class="ajustetabelaIndexPV">
+        <th class="ajustetabelaIndexPV">
+            ID
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Nº CHIC
+        </th>
+        @if (MvcAppHyLinedoBrasil.Controllers.AccountController
+                .GetGroup("HLBAPPM-PedidoVendaDadosExportacao",
+                (System.Collections.ArrayList)Session["Direitos"]))
+        {
+            <th>
+                Geração
+            </th>
+            <th>
+                Tipo Produto
+            </th>
+        }
+        @if (Session["empresa"].ToString().Length > 2)
+        {
+            <th class="ajustetabelaIndexPV">Empresa</th>
+        }
+        <th class="ajustetabelaIndexPV">
+            Cliente
+        </th>
+        @if (MvcAppHyLinedoBrasil.Controllers.AccountController
+                .GetGroup("HLBAPPM-PedidoVendaDadosExportacao",
+                (System.Collections.ArrayList)Session["Direitos"]))
+        {
+            <th class="ajustetabelaIndexPV">
+                País
+            </th>
+        }
+        @*<th>
+            Data Ped.
+        </th>*@
+        <th class="ajustetabelaIndexPV">
+            Prim. Ent.
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Últ. Ent.
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Vend. / Repres.
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Status
+        </th>
+        <th class="ajustetabelaIndexPV"></th>
+    </tr>
+@foreach (var item in Model)
+{
+    <tr class="ajustetabelaIndexPV">
+        <td class="ajustetabelaIndexPV">
+            @Html.DisplayFor(modelItem => item.ID)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(hlbapp.Item_Pedido_Venda.Where(w => w.IDPedidoVenda == item.ID).Max(m => m.OrderNoCHIC))
+        </td>
+        @if (MvcAppHyLinedoBrasil.Controllers.AccountController
+                .GetGroup("HLBAPPM-PedidoVendaDadosExportacao",
+                (System.Collections.ArrayList)Session["Direitos"]))
+        {
+            MvcAppHylinedoBrasilMobile.Models.Item_Pedido_Venda ipv = hlbapp.Item_Pedido_Venda.Where(w => w.IDPedidoVenda == item.ID).FirstOrDefault();
+
+            MvcAppHylinedoBrasilMobile.Models.bdApolo.PRODUTO produto =
+                new MvcAppHylinedoBrasilMobile.Models.bdApolo.PRODUTO();
+
+            string geracao = "";
+            string tipo = "";
+
+            if (ipv != null)
+            {
+                produto = apolo.PRODUTO.Where(w => w.ProdCodEstr == ipv.ProdCodEstr).FirstOrDefault();
+
+                if (produto != null)
+                {
+                    MvcAppHylinedoBrasilMobile.Models.bdApolo2.CATEGORIA_PRODUTO categProd = apolo2
+                        .CATEGORIA_PRODUTO.Where(w => w.CategProdCod == produto.CategProdCod)
+                        .FirstOrDefault();
+
+                    if (categProd != null)
+                    {
+                        geracao = categProd.CategProdNome;
+                    }
+
+                    MvcAppHylinedoBrasilMobile.Models.bdApolo2.FAIXA_PRODUTO fxProd = apolo2
+                        .FAIXA_PRODUTO.Where(w => w.FxaProdCod == produto.FxaProdCod)
+                        .FirstOrDefault();
+
+                    if (fxProd != null)
+                    {
+                        tipo = fxProd.FxaProdNome;
+                    }
+                }
+                else
+                {
+                    if (ipv.ProdCodEstr.Contains("Ovos"))
+                    {
+                        tipo = "Ovos Férteis";
+                    }
+                    else
+                    {
+                        tipo = "Pinto de 1 Dia";
+                    }
+                    geracao = "Comercial";
+                }
+            }            
+            <td>
+                @(geracao)
+            </td>
+            <td>
+                @(tipo)
+            </td>
+        }
+        @if (Session["empresa"].ToString().Length > 2)
+        {
+            <td class="ajustetabelaIndexPV">
+                @item.Empresa
+            </td>
+        }
+        <td class="ajustetabelaIndexPV">
+        @{
+        //   string entnome = MvcAppHylinedoBrasilMobile.Controllers.PedidoVendaController.apoloStatic
+        //.ENTIDADE.Where(w => w.EntCod == item.CodigoCliente).FirstOrDefault().EntNome;
+
+        string entnome = item.NomeCliente;
+
+        int lenEnt = entnome.Length;
+        int lenPrintEnt = (lenEnt < 20) ? lenEnt : 20;
+
+        MvcAppHylinedoBrasilMobile.Models.bdApolo.ENTIDADE entidade = apolo.ENTIDADE.Where(w => w.EntCod == item.CodigoCliente).FirstOrDefault();
+
+        MvcAppHylinedoBrasilMobile.Models.bdApolo.CIDADE cidade = apolo.CIDADE.Where(w => w.CidCod == entidade.CidCod).FirstOrDefault();
+        }
+            @(entnome.Substring(0, lenPrintEnt))...
+        </td>
+        @if (MvcAppHyLinedoBrasil.Controllers.AccountController
+                .GetGroup("HLBAPPM-PedidoVendaDadosExportacao",
+                (System.Collections.ArrayList)Session["Direitos"]))
+        {
+        <td class="ajustetabelaIndexPV">
+           @(cidade.PaisSigla)
+        </td>
+        }
+        @*<td>
+            @String.Format("{0:dd/MM/yy}", item.DataPedido)
+        </td>*@
+        <td class="ajustetabelaIndexPV">
+            @String.Format("{0:dd/MM/yy}", hlbapp.Item_Pedido_Venda.Where(w => w.IDPedidoVenda == item.ID).Min(m => m.DataEntregaInicial))
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @String.Format("{0:dd/MM/yy}", hlbapp.Item_Pedido_Venda.Where(w => w.IDPedidoVenda == item.ID).Max(m => m.DataEntregaFinal))
+        </td>
+        @{
+        string codVendedorCompleto = "0" + item.Vendedor;
+        MvcAppHylinedoBrasilMobile.Models.bdApolo.VENDEDOR vendedor = apolo.VENDEDOR.Where(w => w.VendCod == codVendedorCompleto).FirstOrDefault();
+
+        int lenVend = vendedor.VendNome.Length;
+        int lenPrintVend = (lenVend < 10) ? lenVend : 10;
+        }
+        <td class="ajustetabelaIndexPV">
+            @vendedor.VendNome.Substring(0, lenPrintVend)...
+        </td>
+        @*<td>
+            @(item.Usuario.Substring(0, 10))...
+        </td>*@
+        <td class="ajustetabelaIndexPV">
+            <div style="background-color: 
+               @MvcAppHylinedoBrasilMobile.Controllers.PedidoVendaController.GetColorStatus(item.Status);">
+               <b>
+                @item.Status
+               </b>
+            </div>
+        </td>
+        <td class="ajustetabelaIndexPV">
+            <div align="center">            
+                @Html.ActionLink("Re-importar", "ReImportPVCHIC",
+                    new { id = item.ID },
+                    new
+                    {
+                        @class = "duplicar",
+                        //@target = "_blank",
+                        @title = "Clique aqui para Re-importar este Pedido"
+                    })
+            </div>
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+</div>

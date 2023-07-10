@@ -1,0 +1,23 @@
+﻿@*@model DHTMLX.Scheduler.DHXScheduler
+
+@Html.Raw(Model.Render())*@
+
+@{
+    Layout = null;
+}
+
+@model DHTMLX.Scheduler.DHXScheduler
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View1</title>
+</head>
+<body>
+    <div>
+        @Html.Raw(Model.Render())        
+    </div>
+</body>
+</html>

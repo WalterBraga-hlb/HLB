@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Download de Formulários";
+}
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Menu Principal", "Index", "HomeMobile")
+    </p>
+</div>
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Download de Formulários</li>
+    @*@if (DateTime.Today <= Convert.ToDateTime("08/02/2016"))
+    {
+    <li>
+        @Html.ActionLink("Formulário para preenchimento de Pedidos", "BaixarFormulario", "DownloadFormularios", null, new { @class = "checkdeo", @target = "_blank" })
+    </li>
+    }
+    else
+    {
+        <label>PEDIDOS POR FORMULÁRIOS DESCONTINUADO! ACESSE VIA http://m.hlbapp.hyline.com.br PELO NOVO MÓDULO!!!</label>
+    }*@
+    <li>
+        @Html.ActionLink("Postura App - Android", "BaixarAppAndroid", "DownloadFormularios", null, new { @class = "android", @target = "_blank" })
+    </li>
+    <li>
+        @Html.ActionLink("Auditoria - EW - Android", "BaixarAppEWGroup", "DownloadFormularios", null, new { @class = "auditoriaApp", @target = "_blank" })
+    </li>
+</ul>

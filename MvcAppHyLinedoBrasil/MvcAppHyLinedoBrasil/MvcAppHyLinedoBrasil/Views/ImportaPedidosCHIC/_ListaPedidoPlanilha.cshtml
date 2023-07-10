@@ -1,0 +1,267 @@
+﻿@model IEnumerable<MvcAppHyLinedoBrasil.Models.LayoutPedidoPlanilha>
+@if (Model != null && ViewBag.qtdErros == 0)
+{
+    using (Html.BeginForm("ImportaCHIC", "ImportaPedidosCHIC", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        MvcAppHyLinedoBrasil.Models.LayoutPedidoPlanilha pedido = Model.First();
+    <fieldset>
+        <table style="width: 100%; border: none;">
+            <tr style="border: none;">
+                <td colspan="6" style="border: none;">
+                    <p align="center">
+                        <legend><u>Dados do Pedido</u></legend>
+                    </p>
+                </td>
+            </tr>
+            <tr style="border: none;">
+                <td style="border: none;">
+                    &nbsp;
+                </td>
+                <td style="border: none;">
+                    &nbsp;
+                </td>
+                <td style="border: none;">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr style="border: none;">
+                <td style="border: none;">
+                    <b>Empresa:</b> @Html.Label(pedido.Empresa)
+                </td>
+                <td colspan="3" style="border: none;">
+                    <b>Vendedor / Representante:</b> @Html.Label(pedido.Vendedor)
+                </td>
+                <td style="border: none;">
+                    <b>Operação:</b> @Html.Label(pedido.Operacao)
+                </td>
+            </tr>
+            @if (!pedido.Operacao.Equals("Incluir Novo"))
+            {
+                <tr style="border: none;">
+                    <td style="border: none;">
+                        &nbsp;
+                    </td>
+                    <td style="border: none;">
+                        &nbsp;
+                    </td>
+                    <td style="border: none;">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr style="border: none;">
+                    <td style="border: none;" colspan="6">
+                            <b>Motivo da Operação:</b>
+                        <br />
+                        <br />
+                        @Html.TextArea("motivo", htmlAttributes: new { @style = "width: 100%; height: 100%" })
+                    </td>
+                </tr>
+            }
+            <tr style="border: none;">
+                <td style="border: none;">
+                    &nbsp;
+                </td>
+                <td style="border: none;">
+                    &nbsp;
+                </td>
+                <td style="border: none;">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr style="border: none;">
+                <td style="border: none;">
+                    <b>Cliente:</b> @Html.Label(pedido.CodigoCliente)
+                </td>
+                <td colspan="5" style="border: none;">
+                    @pedido.DescricaoCliente
+                </td>
+            </tr>
+            <tr style="border: none;">
+                <td colspan="4" style="border: none;">
+                    <b>Cidade:</b> @Html.Label(pedido.Cidade)
+                </td>
+                <td style="border: none;">
+                    <b>UF:</b> @Html.Label(pedido.Estado)
+                </td>
+            </tr>
+            <tr style="border: none;">
+                <td style="border: none;">
+                    &nbsp;
+                </td>
+                <td style="border: none;">
+                    &nbsp;
+                </td>
+                <td style="border: none;">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr style="border: none;">
+                <td style="border: none;">
+                    <b>Vacina:</b> @Html.Label(pedido.Vacina)
+                </td>
+                <td style="border: none;">
+                    <b>Bouba:</b>
+                    @if (pedido.Bouba.Equals(1))
+                    { 
+                        <b>X</b>
+                    }
+                </td>
+                <td style="border: none;">
+                    <b>Gombouro:</b>
+                    @if (pedido.Gombouro.Equals(1))
+                    { <b>X</b> }
+                </td>
+                <td style="border: none;">
+                    <b>Coccidiose:</b>
+                    @if (pedido.Coccidiose.Equals(1))
+                    { <b>X</b> }
+                </td>
+                <td style="border: none;">
+                    <b>Laringo:</b>
+                    @if (pedido.Laringo.Equals(1))
+                    { <b>X</b> }
+                </td>
+                <td style="border: none;">
+                    <b>Salmonela:</b>
+                    @if (pedido.Salmonela.Equals(1))
+                    { <b>X</b> }
+                </td>
+            </tr>
+            <tr style="border: none;">
+                <td style="border: none;">
+                    <b>Tratamento Infravermelho:</b>
+                    @if (pedido.TratamentoInfravermelho.Equals(1))
+                    { <b>X</b> }
+                </td>
+                <td style="border: none;">
+                    <b>Qtde. Pintainhas:</b> @Html.Label(String.Format("{0:F}", pedido.QtdePintinhosTratInfraVerm))
+                </td>
+                <td style="border: none;">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr style="border: none;">
+                <td style="border: none;">
+                    <b>Ovos Brasil:</b>
+                    @if (pedido.OvosBrasil.Equals(1))
+                    { <b>X</b> }
+                </td>
+                <td style="border: none;">
+                    <b>Embalagem:</b> @Html.Label(pedido.Embalagem)
+                </td>
+                <td style="border: none;">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr style="border: none;">
+                <td style="border: none;">
+                    &nbsp;
+                </td>
+                <td style="border: none;">
+                    &nbsp;
+                </td>
+                <td style="border: none;">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr style="border: none;">
+                <td colspan="6" style="border: none;">
+                    <b>Condição de Pagamento:</b> @Html.Label(pedido.CondicaoPagamento)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" style="border: none;">
+                    <b>Observação:</b> @Html.Label(pedido.Observacao)
+                </td>
+            </tr>
+        </table>
+        <p align="center">
+            <legend><u>Itens da Planilha</u></legend>
+        </p>
+        <table style="width: 100%">
+            <tr>
+                @if (pedido.Operacao != "Incluir Novo")
+                {
+                    <th>
+                        Nº Ped.CHIC
+                    </th> 
+                }
+                <th>
+                    Data Inicial
+                </th>
+                <th>
+                    Data Final
+                </th>
+                <th>
+                    Linhagem
+                </th>
+                <th>
+                    Qtde.Líquida
+                </th>
+                <th>
+                    % Bonificação
+                </th>
+                <th>
+                    Qtde.Bonific.
+                </th>
+                <th>
+                    Qtde.Reposição
+                </th>
+                <th>
+                    Qtde.Total
+                </th>
+                <th>
+                    Valor Unitário
+                </th>
+                <th>
+                    Valor Total
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr align="center">
+                    @if (pedido.Operacao != "Incluir Novo")
+                    {
+                        <td>
+                            @item.NumeroPedidoCHIC
+                        </td>
+                    }
+                    <td>
+                        @String.Format("{0:dd/MM/yyyy}", item.DataInicial)
+                    </td>
+                    <td>
+                        @String.Format("{0:dd/MM/yyyy}", item.DataFinal)
+                    </td>
+                    <td>
+                        @item.Linhagem
+                    </td>
+                    <td>
+                        @String.Format("{0:0,0}", item.QtdeLiquida)
+                    </td>
+                    <td>
+                        @String.Format("{0:F}", item.PercBonificacao) %
+                    </td>
+                    <td>
+                        @String.Format("{0:0,0}", item.QtdeBonificacao)
+                    </td>
+                    <td>
+                        @String.Format("{0:0,0}", item.QtdeReposicao)
+                    </td>
+                    <td>
+                        @String.Format("{0:0,0}", item.QtdeTotal)
+                    </td>
+                    <td>
+                        R$ @String.Format("{0:0.,0000}", item.ValorUnitario)
+                    </td>
+                    <td>
+                        @String.Format("{0:C}", item.ValorTotal)
+                    </td>
+                </tr>
+            }
+        </table>
+        <p align="center">
+        <input type="submit" value="Confirmar Importação para o CHIC" />
+        </p>
+    </fieldset>
+    }
+}

@@ -1,0 +1,180 @@
+﻿@model IEnumerable<MvcAppHylinedoBrasilMobile.Models.Config_Formula_Racao>
+@{
+    ViewBag.Title = "";
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities apolo =
+        new MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities();
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+}
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Menu Principal", "Index", "HomeMobile")
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/assistencia_tecnica.png"),
+        "Lista de Configuração das Fórmula da Ração")
+    <h2>Lista de Configuração das Fórmulas da Ração</h2>
+</div>
+<br />
+<h4 style="color:red;">@ViewBag.Erro</h4>
+<h4 style="color:Blue;">@ViewBag.Msg</h4>
+@using (Html.BeginForm("CarregarListaConfigFormulaRacaoView", "PedidoRacao"))
+{
+<ul data-role="listview" data-inset="true">
+    <li data-role="fieldcontain">
+        <b>Informe parte da descrição da configuração ou deixe em branco:</b>
+        <div class="editor-label">
+            @Html.TextBox("descricaoCPR", Session["filtraDescricaoCPR"].ToString())
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <b>Configurações Ativas?</b>
+        <div class="editor-label">
+            @Html.DropDownList(
+            "ativaCPR",
+            (List<SelectListItem>)Session["ListaAtivaCPR"])
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <b>Informe o nº da fórmula que deseja pesquisar ou deixe em branco:</b>
+        <div class="editor-label">
+            @Html.TextBox("numFormulaCPR", Session["filtraNumFormulaCPR"].ToString(), new { @type = "number" })
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <b>Informe o código do núcleo que deseja pesquisar ou deixe em branco:</b>
+        <div class="editor-label">
+            @Html.TextBox("nucleoCPR", Session["filtraNucleoCPR"].ToString())
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <input type="submit" value="Pesquisar" />
+    </li>
+</ul>
+}
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Menu da Configuração das Fórmulas da Ração</li>
+    <li>
+        @Html.ActionLink("Adicionar Nova Configuração das Fórmulas da Ração", "CreateConfigFormulaRacao",
+            "PedidoRacao", null,
+            new { @class = "add", @title = "Clique aqui para Inserir nova Configuração das Fórmulas da Ração" })
+    </li>
+    <li>
+        @Html.ActionLink("Gerar Ordens de Produção manualmente", "GerarOrdemProducao",
+            "PedidoRacao", null,
+            new { @class = "checkdeo" })
+    </li>
+</ul>
+<div id="tabelaDEO" style="overflow:auto;">
+    <table id="tabelaIndexPV" class="ajustetabelaIndexPV">
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>ID</th>
+            <th>
+                Decrição
+            </th>
+            <th>
+                Nº Fórmula
+            </th>
+            <th>
+                Cód. Apolo
+            </th>
+            <th>
+                Descrição Apolo
+            </th>
+            <th>
+                Núcleo / Galpões Vinculados
+            </th>
+            <th>
+                Ativa
+            </th>
+            <th>
+                Modelo
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            string nomeProdApolo = "";
+            MvcAppHylinedoBrasilMobile.Models.bdApolo.PRODUTO produto =
+                apolo.PRODUTO.Where(w => w.ProdCodEstr == item.ProdCodEstr).FirstOrDefault();
+
+            string numFormula = "";
+            MvcAppHylinedoBrasilMobile.Models.bdApolo.PRODUTO1 produto1 =
+                apolo.PRODUTO1.Where(w => w.ProdCodEstr == item.ProdCodEstr).FirstOrDefault();
+            if (produto != null)
+            {
+                nomeProdApolo = produto.ProdNome;
+                numFormula = produto1.USERNumFormula.ToString();
+            }
+
+            string ativa = "Sim";
+            if (item.Ativa == 0) { ativa = "Não"; }
+
+            string nucleosGalpoesSelecionados = "";
+
+            List<MvcAppHylinedoBrasilMobile.Models.Config_Formula_Racao_Galpao> listaGalpoes = hlbapp.Config_Formula_Racao_Galpao
+                .Where(w => w.IDConfigFormulaRacao == item.ID).ToList();
+
+            foreach (var galpao in listaGalpoes)
+            {
+                nucleosGalpoesSelecionados = nucleosGalpoesSelecionados + galpao.CodNucleo + " - " + galpao.NumGalpao;
+                if (listaGalpoes.IndexOf(galpao) != (listaGalpoes.Count - 1))
+                {
+                    nucleosGalpoesSelecionados = nucleosGalpoesSelecionados + " / ";
+                }
+            }
+
+            <tr class="ajustetabelaIndexPV">
+                <td class="ajuste">
+                    <div align="center">
+                        @Html.ActionLink("Edit", "EditConfigFormulaRacao", new { id = item.ID },
+                            new { @class = "edit" })
+                    </div>
+                </td>
+                <td class="ajuste">
+                    <div align="center">
+                        @Html.ActionLink("Delete", "DeleteConfigFormulaRacao", new { id = item.ID },
+                            new { @class = "delete" })
+                    </div>
+                </td>
+                <td class="ajuste">
+                    <div align="center">
+                        @Html.ActionLink("Copy", "CopyConfigFormulaRacao", new { id = item.ID },
+                            new { @class = "duplicar" })
+                    </div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @(numFormula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProdCodEstr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => nomeProdApolo)
+                </td>
+                <td>
+                    @(nucleosGalpoesSelecionados)
+                </td>
+                <td>
+                    @(ativa)
+                </td>
+                <td>
+                    @(item.Modelo)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

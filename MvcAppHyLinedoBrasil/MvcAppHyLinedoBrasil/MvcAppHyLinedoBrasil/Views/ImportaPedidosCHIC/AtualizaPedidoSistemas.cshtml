@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Importação de Pedidos do CHIC p/ Embarcador / Apolo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#divProcessing").hide();
+        verificaTipoAtualizacaoSistemas();
+        $('#atualizar').click(function () {
+            $("#divProcessing").show();
+        });
+        $('#atualizar_web').click(function () {
+            $("#divProcessing").show();
+        });
+    });
+
+    function verificaTipoAtualizacaoSistemas() {
+        var tipoAtualizacao = $('#ddlTipoAtualizacaoSistemas option:selected').text();
+        if (tipoAtualizacao == "(Todos)") {
+            $('#pnlOrderNoCHIC').hide();
+            $('#pnlEmbarcador').hide();
+            $('#ordernoCHIC').val('');
+        } else {
+            $('#pnlOrderNoCHIC').show();
+            $('#pnlEmbarcador').show();
+        }
+    }
+
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mnum(v) {
+        v = v.replace(/\D/g, "");                                      //Remove tudo o que não é dígito
+        return v;
+    }
+</script>
+
+@Html.Partial("Abas")
+
+<fieldset>
+    <h2>Importação de Pedidos do CHIC p/ Embarcador / Apolo</h2>
+
+    @using (Html.BeginForm("AtualizaPedidoSistemas", "ImportaPedidosCHIC", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <legend>Informe os parâmetros a seguir:</legend>
+        <br />
+        <br />
+        <b>Selecione a opção de importação: </b>
+        @Html.DropDownList("TipoAtualizacaoSistemas", (IEnumerable<SelectListItem>)Session["ListaTipoAtualizacaoSistemas"],
+            new { @id = "ddlTipoAtualizacaoSistemas", @onchange = "verificaTipoAtualizacaoSistemas();" })
+        <br />
+        <h4 style="color:red;"><b>** A OPÇÃO "(Todos)" SÓ FUNCIONA PARA A IMPORTAÇÃO PARA O APOLO, ONDE SÃO ENVIADOS OS PEDIDOS QUE ESTÃO MARCADOS NO CHIC COM O STATUS "SENT"! **</b></h4>
+        <div id="pnlOrderNoCHIC">
+            <b>Nº Pedido CHIC: </b>@Html.TextBox("ordernoCHIC", "", new { @onkeyup = "mascara(this, mnum);" })
+            <br />
+            <br />
+        </div>
+        <div id="pnlEmbarcador">
+            @Html.CheckBox("atualizaEmbarcador", false) <b>Realizar importação no Embarcador</b>
+            @Html.CheckBox("atualizaApolo", false)  <b>Realizar importação no Apolo</b>
+        </div>
+        <br />
+        <br />
+        <div class="editor-field">
+            <input type="submit" value="Atualizar CHIC / Embarcador" id="atualizar" />
+        </div>
+    }
+</fieldset>
+<br />
+<fieldset>
+    <h2>Atualização dos Pedidos do CHIC p/ Web</h2>
+    @using (Html.BeginForm("AtualizaCHICxWebMensal", "ImportaPedidosCHIC", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <legend>Informe os parâmetros a seguir:</legend>
+        <br />
+        <b>Selecione o Mês que será atualizado: </b>
+        @Html.TextBox("mesAtualizacao", Session["mesAtualizacao"], new { @required = "required", @type = "month" })
+        <br />
+        <br />
+        <div class="editor-field">
+            <input type="submit" value="Atualizar Web" id="atualizar_web" />
+        </div>
+    }
+</fieldset>
+<div id="divProcessing">
+    <p>Processando, por favor, aguarde . . . <img src="../../Content/images/ajax-loading.gif"></p>
+</div>
+
+<div id="divUltimaReview">
+    <h4>@ViewBag.fileName</h4>
+    <h4 style="color:red;">@ViewBag.erro</h4>
+</div>

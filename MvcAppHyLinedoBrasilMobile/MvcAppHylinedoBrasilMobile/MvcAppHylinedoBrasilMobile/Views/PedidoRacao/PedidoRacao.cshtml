@@ -1,0 +1,264 @@
+﻿@model IEnumerable<MvcAppHylinedoBrasilMobile.Models.PedidoRacao_Item>
+
+@{
+    ViewBag.Title = "";
+
+    int totalSolicitado = Convert.ToInt32(Model.Sum(s => s.QtdeKg));
+    
+    string granja = Session["granjaSelecionada"].ToString();
+    DateTime dataPedido = Convert.ToDateTime(Session["dataInicialPedidoRacao"]);
+    
+    bool permiteAlterarPedido = MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+        .GetGroup("HLBAPPM-PedidoRacaoAlteraPedido", (System.Collections.ArrayList)Session["Direitos"]);
+
+    bool permiteAlteracao = MvcAppHylinedoBrasilMobile.Controllers.PedidoRacaoController.VerificaAlteracaoEmpresaFilialApolo(Session["login"].ToString(),
+        granja, dataPedido, permiteAlterarPedido, true);
+}
+
+<script type="text/javascript">
+    $('#dataInicialPedidoRacao').change(function () {
+        var dataInicial = $('#dataInicialPedidoRacao').val();
+        var errorHolder = document.getElementById('errorDataPedido');
+        $.ajax({
+            url: '/PedidoRacao/AtualizaSessionData',
+            type: 'POST',
+            data: JSON.stringify({ id: dataInicial, chamada: '1' }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                    $.ajax({
+                        url: '/PedidoRacao/AtualizaRotaEntrega',
+                        type: 'POST',
+                        data: JSON.stringify({ id: dataInicial }),
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            $('select#rotaEntrega').empty();
+                            $('select#rotaEntrega').append('<option value="0" selected="selected">(Selecione uma Rota de Entrega)</option>');
+                            $.each(data, function (key, SelectListItem) {
+                                $('select#rotaEntrega').append('<option value="' + SelectListItem.Text + '">' + SelectListItem.Text + '</option>');
+                            });
+                            $('select#rotaEntrega').selectmenu('refresh');
+                        }
+                    });
+                    errorHolder.innerHTML = '';
+                    $('#add').button('enable');
+                    $('[type="submit"]').button('refresh');
+                } else {
+                    errorHolder.innerHTML = data;
+                    $('#dataInicialPedidoRacao').focus();
+                    $('#add').button('disable');
+                    $('[type="submit"]').button('refresh');
+                }
+            }
+        });
+    });
+
+    $('#dataFinalPedidoRacao').change(function () {
+        var lote = $('#dataFinalPedidoRacao').val();
+        $.ajax({
+            url: '/PedidoRacao/AtualizaSessionData',
+            type: 'POST',
+            data: JSON.stringify({ id: lote, chamada: '2' }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                } else {
+                    alert(data.toString());
+                }
+            }
+        });
+    });
+
+    $('#rotaEntrega').change(function () {
+        var rotaEntrega = $('#rotaEntrega').val();
+        $.ajax({
+            url: '/PedidoRacao/RetornaRotaEntrega',
+            type: 'POST',
+            data: JSON.stringify({ id: rotaEntrega }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                } else {
+                    alert(data.toString());
+                }
+            }
+        });
+    });
+
+    $('#dropBoxStatusPedidoRacao').change(function () {
+        var lote = $('#dropBoxStatusPedidoRacao option:selected').text();
+        $.ajax({
+            url: '/PedidoRacao/AtualizaSessionData',
+            type: 'POST',
+            data: JSON.stringify({ id: lote, chamada: '3' }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                } else {
+                    alert(data.toString());
+                }
+            }
+        });
+    });
+</script>
+
+@using (Html.BeginForm("SavePedidoRacao", "PedidoRacao", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Pedidos de Ração", "Index", "PedidoRacao")
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/graos_32x32.png"), "PedidoRacao")
+    <h2>Pedido de Ração</h2>
+    <br />
+    <div class="editor-label">
+        <b>Data do Pedido:</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox("dataInicialPedidoRacao", Convert.ToDateTime(Session["dataInicialPedidoRacao"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+    </div>
+    <div class="editor-label" id="errorDataPedido" style="color: Red; font-weight:bold;"></div>
+    @*<div class="editor-label">
+        <b>Data Final:</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox("dataFinalPedidoRacao", Convert.ToDateTime(Session["dataFinalPedidoRacao"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+    </div>*@
+    
+    <br />
+    <div class="editor-label">
+        <b>Status:</b>
+    </div>
+    <div class="editor-field">
+        @Html.DropDownList(
+            "Text",
+            (List<SelectListItem>)Session["ListaStatusPedidosRacao"],
+            new { @id = "dropBoxStatusPedidoRacao"})
+    </div>
+    @*@if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+        .GetGroup("HLBAPPM-PedidoRacaoInsereRotaEntrega", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+    <br />
+    <div class="editor-label">
+        <b>Rota de Entrega:</b>
+    </div>
+    <div class="editor-field">
+        @Html.DropDownList(
+            "RotaEntrega",
+            (List<SelectListItem>)Session["ListaRotaEntregaPedidosRacao"],
+            "(Selecione uma Rota de Entrega)",
+            new { @id = "rotaEntrega" })
+    </div>
+    }*@
+</div>
+    
+<br />
+<div align="center">
+    <h3>Qtde. Total Solicitada neste pedido: @(totalSolicitado.ToString("0,00")) Kg</h3>
+</div>
+<br />
+<div align="center">
+    <h2>Itens</h2>
+</div>
+<h3 style="color:red;">@ViewBag.Erro</h3>    
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Menu dos Itens do Pedido de Ração</li>
+    @if (permiteAlteracao)
+    {
+    <li>
+        @Html.ActionLink("Adicionar Novo Item do Pedido de Ração", "CreatePedidoRacaoItem", "PedidoRacao", null,
+            new { @class = "add", @title = "Clique aqui para Inserir novo Item do Pedido de Ração" })
+    </li>
+    }
+</ul>
+<div style="overflow:auto;">
+<table class="ajuste">
+    <tbody class="ajuste">
+    <tr class="ajuste">
+        <th class="ajuste"></th>
+        <th class="ajuste"></th>
+        <th class="ajuste">
+            ID
+        </th>
+        <th class="ajuste">
+            Núcleo
+        </th>
+        <th class="ajuste">
+            Galpão
+        </th>
+        <th class="ajuste">
+            Linhagem
+        </th>
+        <th class="ajuste">
+            Cód. Fórmula
+        </th>
+        <th class="ajuste">
+            Qtde. Kg.
+        </th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    string nomeProduto = "";
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.PRODUTO1 produto1 =
+    MvcAppHylinedoBrasilMobile.Controllers.PedidoRacaoController
+                .bdApolo.PRODUTO1.Where(w => w.USERNumFormula == item.CodFormulaRacao).FirstOrDefault();
+
+    if (produto1 != null)
+    {
+        nomeProduto = MvcAppHylinedoBrasilMobile.Controllers.PedidoRacaoController
+                .bdApolo.PRODUTO.Where(w => w.ProdCodEstr == produto1.ProdCodEstr).FirstOrDefault().ProdNome;
+    }
+    
+    <tr class="ajuste">
+        <td class="ajuste">
+            @if (permiteAlteracao)
+            {
+            <div align="center">
+                @Html.ActionLink("Edit", "EditPedidoRacaoItem", new { idPedidoRacao = item.IDPedidoRacao, idPedidoRacaoItem = item.ID }, new { @class = "edit" })
+            </div>
+            }
+        </td>
+        <td class="ajuste">
+            @if (permiteAlteracao)
+            {
+            <div align="center">            
+                @Html.ActionLink("Delete", "DeletePedidoRacaoItem", new { idPedidoRacao = item.IDPedidoRacao, idPedidoRacaoItem = item.ID }, new { @class = "delete" })
+            </div>
+            }
+        </td>
+        <td class="ajuste">
+            @Html.DisplayFor(modelItem => item.ID)
+        </td>
+        <td class="ajuste">
+            @Html.DisplayFor(modelItem => item.Nucleo)
+        </td>
+        <td class="ajuste">
+            @Html.DisplayFor(modelItem => item.Galpao)
+        </td>
+        <td class="ajuste">
+            @Html.DisplayFor(modelItem => item.Linhagem)
+        </td>
+        <td class="ajuste">
+            @(Html.DisplayFor(modelItem => item.CodFormulaRacao) + " - " + nomeProduto)
+        </td>
+        <td class="ajuste">
+            @String.Format("{0:N0}", item.QtdeKg)
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+</div>
+<br />
+    if (permiteAlteracao)
+    {
+        <input type="submit" value="Salvar" id="add" />
+    }
+}

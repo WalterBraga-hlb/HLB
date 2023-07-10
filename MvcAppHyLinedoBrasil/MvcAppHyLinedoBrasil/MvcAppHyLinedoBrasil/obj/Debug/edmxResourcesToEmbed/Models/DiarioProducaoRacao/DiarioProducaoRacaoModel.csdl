@@ -1,0 +1,2240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DiarioProducaoRacaoModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="DiarioProducaoRacaoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ITEM_NEC_PLAN_PRODUC" EntityType="DiarioProducaoRacaoModel.ITEM_NEC_PLAN_PRODUC" />
+    <EntitySet Name="ITEM_PLAN_PRODUC" EntityType="DiarioProducaoRacaoModel.ITEM_PLAN_PRODUC" />
+    <EntitySet Name="NEC_PLAN_PRODUC" EntityType="DiarioProducaoRacaoModel.NEC_PLAN_PRODUC" />
+    <EntitySet Name="OPER_ORD_PRODUC" EntityType="DiarioProducaoRacaoModel.OPER_ORD_PRODUC" />
+    <EntitySet Name="OPER_ORD_PRODUC_FUNC" EntityType="DiarioProducaoRacaoModel.OPER_ORD_PRODUC_FUNC" />
+    <EntitySet Name="ORD_PRODUC" EntityType="DiarioProducaoRacaoModel.ORD_PRODUC" />
+    <EntitySet Name="PLAN_PRODUC" EntityType="DiarioProducaoRacaoModel.PLAN_PRODUC" />
+    <EntitySet Name="PLAN_PRODUC_FIC_TEC" EntityType="DiarioProducaoRacaoModel.PLAN_PRODUC_FIC_TEC" />
+    <AssociationSet Name="FK__ORD_PRODUC__46217BB8" Association="DiarioProducaoRacaoModel.FK__ORD_PRODUC__46217BB8">
+      <End Role="ITEM_NEC_PLAN_PRODUC" EntitySet="ITEM_NEC_PLAN_PRODUC" />
+      <End Role="ORD_PRODUC" EntitySet="ORD_PRODUC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ITEM_NEC_REF_10464_NEC_PLAN" Association="DiarioProducaoRacaoModel.FK_ITEM_NEC_REF_10464_NEC_PLAN">
+      <End Role="NEC_PLAN_PRODUC" EntitySet="NEC_PLAN_PRODUC" />
+      <End Role="ITEM_NEC_PLAN_PRODUC" EntitySet="ITEM_NEC_PLAN_PRODUC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ITEM_PLA_REF_10303_PLAN_PRO" Association="DiarioProducaoRacaoModel.FK_ITEM_PLA_REF_10303_PLAN_PRO">
+      <End Role="PLAN_PRODUC" EntitySet="PLAN_PRODUC" />
+      <End Role="ITEM_PLAN_PRODUC" EntitySet="ITEM_PLAN_PRODUC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PLAN_PRO_REF_10326_ITEM_PLA" Association="DiarioProducaoRacaoModel.FK_PLAN_PRO_REF_10326_ITEM_PLA">
+      <End Role="ITEM_PLAN_PRODUC" EntitySet="ITEM_PLAN_PRODUC" />
+      <End Role="PLAN_PRODUC_FIC_TEC" EntitySet="PLAN_PRODUC_FIC_TEC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NEC_PLAN_REF_10436_PLAN_PRO" Association="DiarioProducaoRacaoModel.FK_NEC_PLAN_REF_10436_PLAN_PRO">
+      <End Role="PLAN_PRODUC" EntitySet="PLAN_PRODUC" />
+      <End Role="NEC_PLAN_PRODUC" EntitySet="NEC_PLAN_PRODUC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OPER_ORD_REF_10723_ORD_PROD" Association="DiarioProducaoRacaoModel.FK_OPER_ORD_REF_10723_ORD_PROD">
+      <End Role="ORD_PRODUC" EntitySet="ORD_PRODUC" />
+      <End Role="OPER_ORD_PRODUC" EntitySet="OPER_ORD_PRODUC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OPER_ORD_REF_10744_OPER_ORD" Association="DiarioProducaoRacaoModel.FK_OPER_ORD_REF_10744_OPER_ORD">
+      <End Role="OPER_ORD_PRODUC" EntitySet="OPER_ORD_PRODUC" />
+      <End Role="OPER_ORD_PRODUC_FUNC" EntitySet="OPER_ORD_PRODUC_FUNC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORD_PROD_REF_10641_ORD_PROD" Association="DiarioProducaoRacaoModel.FK_ORD_PROD_REF_10641_ORD_PROD">
+      <End Role="ORD_PRODUC" EntitySet="ORD_PRODUC" />
+      <End Role="ORD_PRODUC1" EntitySet="ORD_PRODUC" />
+    </AssociationSet>
+    <FunctionImport Name="GeraOrdemProducao">
+      <Parameter Name="CODIGO_PLANEJAMENTO" Mode="In" Type="String" />
+      <Parameter Name="CODIGO_PRODUTO" Mode="In" Type="String" />
+      <Parameter Name="SEQUENCIA" Mode="In" Type="Int32" />
+      <Parameter Name="VPRODGRADECORCOD" Mode="In" Type="String" />
+      <Parameter Name="CODIGO_EMPRESA" Mode="In" Type="String" />
+      <Parameter Name="DATA" Mode="In" Type="DateTime" />
+      <Parameter Name="USUCOD" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="InsertOperOrdProducProc">
+      <Parameter Name="VEMPCOD" Mode="In" Type="String" />
+      <Parameter Name="VORDPRODUCNUM" Mode="In" Type="String" />
+      <Parameter Name="VOPERORDPRODUCSEQ" Mode="In" Type="Int32" />
+      <Parameter Name="VPRODUTO" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="FIC_TEC_PROD" EntityType="DiarioProducaoRacaoModel.FIC_TEC_PROD" />
+    <AssociationSet Name="FK_PLAN_PRO_REF_10335_FIC_TEC_" Association="DiarioProducaoRacaoModel.FK_PLAN_PRO_REF_10335_FIC_TEC_">
+      <End Role="FIC_TEC_PROD" EntitySet="FIC_TEC_PROD" />
+      <End Role="PLAN_PRODUC_FIC_TEC" EntitySet="PLAN_PRODUC_FIC_TEC" />
+    </AssociationSet>
+    <FunctionImport Name="GerarCodigo">
+      <Parameter Name="empresa" Mode="In" Type="String" />
+      <Parameter Name="tabela" Mode="In" Type="String" />
+      <Parameter Name="codigo" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="LOC_ARMAZ" EntityType="DiarioProducaoRacaoModel.LOC_ARMAZ" />
+    <AssociationSet Name="FK__OPER_ORD___LocAr__02BCE085" Association="DiarioProducaoRacaoModel.FK__OPER_ORD___LocAr__02BCE085">
+      <End Role="LOC_ARMAZ" EntitySet="LOC_ARMAZ" />
+      <End Role="OPER_ORD_PRODUC" EntitySet="OPER_ORD_PRODUC" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ORD_PRODU__LocAr__7C6E0D31" Association="DiarioProducaoRacaoModel.FK__ORD_PRODU__LocAr__7C6E0D31">
+      <End Role="LOC_ARMAZ" EntitySet="LOC_ARMAZ" />
+      <End Role="ORD_PRODUC" EntitySet="ORD_PRODUC" />
+    </AssociationSet>
+    <EntitySet Name="ITEM_REQ_MAT" EntityType="DiarioProducaoRacaoModel.ITEM_REQ_MAT" />
+    <EntitySet Name="RATEIO_REQ_MAT" EntityType="DiarioProducaoRacaoModel.RATEIO_REQ_MAT" />
+    <EntitySet Name="REQ_MAT" EntityType="DiarioProducaoRacaoModel.REQ_MAT" />
+    <EntitySet Name="REQ_MAT_CLASSE_REC_DESP" EntityType="DiarioProducaoRacaoModel.REQ_MAT_CLASSE_REC_DESP" />
+    <AssociationSet Name="FK__ITEM_REQ_MAT__0A148317" Association="DiarioProducaoRacaoModel.FK__ITEM_REQ_MAT__0A148317">
+      <End Role="FIC_TEC_PROD" EntitySet="FIC_TEC_PROD" />
+      <End Role="ITEM_REQ_MAT" EntitySet="ITEM_REQ_MAT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ITEM_REQ___LocAr__45099505" Association="DiarioProducaoRacaoModel.FK__ITEM_REQ___LocAr__45099505">
+      <End Role="LOC_ARMAZ" EntitySet="LOC_ARMAZ" />
+      <End Role="ITEM_REQ_MAT" EntitySet="ITEM_REQ_MAT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ITEM_REQ_MAT__2BBEF618" Association="DiarioProducaoRacaoModel.FK__ITEM_REQ_MAT__2BBEF618">
+      <End Role="ORD_PRODUC" EntitySet="ORD_PRODUC" />
+      <End Role="ITEM_REQ_MAT" EntitySet="ITEM_REQ_MAT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ITEM_REQ_REF_13014_LOC_ARMA" Association="DiarioProducaoRacaoModel.FK_ITEM_REQ_REF_13014_LOC_ARMA">
+      <End Role="LOC_ARMAZ" EntitySet="LOC_ARMAZ" />
+      <End Role="ITEM_REQ_MAT" EntitySet="ITEM_REQ_MAT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ITEM_REQ_REF_13029_REQ_MAT" Association="DiarioProducaoRacaoModel.FK_ITEM_REQ_REF_13029_REQ_MAT">
+      <End Role="REQ_MAT" EntitySet="REQ_MAT" />
+      <End Role="ITEM_REQ_MAT" EntitySet="ITEM_REQ_MAT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__REQ_MAT__LocArma__53ECB139" Association="DiarioProducaoRacaoModel.FK__REQ_MAT__LocArma__53ECB139">
+      <End Role="LOC_ARMAZ" EntitySet="LOC_ARMAZ" />
+      <End Role="REQ_MAT" EntitySet="REQ_MAT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RATEIO_REQ_MAT__14707F4B" Association="DiarioProducaoRacaoModel.FK__RATEIO_REQ_MAT__14707F4B">
+      <End Role="REQ_MAT" EntitySet="REQ_MAT" />
+      <End Role="RATEIO_REQ_MAT" EntitySet="RATEIO_REQ_MAT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__REQ_MAT_CLASSE_R__1D05C54C" Association="DiarioProducaoRacaoModel.FK__REQ_MAT_CLASSE_R__1D05C54C">
+      <End Role="REQ_MAT" EntitySet="REQ_MAT" />
+      <End Role="REQ_MAT_CLASSE_REC_DESP" EntitySet="REQ_MAT_CLASSE_REC_DESP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_REQ_MAT_REF_12972_REQ_MAT" Association="DiarioProducaoRacaoModel.FK_REQ_MAT_REF_12972_REQ_MAT">
+      <End Role="REQ_MAT" EntitySet="REQ_MAT" />
+      <End Role="REQ_MAT1" EntitySet="REQ_MAT" />
+    </AssociationSet>
+    <FunctionImport Name="ReqMaterialAtendeAutomatico">
+      <Parameter Name="empcod" Mode="In" Type="String" />
+      <Parameter Name="reqmatnum" Mode="In" Type="String" />
+      <Parameter Name="usucod" Mode="In" Type="String" />
+      <Parameter Name="operacao" Mode="In" Type="String" />
+      <Parameter Name="bxaautom" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="ESTQ_LOC_ARMAZ" EntityType="DiarioProducaoRacaoModel.ESTQ_LOC_ARMAZ" />
+    <AssociationSet Name="FK_ESTQ_LOC_REF_5218_LOC_ARMA" Association="DiarioProducaoRacaoModel.FK_ESTQ_LOC_REF_5218_LOC_ARMA">
+      <End Role="LOC_ARMAZ" EntitySet="LOC_ARMAZ" />
+      <End Role="ESTQ_LOC_ARMAZ" EntitySet="ESTQ_LOC_ARMAZ" />
+    </AssociationSet>
+    <EntitySet Name="PROD_UNID_MED" EntityType="DiarioProducaoRacaoModel.PROD_UNID_MED" />
+    <AssociationSet Name="FK__FIC_TEC_PROD__6D626A79" Association="DiarioProducaoRacaoModel.FK__FIC_TEC_PROD__6D626A79">
+      <End Role="PROD_UNID_MED" EntitySet="PROD_UNID_MED" />
+      <End Role="FIC_TEC_PROD" EntitySet="FIC_TEC_PROD" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ITEM_NEC_PLAN_PR__184CC87E" Association="DiarioProducaoRacaoModel.FK__ITEM_NEC_PLAN_PR__184CC87E">
+      <End Role="PROD_UNID_MED" EntitySet="PROD_UNID_MED" />
+      <End Role="ITEM_NEC_PLAN_PRODUC" EntitySet="ITEM_NEC_PLAN_PRODUC" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ITEM_PLAN_PRODUC__1664800C" Association="DiarioProducaoRacaoModel.FK__ITEM_PLAN_PRODUC__1664800C">
+      <End Role="PROD_UNID_MED" EntitySet="PROD_UNID_MED" />
+      <End Role="ITEM_PLAN_PRODUC" EntitySet="ITEM_PLAN_PRODUC" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ITEM_REQ_MAT__07D36E01" Association="DiarioProducaoRacaoModel.FK__ITEM_REQ_MAT__07D36E01">
+      <End Role="PROD_UNID_MED" EntitySet="PROD_UNID_MED" />
+      <End Role="ITEM_REQ_MAT" EntitySet="ITEM_REQ_MAT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ITEM_REQ_MAT__731B43CF" Association="DiarioProducaoRacaoModel.FK__ITEM_REQ_MAT__731B43CF">
+      <End Role="PROD_UNID_MED" EntitySet="PROD_UNID_MED" />
+      <End Role="ITEM_REQ_MAT" EntitySet="ITEM_REQ_MAT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OPER_ORD_PRODUC__324A6168" Association="DiarioProducaoRacaoModel.FK__OPER_ORD_PRODUC__324A6168">
+      <End Role="PROD_UNID_MED" EntitySet="PROD_UNID_MED" />
+      <End Role="OPER_ORD_PRODUC" EntitySet="OPER_ORD_PRODUC" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ORD_PRODUC__7FBEE19B" Association="DiarioProducaoRacaoModel.FK__ORD_PRODUC__7FBEE19B">
+      <End Role="PROD_UNID_MED" EntitySet="PROD_UNID_MED" />
+      <End Role="ORD_PRODUC" EntitySet="ORD_PRODUC" />
+    </AssociationSet>
+    <EntitySet Name="PRODUTO1" EntityType="DiarioProducaoRacaoModel.PRODUTO1" />
+    <AssociationSet Name="FK__ESTQ_LOC___ProdC__28917C65" Association="DiarioProducaoRacaoModel.FK__ESTQ_LOC___ProdC__28917C65">
+      <End Role="PRODUTO1" EntitySet="PRODUTO1" />
+      <End Role="ESTQ_LOC_ARMAZ" EntitySet="ESTQ_LOC_ARMAZ" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FIC_TEC_P__ProdC__30329E2D" Association="DiarioProducaoRacaoModel.FK__FIC_TEC_P__ProdC__30329E2D">
+      <End Role="PRODUTO1" EntitySet="PRODUTO1" />
+      <End Role="FIC_TEC_PROD" EntitySet="FIC_TEC_PROD" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ITEM_NEC___ProdC__58408F87" Association="DiarioProducaoRacaoModel.FK__ITEM_NEC___ProdC__58408F87">
+      <End Role="PRODUTO1" EntitySet="PRODUTO1" />
+      <End Role="ITEM_NEC_PLAN_PRODUC" EntitySet="ITEM_NEC_PLAN_PRODUC" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRODUTO1__ProdCo__68D880B1" Association="DiarioProducaoRacaoModel.FK__PRODUTO1__ProdCo__68D880B1">
+      <End Role="PRODUTO1" EntitySet="PRODUTO1" />
+      <End Role="PRODUTO11" EntitySet="PRODUTO1" />
+    </AssociationSet>
+    <EntitySet Name="SALDO_ESTQ_DATA" EntityType="DiarioProducaoRacaoModel.SALDO_ESTQ_DATA" />
+    <FunctionImport Name="EstornaAtendReqMat">
+      <Parameter Name="empcod" Mode="In" Type="String" />
+      <Parameter Name="numorig" Mode="In" Type="String" />
+      <Parameter Name="reqmatnumatual" Mode="In" Type="String" />
+      <Parameter Name="reqmatnumant" Mode="In" Type="String" />
+      <Parameter Name="reqmatnumprox" Mode="In" Type="String" />
+      <Parameter Name="usucod" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteReqmat">
+      <Parameter Name="empcod" Mode="In" Type="String" />
+      <Parameter Name="reqmatnum" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteOrdProduc">
+      <Parameter Name="Vempcod" Mode="In" Type="String" />
+      <Parameter Name="VORDPRODUCNUM" Mode="In" Type="String" />
+      <Parameter Name="VPRODCODESTR" Mode="In" Type="String" />
+      <Parameter Name="VUSUCOD" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteNecPlanProduc">
+      <Parameter Name="VEMPCOD" Mode="In" Type="String" />
+      <Parameter Name="VPLANPRODUCNUM" Mode="In" Type="String" />
+      <Parameter Name="VUSUCOD" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DeletePlanProduc">
+      <Parameter Name="Vempcod" Mode="In" Type="String" />
+      <Parameter Name="VPLANPRODUCNUM" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteApontOrdProduc">
+      <Parameter Name="Vempcod" Mode="In" Type="String" />
+      <Parameter Name="VORDPRODUCNUM" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteOperOrdProduc">
+      <Parameter Name="Vempcod" Mode="In" Type="String" />
+      <Parameter Name="VORDPRODUCNUM" Mode="In" Type="String" />
+      <Parameter Name="vProdCodEstr" Mode="In" Type="String" />
+      <Parameter Name="vProdOperSeq" Mode="In" Type="Int16" />
+      <Parameter Name="vOperOrdProducSeq" Mode="In" Type="Int32" />
+      <Parameter Name="VUSUCOD" Mode="In" Type="String" />
+      <Parameter Name="VMOTIVO" Mode="In" Type="String" />
+      <Parameter Name="VUSUCODDELECAO" Mode="In" Type="String" />
+    </FunctionImport>
+    <AssociationSet Name="FK_LOCARMAZ_02" Association="DiarioProducaoRacaoModel.FK_LOCARMAZ_02">
+      <End Role="LOC_ARMAZ" EntitySet="LOC_ARMAZ" />
+      <End Role="LOC_ARMAZ1" EntitySet="LOC_ARMAZ" />
+    </AssociationSet>
+    <EntitySet Name="PRODUTO" EntityType="DiarioProducaoRacaoModel.PRODUTO" />
+    <AssociationSet Name="FK__FIC_TEC_P__FicTe__7A5CA4AE" Association="DiarioProducaoRacaoModel.FK__FIC_TEC_P__FicTe__7A5CA4AE">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="FIC_TEC_PROD" EntitySet="FIC_TEC_PROD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FIC_TEC__REF_10254_PRODUTO" Association="DiarioProducaoRacaoModel.FK_FIC_TEC__REF_10254_PRODUTO">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="FIC_TEC_PROD" EntitySet="FIC_TEC_PROD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ITEM_PLA_REF_10300_PRODUTO" Association="DiarioProducaoRacaoModel.FK_ITEM_PLA_REF_10300_PRODUTO">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="ITEM_PLAN_PRODUC" EntitySet="ITEM_PLAN_PRODUC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ITEM_REQ_REF_13026_PRODUTO" Association="DiarioProducaoRacaoModel.FK_ITEM_REQ_REF_13026_PRODUTO">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="ITEM_REQ_MAT" EntitySet="ITEM_REQ_MAT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORD_PROD_REF_10646_PRODUTO" Association="DiarioProducaoRacaoModel.FK_ORD_PROD_REF_10646_PRODUTO">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="ORD_PRODUC" EntitySet="ORD_PRODUC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PLAN_PRO_REF_10340_PRODUTO" Association="DiarioProducaoRacaoModel.FK_PLAN_PRO_REF_10340_PRODUTO">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PLAN_PRODUC_FIC_TEC" EntitySet="PLAN_PRODUC_FIC_TEC" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PROD_UNID__ProdC__14B141C4" Association="DiarioProducaoRacaoModel.FK__PROD_UNID__ProdC__14B141C4">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PROD_UNID_MED" EntitySet="PROD_UNID_MED" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRODUTO__ProdCod__0962B805" Association="DiarioProducaoRacaoModel.FK__PRODUTO__ProdCod__0962B805">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PRODUTO1" EntitySet="PRODUTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRODUTO__ProdCod__2E1B42B5" Association="DiarioProducaoRacaoModel.FK__PRODUTO__ProdCod__2E1B42B5">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PRODUTO1" EntitySet="PRODUTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRODUTO__ProdCod__4DFBD227" Association="DiarioProducaoRacaoModel.FK__PRODUTO__ProdCod__4DFBD227">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PRODUTO1" EntitySet="PRODUTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Produto__ProdTax__4E278607" Association="DiarioProducaoRacaoModel.FK__Produto__ProdTax__4E278607">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PRODUTO1" EntitySet="PRODUTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRODUTO1__ProdCo__053D5330" Association="DiarioProducaoRacaoModel.FK__PRODUTO1__ProdCo__053D5330">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PRODUTO1" EntitySet="PRODUTO1" />
+    </AssociationSet>
+    <AssociationSet Name="FK__REQ_MAT__ProdCod__10586973" Association="DiarioProducaoRacaoModel.FK__REQ_MAT__ProdCod__10586973">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="REQ_MAT" EntitySet="REQ_MAT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRODUTO_REF_1167_PRODUTO" Association="DiarioProducaoRacaoModel.FK_PRODUTO_REF_1167_PRODUTO">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PRODUTO1" EntitySet="PRODUTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRODUTO_REF_1173_PRODUTO" Association="DiarioProducaoRacaoModel.FK_PRODUTO_REF_1173_PRODUTO">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PRODUTO1" EntitySet="PRODUTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRODUTO_REF_1179_PRODUTO" Association="DiarioProducaoRacaoModel.FK_PRODUTO_REF_1179_PRODUTO">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PRODUTO1" EntitySet="PRODUTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SD_ESTQ_DATA_REF_19428_PROD" Association="DiarioProducaoRacaoModel.FK_SD_ESTQ_DATA_REF_19428_PROD">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="SALDO_ESTQ_DATA" EntitySet="SALDO_ESTQ_DATA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_REQMAT_07" Association="DiarioProducaoRacaoModel.FK_REQMAT_07">
+      <End Role="ORD_PRODUC" EntitySet="ORD_PRODUC" />
+      <End Role="REQ_MAT" EntitySet="REQ_MAT" />
+    </AssociationSet>
+    <EntitySet Name="MARCA_PROD" EntityType="DiarioProducaoRacaoModel.MARCA_PROD" />
+    <EntitySet Name="PROD_GRUPO_SUBGRUPO" EntityType="DiarioProducaoRacaoModel.PROD_GRUPO_SUBGRUPO" />
+    <AssociationSet Name="FK__PROD_GRUP__ProdC__6DE3EF6B" Association="DiarioProducaoRacaoModel.FK__PROD_GRUP__ProdC__6DE3EF6B">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PROD_GRUPO_SUBGRUPO" EntitySet="PROD_GRUPO_SUBGRUPO" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ITEM_NEC_PLAN_PRODUC">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="PlanProducNum" />
+      <PropertyRef Name="ProdCodEstr" />
+      <PropertyRef Name="ItNecPlanProducSeq" />
+    </Key>
+    <Property Name="EmpCod" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="PlanProducNum" Type="String" Nullable="false" MaxLength="7" Unicode="false" FixedLength="false" />
+    <Property Name="ProdCodEstr" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="ItNecPlanProducSeq" Type="Int32" Nullable="false" />
+    <Property Name="ProdGradeCorCod" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="ItNecPlanProducUnidMedCod" Type="String" MaxLength="7" Unicode="false" FixedLength="false" />
+    <Property Name="ItNecPlanProducUnidMedPos" Type="Int16" />
+    <Property Name="ItNecPlanProducQtdOrig" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItNecPlanProducQtdReal" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItNecPlanProducQtdEstq" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItNecPlanProducQtdReserv" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItNecPlanProducQtdEmp" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItNecPlanProducQtdNec" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItNecPlanProducQtdDisp" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItNecPlanProducQtdDesm" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItNecPlanProducUtiliz" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="ItNecPlanProducQtdComp" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItNecPlanProducQtdNecPeso" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItNecPlanProducIndRetalho" Type="Decimal" Precision="10" Scale="4" />
+    <Property Name="ItNecPlanProducQtdNecPesoTot" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItNecPlanProducCapHrMaq" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItNecPlanProducSeqLeit" Type="Int32" />
+    <NavigationProperty Name="ORD_PRODUC" Relationship="DiarioProducaoRacaoModel.FK__ORD_PRODUC__46217BB8" FromRole="ITEM_NEC_PLAN_PRODUC" ToRole="ORD_PRODUC" />
+    <NavigationProperty Name="NEC_PLAN_PRODUC" Relationship="DiarioProducaoRacaoModel.FK_ITEM_NEC_REF_10464_NEC_PLAN" FromRole="ITEM_NEC_PLAN_PRODUC" ToRole="NEC_PLAN_PRODUC" />
+    <Property Type="Decimal" Name="ItNecPlanProducQtdEstqMin" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ItNecPlanProducQtdEstqProd" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ItNecPlanProducQtdFatMult" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ItNecPlanProducQtdEstqUso" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ItNecPlanProducQtdEstqUtil" Precision="24" Scale="9" />
+    <NavigationProperty Name="PROD_UNID_MED" Relationship="DiarioProducaoRacaoModel.FK__ITEM_NEC_PLAN_PR__184CC87E" FromRole="ITEM_NEC_PLAN_PRODUC" ToRole="PROD_UNID_MED" />
+    <Property Type="Decimal" Name="ItNecPlanProducQtdDispProduc" Precision="24" Scale="9" />
+    <NavigationProperty Name="PRODUTO1" Relationship="DiarioProducaoRacaoModel.FK__ITEM_NEC___ProdC__58408F87" FromRole="ITEM_NEC_PLAN_PRODUC" ToRole="PRODUTO1" />
+    <Property Name="ItNecPlanProdQtdFatEstq" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItNecPlanProdPercFatEstq" Type="Decimal" Precision="10" Scale="4" />
+    <Property Name="ItNecPlanProdQtdEstqProj" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItNecPlanProdQtdInic" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItNecPlanProdIndPerdaRet" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItNecPlanProdQtdDispAnt" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItNecPlanProdQtdEstqProjAnt" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItNecPlanProducQtdEstqMax" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItNecPlanProducQtdConsMed" Type="Decimal" Nullable="false" Precision="24" Scale="9" />
+    <Property Name="ItemNecPlanProducQtdSldComp" Type="Decimal" Precision="24" Scale="9" />
+  </EntityType>
+  <EntityType Name="ITEM_PLAN_PRODUC">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="PlanProducNum" />
+      <PropertyRef Name="ProdCodEstr" />
+      <PropertyRef Name="ItPlanProducSeq" />
+    </Key>
+    <Property Name="EmpCod" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="PlanProducNum" Type="String" Nullable="false" MaxLength="7" Unicode="false" FixedLength="false" />
+    <Property Name="ProdCodEstr" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="ItPlanProducSeq" Type="Int16" Nullable="false" />
+    <Property Name="ProdGradeCorCod" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="ItPlanProducUnidMedCod" Type="String" MaxLength="7" Unicode="false" FixedLength="false" />
+    <Property Name="ItPlanProducUnidMedPos" Type="Int16" />
+    <Property Name="ItPlanProducQtd" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItPlanProducQtdEstq" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItPlanProducQtdReserv" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItPlanProducQtdEmp" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItPlanProducQtdNec" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItPlanProducQtdDisp" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItPlanProducQtdComp" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItPlanProducQtdNecPeso" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItPlanProducIndRetalho" Type="Decimal" Precision="10" Scale="4" />
+    <Property Name="ItPlanProducQtdNecPesoTot" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItPlanProducCapHrMaq" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItPlanProducConsidEstq" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PedVendaNum" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="ItPedVendaSeq" Type="Int16" />
+    <NavigationProperty Name="PLAN_PRODUC" Relationship="DiarioProducaoRacaoModel.FK_ITEM_PLA_REF_10303_PLAN_PRO" FromRole="ITEM_PLAN_PRODUC" ToRole="PLAN_PRODUC" />
+    <NavigationProperty Name="PLAN_PRODUC_FIC_TEC" Relationship="DiarioProducaoRacaoModel.FK_PLAN_PRO_REF_10326_ITEM_PLA" FromRole="ITEM_PLAN_PRODUC" ToRole="PLAN_PRODUC_FIC_TEC" />
+    <Property Type="Decimal" Name="ItPlanProducQtdComplementar" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ItPlanProducQtdEstqMin" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ItPlanProducQtdEstqUtil" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ItPlanProducQtdEstqUso" Precision="24" Scale="9" />
+    <NavigationProperty Name="PROD_UNID_MED" Relationship="DiarioProducaoRacaoModel.FK__ITEM_PLAN_PRODUC__1664800C" FromRole="ITEM_PLAN_PRODUC" ToRole="PROD_UNID_MED" />
+    <NavigationProperty Name="PRODUTO" Relationship="DiarioProducaoRacaoModel.FK_ITEM_PLA_REF_10300_PRODUTO" FromRole="ITEM_PLAN_PRODUC" ToRole="PRODUTO" />
+    <Property Name="IdProdId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="NEC_PLAN_PRODUC">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="PlanProducNum" />
+    </Key>
+    <Property Name="EmpCod" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="PlanProducNum" Type="String" Nullable="false" MaxLength="7" Unicode="false" FixedLength="false" />
+    <Property Name="NecPlanProducDataEmis" Type="DateTime" Precision="3" />
+    <Property Name="NecPlanProducDataInic" Type="DateTime" Precision="3" />
+    <Property Name="NecPlanProducDataFim" Type="DateTime" Precision="3" />
+    <Property Name="NecPlanProducGerouOp" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="NecPlanProducReqMat" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="NecPlanProducReqComp" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="NecPlanProducVerEstqMat" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="NecPlanProducVerEstqAcab" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="NecPlanProducVerEstqSemiAcab" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="NecPlanProducVerEstqAlt" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="NecPlanProducTexto" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="NecPlanProducVerPedComp" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="NecPlanProducDataEntPedComp" Type="DateTime" Precision="3" />
+    <Property Name="NecPlanProducDesmSemiAcab" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="NecPlanProducDesativada" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="ITEM_NEC_PLAN_PRODUC" Relationship="DiarioProducaoRacaoModel.FK_ITEM_NEC_REF_10464_NEC_PLAN" FromRole="NEC_PLAN_PRODUC" ToRole="ITEM_NEC_PLAN_PRODUC" />
+    <NavigationProperty Name="PLAN_PRODUC" Relationship="DiarioProducaoRacaoModel.FK_NEC_PLAN_REF_10436_PLAN_PRO" FromRole="NEC_PLAN_PRODUC" ToRole="PLAN_PRODUC" />
+    <Property Type="String" Name="NecPlanProducConsEstqMinMat" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NecPlanProduConsEstqMinAcab" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NecPlanProducConsEstqMinSem" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NecPlanProducConsEstqMinAlt" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NecPlanProdConsEstqProdAcab" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NecPlanProdConsEstqProdSemi" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NecPlanProdConsFatMultAcab" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NecPlanProdConsFatMultSemi" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NecPlanProdSimul" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="NecPlanProducDtHoraNec" Precision="3" />
+    <Property Type="String" Name="NecPlanProdConsFatMultMat" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NecPlanProdConsFatMultAlt" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="NecPlanProdConsFatEstqMat" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="NecPlanProdConsFatEstqAcab" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="NecPlanProdConsFatEstqSemAc" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="NecPlanProdConsFatEstqAlt" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="NecPlanProdConsEstqProjMat" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="NecPlanProdConsEstqProjAcab" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="NecPlanProdConsEstqProjSemA" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="NecPlanProdConsEstqProjAlt" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="NecPlanProducDtPosEstq" Type="DateTime" Precision="3" />
+    <Property Name="NecPlanProducEmUso" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="NecPlanProducEstqMaxAlt" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="NecPlanProducEstqMaxMat" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="NecPlanProducEstqMaxAcab" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="NecPlanProducEstqMaxSemAcab" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="NecPlanProducConsMedSemAcab" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="NecPlanProducConsMedMat" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="NecPlanProducConsMedAlt" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="NecPlanProducConsMedAcab" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="OPER_ORD_PRODUC">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="OrdProducNum" />
+      <PropertyRef Name="ProdCodEstr" />
+      <PropertyRef Name="ProdOperSeq" />
+      <PropertyRef Name="OperOrdProducSeq" />
+    </Key>
+    <Property Name="EmpCod" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="OrdProducNum" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="ProdCodEstr" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="ProdOperSeq" Type="Int16" Nullable="false" />
+    <Property Name="OperOrdProducSeq" Type="Int32" Nullable="false" />
+    <Property Name="CCtrlCodEstr" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="OperOrdProducStat" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="OperOrdProducDataHoraInic" Type="DateTime" Precision="3" />
+    <Property Name="OperOrdProducDataHoraFim" Type="DateTime" Precision="3" />
+    <Property Name="OperOrdProducQtdBoa" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OperOrdProducQtdRefug" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OperOrdProducQtdReproc" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="EquipCodEstr" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="OperCod" Type="String" Nullable="false" MaxLength="7" Unicode="false" FixedLength="false" />
+    <Property Name="UsuCod" Type="String" Nullable="false" MaxLength="31" Unicode="false" FixedLength="false" />
+    <Property Name="ProdGradeCorCod" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="OperOrdProducTempoCent" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="EntCod" Type="String" MaxLength="7" Unicode="false" FixedLength="false" />
+    <Property Name="OperOrdProducDocEspec" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="OperOrdProducDocSerie" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+    <Property Name="OperOrdProducDocNum" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="OperOrdProducApont" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="OperOrdProducGerReqMat" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="OperOrdProducPesoUnitProd" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OperOrdProducQtdRetalho" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="AtivGrpCodEstr" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="OperOrdProducGeraLoteAutom" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="ProdUnidMedCod" Type="String" MaxLength="7" Unicode="false" FixedLength="false" />
+    <Property Name="ProdUnidMedPos" Type="Int16" />
+    <Property Name="OperOrdProducCompBruto" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OperOrdProducCompLiq" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OperOrdProducAltBruta" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OperOrdProducAltLiq" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OperOrdProducLargBruta" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OperOrdProducLargLiq" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OperOrdProducEspacoBruto" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OperOrdProducEspacoLiq" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OperOrdProducDataHoraApont" Type="DateTime" Precision="3" />
+    <Property Name="OperOrdProducTara" Type="Decimal" Precision="10" Scale="4" />
+    <Property Name="OperOrdProducPesoBruto" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OperOrdProducTipo" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="LocArmazCodEstr" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="OperOrdProducQtdReal" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="CtrlLoteNum" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="CtrlLoteDataValid" Type="DateTime" Precision="3" />
+    <Property Name="TipoLancCod" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="OperOrdProducIntegraEstq" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="OperOrdProducIntegradoEstq" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="OperOrdProducUnidMedPeso" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OperOrdProducQtdCalc" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OperOrdProducNumSerie" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="ORD_PRODUC" Relationship="DiarioProducaoRacaoModel.FK_OPER_ORD_REF_10723_ORD_PROD" FromRole="OPER_ORD_PRODUC" ToRole="ORD_PRODUC" />
+    <NavigationProperty Name="OPER_ORD_PRODUC_FUNC" Relationship="DiarioProducaoRacaoModel.FK_OPER_ORD_REF_10744_OPER_ORD" FromRole="OPER_ORD_PRODUC" ToRole="OPER_ORD_PRODUC_FUNC" />
+    <NavigationProperty Name="LOC_ARMAZ" Relationship="DiarioProducaoRacaoModel.FK__OPER_ORD___LocAr__02BCE085" FromRole="OPER_ORD_PRODUC" ToRole="LOC_ARMAZ" />
+    <Property Type="String" Name="PedVendaNum" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TipoApontCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="OperOrdProducTipoCalcCusto" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PROD_UNID_MED" Relationship="DiarioProducaoRacaoModel.FK__OPER_ORD_PRODUC__324A6168" FromRole="OPER_ORD_PRODUC" ToRole="PROD_UNID_MED" />
+    <Property Type="String" Name="OperOrdProducPrefixoLoteMask" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="OperOrdProducDataValidLote" Precision="3" />
+    <Property Type="String" Name="OperOrdProducUsuCodDtHrInic" MaxLength="31" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="OperOrdProducCodSscc" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="OperOrdProducQtdRef" />
+    <Property Type="Int32" Name="OperOrdProducSeqRef" />
+    <Property Type="String" Name="OperOrdProducUsuCodRef" MaxLength="31" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="OperOrdProducDtHrRef" Precision="3" />
+    <Property Name="IdProdId" Type="Int32" />
+    <Property Name="OperOrdProducTempoCentVariac" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OperOrdProducTempoCentLiq" Type="Decimal" Precision="24" Scale="9" />
+  </EntityType>
+  <EntityType Name="OPER_ORD_PRODUC_FUNC">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="OrdProducNum" />
+      <PropertyRef Name="ProdCodEstr" />
+      <PropertyRef Name="ProdOperSeq" />
+      <PropertyRef Name="OperOrdProducSeq" />
+      <PropertyRef Name="FuncCod" />
+    </Key>
+    <Property Name="EmpCod" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="OrdProducNum" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="ProdCodEstr" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="ProdOperSeq" Type="Int16" Nullable="false" />
+    <Property Name="OperOrdProducSeq" Type="Int32" Nullable="false" />
+    <Property Name="FuncCod" Type="String" Nullable="false" MaxLength="7" Unicode="false" FixedLength="false" />
+    <Property Name="OperOrdProducFuncApont" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="OPER_ORD_PRODUC" Relationship="DiarioProducaoRacaoModel.FK_OPER_ORD_REF_10744_OPER_ORD" FromRole="OPER_ORD_PRODUC_FUNC" ToRole="OPER_ORD_PRODUC" />
+  </EntityType>
+  <EntityType Name="ORD_PRODUC">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="OrdProducNum" />
+    </Key>
+    <Property Name="EmpCod" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="OrdProducNum" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PlanProducNum" Type="String" MaxLength="7" Unicode="false" FixedLength="false" />
+    <Property Name="ProdCodEstr" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="ItNecPlanProducSeq" Type="Int32" />
+    <Property Name="OrdProducSerie" Type="String" Nullable="false" MaxLength="7" Unicode="false" FixedLength="false" />
+    <Property Name="OrdProducDataEmis" Type="DateTime" Precision="3" />
+    <Property Name="OrdProducQtdNec" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OrdProducQtdBoa" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OrdProducQtdRefug" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OrdProducQtdReproc" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OrdProducStat" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="OrdProducTipo" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="OrdProducNumRef" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="OrdProducReqMat" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="OrdProducReqComp" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="ProdGradeCorCod" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="EquipCodEstr" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="OrdProducQtdNecPc" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OrdProducNumPrimEtiq" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="OrdProducNumUltEtiq" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="OrdProducQtdNecDesm" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OrdProducQtdNecPcDesm" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OrdProducPesoPadrao" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OrdProducEtiqEmit" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="LocArmazCodEstr" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="OrdProducProdDesativado" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="OrdProducTempo" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="OrdProducTempoCent" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OrdProducDataPrevEntrega" Type="DateTime" Precision="3" />
+    <Property Name="OrdProducComp" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OrdProducAlt" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OrdProducLarg" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="OrdProducEspaco" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ProdUnidMedCod" Type="String" MaxLength="7" Unicode="false" FixedLength="false" />
+    <Property Name="ProdUnidMedPos" Type="Int16" />
+    <Property Name="OrdProducTipoOrd" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="GranjaCod" Type="String" MaxLength="7" Unicode="false" FixedLength="false" />
+    <Property Name="PedVendaNum" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="OrdProducDataPrevProd" Type="DateTime" Precision="3" />
+    <Property Name="OrdProducDataLiberacao" Type="DateTime" Precision="3" />
+    <Property Name="LoteCriaCod" Type="String" MaxLength="7" Unicode="false" FixedLength="false" />
+    <Property Name="FormProdCod" Type="String" MaxLength="7" Unicode="false" FixedLength="false" />
+    <Property Name="CCtrlCodEstr" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="OrdProducPedVendaNumOrig" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="CtrlLoteNum" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="CtrlLoteDataValid" Type="DateTime" Precision="3" />
+    <Property Name="OrdProducFinalidade" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="OrdProducQtdEmp" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="EntCod" Type="String" MaxLength="7" Unicode="false" FixedLength="false" />
+    <Property Name="OrdProducObs" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+    <Property Name="GeraNumLoteCod" Type="String" MaxLength="7" Unicode="false" FixedLength="false" />
+    <Property Name="OrdProducDtEntrgDesSetProj" Type="DateTime" Precision="3" />
+    <Property Name="OrdProducDtRecebSetProj" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ITEM_NEC_PLAN_PRODUC" Relationship="DiarioProducaoRacaoModel.FK__ORD_PRODUC__46217BB8" FromRole="ORD_PRODUC" ToRole="ITEM_NEC_PLAN_PRODUC" />
+    <NavigationProperty Name="OPER_ORD_PRODUC" Relationship="DiarioProducaoRacaoModel.FK_OPER_ORD_REF_10723_ORD_PROD" FromRole="ORD_PRODUC" ToRole="OPER_ORD_PRODUC" />
+    <NavigationProperty Name="ORD_PRODUC1" Relationship="DiarioProducaoRacaoModel.FK_ORD_PROD_REF_10641_ORD_PROD" FromRole="ORD_PRODUC" ToRole="ORD_PRODUC1" />
+    <NavigationProperty Name="ORD_PRODUC2" Relationship="DiarioProducaoRacaoModel.FK_ORD_PROD_REF_10641_ORD_PROD" FromRole="ORD_PRODUC1" ToRole="ORD_PRODUC" />
+    <NavigationProperty Name="LOC_ARMAZ" Relationship="DiarioProducaoRacaoModel.FK__ORD_PRODU__LocAr__7C6E0D31" FromRole="ORD_PRODUC" ToRole="LOC_ARMAZ" />
+    <NavigationProperty Name="ITEM_REQ_MAT" Relationship="DiarioProducaoRacaoModel.FK__ITEM_REQ_MAT__2BBEF618" FromRole="ORD_PRODUC" ToRole="ITEM_REQ_MAT" />
+    <Property Type="Int32" Name="OrdProducNumRevisao" />
+    <Property Type="String" Name="OrdProducOrigem" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PROD_UNID_MED" Relationship="DiarioProducaoRacaoModel.FK__ORD_PRODUC__7FBEE19B" FromRole="ORD_PRODUC" ToRole="PROD_UNID_MED" />
+    <Property Type="String" Name="OrdProducEmpCodPedVendaOrig" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ORDPRODUCDTFIN" Precision="3" />
+    <Property Type="Int32" Name="IDGeraNumSer" />
+    <Property Type="DateTime" Name="OrdProducDtEncer" Precision="3" />
+    <NavigationProperty Name="PRODUTO" Relationship="DiarioProducaoRacaoModel.FK_ORD_PROD_REF_10646_PRODUTO" FromRole="ORD_PRODUC" ToRole="PRODUTO" />
+    <NavigationProperty Name="REQ_MAT" Relationship="DiarioProducaoRacaoModel.FK_REQMAT_07" FromRole="ORD_PRODUC" ToRole="REQ_MAT" />
+    <Property Name="OrdProducOrigMod" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="IdProdId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="PLAN_PRODUC">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="PlanProducNum" />
+    </Key>
+    <Property Name="EmpCod" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="PlanProducNum" Type="String" Nullable="false" MaxLength="7" Unicode="false" FixedLength="false" />
+    <Property Name="PlanProducNome" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="PlanProducData" Type="DateTime" Precision="3" />
+    <Property Name="PlanProducDataInic" Type="DateTime" Precision="3" />
+    <Property Name="PlanProducDataFim" Type="DateTime" Precision="3" />
+    <Property Name="PlanProducCompEstq" Type="String" MaxLength="18" Unicode="false" FixedLength="false" />
+    <Property Name="PlanProducConsidLoteEcon" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="PlanProducConsidEstq" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="PlanProducDesativado" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="LoteCriaCod" Type="String" MaxLength="7" Unicode="false" FixedLength="false" />
+    <Property Name="CCtrlCodEstr" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="GranjaCod" Type="String" MaxLength="7" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="ITEM_PLAN_PRODUC" Relationship="DiarioProducaoRacaoModel.FK_ITEM_PLA_REF_10303_PLAN_PRO" FromRole="PLAN_PRODUC" ToRole="ITEM_PLAN_PRODUC" />
+    <NavigationProperty Name="NEC_PLAN_PRODUC" Relationship="DiarioProducaoRacaoModel.FK_NEC_PLAN_REF_10436_PLAN_PRO" FromRole="PLAN_PRODUC" ToRole="NEC_PLAN_PRODUC" />
+    <Property Type="String" Name="PlanProducSimul" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="PlanProducDtHoraNec" Precision="3" />
+    <Property Type="String" Name="OrcNum" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PlanProducStat" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="UsuCod" MaxLength="31" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="PLAN_PRODUC_FIC_TEC">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="PlanProducNum" />
+      <PropertyRef Name="ProdCodEstr" />
+      <PropertyRef Name="ItPlanProducSeq" />
+      <PropertyRef Name="FTProdCodEstr" />
+      <PropertyRef Name="FicTecProdSeq" />
+    </Key>
+    <Property Name="EmpCod" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="PlanProducNum" Type="String" Nullable="false" MaxLength="7" Unicode="false" FixedLength="false" />
+    <Property Name="ProdCodEstr" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="ItPlanProducSeq" Type="Int16" Nullable="false" />
+    <Property Name="FTProdCodEstr" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="FicTecProdSeq" Type="Int32" Nullable="false" />
+    <Property Name="PlanProducFicTecProdCodEstr" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="PlanProducFicTecQtd" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="PlanProducFicTecQtdEstq" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="PlanProducFicTecQtdReserv" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="PlanProducFicTecQtdEmp" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="PlanProducFicTecQtdNec" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="PlanProducFicTecQtdComp" Type="Decimal" Precision="24" Scale="9" />
+    <NavigationProperty Name="ITEM_PLAN_PRODUC" Relationship="DiarioProducaoRacaoModel.FK_PLAN_PRO_REF_10326_ITEM_PLA" FromRole="PLAN_PRODUC_FIC_TEC" ToRole="ITEM_PLAN_PRODUC" />
+    <NavigationProperty Name="FIC_TEC_PROD" Relationship="DiarioProducaoRacaoModel.FK_PLAN_PRO_REF_10335_FIC_TEC_" FromRole="PLAN_PRODUC_FIC_TEC" ToRole="FIC_TEC_PROD" />
+    <Property Type="Decimal" Name="PlanProducFicTecQtdEstqProd" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="PlanProducFicTecQtdFatMult" Precision="24" Scale="9" />
+    <NavigationProperty Name="PRODUTO" Relationship="DiarioProducaoRacaoModel.FK_PLAN_PRO_REF_10340_PRODUTO" FromRole="PLAN_PRODUC_FIC_TEC" ToRole="PRODUTO" />
+  </EntityType>
+  <Association Name="FK__ORD_PRODUC__46217BB8">
+    <End Role="ITEM_NEC_PLAN_PRODUC" Type="DiarioProducaoRacaoModel.ITEM_NEC_PLAN_PRODUC" Multiplicity="0..1" />
+    <End Role="ORD_PRODUC" Type="DiarioProducaoRacaoModel.ORD_PRODUC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ITEM_NEC_PLAN_PRODUC">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="PlanProducNum" />
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ItNecPlanProducSeq" />
+      </Principal>
+      <Dependent Role="ORD_PRODUC">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="PlanProducNum" />
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ItNecPlanProducSeq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ITEM_NEC_REF_10464_NEC_PLAN">
+    <End Role="NEC_PLAN_PRODUC" Type="DiarioProducaoRacaoModel.NEC_PLAN_PRODUC" Multiplicity="1" />
+    <End Role="ITEM_NEC_PLAN_PRODUC" Type="DiarioProducaoRacaoModel.ITEM_NEC_PLAN_PRODUC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NEC_PLAN_PRODUC">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="PlanProducNum" />
+      </Principal>
+      <Dependent Role="ITEM_NEC_PLAN_PRODUC">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="PlanProducNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ITEM_PLA_REF_10303_PLAN_PRO">
+    <End Role="PLAN_PRODUC" Type="DiarioProducaoRacaoModel.PLAN_PRODUC" Multiplicity="1" />
+    <End Role="ITEM_PLAN_PRODUC" Type="DiarioProducaoRacaoModel.ITEM_PLAN_PRODUC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PLAN_PRODUC">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="PlanProducNum" />
+      </Principal>
+      <Dependent Role="ITEM_PLAN_PRODUC">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="PlanProducNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PLAN_PRO_REF_10326_ITEM_PLA">
+    <End Role="ITEM_PLAN_PRODUC" Type="DiarioProducaoRacaoModel.ITEM_PLAN_PRODUC" Multiplicity="1" />
+    <End Role="PLAN_PRODUC_FIC_TEC" Type="DiarioProducaoRacaoModel.PLAN_PRODUC_FIC_TEC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ITEM_PLAN_PRODUC">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="PlanProducNum" />
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ItPlanProducSeq" />
+      </Principal>
+      <Dependent Role="PLAN_PRODUC_FIC_TEC">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="PlanProducNum" />
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ItPlanProducSeq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NEC_PLAN_REF_10436_PLAN_PRO">
+    <End Role="PLAN_PRODUC" Type="DiarioProducaoRacaoModel.PLAN_PRODUC" Multiplicity="1" />
+    <End Role="NEC_PLAN_PRODUC" Type="DiarioProducaoRacaoModel.NEC_PLAN_PRODUC" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="PLAN_PRODUC">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="PlanProducNum" />
+      </Principal>
+      <Dependent Role="NEC_PLAN_PRODUC">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="PlanProducNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OPER_ORD_REF_10723_ORD_PROD">
+    <End Role="ORD_PRODUC" Type="DiarioProducaoRacaoModel.ORD_PRODUC" Multiplicity="1" />
+    <End Role="OPER_ORD_PRODUC" Type="DiarioProducaoRacaoModel.OPER_ORD_PRODUC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORD_PRODUC">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="OrdProducNum" />
+      </Principal>
+      <Dependent Role="OPER_ORD_PRODUC">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="OrdProducNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OPER_ORD_REF_10744_OPER_ORD">
+    <End Role="OPER_ORD_PRODUC" Type="DiarioProducaoRacaoModel.OPER_ORD_PRODUC" Multiplicity="1" />
+    <End Role="OPER_ORD_PRODUC_FUNC" Type="DiarioProducaoRacaoModel.OPER_ORD_PRODUC_FUNC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OPER_ORD_PRODUC">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="OrdProducNum" />
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ProdOperSeq" />
+        <PropertyRef Name="OperOrdProducSeq" />
+      </Principal>
+      <Dependent Role="OPER_ORD_PRODUC_FUNC">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="OrdProducNum" />
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ProdOperSeq" />
+        <PropertyRef Name="OperOrdProducSeq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORD_PROD_REF_10641_ORD_PROD">
+    <End Role="ORD_PRODUC" Type="DiarioProducaoRacaoModel.ORD_PRODUC" Multiplicity="0..1" />
+    <End Role="ORD_PRODUC1" Type="DiarioProducaoRacaoModel.ORD_PRODUC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORD_PRODUC">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="OrdProducNum" />
+      </Principal>
+      <Dependent Role="ORD_PRODUC1">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="OrdProducNumRef" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="FIC_TEC_PROD">
+    <Key>
+      <PropertyRef Name="ProdCodEstr" />
+      <PropertyRef Name="FicTecProdSeq" />
+    </Key>
+    <Property Type="String" Name="ProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="FicTecProdSeq" Nullable="false" />
+    <Property Type="String" Name="ProdGradeCorCod" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FicTecProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FicTecProdGradeCorCod" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FicTecProdQtd" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="FicTecProdPerc" Precision="10" Scale="4" />
+    <Property Type="String" Name="FicTecProdPercTipo" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FicTecProdQtdCalc" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="FicTecProdCustoPerc" Precision="10" Scale="4" />
+    <Property Type="String" Name="FicTecProdCustoPercTipo" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FicTecProdCustoQtd" Precision="24" Scale="9" />
+    <Property Type="DateTime" Name="FicTecProdDataInic" Precision="3" />
+    <Property Type="DateTime" Name="FicTecProdDataFim" Precision="3" />
+    <Property Type="String" Name="FicTecProdCompCusto" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FicTecProdGeraOP" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FicTecProdPercPartic" Precision="10" Scale="4" />
+    <Property Type="String" Name="FicTecProdPartVenda" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FicTecProdPartVendaPercDesc" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="FicTecProdPartVendaPercAcresc" Precision="10" Scale="4" />
+    <Property Type="String" Name="FicTecProdUnidMedCodDig" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="Int16" Name="FicTecProdUnidMedPosDig" />
+    <Property Type="Decimal" Name="FicTecProdUnidMedQtdDig" Precision="24" Scale="9" />
+    <Property Type="String" Name="FicTecProdAcessorio" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Int16" Name="FicTecProdPartVendaUnidMedPos" />
+    <Property Type="String" Name="FicTecProdDiscOpt" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="FicTecProdPercRatDif" Precision="10" Scale="4" />
+    <Property Type="String" Name="FicTecProdFormula" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FicTecProdTerc" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="FicTecProdNumSeq" />
+    <Property Type="String" Name="FicTecProdSubstPor" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="FicTecProdSubstPorSeq" />
+    <Property Type="String" Name="FicTecProdGeraNFRetorno" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FicTecProdOperCalculo" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="fictecprodcalccustovalinsumo" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FicTecProdCompCustoAnaFinanc" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FicTecProdBloqueada" MaxLength="5" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PLAN_PRODUC_FIC_TEC" Relationship="DiarioProducaoRacaoModel.FK_PLAN_PRO_REF_10335_FIC_TEC_" FromRole="FIC_TEC_PROD" ToRole="PLAN_PRODUC_FIC_TEC" />
+    <NavigationProperty Name="ITEM_REQ_MAT" Relationship="DiarioProducaoRacaoModel.FK__ITEM_REQ_MAT__0A148317" FromRole="FIC_TEC_PROD" ToRole="ITEM_REQ_MAT" />
+    <Property Type="String" Name="FicTecProdParCalcLoteApon" MaxLength="5" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PROD_UNID_MED" Relationship="DiarioProducaoRacaoModel.FK__FIC_TEC_PROD__6D626A79" FromRole="FIC_TEC_PROD" ToRole="PROD_UNID_MED" />
+    <Property Type="String" Name="FicTecProdCondPesoBrtAtend" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FicTecProdBaseNumLote" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FicTecProdImpEtiq" MaxLength="5" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PRODUTO1_1" Relationship="DiarioProducaoRacaoModel.FK__FIC_TEC_P__ProdC__30329E2D" FromRole="FIC_TEC_PROD" ToRole="PRODUTO1" />
+    <NavigationProperty Name="PRODUTO" Relationship="DiarioProducaoRacaoModel.FK__FIC_TEC_P__FicTe__7A5CA4AE" FromRole="FIC_TEC_PROD" ToRole="PRODUTO" />
+    <NavigationProperty Name="PRODUTO2" Relationship="DiarioProducaoRacaoModel.FK_FIC_TEC__REF_10254_PRODUTO" FromRole="FIC_TEC_PROD" ToRole="PRODUTO" />
+  </EntityType>
+  <Association Name="FK_PLAN_PRO_REF_10335_FIC_TEC_">
+    <End Type="DiarioProducaoRacaoModel.FIC_TEC_PROD" Role="FIC_TEC_PROD" Multiplicity="1" />
+    <End Type="DiarioProducaoRacaoModel.PLAN_PRODUC_FIC_TEC" Role="PLAN_PRODUC_FIC_TEC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FIC_TEC_PROD">
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="FicTecProdSeq" />
+      </Principal>
+      <Dependent Role="PLAN_PRODUC_FIC_TEC">
+        <PropertyRef Name="FTProdCodEstr" />
+        <PropertyRef Name="FicTecProdSeq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="LOC_ARMAZ">
+    <Key>
+      <PropertyRef Name="LocArmazCodEstr" />
+    </Key>
+    <Property Type="String" Name="LocArmazCodEstr" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LocArmazNome" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LocArmazCodEstrNiv" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LocArmazGrupo" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="LocArmazCodRed" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LocArmazCodAlt" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LocArmazStat" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LocArmazRelatorio" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LocArmazInservivel" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="LocArmazUltDataMod" Precision="3" />
+    <Property Type="String" Name="LocArmazPermiteRepasse" MaxLength="5" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="OPER_ORD_PRODUC" Relationship="DiarioProducaoRacaoModel.FK__OPER_ORD___LocAr__02BCE085" FromRole="LOC_ARMAZ" ToRole="OPER_ORD_PRODUC" />
+    <NavigationProperty Name="ORD_PRODUC" Relationship="DiarioProducaoRacaoModel.FK__ORD_PRODU__LocAr__7C6E0D31" FromRole="LOC_ARMAZ" ToRole="ORD_PRODUC" />
+    <NavigationProperty Name="ITEM_REQ_MAT" Relationship="DiarioProducaoRacaoModel.FK__ITEM_REQ___LocAr__45099505" FromRole="LOC_ARMAZ" ToRole="ITEM_REQ_MAT" />
+    <NavigationProperty Name="ITEM_REQ_MAT1" Relationship="DiarioProducaoRacaoModel.FK_ITEM_REQ_REF_13014_LOC_ARMA" FromRole="LOC_ARMAZ" ToRole="ITEM_REQ_MAT" />
+    <NavigationProperty Name="REQ_MAT" Relationship="DiarioProducaoRacaoModel.FK__REQ_MAT__LocArma__53ECB139" FromRole="LOC_ARMAZ" ToRole="REQ_MAT" />
+    <NavigationProperty Name="ESTQ_LOC_ARMAZ" Relationship="DiarioProducaoRacaoModel.FK_ESTQ_LOC_REF_5218_LOC_ARMA" FromRole="LOC_ARMAZ" ToRole="ESTQ_LOC_ARMAZ" />
+    <Property Type="String" Name="USERCodigoFLIP" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="USERGeracaoFLIP" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="USERLocalEstoqueIncub" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="USERTipoLancSaidaAjuste" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="USERTipoLancSaidaCom" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="USERTipoLancSaidaInc" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="USERTipoProduto" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="USERTitRQRelDEO" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="USEREntraPlanProdRacao" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LocArmazEntCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LOCARMAZCODESTREXPEDICAO" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="LOC_ARMAZ1" Relationship="DiarioProducaoRacaoModel.FK_LOCARMAZ_02" FromRole="LOC_ARMAZ" ToRole="LOC_ARMAZ1" />
+    <NavigationProperty Name="LOC_ARMAZ2" Relationship="DiarioProducaoRacaoModel.FK_LOCARMAZ_02" FromRole="LOC_ARMAZ1" ToRole="LOC_ARMAZ" />
+  </EntityType>
+  <Association Name="FK__OPER_ORD___LocAr__02BCE085">
+    <End Type="DiarioProducaoRacaoModel.LOC_ARMAZ" Role="LOC_ARMAZ" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.OPER_ORD_PRODUC" Role="OPER_ORD_PRODUC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOC_ARMAZ">
+        <PropertyRef Name="LocArmazCodEstr" />
+      </Principal>
+      <Dependent Role="OPER_ORD_PRODUC">
+        <PropertyRef Name="LocArmazCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ORD_PRODU__LocAr__7C6E0D31">
+    <End Type="DiarioProducaoRacaoModel.LOC_ARMAZ" Role="LOC_ARMAZ" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.ORD_PRODUC" Role="ORD_PRODUC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOC_ARMAZ">
+        <PropertyRef Name="LocArmazCodEstr" />
+      </Principal>
+      <Dependent Role="ORD_PRODUC">
+        <PropertyRef Name="LocArmazCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ITEM_REQ_MAT">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="ReqMatNum" />
+      <PropertyRef Name="ItReqMatSeq" />
+    </Key>
+    <Property Type="String" Name="EmpCod" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatNum" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Int16" Name="ItReqMatSeq" Nullable="false" />
+    <Property Type="String" Name="ProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ItReqMatUnidMedCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="Int16" Name="ItReqMatUnidMedPos" />
+    <Property Type="String" Name="LocArmazCodEstr" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ItReqMatQtd" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ItReqMatQtdAtend" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ItReqMatSaldoQtd" Precision="24" Scale="9" />
+    <Property Type="String" Name="ItReqMatGeraPend" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ItReqMatAtendData" Precision="3" />
+    <Property Type="String" Name="ItReqMatGeraEmpen" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ItReqMatQtdEmpen" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ItReqMatQtdComprar" Precision="24" Scale="9" />
+    <Property Type="String" Name="ItReqMatQtdComprarEmpen" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ItReqMatBxaEstqQtdAtend" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ItReqMatAtendFuncCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ItReqMatCanc" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ItReqMatCancData" Precision="3" />
+    <Property Type="String" Name="ItReqMatCancUsuCod" MaxLength="31" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ItReqMatObs" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ItReqMatQtdOrig" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ItReqMatQtdAtendMaior" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ItReqMatQtdCalc" Precision="24" Scale="9" />
+    <Property Type="String" Name="LocArmazCodEstrDest" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FicTecProdCodEstr" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="FicTecProdSeq" />
+    <Property Type="String" Name="ItReqMatCINum" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ItReqMatCIData" Precision="3" />
+    <Property Type="Int16" Name="ItReqMatProcSeqIt" />
+    <Property Type="Int16" Name="ItReqMatProcSeqCompIt" />
+    <Property Type="String" Name="ItReqMatReqComp" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ItReqMatNumPedEnt" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ItReqMatDataSolic" Precision="3" />
+    <Property Type="DateTime" Name="ItReqMatDataProm" Precision="3" />
+    <Property Type="Decimal" Name="ItReqMatQtdEntregaParc" Precision="24" Scale="9" />
+    <Property Type="String" Name="ItReqMatNumProdEnt" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ItReqMatDataPedEnt" Precision="3" />
+    <Property Type="Decimal" Name="ItReqMatQtdAtendCalc" Precision="24" Scale="9" />
+    <Property Type="String" Name="ClasseRecDespCodEstr" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ItReqMatProcSeqItAux" />
+    <Property Type="String" Name="USEROrdProducNum" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodEstrSimilar" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ItReqMatUnidMedCodSim" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="Int16" Name="ItReqMatUnidMedPosSim" />
+    <Property Type="Decimal" Name="ItReqMatQtdAtendSim" Precision="24" Scale="9" />
+    <Property Type="String" Name="ItReqMatEstornado" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ItReqMatValLimite" Precision="14" Scale="2" />
+    <Property Type="DateTime" Name="ItReqMatDataNec" Precision="3" />
+    <Property Type="Int16" Name="ItReqMatSeqDocOrig" />
+    <Property Type="String" Name="ItReqMatTerc" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="OrdProducNum" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ItReqMatQtdSeparada" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ItReqMatQtdSeparadaCalc" Precision="24" Scale="9" />
+    <Property Type="DateTime" Name="ItReqMatDataHoraAtend" Precision="3" />
+    <Property Type="Decimal" Name="ItReqMatQtdDevol" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ItReqMatQtdPerda" Precision="24" Scale="9" />
+    <Property Type="String" Name="VerbaCompCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ItReqMatDataSaidaPassag" Precision="3" />
+    <Property Type="String" Name="ItReqMatTrecho" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ItReqMatHoraSaidaPassag" Precision="3" />
+    <Property Type="DateTime" Name="ItReqMatHoraChegada" Precision="3" />
+    <Property Type="String" Name="ItReqMatCidHosped" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ItReqMatDataCheckIN" Precision="3" />
+    <Property Type="DateTime" Name="ItReqMatDataCheckOut" Precision="3" />
+    <Property Type="String" Name="ItReqMatNomeHotel" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ItReqMatCidLocacaoVeic" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ItReqMatDataRetVeic" Precision="3" />
+    <Property Type="DateTime" Name="ItReqMatDataDevVeic" Precision="3" />
+    <Property Type="String" Name="ItReqMatNomeLocadVeic" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="FIC_TEC_PROD" Relationship="DiarioProducaoRacaoModel.FK__ITEM_REQ_MAT__0A148317" FromRole="ITEM_REQ_MAT" ToRole="FIC_TEC_PROD" />
+    <NavigationProperty Name="LOC_ARMAZ" Relationship="DiarioProducaoRacaoModel.FK__ITEM_REQ___LocAr__45099505" FromRole="ITEM_REQ_MAT" ToRole="LOC_ARMAZ" />
+    <NavigationProperty Name="ORD_PRODUC" Relationship="DiarioProducaoRacaoModel.FK__ITEM_REQ_MAT__2BBEF618" FromRole="ITEM_REQ_MAT" ToRole="ORD_PRODUC" />
+    <NavigationProperty Name="LOC_ARMAZ1" Relationship="DiarioProducaoRacaoModel.FK_ITEM_REQ_REF_13014_LOC_ARMA" FromRole="ITEM_REQ_MAT" ToRole="LOC_ARMAZ" />
+    <NavigationProperty Name="REQ_MAT" Relationship="DiarioProducaoRacaoModel.FK_ITEM_REQ_REF_13029_REQ_MAT" FromRole="ITEM_REQ_MAT" ToRole="REQ_MAT" />
+    <Property Type="String" Name="ITREQMATENTCOD" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="OBJCODESTR" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PROD_UNID_MED" Relationship="DiarioProducaoRacaoModel.FK__ITEM_REQ_MAT__07D36E01" FromRole="ITEM_REQ_MAT" ToRole="PROD_UNID_MED" />
+    <NavigationProperty Name="PROD_UNID_MED1" Relationship="DiarioProducaoRacaoModel.FK__ITEM_REQ_MAT__731B43CF" FromRole="ITEM_REQ_MAT" ToRole="PROD_UNID_MED" />
+    <Property Type="Decimal" Name="ItReqMatSaldoQtdCalc" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ItReqMatQtdEmpenCalc" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ItReqMatQtdComprarCalc" Precision="24" Scale="9" />
+    <NavigationProperty Name="PRODUTO" Relationship="DiarioProducaoRacaoModel.FK_ITEM_REQ_REF_13026_PRODUTO" FromRole="ITEM_REQ_MAT" ToRole="PRODUTO" />
+    <Property Name="ITREQMATPRODOPERSEQ" Type="Int16" />
+    <Property Name="ItReqMatQtdDevolCalc" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="ItReqMatQtdPerdaCalc" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="IdProdId" Type="Int32" />
+    <Property Name="ITREQMATPRODCODALT" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="RATEIO_REQ_MAT">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="ReqMatNum" />
+      <PropertyRef Name="ClasseRecDespCodEstr" />
+      <PropertyRef Name="CCtrlCodEstr" />
+    </Key>
+    <Property Type="String" Name="EmpCod" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatNum" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ClasseRecDespCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CCtrlCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="RatReqMatPerc" Precision="10" Scale="4" />
+    <NavigationProperty Name="REQ_MAT" Relationship="DiarioProducaoRacaoModel.FK__RATEIO_REQ_MAT__14707F4B" FromRole="RATEIO_REQ_MAT" ToRole="REQ_MAT" />
+  </EntityType>
+  <EntityType Name="REQ_MAT">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="ReqMatNum" />
+    </Key>
+    <Property Type="String" Name="EmpCod" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatNum" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ReqMatData" Precision="3" />
+    <Property Type="String" Name="ReqMatDescr" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CCtrlCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FuncCod" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatEspecDoc" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatSerieDoc" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatNumDoc" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatStat" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatRef" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatBaixouEstq" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TipoLancCod" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatTexto" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ReqMatSeqDoc" />
+    <Property Type="DateTime" Name="ReqMatDataEntrega" Precision="3" />
+    <Property Type="String" Name="ReqMatFuncCodEntregou" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatFuncCodRetirou" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="UsuCod" Nullable="false" MaxLength="31" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatOper" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AreaRespCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatNumDocEmit" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatContatoNome" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatContatoFone" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatFuncCodAprov" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ReqMatDataAprov" Precision="3" />
+    <Property Type="DateTime" Name="ReqMatDataSeparac" Precision="3" />
+    <Property Type="String" Name="ReqMatFuncCodSeparac" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatTipoAtend" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ReqMatDataValidade" Precision="3" />
+    <Property Type="String" Name="ReqMatAlarmeValidade" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LocArmazCodEstr" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatNomeRespRet" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatDocRespRet" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatEmpen" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EntCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatNumPedEnt" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatNumAltDoc" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatControle" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatEmpCod" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatCodRota" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ReqMatValLimite" Precision="14" Scale="2" />
+    <Property Type="DateTime" Name="ReqMatDataNec" Precision="3" />
+    <Property Type="String" Name="CtrlProjNum" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TipoReqMatCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MatrizCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LinhaCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ColunaCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="VerbaCtrlProjSeq" />
+    <Property Type="DateTime" Name="ReqMatDataRMOrig" Precision="3" />
+    <Property Type="String" Name="ReqMatSucata" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatGerouPed" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatTipoConsumo" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ReqMatDataConfere" Precision="3" />
+    <Property Type="String" Name="ReqMatFuncCodConfere" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ReqMatDataPrevRetirada" Precision="3" />
+    <Property Type="String" Name="ReqMatAlarmePrevRetirada" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ReqMatDataPrevSeparac" Precision="3" />
+    <Property Type="String" Name="ReqMatAlarmePrevSeparac" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatUsuCodCanc" MaxLength="31" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ReqMatDataCanc" Precision="3" />
+    <Property Type="String" Name="ProdCodEstrRefer" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatOrig" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FinCompCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ITEM_REQ_MAT" Relationship="DiarioProducaoRacaoModel.FK_ITEM_REQ_REF_13029_REQ_MAT" FromRole="REQ_MAT" ToRole="ITEM_REQ_MAT" />
+    <NavigationProperty Name="LOC_ARMAZ" Relationship="DiarioProducaoRacaoModel.FK__REQ_MAT__LocArma__53ECB139" FromRole="REQ_MAT" ToRole="LOC_ARMAZ" />
+    <NavigationProperty Name="RATEIO_REQ_MAT" Relationship="DiarioProducaoRacaoModel.FK__RATEIO_REQ_MAT__14707F4B" FromRole="REQ_MAT" ToRole="RATEIO_REQ_MAT" />
+    <NavigationProperty Name="REQ_MAT_CLASSE_REC_DESP" Relationship="DiarioProducaoRacaoModel.FK__REQ_MAT_CLASSE_R__1D05C54C" FromRole="REQ_MAT" ToRole="REQ_MAT_CLASSE_REC_DESP" />
+    <NavigationProperty Name="REQ_MAT1" Relationship="DiarioProducaoRacaoModel.FK_REQ_MAT_REF_12972_REQ_MAT" FromRole="REQ_MAT" ToRole="REQ_MAT1" />
+    <NavigationProperty Name="REQ_MAT2" Relationship="DiarioProducaoRacaoModel.FK_REQ_MAT_REF_12972_REQ_MAT" FromRole="REQ_MAT1" ToRole="REQ_MAT" />
+    <Property Type="String" Name="MotCancCodEstr" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatTextoCanc" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="REQMATENTCOD" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="OBJCODESTR" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EntCodSolic" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EntCodRetirou" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="REQMATDATAINISEPARAC" Precision="3" />
+    <Property Type="DateTime" Name="REQMATDATAFIMSEPARAC" Precision="3" />
+    <Property Type="String" Name="REQMATCONFERESEPARAC" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PRODUTO" Relationship="DiarioProducaoRacaoModel.FK__REQ_MAT__ProdCod__10586973" FromRole="REQ_MAT" ToRole="PRODUTO" />
+    <Property Name="REQMATUSUCODRETIROU" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+    <Property Name="OrdProducNum" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="REQMATDATAHORADIG" Type="DateTime" Precision="3" />
+    <Property Name="IdVerbaGerencProj" Type="Int32" />
+    <Property Name="IDGERENCPROJ" Type="Int32" />
+    <NavigationProperty Name="ORD_PRODUC" Relationship="DiarioProducaoRacaoModel.FK_REQMAT_07" FromRole="REQ_MAT" ToRole="ORD_PRODUC" />
+    <Property Name="ReqMatDataMenorAtend" Type="DateTime" Precision="3" />
+    <Property Name="ReqMatDataMaiorAtend" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="REQ_MAT_CLASSE_REC_DESP">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="ReqMatNum" />
+      <PropertyRef Name="ClasseRecDespCodEstr" />
+    </Key>
+    <Property Type="String" Name="EmpCod" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ReqMatNum" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ClasseRecDespCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ReqMatClasseRecDespPerc" Precision="10" Scale="4" />
+    <NavigationProperty Name="REQ_MAT" Relationship="DiarioProducaoRacaoModel.FK__REQ_MAT_CLASSE_R__1D05C54C" FromRole="REQ_MAT_CLASSE_REC_DESP" ToRole="REQ_MAT" />
+  </EntityType>
+  <Association Name="FK__ITEM_REQ_MAT__0A148317">
+    <End Type="DiarioProducaoRacaoModel.FIC_TEC_PROD" Role="FIC_TEC_PROD" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.ITEM_REQ_MAT" Role="ITEM_REQ_MAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FIC_TEC_PROD">
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="FicTecProdSeq" />
+      </Principal>
+      <Dependent Role="ITEM_REQ_MAT">
+        <PropertyRef Name="FicTecProdCodEstr" />
+        <PropertyRef Name="FicTecProdSeq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ITEM_REQ___LocAr__45099505">
+    <End Type="DiarioProducaoRacaoModel.LOC_ARMAZ" Role="LOC_ARMAZ" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.ITEM_REQ_MAT" Role="ITEM_REQ_MAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOC_ARMAZ">
+        <PropertyRef Name="LocArmazCodEstr" />
+      </Principal>
+      <Dependent Role="ITEM_REQ_MAT">
+        <PropertyRef Name="LocArmazCodEstrDest" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ITEM_REQ_MAT__2BBEF618">
+    <End Type="DiarioProducaoRacaoModel.ORD_PRODUC" Role="ORD_PRODUC" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.ITEM_REQ_MAT" Role="ITEM_REQ_MAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORD_PRODUC">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="OrdProducNum" />
+      </Principal>
+      <Dependent Role="ITEM_REQ_MAT">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="OrdProducNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ITEM_REQ_REF_13014_LOC_ARMA">
+    <End Type="DiarioProducaoRacaoModel.LOC_ARMAZ" Role="LOC_ARMAZ" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.ITEM_REQ_MAT" Role="ITEM_REQ_MAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOC_ARMAZ">
+        <PropertyRef Name="LocArmazCodEstr" />
+      </Principal>
+      <Dependent Role="ITEM_REQ_MAT">
+        <PropertyRef Name="LocArmazCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ITEM_REQ_REF_13029_REQ_MAT">
+    <End Type="DiarioProducaoRacaoModel.REQ_MAT" Role="REQ_MAT" Multiplicity="1" />
+    <End Type="DiarioProducaoRacaoModel.ITEM_REQ_MAT" Role="ITEM_REQ_MAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="REQ_MAT">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="ReqMatNum" />
+      </Principal>
+      <Dependent Role="ITEM_REQ_MAT">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="ReqMatNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__REQ_MAT__LocArma__53ECB139">
+    <End Type="DiarioProducaoRacaoModel.LOC_ARMAZ" Role="LOC_ARMAZ" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.REQ_MAT" Role="REQ_MAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOC_ARMAZ">
+        <PropertyRef Name="LocArmazCodEstr" />
+      </Principal>
+      <Dependent Role="REQ_MAT">
+        <PropertyRef Name="LocArmazCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RATEIO_REQ_MAT__14707F4B">
+    <End Type="DiarioProducaoRacaoModel.REQ_MAT" Role="REQ_MAT" Multiplicity="1" />
+    <End Type="DiarioProducaoRacaoModel.RATEIO_REQ_MAT" Role="RATEIO_REQ_MAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="REQ_MAT">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="ReqMatNum" />
+      </Principal>
+      <Dependent Role="RATEIO_REQ_MAT">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="ReqMatNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__REQ_MAT_CLASSE_R__1D05C54C">
+    <End Type="DiarioProducaoRacaoModel.REQ_MAT" Role="REQ_MAT" Multiplicity="1" />
+    <End Type="DiarioProducaoRacaoModel.REQ_MAT_CLASSE_REC_DESP" Role="REQ_MAT_CLASSE_REC_DESP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="REQ_MAT">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="ReqMatNum" />
+      </Principal>
+      <Dependent Role="REQ_MAT_CLASSE_REC_DESP">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="ReqMatNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_REQ_MAT_REF_12972_REQ_MAT">
+    <End Type="DiarioProducaoRacaoModel.REQ_MAT" Role="REQ_MAT" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.REQ_MAT" Role="REQ_MAT1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="REQ_MAT">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="ReqMatNum" />
+      </Principal>
+      <Dependent Role="REQ_MAT1">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="ReqMatRef" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ESTQ_LOC_ARMAZ">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="LocArmazCodEstr" />
+      <PropertyRef Name="ProdCodEstr" />
+    </Key>
+    <Property Type="String" Name="EmpCod" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LocArmazCodEstr" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="EstqLocArmazQtd" Precision="24" Scale="9" />
+    <Property Type="Int16" Name="EstqLocArmazPrior" />
+    <Property Type="String" Name="EstqLocArmazLocaliz" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="EstqLocArmazQtdLim" Precision="24" Scale="9" />
+    <Property Type="String" Name="EstqLocArmazEntraRatSldZero" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EstqLocArmazStat" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="LOC_ARMAZ" Relationship="DiarioProducaoRacaoModel.FK_ESTQ_LOC_REF_5218_LOC_ARMA" FromRole="ESTQ_LOC_ARMAZ" ToRole="LOC_ARMAZ" />
+    <NavigationProperty Name="PRODUTO1" Relationship="DiarioProducaoRacaoModel.FK__ESTQ_LOC___ProdC__28917C65" FromRole="ESTQ_LOC_ARMAZ" ToRole="PRODUTO1" />
+    <Property Name="IdProdId" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_ESTQ_LOC_REF_5218_LOC_ARMA">
+    <End Type="DiarioProducaoRacaoModel.LOC_ARMAZ" Role="LOC_ARMAZ" Multiplicity="1" />
+    <End Type="DiarioProducaoRacaoModel.ESTQ_LOC_ARMAZ" Role="ESTQ_LOC_ARMAZ" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOC_ARMAZ">
+        <PropertyRef Name="LocArmazCodEstr" />
+      </Principal>
+      <Dependent Role="ESTQ_LOC_ARMAZ">
+        <PropertyRef Name="LocArmazCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PROD_UNID_MED">
+    <Key>
+      <PropertyRef Name="ProdCodEstr" />
+      <PropertyRef Name="ProdUnidMedCod" />
+      <PropertyRef Name="ProdUnidMedPos" />
+    </Key>
+    <Property Type="String" Name="ProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdUnidMedCod" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="Int16" Name="ProdUnidMedPos" Nullable="false" />
+    <Property Type="Decimal" Name="ProdUnidMedPeso" Precision="24" Scale="9" />
+    <Property Type="String" Name="ProdUnidMedPesoFD" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdUnidMedCodBar" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdUnidMedQtdMinFat" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdUnidMedPesoQtd" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdUnidMedFatorMult" Precision="24" Scale="9" />
+    <Property Type="DateTime" Name="ProdUnidMedDataValidInic" Precision="3" />
+    <Property Type="DateTime" Name="ProdUnidMedDataValidFim" Precision="3" />
+    <Property Type="String" Name="ProdUnidMedLoteUnico" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdUnidMedEstat" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdUnidMedCompra" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdUnidMedProduc" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdUnidMedPadVenda" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Int16" Name="ProdUnidMedSeq" />
+    <Property Type="String" Name="ProdUnidMedExibeComprimVenda" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdUnidMedExibeLargVenda" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdUnidMedExibeAltVenda" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdUnidMedDep" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdUnidMedCodAlt" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdUnidMedPadMovEstq" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ProdUnidMedUltDataMod" Precision="3" />
+    <Property Type="Decimal" Name="ProdUnidMedCubagRod" Precision="24" Scale="9" />
+    <Property Type="String" Name="ProdUnidMedEntrega" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdUnidMedObjVenda" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdUnidMedFatorMultFornecto" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdUnidMedFatorFCI" Precision="24" Scale="9" />
+    <Property Type="Int32" Name="ProdUnidMedSeqFCI" />
+    <NavigationProperty Name="FIC_TEC_PROD" Relationship="DiarioProducaoRacaoModel.FK__FIC_TEC_PROD__6D626A79" FromRole="PROD_UNID_MED" ToRole="FIC_TEC_PROD" />
+    <NavigationProperty Name="ITEM_NEC_PLAN_PRODUC" Relationship="DiarioProducaoRacaoModel.FK__ITEM_NEC_PLAN_PR__184CC87E" FromRole="PROD_UNID_MED" ToRole="ITEM_NEC_PLAN_PRODUC" />
+    <NavigationProperty Name="ITEM_PLAN_PRODUC" Relationship="DiarioProducaoRacaoModel.FK__ITEM_PLAN_PRODUC__1664800C" FromRole="PROD_UNID_MED" ToRole="ITEM_PLAN_PRODUC" />
+    <NavigationProperty Name="ITEM_REQ_MAT" Relationship="DiarioProducaoRacaoModel.FK__ITEM_REQ_MAT__07D36E01" FromRole="PROD_UNID_MED" ToRole="ITEM_REQ_MAT" />
+    <NavigationProperty Name="ITEM_REQ_MAT1" Relationship="DiarioProducaoRacaoModel.FK__ITEM_REQ_MAT__731B43CF" FromRole="PROD_UNID_MED" ToRole="ITEM_REQ_MAT" />
+    <NavigationProperty Name="OPER_ORD_PRODUC" Relationship="DiarioProducaoRacaoModel.FK__OPER_ORD_PRODUC__324A6168" FromRole="PROD_UNID_MED" ToRole="OPER_ORD_PRODUC" />
+    <NavigationProperty Name="ORD_PRODUC" Relationship="DiarioProducaoRacaoModel.FK__ORD_PRODUC__7FBEE19B" FromRole="PROD_UNID_MED" ToRole="ORD_PRODUC" />
+    <Property Type="String" Name="PRODUNIDMEDTRIBUT" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdUnidMedTributExport" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdUnidMedCodBarUnidTrib" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdUnidMedPrNeg" MaxLength="5" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PRODUTO" Relationship="DiarioProducaoRacaoModel.FK__PROD_UNID__ProdC__14B141C4" FromRole="PROD_UNID_MED" ToRole="PRODUTO" />
+    <Property Name="PRODUNIDMEDCOMPBRUTO" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="PRODUNIDMEDCOMPLIQ" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="PRODUNIDMEDLARGBRUTA" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="PRODUNIDMEDLARGLIQ" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="PRODUNIDMEDALTBRUTA" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="PRODUNIDMEDALTLIQ" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="PRODUNIDMEDPALETIZACAO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PRODUNIDMEDACONDPALET" Type="Int32" />
+    <Property Name="USERExibeRastrIncubatorio" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="ProdUnidMedVisualAplicExt" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK__FIC_TEC_PROD__6D626A79">
+    <End Type="DiarioProducaoRacaoModel.PROD_UNID_MED" Role="PROD_UNID_MED" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.FIC_TEC_PROD" Role="FIC_TEC_PROD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROD_UNID_MED">
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ProdUnidMedCod" />
+        <PropertyRef Name="ProdUnidMedPos" />
+      </Principal>
+      <Dependent Role="FIC_TEC_PROD">
+        <PropertyRef Name="FicTecProdCodEstr" />
+        <PropertyRef Name="FicTecProdUnidMedCodDig" />
+        <PropertyRef Name="FicTecProdUnidMedPosDig" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ITEM_NEC_PLAN_PR__184CC87E">
+    <End Type="DiarioProducaoRacaoModel.PROD_UNID_MED" Role="PROD_UNID_MED" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.ITEM_NEC_PLAN_PRODUC" Role="ITEM_NEC_PLAN_PRODUC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROD_UNID_MED">
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ProdUnidMedCod" />
+        <PropertyRef Name="ProdUnidMedPos" />
+      </Principal>
+      <Dependent Role="ITEM_NEC_PLAN_PRODUC">
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ItNecPlanProducUnidMedCod" />
+        <PropertyRef Name="ItNecPlanProducUnidMedPos" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ITEM_PLAN_PRODUC__1664800C">
+    <End Type="DiarioProducaoRacaoModel.PROD_UNID_MED" Role="PROD_UNID_MED" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.ITEM_PLAN_PRODUC" Role="ITEM_PLAN_PRODUC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROD_UNID_MED">
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ProdUnidMedCod" />
+        <PropertyRef Name="ProdUnidMedPos" />
+      </Principal>
+      <Dependent Role="ITEM_PLAN_PRODUC">
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ItPlanProducUnidMedCod" />
+        <PropertyRef Name="ItPlanProducUnidMedPos" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ITEM_REQ_MAT__07D36E01">
+    <End Type="DiarioProducaoRacaoModel.PROD_UNID_MED" Role="PROD_UNID_MED" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.ITEM_REQ_MAT" Role="ITEM_REQ_MAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROD_UNID_MED">
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ProdUnidMedCod" />
+        <PropertyRef Name="ProdUnidMedPos" />
+      </Principal>
+      <Dependent Role="ITEM_REQ_MAT">
+        <PropertyRef Name="ProdCodEstrSimilar" />
+        <PropertyRef Name="ItReqMatUnidMedCodSim" />
+        <PropertyRef Name="ItReqMatUnidMedPosSim" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ITEM_REQ_MAT__731B43CF">
+    <End Type="DiarioProducaoRacaoModel.PROD_UNID_MED" Role="PROD_UNID_MED" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.ITEM_REQ_MAT" Role="ITEM_REQ_MAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROD_UNID_MED">
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ProdUnidMedCod" />
+        <PropertyRef Name="ProdUnidMedPos" />
+      </Principal>
+      <Dependent Role="ITEM_REQ_MAT">
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ItReqMatUnidMedCod" />
+        <PropertyRef Name="ItReqMatUnidMedPos" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OPER_ORD_PRODUC__324A6168">
+    <End Type="DiarioProducaoRacaoModel.PROD_UNID_MED" Role="PROD_UNID_MED" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.OPER_ORD_PRODUC" Role="OPER_ORD_PRODUC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROD_UNID_MED">
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ProdUnidMedCod" />
+        <PropertyRef Name="ProdUnidMedPos" />
+      </Principal>
+      <Dependent Role="OPER_ORD_PRODUC">
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ProdUnidMedCod" />
+        <PropertyRef Name="ProdUnidMedPos" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ORD_PRODUC__7FBEE19B">
+    <End Type="DiarioProducaoRacaoModel.PROD_UNID_MED" Role="PROD_UNID_MED" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.ORD_PRODUC" Role="ORD_PRODUC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROD_UNID_MED">
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ProdUnidMedCod" />
+        <PropertyRef Name="ProdUnidMedPos" />
+      </Principal>
+      <Dependent Role="ORD_PRODUC">
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ProdUnidMedCod" />
+        <PropertyRef Name="ProdUnidMedPos" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PRODUTO1">
+    <Key>
+      <PropertyRef Name="ProdCodEstr" />
+    </Key>
+    <Property Type="String" Name="ProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdVisPocket" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ProdUltDataMod" Precision="3" />
+    <Property Type="String" Name="ProdServMobilDesmobil" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdEntraCalcVerbaProjeto" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdTipoTabPV" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCidCodBloq" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdPrefer" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdVisualReembOnline" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdRetPermSelManualCarga" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdGeraReqMatTransf" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdObrigRelacLoteOP" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdModoAtualizacao" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdPossuiTarget" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCalcQtdPorParticipItOS" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCorteDedo" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodEnquadIPI" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodSeloControleIPI" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdEntraRegInventSpedSinteg" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodEstrProdPaiProj" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdImprimeNumSerNFe" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdTabIncidPisCofinsCod" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodGrupoIncidPisCofins" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdMarcaComerc" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdTaxaDuBruLiq" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MarcaProdCodObjVend" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="GrpProdCodObjVend" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCtrlCustoFIFO" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdDeduzICMSSegCusto" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdDeduzICMSSTSegCusto" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdDeduzIPISegCusto" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdDeduzPISSegCusto" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdDeduzCOFINSSegCusto" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCertificado" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdTurDataBase" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdBloqVendConectExterno" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodMS" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdEntraCalcQtdTotVenda" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodART" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdVacina" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdNecessitaCA" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="RegraPagtoEntCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="DesCodEstr" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdEntEstqApontUltOper" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdPercTotAproxImpost" Precision="10" Scale="4" />
+    <Property Type="String" Name="PRODSTATDMI" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="RefPautaCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdFabricProp" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdBenefic" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdHotelQtdEstrela" Precision="24" Scale="9" />
+    <Property Type="String" Name="ProdTerc" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PRODCTRLCARGAORDEMIMPRESS" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ProdDtUltAtualiz" Precision="3" />
+    <Property Type="Decimal" Name="ProdPesoFixoMaximo" Precision="24" Scale="9" />
+    <Property Type="String" Name="ProdObrigEmbAtendPv" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdNomeRelat" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdNecessitaSSCC" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdDesconsidPesagem" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PRODNOMERELAT2" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PRODPATHARQUIVO2" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PRODOPFINALIZAPONTQTDNEC" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="USERCodigoCHIC" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="USEREmpresaLinha" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="USERLinhagemRRC" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int16" Name="USERNumFormula" />
+    <Property Type="Decimal" Name="USERPpcpKg01Batida" Precision="14" Scale="2" />
+    <Property Type="String" Name="USERPRODCODICMSST" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="USERPRODDATAICMSST" Precision="3" />
+    <Property Type="String" Name="USERTipoLancEntradaProd" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="USERTipoLancSaidaProd" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="USERTipoLinha" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="USERTLBaixaAdicProd" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ESTQ_LOC_ARMAZ" Relationship="DiarioProducaoRacaoModel.FK__ESTQ_LOC___ProdC__28917C65" FromRole="PRODUTO1" ToRole="ESTQ_LOC_ARMAZ" />
+    <NavigationProperty Name="FIC_TEC_PROD" Relationship="DiarioProducaoRacaoModel.FK__FIC_TEC_P__ProdC__30329E2D" FromRole="PRODUTO1" ToRole="FIC_TEC_PROD" />
+    <NavigationProperty Name="ITEM_NEC_PLAN_PRODUC" Relationship="DiarioProducaoRacaoModel.FK__ITEM_NEC___ProdC__58408F87" FromRole="PRODUTO1" ToRole="ITEM_NEC_PLAN_PRODUC" />
+    <NavigationProperty Name="PRODUTO11" Relationship="DiarioProducaoRacaoModel.FK__PRODUTO1__ProdCo__68D880B1" FromRole="PRODUTO1" ToRole="PRODUTO11" />
+    <NavigationProperty Name="PRODUTO12" Relationship="DiarioProducaoRacaoModel.FK__PRODUTO1__ProdCo__68D880B1" FromRole="PRODUTO11" ToRole="PRODUTO1" />
+    <Property Type="String" Name="ProdIndEscRelev" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdPesoRateioEstrCusto" Precision="10" Scale="4" />
+    <Property Type="String" Name="ProdObrigAtendRMLibOP" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdParticipaSaldoDesmVend" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="IDTipoServReinf" />
+    <Property Type="String" Name="ProdSimilar" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdNormaAplic" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodAnvisa" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdUnidPrNeg" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdDescrANP" MaxLength="95" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdPercGLP" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="ProdPercGasNatNac" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="ProdPercGasNatImp" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="ProdValKgSemICMS" Precision="14" Scale="2" />
+    <Property Type="String" Name="ProdFabricEscalRelev" MaxLength="5" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PRODUTO" Relationship="DiarioProducaoRacaoModel.FK__PRODUTO1__ProdCo__053D5330" FromRole="PRODUTO1" ToRole="PRODUTO" />
+    <Property Name="USERInsumoDosado" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="USERStatusPedidoRacao" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="USERFaseRacao" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="ProdProdutAssocVend" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="PRODPERMLOTEVENCIDO" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="TipoAssinCod" Type="Int32" />
+    <Property Name="GrupTensaoCod" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="ProdTpLigacao" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="IDCodigoConsumo" Type="Int32" />
+    <Property Name="IdTipoProdPpcp" Type="Int32" />
+    <Property Name="ProdSegRocha" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK__ESTQ_LOC___ProdC__28917C65">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO1" Role="PRODUTO1" Multiplicity="1" />
+    <End Type="DiarioProducaoRacaoModel.ESTQ_LOC_ARMAZ" Role="ESTQ_LOC_ARMAZ" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="ESTQ_LOC_ARMAZ">
+        <PropertyRef Name="ProdCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FIC_TEC_P__ProdC__30329E2D">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO1" Role="PRODUTO1" Multiplicity="1" />
+    <End Type="DiarioProducaoRacaoModel.FIC_TEC_PROD" Role="FIC_TEC_PROD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="FIC_TEC_PROD">
+        <PropertyRef Name="ProdCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ITEM_NEC___ProdC__58408F87">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO1" Role="PRODUTO1" Multiplicity="1" />
+    <End Type="DiarioProducaoRacaoModel.ITEM_NEC_PLAN_PRODUC" Role="ITEM_NEC_PLAN_PRODUC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="ITEM_NEC_PLAN_PRODUC">
+        <PropertyRef Name="ProdCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRODUTO1__ProdCo__68D880B1">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO1" Role="PRODUTO1" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.PRODUTO1" Role="PRODUTO11" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PRODUTO11">
+        <PropertyRef Name="ProdCodEstrProdPaiProj" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SALDO_ESTQ_DATA">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="ProdCodEstr" />
+      <PropertyRef Name="SaldoEstqData" />
+    </Key>
+    <Property Type="String" Name="EmpCod" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="SaldoEstqData" Nullable="false" Precision="3" />
+    <Property Type="Decimal" Name="SaldoEstqDataQtd" Nullable="false" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="SaldoEstqDataVal" Nullable="false" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="SaldoEstqDataCustoUnit" Nullable="false" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="SaldoEstqDataValSegMoeda" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="SaldoEstqDataCustoUnitSegMoeda" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="SaldoEstqDataSegCustoUnit" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="SaldoEstqDataSegCustUnitSegM" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="SaldoEstqDataSegVal" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="SaldoEstqDataSegValSegMoeda" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="SALDOESTQDATAVALICMSREC" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="SALDOESTQDATACUSTUNITICMSREC" Precision="24" Scale="9" />
+    <NavigationProperty Name="PRODUTO" Relationship="DiarioProducaoRacaoModel.FK_SD_ESTQ_DATA_REF_19428_PROD" FromRole="SALDO_ESTQ_DATA" ToRole="PRODUTO" />
+    <Property Name="IdProdId" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_LOCARMAZ_02">
+    <End Type="DiarioProducaoRacaoModel.LOC_ARMAZ" Role="LOC_ARMAZ" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.LOC_ARMAZ" Role="LOC_ARMAZ1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOC_ARMAZ">
+        <PropertyRef Name="LocArmazCodEstr" />
+      </Principal>
+      <Dependent Role="LOC_ARMAZ1">
+        <PropertyRef Name="LOCARMAZCODESTREXPEDICAO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PRODUTO">
+    <Key>
+      <PropertyRef Name="ProdCodEstr" />
+    </Key>
+    <Property Type="String" Name="ProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodRed" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodAlt" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodBar" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdNome" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdNomeAlt1" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdNomeAlt2" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdNomeAlt3" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodEstrNiv" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdGrupo" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="TipoProdCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdPesoBruto" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdPesoLiq" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdPesoPadrao" Precision="24" Scale="9" />
+    <Property Type="String" Name="ClasFiscCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdRecIcms" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdRecIcmsPerc" Precision="10" Scale="4" />
+    <Property Type="String" Name="ProdRecIpi" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdRecIpiPerc" Precision="10" Scale="4" />
+    <Property Type="String" Name="ProdRecIcmsST" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdRecIcmsSTPerc" Precision="10" Scale="4" />
+    <Property Type="Int16" Name="ProdPrazoMedEnt" />
+    <Property Type="String" Name="CompPVCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="GradeCod" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdNumSer" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCalcMed" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdVerSaldoVenda" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdEntCodFab" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="IndEconCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdCoefComis" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdDivPv" Precision="24" Scale="9" />
+    <Property Type="String" Name="ProdHost" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdQtdLimOrdProduc" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdQtdLoteEconProduc" Precision="24" Scale="9" />
+    <Property Type="String" Name="ProdConstaTabPV" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCtrlUEP" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ProdDataCad" Precision="3" />
+    <Property Type="DateTime" Name="ProdDataValidInic" Precision="3" />
+    <Property Type="DateTime" Name="ProdDataValidFim" Precision="3" />
+    <Property Type="Decimal" Name="ProdCompBruto" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdCompLiq" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdCompToler" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdLargBruta" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdLargLiq" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdLargToler" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdAltBruta" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdAltLiq" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdAltToler" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdPesoToler" Precision="24" Scale="9" />
+    <Property Type="Int16" Name="ProdPrazoMedEntCalc" />
+    <Property Type="String" Name="ProdNecCertQual" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodEstrSubst" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdStat" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CCtrlCodEstr" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodEstrQualPap" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TipoCxaPapCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCorCxa" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdTranspasse" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdAba" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdVisor" Precision="24" Scale="9" />
+    <Property Type="String" Name="ProdFecham" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdQtdM2" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdQtdM3" Precision="24" Scale="9" />
+    <Property Type="String" Name="ProdCusto" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdNecAprovCompra" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdProducPerc" Precision="10" Scale="4" />
+    <Property Type="String" Name="ProdProducPercTipo" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdProducQtdCalc" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdCustoPerc" Precision="10" Scale="4" />
+    <Property Type="String" Name="ProdCustoPercTipo" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdCustoQtdCalc" Precision="24" Scale="9" />
+    <Property Type="String" Name="ProdPossuiIpiEmReal" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdValIpiEmReal" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="ProdQtdParaIpiEmReal" Precision="24" Scale="9" />
+    <Property Type="String" Name="ProdCodEstrGrupoFat" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdEntraCalcCaracVol" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdMarkup" Precision="24" Scale="9" />
+    <Property Type="String" Name="ProdCtrlExped" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdTxaEmisValVenda" Precision="14" Scale="2" />
+    <Property Type="Decimal" Name="ProdTxaEmisValCusto" Precision="14" Scale="2" />
+    <Property Type="String" Name="ProdSetorUtiliz" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdIncideTxaServ" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdImpRelRepos" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCtrlEstq" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdServPossuiIrrf" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdServPossuiInss" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdObs" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdPasta" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FxaCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdPossuiPVDiario" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdBaixaEstqExped" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdBaixaEstqVenda" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdBaixaEstqOcor" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdBaixaEstqOrdServ" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdBaixaEstqTur" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdBaixaEstqProduc" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdBaixaEstqLoja" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdBaixaEstqReqMat" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdConfirmAutomTur" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdEmiteVouc" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdQtdDependeUsuTur" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdDependeForm" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdMultQtdDiaNoite" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCtrlEstqLote" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdNecCalcMedidaComp" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdConfDadosCompl" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FormProdCodEstr" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdPossuiCompNaVenda" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="GrpProdCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SubGrpProdCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MarcaProdCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdUnidMedProp" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdPrecoListaCalc" Precision="24" Scale="9" />
+    <Property Type="String" Name="ProdStrDesc" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdPercDesc" Precision="10" Scale="4" />
+    <Property Type="String" Name="ProdCompPVCodCusto" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodCorProp" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodCorFabric" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodCorMontad" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdAnoCor" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdEmiteVoucGrpIndiv" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdMedChapaPap" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdPermVendaFrenteLoja" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdGarCodVenda" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdGarCodCompra" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodEstrGrupoBloq" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdTipoConsumo" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdHomologado" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdNecLaudo" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodDesenho" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CategCodEstr" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PlanoCtaEmpCod" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCContabCred" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCContabCred2" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCContabCred3" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCContabDeb" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCContabDeb2" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCContabDeb3" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdRecII" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdRecIIPerc" Precision="10" Scale="4" />
+    <Property Type="String" Name="TribACod" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="Int32" Name="ProdVidaUtil" />
+    <Property Type="String" Name="ProdVidaUtilEm" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdPercValRevenda" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="ProdValCustoOperacao" Precision="14" Scale="2" />
+    <Property Type="String" Name="ProdCustoOperacaoEm" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdValCustoMan" Precision="14" Scale="2" />
+    <Property Type="String" Name="ProdCustoManEm" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdTribIssAliqOrigDest" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdServAliqIrrf" Precision="10" Scale="4" />
+    <Property Type="String" Name="ProdTurFinalSemanaInic" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdTurFinalSemanaFim" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ProdMixDomOrig" />
+    <Property Type="String" Name="ProdMixCodOrig" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdVendaGeraMovEstq" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdRecPis" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdRecPisPerc" Precision="10" Scale="4" />
+    <Property Type="String" Name="ProdRecCofins" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdRecCofinsPerc" Precision="10" Scale="4" />
+    <Property Type="String" Name="ProdServCofinsRF" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdServPisRF" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdServCsllRF" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProgDescCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdServPartCalcMargemLucro" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProgDescCodPGC" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdUnidNegocio" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdAplicaFM" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdConjExc" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Int16" Name="ProdCursoCargaHorOpt" />
+    <Property Type="String" Name="GrpCompraCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdGenero" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ProdCodDNF" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdPartCtrlResCompVenda" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdPartCtrlResCompCalcAprov" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdQtdMBruto" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdQtdMLiq" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdQtdMToler" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdQtdM2Liq" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdQtdM2Toler" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdQtdM3Liq" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdQtdM3Toler" Precision="24" Scale="9" />
+    <Property Type="String" Name="ProdCxaEmbalagem" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodEstrRetorno" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdServIrrfDedParc" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdNecAprovCotacCompra" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdNecAprovReqCompra" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodAlt1" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdCapVolDNF" Precision="24" Scale="9" />
+    <Property Type="String" Name="ProdAtualInformProd" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdNumCliche" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdNumFaca" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdStrechFilm" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCompDesativado" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PRODPATHVOUCHER" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EstrutCustoCodEstr" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PesoMensMedEstqCod" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCtrlEstqLoteNumAutom" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdContratoPartListaPadMat" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdPathArqDesenho" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodEstrOrigProc" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdVendaPor" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdBxaEstqMedApontProduc" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCompEntraCalcEspaco" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdLargEntraCalcEspaco" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdAltEntraCalcEspaco" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdPossuiCompPPCP" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdAltEntraCalcQtdPPCP" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Int16" Name="ProdQtdDiasDataValidLotePPCP" />
+    <Property Type="String" Name="ProdUtilizDimensaoLote" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdGeraLoteAutomPPCP" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdEntraPesqInternet" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdIgnoraHomForn" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TribBCod" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdTaxaAdm" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdRestritivo" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AtivEconCodEstr" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdAtivEconCodEstrSubDiv" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="GENSERVCOD" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdModelo" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdEstqAtualizaCustoOnLine" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdTextoHist" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdIncluiISSPrecoVenda" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdIncluiISSPrecoCusto" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdVisPagInicWeb" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdApareceDestacadoWeb" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdProducPorKanban" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdAgrupaQtdRes" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdTipoUtiliz" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCalcDiariaPor" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdPossuiDetalhamentoDimen" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdPercMaxDetalhamento" Precision="10" Scale="4" />
+    <Property Type="Decimal" Name="ProdPercMinDetalhamento" Precision="10" Scale="4" />
+    <Property Type="String" Name="ProdQtdMaiorOrdProduc" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PRODGERARESTURSEMDADOSCOMPL" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdRegExportado" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EspecProdCod" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AptProdCod" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CategProdCod" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FxaProdCod" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdLoteEmbalagVenda" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdIncluiReservaOnLine" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdExcluiReservaOnLine" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdAlteraReservaOnLine" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdTipoComb" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdEntraCtrlEsterilizacao" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Int16" Name="ProdQtdDiasLiberaAeracao" />
+    <Property Type="String" Name="ProdAplicOrdServ" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdRelatorio" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdPossuiICMSSTValor" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdUtilizPesoPadCalcVol" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdEntraArqPosicaoEstq" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ProdQtdFixacao" />
+    <Property Type="String" Name="ProdCodAnp" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdGrauConcentracao" Precision="24" Scale="9" />
+    <Property Type="String" Name="ProdComponPossuiRecalcQtd" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdPossuiPesoFixo" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdPesoFixo" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdPesoFixoMinimo" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdTaraPesoFixo" Precision="24" Scale="9" />
+    <Property Type="String" Name="ProdQtdLoteSaldoLote" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCalcQtdItPvQtdLote" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ClasTurCodEstr" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdEntraRotSac" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdBaixaEstqComp" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdPossuiTribPauta" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TipoProdPautaCod" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdCapacEmbalagem" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdPercMenorQtd" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdPercMaiorQtd" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdPercMenorValor" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdPercMaiorValor" Precision="24" Scale="9" />
+    <Property Type="String" Name="ProdUtilizacao" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdInspFabrica" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdInspFabricaObs" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdQtdInstalEquipSist" Precision="24" Scale="9" />
+    <Property Type="Decimal" Name="ProdQtdInstalTotal" Precision="24" Scale="9" />
+    <Property Type="String" Name="ProdPrzValid" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ProdPrzValidDias" />
+    <Property Type="String" Name="ToxidadeCod" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PericulosidadeCod" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FragilidadeCod" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EstFisCod" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EmbalagemCod" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ManuseioCod" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ModoEstocCod" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ModoConservCod" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ProdPautaCoefConvPisCofins" Precision="24" Scale="9" />
+    <Property Type="String" Name="TipoProdFiscCod" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdIndicTipoArmaFogo" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdTipoMedic" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdValUnitVendaTabPV" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdNecConferDescarga" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdRetornavel" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdCodBEC" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ProdDataSolicCodBEC" Precision="3" />
+    <Property Type="DateTime" Name="ProdDataRecCodBEC" Precision="3" />
+    <Property Type="DateTime" Name="ProdDataSolicNatDesp" Precision="3" />
+    <Property Type="String" Name="ClasseBecCod" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdDescrBec" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProdEntraCtrlCarga" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="FIC_TEC_PROD" Relationship="DiarioProducaoRacaoModel.FK__FIC_TEC_P__FicTe__7A5CA4AE" FromRole="PRODUTO" ToRole="FIC_TEC_PROD" />
+    <NavigationProperty Name="FIC_TEC_PROD1" Relationship="DiarioProducaoRacaoModel.FK_FIC_TEC__REF_10254_PRODUTO" FromRole="PRODUTO" ToRole="FIC_TEC_PROD" />
+    <NavigationProperty Name="ITEM_PLAN_PRODUC" Relationship="DiarioProducaoRacaoModel.FK_ITEM_PLA_REF_10300_PRODUTO" FromRole="PRODUTO" ToRole="ITEM_PLAN_PRODUC" />
+    <NavigationProperty Name="ITEM_REQ_MAT" Relationship="DiarioProducaoRacaoModel.FK_ITEM_REQ_REF_13026_PRODUTO" FromRole="PRODUTO" ToRole="ITEM_REQ_MAT" />
+    <NavigationProperty Name="ORD_PRODUC" Relationship="DiarioProducaoRacaoModel.FK_ORD_PROD_REF_10646_PRODUTO" FromRole="PRODUTO" ToRole="ORD_PRODUC" />
+    <NavigationProperty Name="PLAN_PRODUC_FIC_TEC" Relationship="DiarioProducaoRacaoModel.FK_PLAN_PRO_REF_10340_PRODUTO" FromRole="PRODUTO" ToRole="PLAN_PRODUC_FIC_TEC" />
+    <NavigationProperty Name="PROD_UNID_MED" Relationship="DiarioProducaoRacaoModel.FK__PROD_UNID__ProdC__14B141C4" FromRole="PRODUTO" ToRole="PROD_UNID_MED" />
+    <NavigationProperty Name="PRODUTO1" Relationship="DiarioProducaoRacaoModel.FK__PRODUTO__ProdCod__0962B805" FromRole="PRODUTO" ToRole="PRODUTO1" />
+    <NavigationProperty Name="PRODUTO2" Relationship="DiarioProducaoRacaoModel.FK__PRODUTO__ProdCod__0962B805" FromRole="PRODUTO1" ToRole="PRODUTO" />
+    <NavigationProperty Name="PRODUTO11" Relationship="DiarioProducaoRacaoModel.FK__PRODUTO__ProdCod__2E1B42B5" FromRole="PRODUTO" ToRole="PRODUTO1" />
+    <NavigationProperty Name="PRODUTO3" Relationship="DiarioProducaoRacaoModel.FK__PRODUTO__ProdCod__2E1B42B5" FromRole="PRODUTO1" ToRole="PRODUTO" />
+    <NavigationProperty Name="PRODUTO12" Relationship="DiarioProducaoRacaoModel.FK__PRODUTO__ProdCod__4DFBD227" FromRole="PRODUTO" ToRole="PRODUTO1" />
+    <NavigationProperty Name="PRODUTO4" Relationship="DiarioProducaoRacaoModel.FK__PRODUTO__ProdCod__4DFBD227" FromRole="PRODUTO1" ToRole="PRODUTO" />
+    <NavigationProperty Name="PRODUTO13" Relationship="DiarioProducaoRacaoModel.FK__Produto__ProdTax__4E278607" FromRole="PRODUTO" ToRole="PRODUTO1" />
+    <NavigationProperty Name="PRODUTO5" Relationship="DiarioProducaoRacaoModel.FK__Produto__ProdTax__4E278607" FromRole="PRODUTO1" ToRole="PRODUTO" />
+    <NavigationProperty Name="PRODUTO14" Relationship="DiarioProducaoRacaoModel.FK__PRODUTO1__ProdCo__053D5330" FromRole="PRODUTO" ToRole="PRODUTO1" />
+    <NavigationProperty Name="REQ_MAT" Relationship="DiarioProducaoRacaoModel.FK__REQ_MAT__ProdCod__10586973" FromRole="PRODUTO" ToRole="REQ_MAT" />
+    <NavigationProperty Name="PRODUTO15" Relationship="DiarioProducaoRacaoModel.FK_PRODUTO_REF_1167_PRODUTO" FromRole="PRODUTO" ToRole="PRODUTO1" />
+    <NavigationProperty Name="PRODUTO6" Relationship="DiarioProducaoRacaoModel.FK_PRODUTO_REF_1167_PRODUTO" FromRole="PRODUTO1" ToRole="PRODUTO" />
+    <NavigationProperty Name="PRODUTO16" Relationship="DiarioProducaoRacaoModel.FK_PRODUTO_REF_1173_PRODUTO" FromRole="PRODUTO" ToRole="PRODUTO1" />
+    <NavigationProperty Name="PRODUTO7" Relationship="DiarioProducaoRacaoModel.FK_PRODUTO_REF_1173_PRODUTO" FromRole="PRODUTO1" ToRole="PRODUTO" />
+    <NavigationProperty Name="PRODUTO17" Relationship="DiarioProducaoRacaoModel.FK_PRODUTO_REF_1179_PRODUTO" FromRole="PRODUTO" ToRole="PRODUTO1" />
+    <NavigationProperty Name="PRODUTO8" Relationship="DiarioProducaoRacaoModel.FK_PRODUTO_REF_1179_PRODUTO" FromRole="PRODUTO1" ToRole="PRODUTO" />
+    <NavigationProperty Name="SALDO_ESTQ_DATA" Relationship="DiarioProducaoRacaoModel.FK_SD_ESTQ_DATA_REF_19428_PROD" FromRole="PRODUTO" ToRole="SALDO_ESTQ_DATA" />
+    <NavigationProperty Name="PROD_GRUPO_SUBGRUPO" Relationship="DiarioProducaoRacaoModel.FK__PROD_GRUP__ProdC__6DE3EF6B" FromRole="PRODUTO" ToRole="PROD_GRUPO_SUBGRUPO" />
+  </EntityType>
+  <Association Name="FK__FIC_TEC_P__FicTe__7A5CA4AE">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.FIC_TEC_PROD" Role="FIC_TEC_PROD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="FIC_TEC_PROD">
+        <PropertyRef Name="FicTecProdSubstPor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FIC_TEC__REF_10254_PRODUTO">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO" Multiplicity="1" />
+    <End Type="DiarioProducaoRacaoModel.FIC_TEC_PROD" Role="FIC_TEC_PROD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="FIC_TEC_PROD">
+        <PropertyRef Name="FicTecProdCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ITEM_PLA_REF_10300_PRODUTO">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO" Multiplicity="1" />
+    <End Type="DiarioProducaoRacaoModel.ITEM_PLAN_PRODUC" Role="ITEM_PLAN_PRODUC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="ITEM_PLAN_PRODUC">
+        <PropertyRef Name="ProdCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ITEM_REQ_REF_13026_PRODUTO">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO" Multiplicity="1" />
+    <End Type="DiarioProducaoRacaoModel.ITEM_REQ_MAT" Role="ITEM_REQ_MAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="ITEM_REQ_MAT">
+        <PropertyRef Name="ProdCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORD_PROD_REF_10646_PRODUTO">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO" Multiplicity="1" />
+    <End Type="DiarioProducaoRacaoModel.ORD_PRODUC" Role="ORD_PRODUC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="ORD_PRODUC">
+        <PropertyRef Name="ProdCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PLAN_PRO_REF_10340_PRODUTO">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO" Multiplicity="1" />
+    <End Type="DiarioProducaoRacaoModel.PLAN_PRODUC_FIC_TEC" Role="PLAN_PRODUC_FIC_TEC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PLAN_PRODUC_FIC_TEC">
+        <PropertyRef Name="PlanProducFicTecProdCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PROD_UNID__ProdC__14B141C4">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO" Multiplicity="1" />
+    <End Type="DiarioProducaoRacaoModel.PROD_UNID_MED" Role="PROD_UNID_MED" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PROD_UNID_MED">
+        <PropertyRef Name="ProdCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRODUTO__ProdCod__0962B805">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstrRetorno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRODUTO__ProdCod__2E1B42B5">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstrGrupoBloq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRODUTO__ProdCod__4DFBD227">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstrOrigProc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Produto__ProdTax__4E278607">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PRODUTO1">
+        <PropertyRef Name="ProdTaxaAdm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRODUTO1__ProdCo__053D5330">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO" Multiplicity="1" />
+    <End Type="DiarioProducaoRacaoModel.PRODUTO1" Role="PRODUTO1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__REQ_MAT__ProdCod__10586973">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.REQ_MAT" Role="REQ_MAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="REQ_MAT">
+        <PropertyRef Name="ProdCodEstrRefer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRODUTO_REF_1167_PRODUTO">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstrGrupoFat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRODUTO_REF_1173_PRODUTO">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstrQualPap" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRODUTO_REF_1179_PRODUTO">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstrSubst" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SD_ESTQ_DATA_REF_19428_PROD">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO" Multiplicity="1" />
+    <End Type="DiarioProducaoRacaoModel.SALDO_ESTQ_DATA" Role="SALDO_ESTQ_DATA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="SALDO_ESTQ_DATA">
+        <PropertyRef Name="ProdCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_REQMAT_07">
+    <End Type="DiarioProducaoRacaoModel.ORD_PRODUC" Role="ORD_PRODUC" Multiplicity="0..1" />
+    <End Type="DiarioProducaoRacaoModel.REQ_MAT" Role="REQ_MAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORD_PRODUC">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="OrdProducNum" />
+      </Principal>
+      <Dependent Role="REQ_MAT">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="OrdProducNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="MARCA_PROD">
+    <Key>
+      <PropertyRef Name="MarcaProdCod" />
+    </Key>
+    <Property Name="MarcaProdCod" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Name="MarcaProdNome" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="MarcaProdVisualizaWeb" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="MarcaProdDataInic" Type="DateTime" Precision="3" />
+    <Property Name="MarcaProdDataFim" Type="DateTime" Precision="3" />
+    <Property Name="MarcaProdEntraCalcComis" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="MarcaProdPesoPrem" Type="Decimal" Precision="24" Scale="9" />
+    <Property Name="MarcaProdPos" Type="Int32" />
+    <Property Name="MarcaProdTipo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="CategProdCodEstr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="PROD_GRUPO_SUBGRUPO">
+    <Key>
+      <PropertyRef Name="ProdCodEstr" />
+      <PropertyRef Name="GrpProdCod" />
+      <PropertyRef Name="SubGrpProdCod" />
+    </Key>
+    <Property Name="ProdCodEstr" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="GrpProdCod" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Name="SubGrpProdCod" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PRODUTO" Relationship="DiarioProducaoRacaoModel.FK__PROD_GRUP__ProdC__6DE3EF6B" FromRole="PROD_GRUPO_SUBGRUPO" ToRole="PRODUTO" />
+  </EntityType>
+  <Association Name="FK__PROD_GRUP__ProdC__6DE3EF6B">
+    <End Type="DiarioProducaoRacaoModel.PRODUTO" Role="PRODUTO" Multiplicity="1" />
+    <End Type="DiarioProducaoRacaoModel.PROD_GRUPO_SUBGRUPO" Role="PROD_GRUPO_SUBGRUPO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PROD_GRUPO_SUBGRUPO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

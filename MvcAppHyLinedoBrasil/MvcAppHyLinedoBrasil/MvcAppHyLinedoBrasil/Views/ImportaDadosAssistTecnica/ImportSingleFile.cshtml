@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Importação de Dados da Assitência Técnica";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("MenuDadosAssistenciaTecnica")
+
+<h3>Importação de Dados da Assitência Técnica</h3>
+
+@using (Html.BeginForm("ListaClientesImportacao", "ImportaDadosAssistTecnica", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{    
+    <fieldset>
+    <p align="center">
+    <b>Informe parte da Razão Social ou Nome Fantasia ou / e Estado que pertence o cliente. Caso queira todos, deixa o campo em branco.</b>
+    <br />
+    Razão Social / Nome Fantasia: @Html.TextBox("descricao", Session["descricao"].ToString())
+    U.F.: @Html.DropDownList("Text", (List<SelectListItem>)Session["ListaEstados"])
+    <input type="submit" value="Pesquisar" />
+    </p>
+    </fieldset>
+}
+
+<div id="divUltimaReview">
+    <h4 style="color:Blue;">@ViewBag.fileName</h4>
+    <h4 style="color:Red;">@ViewBag.erro</h4>
+</div>
+@if (ViewBag.Substituicao == "Sim")
+{
+    <p align="center">
+    @using (Html.BeginForm("ConfirmaSubstituicao", "ImportaDadosAssistTecnica", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input type="submit" value="Sim" />
+    }
+    @using (Html.BeginForm("CancelaSubstituicao", "ImportaDadosAssistTecnica", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input type="submit" value="Não" />
+    }
+    </p>
+}
+
+@using (Html.BeginForm("ImportaDados", "ImportaDadosAssistTecnica", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_ListaClientes")
+    
+    @*<legend>
+        Modelos disponíveis para Importação:
+        <br />
+        <br />
+        * EggCell - Modelo Antigo
+        <br />
+        * Modelo Planilha - Granja Iana
+        <br />
+        * Modelo Planilha - Ernesto Raigo Asaumi
+        <br />
+        * Modelo EggCell Crescimento - Atual
+        <br />
+        * Modelo EggCell Crescimento - Novo
+        <br />
+        * Modelo EggCell Produção - Novo
+        <br />
+        * Modelo EggCell Produção - Atual
+        <br />
+        <br />
+        Selecione o arquivo a ser Importado:
+    </legend>*@
+    <div class="editor-field">
+        <input type="file" name="file1"/>
+        @*Selecione o Modelo do Arquivo:
+        @Html.DropDownList(
+        "Text",
+        (IEnumerable<SelectListItem>)Session["ModelosDeArquivo"])*@
+        <input type="submit" value="Importar Arquivo"/>
+    </div>
+}

@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Importação de Pedidos p/ CHIC";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("Abas")
+
+<h2>Importação de Pedidos p/ CHIC</h2>
+
+@using (Html.BeginForm("ImportaDadosPlanilhaPedido", "ImportaPedidosCHIC", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <legend>Selecione o arquivo a ser Importado:</legend>
+    <div class="editor-field">
+        <input type="file" name="file1"/>
+        <input type="submit" value="Importar Arquivo"/>
+    </div>
+}
+
+<div id="divUltimaReview">
+    <h4>@Html.Raw(ViewBag.fileName)</h4>
+    <h4 style="color:red;">@ViewBag.erro</h4>
+    <h4 style="color:red;">@Html.Raw(@ViewBag.mensagemErro)</h4>
+    @if ((ViewBag.mensagemErro != "" && ViewBag.qtdErros > 0) ||
+         (Session["BoubaMarcada"].ToString().Equals("Não") && ViewBag.qtdErros == 0))
+    {
+        using (Html.BeginForm("EnviaEmailErro", "ImportaPedidosCHIC", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <legend>Para Enviar E-mail p/ o Criador da Planilha com os erros abaixo, clique no botão abaixo:</legend>
+            <div class="editor-field">
+                <input type="submit" value="Enviar E-mail p/ Criador da Planilha c/ Erros"/>
+            </div>
+        }
+    }
+    <legend>@ViewBag.mensagemEnvio</legend>
+    <br />
+    @Html.Partial("_ListaPedidoPlanilha")
+</div>
+

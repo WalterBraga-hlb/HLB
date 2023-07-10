@@ -1,0 +1,268 @@
+﻿@model MvcAppHyLinedoBrasil.Models.DropDownListParametros
+@using MvcAppHyLinedoBrasil.Models
+
+@{
+    ViewBag.Title = "Planilha de Acompanhamento de Lote do Cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string previosUrlHost = "";
+    if (Request.UrlReferrer != null) 
+    {
+        previosUrlHost = Request.UrlReferrer.Host;
+    }
+}
+
+<link href="@Url.Content("//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("//code.jquery.com/jquery-1.10.2.js")" type="text/javascript"></script>
+<script src="@Url.Content("//code.jquery.com/ui/1.11.0/jquery-ui.js")" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function () {
+        //$('#pnlLoteNovo').hide();
+        $('#pnlLoteExistente').hide();
+        $('#pnlListaLotes').hide();
+        verificaTipoLote();
+        //        $("#dataNascimento").datepicker({ dateFormat: "dd/mm/yy" });
+        //        $("#dataAlojamento").datepicker({ dateFormat: "dd/mm/yy" });
+        //        $("#dataIni").datepicker({ dateFormat: "dd/mm/yy" });
+        //        $("#dataFim").datepicker({ dateFormat: "dd/mm/yy" });
+    });
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mvalor(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{8})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{5})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{2})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+    function mnum(v) {
+        v = v.replace(/\D/g, "");                                      //Remove tudo o que não é dígito
+        return v;
+    }
+
+    function verificaTipoLote() {
+        var tipoLote = $('#rdTipoLote:checked').val();
+        $('#hdLoteSelecionado').val(tipoLote);
+        $('#hdLoteSelecionado02').val(tipoLote);
+
+        if (tipoLote != undefined) {
+            if (tipoLote == "Novo") {
+                $('#pnlLoteNovo').show();
+                $('#pnlLoteExistente').hide();
+                $('#pnlListaLotes').hide();
+                $('#txtDescricao').val('');
+                document.getElementById("nomeGranja").required = true;
+                document.getElementById("lote").required = true;
+                document.getElementById("dataNascimento").required = true;
+                document.getElementById("dataAlojamento").required = true;
+                document.getElementById("dataNascimento").required = true;
+                document.getElementById("qtdeFemeasAlojadas").required = true;
+                //document.getElementsByName("tipoPlanilha").required = false;
+                //document.getElementsByName("loteSelecionado").required = false;
+            } else {
+                $('#pnlLoteNovo').hide();
+                $('#pnlLoteExistente').show();
+                $('#pnlListaLotes').show();
+                document.getElementById("nomeGranja").required = false;
+                document.getElementById("lote").required = false;
+                document.getElementById("dataNascimento").required = false;
+                document.getElementById("dataAlojamento").required = false;
+                document.getElementById("dataNascimento").required = false;
+                document.getElementById("qtdeFemeasAlojadas").required = false;
+                //document.getElementsByName("tipoPlanilha").required = true;
+                //document.getElementsByName("loteSelecionado").required = true;
+                //alert(document.getElementsByName("qtdeFemeasAlojadas").required);
+                //alert(document.getElementsByName("tipoPlanilha").required);
+            }
+        }
+    }
+
+</script>
+
+@if (previosUrlHost != "" && !previosUrlHost.Contains("www."))
+{
+@Html.Partial("MenuDadosAssistenciaTecnica")
+}
+
+<h3>Planilha de Acompanhamento do Lote do Cliente</h3>
+
+@if (previosUrlHost != "" && !previosUrlHost.Contains("www."))
+{
+<table style="border: none">
+    <tr style="border: none">
+        <td colspan="2" align="center" style="border: none"><h4>O lote é:</h4></td>
+    </tr>
+    <tr style="border: none">
+        <td align="center" style="border: none">
+            @Html.RadioButton("TipoLote", "Novo", Convert.ToBoolean(Session["tipoLoteNovo"]), new
+                {
+                    @id = "rdTipoLote",
+                    @onclick = "verificaTipoLote()"
+                }) Novo
+        </td>
+        <td align="center" style="border: none">
+            @Html.RadioButton("TipoLote", "Existente", Convert.ToBoolean(Session["tipoLoteExistente"]), new
+                {
+                    @id = "rdTipoLote",
+                    @onclick = "verificaTipoLote()"
+                }) Existente
+        </td>
+    </tr>
+</table>
+<div id="pnlLoteExistente">
+    <fieldset>
+        @using (Html.BeginForm("ListaLotesClientes", "ImportaDadosAssistTecnica", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {    
+            <p align="center">
+            <b>Informe parte da Razão Social ou Nome Fantasia ou / e Estado que pertence o cliente.</b>
+            <br />
+            <br />
+            <b>Razão Social / Nome Fantasia: </b>@Html.TextBox("descricao", Session["descricao"].ToString(),
+                new { @id = "txtDescricao", @required = "true" })
+            <b>U.F.: </b>@Html.DropDownList("Text", (List<SelectListItem>)Session["ListaEstados"])
+            <br />
+            <b>Alojado em: 
+                @Html.TextBox("dataIni", Session["sDataInicial"], new { @required = "true", @type = "date" }) à 
+                @Html.TextBox("dataFim", Session["sDataFinal"], new { @required = "true", @type = "date" })</b>
+            <input type="submit" value="Pesquisar Lote" />
+            </p>
+            @Html.Hidden("tipoLoteSelecionadoLote02", "", new { @id = "hdLoteSelecionado02" })
+        }
+    </fieldset>
+</div>
+}
+@using (Html.BeginForm("DownloadPlanilhaAcompanhamentoLoteComDados", "ImportaDadosAssistTecnica",
+    FormMethod.Post, new { enctype = "multipart/form-data", target = "_blank" }))
+{
+    <br />
+    <div id="pnlLoteNovo">
+        <table id="tbParametros">
+            @if (previosUrlHost != "" && !previosUrlHost.Contains("www."))
+            {
+            <tr>
+                <td colspan="2" align="center">
+                    <h4>NOVO LOTE - Informe os parâmetros a seguir:</h4>
+                </td>
+            </tr>
+            }
+            <tr>
+                <td align="right">
+                    <b>Nome da Granja:</b>
+                </td>
+                <td>
+                    @Html.TextBox("nomeGranja", Session["nomeGranja"].ToString(),
+                    new { @onkeyup = "this.value = this.value.toUpperCase();" })
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <b>Identificação do Lote no Cliente:</b>
+                </td>
+                <td>
+                    @Html.TextBox("lote", Session["lote"].ToString(),
+                        new { @onkeyup = "this.value = this.value.toUpperCase();" })
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <b>Data de Nascimento:</b>
+                </td>
+                <td>
+                    @Html.TextBox("dataNascimento", Session["dataNascimento"],
+                        new { @type = "date" })
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <b>Data de Alojamento:</b>
+                </td>
+                <td>
+                    @Html.TextBox("dataAlojamento", Session["dataAlojamento"],
+                        new {  @type = "date" })
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <b>Qtde. Fêmeas Alojadas:</b>
+                </td>
+                <td>
+                    @Html.TextBox("qtdeFemeasAlojadas", Session["qtdeFemeasAlojadas"].ToString(),
+                        new { @onkeyup = "mascara(this, mnum);" })
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <b>Linhagem:</b> 
+                </td>
+                <td>
+                    @Html.DropDownList("linhagem", (List<SelectListItem>)Session["ListaLinhagens"])
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <b>Tipo de Período:</b>
+                </td>
+                <td>
+                    @Html.DropDownList("tipoPeriodo", (List<SelectListItem>)Session["ListaTipoPeriodo"])
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <b>Tipo de Fase:</b>
+                </td>
+                <td>
+                    @Html.DropDownList("tipoFase", (List<SelectListItem>)Session["ListaTipoFase"])
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <b>Tipo de Debicagem:</b>
+                </td>
+                <td>
+                    @Html.DropDownList("tipoDebicagem", (List<SelectListItem>)Session["ListaTipoDebicagem"])
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <b>Tipo de Aviário:</b>
+                </td>
+                <td>
+                    @Html.DropDownList("tipoAviario", (List<SelectListItem>)Session["ListaTipoAviario"])
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <b>Muda:</b>
+                </td>
+                <td>
+                    @Html.DropDownList("muda", (List<SelectListItem>)Session["ListaMuda"])
+                </td>
+            </tr>
+        </table>
+    </div>
+    if (previosUrlHost != "" && !previosUrlHost.Contains("www."))
+    {
+    <div id="pnlListaLotes" align="center">
+        <h4>LOTE EXISTENTE - Informe os parâmetros a seguir:</h4>
+        @Html.Hidden("tipoLoteSelecionado", "", new { @id = "hdLoteSelecionado" })
+        <b>Baixar Planilha de:</b>&nbsp;&nbsp;
+        @Html.DropDownList("tipoPlanilha", (List<SelectListItem>)Session["ListaTipoFase"])
+        @Html.Partial("_ListaLotesClientes")
+    </div>
+    }
+    <div id="divUltimaReview">
+        <h4>@Html.Raw(ViewBag.fileName)</h4>
+        <h4 style="color:red;">@ViewBag.erro</h4>
+    </div>
+    <div class="editor-field">
+        <input type="submit" value="Download" id="importar"/>
+    </div>
+}
+

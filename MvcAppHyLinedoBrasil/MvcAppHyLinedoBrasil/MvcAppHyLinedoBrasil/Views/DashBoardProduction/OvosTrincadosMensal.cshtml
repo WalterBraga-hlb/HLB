@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "% Ovos Tricados p/ Mês/Ano";
+}
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = new google.visualization.DataTable(@(Html.Raw(ViewBag.ovosTrincadosPorMesAno)));
+
+            var options = {
+                title: '% Ovos Trincados p/ Mês/Ano',
+                hAxis: {gridlines: {count: @ViewBag.QtdeRegistrosEixoXOvosTrincadosMesAno }, format: 'yyyy/MM'},
+                height: 400,
+                chartArea: {width:'75%',height:'80%'},
+                legend: {position: 'bottom'},
+                trendlines: { 1: {} }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('chartOvosTrincadosMesAno'));
+            chart.draw(data, options);
+        }
+    </script>
+<div>
+    @if (ViewBag.QtdeRegistrosEixoXOvosTrincadosMesAno != 0)
+    {
+    <div id="chartOvosTrincadosMesAno" style="width: 100%; height: 100%;"></div>
+    }
+    else
+    {
+    <h3>
+        % Ovos Trincados p/ Mês/Ano
+        <br />
+        Não existem dados para os parâmetros selecionados!
+    </h3>
+    }
+</div>

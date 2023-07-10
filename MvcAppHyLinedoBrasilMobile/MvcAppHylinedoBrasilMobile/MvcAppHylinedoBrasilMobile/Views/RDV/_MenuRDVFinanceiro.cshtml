@@ -1,0 +1,54 @@
+﻿<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">RDV - Depto. Financeiro</li>
+    <li>
+        @Html.ActionLink("Adicionar Adiantamento", "CreateAdiantamento", "RDV",
+            null,
+            new { @class = "add", @title = "Clique aqui para Inserir Adiantamento" })
+    </li>
+    <li>
+        @Html.ActionLink("Importa Fatura Excel - Bradesco", "FaturaCartaoCorporativoBradescoEXCEL", "RDV",
+            null,
+            new { @class = "bradesco", @title = "Clique aqui para Importar a Fatura do Bradesco" })
+        @if (ViewBag.fileName != null)
+        {
+            <h3 style="color:White;">@ViewBag.fileName</h3>
+        }
+    </li>
+    <li>
+        @Html.ActionLink("Faturas - Banco do Brasil", "FaturaCartaoCorporativoBBEXCEL", "RDV",
+            null,
+            new { @class = "bb", @title = "Clique aqui para Importar / Enviar E-mails da Fatura do Banco do Brasil" })
+        @if (ViewBag.fileName != null)
+        {
+            <h3 style="color:White;">@ViewBag.fileName</h3>
+        }
+    </li>
+    <li>
+        @Html.ActionLink("Importa Fatura Excel - Itaú", "FaturaCartaoCorporativoItauEXCEL", "RDV",
+            null,
+            new { @class = "itau", @title = "Clique aqui para Importar a Fatura do Itaú" })
+        @if (ViewBag.fileName != null)
+        {
+            <h3 style="color:White;">@ViewBag.fileName</h3>
+        }
+    </li>
+    <li>
+        @Html.ActionLink("RDV - Lista de Adiantamentos", "ListaAdiantamentos", "RDV",
+            null,
+            new { @class = "rdv", @title = "Clique aqui para Listar os Adiantamentos" })
+    </li>
+    <li>
+        @Html.ActionLink("RDV - Fechados Geral", "ListaRDVFechadosGeral", "RDV",
+            null,
+            new { @class = "rdv", @title = "Clique aqui para Listar os RDVs Fechados" })
+    </li>
+    <li>
+        @Html.ActionLink("Exportar Relatório de Cartões Corporativo", "GerarRelatorioCartaoCorporativo", "RDV", null,
+            new { @class = "importExcel", @target = "_blank", @title = "Clique aqui para Exportar o Relatório de Cartões Corporativo." })
+    </li>
+    <li>
+        @Html.ActionLink("Envia E-mail de Aviso RDV em aberto / não aprovado", "EnviarEmailRDVPendente", "RDV",
+            null,
+            new { @class = "mail", @title = "Clique aqui para Envia E-mail de Aviso RDV em aberto / não aprovado" })
+    </li>
+</ul>

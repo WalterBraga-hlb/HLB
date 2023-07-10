@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "";
+
+    int id = Convert.ToInt32(Session["idSelecionado"]);
+}
+
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+<h1 style="color:red; background-color:Yellow">
+        * CONFIRMA A EXCLUSÃO DA AQO ID @(id.ToString())???
+</h1>
+<br />
+@using (Html.BeginForm("ListaAQO", "AQO", FormMethod.Post))
+{
+    <input type="submit" value="Não" />
+}
+
+@using (Html.BeginForm("DeleteAQO", "AQO", FormMethod.Post))
+{
+    <input type="submit" value="Sim" />
+}

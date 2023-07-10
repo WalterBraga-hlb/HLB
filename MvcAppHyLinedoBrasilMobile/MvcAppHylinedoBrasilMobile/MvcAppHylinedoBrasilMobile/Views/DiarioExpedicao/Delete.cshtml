@@ -1,0 +1,13 @@
+﻿@model MvcAppHylinedoBrasilMobile.Models.LayoutDiarioExpedicaos
+
+@{
+    ViewBag.Title = "";
+}
+
+<h3>Confirma a exclusão desse registro?</h3>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" />
+        @Html.ActionLink("Voltar p/ Lista", "EditDEO", new { dataFiltro = Convert.ToDateTime(Session["dataHoraCarreg"]), nfNum = Session["nfNum"] })    
+    </p>
+}

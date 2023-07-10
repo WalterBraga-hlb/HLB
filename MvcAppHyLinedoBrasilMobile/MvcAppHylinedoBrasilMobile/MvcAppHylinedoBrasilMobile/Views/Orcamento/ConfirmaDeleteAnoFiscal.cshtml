@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "";
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+
+    int id = Convert.ToInt32(Session["idSelecionado"]);
+    
+    string anoFiscal = "";
+    MvcAppHylinedoBrasilMobile.Models.AnoFiscal anoFiscalObj = 
+        hlbapp.AnoFiscal.Where(w => w.ID == id).FirstOrDefault();
+    if (anoFiscalObj != null)
+    {
+        anoFiscal = anoFiscalObj.AnoFiscal1;
+    }
+}
+
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+<h1 style="color:red; background-color:Yellow">
+        * CONFIRMA A EXCLUSÃO DO ANO FISCAL @(anoFiscal)???
+</h1>
+<br />
+@using (Html.BeginForm("ListaAnoFiscal", "Orcamento", FormMethod.Post))
+{
+    <input type="submit" value="Não" />
+}
+
+@using (Html.BeginForm("DeleteAnoFiscal", "Orcamento", FormMethod.Post))
+{
+    <input type="submit" value="Sim" />
+}

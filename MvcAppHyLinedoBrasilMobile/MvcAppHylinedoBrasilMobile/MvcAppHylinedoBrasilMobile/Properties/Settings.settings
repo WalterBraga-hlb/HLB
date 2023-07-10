@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MvcAppHylinedoBrasilMobile.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MvcAppHylinedoBrasilMobile_br_com_hyline_fluigteste_ECMWorkflowEngineServiceService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://fluigteste.hyline.com.br/webdesk/ECMWorkflowEngineService</Value>
+    </Setting>
+    <Setting Name="MvcAppHylinedoBrasilMobile_br_com_hyline_fluigteste1_ECMColleagueServiceService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://fluigteste.hyline.com.br/webdesk/ECMColleagueService</Value>
+    </Setting>
+    <Setting Name="MvcAppHylinedoBrasilMobile_br_com_hyline_fluig_ECMWorkflowEngineServiceService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://fluig.hyline.com.br:8080/webdesk/ECMWorkflowEngineService</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

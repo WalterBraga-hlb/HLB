@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Apolo10Model1StoreContainer" CdmEntityContainer="Apolo10Entities1">
+    <EntitySetMapping Name="PAT_BEM">
+      <EntityTypeMapping TypeName="Apolo10Model1.media">
+        <MappingFragment StoreEntitySet="PAT_BEM">
+          <ScalarProperty Name="PatBemDataHoraDig" ColumnName="PatBemDataHoraDig" />
+          <ScalarProperty Name="UsuCod" ColumnName="UsuCod" />
+          <ScalarProperty Name="TipoBemCod" ColumnName="TipoBemCod" />
+          <ScalarProperty Name="PatBemJustAquis" ColumnName="PatBemJustAquis" />
+          <ScalarProperty Name="PatBemVidaUtilEm" ColumnName="PatBemVidaUtilEm" />
+          <ScalarProperty Name="PatBemVidaUtil" ColumnName="PatBemVidaUtil" />
+          <ScalarProperty Name="PatBemPeqVal" ColumnName="PatBemPeqVal" />
+          <ScalarProperty Name="PatBemAreaConst" ColumnName="PatBemAreaConst" />
+          <ScalarProperty Name="PatBemAreaTot" ColumnName="PatBemAreaTot" />
+          <ScalarProperty Name="EmpCod" ColumnName="EmpCod" />
+          <ScalarProperty Name="PatBemCodEstr" ColumnName="PatBemCodEstr" />
+          <ScalarProperty Name="PlanoCtaEmpCod" ColumnName="PlanoCtaEmpCod" />
+          <ScalarProperty Name="PlanoCtaCodRed" ColumnName="PlanoCtaCodRed" />
+          <ScalarProperty Name="PatBemCodRed" ColumnName="PatBemCodRed" />
+          <ScalarProperty Name="PatBemEquip" ColumnName="PatBemEquip" />
+          <ScalarProperty Name="EquipCodEstr" ColumnName="EquipCodEstr" />
+          <ScalarProperty Name="PatBemQtd" ColumnName="PatBemQtd" />
+          <ScalarProperty Name="PatBemNome" ColumnName="PatBemNome" />
+          <ScalarProperty Name="PatBemNomeAlt1" ColumnName="PatBemNomeAlt1" />
+          <ScalarProperty Name="PatBemNomeAlt2" ColumnName="PatBemNomeAlt2" />
+          <ScalarProperty Name="PatBemNomeAlt3" ColumnName="PatBemNomeAlt3" />
+          <ScalarProperty Name="PatBemGrupo" ColumnName="PatBemGrupo" />
+          <ScalarProperty Name="PatBemCodEstrNiv" ColumnName="PatBemCodEstrNiv" />
+          <ScalarProperty Name="PatBemPlanoCtaBemCodEstr" ColumnName="PatBemPlanoCtaBemCodEstr" />
+          <ScalarProperty Name="CCtrlCodEstr" ColumnName="CCtrlCodEstr" />
+          <ScalarProperty Name="PatLocCodEstr" ColumnName="PatLocCodEstr" />
+          <ScalarProperty Name="FuncCod" ColumnName="FuncCod" />
+          <ScalarProperty Name="PatBemDataAquis" ColumnName="PatBemDataAquis" />
+          <ScalarProperty Name="PatBemTxaNormal" ColumnName="PatBemTxaNormal" />
+          <ScalarProperty Name="PatBemTxaAceler" ColumnName="PatBemTxaAceler" />
+          <ScalarProperty Name="PatBemValOrig" ColumnName="PatBemValOrig" />
+          <ScalarProperty Name="PatBemValDepAcum" ColumnName="PatBemValDepAcum" />
+          <ScalarProperty Name="PatBemValOrigOutraMoeda" ColumnName="PatBemValOrigOutraMoeda" />
+          <ScalarProperty Name="PatBemValDepAcumOutraMoeda" ColumnName="PatBemValDepAcumOutraMoeda" />
+          <ScalarProperty Name="PatBemCodPlaq" ColumnName="PatBemCodPlaq" />
+          <ScalarProperty Name="PatBemStat" ColumnName="PatBemStat" />
+          <ScalarProperty Name="PatBemVinculo" ColumnName="PatBemVinculo" />
+          <ScalarProperty Name="TipoDocCod" ColumnName="TipoDocCod" />
+          <ScalarProperty Name="PatBemSerieDoc" ColumnName="PatBemSerieDoc" />
+          <ScalarProperty Name="PatBemNumDoc" ColumnName="PatBemNumDoc" />
+          <ScalarProperty Name="PatBemDataDoc" ColumnName="PatBemDataDoc" />
+          <ScalarProperty Name="EntCod" ColumnName="EntCod" />
+          <ScalarProperty Name="NatOpCodEstr" ColumnName="NatOpCodEstr" />
+          <ScalarProperty Name="PatBemValBaseIcms" ColumnName="PatBemValBaseIcms" />
+          <ScalarProperty Name="PatBemPercIcms" ColumnName="PatBemPercIcms" />
+          <ScalarProperty Name="PatBemValIcms" ColumnName="PatBemValIcms" />
+          <ScalarProperty Name="PatBemDataValidGar" ColumnName="PatBemDataValidGar" />
+          <ScalarProperty Name="PatBemTexto" ColumnName="PatBemTexto" />
+          <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+          <ScalarProperty Name="MovEstqChv" ColumnName="MovEstqChv" />
+          <ScalarProperty Name="ItMovEstqSeq" ColumnName="ItMovEstqSeq" />
+          <ScalarProperty Name="PatBemAnoMesCad" ColumnName="PatBemAnoMesCad" />
+          <ScalarProperty Name="PatBemValCambioOutraMoeda" ColumnName="PatBemValCambioOutraMoeda" />
+          <ScalarProperty Name="PatBemPlanoCtaCodRedAquis" ColumnName="PatBemPlanoCtaCodRedAquis" />
+          <ScalarProperty Name="PatBemCCtrlCodEstrAquis" ColumnName="PatBemCCtrlCodEstrAquis" />
+          <ScalarProperty Name="PatBemPatLocCodEstrAquis" ColumnName="PatBemPatLocCodEstrAquis" />
+          <ScalarProperty Name="PatBemFuncCodAquis" ColumnName="PatBemFuncCodAquis" />
+          <ScalarProperty Name="PatBemCodEstrAquis" ColumnName="PatBemCodEstrAquis" />
+          <ScalarProperty Name="PatBemOrigMod" ColumnName="PatBemOrigMod" />
+          <ScalarProperty Name="PatBemEmpCodMovEstq" ColumnName="PatBemEmpCodMovEstq" />
+          <ScalarProperty Name="CONTRATONUM" ColumnName="CONTRATONUM" />
+          <ScalarProperty Name="ITCONTRATOORCAMSEQ" ColumnName="ITCONTRATOORCAMSEQ" />
+          <ScalarProperty Name="PARCITCONTRATOORCAMSEQ" ColumnName="PARCITCONTRATOORCAMSEQ" />
+          <ScalarProperty Name="PARCITCONTRATOORCAMDESMPAG" ColumnName="PARCITCONTRATOORCAMDESMPAG" />
+          <ScalarProperty Name="DOCPARCITCONTRATOORCAMSEQ" ColumnName="DOCPARCITCONTRATOORCAMSEQ" />
+          <ScalarProperty Name="PatBemNumLRE" ColumnName="PatBemNumLRE" />
+          <ScalarProperty Name="PatBemFolhaLRE" ColumnName="PatBemFolhaLRE" />
+          <ScalarProperty Name="PatBemNumCTRC" ColumnName="PatBemNumCTRC" />
+          <ScalarProperty Name="PatBemEntCodTransp" ColumnName="PatBemEntCodTransp" />
+          <ScalarProperty Name="PatBemValIcmsFrete" ColumnName="PatBemValIcmsFrete" />
+          <ScalarProperty Name="PatBemValIcmsDifAliq" ColumnName="PatBemValIcmsDifAliq" />
+          <ScalarProperty Name="PatBemValCiap" ColumnName="PatBemValCiap" />
+          <ScalarProperty Name="PatBemParticipProduc" ColumnName="PatBemParticipProduc" />
+          <ScalarProperty Name="PatBemQdtMesCredCiap" ColumnName="PatBemQdtMesCredCiap" />
+          <ScalarProperty Name="PatBemValFrete" ColumnName="PatBemValFrete" />
+          <ScalarProperty Name="PatBemValLiq" ColumnName="PatBemValLiq" />
+          <ScalarProperty Name="NumSerCtrl" ColumnName="NumSerCtrl" />
+          <ScalarProperty Name="PATBEMHISTORICO" ColumnName="PATBEMHISTORICO" />
+          <ScalarProperty Name="PatBemGestaoPublica" ColumnName="PatBemGestaoPublica" />
+          <ScalarProperty Name="PatBemNumItemGestPub" ColumnName="PatBemNumItemGestPub" />
+          <ScalarProperty Name="PatBemCodHospGestPub" ColumnName="PatBemCodHospGestPub" />
+          <ScalarProperty Name="PatBemNumSerFabricGestPub" ColumnName="PatBemNumSerFabricGestPub" />
+          <ScalarProperty Name="PatBemMarcaModTipoGestPub" ColumnName="PatBemMarcaModTipoGestPub" />
+          <ScalarProperty Name="PatBemNumSES" ColumnName="PatBemNumSES" />
+          <ScalarProperty Name="PatBemComponente" ColumnName="PatBemComponente" />
+          <ScalarProperty Name="PatBemValIcmsSt" ColumnName="PatBemValIcmsSt" />
+          <ScalarProperty Name="PatBemChaveAcessoNFe" ColumnName="PatBemChaveAcessoNFe" />
+          <ScalarProperty Name="PatBemCodBaseCred" ColumnName="PatBemCodBaseCred" />
+          <ScalarProperty Name="PatBemBaseCalcPIS" ColumnName="PatBemBaseCalcPIS" />
+          <ScalarProperty Name="PatBemPercPIS" ColumnName="PatBemPercPIS" />
+          <ScalarProperty Name="PatBemValPIS" ColumnName="PatBemValPIS" />
+          <ScalarProperty Name="PatBemBaseCalcCOFINS" ColumnName="PatBemBaseCalcCOFINS" />
+          <ScalarProperty Name="PatBemPercCOFINS" ColumnName="PatBemPercCOFINS" />
+          <ScalarProperty Name="PatBemValCOFINS" ColumnName="PatBemValCOFINS" />
+          <ScalarProperty Name="PatBemIdentifBemIncorp" ColumnName="PatBemIdentifBemIncorp" />
+          <ScalarProperty Name="PatBemIndicUtiliz" ColumnName="PatBemIndicUtiliz" />
+          <ScalarProperty Name="PatBemParcAquisDeduzCred" ColumnName="PatBemParcAquisDeduzCred" />
+          <ScalarProperty Name="PatBemIndicNumParc" ColumnName="PatBemIndicNumParc" />
+          <ScalarProperty Name="PatBemParticipEfdPisCofins" ColumnName="PatBemParticipEfdPisCofins" />
+          <ScalarProperty Name="PatBemAnoMesEfdPisCofins" ColumnName="PatBemAnoMesEfdPisCofins" />
+          <ScalarProperty Name="PatBemAnoMesAprEfdPisCofins" ColumnName="PatBemAnoMesAprEfdPisCofins" />
+          <ScalarProperty Name="PatBemValAquisEfdPisCofins" ColumnName="PatBemValAquisEfdPisCofins" />
+          <ScalarProperty Name="PatBemAnoMesInicEfdPisCofins" ColumnName="PatBemAnoMesInicEfdPisCofins" />
+          <ScalarProperty Name="PatBemAnoMesFimEfdPisCofins" ColumnName="PatBemAnoMesFimEfdPisCofins" />
+          <ScalarProperty Name="PatBemQtdParcApropiar" ColumnName="PatBemQtdParcApropiar" />
+          <ScalarProperty Name="PatBemCst" ColumnName="PatBemCst" />
+          <ScalarProperty Name="PatBemOrigCred" ColumnName="PatBemOrigCred" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="gerar_codigo" FunctionName="Apolo10Model1.Store.gerar_codigo" />
+  </EntityContainerMapping>
+</Mapping>

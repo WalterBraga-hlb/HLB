@@ -1,0 +1,789 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <MASTER Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>MASTER</Alias>
+        <ConnectionStringEncrypted>48jZ60ZLAbxxWk1YTXSiO9HS9etNA0ORa0ep3GsQZT/x0PcrT1nZ+eoF</ConnectionStringEncrypted>
+        <Name>MASTER</Name>
+      </MASTER>
+    </Databases>
+    <DataSources isList="true" count="4">
+      <Movimento Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Movimento</Alias>
+        <Columns isList="true" count="9">
+          <value>TipoLancCod,System.String</value>
+          <value>EmpCod,System.String</value>
+          <value>LancMovCtrlBancDataEmis,System.DateTime</value>
+          <value>LancMovCtrlBancNum,System.String</value>
+          <value>MovCtrlBancNum,System.String</value>
+          <value>LancMovCtrlBancObs,System.String</value>
+          <value>LancMovCtrlBancVal,System.Decimal</value>
+          <value>LancMovCtrlBancNominal,System.String</value>
+          <value>ContaFinCod,System.String</value>
+        </Columns>
+        <CommandTimeout>0</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>Movimento</Name>
+        <NameInSource>MASTER</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>Select	L.TipoLancCod, M.EmpCod, L.LancMovCtrlBancDataEmis, L.LancMovCtrlBancNum, M.MovCtrlBancNum, L.LancMovCtrlBancObs, L.LancMovCtrlBancVal,
+		L.LancMovCtrlBancNominal, L.ContaFinCod
+	From	MOV_CTRL_BANC M, LANC_MOV_CTRL_BANC L
+Where	M.MovCtrlBancNum &gt;= '{ChaveIni}'
+And	M.MovCtrlBancNum &lt;= '{ChaveFim}'
+And	L.MovCtrlBancNum = M.MovCtrlBancNum
+And 0 &lt; (select count(1) from EMPRESA_FILIAL EF
+		 where M.EmpCod = EF.EmpCod and EF.EmpPlanoCta = '14')
+</SqlCommand>
+      </Movimento>
+      <Fornecedor Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Fornecedor</Alias>
+        <Columns isList="true" count="8">
+          <value>EntNome,System.String</value>
+          <value>BcoNum,System.String</value>
+          <value>AgNum,System.String</value>
+          <value>EntBcoAgCamCompens,System.String</value>
+          <value>EntBcoAgCCorNum,System.String</value>
+          <value>EntCod,System.String</value>
+          <value>EntTipoFJ,System.String</value>
+          <value>EntCpfCgc,System.String</value>
+        </Columns>
+        <CommandTimeout>0</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>Fornecedor</Name>
+        <NameInSource>MASTER</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>Select	EntNome, BcoNum, AgNum, EntBcoAgCamCompens, EntBcoAgCCorNum,
+	EntCod, EntTipoFJ, EntCpfCgc
+	From	ENTIDADE</SqlCommand>
+      </Fornecedor>
+      <Empresa Ref="5" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Empresa</Alias>
+        <Columns isList="true" count="3">
+          <value>EmpCod,System.String</value>
+          <value>EmpNome,System.String</value>
+          <value>EmpLogoTipo,System.Byte[]</value>
+        </Columns>
+        <CommandTimeout>0</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>Empresa</Name>
+        <NameInSource>MASTER</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>Select	EmpCod, EmpNome, EmpLogoTipo
+	From	EMPRESA_FILIAL
+	Where	EmpPlanoCta = '14'</SqlCommand>
+      </Empresa>
+      <ContaFin Ref="6" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>ContaFin</Alias>
+        <Columns isList="true" count="5">
+          <value>ContaFinCod,System.String</value>
+          <value>BcoNum,System.String</value>
+          <value>AgNum,System.String</value>
+          <value>BcoNome,System.String</value>
+          <value>ContaFinCCorNum,System.String</value>
+        </Columns>
+        <CommandTimeout>0</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>ContaFin</Name>
+        <NameInSource>MASTER</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>Select	C.ContaFinCod, C.BcoNum, AgNum, BcoNome, ContaFinCCorNum 
+	From	CONTA_FIN C, BANCO B
+Where	B.BcoNum = C.BcoNum</SqlCommand>
+      </ContaFin>
+    </DataSources>
+    <Relations isList="true" count="3">
+      <MovimentoXFornecedor Ref="7" type="DataRelation" isKey="true">
+        <Alias>MovimentoXFornecedor</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>EntNome</value>
+        </ChildColumns>
+        <ChildSource isRef="4" />
+        <Dictionary isRef="1" />
+        <Name>MovimentoXFornecedor</Name>
+        <NameInSource>MovimentoXFornecedor</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>LancMovCtrlBancNominal</value>
+        </ParentColumns>
+        <ParentSource isRef="3" />
+      </MovimentoXFornecedor>
+      <MovimentoXEmpresa Ref="8" type="DataRelation" isKey="true">
+        <Alias>MovimentoXEmpresa</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>EmpCod</value>
+        </ChildColumns>
+        <ChildSource isRef="5" />
+        <Dictionary isRef="1" />
+        <Name>MovimentoXEmpresa</Name>
+        <NameInSource>MovimentoXEmpresa</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>EmpCod</value>
+        </ParentColumns>
+        <ParentSource isRef="3" />
+      </MovimentoXEmpresa>
+      <MovimentoXContaFin Ref="9" type="DataRelation" isKey="true">
+        <Alias>MovimentoXContaFin</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>ContaFinCod</value>
+        </ChildColumns>
+        <ChildSource isRef="6" />
+        <Dictionary isRef="1" />
+        <Name>MovimentoXContaFin</Name>
+        <NameInSource>MovimentoXContaFin</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>ContaFinCod</value>
+        </ParentColumns>
+        <ParentSource isRef="3" />
+      </MovimentoXContaFin>
+    </Relations>
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="2">
+      <value>,ChaveIni,ChaveIni,,System.String,_x0036_200002,False,False,True,False</value>
+      <value>,ChaveFim,ChaveFim,,System.String,_x0036_200002,False,False,True,False</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="10" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="3">
+        <PageHeaderBand1 Ref="11" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,19,3.4</ClientRectangle>
+          <Components isList="true" count="3">
+            <Text1 Ref="12" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,1.6,19,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="10" />
+              <Parent isRef="11" />
+              <Text>AUTORIZAÇÃO DE PAGAMENTO</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <Text2 Ref="13" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15,0,4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,7,Bold</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="10" />
+              <Parent isRef="11" />
+              <Text>{ReportName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Image1 Ref="14" type="Image" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,0,2.8,1.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <DataColumn>Empresa.EmpLogoTipo</DataColumn>
+              <Margins>0,0,0,0</Margins>
+              <Name>Image1</Name>
+              <Page isRef="10" />
+              <Parent isRef="11" />
+              <Stretch>True</Stretch>
+            </Image1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="10" />
+          <Parent isRef="10" />
+        </PageHeaderBand1>
+        <DataBand1 Ref="15" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,4.6,19,16.4</ClientRectangle>
+          <Components isList="true" count="32">
+            <Text3 Ref="16" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.2,0.4,16.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,12,Bold</Font>
+              <Guid>e6c01e59d0bc4541b40f7e243b5b2250</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>{Fornecedor.EntNome}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+            <Text4 Ref="17" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.2,1.6,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11,Bold</Font>
+              <Guid>a25e15544dcb4e1796a9c6a7ce549fe1</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>{IIF(Fornecedor.EntTipoFJ == "Física", "CPF:","CNPJ:")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text5 Ref="18" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,1.6,14.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11</Font>
+              <Guid>8e9ad2d550804b90b1bdd6c46bb3cb65</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>{IIF(Fornecedor.EntTipoFJ == "Física", Format("{0:000\.000\.000\-00}", System.Int64.Parse(Fornecedor.EntCpfCgc)),Format("{0:00\.000\.000\/0000\-00}", System.Int64.Parse(Fornecedor.EntCpfCgc)))}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+            <Text6 Ref="19" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.2,2.8,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11,Bold</Font>
+              <Guid>026481ffd133495e8c6a8e912e018b16</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>Código:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text6>
+            <Text7 Ref="20" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,2.8,3,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11</Font>
+              <Guid>e5b7da1045024587a6c3e3f0c4169168</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>{Fornecedor.EntCod}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text8 Ref="21" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.8,2.8,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11,Bold</Font>
+              <Guid>61f2f3f0bc6846b7aeaada0701eb8729</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>Empresa:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text9 Ref="22" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10,2.8,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11</Font>
+              <Guid>e8e82577dc574889ba6768bb259df457</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>{Movimento.EmpCod}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text9>
+            <Text10 Ref="23" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.4,2.8,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11,Bold</Font>
+              <Guid>7e9a84fb4c1c4301b869d1672d455f95</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>T.Lancto.:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text11 Ref="24" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.6,2.8,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11</Font>
+              <Guid>62bac54c585f4288bf5bee569bc8848e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>{Movimento.TipoLancCod}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <Text12 Ref="25" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.2,4,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11,Bold</Font>
+              <Guid>11c37271569a44da8dba6b71e37b3042</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>Banco:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text12>
+            <Text13 Ref="26" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,4,3,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11</Font>
+              <Guid>d323ded4d5bb43ffaa50e4ab4e2fc6b3</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>{Fornecedor.BcoNum}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text13>
+            <Text14 Ref="27" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.8,4,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11,Bold</Font>
+              <Guid>6cd497602cea49db8808b586345e7be7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>Agência:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <Text15 Ref="28" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10,4,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11</Font>
+              <Guid>42d86caadcb54acba20c4d5b4c330742</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>{Fornecedor.AgNum}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text15>
+            <Text16 Ref="29" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.4,4,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11,Bold</Font>
+              <Guid>f0d7bc82af204b4eace52aec99e60c3d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>C/C:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text16>
+            <Text17 Ref="30" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.6,4,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11</Font>
+              <Guid>befd682bfa304070b57c16be4b032235</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>{Fornecedor.EntBcoAgCCorNum}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text17>
+            <Text18 Ref="31" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.8,6.2,15.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,16,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>{Movimento.LancMovCtrlBancVal}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="32" type="CurrencyFormat" isKey="true">
+                <DecimalSeparator>,</DecimalSeparator>
+                <GroupSeparator>.</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <PositivePattern>0</PositivePattern>
+                <Symbol>R$</Symbol>
+              </TextFormat>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text18>
+            <Text19 Ref="33" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.2,8.2,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11,Bold</Font>
+              <Guid>26b77621a93f4fc78c153cfe253ae7d2</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>Emissão:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text19>
+            <Text20 Ref="34" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,8.2,3,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11</Font>
+              <Guid>f7960ae4bb0346d982662c78c7a28f79</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>{Movimento.LancMovCtrlBancDataEmis}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="35" type="DateFormat" isKey="true" />
+              <TextQuality>Typographic</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text20>
+            <Text21 Ref="36" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.8,8.2,3.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11,Bold</Font>
+              <Guid>4c8a9fe27d174609b0bbee42a018c091</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>Nº do Documento:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text21>
+            <Text22 Ref="37" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.4,8.2,3.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11</Font>
+              <Guid>cf477da551e944eea1dea1bd8f25754b</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>{Movimento.LancMovCtrlBancNum}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text22>
+            <Text23 Ref="38" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.2,9.4,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11,Bold</Font>
+              <Guid>725265e437bf4b92a4694c60d74ee7a6</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>Chave:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text23>
+            <Text24 Ref="39" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,9.4,3,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11</Font>
+              <Guid>0cea88a054f14a849a0e080912f09921</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>{Movimento.MovCtrlBancNum}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="40" type="DateFormat" isKey="true" />
+              <TextQuality>Typographic</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text24>
+            <Text25 Ref="41" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.8,9.4,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11,Bold</Font>
+              <Guid>ae4773b66fef451cb03dc01d74fd913e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>Conta:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text25>
+            <Text26 Ref="42" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.4,9.4,5.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11</Font>
+              <Guid>62f279676be244cab82cdd811de8d7bd</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text26</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>{ContaFin.BcoNome}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text26>
+            <Text27 Ref="43" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.2,10.6,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11,Bold</Font>
+              <Guid>114187fdebd7454dab28659031e1fcc3</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text27</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>Obs.:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+            </Text27>
+            <Text28 Ref="44" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,10.6,13.8,2.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,11</Font>
+              <Guid>3535c858ec474f778c322f9a8967ec84</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text28</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>{Movimento.LancMovCtrlBancObs}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="45" type="DateFormat" isKey="true" />
+              <TextQuality>Typographic</TextQuality>
+              <Type>DataColumn</Type>
+            </Text28>
+            <Text29 Ref="46" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.8,15.6,3,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10,Bold</Font>
+              <Guid>bcf36476791d4e18b063abcd825485d7</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text29</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>Financeiro</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text29>
+            <Text30 Ref="47" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.8,15.6,3,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10,Bold</Font>
+              <Guid>cf57964ca8a84759adbcec6216d4f9fd</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text30</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <Text>Diretoria</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Typographic</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text30>
+            <StartPointPrimitive1 Ref="48" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>0.8,0,0,0</ClientRectangle>
+              <Name>StartPointPrimitive1</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <ReferenceToGuid>df30a6078b8c4ee29eb07208ffd2bc76</ReferenceToGuid>
+            </StartPointPrimitive1>
+            <EndPointPrimitive1 Ref="49" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>18.4,5,0,0</ClientRectangle>
+              <Name>EndPointPrimitive1</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <ReferenceToGuid>df30a6078b8c4ee29eb07208ffd2bc76</ReferenceToGuid>
+            </EndPointPrimitive1>
+            <HorizontalLinePrimitive1 Ref="50" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>1.4,15.6,5.8,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="51" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive1</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <StartCap Ref="52" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive1>
+            <HorizontalLinePrimitive2 Ref="53" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>11.4,15.6,5.8,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="54" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>f8b984c726de4a39a6b4940074cf9ced</Guid>
+              <Name>HorizontalLinePrimitive2</Name>
+              <Page isRef="10" />
+              <Parent isRef="15" />
+              <StartCap Ref="55" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive2>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Movimento</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="10" />
+          <Parent isRef="10" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+        <RectanglePrimitive1 Ref="56" type="RectanglePrimitive" isKey="true">
+          <ClientRectangle>0.8,4.6,17.6,5</ClientRectangle>
+          <Color>Black</Color>
+          <Guid>df30a6078b8c4ee29eb07208ffd2bc76</Guid>
+          <Name>RectanglePrimitive1</Name>
+          <Page isRef="10" />
+          <Parent isRef="10" />
+        </RectanglePrimitive1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>52b2c2cf2d224fec94fe3f40621535a2</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="57" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="58" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>AutoPagamento_HeNAvicultura</ReportAlias>
+  <ReportChanged>8/17/2017 11:20:25 PM</ReportChanged>
+  <ReportCreated>6/18/2017 10:03:46 AM</ReportCreated>
+  <ReportFile>C:\Users\adm.hyline.paulo\Documents\Projetos\MvcAppHyLinedoBrasilMobile\MvcAppHylinedoBrasilMobile\MvcAppHylinedoBrasilMobile\Reports\AutoPagamento_HeNAvicultura.mrt</ReportFile>
+  <ReportGuid>36544258bed6433a9807c687b17af345</ReportGuid>
+  <ReportImage isNull="true" />
+  <ReportName>AutoPagamento_HeNAvicultura</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2017.1.10.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class AutoAdiant_HeNAvicultura : Stimulsoft.Report.StiReport
+    {
+        public AutoAdiant_HeNAvicultura()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

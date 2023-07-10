@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "";
+}
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Menu RDV", "MenuRDV", "RDV")
+    </p>
+    @Html.Image(@Url.Content("~/Content/images/logo-itau.png"), "RDV")
+    <h2>Importa Fatura Excel - Itaú</h2>
+</div>
+<br />
+
+<h3 style="color:Red; background-color:White"><b>@ViewBag.Erro</b></h3>
+<h3 style="color:Blue;">@ViewBag.fileName</h3>
+
+@using (Html.BeginForm("ImportaFaturaCartaoCorporativoItauEXCEL", "RDV",
+    FormMethod.Post, new { enctype = "multipart/form-data", data_ajax = "false" }))
+{
+    <ul data-role="listview" data-inset="true">
+         <li data-role="fieldcontain">
+            <b>Selecione o Mês / Ano da Fatura do Itáu a ser importada:</b>
+        </li>
+        <li data-role="fieldcontain">
+            @Html.TextBox("AnoMesFaturaItau", DateTime.Today.ToString("yyyy-MM"), new { @id = "ddlAnoMesFaturaBB", @type = "month", @required = "required" })
+        </li>
+        <li data-role="fieldcontain">
+            <b>Selecione o arquivo a ser Importado:</b>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="file" name="file" />
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Importar" />
+        </li>
+    </ul>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

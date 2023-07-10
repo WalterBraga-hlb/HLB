@@ -1,0 +1,63 @@
+﻿@model MvcAppHyLinedoBrasil.Models.DropDownListParametros
+@using MvcAppHyLinedoBrasil.Models
+
+@{
+    ViewBag.Title = "RRC";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="@Url.Content("//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("//code.jquery.com/jquery-1.10.2.js")" type="text/javascript"></script>
+<script src="@Url.Content("//code.jquery.com/ui/1.11.0/jquery-ui.js")" type="text/javascript"></script>
+
+<script type="text/javascript">
+    //$(function () {
+    //    $("#dataIni").datepicker({ dateFormat: "dd/mm/yy" });
+    //});
+    //$(function () {
+    //    $("#dataFim").datepicker({ dateFormat: "dd/mm/yy" });
+    //});
+</script>
+
+@Html.Partial("MenuDadosAssistenciaTecnica")
+
+<h3>Relatório de Reclamação de Cliente - RRC</h3>
+
+@using (Html.BeginForm("DownloadRRC", "ImportaDadosAssistTecnica", FormMethod.Post, new { enctype = "multipart/form-data", target = "_blank" }))
+{
+    <fieldset>
+        <p align="center">
+            Informe os parâmetros a seguir:
+            <br />
+            <br />
+            @if (Session["empresa"].ToString().Length > 2)
+            {
+                <b>Selecione a Empresa: </b>
+                @Html.DropDownListFor(
+                    d => d.Empresa,
+                    (IEnumerable<SelectListItem>)Session["ListaEmpresasRelComercial"])
+                <br />
+                <br />
+            }
+            <b>
+                Período: @Html.TextBox("dataIni", Session["sDataInicial"], new { @required = "true", @type = "date" })
+                à @Html.TextBox("dataFim", Session["sDataFinal"], new { @required = "true", @type = "date" })
+            </b>
+            <br />
+            <br />
+            <b>Tipo de Data: </b>
+            @Html.RadioButton("tipoData", "Inclusão", Session["sTipoDataRRC"].ToString() == "Inclusão" ? true : false, new { @required = "true" }) Data da Inclusão
+            @Html.RadioButton("tipoData", "Reclamação", Session["sTipoDataRRC"].ToString() == "Reclamação" ? true : false, new { @required = "true" }) Data da Reclamação
+            @Html.RadioButton("tipoData", "Nascimento", Session["sTipoDataRRC"].ToString() == "Nascimento" ? true : false, new { @required = "true" }) Data do Nascimento
+        </p>
+    </fieldset>
+
+    <div id="divUltimaReview">
+        <h4>@Html.Raw(ViewBag.fileName)</h4>
+        <h4 style="color:red;">@ViewBag.erro</h4>
+    </div>
+    <div class="editor-field">
+        <input type="submit" value="Download RRC" id="importar"/>
+    </div>
+}
+

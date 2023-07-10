@@ -1,0 +1,226 @@
+﻿@model MvcAppHyLinedoBrasil.Models.FormulaPPCP.PROD_OPER
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>PROD_OPER</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdCodEstr)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProdCodEstr)
+            @Html.ValidationMessageFor(model => model.ProdCodEstr)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdOperSeq)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProdOperSeq)
+            @Html.ValidationMessageFor(model => model.ProdOperSeq)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OperCod)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OperCod)
+            @Html.ValidationMessageFor(model => model.OperCod)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EquipCodEstr)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EquipCodEstr)
+            @Html.ValidationMessageFor(model => model.EquipCodEstr)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdOperQtdDias)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProdOperQtdDias)
+            @Html.ValidationMessageFor(model => model.ProdOperQtdDias)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdOperHoraEntrega)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProdOperHoraEntrega)
+            @Html.ValidationMessageFor(model => model.ProdOperHoraEntrega)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdOperTemApont)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProdOperTemApont)
+            @Html.ValidationMessageFor(model => model.ProdOperTemApont)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdOperTemReaprov)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProdOperTemReaprov)
+            @Html.ValidationMessageFor(model => model.ProdOperTemReaprov)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdCodEstrSucata)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProdCodEstrSucata)
+            @Html.ValidationMessageFor(model => model.ProdCodEstrSucata)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CCtrlCodEstrSucata)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CCtrlCodEstrSucata)
+            @Html.ValidationMessageFor(model => model.CCtrlCodEstrSucata)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdOperDataInic)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProdOperDataInic)
+            @Html.ValidationMessageFor(model => model.ProdOperDataInic)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdOperDataFim)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProdOperDataFim)
+            @Html.ValidationMessageFor(model => model.ProdOperDataFim)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdOperTexto)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProdOperTexto)
+            @Html.ValidationMessageFor(model => model.ProdOperTexto)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LocArmazCodEstr)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LocArmazCodEstr)
+            @Html.ValidationMessageFor(model => model.LocArmazCodEstr)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdCodEstrRetalho)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProdCodEstrRetalho)
+            @Html.ValidationMessageFor(model => model.ProdCodEstrRetalho)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CCtrlCodEstrRetalho)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CCtrlCodEstrRetalho)
+            @Html.ValidationMessageFor(model => model.CCtrlCodEstrRetalho)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdOperRetalhoMovEstq)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProdOperRetalhoMovEstq)
+            @Html.ValidationMessageFor(model => model.ProdOperRetalhoMovEstq)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdOperRetalhoBxaComp)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProdOperRetalhoBxaComp)
+            @Html.ValidationMessageFor(model => model.ProdOperRetalhoBxaComp)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdOperProcConfApont)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProdOperProcConfApont)
+            @Html.ValidationMessageFor(model => model.ProdOperProcConfApont)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdOperObs)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProdOperObs)
+            @Html.ValidationMessageFor(model => model.ProdOperObs)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdOperEnrolamento)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProdOperEnrolamento)
+            @Html.ValidationMessageFor(model => model.ProdOperEnrolamento)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdOperImprimeEtiqueta)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProdOperImprimeEtiqueta)
+            @Html.ValidationMessageFor(model => model.ProdOperImprimeEtiqueta)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdOperIntegraBalanca)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProdOperIntegraBalanca)
+            @Html.ValidationMessageFor(model => model.ProdOperIntegraBalanca)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdOperAtualizaLote)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProdOperAtualizaLote)
+            @Html.ValidationMessageFor(model => model.ProdOperAtualizaLote)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProdOperGerPVRemInd)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProdOperGerPVRemInd)
+            @Html.ValidationMessageFor(model => model.ProdOperGerPVRemInd)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

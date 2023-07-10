@@ -1,0 +1,156 @@
+﻿@{
+    ViewBag.Title = "";
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbappSession =
+        new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities apolo =
+        new MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities();
+
+    int idLog = Convert.ToInt32(Session["IDLogPedidoRacao"]);
+
+    var logPR = hlbappSession.LOG_PedidoRacao.Where(w => w.ID == idLog).FirstOrDefault();
+    
+    var listaLogPRItens = hlbappSession.LOG_PedidoRacao_Item
+        .Where(w => w.IDLogPedidoRacao == idLog)
+        .OrderBy(o => o.Sequencia)
+        .ThenBy(t => t.ID)
+        .ToList();
+
+    string granja = Session["granjaSelecionada"].ToString();
+    string descricaoGranja = ((List<SelectListItem>)Session["ListaGranjas"])
+        .Where(w => w.Value == granja).FirstOrDefault().Text;
+}
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Histórico de Pedidos de Ração", "LogPedidoRacaoReturn", "PedidoRacao")
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/graos_32x32.png"), "PedidoRacao")
+    <h2>Itens do Histórico ID @idLog.ToString() - Operação: @logPR.Operacao realizada 
+        em @logPR.DataOperacao.ToString("dd/MM/yyyy HH:mm") pelo usuário @logPR.UsuarioOperacao</h2>
+    <br />
+    <h3 style="color:red;">@ViewBag.Erro</h3>
+</div>
+<div id="tabelaDEO" style="overflow:auto;">
+<table id="tabelaIndexPV" class="ajustetabelaIndexPV">
+    <tr class="ajuste">
+        <th class="ajuste">
+            Operação
+        </th>
+        <th class="ajuste">
+            Seq.
+        </th>
+        <th class="ajuste">
+            Núcleo
+        </th>
+        <th class="ajuste">
+            Galpão
+        </th>
+        <th class="ajuste">
+            Linhagem
+        </th>
+        <th class="ajuste">
+            Fórmula
+        </th>
+        <th class="ajuste">
+            Qtde. Kg.
+        </th>
+    </tr>
+@foreach (var item in listaLogPRItens)
+{
+    var adicionaisLogPR = MvcAppHylinedoBrasilMobile.Controllers.PedidoRacaoController.hlbapp
+        .LOG_PedidoRacao_Item_Aditivo.Where(w => w.IDLogPedidoRacao_Item == item.ID)
+        .OrderBy(o => o.Sequencia)
+        .ThenBy(t => t.ID)
+        .ToList();
+
+    string nomeProduto = "";
+    var cfr = hlbappSession.Config_Formula_Racao.Where(w => w.ID == item.IDConfigFormulaRacao).FirstOrDefault();
+    if (cfr != null)
+    {
+        nomeProduto = cfr.Descricao;
+    }
+
+    <tr class="ajustetabelaIndexPV">
+        <td class="ajuste">
+            @item.Operacao
+        </td>
+        <td class="ajuste">
+            @Html.DisplayFor(modelItem => item.Sequencia)
+        </td>
+        <td class="ajuste">
+            @Html.DisplayFor(modelItem => item.Nucleo)
+        </td>
+        <td class="ajuste">
+            @Html.DisplayFor(modelItem => item.Galpao)
+        </td>
+        <td class="ajuste">
+            @Html.DisplayFor(modelItem => item.Linhagem)
+        </td>
+        <td class="ajuste">
+            @(nomeProduto)
+        </td>
+        <td class="ajuste">
+            @String.Format("{0:N0}", item.QtdeKg)
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="6">
+            <ul data-role="listview" data-inset="true">
+                <li data-role="list-divider">Adicionais do Item</li>
+                <li>
+                    <div style="overflow:auto;">
+                    <table class="ajuste">
+                        <tbody class="ajuste">
+                        <tr class="ajuste">
+                            <th class="ajuste">
+                                Operação
+                            </th>
+                            <th class="ajuste">
+                                Origem
+                            </th>
+                            <th class="ajuste">
+                                Adicional
+                            </th>
+                            <th class="ajuste">
+                                Qtde. Kg. p/ Ton.:
+                            </th>
+                        </tr>
+                    @foreach (var adicional in adicionaisLogPR)
+                    {
+                        var adicionalApolo = apolo.PRODUTO.Where(w => w.ProdCodEstr == adicional.ProdCodEstr)
+                            .FirstOrDefault();
+                        string descricao = "";
+                        if (adicionalApolo != null)
+                        {
+                            descricao = adicionalApolo.ProdNome;
+                        }
+
+                        <tr class="ajuste">
+                            <td class="ajuste">
+                                @adicional.Operacao
+                            </td>
+                            <td class="ajuste">
+                                @adicional.Origem
+                            </td>
+                            <td class="ajuste">
+                                @(descricao)
+                            </td>
+                            <td class="ajuste">
+                                @String.Format("{0:N4}", adicional.QtdeKgPorTon)
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                    </table>
+                    </div>
+                </li>
+            </ul>
+        </td>
+    </tr>
+}
+
+</table>
+</div>

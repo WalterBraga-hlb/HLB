@@ -1,0 +1,808 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MixModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+  <EntityContainer Name="MixEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+    <EntitySet Name="FO_FUNCIONARIO" EntityType="MixModel.FO_FUNCIONARIO" />
+    <EntitySet Name="FO_PESSOA" EntityType="MixModel.FO_PESSOA" />
+    <AssociationSet Name="FK_FUNC_PESSOA_SUP_ESTAGIO" Association="MixModel.FK_FUNC_PESSOA_SUP_ESTAGIO">
+      <End Role="FO_PESSOA" EntitySet="FO_PESSOA" />
+      <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FUNCIONARIO_FUNCPENS" Association="MixModel.FK_FUNCIONARIO_FUNCPENS">
+      <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+      <End Role="FO_FUNCIONARIO1" EntitySet="FO_FUNCIONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FUNCIONARIO_PESSOA" Association="MixModel.FK_FUNCIONARIO_PESSOA">
+      <End Role="FO_PESSOA" EntitySet="FO_PESSOA" />
+      <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FUNCIONARIO_TUTOR" Association="MixModel.FK_FUNCIONARIO_TUTOR">
+      <End Role="FO_PESSOA" EntitySet="FO_PESSOA" />
+      <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+    </AssociationSet>
+    <EntitySet Name="BS_ESTRUTURA" EntityType="MixModel.BS_ESTRUTURA" />
+    <AssociationSet Name="FK_ESTRUTURA_ESTRUTURA" Association="MixModel.FK_ESTRUTURA_ESTRUTURA">
+      <End Role="BS_ESTRUTURA" EntitySet="BS_ESTRUTURA" />
+      <End Role="BS_ESTRUTURA1" EntitySet="BS_ESTRUTURA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FUNCIONARIO_ESTRUTURA" Association="MixModel.FK_FUNCIONARIO_ESTRUTURA">
+      <End Role="BS_ESTRUTURA" EntitySet="BS_ESTRUTURA" />
+      <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FUNCIONARIO_ESTRUTURAEMP" Association="MixModel.FK_FUNCIONARIO_ESTRUTURAEMP">
+      <End Role="BS_ESTRUTURA" EntitySet="BS_ESTRUTURA" />
+      <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FUNCIONARIO_ESTRUTURAFIL" Association="MixModel.FK_FUNCIONARIO_ESTRUTURAFIL">
+      <End Role="BS_ESTRUTURA" EntitySet="BS_ESTRUTURA" />
+      <End Role="FO_FUNCIONARIO" EntitySet="FO_FUNCIONARIO" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="FO_FUNCIONARIO">
+    <Key>
+      <PropertyRef Name="DOM_CODIGO" />
+      <PropertyRef Name="FU_MATRICULA" />
+    </Key>
+    <Property Name="DOM_CODIGO" Type="Int32" Nullable="false" />
+    <Property Name="PE_CODIGO" Type="Int32" Nullable="false" />
+    <Property Name="FU_MATRICULA" Type="Int32" Nullable="false" />
+    <Property Name="FU_CHAPA" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="FU_TFU_CODIGO" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="FU_TRE_CODIGO" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="FU_TAD_CODIGO" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_STF_CODIGO" Type="String" Nullable="false" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="FU_CTS_CODIGO" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="FU_OCS_CODIGO" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="FU_DT_BASE" Type="DateTime" />
+    <Property Name="FU_DT_DETERM" Type="DateTime" />
+    <Property Name="FU_NDIAS_DETERM" Type="Int32" />
+    <Property Name="FU_DT_OPCAO" Type="DateTime" />
+    <Property Name="FU_PERC_FGTS" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="FU_ADMISSAO" Type="DateTime" Nullable="false" />
+    <Property Name="FU_DT_TRANSF" Type="DateTime" />
+    <Property Name="FU_SIT_OPCAO" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_PERC_ADIANT" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="FU_DEDUZIR_M65" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_NUM_REGISTRO" Type="Int32" />
+    <Property Name="FU_VALOR_ARRED" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="FU_ANO_COMP" Type="Int32" Nullable="false" />
+    <Property Name="FU_MES_COMP" Type="Int32" Nullable="false" />
+    <Property Name="FU_SALARIO" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="FU_JORNADA" Type="Int32" Nullable="false" />
+    <Property Name="FU_DU_PMES" Type="Int32" />
+    <Property Name="FU_DU_MES" Type="Int32" />
+    <Property Name="FU_VIC_CODIGO" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="FU_SRA_CODIGO" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="FU_CAF_CODIGO" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="FU_CSA_CODIGO" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="FU_DT_AVISO_PREVIO" Type="DateTime" />
+    <Property Name="FU_NDIAS_AVISO" Type="Int32" />
+    <Property Name="FU_DT_DEMISSAO" Type="DateTime" />
+    <Property Name="FU_DT_ULTMOV" Type="DateTime" />
+    <Property Name="FU_PG_AVISO" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_DESC_AVISO" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_DT_PAG_RESC" Type="DateTime" />
+    <Property Name="FU_SIN_CODIGO" Type="Int32" Nullable="false" />
+    <Property Name="FU_PG_CONTRIB" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_ES_COD_EMPRESA" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+    <Property Name="FU_ES_ID_ESTRUTURA" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+    <Property Name="FU_CAC_CODIGO" Type="Int32" Nullable="false" />
+    <Property Name="FU_BA_CODBACEN_FGTS" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+    <Property Name="FU_AG_NUMERO_FGTS" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
+    <Property Name="FU_NRO_CTA_FGTS" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="FU_DVERIF_CTA_FGTS" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="FU_ABERTURA_CTA_FGTS" Type="DateTime" />
+    <Property Name="FU_BA_CODBACEN_CC" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+    <Property Name="FU_AG_NUMERO_CC" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
+    <Property Name="FU_NRO_CTA_CC" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="FU_DVERIF_CTA_CC" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="FU_ABERTURA_CTA_CC" Type="DateTime" />
+    <Property Name="FU_TITULAR_CTA_CC" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="FU_DT_VENC_FERIAS" Type="DateTime" Nullable="false" />
+    <Property Name="FU_SALDO_FERIAS" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="FU_DT_INIGOZO_FERIAS" Type="DateTime" />
+    <Property Name="FU_DT_FIMGOZO_FERIAS" Type="DateTime" />
+    <Property Name="FU_NDIAS_FERIAS" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="FU_DT_PAGTO_FERIAS" Type="DateTime" />
+    <Property Name="FU_DT_AVISO_FERIAS" Type="DateTime" />
+    <Property Name="FU_QUER_ABONO_FERIAS" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_NDIAS_ABONO_FERIAS" Type="Int32" />
+    <Property Name="FU_QUER_PRIM_PARCELA13" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_OBS_FERIAS" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="FU_SALDO_FERIAS_ANTERIOR" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="FU_TOTAL_FALTAS_ACUM" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+    <Property Name="FU_ES_COD_FILIAL" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+    <Property Name="FU_MOT_RESCISAO" Type="Int32" />
+    <Property Name="FU_SLD_FGTS" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="ITF_CODIGO" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="FU_NDIAS_NUTEIS" Type="Int32" />
+    <Property Name="FU_RAC_CODIGO" Type="Int32" />
+    <Property Name="FU_TSL_CODIGO" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="FU_NTS_CODIGO" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="FU_FTS_CODIGO" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="FU_CLD_CODIGO" Type="Int32" />
+    <Property Name="FU_MATRICULA_CHEFE" Type="Int32" />
+    <Property Name="FU_VALOR_DEVE" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="FU_FERIAS_COLETIVAS" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_DIAS_LIC_REM" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="FU_USU_SISTEMA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_FER_ABONA_FALTAS" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_CTRL_SALDO_NEG" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="FU_DT_ABONO_FERIAS" Type="DateTime" />
+    <Property Name="FU_HOR_INDICE_INICIAL" Type="Int32" />
+    <Property Name="FU_FUNCAO" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="FU_SALDO_FER_PROP" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="FU_SALARIO_HORA" Type="Decimal" Precision="15" Scale="3" />
+    <Property Name="FU_JORNADA_DIARIA" Type="Int32" />
+    <Property Name="FU_DIA_DEMISSAO_TRAB" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_MULTIPL_SAL_HORA" Type="Int32" />
+    <Property Name="FU_FER_ANO_COMP" Type="Int32" />
+    <Property Name="FU_FER_MES_COMP" Type="Int32" />
+    <Property Name="FU_DIAS_PERDIDOS_FER" Type="Int32" />
+    <Property Name="FU_DIRIGENTE_SINDICAL" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_INICIO_ESTAB_DS" Type="DateTime" />
+    <Property Name="FU_FIM_ESTAB_DS" Type="DateTime" />
+    <Property Name="FU_POSSUI_ALVARA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_FER_DATA_LIMITE" Type="DateTime" />
+    <Property Name="FU_FER_DATA_RETORNO" Type="DateTime" />
+    <Property Name="FU_FER_REF_PER_ANT" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="PE_NOME" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="FU_AM_LIMITE_COMPRA" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="FU_AM_COD_USU" Type="String" MaxLength="31" Unicode="false" FixedLength="false" />
+    <Property Name="FU_AM_NEC_AUT_VEIC" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="CNT_CODIGO" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="FU_PERC_INSALUBRIDADE" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="FU_PERC_PERICULOSIDADE" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="FU_NAO_CONTRIBUI_INSS" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_CC_FILIAL" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="FU_FICHA_TRANSFERIDA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_FER_QTDE_PARCELAS" Type="Int32" />
+    <Property Name="LTB_CODIGO" Type="Int32" />
+    <Property Name="FU_USA_CARTAO_PONTO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_NUM_CONTRIB_INDIVIDUAL" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="FU_FER_FALTAS_INTEIRA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FPG_CODIGO" Type="Int32" />
+    <Property Name="FU_PERC_COMISSAO" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="FU_DT_REINTEGRACAO" Type="DateTime" />
+    <Property Name="FU_NRO_CARTAO_SALARIO" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="FU_SINDICALIZADO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_ESC_CODIGO" Type="Int32" />
+    <Property Name="FU_DT_PRORROGADA" Type="DateTime" />
+    <Property Name="FU_NDIAS_PRORROGADO" Type="Int32" />
+    <Property Name="FU_DATA_DEMISSAO" Type="DateTime" />
+    <Property Name="FU_DATA_SMT" Type="DateTime" />
+    <Property Name="FU_SIN_FER_PART_AUT" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_PERCENTUAL_ISS" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="FU_PROF_LIBERAL" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_FERIAS_LOGISTICA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_USA_ENCARGOS_DEP" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_COMP_PG_RESC_BANCO_HORAS" Type="Int32" />
+    <Property Name="FU_COMP_PG_RESC_GRATIFICACOES" Type="Int32" />
+    <Property Name="FU_COMP_PG_RESC_DIF_SALARIAL" Type="Int32" />
+    <Property Name="ID_MIX" Type="Int32" />
+    <Property Name="FU_ESC_IND_REF" Type="Int32" />
+    <Property Name="FU_ESC_DATA_REF" Type="DateTime" Nullable="false" />
+    <Property Name="FU_CAC_CODIGO_CONTRATACAO" Type="Int32" />
+    <Property Name="FU_FALTAS_ACUM" Type="Int32" />
+    <Property Name="FU_AVERBACOES_ACUM" Type="Int32" />
+    <Property Name="FU_AFAST_ACUM" Type="Int32" />
+    <Property Name="FU_COD_OPERACAO_CTA_CC" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="FU_NAO_DESC_CONTR_ASSIST" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_NAO_DESC_CONTR_CONFED" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_UNID_ENTREGA_BEN" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+    <Property Name="FU_GERA_CAGED" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="TSL_DT_INICIO" Type="DateTime" />
+    <Property Name="FU_DATA_NOMEACAO" Type="DateTime" />
+    <Property Name="FU_DATA_POSSE" Type="DateTime" />
+    <Property Name="FU_ADMISSAO_NOM" Type="DateTime" />
+    <Property Name="FU_GRUPO_CARGO_NOM" Type="Int32" />
+    <Property Name="FU_CAC_CODIGO_NOM" Type="Int32" />
+    <Property Name="FU_ES_ID_ESTRUTURA_NOM" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+    <Property Name="FU_ING_CODIGO_NOM" Type="Int32" />
+    <Property Name="FU_SIAPE_NOM" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="FU_CHAPA_NOM" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="FU_DT_DEMISSAO_NOM" Type="DateTime" />
+    <Property Name="FU_QLT_ID_VAGA_NOM" Type="Int32" />
+    <Property Name="FU_RAC_CODIGO_NOM" Type="Int32" />
+    <Property Name="FU_AAD_CODIGO_NOM" Type="Int32" />
+    <Property Name="FU_FSP_DT_INI_PER_AQUISITIVO" Type="DateTime" />
+    <Property Name="FU_DT_LICENCA_PREMIO" Type="DateTime" />
+    <Property Name="FU_DT_LICENCA_CAPACITACAO" Type="DateTime" />
+    <Property Name="STA_CODIGO" Type="Int32" />
+    <Property Name="FU_DT_REQUERIMENTO" Type="DateTime" />
+    <Property Name="FU_DT_CONCESSAO" Type="DateTime" />
+    <Property Name="FU_NUM_PROCESSO" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="FU_NUM_PROCESSO_TCU" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="FU_PERC_PROPORCIONALIDADE" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="FU_DT_OBITO" Type="DateTime" />
+    <Property Name="FU_NUM_REGISTRO_OBITO" Type="String" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="FU_NUM_LIVRO" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="FU_NUM_FOLHA" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="FU_NOME_CARTORIO" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="FU_SALDOLICENCA_1998" Type="Int32" />
+    <Property Name="FU_SALDOLICENCA_2003" Type="Int32" />
+    <Property Name="FU_SALDOLICENCA_2005" Type="Int32" />
+    <Property Name="FU_SALDOLICENCA_GERAL" Type="Int32" />
+    <Property Name="FU_VALOR_BENEFICIO" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="FU_MATRICULA_PENS" Type="Int32" />
+    <Property Name="FU_PENS_NATUREZA" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="TPD_CODIGO" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="FU_PENS_DT_INI_VALIDADE" Type="DateTime" />
+    <Property Name="FU_PENS_DT_FIM_VALIDADE" Type="DateTime" />
+    <Property Name="PE_CODIGO_TUTOR" Type="Int32" />
+    <Property Name="FU_TUTOR_BA_CODBACEN_CC" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+    <Property Name="FU_TUTOR_AG_NUMERO_CC" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
+    <Property Name="FU_TUTOR_NRO_CTA_CC" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="FU_TUTOR_DVERIF_CTA_CC" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="FU_PROC_DT_INICIO" Type="DateTime" />
+    <Property Name="FU_PROC_DT_FIM" Type="DateTime" />
+    <Property Name="FU_PROC_NUM_REGISTRO" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="FU_PROC_NUM_LIVRO" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="FU_PROC_NOME_CARTORIO" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="FU_PROC_NUM_FOLHA" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="SIT_CODIGO" Type="Int32" />
+    <Property Name="FU_BENEFNUM" Type="Int32" />
+    <Property Name="FU_BENEFDEN" Type="Int32" />
+    <Property Name="FU_SIN_RETROAGIU_MEDIA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_TMO_CODIGO" Type="Int32" />
+    <Property Name="FU_PENDENCIAS" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_SALARIO_ADICIONAL1" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="FU_SALARIO_ADICIONAL2" Type="Decimal" Precision="15" Scale="2" />
+    <Property Name="ORG_CODIGO" Type="Int32" />
+    <Property Name="FU_CHAPA_ALT" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="FU_ID_CHEFE" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="FU_TSL_CODIGO_NOM" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="FU_NTS_CODIGO_NOM" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="FU_FTS_CODIGO_NOM" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="FU_AVIS_PREV_DT_COMPAREC" Type="DateTime" />
+    <Property Name="FU_AVIS_PREV_HR_COMPAREC" Type="Int32" />
+    <Property Name="FU_AVIS_PREV_NOMELOC_COMPAREC" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+    <Property Name="FU_AVIS_PREV_ENDERLOC_COMPAREC" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+    <Property Name="FU_AVIS_PREV_OBS" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+    <Property Name="FU_AVIS_PREV_TIPO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_AVIS_PREV_OPCAO_JORNADA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_AVIS_PREV_NDIAS_AUSENCIA" Type="Int32" />
+    <Property Name="FU_AVIS_PREV_DIAS_AVISO_REAL" Type="Int32" />
+    <Property Name="FU_AVIS_PREV_COMPLLOC_COMPAREC" Type="String" MaxLength="25" Unicode="false" FixedLength="false" />
+    <Property Name="FU_AVIS_PREV_NUMLOC_COMPAREC" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="FU_AVIS_PREV_CIDADE_COMPAREC" Type="Int32" />
+    <Property Name="FU_AVIS_PREV_BAIRRO_COMPAREC" Type="Int32" />
+    <Property Name="FU_AVIS_PREV_UF_COMPAREC" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="FU_AVIS_PREV_PAIS_COMPAREC" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="FU_AVIS_PREV_CEP_COMPAREC" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="FU_SCF_CODIGO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_RPA_CODIGO" Type="Int32" />
+    <Property Name="FU_INICIO_ESTAB_CAND" Type="DateTime" />
+    <Property Name="FU_FIM_ESTAB_CAND" Type="DateTime" />
+    <Property Name="FU_ESTAB_CANDIDATURA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_VIM_CODIGO" Type="Int32" />
+    <Property Name="FU_TNO_CODIGO" Type="Int32" />
+    <Property Name="FU_ATO_NOMEACAO" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="FU_PG_TXCONFED" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_PG_TXASSIST" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FNC_CODIGO" Type="Int32" />
+    <Property Name="FU_CONSIDERA_DTREINTEGRACAO" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_DT_AVISO_PREVIO_PROJETADO" Type="DateTime" />
+    <Property Name="FU_JORN_SEM_AFA_INTEGRAL" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_JORN_SEM_AFA_CUMP_INTEGRAL" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_JORN_SAB_COMP_SEM_AFA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_COMPR_NOVO_EMPREGO_AVISO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_ORIGEM_FERIAS" Type="Int32" />
+    <Property Name="FU_TIPO_CONTA" Type="Int32" />
+    <Property Name="FU_INDICATIVO_ADMISSAO" Type="Int32" />
+    <Property Name="FU_CTT_CODIGO" Type="String" MaxLength="4" Unicode="false" FixedLength="false" />
+    <Property Name="FU_ESTAG_NATUREZA" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_ESTAG_NIVEL" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_ESTAG_AREA_ATUACAO" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="FU_ESTAG_NR_APOLICE" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="FU_ESTAG_DT_PREV_TERMINO" Type="DateTime" />
+    <Property Name="FU_ESTAG_INST_ENSINO" Type="Int32" />
+    <Property Name="FU_ESTAG_AGENTE_INTEGRACAO" Type="Int32" />
+    <Property Name="FU_ESTAG_COORDENADOR" Type="Int32" />
+    <Property Name="FU_RESC_NRO_PROC_TRABALHISTA" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="FUR_OBSERVACAO" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="FU_RESC_CNPJ_SUCESSORA" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="FU_TIPO_CAGED" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+    <Property Name="FU_CAGED_DATA_REGISTRO" Type="DateTime" />
+    <Property Name="FU_TIPO_REGIME_JORNADA" Type="Int32" />
+    <Property Name="FU_DESCRICAO_SALARIO_VARIAVEL" Type="String" MaxLength="90" Unicode="false" FixedLength="false" />
+    <Property Name="FU_AVISO_PREVIO_MISTO" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_NDIAS_ESTABILIDADE" Type="Int32" />
+    <Property Name="FU_PREENCHE_COTA_DEFICIENTE" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_MATRICULA_ESOCIAL" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="FU_CONTRATO_DETERM_CLAU_ASSEC" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_AVIS_PREV_DT_PREV_DESLIG" Type="DateTime" />
+    <Property Name="FU_AVIS_PREV_TIPO_ESOCIAL" Type="Int32" />
+    <Property Name="FU_AVIS_PREV_OBSERVACAO" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="CPE_CODIGO_MENORIDADE" Type="Int32" />
+    <Property Name="CLI_CODIGO_ENT_EDUC" Type="Int32" />
+    <Property Name="FU_MATRICULA_TRANSF" Type="Int32" />
+    <Property Name="FU_CNPJ_EMPREGADOR" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="FU_OBSERVACAO_TRANSF" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="CPA_CODIGO" Type="Int32" />
+    <Property Name="FU_AUTORIZA_DESC_CONTR_SIND" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="FU_FER_FERIAS_EM_DIAS_UTEIS" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="FU_QUER_ADIANT_FERIAS" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="FO_PESSOA" Relationship="MixModel.FK_FUNC_PESSOA_SUP_ESTAGIO" FromRole="FO_FUNCIONARIO" ToRole="FO_PESSOA" />
+    <NavigationProperty Name="FO_FUNCIONARIO1" Relationship="MixModel.FK_FUNCIONARIO_FUNCPENS" FromRole="FO_FUNCIONARIO" ToRole="FO_FUNCIONARIO1" />
+    <NavigationProperty Name="FO_FUNCIONARIO2" Relationship="MixModel.FK_FUNCIONARIO_FUNCPENS" FromRole="FO_FUNCIONARIO1" ToRole="FO_FUNCIONARIO" />
+    <NavigationProperty Name="FO_PESSOA1" Relationship="MixModel.FK_FUNCIONARIO_PESSOA" FromRole="FO_FUNCIONARIO" ToRole="FO_PESSOA" />
+    <NavigationProperty Name="FO_PESSOA2" Relationship="MixModel.FK_FUNCIONARIO_TUTOR" FromRole="FO_FUNCIONARIO" ToRole="FO_PESSOA" />
+    <NavigationProperty Name="BS_ESTRUTURA" Relationship="MixModel.FK_FUNCIONARIO_ESTRUTURA" FromRole="FO_FUNCIONARIO" ToRole="BS_ESTRUTURA" />
+    <NavigationProperty Name="BS_ESTRUTURA1" Relationship="MixModel.FK_FUNCIONARIO_ESTRUTURAEMP" FromRole="FO_FUNCIONARIO" ToRole="BS_ESTRUTURA" />
+    <NavigationProperty Name="BS_ESTRUTURA2" Relationship="MixModel.FK_FUNCIONARIO_ESTRUTURAFIL" FromRole="FO_FUNCIONARIO" ToRole="BS_ESTRUTURA" />
+  </EntityType>
+  <EntityType Name="FO_PESSOA">
+    <Key>
+      <PropertyRef Name="PE_CODIGO" />
+    </Key>
+    <Property Name="PE_CODIGO" Type="Int32" Nullable="false" />
+    <Property Name="PE_ESTRANG_CONJ_BRASIL" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="PE_ESTRANG_VENC_IDENT" Type="DateTime" />
+    <Property Name="PE_ESTRANG_CART_HAB" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="PE_ESTRANG_NRO_REG" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="PE_ESTRANG_FILHOS_BRASIL" Type="Int32" />
+    <Property Name="PE_ESTRANG_VENC_CTPS" Type="DateTime" />
+    <Property Name="PE_ESTRANG_CART_MOD19" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="PE_ESTRANG_DT_CHEGADA" Type="DateTime" />
+    <Property Name="PE_ESTRANG_NRO_DECRETO" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="PE_ESTRANG_NATURALIZADO" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="PE_NOME" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="PE_SEXO" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="PE_DT_NASC" Type="DateTime" Nullable="false" />
+    <Property Name="PE_APOS_INSS" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="PE_RG_NUMERO" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="PE_RG_DTEMISSAO" Type="DateTime" />
+    <Property Name="PE_RG_ORGAO" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_CPF" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="PE_PIS" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="PE_DT_PIS" Type="DateTime" />
+    <Property Name="PE_EC_CODIGO" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="PE_CIDADE_NATAL" Type="Int32" />
+    <Property Name="PE_ESTADO_NATAL" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="PE_PAIS_NATAL" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_NACIONAL1" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_NACIONAL2" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_NACIONAL3" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_PAIS_END" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_UF_END" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="PE_CIDADE_END" Type="Int32" />
+    <Property Name="PE_BAIRRO_END" Type="Int32" />
+    <Property Name="PE_LOGRADOURO_END" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+    <Property Name="PE_NUMERO_END" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_COMPLEMENTO_END" Type="String" MaxLength="25" Unicode="false" FixedLength="false" />
+    <Property Name="PE_CEP" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_EMAIL" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="PE_GRI_CODIGO" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="PE_CURSO" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="PE_DOUTORADO" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="PE_MESTRADO" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="PE_OBSERVACOES" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+    <Property Name="PE_BA_CODBACEN_PIS" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+    <Property Name="PE_AG_NUMERO_PIS" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
+    <Property Name="PE_NRO_CTA_PIS" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="PE_DVERIF_CTA_PIS" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="PE_ABERTURA_CTA_PIS" Type="DateTime" />
+    <Property Name="PE_TIT_ELEITOR_NRO" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="PE_TIT_ELEITOR_ZONA" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="PE_TIT_ELEITOR_SECAO" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="PE_CERT_RESERV_NRO" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+    <Property Name="PE_CERT_RESERV_CATEGORIA" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="PE_CTPS_NRO" Type="String" MaxLength="8" Unicode="false" FixedLength="false" />
+    <Property Name="PE_CTPS_SERIE" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="PE_CTPS_DTEMISSAO" Type="DateTime" />
+    <Property Name="PE_CTPS_ESTADOEM" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="PE_CTPS_PAISEM" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_CART_HAB_NRO" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="PE_CART_HAB_TIPO" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="PE_REG_PROFISSIONAL" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="PE_RC_CODIGO" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="PE_DEFICIENTE_FISICO" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="USU_USERNAME" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_RG_PAISEM" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_RG_ESTADOEM" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="PE_NRO_PASSAPORTE" Type="String" MaxLength="12" Unicode="false" FixedLength="false" />
+    <Property Name="PE_LOCALIZACAO" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="PE_APELIDO" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="PE_PARTICIPA_SELECAO_INT" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="PE_PARTICIPA_SELECAO_EXT" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="PE_CADASTRO_WEB" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="PE_WEB_ATIVO" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="PE_TIPO_APOSENTADORIA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="PE_DATA_APOSENTADORIA" Type="DateTime" />
+    <Property Name="PE_PAGINA_INTERNET" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+    <Property Name="PE_DT_ULT_EMISSAO_ASO" Type="DateTime" />
+    <Property Name="PE_DT_ULT_EMISSAO_PPP" Type="DateTime" />
+    <Property Name="PE_NOME_PAI" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="PE_NOME_MAE" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+    <Property Name="PE_DT_VENCTO_ASO" Type="DateTime" />
+    <Property Name="PE_TIT_ELEITOR_MUNICIPIO" Type="Int32" />
+    <Property Name="PE_TIT_ELEITOR_ESTADOEM" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="PE_TIT_ELEITOR_PAISEM" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_AUT_RECEB_EMAIL" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="PE_TIPO_DEFICIENCIA" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="PE_FUMANTE" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="PE_DISPONIVEL_VIAGEM" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="PE_RECURSO_ESPECIAL" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+    <Property Name="PE_VEICULO_PROPRIO" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="PE_RESIDE_OUTRO_LOCAL" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="PE_ZONA" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="PE_CART_HAB_VENC" Type="DateTime" />
+    <Property Name="PE_PERFIL" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="PET_CODIGO" Type="Int32" />
+    <Property Name="PE_DT_CADASTRO" Type="DateTime" />
+    <Property Name="PE_PARTICIPA_SELECAO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="MOT_CODIGO" Type="Int32" />
+    <Property Name="PE_ENDERECO_PERFIL" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="PE_INSTRUTOR" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="PE_MONITOR" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="EQE_CODIGO" Type="Int32" />
+    <Property Name="PE_DATAHORA_ULTALTERACAO" Type="DateTime" />
+    <Property Name="PE_RESUMO_QUALIFICACOES" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="PE_CV_ATIVO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="PE_CNS_NUMERO" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="PE_DECL_NASC_VIVO_NUMERO" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="PE_RESP_EVENTO" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="PE_EMISSOR_PASSAPORTE" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_UF_PAIS_PASSAPORTE" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_UF_PASSAPORTE" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="PE_DT_EMISSAO_PASSAPORTE" Type="DateTime" />
+    <Property Name="PE_DT_VALIDADE_PASSAPORTE" Type="DateTime" />
+    <Property Name="PE_PAIS_EMISSAO_PASSAPORTE" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_TP_CERTIDAO_CIVIL" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+    <Property Name="PE_DT_EMISSAO_CERTIDAO_CIVIL" Type="DateTime" />
+    <Property Name="PE_TERMO_CERTIDAO_CIVIL" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="PE_LIVRO_CERTIDAO_CIVIL" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_FOLHA_CERTIDAO_CIVIL" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_CARTORIO_CERTIDAO_CIVIL" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="PE_UF_PAIS_CERTIDAO_CIVIL" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_UF_CERTIDAO_CIVIL" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="PE_MUNICIPIO_CERTIDAO_CIVIL" Type="Int32" />
+    <Property Name="PE_DT_NATURALIZACAO" Type="DateTime" />
+    <Property Name="PE_NRO_RIC" Type="String" MaxLength="11" Unicode="false" FixedLength="false" />
+    <Property Name="PE_UF_PAIS_RIC" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_UF_RIC" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="PE_EMISSOR_RIC" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_MUNICIPIO_RIC" Type="Int32" />
+    <Property Name="PE_DT_EXPEDICAO_RIC" Type="DateTime" />
+    <Property Name="PE_CERT_RESERV_DT_EMISS" Type="DateTime" />
+    <Property Name="PE_CERT_RESERV_EMISSOR" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+    <Property Name="PE_TIT_ELEITOR_DT_EMISS" Type="DateTime" />
+    <Property Name="TLG_CODIGO" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="PE_RNE_EMISSOR" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="PE_RNE_DT_EXPEDICAO" Type="DateTime" />
+    <Property Name="PE_OC_NUMERO" Type="String" MaxLength="14" Unicode="false" FixedLength="false" />
+    <Property Name="PE_OC_EMISSOR" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="PE_OC_DT_EXPEDICAO" Type="DateTime" />
+    <Property Name="PE_OC_DT_VALIDADE" Type="DateTime" />
+    <Property Name="PE_CART_HAB_EMISSOR" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="PE_CART_HAB_DT_EXPEDICAO" Type="DateTime" />
+    <Property Name="PE_CASA_PROPRIA_POSSUI" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="PE_CASA_PROPRIA_USOU_FGTS" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="PE_USERNAME_SGI" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="PE_ORG_EM_PASSAPORTE" Type="Int32" />
+    <Property Name="PE_ORG_EM_RG" Type="Int32" />
+    <Property Name="COE_CODIGO" Type="Int32" />
+    <Property Name="PE_CART_HAB_ESTADOEMISSOR" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="PE_CART_HAB_DT_PRIMEIRA_HAB" Type="DateTime" />
+    <Property Name="PE_DATA_REABILITACAO" Type="DateTime" />
+    <Property Name="PE_DATA_INICIO_PNE" Type="DateTime" />
+    <Property Name="PE_NOME_COMPLETO" Type="String" MaxLength="70" Unicode="false" FixedLength="false" />
+    <Property Name="PE_NOME_SOCIAL" Type="String" MaxLength="70" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="FO_FUNCIONARIO" Relationship="MixModel.FK_FUNC_PESSOA_SUP_ESTAGIO" FromRole="FO_PESSOA" ToRole="FO_FUNCIONARIO" />
+    <NavigationProperty Name="FO_FUNCIONARIO1" Relationship="MixModel.FK_FUNCIONARIO_PESSOA" FromRole="FO_PESSOA" ToRole="FO_FUNCIONARIO" />
+    <NavigationProperty Name="FO_FUNCIONARIO2" Relationship="MixModel.FK_FUNCIONARIO_TUTOR" FromRole="FO_PESSOA" ToRole="FO_FUNCIONARIO" />
+  </EntityType>
+  <Association Name="FK_FUNC_PESSOA_SUP_ESTAGIO">
+    <End Role="FO_PESSOA" Type="MixModel.FO_PESSOA" Multiplicity="0..1" />
+    <End Role="FO_FUNCIONARIO" Type="MixModel.FO_FUNCIONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FO_PESSOA">
+        <PropertyRef Name="PE_CODIGO" />
+      </Principal>
+      <Dependent Role="FO_FUNCIONARIO">
+        <PropertyRef Name="FU_ESTAG_COORDENADOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FUNCIONARIO_FUNCPENS">
+    <End Role="FO_FUNCIONARIO" Type="MixModel.FO_FUNCIONARIO" Multiplicity="0..1" />
+    <End Role="FO_FUNCIONARIO1" Type="MixModel.FO_FUNCIONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FO_FUNCIONARIO">
+        <PropertyRef Name="DOM_CODIGO" />
+        <PropertyRef Name="FU_MATRICULA" />
+      </Principal>
+      <Dependent Role="FO_FUNCIONARIO1">
+        <PropertyRef Name="DOM_CODIGO" />
+        <PropertyRef Name="FU_MATRICULA_PENS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FUNCIONARIO_PESSOA">
+    <End Role="FO_PESSOA" Type="MixModel.FO_PESSOA" Multiplicity="1" />
+    <End Role="FO_FUNCIONARIO" Type="MixModel.FO_FUNCIONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FO_PESSOA">
+        <PropertyRef Name="PE_CODIGO" />
+      </Principal>
+      <Dependent Role="FO_FUNCIONARIO">
+        <PropertyRef Name="PE_CODIGO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FUNCIONARIO_TUTOR">
+    <End Role="FO_PESSOA" Type="MixModel.FO_PESSOA" Multiplicity="0..1" />
+    <End Role="FO_FUNCIONARIO" Type="MixModel.FO_FUNCIONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FO_PESSOA">
+        <PropertyRef Name="PE_CODIGO" />
+      </Principal>
+      <Dependent Role="FO_FUNCIONARIO">
+        <PropertyRef Name="PE_CODIGO_TUTOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="BS_ESTRUTURA">
+    <Key>
+      <PropertyRef Name="DOM_CODIGO" />
+      <PropertyRef Name="ES_ID_ESTRUTURA" />
+    </Key>
+    <Property Type="Int32" Name="DOM_CODIGO" Nullable="false" />
+    <Property Type="String" Name="ES_ID_ESTRUTURA" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_RAZAO_SOCIAL" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_NOME" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_CONTATO" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_INSCR_ESTADUAL" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_INSCR_MUNICIPAL" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_EMAIL" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_SITE" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_LOGRADOURO" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_NUMERO" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_COMPLEMENTO" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="BA_CODIGO" />
+    <Property Type="Int32" Name="CI_CODIGO" />
+    <Property Type="String" Name="PA_SIGLA" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="UF_SIGLA" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ES_CEP" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_DDDFONE1" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_TELEFONE1" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_RAMAL1" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_DDDFONE2" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_TELEFONE2" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_RAMAL2" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_FAX" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_DDDFAX" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_RAMALFAX" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TI_SIGLA" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NE_CODIGO" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CT_CODIGO" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AEC_CODIGO" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_CGC_CEI" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MCG_CODIGO" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_ALT_CGCCEI" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ES_ALT_ENDERECO" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ES_CGC_ANTERIOR" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_PREFIXO" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ES_ANOBASE" />
+    <Property Type="String" Name="ES_CODMUNICIPIO" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ES_MES_DT_BASE" />
+    <Property Type="String" Name="ES_FPAS" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_SAT" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ES_PERC_ACIDENTE" Precision="15" Scale="4" />
+    <Property Type="String" Name="ES_COD_TERCEIROS" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ES_PERC_INSS" Precision="15" Scale="2" />
+    <Property Type="String" Name="ES_ID_SESI_SENAI" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ES_ID_FISICA_JURIDICA" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ES_ID_CGC_CPF_CEI" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ES_CC_CODBACEN" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_CC_AGENCIA" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_CC_NUMERO" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_CC_DIGITO_VERIF" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_CC_TITULAR" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ES_CC_DT_ABERTURA" />
+    <Property Type="String" Name="ES_CC_GERENTE" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_PIS_CODBACEN" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_PIS_AGENCIA" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_VT_COD_ENTREGA" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_VT_COD_DEP" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_VT_CONT_ENTREGA" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_IDENT_FUNC_CEF" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ES_COD_EMPRESA_CEF" MaxLength="14" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_OBS_INSS" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_OBS_DARF" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_NRO_LIC_FO" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ES_NMAX_FUNC" />
+    <Property Type="Decimal" Name="ES_PERC_EMPRESA" Precision="20" Scale="8" />
+    <Property Type="Decimal" Name="ES_PERC_AUTONOMO" Precision="15" Scale="2" />
+    <Property Type="Int32" Name="ES_FGTS_CENTRAL" />
+    <Property Type="Int32" Name="ES_RECOL_SIMPLES" />
+    <Property Type="Int32" Name="ES_CPGTO_GPS" />
+    <Property Type="Decimal" Name="ES_REC_EVDESPORT" Precision="15" Scale="2" />
+    <Property Type="String" Name="ES_ORIGEM_REC" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="Decimal" Name="ES_PROD_RURALPF" Precision="15" Scale="2" />
+    <Property Type="Decimal" Name="ES_PROD_RURALPJ" Precision="15" Scale="2" />
+    <Property Type="Decimal" Name="ES_VR_COMPENSARGPS" Precision="15" Scale="2" />
+    <Property Type="Decimal" Name="ES_VR_MESANT" Precision="15" Scale="2" />
+    <Property Type="Decimal" Name="ES_VR_MESANT_OUTROS" Precision="15" Scale="2" />
+    <Property Type="String" Name="ES_MASC_CCUSTO" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_DIGVER_CONTAS" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ES_CCUSTO_CONTA" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ES_CCUSTO_OBRIG" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ES_REDUZIDO_ATIVO" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ES_FILIAL_ATIVADA" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ES_NRO_LIC_CO" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ES_NMAX_LANC_CO" />
+    <Property Type="String" Name="ES_NRO_LIC_AF" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ES_NMAX_LANC_AF" />
+    <Property Type="String" Name="ES_INTEGR_CONTABIL" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_RED_AUTOMATICO" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ES_M_INI_COMPENSAGPS" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_A_INI_COMPENSAGPS" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_M_FIM_COMPENSAGPS" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_A_FIM_COMPENSAGPS" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ES_PERC_ISFILANTROP" Precision="15" Scale="2" />
+    <Property Type="String" Name="ES_MASC_CTCTB" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_MASC_CTGER" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ES_VR_COOP_TRAB" Precision="15" Scale="2" />
+    <Property Type="String" Name="ES_CNAE" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_PAT" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_PORTE" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="RAC_CODIGO" />
+    <Property Type="Decimal" Name="ES_VR_GPS13" Precision="15" Scale="2" />
+    <Property Type="String" Name="CPG_CODIGO" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_INTEGR_CONTABIL_DEB" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CCU_CODIGO" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_AUTORIZ_CAGED" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ES_FOR_JORNADA_CAGED" />
+    <Property Type="Int32" Name="ES_FOR_REMUNER_CAGED" />
+    <Property Type="String" Name="ES_PREPOSTO" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ES_VALORNF_SERVICO" Precision="15" Scale="2" />
+    <Property Type="Decimal" Name="ES_VR_AUTONOMOS" Precision="15" Scale="2" />
+    <Property Type="Decimal" Name="ES_PERC15_SAT_APESP" Precision="15" Scale="2" />
+    <Property Type="Decimal" Name="ES_PERC20_SAT_APESP" Precision="15" Scale="2" />
+    <Property Type="Decimal" Name="ES_PERC25_SAT_APESP" Precision="15" Scale="2" />
+    <Property Type="Int32" Name="ES_PAT_ATE5SAL" />
+    <Property Type="Int32" Name="ES_PAT_ACIMA5SAL" />
+    <Property Type="DateTime" Name="ES_DATA_ENCERRAMENTO" />
+    <Property Type="Decimal" Name="ES_PERC_SERVICO_PROP" Precision="15" Scale="2" />
+    <Property Type="Decimal" Name="ES_PERC_ADM_COZINHA" Precision="15" Scale="2" />
+    <Property Type="Decimal" Name="ES_PERC_REFEICAO_CONV" Precision="15" Scale="2" />
+    <Property Type="Decimal" Name="ES_PERC_REFEICAO_TRANSP" Precision="15" Scale="2" />
+    <Property Type="Decimal" Name="ES_PERC_CESTA_ALIMENTO" Precision="15" Scale="2" />
+    <Property Type="Decimal" Name="ES_PERC_ALIMENTA_CONV" Precision="15" Scale="2" />
+    <Property Type="String" Name="ES_CPF_CONTATO" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ES_NRO_PROPRIETARIOS" />
+    <Property Type="Int32" Name="ES_MODELO_RECIBO_PAGTO" />
+    <Property Type="String" Name="ES_ID_SENAI_SENAT" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ES_ID_SALARIO_EDUC" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ES_INSALUBRIDADE" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_PERICULOSIDADE" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ES_SINDICATO_BASE" />
+    <Property Type="String" Name="ES_ATIVA" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CLD_CODIGO" />
+    <Property Type="Int32" Name="ID_MIX" />
+    <Property Type="String" Name="ES_CENTRO_CTRL_APOLO" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_CEI_VINCULADO" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="REG_CODIGO" />
+    <Property Type="String" Name="ES_NAO_USA_ESTRUTURA" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="Int32" Name="TOM_CODIGO" />
+    <Property Type="DateTime" Name="ES_DT_INI_LICENCA" />
+    <Property Type="Int32" Name="LTB_CODIGO" />
+    <Property Type="String" Name="ES_MODALIDADE_ARQ_SEFIP" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_ID_SENAI_ADICIONAL" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CNT_CODIGO" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NVA_CODIGO_DIAUTIL" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NVA_CODIGO_DIANUTIL" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="NVA_CODIGO_VISITA" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="GRE_CODIGO" />
+    <Property Type="String" Name="ES_TIPO_SOCIO" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ES_VT_NOME_DEP" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ES_VALOR_CAPITAL_SOCIAL" Precision="15" Scale="2" />
+    <Property Type="Int32" Name="SGL_CODIGO" />
+    <Property Type="String" Name="ES_SIGLA" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_CNAE_PREPONDERANTE" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_FGTS_CODBACEN" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_FGTS_AGENCIA" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ESC_CODIGO" />
+    <Property Type="DateTime" Name="ES_DATA_NASC_CONTATO" />
+    <Property Type="Decimal" Name="ES_PERC_RAT" Precision="15" Scale="2" />
+    <Property Type="Decimal" Name="ES_FAP" Precision="15" Scale="4" />
+    <Property Type="String" Name="ES_NOME_PPP" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ES_PERC_PIS_SOBRE_FOLHA" Precision="15" Scale="2" />
+    <Property Type="DateTime" Name="ES_DT_INI_DESONERACAO_FOLHA" />
+    <Property Type="DateTime" Name="ES_DT_FIM_DESONERACAO_FOLHA" />
+    <Property Type="String" Name="ES_DESONERACAO_PARCIAL" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="ES_VAL_MAX_SALARIO" Precision="15" Scale="2" />
+    <Property Type="Decimal" Name="ES_VAL_MAX_DIARIO_VT" Precision="15" Scale="2" />
+    <Property Type="Int32" Name="ES_JORNADA_MENSAL_MAX" />
+    <Property Type="String" Name="ES_BLOQUEIA_EXCEDE_CONTRATO" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ES_INDIC_COOPERATIVA" />
+    <Property Type="Int32" Name="ES_INDIC_CONSTRUTORA" />
+    <Property Type="String" Name="TRI_CODIGO" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TLO_CODIGO" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TLG_CODIGO" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_TP_SIS_CONTROLE_PONTO" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ES_NUM_MAX_FUNC" />
+    <Property Type="Int32" Name="ES_RECIBO_RELATORIO" />
+    <Property Type="Int32" Name="ES_INDIC_DESONERACAO_FOLHA" />
+    <Property Type="Int32" Name="ES_INDIC_SITUACAO_PJ" />
+    <Property Type="Int32" Name="ES_INDIC_SITUACAO_PF" />
+    <Property Type="Int32" Name="ES_INDIC_SUBST_CONTRIB_PATR" />
+    <Property Type="DateTime" Name="ES_DT_ADESAO_ESOCIAL" />
+    <Property Type="String" Name="ES_ADESAO_ANTECIPADA_ESOCIAL" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ES_CENTRALIZADORA_CNPJ_MANAD" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="Int32" Name="DCR_CODIGO" />
+    <Property Type="String" Name="ES_CPF_DIRF" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ES_INDIC_ENTIDADE_EDUC" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ES_INDIC_TRABALHO_TEMP" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="ES_NUMERO_REG_TRAB_TEMP" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ES_INDIC_CONTRATA_DEFICIENTE" />
+    <Property Type="Int32" Name="ES_INDIC_CONTRATA_APRENDIZ" />
+    <Property Type="String" Name="ES_INDIC_APRENDIZ_ENTIDADE" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="Int32" Name="ES_INDIC_REG_ELETRONICO" />
+    <Property Type="Int32" Name="CPE_CODIGO_APRENDIZ" />
+    <Property Type="Int32" Name="CPE_CODIGO_PCD" />
+    <Property Type="String" Name="ES_OBRA_PROPRIA" MaxLength="1" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="BS_ESTRUTURA1" Relationship="MixModel.FK_ESTRUTURA_ESTRUTURA" FromRole="BS_ESTRUTURA" ToRole="BS_ESTRUTURA1" />
+    <NavigationProperty Name="BS_ESTRUTURA2" Relationship="MixModel.FK_ESTRUTURA_ESTRUTURA" FromRole="BS_ESTRUTURA1" ToRole="BS_ESTRUTURA" />
+    <NavigationProperty Name="FO_FUNCIONARIO" Relationship="MixModel.FK_FUNCIONARIO_ESTRUTURA" FromRole="BS_ESTRUTURA" ToRole="FO_FUNCIONARIO" />
+    <NavigationProperty Name="FO_FUNCIONARIO1" Relationship="MixModel.FK_FUNCIONARIO_ESTRUTURAEMP" FromRole="BS_ESTRUTURA" ToRole="FO_FUNCIONARIO" />
+    <NavigationProperty Name="FO_FUNCIONARIO2" Relationship="MixModel.FK_FUNCIONARIO_ESTRUTURAFIL" FromRole="BS_ESTRUTURA" ToRole="FO_FUNCIONARIO" />
+  </EntityType>
+  <Association Name="FK_ESTRUTURA_ESTRUTURA">
+    <End Type="MixModel.BS_ESTRUTURA" Role="BS_ESTRUTURA" Multiplicity="1" />
+    <End Type="MixModel.BS_ESTRUTURA" Role="BS_ESTRUTURA1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="BS_ESTRUTURA">
+        <PropertyRef Name="DOM_CODIGO" />
+        <PropertyRef Name="ES_ID_ESTRUTURA" />
+      </Principal>
+      <Dependent Role="BS_ESTRUTURA1">
+        <PropertyRef Name="DOM_CODIGO" />
+        <PropertyRef Name="ES_ID_ESTRUTURA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FUNCIONARIO_ESTRUTURA">
+    <End Type="MixModel.BS_ESTRUTURA" Role="BS_ESTRUTURA" Multiplicity="1" />
+    <End Type="MixModel.FO_FUNCIONARIO" Role="FO_FUNCIONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BS_ESTRUTURA">
+        <PropertyRef Name="DOM_CODIGO" />
+        <PropertyRef Name="ES_ID_ESTRUTURA" />
+      </Principal>
+      <Dependent Role="FO_FUNCIONARIO">
+        <PropertyRef Name="DOM_CODIGO" />
+        <PropertyRef Name="FU_ES_ID_ESTRUTURA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FUNCIONARIO_ESTRUTURAEMP">
+    <End Type="MixModel.BS_ESTRUTURA" Role="BS_ESTRUTURA" Multiplicity="1" />
+    <End Type="MixModel.FO_FUNCIONARIO" Role="FO_FUNCIONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BS_ESTRUTURA">
+        <PropertyRef Name="DOM_CODIGO" />
+        <PropertyRef Name="ES_ID_ESTRUTURA" />
+      </Principal>
+      <Dependent Role="FO_FUNCIONARIO">
+        <PropertyRef Name="DOM_CODIGO" />
+        <PropertyRef Name="FU_ES_COD_EMPRESA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FUNCIONARIO_ESTRUTURAFIL">
+    <End Type="MixModel.BS_ESTRUTURA" Role="BS_ESTRUTURA" Multiplicity="1" />
+    <End Type="MixModel.FO_FUNCIONARIO" Role="FO_FUNCIONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BS_ESTRUTURA">
+        <PropertyRef Name="DOM_CODIGO" />
+        <PropertyRef Name="ES_ID_ESTRUTURA" />
+      </Principal>
+      <Dependent Role="FO_FUNCIONARIO">
+        <PropertyRef Name="DOM_CODIGO" />
+        <PropertyRef Name="FU_ES_COD_FILIAL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

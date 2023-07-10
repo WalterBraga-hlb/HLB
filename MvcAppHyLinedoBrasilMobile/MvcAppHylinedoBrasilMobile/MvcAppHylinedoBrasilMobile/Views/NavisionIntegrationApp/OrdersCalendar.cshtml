@@ -1,0 +1,232 @@
+﻿@model IEnumerable<MvcAppHylinedoBrasilMobile.Models.NavOrders>
+
+@{
+    DateTime primeiroDiaSemana = MvcAppHylinedoBrasilMobile.Controllers.NavisionIntegrationAppController
+        .FirstDateOfWeekISO8601(
+            2018, 31);
+}
+
+<div align="center">
+    @Html.ActionLink(@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Link_Back_Home", Session["language"].ToString()), "Index", "HomeMobile")
+</div>
+<br />
+<div align="center">
+    @Html.Image(@Url.Content("~/Content/icons/calendar.png"), MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Title_Calendar_NavisionIntegrationApp", Session["language"].ToString()))
+    <h2>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Title_Calendar_NavisionIntegrationApp", Session["language"].ToString())</h2>
+</div>
+<br />
+
+<table style="border:none;">
+    <tr style="border:none;">
+        <td style="border:none;">
+            <h2>@{
+                    System.Globalization.DateTimeFormatInfo ukDtfi = new System.Globalization.CultureInfo(Session["language"].ToString(), false).DateTimeFormat;
+                    @(Convert.ToDateTime(Session["CalendarFirstDateMonth"]).ToString("MMMMMM", ukDtfi).ToUpper() + ", " + Convert.ToDateTime(Session["CalendarFirstDateMonth"]).ToString("yyyy", ukDtfi).ToUpper())
+                }
+            </h2>
+        </td>
+        <td style="border:none;"></td>
+        <td style="border:none;">
+            @Html.ActionLink("Prev Month", "OrdersCalendar", "NavisionIntegrationApp",
+                new { firstDate = 
+                    new DateTime(Convert.ToDateTime(Session["CalendarFirstDateMonth"]).AddMonths(-1).Year,
+                        Convert.ToDateTime(Session["CalendarFirstDateMonth"]).AddMonths(-1).Month, 1),
+                      source = "filter"
+                },
+                new { @class = "prev32" })
+        </td>
+        <td style="border:none;">
+            @Html.ActionLink("Next Month", "OrdersCalendar", "NavisionIntegrationApp",
+                new { firstDate = 
+                    new DateTime(Convert.ToDateTime(Session["CalendarFirstDateMonth"]).AddMonths(1).Year,
+                        Convert.ToDateTime(Session["CalendarFirstDateMonth"]).AddMonths(1).Month, 1),
+                      source = "filter"
+                },
+                new { @class = "next32" })
+        </td>
+</tr>
+</table>
+<br />
+<div id="tabelaCalendarOrders" style="overflow:auto;">
+    <table>
+        <tr>
+            <th style="background-color:transparent; border: none;"></th>
+            <th>@System.Globalization.CultureInfo.GetCultureInfo(Session["language"].ToString()).DateTimeFormat.DayNames[0].ToString().ToUpper()</th>
+            <th>@System.Globalization.CultureInfo.GetCultureInfo(Session["language"].ToString()).DateTimeFormat.DayNames[1].ToString().ToUpper()</th>
+            <th>@System.Globalization.CultureInfo.GetCultureInfo(Session["language"].ToString()).DateTimeFormat.DayNames[2].ToString().ToUpper()</th>
+            <th>@System.Globalization.CultureInfo.GetCultureInfo(Session["language"].ToString()).DateTimeFormat.DayNames[3].ToString().ToUpper()</th>
+            <th>@System.Globalization.CultureInfo.GetCultureInfo(Session["language"].ToString()).DateTimeFormat.DayNames[4].ToString().ToUpper()</th>
+            <th>@System.Globalization.CultureInfo.GetCultureInfo(Session["language"].ToString()).DateTimeFormat.DayNames[5].ToString().ToUpper()</th>
+            <th>@System.Globalization.CultureInfo.GetCultureInfo(Session["language"].ToString()).DateTimeFormat.DayNames[6].ToString().ToUpper()</th>
+        </tr>
+        @foreach (var weekYear in (List<int>)Session["CalendarListWeeksOfYear"])
+        {
+            <tr>
+                @{
+                    var listaLinhas = Model
+                        .Where(w => w.NumeroSemanaAno == weekYear)
+                        .GroupBy(g => g.NumeroSemanaAno).ToList();
+
+                    int yearOfMonth = 0;
+                    if (weekYear > 6 && Convert.ToDateTime(Session["CalendarFirstDateMonth"]).Month == 1)
+                    {
+                        yearOfMonth = Convert.ToDateTime(Session["CalendarFirstDateMonth"]).AddYears(-1).Year;
+                    }
+                    else
+                    {
+                        yearOfMonth = Convert.ToDateTime(Session["CalendarFirstDateMonth"]).Year;
+                    }
+                }
+                <td style="color:Orange;"><b>@Html.Label(weekYear.ToString())</b></td>
+                @for (int j = 0; j < 7; j++)
+                {
+                    <td style="vertical-align: text-top;" align="left">
+                        @if ((MvcAppHylinedoBrasilMobile.Controllers.NavisionIntegrationAppController
+                            .FirstDateOfWeekISO8601(
+                                yearOfMonth, weekYear))
+                                .AddDays(j).Month == Convert.ToDateTime(Session["CalendarFirstDateMonth"]).Month)
+                        {
+                            <div style="color: Blue;">
+                                <b>@String.Format("{0: dd}",
+                                    (MvcAppHylinedoBrasilMobile.Controllers.NavisionIntegrationAppController
+                                    .FirstDateOfWeekISO8601(
+                                      yearOfMonth, weekYear)).AddDays(j))</b>
+                            </div>
+                        }
+                        else
+                        {
+                            <div style="color: Gray;">
+                                <b>@String.Format("{0: dd}",
+                                    (MvcAppHylinedoBrasilMobile.Controllers.NavisionIntegrationAppController
+                                    .FirstDateOfWeekISO8601(
+                                      yearOfMonth, weekYear)).AddDays(j))</b>
+                            </div>
+                        }
+                        @foreach (var linha in listaLinhas)
+                        {
+                            var listaColunas = Model
+                                .Where(w => w.NumeroSemanaAno == linha.Key)
+                                .GroupBy(g => new
+                                {
+                                    g.Location,
+                                    g.CustomerName,
+                                    g.Country,
+                                    g.HatchDate,
+                                    g.SetDate,
+                                    g.DeliveryDate,
+                                    g.OrderNo,
+                                    g.NavOrderNo
+                                })
+                                .Select(s => new
+                                {
+                                    s.Key.Location,
+                                    s.Key.CustomerName,
+                                    s.Key.Country,
+                                    s.Key.HatchDate,
+                                    s.Key.SetDate,
+                                    s.Key.DeliveryDate,
+                                    s.Key.OrderNo,
+                                    s.Key.NavOrderNo
+                                }).ToList();
+                            foreach (var coluna in listaColunas)
+                            {
+                                if (Convert.ToInt32(coluna.HatchDate.DayOfWeek) == j)
+                                {
+                                    <div style="background-color: 
+                                        @MvcAppHylinedoBrasilMobile.Controllers.NavisionIntegrationAppController.GetColorLocation(coluna.Location);
+                                        border: 1px solid Gray;
+                                        margin-left: 10px;">
+                                        <b style="">
+                                            @{
+                                                string exibe = "";    
+                                            }
+                                            @if (coluna.OrderNo != "")
+                                            {
+                                                exibe = (coluna.OrderNo + " - " + coluna.CustomerName);
+                                            }
+                                            else
+                                            {
+                                                exibe = (coluna.NavOrderNo + " - " + coluna.CustomerName);
+                                            }
+                                            @Html.ActionLink(exibe, "DetailsOrder", "NavisionIntegrationApp",
+                                          new { local = coluna.Location, orderNoCHIC = coluna.OrderNo,
+                                                orderNoNavision = coluna.NavOrderNo
+                                          }, null)
+                                        </b>
+                                    </div>
+                                }
+                            }
+
+                            if (Convert.ToBoolean(Session["showAgendaSearchNav"]))
+                            {
+                                string visitor = Session["visitorSelectedNavInt"].ToString();
+
+                                var agendaList = MvcAppHylinedoBrasilMobile.Controllers.NavisionIntegrationAppController.hlbappStatic
+                                            .Nav_Agenda.Where(w => w.YearWeek == linha.Key
+                                                && (w.Visitor == visitor || visitor == "")
+                                                && w.VisitDate.Year == yearOfMonth)
+                                               .ToList();
+
+                                foreach (var schedule in agendaList)
+                                {
+                                    if (Convert.ToInt32(schedule.VisitDate.DayOfWeek) == j)
+                                    {
+                                        if (schedule.Description != "0")
+                                        {
+                                            <div style="background-color:Orange;
+                                                border: 1px solid Gray;
+                                                margin-left: 10px;">
+                                                <b style="">
+                                                    @(schedule.Visitor + " - " + schedule.Description)
+                                                </b>
+                                            </div>
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+</div>
+<br />
+@{
+    var legend = MvcAppHylinedoBrasilMobile.Controllers.NavisionIntegrationAppController.hlbappStatic
+        .NavLocations.OrderBy(o => o.Location).ToList();    
+}
+
+<div align="center">
+    <h3>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Title_Calendar_Legend_NavisionIntegrationApp", Session["language"].ToString())</h3>
+<br />
+<table style="width: 20%">
+    <tr style="font-size: xx-small">
+        <th style="font-size: xx-small">
+            @MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_Location", Session["language"].ToString())
+        </th>
+        <th>
+        </th>
+    </tr>
+    @foreach (var item in legend)
+    {
+        <tr style="font-size: xx-small">
+            <td style="font-size: xx-small">
+                <b>@item.Location</b>
+            </td>
+            <td style="font-size: xx-small; background-color: @item.LocationColor; border-color: @item.LocationColor;">
+            </td>
+        </tr>
+    }
+</table>
+</div>
+
+
+@Html.Partial("_SearchOrdersCalendar")
+
+<br />
+@Html.Partial("_Menu")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

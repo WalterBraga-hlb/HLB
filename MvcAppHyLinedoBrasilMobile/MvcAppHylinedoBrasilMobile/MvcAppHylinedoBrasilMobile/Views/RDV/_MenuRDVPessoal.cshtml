@@ -1,0 +1,26 @@
+﻿<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">RDV - Pessoal</li>
+    <li>
+        @Html.ActionLink("Adicionar Nova Despesa - Espécie", "CreateDespesa", "RDV",
+            null,
+            new { @class = "add", @title = "Clique aqui para Inserir Nova Despesa" })
+    </li>
+    <li>
+        @Html.ActionLink("RDV - Lançamentos Pendentes p/ Fechamento - Espécie", "ListaLancamentosPendentes", "RDV", 
+            null,
+            new { @class = "rdv", @title = "Clique aqui para Listar os Lançamentos Pendentes p/ Fechamento" })
+    </li>
+    <li>
+        @Html.ActionLink("RDV - Fechados - Espécie", "ListaRDVFechados", "RDV", 
+            null,
+            new { @class = "rdv", @title = "Clique aqui para Listar os RDVs Fechados" })
+    </li>
+    @if (Session["tipoUsuario"].ToString() != "CHIC")
+    {
+        <li>
+            @Html.ActionLink("RDV - Faturas de Cartão Corporativo", "ListaFaturaCartaoCorporativo", "RDV",
+                null,
+                new { @class = "rdv", @title = "Clique aqui para Listar as Faturas" })
+        </li>
+    }
+</ul>

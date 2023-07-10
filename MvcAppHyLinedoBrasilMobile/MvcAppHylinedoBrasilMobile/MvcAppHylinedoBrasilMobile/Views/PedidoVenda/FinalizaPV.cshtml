@@ -1,0 +1,1803 @@
+﻿@{
+    ViewBag.Title = "";
+
+    MvcAppHylinedoBrasilMobile.Models.LOG_Pedido_Venda logPV = null;
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbappSession = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+
+    decimal valorTotalItens = 0;
+    int qtdeTotalPintos = 0;
+    int qtdeTotalPintosCalcular = 0;
+    decimal valorTotalPintos = 0;
+    decimal precoTotalPintos = 0;
+
+    int idPedVenda = Convert.ToInt32(Session["idSelecionado"].ToString());
+}
+
+<script type='text/javascript'>
+    /* Máscaras ER */
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mvalor(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{8})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{5})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{2})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+
+    $(document).ready(function () {
+        inicializaPagina();
+    });
+
+    setTimeout(function () { inicializaPagina(); }, 1);
+
+    function inicializaPagina() {
+        var ckMascaraTIDiferenteProtocolo = document.getElementById('ckMascaraTIDiferenteProtocolo');
+        if (ckMascaraTIDiferenteProtocolo != undefined) {
+            verificaMascaraTIDiferenteProtocolo(ckMascaraTIDiferenteProtocolo);
+        }
+    }
+
+    function verificaMascaraTIDiferenteProtocolo(obj) {
+        if (obj.checked) {
+            $('#pnlMascaraTI').show();
+        } else {
+            $('#pnlMascaraTI').hide();
+        }
+
+        $.ajax({
+            url: '/PedidoVenda/VerificaMascaraTIDiferenteProtocolo',
+            type: 'POST',
+            data: JSON.stringify({ check: obj.checked }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+    }
+
+    function carregaMascaraTI(obj) {
+        $.ajax({
+            url: '/PedidoVenda/AtualizaMascaraTI',
+            type: 'POST',
+            data: JSON.stringify({ mascaraTI: obj.value }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            }
+        });
+    }
+</script>
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Pedidos de Venda", "Index", "PedidoVenda")
+        @if (!Convert.ToBoolean(Session["visualizaPV"]))
+        {
+            <br />
+            <br />
+            if (Convert.ToBoolean(Session["deletaPV"]))
+            {
+                <h1 style="color:red; background-color:Yellow">
+                    * CONFIRMA A EXCLUSÃO DO PEDIDO ABAIXO???
+                </h1>
+            }
+            else if (Convert.ToBoolean(Session["solicitaCancelarPV"]))
+            {
+                <h1 style="color:red; background-color:Yellow">
+                    * CONFIRMA A SOLICITAÇÃO DO CANCELAMENTO DOS PEDIDOS SELECIONADOS ABAIXO???
+                    SE FOR REALIZADA, NÃO PODERÁ SER MAIS DESFEITA!
+                </h1>
+            }
+            else
+            {
+                <b style="color:red; background-color:Yellow">
+                    * CUIDADO!!! CASO CLIQUE NO LINK ACIMA, OS DADOS INFORMADOS DO PEDIDO
+                    ANTES DA FINALIZAÇÃO SERÃO PERDIDOS!!!
+                </b>
+            }
+        }
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/pedidoVenda.png"), "Pedido de Venda")
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+
+@if ((!Convert.ToBoolean(Session["visualizaPV"])) && !(Convert.ToBoolean(Session["deletaPV"]))
+    && (!Convert.ToBoolean(Session["solicitaCancelarPV"])))
+{
+    if (Session["origemPV"].ToString().Equals("Alteração"))
+    {
+        <h2>
+            Para alterar qualquer passo, clique no botão correspondente ao mesmo.
+        </h2>
+    }
+    else
+    {
+        <h2>
+            Passo 05: Verifique todos os dados do Pedido para finalizá-lo. Caso precise alterar algum passo,
+            clique no botão "Anterior" até ele.
+        </h2>
+    }
+}
+@{
+    string codigoCliente = "";
+    if (Session["selectedCustomer"] != null)
+    {
+        codigoCliente = Session["selectedCustomer"].ToString();
+    }
+
+    string codigoVendedor = "";
+    if (Session["vendedorPV"] != null)
+    {
+        codigoVendedor = Session["vendedorPV"].ToString();
+    }
+
+    //MvcAppHylinedoBrasilMobile.Models.CHICMobileDataSet.salesmanNavDataTable salesmanDT =
+    //    new MvcAppHylinedoBrasilMobile.Models.CHICMobileDataSet.salesmanNavDataTable();
+    //MvcAppHylinedoBrasilMobile.Models.CHICMobileDataSetTableAdapters.salesmanNavTableAdapter salesmanTA =
+    //    new MvcAppHylinedoBrasilMobile.Models.CHICMobileDataSetTableAdapters.salesmanNavTableAdapter();
+
+    //salesmanTA.FillBy(salesmanDT, login, empresa, login, empresa);
+    //salesmanTA.FillByCode(salesmanDT, codigoVendedor);
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities apoloStatic = new MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities();
+
+    var codigoVendedorApolo = "0" + codigoVendedor;
+    if (codigoVendedor.Length == 7)
+    {
+        codigoVendedorApolo = codigoVendedor;
+    }
+    var vendedor = apoloStatic.VU_Vendedores.Where(w => w.VendCod == codigoVendedorApolo).FirstOrDefault();
+
+    string empresaL = "";
+    if (vendedor != null)
+    {
+        empresaL = vendedor.CodigoCHIC;
+    }
+
+    var itensPVList = (List<MvcAppHylinedoBrasilMobile.Models.Item_Pedido_Venda>)Session["ItensPVList"];
+    DateTime menorDataInicial = itensPVList.Min(m => m.DataEntregaInicial);
+    DateTime maiorDataFinal = itensPVList.Max(m => m.DataEntregaFinal);
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities apoloSession = new MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities();
+    MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities apolo2Session = new MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities();
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.ENTIDADE entidade = apoloSession.ENTIDADE.Where(w => w.EntCod == codigoCliente).FirstOrDefault();
+
+    string cidCod = "";
+    string paisSigla = "";
+    if (entidade != null)
+    {
+        cidCod = entidade.CidCod;
+    }
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.CIDADE cidade =
+        apoloSession
+        .CIDADE.Where(w => w.CidCod == cidCod).FirstOrDefault();
+
+    if (cidade != null)
+    {
+        paisSigla = cidade.PaisSigla;
+    }
+
+    string codigoVacinaPrimaria = Session["vacinaPrimariaPV"].ToString();
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.PRODUTO vacinaPrimaria =
+        apoloSession
+        .PRODUTO.Where(w => w.ProdCodEstr == codigoVacinaPrimaria).FirstOrDefault();
+
+    MvcAppHylinedoBrasilMobile.Models.Tabela_Precos precoVacinaPrimaria =
+        new MvcAppHylinedoBrasilMobile.Models.Tabela_Precos();
+
+    if (vacinaPrimaria != null)
+    {
+        precoVacinaPrimaria =
+            hlbappSession.Tabela_Precos
+            .Where(w => w.Tipo == "Vacina" && w.Produto == vacinaPrimaria.ProdNomeAlt2
+                && w.Regiao == "Todas" && w.Empresa == empresaL
+                && menorDataInicial >= w.DataInicial && maiorDataFinal <= w.DataFinal)
+            .FirstOrDefault();
+    }
+
+    string login = "";
+    if (Session["login"].ToString().Contains("@"))
+    {
+        login = Session["login"].ToString();
+    }
+
+    string empresa = "";
+    if (Session["login"].ToString().Contains("@"))
+    {
+        empresa = Session["empresa"].ToString();
+    }
+
+    int qtdAlterado = itensPVList.Where(w => w.Alterado == 1).Count();
+    int qtdImportar = itensPVList.Where(w => w.Importar == 1).Count();
+}
+@if (!MvcAppHyLinedoBrasil.Controllers.AccountController
+        .GetGroup("HLBAPPM-PedidoVendaDadosExportacao",
+        (System.Collections.ArrayList)Session["Direitos"]))
+{
+    <br />
+    <b style="color:red; background-color:Yellow">
+        - OS ITENS QUE TIVEREM OS ASTERISCO (*) SÃO OS QUE TIVERAM ALTERAÇÕES!!!
+        CASO NÃO APAREÇA, PODE TER SIDO ALTERADO MAIS O VALOR ESTÁ IDÊNTICO AO ANTIGO!!!
+    </b>
+    <br />
+}
+<ul data-role="listview" data-inset="true">
+    @if ((Session["idSelecionado"] != null) && (Session["idSelecionado"].ToString() != "0"))
+    {
+        int idSelecionado = Convert.ToInt32(Session["idSelecionado"].ToString());
+        MvcAppHylinedoBrasilMobile.Models.Pedido_Venda pedidoVenda =
+            hlbappSession
+            .Pedido_Venda.Where(w => w.ID == idSelecionado).FirstOrDefault();
+
+        //MvcAppHylinedoBrasilMobile.Models.LOG_Pedido_Venda logUltimaAlteracao =
+        //    hlbappSession
+        //    .LOG_Pedido_Venda
+        //    .Where(w => w.IDPedidoVenda == pedidoVenda.ID
+        //        && (w.Operacao == "Alteração" || w.Operacao == "Inclusão" || w.Operacao == "Importado"))
+        //        && hlbappSession
+        //        .LOG_Item_Pedido_Venda.Any(a => a.IDLogPedidoVenda == w.ID))
+        //    .OrderByDescending(o => o.DataHora)
+        //    .FirstOrDefault();
+
+
+        //if (logUltimaAlteracao != null)
+        //{
+        //    int idLogUltimaAlteracao = logUltimaAlteracao.ID;
+
+        logPV =
+            hlbappSession
+            .LOG_Pedido_Venda
+            .Where(w => w.IDPedidoVenda == pedidoVenda.ID
+                //&& (w.Operacao == "Alteração" || w.Operacao == "Inclusão" || w.Operacao == "Importado")
+                && (w.Operacao.Contains("Importado") || w.Operacao.Contains("AniPlan")))
+            //&& w.ID != idLogUltimaAlteracao
+            //&& hlbappSession
+            //.LOG_Item_Pedido_Venda.Any(a => a.IDLogPedidoVenda == w.ID))
+            .OrderByDescending(o => o.DataHora)
+            .FirstOrDefault();
+        <li data-role="fieldcontain">
+            <div class="editor-label">
+                <b>ID do Pedido:</b>
+                @(Session["idSelecionado"].ToString())
+                <br />
+                <b>Data do Pedido:</b>
+                @String.Format("{0:dd/MM/yy}", pedidoVenda.DataPedido)
+                <br />
+                <b>Usuário:</b>
+                @(pedidoVenda.Usuario)
+            </div>
+        </li>
+    }
+    <li data-role="fieldcontain">
+        <div class="editor-label">
+            <h3>
+                Passo 01 - Cliente / Endereço de Faturamento:
+                @if (logPV != null)
+                {
+                    if (logPV.CodigoCliente != codigoCliente)
+                    {
+                        <b style="color:red; background-color:Yellow">
+                            *
+                        </b>
+                        <br />
+                    }
+                }
+            </h3>
+            @(entidade.EntCod + " - " + entidade.EntNome)
+            <br />
+            @(entidade.EntEnder + " "
+            + entidade.EntEnderNo + " - " + entidade.EntEnderComp + " - " + entidade.EntBair)
+            @if (cidade != null)
+            {
+                <label>
+                    @(" - " + cidade.CidNomeComp + " - " + cidade.UfSigla
+                  + " - " + cidade.PaisSigla)
+                </label>
+            }
+            @if (Session["origemPV"].ToString().Equals("Alteração"))
+            {
+                using (Html.BeginForm("AddClientePV", "PedidoVenda", FormMethod.Post))
+                {
+                    <input type="submit" value="Alterar Cliente" />
+                }
+            }
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <div class="editor-label">
+            <h3>Passo 01.01 - Endereço de Entrega:</h3>
+            @if (Session["selectedTypeAddress"].ToString().Equals("Outro"))
+            {
+                int seqShipAddress = Convert.ToInt32(Session["selectedShipAddress"].ToString());
+
+                MvcAppHylinedoBrasilMobile.Models.bdApolo2.ENDER_ENT shipAddress =
+                    apolo2Session
+                    .ENDER_ENT.Where(w => w.EntCod == entidade.EntCod && w.EnderEntSeq == seqShipAddress)
+                    .FirstOrDefault();
+
+                string enderecoEntrega = "";
+                string cidadeEntrega = "";
+
+                //if (shipAddress == null)
+                //{
+                //    MvcAppHylinedoBrasilMobile.Models.CHICMobileDataSetTableAdapters.shippingTableAdapter sTA =
+                //        new MvcAppHylinedoBrasilMobile.Models.CHICMobileDataSetTableAdapters.shippingTableAdapter();
+
+                    //    MvcAppHylinedoBrasilMobile.Models.CHICMobileDataSet.shippingDataTable sDT =
+                    //        new MvcAppHylinedoBrasilMobile.Models.CHICMobileDataSet.shippingDataTable();
+
+                    //    sTA.FillByOrderNo(sDT, entidade.EntCod);
+
+                    //    MvcAppHylinedoBrasilMobile.Models.CHICMobileDataSet.shippingRow sR =
+                    //        sDT.Where(w => w.contact_no == seqShipAddress).FirstOrDefault();
+
+                    //    if (sR != null)
+                    //    {
+                    //        enderecoEntrega = (sR.address1.Trim() + " "
+                    //            + sR.address2.Trim() + " - " + sR.address3.Trim()
+                    //            + " - " + sR.address4.Trim() + " - " + sR.address5.Trim());
+                    //    }
+                    //    else
+                    //    {
+                    //        enderecoEntrega = "*** ENDEREÇO DE ENTREGA NÃO EXISTE MAIS NO CADASTRO! POR FAVOR, "
+                    //            + "REALIZAR A ALTERAÇÃO DO MESMO! ****";
+                    //    }
+                    //}
+                //else
+                if (shipAddress != null)
+                {
+                    MvcAppHylinedoBrasilMobile.Models.bdApolo.CIDADE cidadeShipAddress =
+                        apoloSession
+                        .CIDADE.Where(w => w.CidCod == shipAddress.CidCod).FirstOrDefault();
+
+                    enderecoEntrega = (shipAddress.EnderEnt + " "
+                        + shipAddress.EnderEntNo + " - " + shipAddress.EnderEntComp
+                        + " - " + shipAddress.EnderEntBair);
+
+                    if (cidadeShipAddress != null)
+                    {
+                        cidadeEntrega = (" - " + cidadeShipAddress.CidNomeComp + " - " + cidadeShipAddress.UfSigla
+                                + " - " + cidadeShipAddress.PaisSigla);
+                    }
+
+                    if (shipAddress.EnderEntCod != null)
+                    {
+                        MvcAppHylinedoBrasilMobile.Models.bdApolo.ENTIDADE entidadeEndereoEntrega =
+                            apoloSession.ENTIDADE
+                            .Where(w => w.EntCod == shipAddress.EnderEntCod).FirstOrDefault();
+
+                        if (entidadeEndereoEntrega != null)
+                        {
+                            cidade =
+                                apoloSession.CIDADE
+                                .Where(w => w.CidCod == entidadeEndereoEntrega.CidCod)
+                                .FirstOrDefault();
+                            if (cidade != null)
+                            {
+                                cidadeEntrega = " - " + cidade.CidNomeComp + " - " + cidade.UfSigla
+                                        + " - " + cidade.PaisSigla;
+                            }
+
+                            enderecoEntrega = entidadeEndereoEntrega.EntCod + " - " + entidadeEndereoEntrega.EntNome + " - "
+                                + entidadeEndereoEntrega.EntEnder + " " + entidadeEndereoEntrega.EntEnderNo
+                                + " - " + entidadeEndereoEntrega.EntEnderComp + " - "
+                                + entidadeEndereoEntrega.EntBair;
+                        }
+                    }
+                }
+
+                @(enderecoEntrega)
+                <label>@(cidadeEntrega)</label>
+            }
+            else
+            {
+                <label>Mesmo do Faturamento</label>
+            }
+            @if (Session["origemPV"].ToString().Equals("Alteração"))
+            {
+                using (Html.BeginForm("AddClientePV", "PedidoVenda", FormMethod.Post))
+                {
+                    <input type="submit" value="Alterar Endereço de Entrega" />
+                }
+            }
+        </div>
+    </li>
+    @if (MvcAppHyLinedoBrasil.Controllers.AccountController
+        .GetGroup("HLBAPPM-PedidoVendaDadosExportacao",
+        (System.Collections.ArrayList)Session["Direitos"])
+        && !paisSigla.Equals("BRA"))
+    {
+        <li data-role="fieldcontain">
+            <div class="editor-label">
+                <h3>Passo 01.02 - Dados da Exportação:</h3>
+            </div>
+            <div class="editor-label">
+                <b>Data de Coleta / Nascimento:</b>
+                @String.Format("{0:dd/MM/yy HH:mm}", Convert.ToDateTime(Session["dataColetaNascimento"]))
+            </div>
+            <br />
+            <div class="editor-label">
+                <b>Data de Saída do Incubatório:</b>
+                @String.Format("{0:dd/MM/yy HH:mm}", Convert.ToDateTime(Session["dataSaidaIncubatorio"]))
+            </div>
+            <br />
+            <div class="editor-label">
+                <b>Data / Hora de Envio:</b>
+                @String.Format("{0:dd/MM/yy HH:mm}", Convert.ToDateTime(Session["dataEnvio"]))
+            </div>
+            <br />
+            <div class="editor-label">
+                <b>Data de Entrega:</b>
+                @String.Format("{0:dd/MM/yy HH:mm}", Convert.ToDateTime(Session["dataEntregaInicial"]))
+            </div>
+            <br />
+            <div class="editor-label">
+                <b>Enviado via:</b>
+                @(Session["viaDeEnvioSelecionada"].ToString())
+            </div>
+            <br />
+            <div class="editor-label">
+                <b>Tipo de Venda:</b>
+                @(Session["tipoVendaSelecionado"].ToString())
+            </div>
+            <br />
+            <div class="editor-label">
+                <b>Aeroporto de Origem:</b>
+                @(Session["aeroportoOrigemSelecionado"].ToString())
+            </div>
+            <br />
+            <div class="editor-label">
+                <b>Aeroporto de Destino:</b>
+                @(Session["aeroportoDestinoSelecionado"].ToString())
+            </div>
+            <br />
+            <div class="editor-label">
+                <b>Número do Vôo:</b>
+                @(Session["numeroVooPV"].ToString())
+            </div>
+            <br />
+            <div class="editor-label">
+                <b>Cia. Aérea:</b>
+                @(Session["ciaAereaPV"].ToString())
+            </div>
+            <br />
+            <div class="editor-label">
+                <b>AWB:</b>
+                @(Session["awbPV"].ToString())
+            </div>
+            <br />
+            <div class="editor-label">
+                <b>Nº Fatura:</b>
+                @(Session["numFaturaDE"].ToString())
+            </div>
+            <br />
+            <div class="editor-label">
+                <b>NCM:</b>
+                @(Session["ncmPV"].ToString())
+            </div>
+            <br />
+            <div class="editor-label">
+                <b>Condição de Pagamento:</b>
+                @(Session["condPagPV"].ToString())
+            </div>
+            <br />
+            <div class="editor-label">
+                <b>Valor Documentação:</b>
+                @String.Format("{0:N2}", Convert.ToDecimal(Session["valorDocumentacaoDE"].ToString()))
+            </div>
+            <br />
+            <div class="editor-label">
+                <b>Valor Frete:</b>
+                @String.Format("{0:N2}", Convert.ToDecimal(Session["valorFreteDE"].ToString()))
+            </div>
+            <br />
+            <div class="editor-label">
+                <b>Nº Caixas:</b>
+                @String.Format("{0:N0}", Convert.ToInt32(Session["numCaixasDE"].ToString()))
+            </div>
+            <br />
+            <div class="editor-label">
+                <b>Nº Paletes:</b>
+                @String.Format("{0:N0}", Convert.ToInt32(Session["numPaletesDE"].ToString()))
+            </div>
+            <br />
+            <div class="editor-label">
+                <b>Veterinário Responsável:</b>
+                @{
+                    string codVeterinario = Session["veterinarioSelecionado"].ToString();
+
+                    MvcAppHylinedoBrasilMobile.Models.bdApolo2.FUNCIONARIO veterinario =
+                        apolo2Session
+                        .FUNCIONARIO.Where(w => w.FuncCod == codVeterinario).First();
+                }
+                @if (veterinario != null)
+                {
+                    @(veterinario.FuncNome)
+                }
+            </div>
+            @if (Session["origemPV"].ToString().Equals("Alteração"))
+            {
+                using (Html.BeginForm("ListItensPV", "PedidoVenda", FormMethod.Post))
+                {
+                    <input type="submit" value="Alterar Dados da Exportação" />
+                }
+            }
+        </li>
+    }
+    <li data-role="fieldcontain">
+        <h3>Passo 02 - Linhagens do Pedido:</h3>
+        <div class="editor-label" align="center">
+            @*<u>Legenda:</u>*@
+            @*@Html.Image(@Url.Content("~/Content/icons/alterado.png"), "")
+                <i>Item Alterado</i>
+                @Html.Image(@Url.Content("~/Content/icons/importar.png"), "")
+                <i>Item para Importar no CHIC</i>
+                @Html.Image(@Url.Content("~/Content/icons/log.png"), "")
+                <i>Clique em cada Item para Visualizar o Histórico de Eventos</i>
+                @Html.Image(@Url.Content("~/Content/icons/icn_cancelar.png"), "")
+                <i>Item Solicitado Cancelamento</i>
+                @Html.Image(@Url.Content("~/Content/icons/cifrao.png"), "")
+                <i>Clique em cada Item para Alterar o Preço / % de Bonificação</i>*@
+            <table style="width: 90%">
+                <tr style="font-size: xx-small; background-color:Gray">
+                    <th colspan="3" style="font-size: xx-small; background-color:Gray">
+                        <u>Legenda de Ações:</u>
+                    </th>
+                </tr>
+                <tr style="font-size: xx-small">
+                    <td style="font-size: xx-small">
+                        @Html.Image(@Url.Content("~/Content/icons/alterado.png"), "")
+                        <i>Item Alterado</i>
+                    </td>
+                    <td style="font-size: xx-small">
+                        @Html.Image(@Url.Content("~/Content/icons/importar.png"), "")
+                        <i>Item para Importar no CHIC</i>
+                    </td>
+                    <td style="font-size: xx-small">
+                        @Html.Image(@Url.Content("~/Content/icons/icn_cancelar.png"), "")
+                        <i>Item Solicitado Cancelamento</i>
+                    </td>
+                </tr>
+            </table>
+            <table style="width: 90%">
+                <tr style="font-size: xx-small">
+                    <td style="font-size: xx-small">
+                        @Html.Image(@Url.Content("~/Content/icons/log.png"), "")
+                        <i>Clique em cada Item para Visualizar o Histórico de Eventos</i>
+                    </td>
+                    <td style="font-size: xx-small">
+                        @Html.Image(@Url.Content("~/Content/icons/cifrao.png"), "")
+                        <i>Clique em cada Item para Alterar o Preço / % de Bonificação</i>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br />
+        <br />
+        <b style="color:red; background-color:Yellow">
+            - OS ITENS QUE TIVEREM EM VERMELHO COM FUNDO AMARELO SÃO VALORES FORA DA TABELA PADRÃO!!!
+            SENDO ASSIM, VERIFICAR SE ESTÃO CORRETOS PARA NÃO TER ERRO NO FUTURO!!!
+        </b>
+        <br />
+        <div id="tabelaItensPV" style="overflow:auto;">
+            <table id="tabelaItensPV" class="ajustetabelaItensFinalizaPV">
+                <thead class="ajustetabelaItensFinalizaPV"
+                    <tr class="ajustetabelaItensFinalizaPV">
+                        <th class="ajustetabelaItensFinalizaPV">
+                            Seq.
+                        </th>
+                        <th class="ajustetabelaItensFinalizaPV">
+                            De
+                        </th>
+                        <th class="ajustetabelaItensFinalizaPV">
+                            A
+                        </th>
+                        @if (MvcAppHyLinedoBrasil.Controllers.AccountController
+                            .GetGroup("HLBAPPM-PedidoVendaVisualizaDiasAtraso",
+                            (System.Collections.ArrayList)Session["Direitos"]))
+                        {
+                            <th class="ajustetabelaItensFinalizaPV">
+                                Dias de Atraso
+                            </th>
+                        }
+                        <th class="ajustetabelaItensFinalizaPV">
+                            Linha
+                        </th>
+                        <th class="ajustetabelaItensFinalizaPV">
+                            Qt. Líq.
+                        </th>
+                        <th class="ajustetabelaItensFinalizaPV">
+                            % Bon.
+                        </th>
+                        <th class="ajustetabelaItensFinalizaPV">
+                            Qt. Bon.
+                        </th>
+                        <th class="ajustetabelaItensFinalizaPV">
+                            Qt. Rep.
+                        </th>
+                        <th class="ajustetabelaItensFinalizaPV">
+                            Qt. Tot.
+                        </th>
+                        <th class="ajustetabelaItensFinalizaPV">
+                            Pr. Pint.@* (Tab. Pr.)*@
+                        </th>
+                        @*<th class="ajustetabelaItensFinalizaPV">
+            Pr. Extras
+        </th>*@
+                        <th class="ajustetabelaItensFinalizaPV">
+                            Val. Tot. Pint.
+                        </th>
+                        <th class="ajustetabelaItensFinalizaPV">
+                            Pr. Tot.
+                        </th>
+                        <th class="ajustetabelaItensFinalizaPV">
+                            Val. Tot.
+                        </th>
+                        <th class="ajustetabelaItensFinalizaPV">
+                            CHIC
+                        </th>
+                        <th class="ajustetabelaItensFinalizaPV">
+                            CHIC Rep.
+                        </th>
+                        @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPPM-PedidoVendaSobra", (System.Collections.ArrayList)Session["Direitos"]))
+                        {
+                            <th>Sobra?</th>
+                        }
+                        <th class="ajustetabelaItensFinalizaPV">
+                            Ações
+                        </th>
+</thead>
+                @foreach (var item in itensPVList)
+                {
+                    MvcAppHylinedoBrasilMobile.Models.LOG_Item_Pedido_Venda logIpv = null;
+                    if (logPV != null)
+                    {
+                        logIpv =
+                            hlbappSession
+                            .LOG_Item_Pedido_Venda.Where(w => w.IDLogPedidoVenda == logPV.ID
+                                && w.Sequencia == item.Sequencia).FirstOrDefault();
+                    }
+
+                    MvcAppHylinedoBrasilMobile.Models.LOG_Item_Pedido_Venda logPrimeioIpvImportado =
+                        hlbappSession
+                            .LOG_Item_Pedido_Venda.Where(w => w.IDItPedVenda == item.ID
+                                && (w.Operacao.Contains("Importado") || w.Operacao.Contains("AniPlan")))
+                            .OrderBy(o => o.DataHora)
+                            .FirstOrDefault();
+
+                    int diasAtraso = 0;
+                    if (logPrimeioIpvImportado != null)
+                    {
+                        if (!(item.DataEntregaFinal >= logPrimeioIpvImportado.DataEntregaInicial
+                            && item.DataEntregaFinal <= logPrimeioIpvImportado.DataEntregaFinal))
+                        {
+                            TimeSpan date = (item.DataEntregaFinal - logPrimeioIpvImportado.DataEntregaFinal);
+                            diasAtraso = date.Days;
+                        }
+                    }
+                    <tbody class="ajustetabelaItensFinalizaPV">
+                        <tr class="ajustetabelaItensFinalizaPV">
+                            <td class="ajustetabelaItensFinalizaPV">
+                                @item.Sequencia
+                            </td>
+                            <td class="ajustetabelaItensFinalizaPV">
+                                @String.Format("{0:dd/MM/yy}", item.DataEntregaInicial)
+                                @if (logIpv != null)
+                                {
+                                    if (logIpv.DataEntregaInicial != item.DataEntregaInicial)
+                                    {
+                                        <b style="color:red; background-color:Yellow">
+                                            *
+                                        </b>
+                                        <br />
+                                    }
+                                }
+                            </td>
+                            <td class="ajustetabelaItensFinalizaPV">
+                                @String.Format("{0:dd/MM/yy}", item.DataEntregaFinal)
+                                @if (logIpv != null)
+                                {
+                                    if (logIpv.DataEntregaFinal != item.DataEntregaFinal)
+                                    {
+                                        <b style="color:red; background-color:Yellow">
+                                            *
+                                        </b>
+                                        <br />
+                                    }
+                                }
+                            </td>
+                            @if (MvcAppHyLinedoBrasil.Controllers.AccountController
+                                .GetGroup("HLBAPPM-PedidoVendaVisualizaDiasAtraso",
+                                (System.Collections.ArrayList)Session["Direitos"]))
+                            {
+                                <td class="ajustetabelaItensFinalizaPV">
+                                    @Html.Label(diasAtraso.ToString())
+                                </td>
+                            }
+                            @{
+                                MvcAppHylinedoBrasilMobile.Models.bdApolo.PRODUTO produto =
+                                apoloSession
+                                        .PRODUTO.Where(w => w.ProdCodEstr == item.ProdCodEstr).FirstOrDefault();
+                            }
+                            @if (produto == null)
+                            {
+                                <td class="ajustetabelaItensFinalizaPV">
+                                    @item.ProdCodEstr
+                                    @if (logIpv != null)
+                                    {
+                                        if (logIpv.ProdCodEstr != item.ProdCodEstr)
+                                        {
+                                            <b style="color:red; background-color:Yellow">
+                                                *
+                                            </b>
+                                            <br />
+                                        }
+                                    }
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="ajustetabelaItensFinalizaPV">
+                                    @(item.ProdCodEstr + " - " + produto.ProdNome)
+                                </td>
+                            }
+                            <td class="ajustetabelaItensFinalizaPV">
+                                @String.Format("{0:N0}", item.QtdeLiquida)
+                                @if (logIpv != null)
+                                {
+                                    if (logIpv.QtdeLiquida != item.QtdeLiquida)
+                                    {
+                                        <b style="color:red; background-color:Yellow">
+                                            *
+                                        </b>
+                                        <br />
+                                    }
+                                }
+                            </td>
+                            <td class="ajustetabelaItensFinalizaPV">
+                                @if (item.PercBonificacao > Convert.ToDecimal(2.5))
+                                {
+                                    <h1 style="color:red; background-color:Yellow">
+                                        @String.Format("{0:N2}", item.PercBonificacao)%
+                                    </h1>
+                                }
+                                else
+                                {
+                                    @(String.Format("{0:N2}", item.PercBonificacao) + "%")
+                                }
+                                @if (logIpv != null)
+                                {
+                                    if (logIpv.PercBonificacao != item.PercBonificacao)
+                                    {
+                                        <b style="color:red; background-color:Yellow">
+                                            *
+                                        </b>
+                                        <br />
+                                    }
+                                }
+                            </td>
+                            <td class="ajustetabelaItensFinalizaPV">
+                                @String.Format("{0:N0}", item.QtdeBonificada)
+                                @if (logIpv != null)
+                                {
+                                    if (logIpv.QtdeBonificada != item.QtdeBonificada)
+                                    {
+                                        <b style="color:red; background-color:Yellow">
+                                            *
+                                        </b>
+                                        <br />
+                                    }
+                                }
+                            </td>
+                            <td class="ajustetabelaItensFinalizaPV">
+                                @String.Format("{0:N0}", item.QtdeReposicao)
+                                @if (logIpv != null)
+                                {
+                                    if (logIpv.QtdeReposicao != item.QtdeReposicao)
+                                    {
+                                        <b style="color:red; background-color:Yellow">
+                                            *
+                                        </b>
+                                        <br />
+                                    }
+                                }
+                                @if (item.QtdeReposicao > 0)
+                                {
+                                    <h1 style="color:red; background-color:Yellow">
+                                        @(item.TipoReposicao)
+                                    </h1>
+                                }
+                            </td>
+                            <td class="ajustetabelaItensFinalizaPV">
+                                @String.Format("{0:N0}", (item.QtdeLiquida + item.QtdeBonificada + item.QtdeReposicao))
+                                @{
+                                    qtdeTotalPintos = qtdeTotalPintos + Convert.ToInt32((item.QtdeLiquida
+                                        + item.QtdeBonificada + item.QtdeReposicao));
+                                    int qtdeReposicao = 0;
+                                    if (item.TipoReposicao == "Acerto Comercial")
+                                    {
+                                        qtdeReposicao = Convert.ToInt32(item.QtdeReposicao);
+                                    }
+                                    qtdeTotalPintosCalcular = qtdeTotalPintosCalcular + Convert.ToInt32((item.QtdeLiquida
+                                        + item.QtdeBonificada + qtdeReposicao));
+                                }
+                            </td>
+                            <td class="ajustetabelaItensFinalizaPV">
+                                @{
+                                    string condPag = "";
+                                    if (Session["condicaoPagamentoPV"].ToString().Equals("PAGTO ANTECIPADO"))
+                                    {
+                                        condPag = Session["condicaoPagamentoPV"].ToString();
+                                    }
+                                    else
+                                    {
+                                        condPag = "Faturamento";
+                                    }
+
+                                    string ufSigla = "";
+                                    if (cidade != null)
+                                    {
+                                        ufSigla = cidade.UfSigla;
+                                    }
+
+                                    MvcAppHylinedoBrasilMobile.Models.bdApolo.UNID_FEDERACAO uf =
+                                        apoloSession
+                                        .UNID_FEDERACAO.Where(w => w.UfSigla == ufSigla).FirstOrDefault();
+
+
+                                    MvcAppHylinedoBrasilMobile.Models.Tabela_Precos precoLinhagem =
+                                        hlbappSession
+                                        .Tabela_Precos.Where(w => w.Tipo == condPag && w.Produto == item.ProdCodEstr
+                                        && w.Regiao == uf.UfSigla && w.Empresa == empresaL
+                                        && item.DataEntregaInicial >= w.DataInicial && item.DataEntregaFinal <= w.DataFinal)
+                                    .FirstOrDefault();
+
+                                    if (precoLinhagem == null)
+                                    {
+                                        precoLinhagem =
+                                            hlbappSession
+                                            .Tabela_Precos.Where(w => w.Tipo == condPag && w.Produto == item.ProdCodEstr
+                                            && w.Regiao == uf.UfRegGeog && w.Empresa == empresaL
+                                            && item.DataEntregaInicial >= w.DataInicial && item.DataEntregaFinal <= w.DataFinal)
+                                        .FirstOrDefault();
+                                    }
+
+                                    decimal? precoLin = 0;
+                                    if ((precoLinhagem != null) && item.PrecoUnitario != 0)
+                                    {
+                                        int qtdTotalMesmaData = itensPVList
+                                                .Where(w => w.DataEntregaInicial == item.DataEntregaInicial
+                                                    && w.OrderNoCHIC != "Cancelado")
+                                                .Count();
+
+                                        if (qtdTotalMesmaData > 0)
+                                        {
+                                            qtdTotalMesmaData = itensPVList
+                                                    .Where(w => w.DataEntregaInicial == item.DataEntregaInicial
+                                                        && w.OrderNoCHIC != "Cancelado")
+                                                    .FirstOrDefault().QtdeLiquida;
+
+                                            if (qtdTotalMesmaData < 5000)
+                                            {
+                                                precoLin = precoLinhagem.ValorMenor5000Aves;
+                                            }
+                                            else
+                                            {
+                                                precoLin = precoLinhagem.ValorNormal;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            qtdTotalMesmaData = itensPVList
+                                                    .Where(w => w.DataEntregaInicial == item.DataEntregaInicial)
+                                                    .FirstOrDefault().QtdeLiquida;
+
+                                            if (qtdTotalMesmaData < 5000)
+                                            {
+                                                precoLin = precoLinhagem.ValorMenor5000Aves;
+                                            }
+                                            else
+                                            {
+                                                precoLin = precoLinhagem.ValorNormal;
+                                            }
+                                        }
+                                    }
+                                }
+                                @if (item.PrecoPinto != null && item.PrecoPinto > 0)
+                                {
+                                    if (item.PrecoPinto == precoLin)
+                                    {
+                                        @String.Format("{0:N2}", item.PrecoPinto)
+                                    }
+                                    else
+                                    {
+                                        <h1 style="color:red; background-color:Yellow">
+                                            @String.Format("{0:N2}", item.PrecoPinto)
+                                        </h1>
+                                        <div style="color:red; font-weight: bold;">
+                                            @("Tab. Pr.: " + String.Format("{0:N2}", precoLin))
+                                        </div>
+                                    }
+                                    precoTotalPintos = precoTotalPintos + Convert.ToDecimal(item.PrecoPinto);
+                                    valorTotalPintos = valorTotalPintos + (item.QtdeLiquida
+                                        * Convert.ToDecimal(item.PrecoPinto));
+                                }
+                                else
+                                {
+                                    @String.Format("{0:N2}", precoLin)
+                                    precoTotalPintos = precoTotalPintos + Convert.ToDecimal(precoLin);
+                                    valorTotalPintos = valorTotalPintos + (item.QtdeLiquida * Convert.ToDecimal(precoLin));
+                                }
+                                @if (logIpv != null)
+                                {
+                                    if (logIpv.PrecoPinto != item.PrecoPinto)
+                                    {
+                                        <b style="color:red; background-color:Yellow">
+                                            *
+                                        </b>
+                                        <br />
+                                    }
+                                }
+                            </td>
+                            <td class="ajustetabelaItensFinalizaPV">
+                                @if (item.PrecoPinto != null && item.PrecoPinto > 0)
+                                {
+                                    @String.Format("{0:N2}", (item.QtdeLiquida * Convert.ToDecimal(item.PrecoPinto)))
+                                }
+                                else
+                                {
+                                    @String.Format("{0:N2}", (item.QtdeLiquida * Convert.ToDecimal(precoLin)))
+                                }
+                            </td>
+                            @*<td class="ajustetabelaItensFinalizaPV">
+                                    @if ((item.PrecoUnitario - precoLin) > 0)
+                                    {
+                                        @String.Format("{0:N6}", (item.PrecoUnitario - precoLin))
+                                    }
+                                </td>*@
+                            <td class="ajustetabelaItensFinalizaPV">
+                                @String.Format("{0:N4}", item.PrecoUnitario)
+                                @if (logIpv != null)
+                                {
+                                    if (logIpv.PrecoUnitario != item.PrecoUnitario)
+                                    {
+                                        <b style="color:red; background-color:Yellow">
+                                            *
+                                        </b>
+                                        <br />
+                                    }
+                                }
+                            </td>
+                            <td class="ajustetabelaItensFinalizaPV">
+                                @if (item.ValorTotal == 0 || item.ValorTotal == null)
+                                {
+                                    decimal qtdTratVerm = 1;
+                                    if ((Session["qtdTratamentoInfravermelhoPV"] != null)
+                                        && (Session["qtdTratamentoInfravermelhoPV"].ToString() != ""))
+                                    {
+                                        qtdTratVerm = Convert.ToDecimal(Session["qtdTratamentoInfravermelhoPV"]);
+                                    }
+                                    decimal? qtTV = 0;
+                                    qtTV = ((item.QtdeLiquida + item.QtdeBonificada) * (qtdTratVerm / 100));
+                                    valorTotalItens = valorTotalItens + Convert.ToDecimal(item.PrecoUnitario * item.QtdeLiquida);
+
+                                    @String.Format("{0:N2}", (item.PrecoUnitario * item.QtdeLiquida)
+                                     + (Convert.ToDecimal(Session["valorServicoPV"])
+                                        * qtTV))
+                                }
+                                else
+                                {
+                                    @String.Format("{0:N2}", item.ValorTotal)
+                                    valorTotalItens = valorTotalItens + Convert.ToDecimal(item.ValorTotal);
+                                }
+                            </td>
+                            <td class="ajustetabelaItensFinalizaPV">
+                                @item.OrderNoCHIC
+                                @if ((item.Alterado == 3 || item.Alterado == 5)
+                                           && (Convert.ToBoolean(Session["solicitaCancelarPV"])
+                                               || Session["status"].ToString().Equals("Cancelamento Pendente")))
+                                {
+                                    <div align="center">
+                                        @Html.Image(@Url.Content("~/Content/icons/icn_cancelar.png"), "")
+                                    </div>
+                                }
+                            </td>
+                            <td class="ajustetabelaItensFinalizaPV">
+                                @item.OrderNoCHICReposicao
+                                @if ((item.Alterado == 4 || item.Alterado == 5)
+                                           && (Convert.ToBoolean(Session["solicitaCancelarPV"])
+                                               || Session["status"].ToString().Equals("Cancelamento Pendente")))
+                                {
+                                    <div align="center">
+                                        @Html.Image(@Url.Content("~/Content/icons/icn_cancelar.png"), "")
+                                    </div>
+                                }
+                            </td>
+                            @*<td>
+                                    @item.Vacina
+                                </td>*@
+                            @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPPM-PedidoVendaSobra", (System.Collections.ArrayList)Session["Direitos"]))
+                            {
+                                <td>@(item.Sobra == 0 ? "Não" : "Sim")</td>
+                            }
+                            <td class="ajustetabelaItensFinalizaPV">
+                                <table>
+                                    <tr>
+                                        @if (item.Alterado.Equals(1)
+                                            && !Convert.ToBoolean(Session["solicitaCancelarPV"])
+                                            && !Session["status"].ToString().Equals("Cancelamento Pendente"))
+                                        {
+                                            <td align="center">
+                                                @Html.Image(@Url.Content("~/Content/icons/alterado.png"), "")
+                                            </td>
+
+                                        }
+                                        @if (item.Importar.Equals(1))
+                                        {
+                                            <td align="center">
+                                                @Html.Image(@Url.Content("~/Content/icons/importar.png"), "")
+                                            </td>
+                                        }
+                                        @if ((!Session["status"].ToString().Contains("Cancela"))
+                                            && (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                                            .GetGroup("HLBAPPM-AlteraPrecoBonificacaoItemPV",
+                                            (System.Collections.ArrayList)Session["Direitos"]))
+                                            && (Convert.ToBoolean(Session["visualizaPV"])))
+                                        {
+                                            <td align="center">
+                                                @Html.ActionLink("Alteração de Preço / Bonificação", "AlteraPrecoBonificacao",
+                                                    new { sequencia = item.Sequencia },
+                                                    new { @class = "preco", @title = "Clique aqui para Alterar o Preço ou a Bonificação deste Item" })
+                                            </td>
+                                        }
+                                        @*@if ((!Session["status"].ToString().Contains("Cancela"))
+                                                && (Convert.ToBoolean(Session["visualizaPV"])))
+                                            {
+                                                <td>
+                                                    @Html.ActionLink("Alteração de Vacinas do Item", "AlteraVacinaItem",
+                                                        new { sequencia = item.Sequencia, origem = "Visualiza" },
+                                                     new { @class = "vacina", @title = "Clique aqui para Alterar as Vacinas deste Item" })
+                                                </td>
+                                            }*@
+                                        @if (Session["origemPV"].ToString() != "Inclusão")
+                                        {
+                                            <td align="center">
+                                                @Html.ActionLink("Histórico de Eventos", "LogItemPV",
+                                                    new { id = item.ID },
+                                                    new { @class = "log", @title = "Clique aqui para visualizar o Histórico de Eventos" })
+                                            </td>
+                                        }
+                                        @*@if ((item.Alterado == 3 || item.Alterado == 4 || item.Alterado == 5)
+                                                && (Convert.ToBoolean(Session["solicitaCancelarPV"])
+                                                    || Session["status"].ToString().Equals("Cancelamento Pendente")))
+                                            {
+                                                <td align="center">
+                                                    @Html.Image(@Url.Content("~/Content/icons/icn_cancelar.png"), "")
+                                                </td>
+
+                                            }*@
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+        <br />
+        <div class="editor-label">
+            <b>Preço Unitário das Vacinas / Serviços:</b>
+            @String.Format("{0:N4}", Convert.ToDecimal(Session["valorVacinaAntigo"].ToString()))
+        </div>
+        <div class="editor-label">
+            <b>Qtde. Total de Pintos do Pedido (Líquido + Bonificado + Reposição):</b>
+            @String.Format("{0:N0}", Convert.ToDecimal(qtdeTotalPintos))
+        </div>
+        <div class="editor-label">
+            <b>
+                Qtde. Total de Pintos do Pedido a ser calulado Vacinas e Serviços
+                (Líquido + Bonificado + Reposição [Somente se Tipo for "Acerto Comercial"]):
+            </b>
+            @String.Format("{0:N0}", Convert.ToDecimal(qtdeTotalPintosCalcular))
+        </div>
+        <div class="editor-label">
+            <b>Valor Total das Vacinas:</b>
+            @String.Format("{0:N2}", Convert.ToDecimal(qtdeTotalPintosCalcular)
+                * Convert.ToDecimal(Session["valorVacinaAntigo"].ToString()))
+        </div>
+        <div class="editor-label">
+            @{
+                decimal qtdTratamentoInfravermelhoPV = 0;
+                if (Session["qtdTratamentoInfravermelhoPV"] != null && Session["qtdTratamentoInfravermelhoPV"] != "")
+                {
+                    qtdTratamentoInfravermelhoPV = Convert.ToDecimal(Session["qtdTratamentoInfravermelhoPV"].ToString());
+                }
+                decimal valortotalServicos = (Convert.ToDecimal(qtdeTotalPintosCalcular)
+                    * (qtdTratamentoInfravermelhoPV / 100))
+                            * Convert.ToDecimal(Session["valorServicoPV"].ToString());
+            }
+            <b>Valor Total dos Serviços (@Session["qtdTratamentoInfravermelhoPV"].ToString()% do Total):</b>
+            @String.Format("{0:N2}", valortotalServicos)
+        </div>
+        <div class="editor-label">
+            <b>Valor Total dos Pintos:</b>
+            @String.Format("{0:N2}", (valorTotalPintos))
+        </div>
+        <br />
+        <div class="editor-label">
+            <b>Valor Total do Pedido:</b>
+            @String.Format("{0:N2}",
+                    (Convert.ToDecimal(Session["valorDocumentacaoDE"].ToString()) +
+                    Convert.ToDecimal(Session["valorFreteDE"].ToString()) +
+                    (valorTotalItens)))
+        </div>
+        @if (Session["origemPV"].ToString().Equals("Alteração"))
+        {
+            using (Html.BeginForm("ListItensPVReturn", "PedidoVenda", FormMethod.Post))
+            {
+                <input type="submit" value="Alterar Itens do Pedido" />
+            }
+        }
+    </li>
+    <li data-role="fieldcontain">
+        <h3>Passo 03 - Vacinas:</h3>
+        <div class="editor-label">
+            <b>Vacina Primária:</b>
+            @{
+                MvcAppHylinedoBrasilMobile.Models.LOG_Vacinas_Primaria_Pedido_Venda logVacPrim = null;
+            }
+            @if (vacinaPrimaria != null)
+            {
+                if (logPV != null)
+                {
+                    logVacPrim =
+                        hlbappSession
+                        .LOG_Vacinas_Primaria_Pedido_Venda
+                        .Where(w => w.IDLogPedidoVenda == logPV.ID)
+                        .FirstOrDefault();
+                }
+
+                <label>@(vacinaPrimaria.ProdNomeAlt1)</label>
+                if (logVacPrim != null)
+                {
+                    if (logVacPrim.ProdCodEstr != codigoVacinaPrimaria)
+                    {
+                        <b style="color:red; background-color:Yellow">
+                            *
+                        </b>
+                        <br />
+                    }
+                }
+                //if (precoVacinaPrimaria != null)
+
+                MvcAppHylinedoBrasilMobile.Models.Vacinas_Primaria_Pedido_Venda vacinaPrimariaObj =
+                    hlbappSession
+                    .Vacinas_Primaria_Pedido_Venda.Where(w => w.IDPedidoVenda == idPedVenda).FirstOrDefault();
+
+                if (vacinaPrimariaObj != null)
+                {
+                    if (vacinaPrimariaObj.PrecoUnitario != null && vacinaPrimariaObj.PrecoUnitario > 0)
+                    {
+                        @(" - R$ " + String.Format("{0:N2}", vacinaPrimariaObj.PrecoUnitario))
+                    }
+                    else
+                    {
+                        if (vacinaPrimariaObj.Bonificada == null)
+                        {
+                            if (precoVacinaPrimaria != null)
+                            {
+                                @(" - R$ " + String.Format("{0:N}", precoVacinaPrimaria.ValorNormal))
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (precoVacinaPrimaria != null)
+                    {
+                        @(" - R$ " + String.Format("{0:N2}", precoVacinaPrimaria.ValorNormal))
+                    }
+                }
+
+                if (vacinaPrimariaObj.Bonificada == 1)
+                {
+                    <b style="color:red; background-color:Yellow">
+                        @(" - VACINA PRIMÁRIA BONIFICADA ")
+                    </b>
+                }
+                else if (vacinaPrimariaObj.Bonificada == 2)
+                {
+                    <b style="color:red; background-color:Yellow">
+                        @(" - VACINA PRIMÁRIA ENVIADA PELO CLIENTE ")
+                    </b>
+                }
+            }
+            else
+            {
+                @Session["vacinaPrimariaPV"].ToString()
+            }
+        </div>
+        @{
+            var itensVacinaList = (List<MvcAppHylinedoBrasilMobile.Models.Vacinas_Secundaria_Pedido_Venda>)Session["VacinasSecundariaPVList"];
+        }
+        @if (itensVacinaList.Count > 0)
+        {
+            <br />
+            <div id="tabelaVacinasSecundariaPV" style="overflow:auto;">
+                <table id="tabela">
+                    <tr>
+                        <th>
+                            Vacina Secundária
+                        </th>
+                        <th>
+                            Preço Unit.
+                        </th>
+                        <th>
+                            Tipo de Cobrança
+                        </th>
+                    </tr>
+                    @foreach (var item in itensVacinaList)
+                    {
+                        <tr>
+                            @{
+                                MvcAppHylinedoBrasilMobile.Models.bdApolo.PRODUTO vacinaSecObject =
+                                    apoloSession.PRODUTO
+                                    .Where(w => w.ProdCodEstr == item.ProdCodEstr)
+                                    .FirstOrDefault();
+
+                                MvcAppHylinedoBrasilMobile.Models.Tabela_Precos precoVacinaSec =
+                                    hlbappSession.Tabela_Precos
+                                    .Where(w => w.Tipo == "Vacina" && w.Produto == vacinaSecObject.ProdNomeAlt2
+                                        && w.Regiao == "Todas" && w.Empresa == empresaL
+                                        && menorDataInicial >= w.DataInicial && maiorDataFinal <= w.DataFinal)
+                                    .FirstOrDefault();
+
+                                decimal? valorvacina = 0;
+                                if (precoVacinaSec != null)
+                                {
+                                    valorvacina = precoVacinaSec.ValorNormal;
+                                }
+
+                                MvcAppHylinedoBrasilMobile.Models.LOG_Vacinas_Secundaria_Pedido_Venda logVacSec = null;
+
+                                if (logVacPrim != null)
+                                {
+                                    logVacSec =
+                                        hlbappSession
+                                        .LOG_Vacinas_Secundaria_Pedido_Venda
+                                        .Where(w => w.IDVacPrimLogPedidoVenda == logVacPrim.ID
+                                            //&& w.Sequencia == item.Sequencia)
+                                            && w.ProdCodEstr == item.ProdCodEstr)
+                                        .FirstOrDefault();
+                                }
+                            }
+                            <td>
+                                @(apoloSession
+                                    .PRODUTO.Where(w => w.ProdCodEstr == item.ProdCodEstr).FirstOrDefault().ProdNomeAlt1)
+                                @if (logVacSec != null)
+                                {
+                                    if (logVacSec.ProdCodEstr != item.ProdCodEstr)
+                                    {
+                                        <b style="color:red; background-color:Yellow">
+                                            *
+                                        </b>
+                                        <br />
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @if (item.PrecoUnitario != null)
+                                {
+                                    @String.Format("{0:N2}", item.PrecoUnitario)
+                                }
+                                else
+                                {
+                                    if (item.Bonificada == null)
+                                    {
+                                        @String.Format("{0:N2}", valorvacina)
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @if (item.Bonificada == 1)
+                                {
+                                    <b style="color:red; background-color:Yellow">
+                                        @("Bonificação")
+                                    </b>
+                                }
+                                else if (item.Bonificada == 2)
+                                {
+                                    <b style="color:red; background-color:Yellow">
+                                        @("Cliente Envia")
+                                    </b>
+                                }
+                                else
+                                {
+                                    @("Normal")
+                                }
+                                @if (logVacSec != null)
+                                {
+                                    if (logVacSec.Bonificada != item.Bonificada)
+                                    {
+                                        <b style="color:red; background-color:Yellow">
+                                            *
+                                        </b>
+                                        <br />
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        }
+        @if (Session["origemPV"].ToString().Equals("Alteração"))
+        {
+            using (Html.BeginForm("VerificaVacina", "PedidoVenda", FormMethod.Post))
+            {
+                <input type="submit" value="Alterar Vacinas do Pedido" />
+            }
+        }
+    </li>
+    <li data-role="fieldcontain">
+        <h3>Passo 04 - Dados Adicionais:</h3>
+        <div class="editor-label"
+             style="background-color:
+               @MvcAppHylinedoBrasilMobile.Controllers.PedidoVendaController.GetColorStatus(Session["status"].ToString());">
+            <b>Status:</b>
+            @(Session["status"].ToString())
+        </div>
+        <div class="editor-label">
+            <b>Tratamento Infravermelho:</b>
+            @if (Convert.ToBoolean(Session["tratamentoInfravermelhoPV"]))
+            {
+                @Html.Image(@Url.Content("~/Content/icons/apply.png"), "")
+                @(" - " + String.Format("{0:N2}", Session["qtdTratamentoInfravermelhoPV"].ToString()) + "%")
+            }
+            else
+            {
+                @Html.Image(@Url.Content("~/Content/icons/button_cancel.png"), "")
+            }
+            @{
+                MvcAppHylinedoBrasilMobile.Models.LOG_Servicos_Pedido_Venda logServ = null;
+
+                if (logPV != null)
+                {
+                    logServ = hlbappSession
+                        .LOG_Servicos_Pedido_Venda.Where(w => w.IDLogPedidoVenda == logPV.ID).FirstOrDefault();
+                }
+
+                MvcAppHylinedoBrasilMobile.Models.Servicos_Pedido_Venda servicoObj =
+                    hlbappSession
+                    .Servicos_Pedido_Venda.Where(w => w.IDPedidoVenda == idPedVenda).FirstOrDefault();
+
+                MvcAppHylinedoBrasilMobile.Models.Tabela_Precos precoServico =
+                    new MvcAppHylinedoBrasilMobile.Models.Tabela_Precos();
+
+                if (servicoObj != null)
+                {
+                    precoServico =
+                        hlbappSession.Tabela_Precos
+                        .Where(w => w.Tipo == "Serviço" && w.Produto == "Tratamento Infravermelho"
+                            && w.Regiao == "Todas" && w.Empresa == empresaL
+                            && menorDataInicial >= w.DataInicial && maiorDataFinal <= w.DataFinal)
+                        .FirstOrDefault();
+                }
+
+                if (servicoObj != null)
+                {
+                    if (servicoObj.PrecoUnitario != null && servicoObj.PrecoUnitario > 0)
+                    {
+                        @(" - R$ " + String.Format("{0:N2}", servicoObj.PrecoUnitario))
+                    }
+                    else
+                    {
+                        if (servicoObj.Bonificada == null)
+                        {
+                            @(" - R$ " + String.Format("{0:N}", precoServico.ValorNormal))
+                        }
+                    }
+                    if (servicoObj.Bonificada == 1)
+                    {
+                        <b style="color:red; background-color:Yellow">
+                            @(" - SERVIÇO BONIFICADO ")
+                        </b>
+                    }
+                }
+            }
+            @if ((logServ == null) && (Convert.ToBoolean(Session["tratamentoInfravermelhoPV"])))
+            {
+                <b style="color:red; background-color:Yellow">
+                    *
+                </b>
+                <br />
+            }
+            else if ((logServ != null) && (!Convert.ToBoolean(Session["tratamentoInfravermelhoPV"])))
+            {
+                <b style="color:red; background-color:Yellow">
+                    *
+                </b>
+                <br />
+            }
+            else if (logServ != null)
+            {
+                if (logServ.PercAplicacaoServico != Convert.ToDecimal(Session["qtdTratamentoInfravermelhoPV"].ToString()))
+                {
+                    <b style="color:red; background-color:Yellow">
+                        *
+                    </b>
+                    <br />
+                }
+            }
+            @if (empresaL == "LB" && Convert.ToBoolean(Session["tratamentoInfravermelhoPV"]))
+            {
+                if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPPM-PedidoVendaAlteraMascaraTI", (System.Collections.ArrayList)Session["Direitos"])
+                    && (Session["status"].ToString() == "Inclusão Aguardando Análise Gerência" || Session["status"].ToString() == "Alteração Aguardando Análise Gerência"))
+                {
+                    <br />
+                    <label style="width: 100%">
+                        @Html.CheckBox("mascaraTIDiferenteProtocolo", Convert.ToBoolean(Session["mascaraTIDiferenteProtocolo"]),
+                              new { @id = "ckMascaraTIDiferenteProtocolo", @onchange = "verificaMascaraTIDiferenteProtocolo(this)" })Máscara para o Tratamento Infravermelho diferente do Protocolo?
+                    </label>
+                    <br />
+                    <div id="pnlMascaraTI">
+                        <b>Tipo de Máscara para o Tratamento Infravermelho:</b>
+                        @Html.DropDownList(
+                              "MascaraTI",
+                              (List<SelectListItem>)Session["ListaMascaraTI"],
+                              new
+                              {
+                                  @id = "ddlMascaraTI",
+                                  @onchange = "carregaMascaraTI(this)"
+                              })
+                    </div>
+                }
+                else if (Convert.ToBoolean(Session["mascaraTIDiferenteProtocolo"]))
+                {
+                    <br />
+                    <b>Máscara para o Tratamento Infravermelho diferente do Protocolo: @Session["mascaraTI"]</b>
+                }
+            }
+        </div>
+        <br />
+        <div class="editor-label">
+            <b>Ovos Brasil:</b>
+            @if (Convert.ToBoolean(Session["ovosBrasilPV"]))
+            {
+                @Html.Image(@Url.Content("~/Content/icons/apply.png"), "")
+
+            }
+            else
+            {
+                @Html.Image(@Url.Content("~/Content/icons/button_cancel.png"), "")
+            }
+            @if (logPV != null)
+            {
+                int ovosBRasil = 0;
+                if (Convert.ToBoolean(Session["ovosBrasilPV"]))
+                {
+                    ovosBRasil = 1;
+                }
+
+                if (logPV.OvosBrasil != ovosBRasil)
+                {
+                    <b style="color:red; background-color:Yellow">
+                        *
+                    </b>
+                    <br />
+                }
+            }
+        </div>
+        <br />
+        <div class="editor-label">
+            <b>Condição de Pagamento:</b>
+            @(Session["condicaoPagamentoPV"].ToString())
+            @if (logPV != null)
+            {
+                if (logPV.CondicaoPagamento != Session["condicaoPagamentoPV"].ToString())
+                {
+                    <b style="color:red; background-color:Yellow">
+                        *
+                    </b>
+                    <br />
+                }
+            }
+        </div>
+        <br />
+        <div class="editor-label">
+            <b>Observações:</b>
+            @*<p>@Html.Raw("<pre>" + Html.Encode(Session["observacaoPV"].ToString()) + "</pre>")</p>*@
+            @Html.Raw(Session["observacaoPV"].ToString().Replace("\r\n", "<br />"))
+        </div>
+        <br />
+        <div class="editor-label">
+            <b>Motivo da(s) Alteração(ões):</b>
+            <br />
+            @*<p>@Html.Raw("<pre>" + Html.Encode(Session["motivoAlteracaoPV"].ToString()) + "</pre>")</p>*@
+            @Html.Raw(Session["motivoAlteracaoPV"].ToString().Replace("\r\n", "<br />"))
+        </div>
+        <br />
+        <div class="editor-label">
+            @if (Session["vendedorPV"] != null & vendedor != null)
+            {
+                <b>Vendedor / Representante:</b>
+                <b>@(Session["vendedorPV"].ToString() + " - " + vendedor.VendNome)</b>
+                if (logPV != null)
+                {
+                    if (logPV.Vendedor != Session["vendedorPV"].ToString())
+                    {
+                        <b style="color:red; background-color:Yellow">
+                            *
+                        </b>
+                        <br />
+                    }
+                }
+            }
+        </div>
+        @if (Session["origemPV"].ToString().Equals("Alteração"))
+        {
+            using (Html.BeginForm("OtherInformationsReturn", "PedidoVenda", FormMethod.Post))
+            {
+                <input type="submit" value="Alterar Dados Adicionais do Pedido" />
+            }
+        }
+    </li>
+</ul>
+
+@if (!Convert.ToBoolean(Session["visualizaPV"]))
+{
+    if (Convert.ToBoolean(Session["deletaPV"]))
+    {
+        using (Html.BeginForm("ConfirmaDeletePV", "PedidoVenda", FormMethod.Post))
+        {
+            <b>Motivo da Exclusão do Pedido:</b>
+            @Html.TextArea("motivo", null, new { @required = true })
+            <input type="submit" value="Confirma Exclusão" />
+        }
+    }
+    else if (Convert.ToBoolean(Session["solicitaCancelarPV"]))
+    {
+        using (Html.BeginForm("CancelaPVReturn", "PedidoVenda", FormMethod.Post))
+        {
+            <input type="submit" value="Anterior" />
+        }
+
+        using (Html.BeginForm("ConfirmaSolicitacaoCancelaPV", "PedidoVenda", FormMethod.Post))
+        {
+            <b>Motivo da Solicitação do Cancelamento:</b>
+            @Html.TextArea("motivo", null, new { @required = true })
+            <input type="submit" value="Confirma Solicitação de Cancelamento" />
+        }
+    }
+    else
+    {
+        if (!Session["origemPV"].ToString().Equals("Alteração"))
+        {
+            using (Html.BeginForm("OtherInformationsReturn", "PedidoVenda", FormMethod.Post))
+            {
+                <input type="submit" value="Anterior" />
+            }
+        }
+
+        using (Html.BeginForm("SaveFinalizaPV", "PedidoVenda", FormMethod.Post))
+        {
+            if (Convert.ToBoolean(Session["alteracaoPrecoBonificacaoPV"])
+                || Session["origemPV"].ToString().Equals("Alteração"))
+            {
+                if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                    .GetGroup("HLBAPPM-TipoAlteracaoInterno", (System.Collections.ArrayList)Session["Direitos"]))
+                {
+                    <b>Selecione o Tipo da Alteração (MOTIVO INTERNO):</b>
+                    @Html.DropDownList(
+                        "TipoAlteracao",
+                        (List<SelectListItem>)Session["ListaTipoAlteracaoPV"])
+                    <br />
+                    <br />
+                }
+                <b>Motivo da Alteração:</b>
+                @Html.TextArea("motivoAlteraPrecoBonificacao", null, new { @required = true })
+            }
+            <input type="submit" value="Finaliza Pedido" name="FinalizaPedidoButton" />
+        }
+    }
+}
+else
+{
+    if ((!Convert.ToBoolean(Session["alteracaoPrecoBonificacaoPV"]) &&
+        (!Convert.ToBoolean(Session["alteracaoVacinasItemPV"]))))
+    {
+        if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-ImportaPVChic", (System.Collections.ArrayList)Session["Direitos"]))
+        {
+            if (Session["status"].ToString().Contains("Pendente")
+                && !Session["status"].ToString().Contains("Cancelamento")
+                && (!Convert.ToBoolean(Session["alteracaoPrecoBonificacaoPV"])))
+            {
+                <h3 style="color:red; background-color:Yellow">
+                    * CLIQUE ABAIXO PARA CONFIRMAR A IMPORTAÇÃO PARA O ANIPLAN!
+                    SE REALIZAR A IMPORTAÇÃO, NÃO PODERÁ SER MAIS DESFEITA!
+                    SÓ ATUALIZADA OU CANCELADA!
+                </h3>
+
+                /**** 21/03/2021 - DESATIVADO DEVIDO A MIGRAÇÃO DO CHIC P/ ANIPLAN ****/
+
+                @*using (Html.BeginForm("ImportaPVChic", "PedidoVenda", FormMethod.Post))
+                {
+                    <label style="width: 100%">
+                        @Html.CheckBox("manterVolDisponivel") DESEJA MANTER O VOLUME DISPONÍVEL NA DATA?
+                    </label>
+                    <b>Motivo da Disponibilidade Mantida:</b>
+                    @Html.TextArea("motivo")
+                    <br />
+                    <b>Informações para Incubatório:</b>
+                    @Html.TextArea("infoIncubatorio")
+                    <br />
+                    <b>Valor Total do Pintinho:</b>
+                    @Html.TextBox("valorTotalPintinho", Convert.ToDecimal(Session["valorTotalPintinho"]),
+                        new { @onkeyup = "mascara(this, mvalor);", @required = true })
+                    <input type="submit" value="Importar para CHIC" name="ImportaCHICButton" />
+                }*@
+
+                <br />
+
+                if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-ImportaPVAniPlan", (System.Collections.ArrayList)Session["Direitos"]))
+                {
+                    using (Html.BeginForm("ProgramarPVAniPlan", "PedidoVenda", FormMethod.Post))
+                    {
+                        <input type="submit" value="Programar Pedido" name="ProgramarPVButton" />
+                    }
+                }
+
+                <br />
+
+                <h3 style="color:red; background-color:Yellow">
+                    * CASO NÃO ESTEJA DE ACORDO COM O PEDIDO, INFORME O MOTIVO NO CAMPO ABAIXO
+                    E CLIQUE EM "REPROVAR PEDIDO"! O RESPONSÁVEL PELO PEDIDO
+                    RECEBERÁ UM E-MAIL COM O MOTIVO DO RETORNO PARA QUE ELE VERIFIQUE!
+                    O STATUS DO PEDIDO FICARÁ COMO "INCLUSÃO / ALTERAÇÃO REPROVADA" PARA O RESPONSÁVEL AJUSTAR!
+                </h3>
+
+                <br />
+
+                using (Html.BeginForm("ReprovarPV", "PedidoVenda", FormMethod.Post))
+                {
+                    <b>Motivo da Reprovação:</b>
+                    @Html.TextArea("motivo", null, new { @required = true })
+
+                    <input type="submit" value="Reprovar Pedido" />
+                }
+            }
+            else if (Session["status"].ToString().Equals("Cancelamento Pendente"))
+            {
+                <h3 style="color:red; background-color:Yellow">
+                    * CLIQUE ABAIXO PARA CONFIRMAR O CANCELAMENTO NO CHIC!
+                    SE REALIZAR O CANCELAMENTO, NÃO PODERÁ SER MAIS DESFEITO!
+                </h3>
+
+                /**** 21/03/2021 - DESATIVADO DEVIDO A MIGRAÇÃO DO CHIC P/ ANIPLAN ****/
+
+                @*using (Html.BeginForm("ConfirmaCancelaPV", "PedidoVenda", FormMethod.Post))
+                {
+                    <label style="width: 100%">
+                        @Html.CheckBox("manterVolDisponivel") DESEJA MANTER O VOLUME DISPONÍVEL NA DATA?
+                    </label>
+                    <b>Motivo da Disponibilidade Mantida:</b>
+                    @Html.TextArea("motivo")
+                    <br />
+                    <input type="submit" value="Confirmar Cancelamento no CHIC" name="ConfirmaCancelaButton" />
+                }*@
+
+                <br />
+
+                if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-ImportaPVAniPlan", (System.Collections.ArrayList)Session["Direitos"]))
+                {
+                    using (Html.BeginForm("ConfirmaCancelaPVAniPlan", "PedidoVenda", FormMethod.Post))
+                    {
+                        <label style="width: 100%">
+                            @Html.CheckBox("manterVolDisponivel") DESEJA MANTER O VOLUME DISPONÍVEL NA DATA?
+                        </label>
+                        <b>Motivo da Disponibilidade Mantida:</b>
+                        @Html.TextArea("motivo")
+                        <br />
+                        <input type="submit" value="Confirmar Cancelamento" name="ConfirmaCancelaAniPlanButton" />
+                    }
+                }
+
+                <br />
+
+                <h3 style="color:red; background-color:Yellow">
+                    * CASO NÃO ESTEJA DE ACORDO COM O CANCELAMENTO DO PEDIDO, INFORME O MOTIVO NO CAMPO ABAIXO
+                    E CLIQUE EM "REPROVAR CANCELAMENTO DE PEDIDO"! O RESPONSÁVEL PELO PEDIDO
+                    RECEBERÁ UM E-MAIL COM O MOTIVO DO RETORNO PARA QUE ELE VERIFIQUE!
+                    O STATUS DELE FICARÁ COMO "CANCELAMENTO REPROVADO" PARA O RESPONSÁVEL AJUSTAR!
+                </h3>
+
+                <br />
+
+                using (Html.BeginForm("ReprovarCancelamentoPV", "PedidoVenda", FormMethod.Post))
+                {
+                    <b>Motivo da Reprovação do Cancelamento:</b>
+                    @Html.TextArea("motivo", null, new { @required = true })
+
+                    <input type="submit" value="Reprovar Cancelamento de Pedido" />
+                }
+            }
+        }
+
+        if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+            .GetGroup("HLBAPPM-PedidoVendaAprovaAnaliseGerencia",
+            (System.Collections.ArrayList)Session["Direitos"])
+            && (
+                (Session["statusClienteSelecionado"].ToString() != "03" && !Session["status"].ToString().Contains("Cancela"))
+                ||
+                Session["status"].ToString().Contains("Cancela")
+               ))
+        {
+            if (Session["status"].ToString().Contains("Aguardando Análise Gerência"))
+            {
+                <h3 style="color:red; background-color:Yellow">
+                    * CLIQUE ABAIXO PARA APROVAR O PEDIDO PARA ENVIO AO DEPTO. PROGRAMAÇÃO!
+                </h3>
+
+                using (Html.BeginForm("AprovaGerenciaPV", "PedidoVenda", FormMethod.Post))
+                {
+                    <input type="submit" value="Aprovar Pedido" name="AprovarGerenciaButton" />
+                }
+
+                <br />
+
+                <h3 style="color:red; background-color:Yellow">
+                    * CASO NÃO ESTEJA DE ACORDO COM O PEDIDO, INFORME O MOTIVO NO CAMPO ABAIXO
+                    E CLIQUE EM "REPROVAR PEDIDO"! O RESPONSÁVEL PELO PEDIDO
+                    RECEBERÁ UM E-MAIL COM O MOTIVO DO RETORNO PARA QUE ELE VERIFIQUE!
+                    O STATUS DO PEDIDO FICARÁ COMO "REPROVADO PELA GERÊNCIA" PARA O RESPONSÁVEL AJUSTAR!
+                </h3>
+
+                <br />
+
+                using (Html.BeginForm("ReprovarGerenciaPV", "PedidoVenda", FormMethod.Post))
+                {
+                    <b>Motivo da Reprovação:</b>
+                    @Html.TextArea("motivo", null, new { @required = true })
+
+                    <input type="submit" value="Reprovar Pedido" />
+                }
+            }
+        }
+    }
+    else if ((Convert.ToBoolean(Session["alteracaoPrecoBonificacaoPV"]))
+        || (Convert.ToBoolean(Session["alteracaoVacinasItemPV"])))
+    {
+        if ((!Session["status"].ToString().Contains("Cancela")
+            || Session["status"].ToString().Equals("Cancelamento Reprovado")))
+        {
+            using (Html.BeginForm("Index", "PedidoVenda", FormMethod.Post))
+            {
+                <input type="submit" value="Cancelar" />
+            }
+
+            using (Html.BeginForm("SaveFinalizaPV", "PedidoVenda", FormMethod.Post))
+            {
+                <b>Motivo da Alteração de Preço(s) e/ou % de Bonificação e/ou Vacinas nos Itens:</b>
+                @Html.TextArea("motivoAlteraPrecoBonificacao", null, new { @required = true })
+                <input type="submit" value="Finaliza Pedido" />
+            }
+        }
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

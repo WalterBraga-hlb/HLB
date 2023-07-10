@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProceduresApoloModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="USER_Insere_RDV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pMatricula" Type="int" Mode="In" />
+          <Parameter Name="pNumRDV" Type="int" Mode="In" />
+          <Parameter Name="pAnoMes" Type="varchar" Mode="In" />
+          <Parameter Name="pValorReembolso" Type="decimal" Mode="In" />
+          <Parameter Name="pAprovador" Type="varchar" Mode="In" />
+          <Parameter Name="pDataHoraAprov" Type="varchar" Mode="In" />
+          <Parameter Name="pDataLancamento" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="ProceduresApoloModelStoreContainer" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProceduresApoloModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ProceduresApolo" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="USER_Insere_RDV">
+            <Parameter Name="pMatricula" Mode="In" Type="Int32" />
+            <Parameter Name="pNumRDV" Mode="In" Type="Int32" />
+            <Parameter Name="pAnoMes" Mode="In" Type="String" />
+            <Parameter Name="pValorReembolso" Mode="In" Type="Decimal" />
+            <Parameter Name="pAprovador" Mode="In" Type="String" />
+            <Parameter Name="pDataHoraAprov" Mode="In" Type="String" />
+            <Parameter Name="pDataLancamento" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="USER_Insere_RDV_Result">
+          <Property Type="Int32" Name="ErrorNumber" Nullable="true" />
+          <Property Type="String" Name="ErrorMessage" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProceduresApoloModelStoreContainer" CdmEntityContainer="ProceduresApolo" >
+          <FunctionImportMapping FunctionImportName="USER_Insere_RDV" FunctionName="ProceduresApoloModel.Store.USER_Insere_RDV">
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,202 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+}
+
+<script src="../../Scripts/jquery.maskedinput.js" type="text/javascript"></script>
+
+<script language="javascript" type="text/javascript">
+
+    window.onkeydown = function (e) {
+        if (e.keyCode === 116) {
+            alert("Função não permitida");
+            e.keyCode = 0;
+            e.returnValue = false;
+            return false;
+        }
+    }
+
+    $(document).ready(function () {
+        $("#natOperacao").mask(".999");
+        $("#tipoLancamento").mask("E9999999");
+        verificaFormulario();
+
+    });
+
+    function verificaFormulario() {
+        verificaClasFiscal();
+        verificaContaDebito();
+    }
+
+    function verificaClasFiscal() {
+        var tipoClasFiscal = $('#ddlClasFiscal option:selected').text();
+        if (tipoClasFiscal == "Fixa") {
+            $('#pnlTxtClasFiscal').show();
+            if ($('#txtClasFiscal').val() == " ") {
+                $('#txtClasFiscal').val("");
+            }
+        } else {
+            $('#pnlTxtClasFiscal').hide();
+            $('#txtClasFiscal').val(" ");
+        }
+    }
+
+    function verificaContaDebito() {
+        var tipoContaDebito = $('#ddlContaDebito option:selected').text();
+        if (tipoContaDebito == "Fixa") {
+            $('#pnlTxtContaDebito').show();
+            if ($('#txtContaDebito').val() == " ") {
+                $('#txtContaDebito').val("");
+            }
+        } else {
+            $('#pnlTxtContaDebito').hide();
+            $('#txtContaDebito').val(" ");
+        }
+    }
+
+    $('#ddlClasFiscal').change(function () {
+        verificaClasFiscal();
+    });
+
+    $('#ddlContaDebito').change(function () {
+        verificaContaDebito();
+    });
+
+    /* Máscaras ER */
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mnum(v) {
+        v = v.replace(/\D/g, "");                                      //Remove tudo o que não é dígito
+        return v;
+    }
+</script>
+
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para a Lista de Configuração de Importação de NF-e", "ListaConfiguracaoImportaNFe", "Fiscal", 
+                null,
+                new { @class = "configDoc_32", @title = "Clique aqui para voltar para a Lista de Configuração de Importação de NF-e" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/config_doc_32x32.png"), "ConfiguracaoImportaNFe")
+    <h2>Configuração de Importação de NF-e</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+@using (Html.BeginForm("SaveConfiguracaoImportaNFe", "Fiscal", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        <div class="editor-label">
+            <b>Descricao:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("descricao", Session["descricaoCIN"],
+                 new
+                 {
+                     @placeholder = "Insira a descrição da configuração.",
+                     @required = "true",
+                     @maxlength = "100",
+                     @onkeyup = "this.value = this.value.toUpperCase();"
+                 })
+        </div>
+        <div class="editor-label">
+            <b>Tipo de Lançamento:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("tipoLancamento", Session["tipoLancCIN"],
+                new
+                {
+                    @placeholder = "Insira o código do Tipo de Lançamento (Exemplo: E0000007).",
+                    @required = "true",
+                    @maxlength = "8"
+                })
+        </div>
+        <div class="editor-label">
+            <b>Classificação Fiscal:</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList(
+                "ddlClasFiscal",
+                (List<SelectListItem>)Session["ddlClasFiscalCIN"],
+                "(Selecione uma Configuração)",
+                new { @id = "ddlClasFiscal", @required = "true" })
+            <div id="pnlTxtClasFiscal">
+                @Html.TextBox("txtClasFiscal", Session["clasFiscalCIN"],
+                    new
+                    {
+                        @placeholder = "Insira o código da Classificação Fiscal.",
+                        @required = "true",
+                        @maxlength = "7",
+                        @onkeyup = "mascara(this, mnum)"
+                    })
+            </div>
+        </div>
+        <div class="editor-label">
+            <b>Data do Movimento:</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList(
+                "ddldataMovimento",
+                (List<SelectListItem>)Session["ddlDataMovimentoCIN"],
+                "(Selecione uma Configuração)",
+                new { @id = "ddldataMovimento", @required = "true" })
+        </div>
+        <div class="editor-label">
+            <b>Natureza de Operação:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("natOperacao", Session["natOperacaoCIN"],
+                new
+                {
+                    @placeholder = "Insira o código da natureza de operação (Exemplo: .101).",
+                    @required = "true",
+                    @maxlength = "4"
+                })
+        </div>
+        <div class="editor-label">
+            <b>Local de Armazenagem:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("localArmazenagem", Session["locArmazCIN"],
+                new
+                {
+                    @placeholder = "Insira o código do Local de Armazenagem.",
+                    @required = "true",
+                    @maxlength = "10"
+                })
+        </div>
+        <div class="editor-label">
+            <b>Conta Débito:</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList(
+                "ddlContaDebito",
+                (List<SelectListItem>)Session["ddlContaDebitoCIN"],
+                "(Selecione uma Configuração)",
+                new { @id = "ddlContaDebito", @required = "true" })
+            <div id="pnlTxtContaDebito">
+                @Html.TextBox("txtContaDebito", Session["contaDebitoCIN"],
+                    new
+                    {
+                        @placeholder = "Insira o código da Conta Débito.",
+                        @required = "true",
+                        @maxlength = "7",
+                        @onkeyup = "mascara(this, mnum)"
+                    })
+            </div>
+        </div>
+        <p>
+            <input type="submit" value="Salvar Configuração" id="add" />
+        </p>
+    </fieldset>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

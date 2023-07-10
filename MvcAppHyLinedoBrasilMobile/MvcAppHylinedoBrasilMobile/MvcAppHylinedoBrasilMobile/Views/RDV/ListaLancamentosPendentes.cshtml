@@ -1,0 +1,210 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+
+    List<MvcAppHylinedoBrasilMobile.Models.RDV> listaRDV =
+        (List<MvcAppHylinedoBrasilMobile.Models.RDV>)Session["ListaRDV"];
+}
+<script language="JavaScript">
+    function mostrarElemento(id, visibilidade) {
+        document.getElementById(id).style.display = visibilidade;
+        if (visibilidade == 'inline-block') {
+            $('#' + id + 'Recibo').hide();
+            $('#' + id + 'Fechar').show();
+        }
+        if (visibilidade == 'none') {
+            $('#' + id + 'Recibo').show();
+            $('#' + id + 'Fechar').hide();
+        }
+    }
+</script>
+<style type="text/css">
+    .prodImagem {
+	    background-color: black;
+	    display: none;
+	    color: white;
+	    padding: 5px;
+	    width:300px;
+	    height:300px;
+    }
+</style>
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Menu RDV", "MenuRDV", "RDV")
+    </p>
+    @Html.Image(@Url.Content("~/Content/images/Amil-Reembolso-Icon.png"), "RDV")
+    <h2>RDV - Lançamentos Pendentes</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+@using (Html.BeginForm("SearchLancamentosPendentes", "RDV"))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <b>Data Inicial:</b>
+            <div class="editor-label">
+                @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+                {
+                    @Html.TextBox("dataInicialRDV", Convert.ToDateTime(Session["dataInicialRDV"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+                }
+                else
+                {
+                    @Html.TextBox("dataInicialRDV", Convert.ToDateTime(Session["dataInicialRDV"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+                }
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Data Final:</b>
+            <div class="editor-label">
+                @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+                {
+                    @Html.TextBox("dataFinalRDV", Convert.ToDateTime(Session["dataFinalRDV"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+                }
+                else
+                {
+                    @Html.TextBox("dataFinalRDV", Convert.ToDateTime(Session["dataFinalRDV"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+                }
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Pesquisar" />
+        </li>
+    </ul>
+}
+@Html.Partial("_MenuRDVPessoal")
+<br />
+<div class="editor-label"  align="center">
+    <table style="width: 90%">
+        <tr style="font-size: xx-small; background-color:Gray">
+            <th colspan="6" style="font-size: xx-small; background-color:Gray">
+                <u>Legenda de Ações:</u>
+            </th>
+        </tr>
+        <tr style="font-size: xx-small">
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/kjots.png"), "")
+                <i>Alterar Lançamento Pendente</i>
+            </td>
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/button_cancel.png"), "")
+                <i>Excluir Lançamento Pendente</i>
+            </td>
+        </tr>
+    </table>
+</div>
+<br />
+<br />
+<div id="divTabelaIndexPV" style="overflow:auto" >
+<table id="tabelaIndexPV" class="ajustetabelaIndexPV">
+    <tbody class="ajustetabelaIndexPV">
+    <tr class="ajustetabelaIndexPV">
+        <th class="ajustetabelaIndexPV">
+            ID
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Data
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Tipo Despesa
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Descrição
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Forma Pag.
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Local
+        </th>
+        <th class="ajustetabelaIndexPV" colspan="2">
+            Valores
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Ações
+        </th>
+    </tr>
+@foreach (var item in listaRDV)
+{
+    <tr class="ajustetabelaIndexPV">
+        <td class="ajustetabelaIndexPV">
+           @Html.Label(item.ID.ToString())
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @String.Format("{0:dd/MM/yy}", item.DataRDV)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @Html.DisplayFor(modelItem => item.TipoDespesa)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @Html.DisplayFor(modelItem => item.FormaPagamento)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @Html.DisplayFor(modelItem => item.NomeCidade)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @if (item.ValorDespesa > 0)
+            {
+                if (item.TipoDespesa.Contains("(D)"))
+                {
+                    @String.Format("({0:C2})", item.ValorDespesa);
+                }
+                else
+                {
+                    @String.Format("{0:C2}", item.ValorDespesa);
+                }
+            }
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @if (item.ValorMoedaEstrangeira > 0)
+            {
+                if (item.TipoDespesa.Contains("(D)"))
+                {
+                     @String.Format("("
+                        + item.IndEconNome.Substring(item.IndEconNome.IndexOf("-") + 2, item.IndEconNome.Length - (item.IndEconNome.IndexOf("-") + 2))
+                        + "{0:N2})", item.ValorMoedaEstrangeira);
+                }
+                else
+                {
+                    @String.Format(
+                        item.IndEconNome.Substring(item.IndEconNome.IndexOf("-") + 2, item.IndEconNome.Length - (item.IndEconNome.IndexOf("-") + 2))
+                        + "{0:N2}", item.ValorMoedaEstrangeira);
+                }
+            }
+        </td>
+        <td>
+            <table>
+                <tr>
+                    @if (item.Status != "Importado" && item.TipoDespesa.Contains("(D"))
+                    {
+                    <td align="center">
+                        @Html.ActionLink("Edit", "EditDespesa",
+                        new { id = item.ID },
+                            new { @class = "edit", @title = "Clique aqui para Alterar este Lançamento Pendente" })
+                    </td>
+                    <td align="center">
+                        @Html.ActionLink("Delete", "ConfirmaDeleteDespesa",
+                            new { id = item.ID },
+                                     new { @class = "delete", @title = "Clique aqui para Excluir este Lançamento Pendente" })
+                    </td>
+                    }
+                </tr>
+            </table>
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+</div>
+
+@using (Html.BeginForm("FechamentoRDV", "RDV", FormMethod.Post))
+{
+<input type="submit" value="Fechar Lançamentos Pendentes do Período Selecionado" />
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

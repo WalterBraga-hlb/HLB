@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Importação de Dados das Fórmulas da Ração";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: '<$= Url.Action("ImportaDadosFormulaPPCP","FormulaPPCP") %>',
+            //data: 'id=<%= ViewData["modelID"] %>',
+            timeout: 15000,  // wait upto 15 secs
+            success: function (content) {
+                $("#container").html(content);
+            }
+        });
+    });
+</script>
+
+<h2>Produção de Ração</h2>
+
+<ul id="menu2">
+    <li>@Html.ActionLink("Importa Fórmula", "Index", "FormulaPPCP")</li>
+    <li>@Html.ActionLink("Importa Diário Produção - Antigo", "Index", "DiarioProducaoRacao")</li>
+    <li>@Html.ActionLink("Importa Diário Produção - Novo", "ImportaDiarioPR", "DiarioProducaoRacao")</li>
+</ul>
+
+<h2>Importação de Dados das Fórmulas da Ração</h2>
+
+@using (Html.BeginForm("ImportaDadosFormulaPPCPNew", "FormulaPPCP", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <legend>Selecione o arquivo a ser Importado:</legend>
+    <div class="editor-field">
+        <input type="file" name="file1" style="width:100%"/>
+        <br />
+        <br />
+        <input type="submit" value="IMPORTAR" style="width:100px;height:60px"/>
+    </div>
+}
+
+@*@using (Ajax.BeginForm("ImportaDadosFormulaPPCP", "FormulaPPCP", new AjaxOptions
+{
+    UpdateTargetId = "divUltimaReview",
+    InsertionMode = InsertionMode.Replace,
+    HttpMethod = "POST",
+    LoadingElementId = "loadingImage"
+    //OnFailure = "AjaxFailure",
+    //OnBegin = "AjaxBegin",
+    //OnComplete = "AjaxComplete"
+},
+                                                                    new { enctype = "multipart/form-data" }
+                      )
+       )
+{
+    <h4>Selecione o arquivo a ser Importado:</h4>
+    <div class="editor-field">
+        <input type="file" name="file1"/>
+        <input type="submit" value="Analisar"/>
+    </div>
+    
+    
+}*@
+
+<div id="divUltimaReview">
+    <h4>@ViewBag.fileName</h4>
+    <h4 style="color:red;">@ViewBag.erro</h4>
+</div>
+

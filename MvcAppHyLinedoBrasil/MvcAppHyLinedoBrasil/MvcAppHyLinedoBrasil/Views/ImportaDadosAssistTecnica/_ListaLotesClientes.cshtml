@@ -1,0 +1,82 @@
+﻿@{
+    var listaResumoClientes = (List<MvcAppHyLinedoBrasil.Models.HLBAPP.VU_Resumo_Dados_Lotes_Clientes>)
+        Session["ListaResumoLotesClientes"];            
+}
+
+@if (listaResumoClientes != null)
+{
+    <fieldset>
+        <p align="center">
+            <u>Lista dos Lotes dos Clientes</u>
+        </p>
+        <table style="width: 100%">
+            <tr>
+                <th>
+                </th>
+                <th>
+                    Código
+                </th>
+                <th>
+                    Razão Social
+                </th>
+                <th>
+                    Cidade
+                </th>
+                <th>
+                    UF
+                </th>
+                <th>
+                    Linhagem
+                </th>
+                <th>
+                    Lote
+                </th>
+                <th>
+                    Data Alojamento
+                </th>
+                <th>
+                    Última Idade Coletada
+                </th>
+            </tr>
+            @foreach (var item in listaResumoClientes.OrderBy(o => o.DataAlojamento).ToList())
+            {
+                var chave = "";
+                if (item.Chave != null)
+                {
+                    chave = item.Chave;
+                }
+                
+                <tr align="center">
+                    <td>
+                        @Html.RadioButton("loteSelecionado", chave, (Session["loteSelecionado"].ToString() == chave && chave != "") ? true : false,
+                            new { @required = "true" })
+                    </td>
+                    <td>
+                        @item.CodigoCliente
+                    </td>
+                    <td>
+                        @item.Nome
+                    </td>
+                    <td>
+                        @item.Cidade
+                    </td>
+                    <td>
+                        @item.UF
+                    </td>
+                    <td>
+                        @item.Linhagem
+                    </td>
+                    <td>
+                        @item.Lote
+                    </td>
+                    <td>
+                        @String.Format("{0:dd/MM/yyyy}", item.DataAlojamento)
+                    </td>
+                    <td>
+                        @item.UltimaIdade
+                    </td>
+                </tr>
+            }
+        </table>
+    </fieldset>
+}

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="fluigtesteModelStoreContainer" CdmEntityContainer="fluigtesteEntities">
+    <EntitySetMapping Name="VW_Manutencao_Preventiva">
+      <EntityTypeMapping TypeName="fluigtesteModel.VW_Manutencao_Preventiva">
+        <MappingFragment StoreEntitySet="VW_Manutencao_Preventiva">
+          <ScalarProperty Name="SemanaAnoManutencao" ColumnName="SemanaAnoManutencao" />
+          <ScalarProperty Name="DataManutencao" ColumnName="DataManutencao" />
+          <ScalarProperty Name="pesquisa_equipamento" ColumnName="pesquisa_equipamento" />
+          <ScalarProperty Name="prazo_planejamento" ColumnName="prazo_planejamento" />
+          <ScalarProperty Name="planejamento" ColumnName="planejamento" />
+          <ScalarProperty Name="grupo_gestor" ColumnName="grupo_gestor" />
+          <ScalarProperty Name="grupo_manutencao" ColumnName="grupo_manutencao" />
+          <ScalarProperty Name="periodo_manutencao" ColumnName="periodo_manutencao" />
+          <ScalarProperty Name="usuario_calibracao" ColumnName="usuario_calibracao" />
+          <ScalarProperty Name="data_calibracao" ColumnName="data_calibracao" />
+          <ScalarProperty Name="existe_incubacao" ColumnName="existe_incubacao" />
+          <ScalarProperty Name="usuario_manutencao" ColumnName="usuario_manutencao" />
+          <ScalarProperty Name="data_manutencao" ColumnName="data_manutencao" />
+          <ScalarProperty Name="periodicidade" ColumnName="periodicidade" />
+          <ScalarProperty Name="localidade" ColumnName="localidade" />
+          <ScalarProperty Name="tag" ColumnName="tag" />
+          <ScalarProperty Name="equipamento" ColumnName="equipamento" />
+          <ScalarProperty Name="tableid" ColumnName="tableid" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="documentid" ColumnName="documentid" />
+          <ScalarProperty Name="cardid" ColumnName="cardid" />
+          <ScalarProperty Name="companyid" ColumnName="companyid" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DataSolicitacao" ColumnName="DataSolicitacao" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="NomeSolicitante" ColumnName="NomeSolicitante" />
+          <ScalarProperty Name="LoginSolicitante" ColumnName="LoginSolicitante" />
+          <ScalarProperty Name="NUM_PROCES" ColumnName="NUM_PROCES" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

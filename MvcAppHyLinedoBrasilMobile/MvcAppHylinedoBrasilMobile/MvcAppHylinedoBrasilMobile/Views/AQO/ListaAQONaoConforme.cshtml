@@ -1,0 +1,295 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+
+    List<MvcAppHylinedoBrasilMobile.Models.LOG_Analise_Qualidade_Ovo> lista =
+        (List<MvcAppHylinedoBrasilMobile.Models.LOG_Analise_Qualidade_Ovo>)Session["ListaAQONaoConforme"];
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+
+    bool downloadMobile = false;
+    if (Request.Browser.IsMobileDevice)
+    {
+        downloadMobile = true;
+    }
+}
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+           @Html.ActionLink("Voltar para Menu de Controle de Estoque de Ovos", "MenuControleEstoqueOvos", "DiarioExpedicao",
+                null,
+                new { @title = "Clique aqui para Voltar para o Menu de Controle de Estoque de Ovos", @class = "AQO" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/uncheck.png"), "Lista de AQO")
+    <h2>Lista dos Ovos Não Conforme</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+@using (Html.BeginForm("SearchAQONaoConforme", "AQO"))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <b>Incubatório:</b>
+            <div class="editor-field">
+                @Html.DropDownList(
+                 "Incubatorio",
+                (List<SelectListItem>)Session["FiltroDDLIncubatorio"],
+                new { @id = "ddlIncubatorio" })
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Data Inicial:</b>
+            <div class="editor-label">
+                @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+                {
+                    @Html.TextBox("dataInicialAQO", Convert.ToDateTime(Session["dataInicialAQO"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+                }
+                else
+                {
+                    @Html.TextBox("dataInicialAQO", Convert.ToDateTime(Session["dataInicialAQO"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+                }
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Data Final:</b>
+            <div class="editor-label">
+                @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+                {
+                    @Html.TextBox("dataFinalAQO", Convert.ToDateTime(Session["dataFinalAQO"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+                }
+                else
+                {
+                    @Html.TextBox("dataFinalAQO", Convert.ToDateTime(Session["dataFinalAQO"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+                }
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Não Conformidade:</b>
+            <div class="editor-field">
+                @Html.DropDownList(
+                "NaoConformidade",
+                (List<SelectListItem>)Session["FiltroDDLNaoConformidade"],
+                new { @id = "ddlFiltroDDLNaoConformidade" })
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Status:</b>
+            <div class="editor-field">
+                @Html.DropDownList(
+                  "Status",
+                 (List<SelectListItem>)Session["FiltroDDLStatus"],
+                 new { @id = "ddlStatus" })
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Informe parte do nome do Núcleo / Lote:</b>
+            <div class="editor-label">
+                @Html.TextBox("lote", Session["filtroLote"].ToString())
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Pesquisar" />
+        </li>
+    </ul>
+}
+<ul data-role="listview" data-inset="true">
+    <li>
+        @Html.ActionLink("Exportar Relatório de Evolução da AQO", "GerarRelatorioEvolucaoAQO", "AQO", null,
+            new { @class = "importExcel", @target = "_blank", @title = "Clique aqui para Exportar o Relatório de Evolução da AQO." })
+    </li>
+</ul>
+<br />
+<div id="divTabelaRRC">
+<table id="tabelaRRC" class="ajustetabelaAQO">
+    <tbody class="ajustetabelaAQO">
+        <tr class="ajustetabelaAQO">
+            <th class="ajustetabelaAQO">
+                Origem
+            </th>
+            <th class="ajustetabelaAQO">
+                Incubatório
+            </th>
+            <th class="ajustetabelaAQO">
+                Data do Lançamento
+            </th>
+            <th class="ajustetabelaAQO">
+                Lote
+            </th>
+            <th class="ajustetabelaAQO">
+                Linhagem
+            </th>
+            <th class="ajustetabelaAQO">
+                Data Produção
+            </th>
+            <th class="ajustetabelaAQO">
+                Responsável Coleta
+            </th>
+            <th class="ajustetabelaAQO">
+                Não Conformidade
+            </th>
+            <th class="ajustetabelaAQO">
+                Valor
+            </th>
+            <th class="ajustetabelaAQO">
+                Resolução
+            </th>
+            <th class="ajustetabelaAQO">
+                Status
+            </th>
+            <th class="ajustetabelaAQO">
+            </th>
+        </tr>
+
+        @foreach (var item in lista)
+        {
+            MvcAppHylinedoBrasilMobile.Models.Analise_Qualidade_Ovo aqo = hlbapp
+                .Analise_Qualidade_Ovo.Where(w => w.ID == item.IDAQO).FirstOrDefault();
+
+            string qtdeNaoConforme = "";
+            string origem = "";
+            string incubatorio = "";
+            string data = "";
+            string lote = "";
+            string linhagem = "";
+            string dataProducao = "";
+            string responsavelColeta = "";
+            if (aqo != null)
+            {
+                origem = "AQO";
+                incubatorio = aqo.Incubatorio;
+                data = aqo.DataAQO.ToShortDateString();
+                lote = aqo.LoteCompleto;
+                linhagem = aqo.Linhagem;
+                dataProducao = aqo.DataProducao.ToShortDateString();
+                responsavelColeta = aqo.ResponsavelColeta;
+                if (item.NaoConformidade == "Sujo")
+                {
+                    qtdeNaoConforme = String.Format("{0:N0}",aqo.Sujo) + " - " + String.Format("{0:N2}", ((aqo.Sujo * 1.00m) / aqo.Amostra) * 100.00m) + "%";
+                }
+                else if (item.NaoConformidade == "Trincado")
+                {
+                    qtdeNaoConforme = String.Format("{0:N0}",aqo.Trincado) + " - " + String.Format("{0:N2}", ((aqo.Trincado * 1.00m) / aqo.Amostra) * 100.00m) + "%";
+                }
+                if (item.NaoConformidade == "Virado")
+                {
+                    qtdeNaoConforme = String.Format("{0:N0}",aqo.Virado) + " - " + String.Format("{0:N2}", ((aqo.Virado * 1.00m) / aqo.Amostra) * 100.00m) + "%";
+                }
+            }
+            else
+            {
+                origem = "DEO";
+                MvcAppHylinedoBrasilMobile.Models.LayoutDiarioExpedicaos deo = hlbapp
+                    .LayoutDiarioExpedicaos.Where(w => w.ID == item.IDAQO).FirstOrDefault();
+                incubatorio = deo.Incubatorio;
+                data = deo.DataHoraRecebInc.ToShortDateString();
+                lote = deo.LoteCompleto;
+                linhagem = deo.Linhagem;
+                dataProducao = deo.DataProducao.ToShortDateString();
+                responsavelColeta = deo.ResponsavelReceb;
+                qtdeNaoConforme = Convert.ToDecimal(deo.TemperaturaOvoInterna).ToString("0.00");
+            }
+
+            string resolucao = "";
+            MvcAppHylinedoBrasilMobile.Models.LOG_Analise_Qualidade_Ovo logResolucao = hlbapp
+                    .LOG_Analise_Qualidade_Ovo.Where(w => w.IDAQO == item.IDAQO
+                        && w.NaoConformidade == item.NaoConformidade
+                        && w.Status == "Resolvido")
+                    .OrderByDescending(o => o.DataHora)
+                    .FirstOrDefault();
+
+                if (logResolucao != null)
+                {
+                    resolucao = logResolucao.DataHora.ToShortDateString() + " - " + logResolucao.Usuario + "<br />"
+                        + logResolucao.Resposta;
+                }
+
+            <tr class="ajustetabelaAQO">
+                <td class="ajustetabelaAQO">
+                    @(origem)
+                </td>
+                <td class="ajustetabelaAQO">
+                    @(incubatorio)
+                </td>
+                <td class="ajustetabelaAQO">
+                    @(data)
+                </td>
+                <td class="ajustetabelaAQO">
+                    @(lote)
+                </td>
+                <td class="ajustetabelaAQO">
+                    @(linhagem)
+                </td>
+                <td class="ajustetabelaAQO">
+                    @(dataProducao)
+                </td>
+                <td class="ajustetabelaAQO">
+                    @(responsavelColeta)
+                </td>
+                <td class="ajustetabelaAQO">
+                    @(item.NaoConformidade)
+                </td>
+                <td class="ajustetabelaAQO">
+                    @(qtdeNaoConforme)
+                </td>
+                <td class="ajustetabelaAQO">
+                    @Html.Raw(resolucao)
+                </td>
+                <td class="ajustetabelaAQO">
+                    @(item.Status)
+                </td>
+                <td class="ajustetabelaAQO" align="center">
+                    <table style="background-color:transparent; border:none">
+                        <tr style="background-color:transparent; border:none">
+                            @if (item.Status == "Reprovado" || item.Status == "Pendente")
+                            {
+                            <td style="background-color:transparent; border:none" align="center">
+                                <div class="tooltip">
+                                        @Html.ActionLink("Conforme", "ResolucaoNaoConforme",
+                                            new { id = item.ID, status = "Resolvido" },
+                                            new
+                                            {
+                                                @class = "check"
+                                            })
+                                    <span class="tooltiptext">Clique aqui resolver a não conformidade.</span>
+                                </div>
+                            </td>
+                            }
+                            @if (item.Status == "Resolvido")
+                            {
+                            <td style="background-color:transparent; border:none" align="center">
+                                <div class="tooltip">
+                                        @Html.ActionLink("Aprovar Resolução", "AprovarResolucaoAQO",
+                                            new { id = item.ID },
+                                            new
+                                            {
+                                                @class = "aprovar"
+                                            })
+                                    <span class="tooltiptext">Clique aqui para Aprovar a resolução do AQO.</span>
+                                </div>
+                            </td>
+                            <td style="background-color:transparent; border:none" align="center">
+                                <div class="tooltip">
+                                    @Html.ActionLink("Reprovar Resolução", "ResolucaoNaoConforme",
+                                        new { id = item.ID, status = "Reprovado" },
+                                        new
+                                        {
+                                            @class = "reprovar"
+                                        })
+                                    <span class="tooltiptext">Clique aqui para Reprovar a resolução do AQO.</span>
+                                </div>
+                            </td>
+                            }
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

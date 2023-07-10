@@ -1,0 +1,102 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+}
+
+<script src="../../Scripts/jquery.maskedinput.js" type="text/javascript"></script>
+
+<script language="javascript" type="text/javascript">
+    
+    window.onkeydown = function (e) {
+        if (e.keyCode === 116) {
+            alert("Função não permitida");
+            e.keyCode = 0;
+            e.returnValue = false;
+            return false;
+        }
+    }
+
+    /* Máscaras ER */
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mnum(v) {
+        v = v.replace(/\D/g, "");                                      //Remove tudo o que não é dígito
+        return v;
+    }
+</script>
+
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para a Lista de Recebimento de Documentos", "ListaRecebimentoDocumentos", "Fiscal", 
+                null,
+                new { @class = "recDoc_32", @title = "Clique aqui para voltar para a Lista de Recebimento de Documentos" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/rec_doc_32x32.png"), "Documento")
+    <h2>Recebimento de Documento</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+@using (Html.BeginForm("SaveRecebimentoDocumento", "Fiscal", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        <div class="editor-label">
+            <b>Chave Eletrônica:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("chaveEletronica", Session["chaveEletronicaRD"],
+             new
+             {
+                 @placeholder = "Insira a chave eletrônica do documento.",
+                 @type = "text",
+                 @required = "true",
+                 maxlength = "44",
+                 @onkeyup = "mascara(this, mnum);"
+             })
+        </div>
+        <div class="editor-label">
+            <b>Nº Pedido Compra:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("numeroPedidoCompra", Session["numeroPedidoCompraRD"],
+                new
+                {
+                    @placeholder = "Insira o nº do pedido de compra do documento.",
+                    @type = "text",
+                    @required = "true",
+                    maxlength = "7",
+                    @onkeyup = "mascara(this, mnum);"
+                })
+        </div>
+        <div class="editor-label">
+            <b>Data da Entrada do Documento:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("dataEntrada", Convert.ToDateTime(Session["dataEntradaRD"]).ToString("yyyy-MM-dd"), 
+                new { @type = "date", @required = true })
+        </div>
+        <div class="editor-label">
+            <b>Configuração p/ Importação:</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList(
+             "ConfigTabelaNFe",
+                (List<SelectListItem>)Session["ListaConfigImportaNFe"],
+                "(Selecione uma Configuração)",
+                new { @id = "ddlConfigTabelaNFe", @required = "true" })
+        </div>
+        <p>
+            <input type="submit" value="Salvar Recebimento" id="add" />
+        </p>
+    </fieldset>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

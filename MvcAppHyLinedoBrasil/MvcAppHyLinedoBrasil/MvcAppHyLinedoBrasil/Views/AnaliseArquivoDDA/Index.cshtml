@@ -1,0 +1,37 @@
+﻿@using System.Web.Mvc.Html;
+
+@{
+    ViewBag.Title = "Análise do Arquivo DDA - Contas a Pagar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Análise do Arquivo DDA - Contas a Pagar</h2>
+
+@using (Html.BeginForm("AnaliseArquivo", "AnaliseArquivoDDA", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <legend>Selecione o arquivo a ser Analisado:</legend>
+    <div class="editor-field">
+        <input type="file" name="file1"/>
+        <input type="submit" value="Analisar"/>
+    </div>
+}
+
+@*@using (Ajax.BeginForm("AnaliseArquivo", "AnaliseArquivoDDA", new AjaxOptions{UpdateTargetId = "divUltimaReview",
+                                                                                InsertionMode = InsertionMode.Replace,
+                                                                                HttpMethod = "POST",
+                                                                                LoadingElementId = "divProgress"}, new { enctype = "multipart/form-data" }))
+{
+    <legend>Selecione o arquivo a ser Analisado:</legend>
+    <div class="editor-field">
+        <input type="file" name="file1"/>
+        <input type="submit" value="Analisar"/>
+    </div>
+}*@
+
+<div id="divProgress">
+    <img src="/Content/Images/ajax-loading.gif" alt="" />
+</div>
+
+<div id="divUltimaReview">
+    @Html.Partial("_ListaDDA")
+</div>

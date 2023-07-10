@@ -1,0 +1,42 @@
+﻿<h2>Dados da Assitência Técnica</h2>
+
+<ul id="menu2">
+    @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-DAT_AcompanhamentoLote", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink("Planilha de Acompanhamento de Lote do Cliente", "AcompanhamentoLote", "ImportaDadosAssistTecnica")</li>
+    }
+    @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-DAT_ImportacaoDadosClientes", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        @*<li>@Html.ActionLink("Importação - Único Arquivo", "ImportSingleFile", "ImportaDadosAssistTecnica")</li>*@
+        <li>@Html.ActionLink("Importação de Dados dos Clientes", "ImportMultiplesFiles", "ImportaDadosAssistTecnica")</li>
+    }
+    @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-DAT_ImportacaoLoggers", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink("Importação de Loggers", "ImportLoggers", "ImportaDadosAssistTecnica")</li>
+    }
+    @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-DAT_RelatorioGeral", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink("Relatório Geral", "RelatorioGeral", "ImportaDadosAssistTecnica")</li>
+    }
+    @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-DAT_SAC", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink("SAC por Pedido", "SAC", "ImportaDadosAssistTecnica")</li>
+    }
+    @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-DAT_Logistica", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink("Relatório de Entregas - Logística", "SACNF", "ImportaDadosAssistTecnica")</li>
+    }
+    @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-DAT_SAC", (System.Collections.ArrayList)Session["Direitos"])
+        && Session["empresa"].ToString().Contains("BR"))
+    {
+        <li>@Html.ActionLink("SAC - Mantiqueira", "SACMantiqueira", "ImportaDadosAssistTecnica")</li>
+    }
+    @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-DAT_RRC", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink("RRC", "RRC", "ImportaDadosAssistTecnica")</li>
+    }
+    @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-DAT_RelatorioVisitas", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink("Relatório de Visitas Técnicas", "RelVisitaTecnica", "ImportaDadosAssistTecnica")</li>
+    }
+</ul>

@@ -1,0 +1,77 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+
+    List<MvcAppHylinedoBrasilMobile.Models.LOG_RDV> lista =
+        (List<MvcAppHylinedoBrasilMobile.Models.LOG_RDV>)Session["ListaLOGRDV"];
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+    MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities apolo = new MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities();
+
+    string numRDV = lista.FirstOrDefault().NumeroFechamentoRDV;
+
+    MvcAppHylinedoBrasilMobile.Models.RDV rdv =
+        hlbapp.RDV.Where(w => w.NumeroFechamentoRDV == numRDV).FirstOrDefault();
+
+    string descricao = "";
+    if (rdv.FormaPagamento == "Cartão Corp.")
+    {
+        descricao = rdv.NumeroFechamentoRDV + " - " + rdv.NomeUsuario + " - "
+            + rdv.Banco + " - " + rdv.MesAnoFatura;
+    }
+    else
+    {
+        descricao = rdv.NumeroFechamentoRDV + " - " + rdv.NomeUsuario + " - "
+            + "Espécie";
+    }
+}
+<div align="center">
+    @Html.ActionLink("Voltar p/ RDVs Fechados Geral", "ListaRDVFechadosGeral", "RDV")
+    <br />
+    @Html.Image(@Url.Content("~/Content/icons/requisito_32.png"), "Visita")
+    <h2>Histórico do RDV</h2>
+    <br />
+    <h3>@(descricao)</h3>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+<div id="divTabelaRV">
+<table id="tabelaGrupoRequisito" class="ajustetabelaLogRequisitoVisita">
+    <tbody class="ajustetabelaLogRequisitoVisita">
+        <tr class="ajustetabelaLogRequisitoVisita">
+            <th class="ajustetabelaLogRequisitoVisita">
+                Data Hora
+            </th>
+            <th class="ajustetabelaLogRequisitoVisita">
+                Usuario
+            </th>
+            <th class="ajustetabelaLogRequisitoVisita">
+                Operação
+            </th>
+            <th class="ajustetabelaLogRequisitoVisita">
+                Status
+            </th>
+        </tr>
+        @foreach (var item in lista.OrderBy(o => o.DataHora).ToList())
+        {
+            MvcAppHylinedoBrasilMobile.Models.bdApolo2.USUARIO usuario =
+                apolo.USUARIO.Where(w => w.UsuCod == item.Usuario).FirstOrDefault();
+            
+            <tr class="ajustetabelaLogRequisitoVisita">
+                <td class="ajustetabelaLogRequisitoVisita">
+                    @(item.DataHora)
+                </td>
+                <td class="ajustetabelaLogRequisitoVisita">
+                    @(usuario.UsuNome)
+                </td>
+                <td class="ajustetabelaLogRequisitoVisita">
+                    @(item.Operacao)
+                </td>
+                <td class="ajustetabelaLogRequisitoVisita">
+                    @(item.Status)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>

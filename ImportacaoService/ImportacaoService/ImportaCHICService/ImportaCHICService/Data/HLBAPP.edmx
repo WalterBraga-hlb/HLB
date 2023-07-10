@@ -1,0 +1,1826 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HLBAPPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="CHIC_Ultimo_Numero">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="UltimoOrderNOCHIC" Type="int" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Item_Pedido_Venda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDPedidoVenda" Type="int" Nullable="false" />
+          <Property Name="ProdCodEstr" Type="varchar" MaxLength="100" />
+          <Property Name="DataEntregaInicial" Type="datetime" Nullable="false" />
+          <Property Name="DataEntregaFinal" Type="datetime" Nullable="false" />
+          <Property Name="QtdeLiquida" Type="int" Nullable="false" />
+          <Property Name="PercBonificacao" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="QtdeBonificada" Type="int" />
+          <Property Name="QtdeReposicao" Type="int" />
+          <Property Name="PrecoUnitario" Type="numeric" Precision="24" Scale="9" />
+          <Property Name="Sequencia" Type="int" Nullable="false" />
+          <Property Name="OrderNoCHIC" Type="varchar" MaxLength="30" />
+          <Property Name="Alterado" Type="int" />
+          <Property Name="Importar" Type="int" />
+          <Property Name="OrderNoCHICReposicao" Type="varchar" MaxLength="30" />
+          <Property Name="Vacina" Type="varchar" MaxLength="20" />
+          <Property Name="ValorTotal" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="PrecoPinto" Type="numeric" Precision="24" Scale="9" />
+          <Property Name="TipoReposicao" Type="varchar" MaxLength="50" />
+          <Property Name="DataNascimento" Type="datetime" />
+          <Property Name="Sobra" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LOG_Atualizacao_CHIC_SQLServer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DataHoraInicio" Type="datetime" Nullable="false" />
+          <Property Name="DataHoraFim" Type="datetime" />
+          <Property Name="Usuario" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Periodo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Observacao" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="LOG_Item_Pedido_Venda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDPedidoVenda" Type="int" Nullable="false" />
+          <Property Name="ProdCodEstr" Type="varchar" MaxLength="100" />
+          <Property Name="DataEntregaInicial" Type="datetime" Nullable="false" />
+          <Property Name="DataEntregaFinal" Type="datetime" Nullable="false" />
+          <Property Name="QtdeLiquida" Type="int" Nullable="false" />
+          <Property Name="PercBonificacao" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="QtdeBonificada" Type="int" />
+          <Property Name="QtdeReposicao" Type="int" />
+          <Property Name="PrecoUnitario" Type="numeric" Precision="24" Scale="9" />
+          <Property Name="Sequencia" Type="int" Nullable="false" />
+          <Property Name="DataHora" Type="datetime" Nullable="false" />
+          <Property Name="Operacao" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDItPedVenda" Type="int" />
+          <Property Name="OrderNoCHIC" Type="varchar" MaxLength="30" />
+          <Property Name="IDLogPedidoVenda" Type="int" />
+          <Property Name="OrderNoCHICReposicao" Type="varchar" MaxLength="30" />
+          <Property Name="TipoAlteracao" Type="varchar" MaxLength="200" />
+          <Property Name="Vacina" Type="varchar" MaxLength="20" />
+          <Property Name="PrecoPinto" Type="numeric" Precision="24" Scale="9" />
+          <Property Name="TipoReposicao" Type="varchar" MaxLength="50" />
+          <Property Name="ValorTotal" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="Sobra" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LOG_Pedido_Venda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoCliente" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="DataPedido" Type="datetime" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="DataHora" Type="datetime" Nullable="false" />
+          <Property Name="OvosBrasil" Type="int" Nullable="false" />
+          <Property Name="CondicaoPagamento" Type="varchar" MaxLength="200" />
+          <Property Name="Observacoes" Type="varchar(max)" />
+          <Property Name="Vendedor" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="Operacao" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDPedidoVenda" Type="int" />
+          <Property Name="Motivo" Type="varchar(max)" />
+          <Property Name="EnviadoVia" Type="varchar" MaxLength="50" />
+          <Property Name="AeroportoOrigem" Type="varchar" MaxLength="50" />
+          <Property Name="AeroportoDestino" Type="varchar" MaxLength="50" />
+          <Property Name="ValorDocumentacao" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="ValorFrete" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="NumCaixas" Type="int" />
+          <Property Name="DataEnvio" Type="datetime" />
+          <Property Name="DataSaidaIncubatorio" Type="datetime" />
+          <Property Name="TipoPedido" Type="varchar" MaxLength="20" />
+          <Property Name="NumPaletes" Type="int" />
+          <Property Name="NumFatura" Type="varchar" MaxLength="20" />
+          <Property Name="NumeroVoo" Type="varchar" MaxLength="20" />
+          <Property Name="CiaAerea" Type="varchar" MaxLength="50" />
+          <Property Name="NCM" Type="varchar" MaxLength="30" />
+          <Property Name="AWB" Type="varchar" MaxLength="50" />
+          <Property Name="DataColetaNascimento" Type="datetime" />
+          <Property Name="Placa" Type="varchar" MaxLength="10" />
+          <Property Name="Lacre" Type="varchar" MaxLength="30" />
+          <Property Name="Motorista" Type="varchar" MaxLength="100" />
+          <Property Name="RGMotorista" Type="varchar" MaxLength="100" />
+          <Property Name="Projecao" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="LOG_Prog_Diaria_Transp_Pedidos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DataHora" Type="datetime" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Operacao" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ObsLog" Type="varchar(max)" />
+          <Property Name="DataProgramacao" Type="datetime" />
+          <Property Name="CodigoCliente" Type="varchar" MaxLength="20" />
+          <Property Name="NomeCliente" Type="varchar" MaxLength="500" />
+          <Property Name="NumVeiculo" Type="int" />
+          <Property Name="Quantidade" Type="int" />
+          <Property Name="LocalEntrega" Type="varchar" MaxLength="500" />
+          <Property Name="Produto" Type="varchar" MaxLength="100" />
+          <Property Name="Linhagem" Type="varchar" MaxLength="100" />
+          <Property Name="Embalagem" Type="varchar" MaxLength="100" />
+          <Property Name="ValorTotal" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="NFEspecie" Type="varchar" MaxLength="20" />
+          <Property Name="NFSerie" Type="varchar" MaxLength="10" />
+          <Property Name="NFNum" Type="varchar" MaxLength="20" />
+          <Property Name="CHICNum" Type="varchar" MaxLength="20" />
+          <Property Name="LocalNascimento" Type="varchar" MaxLength="500" />
+          <Property Name="TelefoneCliente" Type="varchar" MaxLength="100" />
+          <Property Name="InicioCarregamentoEsperado" Type="varchar" MaxLength="20" />
+          <Property Name="DataEntrega" Type="datetime" />
+          <Property Name="ChegadaClienteEsperado" Type="varchar" MaxLength="20" />
+          <Property Name="KM" Type="int" />
+          <Property Name="CodigoRepresentante" Type="varchar" MaxLength="10" />
+          <Property Name="NomeRepresentante" Type="varchar" MaxLength="200" />
+          <Property Name="InicioCarregamentoReal" Type="varchar" MaxLength="20" />
+          <Property Name="ChegadaClienteReal" Type="varchar" MaxLength="20" />
+          <Property Name="Observacao" Type="varchar(max)" />
+          <Property Name="Status" Type="varchar" MaxLength="30" />
+          <Property Name="ObservacaoCHIC" Type="varchar(max)" />
+          <Property Name="Debicagem" Type="varchar" MaxLength="1" />
+          <Property Name="Ordem" Type="int" />
+          <Property Name="EmpresaTranportador" Type="varchar" MaxLength="10" />
+          <Property Name="Empresa" Type="varchar" MaxLength="10" />
+          <Property Name="QuantidadeCaixa" Type="int" />
+          <Property Name="CHICOrigem" Type="varchar" MaxLength="20" />
+          <Property Name="NumRoteiroEntregaFluig" Type="varchar" MaxLength="30" />
+          <Property Name="DataChegadaClienteReal" Type="datetime" />
+          <Property Name="IDProgDiariaTranspPedidos" Type="int" Nullable="false" />
+          <Property Name="QtdeVendida" Type="int" />
+          <Property Name="QtdeBonificada" Type="int" />
+          <Property Name="QtdeReposicao" Type="int" />
+          <Property Name="QtdeSobra" Type="int" />
+          <Property Name="MotivoSobra" Type="varchar" MaxLength="50" />
+          <Property Name="CHICNumReposicao" Type="varchar" MaxLength="20" />
+          <Property Name="MotivoReposicao" Type="varchar" MaxLength="50" />
+          <Property Name="IDPedidoVenda" Type="int" />
+          <Property Name="EnderEntSeq" Type="int" />
+          <Property Name="PercBonificacao" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="PrecoProduto" Type="numeric" Precision="24" Scale="9" />
+          <Property Name="ObsProgramacao" Type="varchar(max)" />
+          <Property Name="CondicaoPagamento" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="LOG_Servicos_Pedido_Venda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDPedidoVenda" Type="int" Nullable="false" />
+          <Property Name="ProdCodEstr" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="PercAplicacaoServico" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="DataHora" Type="datetime" Nullable="false" />
+          <Property Name="Operacao" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDServPedVenda" Type="int" />
+          <Property Name="IDLogPedidoVenda" Type="int" />
+          <Property Name="Bonificada" Type="int" />
+          <Property Name="PrecoUnitario" Type="numeric" Precision="24" Scale="9" />
+        </EntityType>
+        <EntityType Name="LOG_Vacinas_Primaria_Pedido_Venda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDPedidoVenda" Type="int" Nullable="false" />
+          <Property Name="ProdCodEstr" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="DataHora" Type="datetime" Nullable="false" />
+          <Property Name="Operacao" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDVacPrimPedVenda" Type="int" />
+          <Property Name="IDLogPedidoVenda" Type="int" />
+          <Property Name="SeqItemPedVenda" Type="int" />
+          <Property Name="Bonificada" Type="int" />
+          <Property Name="PrecoUnitario" Type="numeric" Precision="24" Scale="9" />
+        </EntityType>
+        <EntityType Name="LOG_Vacinas_Secundaria_Pedido_Venda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDVacPrimPedVenda" Type="int" Nullable="false" />
+          <Property Name="ProdCodEstr" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Sequencia" Type="int" Nullable="false" />
+          <Property Name="DataHora" Type="datetime" Nullable="false" />
+          <Property Name="Operacao" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDVacSecPedVenda" Type="int" />
+          <Property Name="IDVacPrimLogPedidoVenda" Type="int" />
+          <Property Name="SeqItemPedVenda" Type="int" />
+          <Property Name="Bonificada" Type="int" />
+          <Property Name="PrecoUnitario" Type="numeric" Precision="24" Scale="9" />
+        </EntityType>
+        <EntityType Name="Pedido_Venda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoCliente" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="DataPedido" Type="datetime" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="DataHora" Type="datetime" Nullable="false" />
+          <Property Name="OvosBrasil" Type="int" Nullable="false" />
+          <Property Name="CondicaoPagamento" Type="varchar" MaxLength="200" />
+          <Property Name="Observacoes" Type="varchar(max)" />
+          <Property Name="Vendedor" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="Empresa" Type="varchar" MaxLength="30" />
+          <Property Name="NomeCliente" Type="varchar" MaxLength="300" />
+          <Property Name="EnviadoVia" Type="varchar" MaxLength="50" />
+          <Property Name="AeroportoOrigem" Type="varchar" MaxLength="50" />
+          <Property Name="AeroportoDestino" Type="varchar" MaxLength="50" />
+          <Property Name="ValorDocumentacao" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="ValorFrete" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="NumCaixas" Type="int" />
+          <Property Name="DataEnvio" Type="datetime" />
+          <Property Name="DataSaidaIncubatorio" Type="datetime" />
+          <Property Name="TipoPedido" Type="varchar" MaxLength="20" />
+          <Property Name="NumPaletes" Type="int" />
+          <Property Name="NumFatura" Type="varchar" MaxLength="20" />
+          <Property Name="NumeroVoo" Type="varchar" MaxLength="20" />
+          <Property Name="CiaAerea" Type="varchar" MaxLength="50" />
+          <Property Name="NCM" Type="varchar" MaxLength="30" />
+          <Property Name="AWB" Type="varchar" MaxLength="50" />
+          <Property Name="EnderEntSeq" Type="int" />
+          <Property Name="DataColetaNascimento" Type="datetime" />
+          <Property Name="Placa" Type="varchar" MaxLength="10" />
+          <Property Name="Lacre" Type="varchar" MaxLength="30" />
+          <Property Name="Motorista" Type="varchar" MaxLength="100" />
+          <Property Name="RGMotorista" Type="varchar" MaxLength="100" />
+          <Property Name="Veterinario" Type="varchar" MaxLength="10" />
+          <Property Name="ValorTotalPintinho" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="Projecao" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Prog_Diaria_Transp_Pedidos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DataProgramacao" Type="datetime" />
+          <Property Name="CodigoCliente" Type="varchar" MaxLength="20" />
+          <Property Name="NomeCliente" Type="varchar" MaxLength="500" />
+          <Property Name="NumVeiculo" Type="int" />
+          <Property Name="Quantidade" Type="int" />
+          <Property Name="LocalEntrega" Type="varchar" MaxLength="500" />
+          <Property Name="Produto" Type="varchar" MaxLength="100" />
+          <Property Name="Linhagem" Type="varchar" MaxLength="100" />
+          <Property Name="Embalagem" Type="varchar" MaxLength="100" />
+          <Property Name="ValorTotal" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="NFEspecie" Type="varchar" MaxLength="20" />
+          <Property Name="NFSerie" Type="varchar" MaxLength="10" />
+          <Property Name="NFNum" Type="varchar" MaxLength="20" />
+          <Property Name="CHICNum" Type="varchar" MaxLength="20" />
+          <Property Name="LocalNascimento" Type="varchar" MaxLength="500" />
+          <Property Name="TelefoneCliente" Type="varchar" MaxLength="100" />
+          <Property Name="InicioCarregamentoEsperado" Type="varchar" MaxLength="20" />
+          <Property Name="DataEntrega" Type="datetime" />
+          <Property Name="ChegadaClienteEsperado" Type="varchar" MaxLength="20" />
+          <Property Name="KM" Type="int" />
+          <Property Name="CodigoRepresentante" Type="varchar" MaxLength="10" />
+          <Property Name="NomeRepresentante" Type="varchar" MaxLength="200" />
+          <Property Name="InicioCarregamentoReal" Type="varchar" MaxLength="20" />
+          <Property Name="ChegadaClienteReal" Type="varchar" MaxLength="20" />
+          <Property Name="Observacao" Type="varchar(max)" />
+          <Property Name="Status" Type="varchar" MaxLength="30" />
+          <Property Name="ObservacaoCHIC" Type="varchar(max)" />
+          <Property Name="Debicagem" Type="varchar" MaxLength="1" />
+          <Property Name="Ordem" Type="int" />
+          <Property Name="EmpresaTranportador" Type="varchar" MaxLength="10" />
+          <Property Name="Empresa" Type="varchar" MaxLength="10" />
+          <Property Name="QuantidadeCaixa" Type="int" />
+          <Property Name="CHICOrigem" Type="varchar" MaxLength="20" />
+          <Property Name="NumRoteiroEntregaFluig" Type="varchar" MaxLength="30" />
+          <Property Name="DataChegadaClienteReal" Type="datetime" />
+          <Property Name="QtdeVendida" Type="int" Nullable="false" />
+          <Property Name="QtdeBonificada" Type="int" Nullable="false" />
+          <Property Name="QtdeReposicao" Type="int" Nullable="false" />
+          <Property Name="QtdeSobra" Type="int" Nullable="false" />
+          <Property Name="MotivoSobra" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CHICNumReposicao" Type="varchar" MaxLength="20" />
+          <Property Name="MotivoReposicao" Type="varchar" MaxLength="50" />
+          <Property Name="IDPedidoVenda" Type="int" />
+          <Property Name="EnderEntSeq" Type="int" Nullable="false" />
+          <Property Name="PercBonificacao" Type="numeric" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="PrecoProduto" Type="numeric" Precision="24" Scale="9" Nullable="false" />
+          <Property Name="ObsProgramacao" Type="varchar(max)" />
+          <Property Name="ObsFaturamento" Type="varchar(max)" />
+          <Property Name="CondicaoPagamento" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Prog_Diaria_Transp_Veiculos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DataProgramacao" Type="datetime" />
+          <Property Name="NumVeiculo" Type="int" />
+          <Property Name="Placa" Type="varchar" MaxLength="20" />
+          <Property Name="Motorista01" Type="varchar" MaxLength="200" />
+          <Property Name="Motorista02" Type="varchar" MaxLength="200" />
+          <Property Name="QuantidadeTotal" Type="int" />
+          <Property Name="QuantidadePorCaixa" Type="int" />
+          <Property Name="QunatidadeCaixa" Type="int" />
+          <Property Name="ValorTotal" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="EmpresaTranportador" Type="varchar" MaxLength="10" />
+          <Property Name="InicioCarregamentoEsperado" Type="varchar" MaxLength="20" />
+          <Property Name="HorarioEntregaNF" Type="varchar" MaxLength="20" />
+          <Property Name="Tranportadora" Type="varchar" MaxLength="100" />
+          <Property Name="ValorKM" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="UnidadeBaseEmbarcador" Type="varchar" MaxLength="2" />
+          <Property Name="CargaLiberada" Type="int" />
+          <Property Name="DataEmbarque" Type="datetime" />
+          <Property Name="AeroportoOrigem" Type="varchar" MaxLength="100" />
+          <Property Name="HorarioChegadaAeroporto" Type="varchar" MaxLength="20" />
+          <Property Name="Despachante" Type="varchar" MaxLength="100" />
+          <Property Name="DataInicioVazio" Type="datetime" />
+          <Property Name="IDCargaEmbarcador" Type="int" />
+          <Property Name="InicioCarregamentoReal" Type="varchar" MaxLength="20" />
+          <Property Name="TerminoCarregamentoReal" Type="varchar" MaxLength="20" />
+          <Property Name="OdometroVeiculoDataEmbarque" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="EntCod" Type="varchar" MaxLength="10" />
+          <Property Name="IdRoteiroTarget" Type="int" />
+          <Property Name="IdOperacaoTransporte" Type="int" />
+          <Property Name="EntCodMotorista01" Type="varchar" MaxLength="10" />
+          <Property Name="EntCodMotorista02" Type="varchar" MaxLength="10" />
+          <Property Name="EquipCodEstrVeiculo" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Servicos_Pedido_Venda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDPedidoVenda" Type="int" Nullable="false" />
+          <Property Name="ProdCodEstr" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="PercAplicacaoServico" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="Bonificada" Type="int" />
+          <Property Name="PrecoUnitario" Type="numeric" Precision="24" Scale="9" />
+          <Property Name="MascaraTI" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Tabela_Precos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Empresa" Type="varchar" MaxLength="2" />
+          <Property Name="Produto" Type="varchar" MaxLength="100" />
+          <Property Name="Tipo" Type="varchar" MaxLength="100" />
+          <Property Name="DataInicial" Type="datetime" />
+          <Property Name="DataFinal" Type="datetime" />
+          <Property Name="Regiao" Type="varchar" MaxLength="100" />
+          <Property Name="ValorMenor5000Aves" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="ValorNormal" Type="numeric" Precision="16" Scale="4" />
+        </EntityType>
+        <EntityType Name="Vacinas_Primaria_Pedido_Venda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDPedidoVenda" Type="int" Nullable="false" />
+          <Property Name="ProdCodEstr" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="SeqItemPedVenda" Type="int" />
+          <Property Name="PrecoUnitario" Type="numeric" Precision="24" Scale="9" />
+          <Property Name="Bonificada" Type="int" />
+        </EntityType>
+        <EntityType Name="Vacinas_Secundaria_Pedido_Venda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDVacPrimPedVenda" Type="int" Nullable="false" />
+          <Property Name="ProdCodEstr" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Sequencia" Type="int" Nullable="false" />
+          <Property Name="SeqItemPedVenda" Type="int" />
+          <Property Name="PrecoUnitario" Type="numeric" Precision="24" Scale="9" />
+          <Property Name="Bonificada" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HLBAPP.dbo.VU_Verifica_Pedidos_Num_CHIC_Duplicados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VU_Verifica_Pedidos_Num_CHIC_Duplicados">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CodigoCliente" />
+            <PropertyRef Name="DataPedido" />
+            <PropertyRef Name="Usuario" />
+            <PropertyRef Name="DataHora" />
+            <PropertyRef Name="OvosBrasil" />
+            <PropertyRef Name="Vendedor" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CodigoCliente" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="DataPedido" Type="datetime" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="DataHora" Type="datetime" Nullable="false" />
+          <Property Name="OvosBrasil" Type="int" Nullable="false" />
+          <Property Name="CondicaoPagamento" Type="varchar" MaxLength="200" />
+          <Property Name="Observacoes" Type="varchar(max)" />
+          <Property Name="Vendedor" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="Empresa" Type="varchar" MaxLength="30" />
+          <Property Name="NomeCliente" Type="varchar" MaxLength="300" />
+          <Property Name="EnviadoVia" Type="varchar" MaxLength="50" />
+          <Property Name="AeroportoOrigem" Type="varchar" MaxLength="50" />
+          <Property Name="AeroportoDestino" Type="varchar" MaxLength="50" />
+          <Property Name="ValorDocumentacao" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="ValorFrete" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="NumCaixas" Type="int" />
+          <Property Name="DataEnvio" Type="datetime" />
+          <Property Name="DataSaidaIncubatorio" Type="datetime" />
+          <Property Name="TipoPedido" Type="varchar" MaxLength="20" />
+          <Property Name="NumPaletes" Type="int" />
+          <Property Name="NumFatura" Type="varchar" MaxLength="20" />
+          <Property Name="NumeroVoo" Type="varchar" MaxLength="20" />
+          <Property Name="CiaAerea" Type="varchar" MaxLength="50" />
+          <Property Name="NCM" Type="varchar" MaxLength="30" />
+          <Property Name="AWB" Type="varchar" MaxLength="50" />
+          <Property Name="EnderEntSeq" Type="int" />
+          <Property Name="DataColetaNascimento" Type="datetime" />
+          <Property Name="Placa" Type="varchar" MaxLength="10" />
+          <Property Name="Lacre" Type="varchar" MaxLength="30" />
+          <Property Name="Motorista" Type="varchar" MaxLength="100" />
+          <Property Name="RGMotorista" Type="varchar" MaxLength="100" />
+          <Property Name="Veterinario" Type="varchar" MaxLength="10" />
+          <Property Name="ValorTotalPintinho" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="Projecao" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK__Item_Pedi__IDPed__214BF109">
+          <End Role="Pedido_Venda" Type="Self.Pedido_Venda" Multiplicity="1" />
+          <End Role="Item_Pedido_Venda" Type="Self.Item_Pedido_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido_Venda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item_Pedido_Venda">
+              <PropertyRef Name="IDPedidoVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Item_Pedi__IDPed__3BFFE745">
+          <End Role="Pedido_Venda" Type="Self.Pedido_Venda" Multiplicity="1" />
+          <End Role="Item_Pedido_Venda" Type="Self.Item_Pedido_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido_Venda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item_Pedido_Venda">
+              <PropertyRef Name="IDPedidoVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prog_Diar__IDPed__39A368DE">
+          <End Role="Pedido_Venda" Type="Self.Pedido_Venda" Multiplicity="0..1" />
+          <End Role="Prog_Diaria_Transp_Pedidos" Type="Self.Prog_Diaria_Transp_Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido_Venda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Prog_Diaria_Transp_Pedidos">
+              <PropertyRef Name="IDPedidoVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicos___IDPed__2F9A1060">
+          <End Role="Pedido_Venda" Type="Self.Pedido_Venda" Multiplicity="1" />
+          <End Role="Servicos_Pedido_Venda" Type="Self.Servicos_Pedido_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido_Venda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Servicos_Pedido_Venda">
+              <PropertyRef Name="IDPedidoVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicos___IDPed__4A4E069C">
+          <End Role="Pedido_Venda" Type="Self.Pedido_Venda" Multiplicity="1" />
+          <End Role="Servicos_Pedido_Venda" Type="Self.Servicos_Pedido_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido_Venda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Servicos_Pedido_Venda">
+              <PropertyRef Name="IDPedidoVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vacinas_P__IDPed__2610A626">
+          <End Role="Pedido_Venda" Type="Self.Pedido_Venda" Multiplicity="1" />
+          <End Role="Vacinas_Primaria_Pedido_Venda" Type="Self.Vacinas_Primaria_Pedido_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido_Venda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vacinas_Primaria_Pedido_Venda">
+              <PropertyRef Name="IDPedidoVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vacinas_P__IDPed__40C49C62">
+          <End Role="Pedido_Venda" Type="Self.Pedido_Venda" Multiplicity="1" />
+          <End Role="Vacinas_Primaria_Pedido_Venda" Type="Self.Vacinas_Primaria_Pedido_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido_Venda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vacinas_Primaria_Pedido_Venda">
+              <PropertyRef Name="IDPedidoVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vacinas_S__IDVac__2AD55B43">
+          <End Role="Vacinas_Primaria_Pedido_Venda" Type="Self.Vacinas_Primaria_Pedido_Venda" Multiplicity="1" />
+          <End Role="Vacinas_Secundaria_Pedido_Venda" Type="Self.Vacinas_Secundaria_Pedido_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vacinas_Primaria_Pedido_Venda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vacinas_Secundaria_Pedido_Venda">
+              <PropertyRef Name="IDVacPrimPedVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vacinas_S__IDVac__4589517F">
+          <End Role="Vacinas_Primaria_Pedido_Venda" Type="Self.Vacinas_Primaria_Pedido_Venda" Multiplicity="1" />
+          <End Role="Vacinas_Secundaria_Pedido_Venda" Type="Self.Vacinas_Secundaria_Pedido_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vacinas_Primaria_Pedido_Venda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vacinas_Secundaria_Pedido_Venda">
+              <PropertyRef Name="IDVacPrimPedVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HLBAPPModelStoreContainer">
+          <EntitySet Name="CHIC_Ultimo_Numero" EntityType="Self.CHIC_Ultimo_Numero" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item_Pedido_Venda" EntityType="Self.Item_Pedido_Venda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOG_Atualizacao_CHIC_SQLServer" EntityType="Self.LOG_Atualizacao_CHIC_SQLServer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOG_Item_Pedido_Venda" EntityType="Self.LOG_Item_Pedido_Venda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOG_Pedido_Venda" EntityType="Self.LOG_Pedido_Venda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOG_Prog_Diaria_Transp_Pedidos" EntityType="Self.LOG_Prog_Diaria_Transp_Pedidos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOG_Servicos_Pedido_Venda" EntityType="Self.LOG_Servicos_Pedido_Venda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOG_Vacinas_Primaria_Pedido_Venda" EntityType="Self.LOG_Vacinas_Primaria_Pedido_Venda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOG_Vacinas_Secundaria_Pedido_Venda" EntityType="Self.LOG_Vacinas_Secundaria_Pedido_Venda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pedido_Venda" EntityType="Self.Pedido_Venda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prog_Diaria_Transp_Pedidos" EntityType="Self.Prog_Diaria_Transp_Pedidos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prog_Diaria_Transp_Veiculos" EntityType="Self.Prog_Diaria_Transp_Veiculos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Servicos_Pedido_Venda" EntityType="Self.Servicos_Pedido_Venda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tabela_Precos" EntityType="Self.Tabela_Precos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vacinas_Primaria_Pedido_Venda" EntityType="Self.Vacinas_Primaria_Pedido_Venda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vacinas_Secundaria_Pedido_Venda" EntityType="Self.Vacinas_Secundaria_Pedido_Venda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VU_Verifica_Pedidos_Num_CHIC_Duplicados" EntityType="Self.VU_Verifica_Pedidos_Num_CHIC_Duplicados" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[ID] AS [ID], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[CodigoCliente] AS [CodigoCliente], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[DataPedido] AS [DataPedido], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[Usuario] AS [Usuario], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[DataHora] AS [DataHora], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[OvosBrasil] AS [OvosBrasil], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[CondicaoPagamento] AS [CondicaoPagamento], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[Observacoes] AS [Observacoes], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[Vendedor] AS [Vendedor], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[Status] AS [Status], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[Empresa] AS [Empresa], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[NomeCliente] AS [NomeCliente], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[EnviadoVia] AS [EnviadoVia], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[AeroportoOrigem] AS [AeroportoOrigem], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[AeroportoDestino] AS [AeroportoDestino], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[ValorDocumentacao] AS [ValorDocumentacao], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[ValorFrete] AS [ValorFrete], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[NumCaixas] AS [NumCaixas], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[DataEnvio] AS [DataEnvio], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[DataSaidaIncubatorio] AS [DataSaidaIncubatorio], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[TipoPedido] AS [TipoPedido], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[NumPaletes] AS [NumPaletes], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[NumFatura] AS [NumFatura], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[NumeroVoo] AS [NumeroVoo], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[CiaAerea] AS [CiaAerea], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[NCM] AS [NCM], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[AWB] AS [AWB], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[EnderEntSeq] AS [EnderEntSeq], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[DataColetaNascimento] AS [DataColetaNascimento], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[Placa] AS [Placa], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[Lacre] AS [Lacre], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[Motorista] AS [Motorista], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[RGMotorista] AS [RGMotorista], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[Veterinario] AS [Veterinario], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[ValorTotalPintinho] AS [ValorTotalPintinho], 
+[VU_Verifica_Pedidos_Num_CHIC_Duplicados].[Projecao] AS [Projecao]
+FROM [dbo].[VU_Verifica_Pedidos_Num_CHIC_Duplicados] AS [VU_Verifica_Pedidos_Num_CHIC_Duplicados]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Item_Pedi__IDPed__214BF109" Association="Self.FK__Item_Pedi__IDPed__214BF109">
+            <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+            <End Role="Item_Pedido_Venda" EntitySet="Item_Pedido_Venda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Item_Pedi__IDPed__3BFFE745" Association="Self.FK__Item_Pedi__IDPed__3BFFE745">
+            <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+            <End Role="Item_Pedido_Venda" EntitySet="Item_Pedido_Venda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prog_Diar__IDPed__39A368DE" Association="Self.FK__Prog_Diar__IDPed__39A368DE">
+            <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+            <End Role="Prog_Diaria_Transp_Pedidos" EntitySet="Prog_Diaria_Transp_Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicos___IDPed__2F9A1060" Association="Self.FK__Servicos___IDPed__2F9A1060">
+            <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+            <End Role="Servicos_Pedido_Venda" EntitySet="Servicos_Pedido_Venda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicos___IDPed__4A4E069C" Association="Self.FK__Servicos___IDPed__4A4E069C">
+            <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+            <End Role="Servicos_Pedido_Venda" EntitySet="Servicos_Pedido_Venda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vacinas_P__IDPed__2610A626" Association="Self.FK__Vacinas_P__IDPed__2610A626">
+            <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+            <End Role="Vacinas_Primaria_Pedido_Venda" EntitySet="Vacinas_Primaria_Pedido_Venda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vacinas_P__IDPed__40C49C62" Association="Self.FK__Vacinas_P__IDPed__40C49C62">
+            <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+            <End Role="Vacinas_Primaria_Pedido_Venda" EntitySet="Vacinas_Primaria_Pedido_Venda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vacinas_S__IDVac__2AD55B43" Association="Self.FK__Vacinas_S__IDVac__2AD55B43">
+            <End Role="Vacinas_Primaria_Pedido_Venda" EntitySet="Vacinas_Primaria_Pedido_Venda" />
+            <End Role="Vacinas_Secundaria_Pedido_Venda" EntitySet="Vacinas_Secundaria_Pedido_Venda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vacinas_S__IDVac__4589517F" Association="Self.FK__Vacinas_S__IDVac__4589517F">
+            <End Role="Vacinas_Primaria_Pedido_Venda" EntitySet="Vacinas_Primaria_Pedido_Venda" />
+            <End Role="Vacinas_Secundaria_Pedido_Venda" EntitySet="Vacinas_Secundaria_Pedido_Venda" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HLBAPPServiceModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="HLBAPPServiceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tabela_Precos" EntityType="HLBAPPServiceModel.Tabela_Precos" />
+          <EntitySet Name="LOG_Item_Pedido_Venda" EntityType="HLBAPPServiceModel.LOG_Item_Pedido_Venda" />
+          <EntitySet Name="LOG_Pedido_Venda" EntityType="HLBAPPServiceModel.LOG_Pedido_Venda" />
+          <EntitySet Name="Item_Pedido_Venda" EntityType="HLBAPPServiceModel.Item_Pedido_Venda" />
+          <EntitySet Name="Pedido_Venda" EntityType="HLBAPPServiceModel.Pedido_Venda" />
+          <AssociationSet Name="FK__Item_Pedi__IDPed__214BF109" Association="HLBAPPServiceModel.FK__Item_Pedi__IDPed__214BF109">
+            <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+            <End Role="Item_Pedido_Venda" EntitySet="Item_Pedido_Venda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Item_Pedi__IDPed__3BFFE745" Association="HLBAPPServiceModel.FK__Item_Pedi__IDPed__3BFFE745">
+            <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+            <End Role="Item_Pedido_Venda" EntitySet="Item_Pedido_Venda" />
+          </AssociationSet>
+          <EntitySet Name="LOG_Servicos_Pedido_Venda" EntityType="HLBAPPServiceModel.LOG_Servicos_Pedido_Venda" />
+          <EntitySet Name="LOG_Vacinas_Primaria_Pedido_Venda" EntityType="HLBAPPServiceModel.LOG_Vacinas_Primaria_Pedido_Venda" />
+          <EntitySet Name="LOG_Vacinas_Secundaria_Pedido_Venda" EntityType="HLBAPPServiceModel.LOG_Vacinas_Secundaria_Pedido_Venda" />
+          <EntitySet Name="Servicos_Pedido_Venda" EntityType="HLBAPPServiceModel.Servicos_Pedido_Venda" />
+          <EntitySet Name="Vacinas_Primaria_Pedido_Venda" EntityType="HLBAPPServiceModel.Vacinas_Primaria_Pedido_Venda" />
+          <EntitySet Name="Vacinas_Secundaria_Pedido_Venda" EntityType="HLBAPPServiceModel.Vacinas_Secundaria_Pedido_Venda" />
+          <AssociationSet Name="FK__Servicos___IDPed__2F9A1060" Association="HLBAPPServiceModel.FK__Servicos___IDPed__2F9A1060">
+            <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+            <End Role="Servicos_Pedido_Venda" EntitySet="Servicos_Pedido_Venda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicos___IDPed__4A4E069C" Association="HLBAPPServiceModel.FK__Servicos___IDPed__4A4E069C">
+            <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+            <End Role="Servicos_Pedido_Venda" EntitySet="Servicos_Pedido_Venda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vacinas_P__IDPed__2610A626" Association="HLBAPPServiceModel.FK__Vacinas_P__IDPed__2610A626">
+            <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+            <End Role="Vacinas_Primaria_Pedido_Venda" EntitySet="Vacinas_Primaria_Pedido_Venda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vacinas_P__IDPed__40C49C62" Association="HLBAPPServiceModel.FK__Vacinas_P__IDPed__40C49C62">
+            <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+            <End Role="Vacinas_Primaria_Pedido_Venda" EntitySet="Vacinas_Primaria_Pedido_Venda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vacinas_S__IDVac__2AD55B43" Association="HLBAPPServiceModel.FK__Vacinas_S__IDVac__2AD55B43">
+            <End Role="Vacinas_Primaria_Pedido_Venda" EntitySet="Vacinas_Primaria_Pedido_Venda" />
+            <End Role="Vacinas_Secundaria_Pedido_Venda" EntitySet="Vacinas_Secundaria_Pedido_Venda" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vacinas_S__IDVac__4589517F" Association="HLBAPPServiceModel.FK__Vacinas_S__IDVac__4589517F">
+            <End Role="Vacinas_Primaria_Pedido_Venda" EntitySet="Vacinas_Primaria_Pedido_Venda" />
+            <End Role="Vacinas_Secundaria_Pedido_Venda" EntitySet="Vacinas_Secundaria_Pedido_Venda" />
+          </AssociationSet>
+          <EntitySet Name="Prog_Diaria_Transp_Veiculos" EntityType="HLBAPPServiceModel.Prog_Diaria_Transp_Veiculos" />
+          <EntitySet Name="CHIC_Ultimo_Numero" EntityType="HLBAPPServiceModel.CHIC_Ultimo_Numero" />
+          <EntitySet Name="VU_Verifica_Pedidos_Num_CHIC_Duplicados" EntityType="HLBAPPServiceModel.VU_Verifica_Pedidos_Num_CHIC_Duplicados" />
+          <EntitySet Name="LOG_Atualizacao_CHIC_SQLServer" EntityType="HLBAPPServiceModel.LOG_Atualizacao_CHIC_SQLServer" />
+          <EntitySet Name="LOG_Prog_Diaria_Transp_Pedidos" EntityType="HLBAPPServiceModel.LOG_Prog_Diaria_Transp_Pedidos" />
+          <EntitySet Name="Prog_Diaria_Transp_Pedidos" EntityType="HLBAPPServiceModel.Prog_Diaria_Transp_Pedidos" />
+          <AssociationSet Name="FK__Prog_Diar__IDPed__39A368DE" Association="HLBAPPServiceModel.FK__Prog_Diar__IDPed__39A368DE">
+            <End Role="Pedido_Venda" EntitySet="Pedido_Venda" />
+            <End Role="Prog_Diaria_Transp_Pedidos" EntitySet="Prog_Diaria_Transp_Pedidos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Tabela_Precos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Empresa" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="Produto" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Tipo" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="DataInicial" Type="DateTime" Precision="3" />
+          <Property Name="DataFinal" Type="DateTime" Precision="3" />
+          <Property Name="Regiao" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="ValorMenor5000Aves" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="ValorNormal" Type="Decimal" Precision="16" Scale="4" />
+        </EntityType>
+        <EntityType Name="LOG_Item_Pedido_Venda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="IDPedidoVenda" Nullable="false" />
+          <Property Type="String" Name="ProdCodEstr" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataEntregaInicial" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="DataEntregaFinal" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="QtdeLiquida" Nullable="false" />
+          <Property Type="Decimal" Name="PercBonificacao" Precision="14" Scale="2" />
+          <Property Type="Int32" Name="QtdeBonificada" />
+          <Property Type="Int32" Name="QtdeReposicao" />
+          <Property Type="Decimal" Name="PrecoUnitario" Precision="24" Scale="9" />
+          <Property Type="Int32" Name="Sequencia" Nullable="false" />
+          <Property Type="DateTime" Name="DataHora" Nullable="false" Precision="3" />
+          <Property Type="String" Name="Operacao" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IDItPedVenda" />
+          <Property Type="String" Name="OrderNoCHIC" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IDLogPedidoVenda" />
+          <Property Type="String" Name="OrderNoCHICReposicao" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TipoAlteracao" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Vacina" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="PrecoPinto" Precision="24" Scale="9" />
+          <Property Type="String" Name="TipoReposicao" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ValorTotal" Precision="14" Scale="2" />
+          <Property Name="Sobra" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LOG_Pedido_Venda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="CodigoCliente" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataPedido" Nullable="false" Precision="3" />
+          <Property Type="String" Name="Usuario" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataHora" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="OvosBrasil" Nullable="false" />
+          <Property Type="String" Name="CondicaoPagamento" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Observacoes" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Vendedor" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Operacao" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IDPedidoVenda" />
+          <Property Type="String" Name="Motivo" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="EnviadoVia" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AeroportoOrigem" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AeroportoDestino" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ValorDocumentacao" Precision="14" Scale="2" />
+          <Property Type="Decimal" Name="ValorFrete" Precision="14" Scale="2" />
+          <Property Type="Int32" Name="NumCaixas" />
+          <Property Type="DateTime" Name="DataEnvio" Precision="3" />
+          <Property Type="DateTime" Name="DataSaidaIncubatorio" Precision="3" />
+          <Property Type="String" Name="TipoPedido" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="NumPaletes" />
+          <Property Type="String" Name="NumFatura" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NumeroVoo" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CiaAerea" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NCM" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AWB" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataColetaNascimento" Precision="3" />
+          <Property Type="String" Name="Placa" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Lacre" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Motorista" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RGMotorista" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Projecao" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Item_Pedido_Venda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="IDPedidoVenda" Nullable="false" />
+          <Property Type="String" Name="ProdCodEstr" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataEntregaInicial" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="DataEntregaFinal" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="QtdeLiquida" Nullable="false" />
+          <Property Type="Decimal" Name="PercBonificacao" Precision="14" Scale="2" />
+          <Property Type="Int32" Name="QtdeBonificada" />
+          <Property Type="Int32" Name="QtdeReposicao" />
+          <Property Type="Decimal" Name="PrecoUnitario" Precision="24" Scale="9" />
+          <Property Type="Int32" Name="Sequencia" Nullable="false" />
+          <Property Type="String" Name="OrderNoCHIC" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Alterado" />
+          <Property Type="Int32" Name="Importar" />
+          <Property Type="String" Name="OrderNoCHICReposicao" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Vacina" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pedido_Venda" Relationship="HLBAPPServiceModel.FK__Item_Pedi__IDPed__214BF109" FromRole="Item_Pedido_Venda" ToRole="Pedido_Venda" />
+          <NavigationProperty Name="Pedido_Venda1" Relationship="HLBAPPServiceModel.FK__Item_Pedi__IDPed__3BFFE745" FromRole="Item_Pedido_Venda" ToRole="Pedido_Venda" />
+          <Property Type="Decimal" Name="ValorTotal" Precision="14" Scale="2" />
+          <Property Type="Decimal" Name="PrecoPinto" Precision="24" Scale="9" />
+          <Property Type="String" Name="TipoReposicao" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataNascimento" Precision="3" />
+          <Property Name="Sobra" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pedido_Venda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="CodigoCliente" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataPedido" Nullable="false" Precision="3" />
+          <Property Type="String" Name="Usuario" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataHora" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="OvosBrasil" Nullable="false" />
+          <Property Type="String" Name="CondicaoPagamento" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Observacoes" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Vendedor" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Empresa" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NomeCliente" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="EnviadoVia" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AeroportoOrigem" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AeroportoDestino" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ValorDocumentacao" Precision="14" Scale="2" />
+          <Property Type="Decimal" Name="ValorFrete" Precision="14" Scale="2" />
+          <Property Type="Int32" Name="NumCaixas" />
+          <Property Type="DateTime" Name="DataEnvio" Precision="3" />
+          <Property Type="DateTime" Name="DataSaidaIncubatorio" Precision="3" />
+          <Property Type="String" Name="TipoPedido" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="NumPaletes" />
+          <Property Type="String" Name="NumFatura" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NumeroVoo" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CiaAerea" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NCM" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AWB" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="EnderEntSeq" />
+          <NavigationProperty Name="Item_Pedido_Venda" Relationship="HLBAPPServiceModel.FK__Item_Pedi__IDPed__214BF109" FromRole="Pedido_Venda" ToRole="Item_Pedido_Venda" />
+          <NavigationProperty Name="Item_Pedido_Venda1" Relationship="HLBAPPServiceModel.FK__Item_Pedi__IDPed__3BFFE745" FromRole="Pedido_Venda" ToRole="Item_Pedido_Venda" />
+          <NavigationProperty Name="Servicos_Pedido_Venda" Relationship="HLBAPPServiceModel.FK__Servicos___IDPed__2F9A1060" FromRole="Pedido_Venda" ToRole="Servicos_Pedido_Venda" />
+          <NavigationProperty Name="Servicos_Pedido_Venda1" Relationship="HLBAPPServiceModel.FK__Servicos___IDPed__4A4E069C" FromRole="Pedido_Venda" ToRole="Servicos_Pedido_Venda" />
+          <NavigationProperty Name="Vacinas_Primaria_Pedido_Venda" Relationship="HLBAPPServiceModel.FK__Vacinas_P__IDPed__2610A626" FromRole="Pedido_Venda" ToRole="Vacinas_Primaria_Pedido_Venda" />
+          <NavigationProperty Name="Vacinas_Primaria_Pedido_Venda1" Relationship="HLBAPPServiceModel.FK__Vacinas_P__IDPed__40C49C62" FromRole="Pedido_Venda" ToRole="Vacinas_Primaria_Pedido_Venda" />
+          <Property Type="DateTime" Name="DataColetaNascimento" Precision="3" />
+          <Property Type="String" Name="Placa" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Lacre" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Motorista" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RGMotorista" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Veterinario" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ValorTotalPintinho" Precision="14" Scale="2" />
+          <Property Type="String" Name="Projecao" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Prog_Diaria_Transp_Pedidos" Relationship="HLBAPPServiceModel.FK__Prog_Diar__IDPed__39A368DE" FromRole="Pedido_Venda" ToRole="Prog_Diaria_Transp_Pedidos" />
+        </EntityType>
+        <Association Name="FK__Item_Pedi__IDPed__214BF109">
+          <End Type="HLBAPPServiceModel.Pedido_Venda" Role="Pedido_Venda" Multiplicity="1" />
+          <End Type="HLBAPPServiceModel.Item_Pedido_Venda" Role="Item_Pedido_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido_Venda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item_Pedido_Venda">
+              <PropertyRef Name="IDPedidoVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Item_Pedi__IDPed__3BFFE745">
+          <End Type="HLBAPPServiceModel.Pedido_Venda" Role="Pedido_Venda" Multiplicity="1" />
+          <End Type="HLBAPPServiceModel.Item_Pedido_Venda" Role="Item_Pedido_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido_Venda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item_Pedido_Venda">
+              <PropertyRef Name="IDPedidoVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LOG_Servicos_Pedido_Venda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="IDPedidoVenda" Nullable="false" />
+          <Property Type="String" Name="ProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="PercAplicacaoServico" Precision="14" Scale="2" />
+          <Property Type="DateTime" Name="DataHora" Nullable="false" Precision="3" />
+          <Property Type="String" Name="Operacao" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IDServPedVenda" />
+          <Property Type="Int32" Name="IDLogPedidoVenda" />
+          <Property Type="Int32" Name="Bonificada" />
+          <Property Type="Decimal" Name="PrecoUnitario" Precision="24" Scale="9" />
+        </EntityType>
+        <EntityType Name="LOG_Vacinas_Primaria_Pedido_Venda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="IDPedidoVenda" Nullable="false" />
+          <Property Type="String" Name="ProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataHora" Nullable="false" Precision="3" />
+          <Property Type="String" Name="Operacao" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IDVacPrimPedVenda" />
+          <Property Type="Int32" Name="IDLogPedidoVenda" />
+          <Property Type="Int32" Name="SeqItemPedVenda" />
+          <Property Type="Int32" Name="Bonificada" />
+          <Property Type="Decimal" Name="PrecoUnitario" Precision="24" Scale="9" />
+        </EntityType>
+        <EntityType Name="LOG_Vacinas_Secundaria_Pedido_Venda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="IDVacPrimPedVenda" Nullable="false" />
+          <Property Type="String" Name="ProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Sequencia" Nullable="false" />
+          <Property Type="DateTime" Name="DataHora" Nullable="false" Precision="3" />
+          <Property Type="String" Name="Operacao" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IDVacSecPedVenda" />
+          <Property Type="Int32" Name="IDVacPrimLogPedidoVenda" />
+          <Property Type="Int32" Name="SeqItemPedVenda" />
+          <Property Type="Int32" Name="Bonificada" />
+          <Property Type="Decimal" Name="PrecoUnitario" Precision="24" Scale="9" />
+        </EntityType>
+        <EntityType Name="Servicos_Pedido_Venda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="IDPedidoVenda" Nullable="false" />
+          <Property Type="String" Name="ProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="PercAplicacaoServico" Precision="14" Scale="2" />
+          <NavigationProperty Name="Pedido_Venda" Relationship="HLBAPPServiceModel.FK__Servicos___IDPed__2F9A1060" FromRole="Servicos_Pedido_Venda" ToRole="Pedido_Venda" />
+          <NavigationProperty Name="Pedido_Venda1" Relationship="HLBAPPServiceModel.FK__Servicos___IDPed__4A4E069C" FromRole="Servicos_Pedido_Venda" ToRole="Pedido_Venda" />
+          <Property Type="Int32" Name="Bonificada" />
+          <Property Type="Decimal" Name="PrecoUnitario" Precision="24" Scale="9" />
+          <Property Name="MascaraTI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Vacinas_Primaria_Pedido_Venda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="IDPedidoVenda" Nullable="false" />
+          <Property Type="String" Name="ProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="SeqItemPedVenda" />
+          <NavigationProperty Name="Pedido_Venda" Relationship="HLBAPPServiceModel.FK__Vacinas_P__IDPed__2610A626" FromRole="Vacinas_Primaria_Pedido_Venda" ToRole="Pedido_Venda" />
+          <NavigationProperty Name="Pedido_Venda1" Relationship="HLBAPPServiceModel.FK__Vacinas_P__IDPed__40C49C62" FromRole="Vacinas_Primaria_Pedido_Venda" ToRole="Pedido_Venda" />
+          <NavigationProperty Name="Vacinas_Secundaria_Pedido_Venda" Relationship="HLBAPPServiceModel.FK__Vacinas_S__IDVac__2AD55B43" FromRole="Vacinas_Primaria_Pedido_Venda" ToRole="Vacinas_Secundaria_Pedido_Venda" />
+          <NavigationProperty Name="Vacinas_Secundaria_Pedido_Venda1" Relationship="HLBAPPServiceModel.FK__Vacinas_S__IDVac__4589517F" FromRole="Vacinas_Primaria_Pedido_Venda" ToRole="Vacinas_Secundaria_Pedido_Venda" />
+          <Property Type="Decimal" Name="PrecoUnitario" Precision="24" Scale="9" />
+          <Property Type="Int32" Name="Bonificada" />
+        </EntityType>
+        <EntityType Name="Vacinas_Secundaria_Pedido_Venda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="IDVacPrimPedVenda" Nullable="false" />
+          <Property Type="String" Name="ProdCodEstr" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Sequencia" Nullable="false" />
+          <Property Type="Int32" Name="SeqItemPedVenda" />
+          <NavigationProperty Name="Vacinas_Primaria_Pedido_Venda" Relationship="HLBAPPServiceModel.FK__Vacinas_S__IDVac__2AD55B43" FromRole="Vacinas_Secundaria_Pedido_Venda" ToRole="Vacinas_Primaria_Pedido_Venda" />
+          <NavigationProperty Name="Vacinas_Primaria_Pedido_Venda1" Relationship="HLBAPPServiceModel.FK__Vacinas_S__IDVac__4589517F" FromRole="Vacinas_Secundaria_Pedido_Venda" ToRole="Vacinas_Primaria_Pedido_Venda" />
+          <Property Type="Decimal" Name="PrecoUnitario" Precision="24" Scale="9" />
+          <Property Type="Int32" Name="Bonificada" />
+        </EntityType>
+        <Association Name="FK__Servicos___IDPed__2F9A1060">
+          <End Type="HLBAPPServiceModel.Pedido_Venda" Role="Pedido_Venda" Multiplicity="1" />
+          <End Type="HLBAPPServiceModel.Servicos_Pedido_Venda" Role="Servicos_Pedido_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido_Venda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Servicos_Pedido_Venda">
+              <PropertyRef Name="IDPedidoVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicos___IDPed__4A4E069C">
+          <End Type="HLBAPPServiceModel.Pedido_Venda" Role="Pedido_Venda" Multiplicity="1" />
+          <End Type="HLBAPPServiceModel.Servicos_Pedido_Venda" Role="Servicos_Pedido_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido_Venda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Servicos_Pedido_Venda">
+              <PropertyRef Name="IDPedidoVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vacinas_P__IDPed__2610A626">
+          <End Type="HLBAPPServiceModel.Pedido_Venda" Role="Pedido_Venda" Multiplicity="1" />
+          <End Type="HLBAPPServiceModel.Vacinas_Primaria_Pedido_Venda" Role="Vacinas_Primaria_Pedido_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido_Venda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vacinas_Primaria_Pedido_Venda">
+              <PropertyRef Name="IDPedidoVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vacinas_P__IDPed__40C49C62">
+          <End Type="HLBAPPServiceModel.Pedido_Venda" Role="Pedido_Venda" Multiplicity="1" />
+          <End Type="HLBAPPServiceModel.Vacinas_Primaria_Pedido_Venda" Role="Vacinas_Primaria_Pedido_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido_Venda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vacinas_Primaria_Pedido_Venda">
+              <PropertyRef Name="IDPedidoVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vacinas_S__IDVac__2AD55B43">
+          <End Type="HLBAPPServiceModel.Vacinas_Primaria_Pedido_Venda" Role="Vacinas_Primaria_Pedido_Venda" Multiplicity="1" />
+          <End Type="HLBAPPServiceModel.Vacinas_Secundaria_Pedido_Venda" Role="Vacinas_Secundaria_Pedido_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vacinas_Primaria_Pedido_Venda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vacinas_Secundaria_Pedido_Venda">
+              <PropertyRef Name="IDVacPrimPedVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vacinas_S__IDVac__4589517F">
+          <End Type="HLBAPPServiceModel.Vacinas_Primaria_Pedido_Venda" Role="Vacinas_Primaria_Pedido_Venda" Multiplicity="1" />
+          <End Type="HLBAPPServiceModel.Vacinas_Secundaria_Pedido_Venda" Role="Vacinas_Secundaria_Pedido_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vacinas_Primaria_Pedido_Venda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vacinas_Secundaria_Pedido_Venda">
+              <PropertyRef Name="IDVacPrimPedVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Prog_Diaria_Transp_Veiculos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="DataProgramacao" Precision="3" />
+          <Property Type="Int32" Name="NumVeiculo" />
+          <Property Type="String" Name="Placa" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Motorista01" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Motorista02" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="QuantidadeTotal" />
+          <Property Type="Int32" Name="QuantidadePorCaixa" />
+          <Property Type="Int32" Name="QunatidadeCaixa" />
+          <Property Type="Decimal" Name="ValorTotal" Precision="14" Scale="2" />
+          <Property Type="String" Name="EmpresaTranportador" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="InicioCarregamentoEsperado" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="HorarioEntregaNF" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Tranportadora" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ValorKM" Precision="14" Scale="2" />
+          <Property Type="String" Name="UnidadeBaseEmbarcador" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CargaLiberada" />
+          <Property Type="DateTime" Name="DataEmbarque" Precision="3" />
+          <Property Type="String" Name="AeroportoOrigem" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="HorarioChegadaAeroporto" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Despachante" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataInicioVazio" Precision="3" />
+          <Property Type="Int32" Name="IDCargaEmbarcador" />
+          <Property Name="InicioCarregamentoReal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TerminoCarregamentoReal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OdometroVeiculoDataEmbarque" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="EntCod" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdRoteiroTarget" Type="Int32" />
+          <Property Name="IdOperacaoTransporte" Type="Int32" />
+          <Property Name="EntCodMotorista01" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EntCodMotorista02" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EquipCodEstrVeiculo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CHIC_Ultimo_Numero">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="UltimoOrderNOCHIC" />
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="VU_Verifica_Pedidos_Num_CHIC_Duplicados">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CodigoCliente" />
+            <PropertyRef Name="DataPedido" />
+            <PropertyRef Name="Usuario" />
+            <PropertyRef Name="DataHora" />
+            <PropertyRef Name="OvosBrasil" />
+            <PropertyRef Name="Vendedor" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="CodigoCliente" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataPedido" Nullable="false" Precision="3" />
+          <Property Type="String" Name="Usuario" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataHora" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="OvosBrasil" Nullable="false" />
+          <Property Type="String" Name="CondicaoPagamento" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Observacoes" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Vendedor" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Empresa" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NomeCliente" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="EnviadoVia" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AeroportoOrigem" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AeroportoDestino" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ValorDocumentacao" Precision="14" Scale="2" />
+          <Property Type="Decimal" Name="ValorFrete" Precision="14" Scale="2" />
+          <Property Type="Int32" Name="NumCaixas" />
+          <Property Type="DateTime" Name="DataEnvio" Precision="3" />
+          <Property Type="DateTime" Name="DataSaidaIncubatorio" Precision="3" />
+          <Property Type="String" Name="TipoPedido" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="NumPaletes" />
+          <Property Type="String" Name="NumFatura" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NumeroVoo" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CiaAerea" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NCM" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AWB" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="EnderEntSeq" />
+          <Property Type="DateTime" Name="DataColetaNascimento" Precision="3" />
+          <Property Type="String" Name="Placa" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Lacre" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Motorista" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RGMotorista" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Veterinario" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ValorTotalPintinho" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="Projecao" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LOG_Atualizacao_CHIC_SQLServer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DataHoraInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataHoraFim" Type="DateTime" Precision="3" />
+          <Property Name="Usuario" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Periodo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Observacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LOG_Prog_Diaria_Transp_Pedidos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DataHora" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Usuario" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Operacao" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ObsLog" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DataProgramacao" Type="DateTime" Precision="3" />
+          <Property Name="CodigoCliente" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NomeCliente" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NumVeiculo" Type="Int32" />
+          <Property Name="Quantidade" Type="Int32" />
+          <Property Name="LocalEntrega" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Produto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Linhagem" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Embalagem" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ValorTotal" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="NFEspecie" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NFSerie" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NFNum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CHICNum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LocalNascimento" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TelefoneCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="InicioCarregamentoEsperado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DataEntrega" Type="DateTime" Precision="3" />
+          <Property Name="ChegadaClienteEsperado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="KM" Type="Int32" />
+          <Property Name="CodigoRepresentante" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NomeRepresentante" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="InicioCarregamentoReal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ChegadaClienteReal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Observacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ObservacaoCHIC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Debicagem" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Ordem" Type="Int32" />
+          <Property Name="EmpresaTranportador" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Empresa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="QuantidadeCaixa" Type="Int32" />
+          <Property Name="CHICOrigem" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NumRoteiroEntregaFluig" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DataChegadaClienteReal" Type="DateTime" Precision="3" />
+          <Property Name="IDProgDiariaTranspPedidos" Type="Int32" Nullable="false" />
+          <Property Name="QtdeVendida" Type="Int32" />
+          <Property Name="QtdeBonificada" Type="Int32" />
+          <Property Name="QtdeReposicao" Type="Int32" />
+          <Property Name="QtdeSobra" Type="Int32" />
+          <Property Name="MotivoSobra" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CHICNumReposicao" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoReposicao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDPedidoVenda" Type="Int32" />
+          <Property Name="EnderEntSeq" Type="Int32" />
+          <Property Name="PercBonificacao" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="PrecoProduto" Type="Decimal" Precision="24" Scale="9" />
+          <Property Name="ObsProgramacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CondicaoPagamento" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Prog_Diaria_Transp_Pedidos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DataProgramacao" Type="DateTime" Precision="3" />
+          <Property Name="CodigoCliente" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NomeCliente" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NumVeiculo" Type="Int32" />
+          <Property Name="Quantidade" Type="Int32" />
+          <Property Name="LocalEntrega" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Produto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Linhagem" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Embalagem" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ValorTotal" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="NFEspecie" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NFSerie" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NFNum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CHICNum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LocalNascimento" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TelefoneCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="InicioCarregamentoEsperado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DataEntrega" Type="DateTime" Precision="3" />
+          <Property Name="ChegadaClienteEsperado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="KM" Type="Int32" />
+          <Property Name="CodigoRepresentante" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NomeRepresentante" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="InicioCarregamentoReal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ChegadaClienteReal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Observacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ObservacaoCHIC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Debicagem" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Ordem" Type="Int32" />
+          <Property Name="EmpresaTranportador" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Empresa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="QuantidadeCaixa" Type="Int32" />
+          <Property Name="CHICOrigem" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NumRoteiroEntregaFluig" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DataChegadaClienteReal" Type="DateTime" Precision="3" />
+          <Property Name="QtdeVendida" Type="Int32" Nullable="false" />
+          <Property Name="QtdeBonificada" Type="Int32" Nullable="false" />
+          <Property Name="QtdeReposicao" Type="Int32" Nullable="false" />
+          <Property Name="QtdeSobra" Type="Int32" Nullable="false" />
+          <Property Name="MotivoSobra" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CHICNumReposicao" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoReposicao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDPedidoVenda" Type="Int32" />
+          <Property Name="EnderEntSeq" Type="Int32" Nullable="false" />
+          <Property Name="PercBonificacao" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="PrecoProduto" Type="Decimal" Nullable="false" Precision="24" Scale="9" />
+          <Property Name="ObsProgramacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ObsFaturamento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pedido_Venda" Relationship="HLBAPPServiceModel.FK__Prog_Diar__IDPed__39A368DE" FromRole="Prog_Diaria_Transp_Pedidos" ToRole="Pedido_Venda" />
+          <Property Name="CondicaoPagamento" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__Prog_Diar__IDPed__39A368DE">
+          <End Type="HLBAPPServiceModel.Pedido_Venda" Role="Pedido_Venda" Multiplicity="0..1" />
+          <End Type="HLBAPPServiceModel.Prog_Diaria_Transp_Pedidos" Role="Prog_Diaria_Transp_Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido_Venda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Prog_Diaria_Transp_Pedidos">
+              <PropertyRef Name="IDPedidoVenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HLBAPPModelStoreContainer" CdmEntityContainer="HLBAPPServiceEntities">
+          <EntitySetMapping Name="Tabela_Precos">
+            <EntityTypeMapping TypeName="HLBAPPServiceModel.Tabela_Precos">
+              <MappingFragment StoreEntitySet="Tabela_Precos">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+                <ScalarProperty Name="Produto" ColumnName="Produto" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="DataInicial" ColumnName="DataInicial" />
+                <ScalarProperty Name="DataFinal" ColumnName="DataFinal" />
+                <ScalarProperty Name="Regiao" ColumnName="Regiao" />
+                <ScalarProperty Name="ValorMenor5000Aves" ColumnName="ValorMenor5000Aves" />
+                <ScalarProperty Name="ValorNormal" ColumnName="ValorNormal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOG_Item_Pedido_Venda">
+            <EntityTypeMapping TypeName="HLBAPPServiceModel.LOG_Item_Pedido_Venda">
+              <MappingFragment StoreEntitySet="LOG_Item_Pedido_Venda">
+                <ScalarProperty Name="Sobra" ColumnName="Sobra" />
+                <ScalarProperty Name="ValorTotal" ColumnName="ValorTotal" />
+                <ScalarProperty Name="TipoReposicao" ColumnName="TipoReposicao" />
+                <ScalarProperty Name="PrecoPinto" ColumnName="PrecoPinto" />
+                <ScalarProperty Name="Vacina" ColumnName="Vacina" />
+                <ScalarProperty Name="TipoAlteracao" ColumnName="TipoAlteracao" />
+                <ScalarProperty Name="OrderNoCHICReposicao" ColumnName="OrderNoCHICReposicao" />
+                <ScalarProperty Name="IDLogPedidoVenda" ColumnName="IDLogPedidoVenda" />
+                <ScalarProperty Name="OrderNoCHIC" ColumnName="OrderNoCHIC" />
+                <ScalarProperty Name="IDItPedVenda" ColumnName="IDItPedVenda" />
+                <ScalarProperty Name="Operacao" ColumnName="Operacao" />
+                <ScalarProperty Name="DataHora" ColumnName="DataHora" />
+                <ScalarProperty Name="Sequencia" ColumnName="Sequencia" />
+                <ScalarProperty Name="PrecoUnitario" ColumnName="PrecoUnitario" />
+                <ScalarProperty Name="QtdeReposicao" ColumnName="QtdeReposicao" />
+                <ScalarProperty Name="QtdeBonificada" ColumnName="QtdeBonificada" />
+                <ScalarProperty Name="PercBonificacao" ColumnName="PercBonificacao" />
+                <ScalarProperty Name="QtdeLiquida" ColumnName="QtdeLiquida" />
+                <ScalarProperty Name="DataEntregaFinal" ColumnName="DataEntregaFinal" />
+                <ScalarProperty Name="DataEntregaInicial" ColumnName="DataEntregaInicial" />
+                <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+                <ScalarProperty Name="IDPedidoVenda" ColumnName="IDPedidoVenda" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOG_Pedido_Venda">
+            <EntityTypeMapping TypeName="HLBAPPServiceModel.LOG_Pedido_Venda">
+              <MappingFragment StoreEntitySet="LOG_Pedido_Venda">
+                <ScalarProperty Name="Projecao" ColumnName="Projecao" />
+                <ScalarProperty Name="RGMotorista" ColumnName="RGMotorista" />
+                <ScalarProperty Name="Motorista" ColumnName="Motorista" />
+                <ScalarProperty Name="Lacre" ColumnName="Lacre" />
+                <ScalarProperty Name="Placa" ColumnName="Placa" />
+                <ScalarProperty Name="DataColetaNascimento" ColumnName="DataColetaNascimento" />
+                <ScalarProperty Name="AWB" ColumnName="AWB" />
+                <ScalarProperty Name="NCM" ColumnName="NCM" />
+                <ScalarProperty Name="CiaAerea" ColumnName="CiaAerea" />
+                <ScalarProperty Name="NumeroVoo" ColumnName="NumeroVoo" />
+                <ScalarProperty Name="NumFatura" ColumnName="NumFatura" />
+                <ScalarProperty Name="NumPaletes" ColumnName="NumPaletes" />
+                <ScalarProperty Name="TipoPedido" ColumnName="TipoPedido" />
+                <ScalarProperty Name="DataSaidaIncubatorio" ColumnName="DataSaidaIncubatorio" />
+                <ScalarProperty Name="DataEnvio" ColumnName="DataEnvio" />
+                <ScalarProperty Name="NumCaixas" ColumnName="NumCaixas" />
+                <ScalarProperty Name="ValorFrete" ColumnName="ValorFrete" />
+                <ScalarProperty Name="ValorDocumentacao" ColumnName="ValorDocumentacao" />
+                <ScalarProperty Name="AeroportoDestino" ColumnName="AeroportoDestino" />
+                <ScalarProperty Name="AeroportoOrigem" ColumnName="AeroportoOrigem" />
+                <ScalarProperty Name="EnviadoVia" ColumnName="EnviadoVia" />
+                <ScalarProperty Name="Motivo" ColumnName="Motivo" />
+                <ScalarProperty Name="IDPedidoVenda" ColumnName="IDPedidoVenda" />
+                <ScalarProperty Name="Operacao" ColumnName="Operacao" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+                <ScalarProperty Name="Observacoes" ColumnName="Observacoes" />
+                <ScalarProperty Name="CondicaoPagamento" ColumnName="CondicaoPagamento" />
+                <ScalarProperty Name="OvosBrasil" ColumnName="OvosBrasil" />
+                <ScalarProperty Name="DataHora" ColumnName="DataHora" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="DataPedido" ColumnName="DataPedido" />
+                <ScalarProperty Name="CodigoCliente" ColumnName="CodigoCliente" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Item_Pedido_Venda">
+            <EntityTypeMapping TypeName="HLBAPPServiceModel.Item_Pedido_Venda">
+              <MappingFragment StoreEntitySet="Item_Pedido_Venda">
+                <ScalarProperty Name="Sobra" ColumnName="Sobra" />
+                <ScalarProperty Name="DataNascimento" ColumnName="DataNascimento" />
+                <ScalarProperty Name="TipoReposicao" ColumnName="TipoReposicao" />
+                <ScalarProperty Name="PrecoPinto" ColumnName="PrecoPinto" />
+                <ScalarProperty Name="ValorTotal" ColumnName="ValorTotal" />
+                <ScalarProperty Name="Vacina" ColumnName="Vacina" />
+                <ScalarProperty Name="OrderNoCHICReposicao" ColumnName="OrderNoCHICReposicao" />
+                <ScalarProperty Name="Importar" ColumnName="Importar" />
+                <ScalarProperty Name="Alterado" ColumnName="Alterado" />
+                <ScalarProperty Name="OrderNoCHIC" ColumnName="OrderNoCHIC" />
+                <ScalarProperty Name="Sequencia" ColumnName="Sequencia" />
+                <ScalarProperty Name="PrecoUnitario" ColumnName="PrecoUnitario" />
+                <ScalarProperty Name="QtdeReposicao" ColumnName="QtdeReposicao" />
+                <ScalarProperty Name="QtdeBonificada" ColumnName="QtdeBonificada" />
+                <ScalarProperty Name="PercBonificacao" ColumnName="PercBonificacao" />
+                <ScalarProperty Name="QtdeLiquida" ColumnName="QtdeLiquida" />
+                <ScalarProperty Name="DataEntregaFinal" ColumnName="DataEntregaFinal" />
+                <ScalarProperty Name="DataEntregaInicial" ColumnName="DataEntregaInicial" />
+                <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+                <ScalarProperty Name="IDPedidoVenda" ColumnName="IDPedidoVenda" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pedido_Venda">
+            <EntityTypeMapping TypeName="HLBAPPServiceModel.Pedido_Venda">
+              <MappingFragment StoreEntitySet="Pedido_Venda">
+                <ScalarProperty Name="Projecao" ColumnName="Projecao" />
+                <ScalarProperty Name="ValorTotalPintinho" ColumnName="ValorTotalPintinho" />
+                <ScalarProperty Name="Veterinario" ColumnName="Veterinario" />
+                <ScalarProperty Name="RGMotorista" ColumnName="RGMotorista" />
+                <ScalarProperty Name="Motorista" ColumnName="Motorista" />
+                <ScalarProperty Name="Lacre" ColumnName="Lacre" />
+                <ScalarProperty Name="Placa" ColumnName="Placa" />
+                <ScalarProperty Name="DataColetaNascimento" ColumnName="DataColetaNascimento" />
+                <ScalarProperty Name="EnderEntSeq" ColumnName="EnderEntSeq" />
+                <ScalarProperty Name="AWB" ColumnName="AWB" />
+                <ScalarProperty Name="NCM" ColumnName="NCM" />
+                <ScalarProperty Name="CiaAerea" ColumnName="CiaAerea" />
+                <ScalarProperty Name="NumeroVoo" ColumnName="NumeroVoo" />
+                <ScalarProperty Name="NumFatura" ColumnName="NumFatura" />
+                <ScalarProperty Name="NumPaletes" ColumnName="NumPaletes" />
+                <ScalarProperty Name="TipoPedido" ColumnName="TipoPedido" />
+                <ScalarProperty Name="DataSaidaIncubatorio" ColumnName="DataSaidaIncubatorio" />
+                <ScalarProperty Name="DataEnvio" ColumnName="DataEnvio" />
+                <ScalarProperty Name="NumCaixas" ColumnName="NumCaixas" />
+                <ScalarProperty Name="ValorFrete" ColumnName="ValorFrete" />
+                <ScalarProperty Name="ValorDocumentacao" ColumnName="ValorDocumentacao" />
+                <ScalarProperty Name="AeroportoDestino" ColumnName="AeroportoDestino" />
+                <ScalarProperty Name="AeroportoOrigem" ColumnName="AeroportoOrigem" />
+                <ScalarProperty Name="EnviadoVia" ColumnName="EnviadoVia" />
+                <ScalarProperty Name="NomeCliente" ColumnName="NomeCliente" />
+                <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+                <ScalarProperty Name="Observacoes" ColumnName="Observacoes" />
+                <ScalarProperty Name="CondicaoPagamento" ColumnName="CondicaoPagamento" />
+                <ScalarProperty Name="OvosBrasil" ColumnName="OvosBrasil" />
+                <ScalarProperty Name="DataHora" ColumnName="DataHora" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="DataPedido" ColumnName="DataPedido" />
+                <ScalarProperty Name="CodigoCliente" ColumnName="CodigoCliente" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOG_Servicos_Pedido_Venda">
+            <EntityTypeMapping TypeName="HLBAPPServiceModel.LOG_Servicos_Pedido_Venda">
+              <MappingFragment StoreEntitySet="LOG_Servicos_Pedido_Venda">
+                <ScalarProperty Name="PrecoUnitario" ColumnName="PrecoUnitario" />
+                <ScalarProperty Name="Bonificada" ColumnName="Bonificada" />
+                <ScalarProperty Name="IDLogPedidoVenda" ColumnName="IDLogPedidoVenda" />
+                <ScalarProperty Name="IDServPedVenda" ColumnName="IDServPedVenda" />
+                <ScalarProperty Name="Operacao" ColumnName="Operacao" />
+                <ScalarProperty Name="DataHora" ColumnName="DataHora" />
+                <ScalarProperty Name="PercAplicacaoServico" ColumnName="PercAplicacaoServico" />
+                <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+                <ScalarProperty Name="IDPedidoVenda" ColumnName="IDPedidoVenda" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOG_Vacinas_Primaria_Pedido_Venda">
+            <EntityTypeMapping TypeName="HLBAPPServiceModel.LOG_Vacinas_Primaria_Pedido_Venda">
+              <MappingFragment StoreEntitySet="LOG_Vacinas_Primaria_Pedido_Venda">
+                <ScalarProperty Name="PrecoUnitario" ColumnName="PrecoUnitario" />
+                <ScalarProperty Name="Bonificada" ColumnName="Bonificada" />
+                <ScalarProperty Name="SeqItemPedVenda" ColumnName="SeqItemPedVenda" />
+                <ScalarProperty Name="IDLogPedidoVenda" ColumnName="IDLogPedidoVenda" />
+                <ScalarProperty Name="IDVacPrimPedVenda" ColumnName="IDVacPrimPedVenda" />
+                <ScalarProperty Name="Operacao" ColumnName="Operacao" />
+                <ScalarProperty Name="DataHora" ColumnName="DataHora" />
+                <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+                <ScalarProperty Name="IDPedidoVenda" ColumnName="IDPedidoVenda" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOG_Vacinas_Secundaria_Pedido_Venda">
+            <EntityTypeMapping TypeName="HLBAPPServiceModel.LOG_Vacinas_Secundaria_Pedido_Venda">
+              <MappingFragment StoreEntitySet="LOG_Vacinas_Secundaria_Pedido_Venda">
+                <ScalarProperty Name="PrecoUnitario" ColumnName="PrecoUnitario" />
+                <ScalarProperty Name="Bonificada" ColumnName="Bonificada" />
+                <ScalarProperty Name="SeqItemPedVenda" ColumnName="SeqItemPedVenda" />
+                <ScalarProperty Name="IDVacPrimLogPedidoVenda" ColumnName="IDVacPrimLogPedidoVenda" />
+                <ScalarProperty Name="IDVacSecPedVenda" ColumnName="IDVacSecPedVenda" />
+                <ScalarProperty Name="Operacao" ColumnName="Operacao" />
+                <ScalarProperty Name="DataHora" ColumnName="DataHora" />
+                <ScalarProperty Name="Sequencia" ColumnName="Sequencia" />
+                <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+                <ScalarProperty Name="IDVacPrimPedVenda" ColumnName="IDVacPrimPedVenda" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Servicos_Pedido_Venda">
+            <EntityTypeMapping TypeName="HLBAPPServiceModel.Servicos_Pedido_Venda">
+              <MappingFragment StoreEntitySet="Servicos_Pedido_Venda">
+                <ScalarProperty Name="MascaraTI" ColumnName="MascaraTI" />
+                <ScalarProperty Name="PrecoUnitario" ColumnName="PrecoUnitario" />
+                <ScalarProperty Name="Bonificada" ColumnName="Bonificada" />
+                <ScalarProperty Name="PercAplicacaoServico" ColumnName="PercAplicacaoServico" />
+                <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+                <ScalarProperty Name="IDPedidoVenda" ColumnName="IDPedidoVenda" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vacinas_Primaria_Pedido_Venda">
+            <EntityTypeMapping TypeName="HLBAPPServiceModel.Vacinas_Primaria_Pedido_Venda">
+              <MappingFragment StoreEntitySet="Vacinas_Primaria_Pedido_Venda">
+                <ScalarProperty Name="Bonificada" ColumnName="Bonificada" />
+                <ScalarProperty Name="PrecoUnitario" ColumnName="PrecoUnitario" />
+                <ScalarProperty Name="SeqItemPedVenda" ColumnName="SeqItemPedVenda" />
+                <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+                <ScalarProperty Name="IDPedidoVenda" ColumnName="IDPedidoVenda" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vacinas_Secundaria_Pedido_Venda">
+            <EntityTypeMapping TypeName="HLBAPPServiceModel.Vacinas_Secundaria_Pedido_Venda">
+              <MappingFragment StoreEntitySet="Vacinas_Secundaria_Pedido_Venda">
+                <ScalarProperty Name="Bonificada" ColumnName="Bonificada" />
+                <ScalarProperty Name="PrecoUnitario" ColumnName="PrecoUnitario" />
+                <ScalarProperty Name="SeqItemPedVenda" ColumnName="SeqItemPedVenda" />
+                <ScalarProperty Name="Sequencia" ColumnName="Sequencia" />
+                <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+                <ScalarProperty Name="IDVacPrimPedVenda" ColumnName="IDVacPrimPedVenda" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prog_Diaria_Transp_Veiculos">
+            <EntityTypeMapping TypeName="HLBAPPServiceModel.Prog_Diaria_Transp_Veiculos">
+              <MappingFragment StoreEntitySet="Prog_Diaria_Transp_Veiculos">
+                <ScalarProperty Name="EquipCodEstrVeiculo" ColumnName="EquipCodEstrVeiculo" />
+                <ScalarProperty Name="EntCodMotorista02" ColumnName="EntCodMotorista02" />
+                <ScalarProperty Name="EntCodMotorista01" ColumnName="EntCodMotorista01" />
+                <ScalarProperty Name="IdOperacaoTransporte" ColumnName="IdOperacaoTransporte" />
+                <ScalarProperty Name="IdRoteiroTarget" ColumnName="IdRoteiroTarget" />
+                <ScalarProperty Name="EntCod" ColumnName="EntCod" />
+                <ScalarProperty Name="OdometroVeiculoDataEmbarque" ColumnName="OdometroVeiculoDataEmbarque" />
+                <ScalarProperty Name="TerminoCarregamentoReal" ColumnName="TerminoCarregamentoReal" />
+                <ScalarProperty Name="InicioCarregamentoReal" ColumnName="InicioCarregamentoReal" />
+                <ScalarProperty Name="IDCargaEmbarcador" ColumnName="IDCargaEmbarcador" />
+                <ScalarProperty Name="DataInicioVazio" ColumnName="DataInicioVazio" />
+                <ScalarProperty Name="Despachante" ColumnName="Despachante" />
+                <ScalarProperty Name="HorarioChegadaAeroporto" ColumnName="HorarioChegadaAeroporto" />
+                <ScalarProperty Name="AeroportoOrigem" ColumnName="AeroportoOrigem" />
+                <ScalarProperty Name="DataEmbarque" ColumnName="DataEmbarque" />
+                <ScalarProperty Name="CargaLiberada" ColumnName="CargaLiberada" />
+                <ScalarProperty Name="UnidadeBaseEmbarcador" ColumnName="UnidadeBaseEmbarcador" />
+                <ScalarProperty Name="ValorKM" ColumnName="ValorKM" />
+                <ScalarProperty Name="Tranportadora" ColumnName="Tranportadora" />
+                <ScalarProperty Name="HorarioEntregaNF" ColumnName="HorarioEntregaNF" />
+                <ScalarProperty Name="InicioCarregamentoEsperado" ColumnName="InicioCarregamentoEsperado" />
+                <ScalarProperty Name="EmpresaTranportador" ColumnName="EmpresaTranportador" />
+                <ScalarProperty Name="ValorTotal" ColumnName="ValorTotal" />
+                <ScalarProperty Name="QunatidadeCaixa" ColumnName="QunatidadeCaixa" />
+                <ScalarProperty Name="QuantidadePorCaixa" ColumnName="QuantidadePorCaixa" />
+                <ScalarProperty Name="QuantidadeTotal" ColumnName="QuantidadeTotal" />
+                <ScalarProperty Name="Motorista02" ColumnName="Motorista02" />
+                <ScalarProperty Name="Motorista01" ColumnName="Motorista01" />
+                <ScalarProperty Name="Placa" ColumnName="Placa" />
+                <ScalarProperty Name="NumVeiculo" ColumnName="NumVeiculo" />
+                <ScalarProperty Name="DataProgramacao" ColumnName="DataProgramacao" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHIC_Ultimo_Numero">
+            <EntityTypeMapping TypeName="HLBAPPServiceModel.CHIC_Ultimo_Numero">
+              <MappingFragment StoreEntitySet="CHIC_Ultimo_Numero">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UltimoOrderNOCHIC" ColumnName="UltimoOrderNOCHIC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VU_Verifica_Pedidos_Num_CHIC_Duplicados">
+            <EntityTypeMapping TypeName="HLBAPPServiceModel.VU_Verifica_Pedidos_Num_CHIC_Duplicados">
+              <MappingFragment StoreEntitySet="VU_Verifica_Pedidos_Num_CHIC_Duplicados">
+                <ScalarProperty Name="Projecao" ColumnName="Projecao" />
+                <ScalarProperty Name="ValorTotalPintinho" ColumnName="ValorTotalPintinho" />
+                <ScalarProperty Name="Veterinario" ColumnName="Veterinario" />
+                <ScalarProperty Name="RGMotorista" ColumnName="RGMotorista" />
+                <ScalarProperty Name="Motorista" ColumnName="Motorista" />
+                <ScalarProperty Name="Lacre" ColumnName="Lacre" />
+                <ScalarProperty Name="Placa" ColumnName="Placa" />
+                <ScalarProperty Name="DataColetaNascimento" ColumnName="DataColetaNascimento" />
+                <ScalarProperty Name="EnderEntSeq" ColumnName="EnderEntSeq" />
+                <ScalarProperty Name="AWB" ColumnName="AWB" />
+                <ScalarProperty Name="NCM" ColumnName="NCM" />
+                <ScalarProperty Name="CiaAerea" ColumnName="CiaAerea" />
+                <ScalarProperty Name="NumeroVoo" ColumnName="NumeroVoo" />
+                <ScalarProperty Name="NumFatura" ColumnName="NumFatura" />
+                <ScalarProperty Name="NumPaletes" ColumnName="NumPaletes" />
+                <ScalarProperty Name="TipoPedido" ColumnName="TipoPedido" />
+                <ScalarProperty Name="DataSaidaIncubatorio" ColumnName="DataSaidaIncubatorio" />
+                <ScalarProperty Name="DataEnvio" ColumnName="DataEnvio" />
+                <ScalarProperty Name="NumCaixas" ColumnName="NumCaixas" />
+                <ScalarProperty Name="ValorFrete" ColumnName="ValorFrete" />
+                <ScalarProperty Name="ValorDocumentacao" ColumnName="ValorDocumentacao" />
+                <ScalarProperty Name="AeroportoDestino" ColumnName="AeroportoDestino" />
+                <ScalarProperty Name="AeroportoOrigem" ColumnName="AeroportoOrigem" />
+                <ScalarProperty Name="EnviadoVia" ColumnName="EnviadoVia" />
+                <ScalarProperty Name="NomeCliente" ColumnName="NomeCliente" />
+                <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+                <ScalarProperty Name="Observacoes" ColumnName="Observacoes" />
+                <ScalarProperty Name="CondicaoPagamento" ColumnName="CondicaoPagamento" />
+                <ScalarProperty Name="OvosBrasil" ColumnName="OvosBrasil" />
+                <ScalarProperty Name="DataHora" ColumnName="DataHora" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="DataPedido" ColumnName="DataPedido" />
+                <ScalarProperty Name="CodigoCliente" ColumnName="CodigoCliente" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOG_Atualizacao_CHIC_SQLServer">
+            <EntityTypeMapping TypeName="HLBAPPServiceModel.LOG_Atualizacao_CHIC_SQLServer">
+              <MappingFragment StoreEntitySet="LOG_Atualizacao_CHIC_SQLServer">
+                <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="DataHoraFim" ColumnName="DataHoraFim" />
+                <ScalarProperty Name="DataHoraInicio" ColumnName="DataHoraInicio" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOG_Prog_Diaria_Transp_Pedidos">
+            <EntityTypeMapping TypeName="HLBAPPServiceModel.LOG_Prog_Diaria_Transp_Pedidos">
+              <MappingFragment StoreEntitySet="LOG_Prog_Diaria_Transp_Pedidos">
+                <ScalarProperty Name="CondicaoPagamento" ColumnName="CondicaoPagamento" />
+                <ScalarProperty Name="ObsProgramacao" ColumnName="ObsProgramacao" />
+                <ScalarProperty Name="PrecoProduto" ColumnName="PrecoProduto" />
+                <ScalarProperty Name="PercBonificacao" ColumnName="PercBonificacao" />
+                <ScalarProperty Name="EnderEntSeq" ColumnName="EnderEntSeq" />
+                <ScalarProperty Name="IDPedidoVenda" ColumnName="IDPedidoVenda" />
+                <ScalarProperty Name="MotivoReposicao" ColumnName="MotivoReposicao" />
+                <ScalarProperty Name="CHICNumReposicao" ColumnName="CHICNumReposicao" />
+                <ScalarProperty Name="MotivoSobra" ColumnName="MotivoSobra" />
+                <ScalarProperty Name="QtdeSobra" ColumnName="QtdeSobra" />
+                <ScalarProperty Name="QtdeReposicao" ColumnName="QtdeReposicao" />
+                <ScalarProperty Name="QtdeBonificada" ColumnName="QtdeBonificada" />
+                <ScalarProperty Name="QtdeVendida" ColumnName="QtdeVendida" />
+                <ScalarProperty Name="IDProgDiariaTranspPedidos" ColumnName="IDProgDiariaTranspPedidos" />
+                <ScalarProperty Name="DataChegadaClienteReal" ColumnName="DataChegadaClienteReal" />
+                <ScalarProperty Name="NumRoteiroEntregaFluig" ColumnName="NumRoteiroEntregaFluig" />
+                <ScalarProperty Name="CHICOrigem" ColumnName="CHICOrigem" />
+                <ScalarProperty Name="QuantidadeCaixa" ColumnName="QuantidadeCaixa" />
+                <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+                <ScalarProperty Name="EmpresaTranportador" ColumnName="EmpresaTranportador" />
+                <ScalarProperty Name="Ordem" ColumnName="Ordem" />
+                <ScalarProperty Name="Debicagem" ColumnName="Debicagem" />
+                <ScalarProperty Name="ObservacaoCHIC" ColumnName="ObservacaoCHIC" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+                <ScalarProperty Name="ChegadaClienteReal" ColumnName="ChegadaClienteReal" />
+                <ScalarProperty Name="InicioCarregamentoReal" ColumnName="InicioCarregamentoReal" />
+                <ScalarProperty Name="NomeRepresentante" ColumnName="NomeRepresentante" />
+                <ScalarProperty Name="CodigoRepresentante" ColumnName="CodigoRepresentante" />
+                <ScalarProperty Name="KM" ColumnName="KM" />
+                <ScalarProperty Name="ChegadaClienteEsperado" ColumnName="ChegadaClienteEsperado" />
+                <ScalarProperty Name="DataEntrega" ColumnName="DataEntrega" />
+                <ScalarProperty Name="InicioCarregamentoEsperado" ColumnName="InicioCarregamentoEsperado" />
+                <ScalarProperty Name="TelefoneCliente" ColumnName="TelefoneCliente" />
+                <ScalarProperty Name="LocalNascimento" ColumnName="LocalNascimento" />
+                <ScalarProperty Name="CHICNum" ColumnName="CHICNum" />
+                <ScalarProperty Name="NFNum" ColumnName="NFNum" />
+                <ScalarProperty Name="NFSerie" ColumnName="NFSerie" />
+                <ScalarProperty Name="NFEspecie" ColumnName="NFEspecie" />
+                <ScalarProperty Name="ValorTotal" ColumnName="ValorTotal" />
+                <ScalarProperty Name="Embalagem" ColumnName="Embalagem" />
+                <ScalarProperty Name="Linhagem" ColumnName="Linhagem" />
+                <ScalarProperty Name="Produto" ColumnName="Produto" />
+                <ScalarProperty Name="LocalEntrega" ColumnName="LocalEntrega" />
+                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+                <ScalarProperty Name="NumVeiculo" ColumnName="NumVeiculo" />
+                <ScalarProperty Name="NomeCliente" ColumnName="NomeCliente" />
+                <ScalarProperty Name="CodigoCliente" ColumnName="CodigoCliente" />
+                <ScalarProperty Name="DataProgramacao" ColumnName="DataProgramacao" />
+                <ScalarProperty Name="ObsLog" ColumnName="ObsLog" />
+                <ScalarProperty Name="Operacao" ColumnName="Operacao" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="DataHora" ColumnName="DataHora" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prog_Diaria_Transp_Pedidos">
+            <EntityTypeMapping TypeName="HLBAPPServiceModel.Prog_Diaria_Transp_Pedidos">
+              <MappingFragment StoreEntitySet="Prog_Diaria_Transp_Pedidos">
+                <ScalarProperty Name="CondicaoPagamento" ColumnName="CondicaoPagamento" />
+                <ScalarProperty Name="ObsFaturamento" ColumnName="ObsFaturamento" />
+                <ScalarProperty Name="ObsProgramacao" ColumnName="ObsProgramacao" />
+                <ScalarProperty Name="PrecoProduto" ColumnName="PrecoProduto" />
+                <ScalarProperty Name="PercBonificacao" ColumnName="PercBonificacao" />
+                <ScalarProperty Name="EnderEntSeq" ColumnName="EnderEntSeq" />
+                <ScalarProperty Name="IDPedidoVenda" ColumnName="IDPedidoVenda" />
+                <ScalarProperty Name="MotivoReposicao" ColumnName="MotivoReposicao" />
+                <ScalarProperty Name="CHICNumReposicao" ColumnName="CHICNumReposicao" />
+                <ScalarProperty Name="MotivoSobra" ColumnName="MotivoSobra" />
+                <ScalarProperty Name="QtdeSobra" ColumnName="QtdeSobra" />
+                <ScalarProperty Name="QtdeReposicao" ColumnName="QtdeReposicao" />
+                <ScalarProperty Name="QtdeBonificada" ColumnName="QtdeBonificada" />
+                <ScalarProperty Name="QtdeVendida" ColumnName="QtdeVendida" />
+                <ScalarProperty Name="DataChegadaClienteReal" ColumnName="DataChegadaClienteReal" />
+                <ScalarProperty Name="NumRoteiroEntregaFluig" ColumnName="NumRoteiroEntregaFluig" />
+                <ScalarProperty Name="CHICOrigem" ColumnName="CHICOrigem" />
+                <ScalarProperty Name="QuantidadeCaixa" ColumnName="QuantidadeCaixa" />
+                <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+                <ScalarProperty Name="EmpresaTranportador" ColumnName="EmpresaTranportador" />
+                <ScalarProperty Name="Ordem" ColumnName="Ordem" />
+                <ScalarProperty Name="Debicagem" ColumnName="Debicagem" />
+                <ScalarProperty Name="ObservacaoCHIC" ColumnName="ObservacaoCHIC" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+                <ScalarProperty Name="ChegadaClienteReal" ColumnName="ChegadaClienteReal" />
+                <ScalarProperty Name="InicioCarregamentoReal" ColumnName="InicioCarregamentoReal" />
+                <ScalarProperty Name="NomeRepresentante" ColumnName="NomeRepresentante" />
+                <ScalarProperty Name="CodigoRepresentante" ColumnName="CodigoRepresentante" />
+                <ScalarProperty Name="KM" ColumnName="KM" />
+                <ScalarProperty Name="ChegadaClienteEsperado" ColumnName="ChegadaClienteEsperado" />
+                <ScalarProperty Name="DataEntrega" ColumnName="DataEntrega" />
+                <ScalarProperty Name="InicioCarregamentoEsperado" ColumnName="InicioCarregamentoEsperado" />
+                <ScalarProperty Name="TelefoneCliente" ColumnName="TelefoneCliente" />
+                <ScalarProperty Name="LocalNascimento" ColumnName="LocalNascimento" />
+                <ScalarProperty Name="CHICNum" ColumnName="CHICNum" />
+                <ScalarProperty Name="NFNum" ColumnName="NFNum" />
+                <ScalarProperty Name="NFSerie" ColumnName="NFSerie" />
+                <ScalarProperty Name="NFEspecie" ColumnName="NFEspecie" />
+                <ScalarProperty Name="ValorTotal" ColumnName="ValorTotal" />
+                <ScalarProperty Name="Embalagem" ColumnName="Embalagem" />
+                <ScalarProperty Name="Linhagem" ColumnName="Linhagem" />
+                <ScalarProperty Name="Produto" ColumnName="Produto" />
+                <ScalarProperty Name="LocalEntrega" ColumnName="LocalEntrega" />
+                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+                <ScalarProperty Name="NumVeiculo" ColumnName="NumVeiculo" />
+                <ScalarProperty Name="NomeCliente" ColumnName="NomeCliente" />
+                <ScalarProperty Name="CodigoCliente" ColumnName="CodigoCliente" />
+                <ScalarProperty Name="DataProgramacao" ColumnName="DataProgramacao" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="HLBAPP" ZoomLevel="66">
+        <EntityTypeShape EntityType="HLBAPPServiceModel.Tabela_Precos" Width="1.5" PointX="0.75" PointY="0.75" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="HLBAPPServiceModel.LOG_Item_Pedido_Venda" Width="1.5" PointX="3.75" PointY="0.75" Height="4.6725065104166656" />
+        <EntityTypeShape EntityType="HLBAPPServiceModel.LOG_Pedido_Venda" Width="1.5" PointX="0.75" PointY="4.75" Height="6.4032194010416656" />
+        <EntityTypeShape EntityType="HLBAPPServiceModel.Item_Pedido_Venda" Width="1.5" PointX="8.625" PointY="2.375" Height="4.480205078125" />
+        <EntityTypeShape EntityType="HLBAPPServiceModel.Pedido_Venda" Width="1.5" PointX="6.375" PointY="1.125" Height="6.7878222656249978" />
+        <AssociationConnector Association="HLBAPPServiceModel.FK__Item_Pedi__IDPed__214BF109" >
+          <ConnectorPoint PointX="7.875" PointY="5.9683183365885419" />
+          <ConnectorPoint PointX="8.625" PointY="5.9683183365885419" />
+        </AssociationConnector>
+        <AssociationConnector Association="HLBAPPServiceModel.FK__Item_Pedi__IDPed__3BFFE745" >
+          <ConnectorPoint PointX="7.875" PointY="4.109159168294271" />
+          <ConnectorPoint PointX="8.625" PointY="4.109159168294271" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="HLBAPPServiceModel.LOG_Servicos_Pedido_Venda" Width="1.5" PointX="3.375" PointY="8.375" Height="2.5571907552083317" />
+        <EntityTypeShape EntityType="HLBAPPServiceModel.LOG_Vacinas_Primaria_Pedido_Venda" Width="1.5" PointX="5.375" PointY="11.375" Height="2.5571907552083317" />
+        <EntityTypeShape EntityType="HLBAPPServiceModel.LOG_Vacinas_Secundaria_Pedido_Venda" Width="1.5" PointX="11.375" PointY="2.375" Height="2.7494921874999996" />
+        <EntityTypeShape EntityType="HLBAPPServiceModel.Servicos_Pedido_Venda" Width="1.5" PointX="8.625" PointY="0.75" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="HLBAPPServiceModel.Vacinas_Primaria_Pedido_Venda" Width="1.5" PointX="8.625" PointY="9.625" Height="2.5571907552083317" />
+        <EntityTypeShape EntityType="HLBAPPServiceModel.Vacinas_Secundaria_Pedido_Venda" Width="1.5" PointX="10.875" PointY="9.75" Height="2.3648893229166674" />
+        <AssociationConnector Association="HLBAPPServiceModel.FK__Servicos___IDPed__2F9A1060" >
+          <ConnectorPoint PointX="7.875" PointY="2.0237939453125" />
+          <ConnectorPoint PointX="8.625" PointY="2.0237939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="HLBAPPServiceModel.FK__Servicos___IDPed__4A4E069C" >
+          <ConnectorPoint PointX="7.875" PointY="1.51189697265625" />
+          <ConnectorPoint PointX="8.625" PointY="1.51189697265625" />
+        </AssociationConnector>
+        <AssociationConnector Association="HLBAPPServiceModel.FK__Vacinas_P__IDPed__2610A626" >
+          <ConnectorPoint PointX="7.40625" PointY="8.6820279947916656" />
+          <ConnectorPoint PointX="7.40625" PointY="10.46875" />
+          <ConnectorPoint PointX="8.625" PointY="10.46875" />
+        </AssociationConnector>
+        <AssociationConnector Association="HLBAPPServiceModel.FK__Vacinas_P__IDPed__40C49C62" >
+          <ConnectorPoint PointX="7.6718775" PointY="8.6820279947916656" />
+          <ConnectorPoint PointX="7.6718775" PointY="10.0156225" />
+          <ConnectorPoint PointX="8.625" PointY="10.0156225" />
+        </AssociationConnector>
+        <AssociationConnector Association="HLBAPPServiceModel.FK__Vacinas_S__IDVac__2AD55B43" >
+          <ConnectorPoint PointX="10.125" PointY="10.932444661458334" />
+          <ConnectorPoint PointX="10.875" PointY="10.932444661458334" />
+        </AssociationConnector>
+        <AssociationConnector Association="HLBAPPServiceModel.FK__Vacinas_S__IDVac__4589517F" >
+          <ConnectorPoint PointX="10.125" PointY="10.278722330729167" />
+          <ConnectorPoint PointX="10.875" PointY="10.278722330729167" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="HLBAPPServiceModel.Prog_Diaria_Transp_Veiculos" Width="1.5" PointX="0.75" PointY="13.75" Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="HLBAPPServiceModel.CHIC_Ultimo_Numero" Width="1.5" PointX="7.375" PointY="13.75" Height="1.4033821614583388" />
+        <EntityTypeShape EntityType="HLBAPPServiceModel.VU_Verifica_Pedidos_Num_CHIC_Duplicados" Width="1.5" PointX="16.5" PointY="9.5" Height="7.5570279947916674" />
+        <EntityTypeShape EntityType="HLBAPPServiceModel.LOG_Atualizacao_CHIC_SQLServer" Width="1.5" PointX="9.375" PointY="13.75" />
+        <EntityTypeShape EntityType="HLBAPPServiceModel.LOG_Prog_Diaria_Transp_Pedidos" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="HLBAPPServiceModel.Prog_Diaria_Transp_Pedidos" Width="1.5" PointX="8.625" PointY="17.25" />
+        <AssociationConnector Association="HLBAPPServiceModel.FK__Prog_Diar__IDPed__39A368DE" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

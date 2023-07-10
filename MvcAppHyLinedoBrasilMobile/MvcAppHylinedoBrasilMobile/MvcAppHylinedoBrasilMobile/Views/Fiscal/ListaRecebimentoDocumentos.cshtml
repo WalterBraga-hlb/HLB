@@ -1,0 +1,168 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+    
+    List<MvcAppHylinedoBrasilMobile.Models.Recebimento_Documento> listaRecebimentoDocumentos =
+        (List<MvcAppHylinedoBrasilMobile.Models.Recebimento_Documento>)Session["ListaRecebimentoDocumentos"];
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+}
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para o Menu do Módulo Fiscal", "MenuFiscal", "Fiscal", 
+                null,
+                new { @title = "Clique aqui para voltar para o Menu do Módulo Fiscal", @class = "fiscal_32" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/rec_doc_32x32.png"), "Documentos")
+    <h2>Lista de Recebimento de Documentos</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+@using (Html.BeginForm("SearchRecebimentoDocumentos", "Fiscal"))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <b>Data do Cadastro Inicial:</b>
+            <div class="editor-label">
+                @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+                {
+                    @Html.TextBox("dataInicialRecDoc", Convert.ToDateTime(Session["dataInicialRecDoc"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+                }
+                else
+                {
+                    @Html.TextBox("dataInicialRecDoc", Convert.ToDateTime(Session["dataInicialRecDoc"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+                }
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Data do Cadastro Final:</b>
+            <div class="editor-label">
+                @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+                {
+                    @Html.TextBox("dataFinalRecDoc", Convert.ToDateTime(Session["dataFinalRecDoc"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+                }
+                else
+                {
+                    @Html.TextBox("dataFinalRecDoc", Convert.ToDateTime(Session["dataFinalRecDoc"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+                }
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Configuração p/ Importação:</b>
+            <div class="editor-field">
+                @Html.DropDownList(
+                    "ConfigImportaNFe",
+                    (List<SelectListItem>)Session["FiltroListaConfigImportaNFe"])
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Pesquisar" />
+        </li>
+    </ul>
+}
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Recebimento de Documentos</li>
+    <li>
+        @Html.ActionLink("Adicionar Novo Recebimento de Documento", "CreateRecebimentoDocumento", "Fiscal",
+            null,
+            new { @class = "add", @title = "Clique aqui para inserir um novo recebimento de documento." })
+    </li>
+</ul>
+<br />
+<div class="editor-label"  align="center">
+    <table style="width: 90%">
+        <tr style="font-size: xx-small; background-color:Gray">
+            <th colspan="6" style="font-size: xx-small; background-color:Gray">
+                <u>Legenda de Ações:</u>
+            </th>
+        </tr>
+        <tr style="font-size: xx-small">
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/kjots.png"), "")
+                <i>Alterar Recebimento de Documento</i>
+            </td>
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/button_cancel.png"), "")
+                <i>Excluir Recebimento de Documento</i>
+            </td>
+        </tr>
+    </table>
+</div>
+<br />
+<div id="divTabelaIndexPV">
+<table id="tabelaIndexPV" class="ajustetabelaIndexPV">
+    <tbody class="ajustetabelaIndexPV">
+    <tr class="ajustetabelaIndexPV">
+        <th class="ajustetabelaIndexPV">
+            Chave
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Nº Pedido Compra
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Data Entrada
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Configuração p/ Importação
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Usuário
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Data Cadastro
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Ações
+        </th>
+    </tr>
+@foreach (var item in listaRecebimentoDocumentos)
+{
+    string descricaoConfiguracao = hlbapp.Configuracao_Importa_NFe.Where(w => w.ID == item.IDConfigImportaNFe).FirstOrDefault().Descricao;
+    
+    <tr class="ajustetabelaIndexPV">
+        <td class="ajustetabelaIndexPV">
+            @(item.ChaveEletronica)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(item.NumeroPedidoCompra)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(Convert.ToDateTime(item.DataEntrada).ToShortDateString())
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(descricaoConfiguracao)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(item.Usuario)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(Convert.ToDateTime(item.DataHoraCadastro).ToString("dd/MM/yy HH:ss"))
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td align="center">
+                        @Html.ActionLink("Edit", "EditRecebimentoDocumento",
+                            new { id = item.ID },
+                            new { @class = "edit", @title = "Clique aqui para Alterar o Recebimento do Documento." })
+                    </td>
+                    <td align="center">
+                        @Html.ActionLink("Delete", "ConfirmaDeleteRecebimentoDocumento",
+                            new { id = item.ID },
+                            new { @class = "delete", @title = "Clique aqui para Excluir o Recebimento do Documento." })
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

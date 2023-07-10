@@ -1,0 +1,199 @@
+﻿@model MvcAppHylinedoBrasilMobile.Models.LayoutDiarioExpedicaos
+
+@{
+    ViewBag.Title = "";
+}
+
+<script src="../../Scripts/jquery.maskedinput.js" type="text/javascript"></script>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+        $('#dataProducao').mask("99/99/9999");
+    });
+    $('#MyId').change(function () {
+        var farm = $('#MyId').val();
+
+        //        $.ajax({
+        //            url: 'Url.Action("CarregaLotes")',
+        //            data: { id: farm },
+        //            type: "post",
+        //            cache: false,
+        //            success: $('#create').submit()
+        //        });
+
+        $.ajax({
+            url: '/DiarioExpedicao/CarregaLotes',
+            type: 'POST',
+            data: JSON.stringify({ id: farm }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#Lote').empty();
+                $('select#Lote').append('<option value="0" selected="selected">(Selecione um Lote)</option>');
+                $.each(data, function (key, SelectListItem) {
+                    $('select#Lote').append('<option value="' + SelectListItem.Text + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#Lote').selectmenu('refresh');
+            }
+        });
+    });
+
+    $('#Lote').change(function () {
+        var lote = $('#Lote option:selected').text();
+        $.ajax({
+            url: '/DiarioExpedicao/CarregaGalpoes',
+            type: 'POST',
+            data: JSON.stringify({ id: lote }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#Galpao').empty();
+                $('select#Galpao').append('<option value="0" selected="selected">(Selecione um Galpão)</option>');
+                $.each(data, function (key, Lotes) {
+                    $('select#Galpao').append('<option value="' + Lotes.Galpao + '">' + Lotes.Galpao + '</option>');
+                    $('#linhagem').val(Lotes.Linhagem);
+                });
+                $('select#Galpao').selectmenu('refresh');
+            }
+        });
+    });
+
+    $('#Galpao').change(function () {
+        var lote = $('#Lote option:selected').val();
+        var galpao = $('#Galpao option:selected').val();
+        $.ajax({
+            url: '/DiarioExpedicao/RetornaLoteCompleto',
+            type: 'POST',
+            data: JSON.stringify({ id: lote, id2: galpao }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('#loteCompleto').val(data);
+            }
+        });
+    });
+
+    $('#dataProducao').change(function () {
+        var dataProducao = $('#dataProducao').val();
+        $.ajax({
+            url: '/DiarioExpedicao/RetorndaIdade',
+            type: 'POST',
+            data: JSON.stringify({ id: dataProducao }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('#idade').val(data);
+            }
+        });
+    });
+
+    $('#bandejas').change(function () {
+        var result = null;
+        var dataProducao = $('#dataProducao').val();
+        var lote = $('#loteCompleto').val();
+        //var qtdeBandejas = $('#bandejas').val();
+        //var qtdeOvos = qtdeBandejas * 150;
+        var qtdeOvos = $('#ovos').val();
+        var qtdeBandejas = qtdeOvos / 150;
+        $.ajax({
+            url: '/DiarioExpedicao/VerificaEstoque',
+            type: 'POST',
+            data: JSON.stringify({ id: dataProducao, id2: lote, id3: qtdeOvos }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                    $('#ovos').val(qtdeOvos.toFixed(0));
+                    $('#bandejas').val(qtdeBandejas.toFixed(0))
+                } else {
+                    alert(data.toString());
+                }
+            }
+        });
+    });
+</script>
+
+<div align="center">
+    <h2>Alterar Item do Diário da Produção</h2>
+</div>
+
+@using (Html.BeginForm("EditItem", "DiarioExpedicao", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.Usuario)
+        @Html.HiddenFor(model => model.DataHora)
+
+        <div class="editor-label">
+            <b>Núcleo:</b>
+        </div>        
+        <div class="editor-field">
+            @Html.DropDownListFor(
+            n => n.Nucleo,
+            (List<SelectListItem>)Session["ListaNucleos"],
+            "(Selecione um Núcleo)",
+            new { @id = "MyId" })
+            @Html.ValidationMessageFor(model => model.Nucleo)
+        </div>
+        <div class="editor-label">
+            <b>Lote:</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(
+            l => l.Lote,
+            (List<SelectListItem>)Session["ListaLotes"],
+            new { @id = "Lote" })
+            @Html.ValidationMessageFor(model => model.Lote)
+        </div>
+        <div class="editor-label">
+            <b>Galpão:</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(
+            g => g.Galpao,
+            (List<SelectListItem>)Session["ListaGalpoes"],
+            new { @id = "Galpao" })
+            @Html.ValidationMessageFor(model => model.Galpao)
+        </div>
+
+        @Html.HiddenFor(model => model.Linhagem, new { @id = "linhagem" })
+            
+        @Html.HiddenFor(model => model.LoteCompleto, new { @id = "loteCompleto" })
+        
+        <div class="editor-label">
+            <b>Data de Produção:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.DataProducao, new { @id = "dataProducao" })
+            @Html.ValidationMessageFor(model => model.DataProducao)
+        </div>
+
+        @Html.HiddenFor(model => model.Idade, new { @id = "idade" })
+        
+        @Html.HiddenFor(model => model.NumeroReferencia)
+
+        @Html.HiddenFor(model => model.QtdeOvos, new { @id = "ovos" })
+       
+        <div class="editor-label">
+            <b>Qtde. OVOS:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.QtdeBandejas, new { id = "bandejas" })
+            @Html.ValidationMessageFor(model => model.QtdeBandejas)
+        </div>
+        
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Voltar p/ Lista", "EditDEO", new { dataFiltro = Convert.ToDateTime(Session["dataHoraCarreg"]), nfNum = Session["nfNum"], operacaoMetodo = "Edit" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

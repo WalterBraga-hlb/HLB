@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = "Importa XML Fiscal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript" src="@Url.Content("~/Content/Uploadify/jquery.uploadify.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/Uploadify/jquery.uploadify.min.js")"></script>
+
+<script type="text/javascript">
+    @*$(function () {
+        $('#file_upload').uploadify({
+            'swf': "@Url.Content("~/Content/Uploadify/uploadify.swf")",
+            'cancelImg': "@Url.Content("~/Content/Uploadify/uploadify-cancel.png")",
+            'uploader': "@Url.Action("ImportaXML", "ImportaXMLFiscal")",
+            'fileTypeDesc' : 'XML Files',
+            'width'    : 300,
+            'fileTypeExts' : '*.xml',
+            'buttonText': 'Clique para selecionar um ou mais arquivos',
+            //'formData' : { 'id' : $('input[name="clienteSelecionado"]:checked').val() },
+            'onUploadStart' : function(file) {
+                $('#file_upload').uploadify("settings", "formData",
+                    {"data": $("input[name='dataEntrada']").val(),
+                     "codigoEmpresa": $("input[name='codigoEmpresa']").val(),
+                     "finalidade": $("select[name='ddlFinalidadeCTe']").val(),
+                     "tipoFrete": $("select[name='ddlTipoFreteCTe']").val()});
+            },
+            'onUploadSuccess': function (file, data, response) {
+                $("#Status").append(data);
+            }
+        });
+    });*@
+
+    /* Máscaras ER */
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mdata(v) {
+        v = v.replace(/\D/g, "");                    //Remove tudo o que não é dígito
+        v = v.replace(/(\d{2})(\d)/, "$1/$2");
+        v = v.replace(/(\d{2})(\d)/, "$1/$2");
+
+        v = v.replace(/(\d{2})(\d{2})$/, "$1$2");
+        return v;
+    }
+</script>
+
+@Html.Partial("_Menu")
+
+@if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-ImportaXMLFiscalCTe", (System.Collections.ArrayList)Session["Direitos"]))
+{
+    <h2>CT-e</h2>
+    @*<h4 style="color:Red;">@ViewBag.erro</h4>
+        <h4 style="color:Blue;">@ViewBag.OK</h4>*@
+    @*@using (Html.BeginForm("ImportaXML", "ImportaXMLFiscal", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <legend>Selecione o XML a ser importado:</legend>
+            <div class="editor-field">
+                <input type="file" name="file1"/>
+                <input type="submit" value="Importar"/>
+            </div>
+        }*@
+    using (Html.BeginForm("ImportaXML", "ImportaXMLFiscal", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div>
+            <table>
+                @*<tr>
+                    <td align="center"><h4>Código da Empresa do Apolo onde será importado o CT-e:</h4></td>
+                    <td align="center"><h4>@Html.TextBox("codigoEmpresa", null, new { @type = "number", @required = true })</h4></td>
+                </tr>*@
+                <tr>
+                    <td align="center"><h4>Data de Entrada (Deixar vazio para assumir Data do CT-e):</h4></td>
+                    <td align="center"><h4>@Html.TextBox("dataEntrada", null, new { @onkeyup = "mascara(this, mdata);" })</h4></td>
+                </tr>
+                <tr>
+                    <td align="center"><h4>Finalidade do CT-e:</h4></td>
+                    <td align="center"><h4>@Html.DropDownList("ddlFinalidadeCTe", (IEnumerable<SelectListItem>)Session["ListaFinalidadeCTe"], new { @required = true })</h4></td>
+                </tr>
+                <tr>
+                    <td align="center"><h4>Tipo de Frete do CT-e:</h4></td>
+                    <td align="center"><h4>@Html.DropDownList("ddlTipoFreteCTe", (IEnumerable<SelectListItem>)Session["ListaTipoFreteCTe"], new { @required = true })</h4></td>
+                </tr>
+                <tr colspan="2">
+                    <td align="center"><input type="file" name="file_upload" multiple accept=".xml" required /></td>
+                </tr>
+                <tr>
+                    <td align="center"><input type="submit" value="Importar" /></td>
+                </tr>
+            </table>
+            <br />
+            @Html.Raw(ViewBag.msg)
+        </div>
+
+        @*<b>Código da Empresa do Apolo onde será importado o CT-e: @Html.TextBox("codigoEmpresa", null, new { @type = "number" })</b>
+            <br />
+            <b>Data de Entrada (Deixar vazio para assumir Data do CT-e): @Html.TextBox("dataEntrada", null, new { @onkeyup = "mascara(this, mdata);" })</b>
+            <br />
+            <b>
+                Finalidade do CT-e: @Html.DropDownList("ddlFinalidadeCTe", (IEnumerable<SelectListItem>)Session["ListaFinalidadeCTe"],
+                    new { @required = true })
+            </b>
+            <br />
+            <b>
+                Tipo de Frete do CT-e: @Html.DropDownList("ddlTipoFreteCTe", (IEnumerable<SelectListItem>)Session["ListaTipoFreteCTe"],
+                 new { @required = true })
+            </b>
+            <input type="submit" value="file_upload" id="file_upload" />
+
+            <div id="Status">
+            </div>*@
+    }
+}

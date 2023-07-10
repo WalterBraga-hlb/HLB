@@ -1,0 +1,15 @@
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICApoloManual\bin\Debug\Data\HLBAPP.Designer.cs
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICApoloManual\bin\Debug\ImportaCHICApoloManual.exe.config
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICApoloManual\bin\Debug\ImportaCHICApoloManual.exe
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICApoloManual\bin\Debug\ImportaCHICApoloManual.pdb
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICApoloManual\bin\Debug\ImportaCHICService.exe
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICApoloManual\bin\Debug\ImportaCHICService.pdb
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICApoloManual\bin\Debug\ImportaCHICService.exe.config
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICApoloManual\obj\x86\Debug\ImportaCHICApoloManual.csproj.AssemblyReference.cache
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICApoloManual\obj\x86\Debug\ImportaCHICApoloManual.Form1.resources
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICApoloManual\obj\x86\Debug\ImportaCHICApoloManual.Properties.Resources.resources
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICApoloManual\obj\x86\Debug\ImportaCHICApoloManual.csproj.GenerateResource.cache
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICApoloManual\obj\x86\Debug\ImportaCHICApoloManual.csproj.CoreCompileInputs.cache
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICApoloManual\obj\x86\Debug\ImportaCHICApoloManual.csproj.CopyComplete
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICApoloManual\obj\x86\Debug\ImportaCHICApoloManual.exe
+C:\Users\wneto\Documents\VS\ImportacaoService\ImportacaoService\ImportaCHICApoloManual\obj\x86\Debug\ImportaCHICApoloManual.pdb

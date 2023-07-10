@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "";
+}
+
+<script type='text/javascript'>
+    /* Máscaras ER */
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mnum(v) {
+        v = v.replace(/\D/g, "");                                      //Remove tudo o que não é dígito
+        return v;
+    }
+</script>
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Pedidos de Venda", "Index", "PedidoVenda")
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/pedidoVenda.png"), "Pedido de Venda")
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+
+<h1 style="color:red; background-color:Yellow">
+    * CONFIRMA A DUPLICAÇÃO DO PEDIDO @Session["idSelecionado"].ToString() ???
+</h1>
+<br />
+@using (Html.BeginForm("Index", "PedidoVenda", FormMethod.Post))
+{
+    <input type="submit" value="Não" />
+}
+
+@using (Html.BeginForm("DuplicaPedidoVenda", "PedidoVenda", FormMethod.Post))
+{
+    <fieldset>
+        <div class="editor-label">
+            <b>Qtde. de cópias:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("qtdeCopias", "1",
+                new { @type = "number", @onkeyup = "mascara(this, mnum);", @required = true })
+        </div>
+        <div class="editor-label">
+            <b>Intervalo de data entre as cópias (em dias):</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("intervaloDias", "0",
+                new { @type = "number", @onkeyup = "mascara(this, mnum);", @required = true })
+        </div>
+    </fieldset>
+    
+    <input type="submit" value="Sim" />
+}

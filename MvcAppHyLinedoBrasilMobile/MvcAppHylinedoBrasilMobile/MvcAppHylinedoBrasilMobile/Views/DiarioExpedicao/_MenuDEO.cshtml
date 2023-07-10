@@ -1,0 +1,51 @@
+﻿@using am = MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController;
+@{
+    string lg = Session["language"].ToString();
+}
+<ul data-role="listview" data-inset="true">
+    <li>
+        @Html.ActionLink(am.GetTextOnLanguage("Voltar para Menu Principal", lg), "Index", "HomeMobile",
+            null,
+            new { @title = "Clique aqui para Voltar para o Menu Principal" })
+    </li>
+</ul>
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">@am.GetTextOnLanguage("Menu Controle de Estoque de Ovos", lg)</li>
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-DiarioExpedicao", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink(am.GetTextOnLanguage("Diário de Expedição", lg), "ListaDEOs", "DiarioExpedicao", null, new { @class = "diarioexpedicao" })</li>
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-ConferenciaDiarioExpedicao", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink(am.GetTextOnLanguage("Conferência do Diário de Expedição", lg), "ListaConferenciaDEO", "DiarioExpedicao", null, new { @class = "checkdeo" })</li>
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-CancelaConferenciaDiarioExpedicao", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink(am.GetTextOnLanguage("Cancelamento de Conferência do Diário de Expedição", lg), "ListaDEOConferidos", "DiarioExpedicao", null, new { @class = "delete32" })</li>
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-DivergenciaDiarioExpedicao", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink(am.GetTextOnLanguage("Divergência do Diário de Expedição", lg), "ListaDivergenciaDEO", "DiarioExpedicao", null, new { @class = "listaNaoConforme" })</li>
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-TransferenciaOvosClassificados", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink(am.GetTextOnLanguage("Transferência de Ovos Classificados", lg), "ListaTransferenciasOvosClassificados", "DiarioExpedicao", null, new { @class = "transferencia" })</li>
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-ClassificacaoOvos", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink(am.GetTextOnLanguage("Classificações de Ovos", lg), "ListaClassificacaoOvos", "DiarioExpedicao", null, new { @class = "transferenciaLinhagens" })</li>
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-DescarteOvosClassificados", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink(am.GetTextOnLanguage("Descarte de Ovos Classificados para Comércio", lg), "ListaDescarteOvosClassificadosParaComercio", "DiarioExpedicao", null, new { @class = "AQO" })</li>
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-AjusteEstoque", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink(am.GetTextOnLanguage("Solicitação de Ajuste de Estoque de Ovos", lg), "ListaAjusteEstoque", "DiarioExpedicao", null, new { @class = "ajusteEstoque" })</li>
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+    .GetGroup("HLBAPPM-AQONaoConformidade", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink("Lista dos Ovos Não Conforme", "ListaAQONaoConforme", "AQO", null, new { @class = "uncheck_button" })</li>
+    }
+</ul>

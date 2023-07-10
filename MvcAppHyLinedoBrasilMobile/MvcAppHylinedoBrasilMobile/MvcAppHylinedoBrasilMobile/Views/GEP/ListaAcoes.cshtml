@@ -1,0 +1,258 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+    
+    List<MvcAppHylinedoBrasilMobile.Models.GEP_Acao> listaAcoes =
+        (List<MvcAppHylinedoBrasilMobile.Models.GEP_Acao>)Session["ListaAcoes"];
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+    
+    int semanaAnoAtual = System.Globalization.CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(
+        DateTime.Today,
+        System.Globalization.CalendarWeekRule.FirstDay, DayOfWeek.Sunday);
+    
+    int anoAtual = DateTime.Today.Year;
+}
+
+<script language="javascript" type="text/javascript">
+    $('#ddlPilar').change(function () {
+        var descPilar = $('#ddlPilar option:selected').text();
+        $.ajax({
+            url: '/GEP/CarregaObjetivos',
+            type: 'POST',
+            data: JSON.stringify({ pilar: descPilar, todos: "true" }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#ddlObjetivo').empty();
+                //$('select#ddlObjetivo').append('<option value="0" selected="selected">(Selecione um Objetivo)</option>');
+                $.each(data, function (key, SelectListItem) {
+                    $('select#ddlObjetivo').append('<option value="' + SelectListItem.Value + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#ddlObjetivo').selectmenu('refresh');
+            }
+        });
+    });
+
+    $(function () {
+        $("a.postLink").click(function (e) {
+            e.preventDefault();
+            $.post($(this).attr("href"), function (data) {
+                // got the result in data variable. do whatever you want now
+                //may be reload the page
+            });
+        });
+    });
+</script>
+
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para o Menu do GEP", "MenuGEP", "GEP", 
+                null,
+                new { @title = "Clique aqui para voltar para o Menu do GEP", @class = "gep" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/acao_02.png"), "Ação")
+    <h2>Lista de Ações</h2>
+</div>
+<br />
+<h4 id="erro" style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+@using (Html.BeginForm("SearchAcao", "GEP"))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <b>Semana Inicial:</b>
+            <div class="editor-field">
+                @Html.TextBox("semanaAnoInicial", Session["semanaAnoInicialSession"].ToString(), new { @type = "week" })
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Semana Final:</b>
+            <div class="editor-field">
+                @Html.TextBox("semanaAnoFinal", Session["semanaAnoFinalSession"].ToString(), new { @type = "week" })
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Pilar:</b>
+            <div class="editor-field">
+                @Html.DropDownList(
+                    "Pilar",
+                    (List<SelectListItem>)Session["FiltroDDLListaPilares"],
+                    new { @id = "ddlPilar" })
+            </div>
+        </li>
+        @*<li data-role="fieldcontain">
+            <b>Objetivo:</b>
+            <div class="editor-field">
+                @Html.DropDownList(
+                    "Objetivo",
+                    (List<SelectListItem>)Session["FiltroDDLListaObjetivos"],
+                    new { @id = "ddlObjetivo" })
+            </div>
+        </li>*@
+        <li data-role="fieldcontain">
+            <b>Informe parte da descrição:</b>
+            <div class="editor-field">
+                @Html.TextBox("pesquisa", Session["pesquisaSession"])
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Pesquisar" />
+        </li>
+    </ul>
+}
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Ação</li>
+    <li>
+        @Html.ActionLink("Adicionar Nova Ação", "CreateAcao", "GEP",
+            null,
+            new { @class = "add", @title = "Clique aqui para inserir uma nova ação." })
+    </li>
+</ul>
+<br />
+<div class="editor-label"  align="center">
+    <table style="width: 90%">
+        <tr style="font-size: xx-small; background-color:Gray">
+            <th colspan="6" style="font-size: xx-small; background-color:Gray">
+                <u>Legenda de Ações:</u>
+            </th>
+        </tr>
+        <tr style="font-size: xx-small">
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/kjots.png"), "")
+                <i>Alterar Ação</i>
+            </td>
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/button_cancel.png"), "")
+                <i>Excluir Ação</i>
+            </td>
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/check.png"), "")
+                <i>Encerrar Ação</i>
+            </td>
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/uncheck.png"), "")
+                <i>Cancelar Encerramento da Ação</i>
+            </td>
+        </tr>
+    </table>
+</div>
+<br />
+<div id="divTabelaIndexPV" style="overflow:auto" >
+<table id="tabelaIndexPV" class="ajustetabelaAcaoGEP">
+    <tbody class="ajustetabelaAcaoGEP">
+    <tr class="ajustetabelaAcaoGEP">
+        <th class="ajustetabelaAcaoGEP">
+            Semana / Ano
+        </th>
+        <th class="ajustetabelaAcaoGEP">
+            Ação
+        </th>
+        <th class="ajustetabelaAcaoGEP">
+            Pilar
+        </th>
+        <th class="ajustetabelaAcaoGEP">
+            Objetivo
+        </th>
+        <th class="ajustetabelaAcaoGEP">
+            Prazo
+        </th>
+        <th class="ajustetabelaAcaoGEP">
+            Status
+        </th>
+        <th class="ajustetabelaAcaoGEP">
+            Usuário
+        </th>
+        <th class="ajustetabelaAcaoGEP">
+            Data Cadastro
+        </th>
+        <th class="ajustetabelaAcaoGEP">
+            Ações
+        </th>
+    </tr>
+@foreach (var item in listaAcoes)
+{
+    <tr class="ajustetabelaAcaoGEP">
+        <td class="ajustetabelaAcaoGEP">
+            @(item.SemanaDoAno.ToString())/@(item.Ano.ToString())
+        </td>
+        <td class="ajustetabelaAcaoGEP">
+            @(item.Acao)
+        </td>
+        <td class="ajustetabelaAcaoGEP">
+            @(item.Pilar)
+        </td>
+        <td class="ajustetabelaAcaoGEP">
+            @(item.Objetivo)
+        </td>
+        <td class="ajustetabelaAcaoGEP">
+            @(item.Prazo.ToString("dd/MM/yy"))
+        </td>
+        <td class="ajustetabelaAcaoGEP">
+            @if (item.Status == 0)
+            {
+                <img src="../../Content/icons/button_cancel.png" />
+            }
+            else
+            {
+                <img src="../../Content/icons/apply.png" />
+            }
+            
+        </td>
+        <td class="ajustetabelaAcaoGEP">
+            @(item.Usuario)
+        </td>
+        <td class="ajustetabelaAcaoGEP">
+            @(Convert.ToDateTime(item.DataHoraCadastro).ToString("dd/MM/yy HH:ss"))
+        </td>
+        <td>
+            <table>
+                <tr>
+                    @if ((item.SemanaDoAno == semanaAnoAtual && item.Ano == anoAtual
+                        && DateTime.Today.DayOfWeek != DayOfWeek.Sunday)
+                        ||
+                        (item.SemanaDoAno > semanaAnoAtual && item.Ano >= anoAtual))
+                    {
+                        if (item.Status == 0)
+                        {
+                            <td align="center">
+                                @Html.ActionLink("Edit", "EditAcao",
+                                    new { id = item.ID },
+                                        new { @class = "edit", @title = "Clique aqui para alterar a ação." })
+                            </td>
+                            <td align="center">
+                                @Html.ActionLink("Delete", "ConfirmaDeleteAcao",
+                                    new { id = item.ID },
+                                             new { @class = "delete", @title = "Clique aqui para excluir a ação." })
+                            </td>
+                        
+                            <td align="center">
+                                @Html.ActionLink("Encerrar", "EncerrarAcao",
+                                    new { id = item.ID },
+                                    new { @class = "check", @title = "Clique aqui para encerrar a ação." })
+                            </td>
+                        }
+                        else
+                        {
+                            <td align="center">
+                                @Html.ActionLink("Cancelar", "CancelarEncerramentoAcao",
+                                    new { id = item.ID },
+                                    new { @class = "uncheck", @title = "Clique aqui para cancelar encerramento a ação." })
+                            </td>
+                        }
+
+                    }
+                </tr>
+            </table>
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

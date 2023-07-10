@@ -1,0 +1,11 @@
+﻿<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">MANUTENÇÃO</li>
+    <li>
+        @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+            .GetGroup("HLBAPPM-FiscalManutencaoRecebimentoDocumentos", (System.Collections.ArrayList)Session["Direitos"]))
+        {
+        @Html.ActionLink("Lista de Recebimento de Documentos", "ListaRecebimentoDocumentos", "Fiscal",
+            null, new { @class = "recDoc_32", @title = "Clique aqui para abrir a lista de recebimento de documentos." })
+        }
+    </li>
+</ul>

@@ -1,0 +1,42 @@
+﻿<html>
+<head runat="server">
+    <title>Client-Side Visualization</title>
+    <style type="text/css">
+        body, select, button {font-family: Verdana, Geneva, Tahoma, sans-serif;}
+    </style>
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script src="http://code.jquery.com/jquery-1.4.3.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", { "packages": ["corechart"] });
+        var opts = {
+            width: 600, height: 300,
+            fontName: "Verdana",
+            title: "Visualization Satisfaction",
+            hAxis: { title: "Programming method" },
+            vAxis: { title: "International Units" }
+        };
+        $(document).ready(function () {
+            $("#btn").click(function () {
+                $.getJSON("VisualizationProgrammingTasks.ashx", { funest: $("#mostest").val() }, function (gdt) {
+                    new google.visualization.ColumnChart($("#chart_div").get(0))
+                        .draw(new google.visualization.DataTable(gdt, 0.5), opts);
+                });
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <div id="chart_div"></div>
+        <span>Which is the most fun?</span>
+        <select id="mostest">
+            <option>Hand Coding</option>
+            <option selected="selected">Using the .NET Library</option>
+            <option>Skipping Visualization</option>
+        </select>
+        <button id="btn">Go</button>
+        <p>See <a href="http://code.google.com/p/bortosky-google-visualization/">the open-source project site</a> for more information and to download the Visualization helper for .NET.</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,301 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+    
+    List<MvcAppHylinedoBrasilMobile.Models.RDV> listaRDV =
+        (List<MvcAppHylinedoBrasilMobile.Models.RDV>)Session["ListaRDV"];
+
+    var listaRDVFechados = listaRDV
+        .GroupBy(g => new
+            {
+                g.NumeroFechamentoRDV,
+                g.Empresa,
+                g.IndEconNome,
+                g.Status,
+            })
+        .Select(s => new
+            {
+                s.Key.Empresa,
+                s.Key.NumeroFechamentoRDV,
+                s.Key.Status,
+                NomeUsuario = s.Max(m => m.NomeUsuario),
+                s.Key.IndEconNome,
+                DataInicial = s.Min(m => m.DataRDV),
+                DataFinal = s.Max(m => m.DataRDV),
+                ValorRealCredito = s.Where(w => w.TipoDespesa.Contains("(C")).Sum(m => m.ValorDespesa),
+                ValorRealDebito = s.Where(w => w.TipoDespesa.Contains("(D")).Sum(m => m.ValorDespesa),
+                ValorMoedaEstrangeiraCredito = s.Where(w => w.TipoDespesa.Contains("(C"))
+                    .Sum(m => m.ValorMoedaEstrangeira),
+                ValorMoedaEstrangeiraDebito = s.Where(w => w.TipoDespesa.Contains("(D"))
+                    .Sum(m => m.ValorMoedaEstrangeira)
+            })
+        .OrderBy(o => o.DataInicial)
+        .ToList();
+
+    bool downloadMobile = false;
+    if (Request.Browser.IsMobileDevice)
+    {
+        downloadMobile = true;
+    }
+}
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Menu Principal", "Index", "HomeMobile")
+    </p>
+    @Html.Image(@Url.Content("~/Content/images/Amil-Reembolso-Icon.png"), "RDV")
+    <h2>Lista de RDV - Mensal</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+@using (Html.BeginForm("SearchRDVFechado", "RDV"))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <b>Data Inicial:</b>
+            <div class="editor-label">
+                @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+                {
+                    @Html.TextBox("dataInicialRDV", Convert.ToDateTime(Session["dataInicialRDV"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+                }
+                else
+                {
+                    @Html.TextBox("dataInicialRDV", Convert.ToDateTime(Session["dataInicialRDV"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+                }
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Data Final:</b>
+            <div class="editor-label">
+                @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+                {
+                    @Html.TextBox("dataFinalRDV", Convert.ToDateTime(Session["dataFinalRDV"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+                }
+                else
+                {
+                    @Html.TextBox("dataFinalRDV", Convert.ToDateTime(Session["dataFinalRDV"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+                }
+            </div>
+        </li>
+        @if (Convert.ToBoolean(Session["permissaoCredito"]) || Convert.ToBoolean(Session["permissaoAprovacao"]))
+        {
+        <li data-role="fieldcontain">
+            <b>Usuário:</b>
+            <div class="editor-field">
+                @Html.DropDownList(
+                    "Usuario",
+                    (List<SelectListItem>)Session["ListaFuncionariosPesquisa"])
+            </div>
+        </li>
+        }
+        <li data-role="fieldcontain">
+            <b>Status:</b>
+            <div class="editor-field">
+                @Html.DropDownList(
+                    "Status",
+                    (List<SelectListItem>)Session["ListaStatus"])
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Pesquisar" />
+        </li>
+    </ul>
+}
+@Html.Partial("_MenuRDVPessoal")
+<br />
+<div class="editor-label"  align="center">
+    <table style="width: 90%">
+        <tr style="font-size: xx-small; background-color:Gray">
+            <th colspan="6" style="font-size: xx-small; background-color:Gray">
+                <u>Legenda de Ações:</u>
+            </th>
+        </tr>
+        <tr style="font-size: xx-small">
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/kjots.png"), "")
+                <i>Alterar RDV</i>
+            </td>
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/button_cancel.png"), "")
+                <i>Excluir RDV</i>
+            </td>
+            @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-AprovarRDV", (System.Collections.ArrayList)Session["Direitos"]))
+            {
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/apply.png"), "")
+                <i>Aprovar RDV</i>
+            </td>
+            }
+        </tr>
+    </table>
+</div>
+<br />
+<div id="divTabelaIndexPV" style="overflow:auto" >
+<table id="tabelaIndexPV" class="ajustetabelaIndexPV">
+    <tbody class="ajustetabelaIndexPV">
+    <tr class="ajustetabelaIndexPV">
+        @if (Session["empresa"].ToString().Length > 2)
+        {
+            <th class="ajustetabelaIndexPV">Empresa</th>
+        }
+        @if (MvcAppHyLinedoBrasil.Controllers.AccountController
+                .GetGroup("HLBAPPM-RDVVerTodos",
+                (System.Collections.ArrayList)Session["Direitos"])
+            || Convert.ToBoolean(Session["permissaoAprovacao"])
+            || Convert.ToBoolean(Session["permissaoCredito"]))
+        {
+            <th class="ajustetabelaIndexPV">
+                Usuário
+            </th>
+        }
+        <th class="ajustetabelaIndexPV">
+            Data Inicial
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Data Final
+        </th>
+        <th class="ajustetabelaIndexPV" colspan="2">
+            Valores
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Nº Fech. RDV
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Ações
+        </th>
+    </tr>
+@foreach (var item in listaRDVFechados)
+{
+    <tr class="ajustetabelaIndexPV">
+        @if (Session["empresa"].ToString().Length > 2)
+        {
+        <td class="ajustetabelaIndexPV">
+            @Html.DisplayFor(modelItem => item.Empresa)
+        </td>
+        }
+        @if (MvcAppHyLinedoBrasil.Controllers.AccountController
+                .GetGroup("HLBAPPM-RDVVerTodos",
+                (System.Collections.ArrayList)Session["Direitos"])
+            || Convert.ToBoolean(Session["permissaoAprovacao"])
+            || Convert.ToBoolean(Session["permissaoCredito"]))
+        {
+        <td class="ajustetabelaIndexPV">
+            @Html.DisplayFor(modelItem => item.NomeUsuario)
+        </td>
+        }
+        <td class="ajustetabelaIndexPV">
+            @String.Format("{0:dd/MM/yy}", item.DataInicial)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @String.Format("{0:dd/MM/yy}", item.DataFinal)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @if ((item.ValorRealCredito - item.ValorRealDebito) < 0)
+            {
+                @String.Format("({0:C2})", (item.ValorRealCredito - item.ValorRealDebito) * (-1))
+            }
+            else
+            {
+                @String.Format("{0:C2}", (item.ValorRealCredito - item.ValorRealDebito))
+            }
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @if ((item.ValorMoedaEstrangeiraCredito - item.ValorMoedaEstrangeiraDebito) != 0)
+            {
+                if ((item.ValorMoedaEstrangeiraCredito - item.ValorMoedaEstrangeiraDebito) < 0)
+                {
+                    @String.Format("("
+                        + item.IndEconNome.Substring(item.IndEconNome.IndexOf("-") + 2, 
+                            item.IndEconNome.Length - (item.IndEconNome.IndexOf("-") + 2))
+                        + " {0:N2})", (item.ValorMoedaEstrangeiraCredito - item.ValorMoedaEstrangeiraDebito) * (-1));
+                }
+                else
+                {
+                    @String.Format(""
+                        + item.IndEconNome.Substring(item.IndEconNome.IndexOf("-") + 2, 
+                            item.IndEconNome.Length - (item.IndEconNome.IndexOf("-") + 2))
+                        + " {0:N2}", (item.ValorMoedaEstrangeiraCredito - item.ValorMoedaEstrangeiraDebito));
+                }
+            }
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @Html.DisplayFor(modelItem => item.NumeroFechamentoRDV)
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td align="center">
+                        @Html.ActionLink("Visualiza", "VisualizaRDVFechado",
+                             new { numRDV = item.NumeroFechamentoRDV },
+                             new { @class = "visualizar", 
+                                 @title = "Clique aqui para Visualizar os Lançamentos deste RDV" })
+                    </td>
+                    @if (item.Status != "Importado")
+                    {
+                    <td align="center">
+                        @Html.ActionLink("Excluir", "DeleteRDVFechado",
+                            new { numRDV = item.NumeroFechamentoRDV },
+                            new { @class = "delete", @title = "Clique aqui para Excluir o Fechamento" })
+                    </td>
+                    }
+                    @if (item.NumeroFechamentoRDV != null && item.NumeroFechamentoRDV != "")
+                    {
+                        <td align="center">
+                            @Html.ActionLink("Imprimir RDV", "PrintRDV",
+                                new
+                                {
+                                    numRDV = item.NumeroFechamentoRDV,
+                                    download = downloadMobile
+                                },
+                                new
+                                {
+                                    @class = "print",
+                                    @target = "_blank",
+                                    @title = "Clique aqui para Imprimir o RDV"
+                                })
+                        </td>
+                    }
+                    @*@if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                        .GetGroup("HLBAPPM-RDVAprovar", (System.Collections.ArrayList)Session["Direitos"]))
+                    {
+                        if (existe > 0)
+                        {
+                        <td align="center">
+                            @Html.ActionLink("Aprovar", "AprovarRDVSemanal",
+                                new
+                                {
+                                    empresa = item.Empresa,
+                                    usuario = item.Usuario,
+                                    ano = item.Ano,
+                                    semanaAno = item.SemanaAno
+                                },
+                                new { @class = "apply", @title = "Clique aqui para Aprovar estes RDVs" })
+                        </td>
+                        }
+                        else
+                        {
+                        <td align="center">
+                            @Html.ActionLink("Desaprovar", "DesaprovarRDVSemanal",
+                                new
+                                {
+                                    empresa = item.Empresa,
+                                    usuario = item.Usuario,
+                                    ano = item.Ano,
+                                    semanaAno = item.SemanaAno
+                                },
+                                new { @class = "cancel", @title = "Clique aqui para Desaprovar estes RDVs" })
+                        </td>
+                        }
+                    }*@
+                </tr>
+            </table>
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

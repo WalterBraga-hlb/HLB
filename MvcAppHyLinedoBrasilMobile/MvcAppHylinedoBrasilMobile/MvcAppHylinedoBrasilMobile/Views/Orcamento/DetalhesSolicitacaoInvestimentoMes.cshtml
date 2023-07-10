@@ -1,0 +1,97 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+
+    List<MvcAppHylinedoBrasilMobile.Models.Investimento_Solicitacao> lista =
+        (List<MvcAppHylinedoBrasilMobile.Models.Investimento_Solicitacao>)Session["ListaSolicitacaoInvestimentoMes"];
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+    MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities apolo = new MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities();
+
+    string mesAno = lista.FirstOrDefault().DataInicio.ToString("MMMMM/yyyy");
+
+    int id = lista.FirstOrDefault().IDInvestimento;
+
+    MvcAppHylinedoBrasilMobile.Models.Investimento inv =
+        hlbapp.Investimento.Where(w => w.ID == id).FirstOrDefault();
+
+    decimal valorTotal = 0;
+}
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para a Tabela de Investimentos / Mês", "TabelaInvestimentoMes", "Orcamento",
+                null, new { @class = "table_invest", @title = "Clique aqui para voltar para a tabela de investimentos / mês" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/sol_invest.png"), "Solicitação de Investimento")
+    <h2>Detalhes das Solicitações do Investimento @(inv.NumeroProjeto + " - " + inv.NomeProjeto) em @(mesAno)</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+<div id="divTabelaRV">
+<table id="tabelaGrupoRequisito" class="ajustetabelaLogRequisitoVisita">
+    <tbody class="ajustetabelaLogRequisitoVisita">
+        <tr class="ajustetabelaLogRequisitoVisita">
+            <th class="ajustetabelaLogRequisitoVisita">
+                ID
+            </th>
+            <th class="ajustetabelaLogRequisitoVisita">
+                Descrição
+            </th>
+            <th class="ajustetabelaLogRequisitoVisita">
+                Data Início
+            </th>
+            <th class="ajustetabelaLogRequisitoVisita">
+                Data Término
+            </th>
+            <th class="ajustetabelaLogRequisitoVisita">
+                Valor Solicitado
+            </th>
+            <th class="ajustetabelaLogRequisitoVisita">
+                Status
+            </th>
+        </tr>
+        @foreach (var item in lista.OrderBy(o => o.DataInicio).ToList())
+        {
+            decimal totalSolicitacaoProjeto = 0;
+            
+            List<MvcAppHylinedoBrasilMobile.Models.Investimento_Solicitacao_Projecao_Pagamento> listaProjPag = hlbapp
+                .Investimento_Solicitacao_Projecao_Pagamento.Where(w => w.IDInvestimentoSolicitacao == item.ID
+                    && w.Valor > 0).ToList();
+            
+            if (listaProjPag.Count > 0)
+            {
+                totalSolicitacaoProjeto = listaProjPag.Sum(s => s.Valor);
+            }
+            
+            <tr class="ajustetabelaLogRequisitoVisita">
+                <td class="ajustetabelaLogRequisitoVisita">
+                    @(item.ID)
+                </td>
+                <td class="ajustetabelaLogRequisitoVisita">
+                    @(item.Descricao)
+                </td>
+                <td class="ajustetabelaLogRequisitoVisita">
+                    @(item.DataInicio.ToShortDateString())
+                </td>
+                <td class="ajustetabelaLogRequisitoVisita">
+                    @(item.DataTermino.ToShortDateString())
+                </td>
+                <td class="ajustetabelaLogRequisitoVisita">
+                    @(String.Format("{0:C}", totalSolicitacaoProjeto))
+                </td>
+                <td class="ajustetabelaLogRequisitoVisita">
+                    @(item.Status)
+                </td>
+            </tr>
+            
+            valorTotal = valorTotal + totalSolicitacaoProjeto;
+        }
+    </tbody>
+</table>
+<br />
+<div align="center">
+<h4>@String.Format("VALOR TOTAL: {0:C}", valorTotal)</h4>
+</div>
+</div>

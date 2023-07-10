@@ -1,0 +1,91 @@
+﻿@using am = MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController;
+@{
+    string lg = Session["language"].ToString();
+}
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Header_Navigation", Session["language"].ToString())</li>
+    @*<li>@Html.ActionLink("Home", "Index", "HomeMobile", null,  new { @class = "home" })</li>*@
+    <li>@Html.ActionLink(am.GetTextOnLanguage("Controle de Estoque de Ovos", lg), "MenuControleEstoqueOvos", "DiarioExpedicao", null, new { @class = "AQO" })</li>
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+        .GetGroup("HLBAPPM-PedidoRacaoConfiguracaoFormula", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink("Configuração das Fórmulas da Ração", "ListaConfigFormulaRacao", "PedidoRacao", null, new { @class = "assistencia_tecnica" })</li>
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-PedidoRacao", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink("Pedidos de Ração", "Index", "PedidoRacao", null, new { @class = "graos" })</li>
+    }
+    @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-DownloadFormularios", (System.Collections.ArrayList)Session["Direitos"]))
+    //|| Session["tipoUsuario"].ToString() == "CHIC")
+    {
+        <li>@Html.ActionLink("Downloads", "Index", "DownloadFormularios", null, new { @class = "favicon" })</li>
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-NavisionIntegrationApp", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink(@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Title_Index_NavisionIntegrationApp", Session["language"].ToString()), "OrdersCalendar", "NavisionIntegrationApp", new { firstDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1), source = "" }, new { @class = "navision" })</li>
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-PedidoVenda", (System.Collections.ArrayList)Session["Direitos"])
+        || Session["tipoUsuario"].ToString() == "CHIC")
+    {
+        <li>@Html.ActionLink("Pedidos de Venda", "Index", "PedidoVenda", null, new { @class = "pedidovenda" })</li>
+        if (!Session["empresa"].ToString().Equals("PL") && !Session["login"].ToString().Contains("@"))
+        {
+            <li><a href="@Url.Content("https://www.youtube.com/playlist?list=PL38lSiQXICLFl-7RN2yuznfXaUaXoRo2b")" target="_blank">Tutoriais Pedido de Venda</a></li>
+        }
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-TransferenciaOvosEntreEmpresas", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink("Transferências de Ovos entre Empresas", "ListaTransferenciaLinhagens", "PedidoVenda", null, new { @class = "transferenciaLinhagens" })</li>
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+        .GetGroup("HLBAPPM-RDV", (System.Collections.ArrayList)Session["Direitos"])
+        || (Session["tipoUsuario"].ToString() == "CHIC"
+                //&& Session["empresa"].ToString().Contains("PL")
+                && Session["vendedorParticipaControleRDV"].ToString() == "Sim"))
+    {
+        <li>@Html.ActionLink("RDV", "MenuRDV", "RDV", null, new { @class = "rdv" })</li>
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+        .GetGroup("HLBAPPM-Orcamento", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink("Orçamentos", "MenuOrcamento", "Orcamento", null, new { @class = "budget" })</li>
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+        .GetGroup("HLBAPPM-GEP", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink("GEP", "MenuGEP", "GEP", null, new { @class = "gep" })</li>
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+        .GetGroup("HLBAPPM-Fiscal", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink("Fiscal", "MenuFiscal", "Fiscal", null, new { @class = "fiscal_32" })</li>
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+        .GetGroup("HLBAPPM-Auditoria", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink("Auditoria", "MenuAuditoria", "Auditoria", null, new { @class = "auditoria" })</li>
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+        .GetGroup("HLBAPPM-AssistenciaTecnica", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink("Assistência Técnica", "MenuAssistenciaTecnica", "AssistenciaTecnica", null, new { @class = "assistencia_tecnica" })</li>
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+        .GetGroup("HLBAPPM-AQO", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>@Html.ActionLink("AQO - Análise da Qualidade do Ovo", "MenuAQO", "AQO", null, new { @class = "AQO" })</li>
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+        .GetGroup("HLBAPP-AcessoFechamentoDataLancamentos", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <li>
+            @Html.ActionLink(am.GetTextOnLanguage("Fechamento das Datas de Lançamentos", lg), "FechamentoLancamentosProducao",
+        "DiarioExpedicao", null, new { @class = "assistencia_tecnica" })
+        </li>
+    }
+    @if (Session["empresaApolo"] == "MIX")
+    {
+        <li><a href="@Url.Content("https://docs.google.com/forms/d/e/1FAIpQLSc0Qprq76zExJ7OHQcGLvHEVTctCGQa1P78sCfDpFzMibeO1Q/viewform?c=0&w=1&usp=mail_form_link")" target="_blank">Pesquisa de Clima Organizacional - 2018</a></li>
+    }
+    <li>@Html.ActionLink(@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Menu_About", Session["language"].ToString()), "About", "HomeMobile")</li>
+</ul>

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<MvcAppHylinedoBrasilMobile.Models.Nav_Agenda>
+
+@{
+    DateTime dateInicialVisita = Model.Min(m => m.VisitDate);
+    DateTime dateFinalVisita = Model.Max(m => m.VisitDate);
+    
+    var listVisitors = MvcAppHylinedoBrasilMobile.Controllers.NavisionIntegrationAppController.hlbappStatic
+        .Nav_Agenda
+        .Where(w => w.VisitDate >= dateInicialVisita && w.VisitDate <= dateFinalVisita)
+        .GroupBy(g => new { g.Visitor }).Select(s => new { s.Key.Visitor }).OrderBy(o => o.Visitor)
+        .ToList();
+}
+
+<div id="tabelaNavisionOrders" style="overflow:auto;">
+<table id="tabelaNavision">
+    <tr>
+        <th>
+            @MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Agenda_List_Date", Session["language"].ToString())
+        </th>
+        <th>
+            @MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Agenda_List_Week", Session["language"].ToString())
+        </th>
+        <th>
+            @MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Agenda_List_Delivey", Session["language"].ToString())
+        </th>
+        @foreach (var visitor in listVisitors)
+        {
+            <th>
+                @visitor.Visitor
+            </th>
+        }
+    </tr>
+@foreach (var item in Model.GroupBy(g => new { g.VisitDate, g.YearWeek }).Select(s => new { s.Key.VisitDate, s.Key.YearWeek }).ToList())
+{
+    <tr>
+        <td style="width: 20px">
+            <b>@String.Format("{0:" + MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Format_Date_Agenda", Session["language"].ToString()) + "}", item.VisitDate)</b>
+        </td>
+        <td style="width: 10px">
+            <b>@Html.DisplayFor(modelItem => item.YearWeek)</b>
+        </td>
+        <td style="width: 60px">
+            @{
+                List<MvcAppHylinedoBrasilMobile.Models.NavOrders> listDeliverys =
+                    (List<MvcAppHylinedoBrasilMobile.Models.NavOrders>)Session["ListOrders"];
+            }
+            @foreach (var delivery in listDeliverys.Where(w => w.HatchDate.AddDays(1) == item.VisitDate).ToList())
+            {
+                //descriptionDelivery = descriptionDelivery + " / " + delivery.CustomerName;
+                @*<b style="background-color:@delivery.LocationColor">@(delivery.CustomerName + " / ")</b>*@
+                <b style="background-color:@delivery.LocationColor">
+                    @Html.ActionLink((delivery.CustomerName + " / "), "DetailsOrderAgenda", "NavisionIntegrationApp",
+                        new
+                        {
+                            customer = delivery.CustomerName,
+                            hatchDate = delivery.HatchDate
+                        }, null)
+                </b>
+            }
+        </td>
+        @{
+            var listDateVisitors = MvcAppHylinedoBrasilMobile.Controllers.NavisionIntegrationAppController.hlbappStatic
+                .Nav_Agenda.Where(w => w.VisitDate == item.VisitDate).OrderBy(o => o.Visitor).ToList();
+        }
+        @foreach (var visitor in listDateVisitors)
+        {
+		    <td style="width: 40px">
+                @(visitor.Description == "0" ? "" : visitor.Description)
+            </td>
+        }
+    </tr>
+}
+
+</table>
+</div>

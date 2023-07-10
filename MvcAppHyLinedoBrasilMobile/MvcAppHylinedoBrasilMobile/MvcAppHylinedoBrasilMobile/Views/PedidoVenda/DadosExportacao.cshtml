@@ -1,0 +1,398 @@
+﻿@{
+    ViewBag.Title = "";
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+}
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+//        $('#valorDocumentacaoDE').focusout(function () {
+//            var value = $('#valorDocumentacaoDE').val();
+//            if (value == "") {
+//                alert('O campo Valor da Documentação não pode ser VAZIO!');
+//                $('#valorDocumentacaoDE').focus();
+//            }
+//        });
+        $('#horaEnvioPV').mask('99:99');
+        $('#horaSaidaIncubatorioPV').mask('99:99');
+        $('#horaEntregaPV').mask('99:99');
+        $('#valorFreteDE').focusout(function () {
+            var value = $('#valorFreteDE').val();
+            if (value == "") {
+                alert('O campo Valor de Frete não pode ser VAZIO!');
+                $('#valorFreteDE').focus();
+            }
+        });
+        $('#numCaixasDE').focusout(function () {
+            var value = $('#numCaixasDE').val();
+            if (value == "") {
+                alert('O campo Nº de Caixas não pode ser VAZIO!');
+                $('#numCaixasDE').focus();
+            }
+        });
+    });
+
+    /* Máscaras ER */
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mcep(v) {
+        v = v.replace(/\D/g, "")                    //Remove tudo o que não é dígito
+        v = v.replace(/^(\d{5})(\d)/, "$1-$2")         //Esse é tão fácil que não merece explicações
+        return v
+    }
+    function mtel(v) {
+        v = v.replace(/\D/g, "");             //Remove tudo o que não é dígito
+        v = v.replace(/^(\d{2})(\d)/g, "($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+        v = v.replace(/(\d)(\d{4})$/, "$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
+        return v;
+    }
+    function cnpj(v) {
+        v = v.replace(/\D/g, "")                           //Remove tudo o que não é dígito
+        v = v.replace(/^(\d{2})(\d)/, "$1.$2")             //Coloca ponto entre o segundo e o terceiro dígitos
+        v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3") //Coloca ponto entre o quinto e o sexto dígitos
+        v = v.replace(/\.(\d{3})(\d)/, ".$1/$2")           //Coloca uma barra entre o oitavo e o nono dígitos
+        v = v.replace(/(\d{4})(\d)/, "$1-$2")              //Coloca um hífen depois do bloco de quatro dígitos
+        return v
+    }
+    function mcpf(v) {
+        v = v.replace(/\D/g, "")                    //Remove tudo o que não é dígito
+        v = v.replace(/(\d{3})(\d)/, "$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+        v = v.replace(/(\d{3})(\d)/, "$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+        //de novo (para o segundo bloco de números)
+        v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2") //Coloca um hífen entre o terceiro e o quarto dígitos
+        return v
+    }
+    function mdata(v) {
+        v = v.replace(/\D/g, "");                    //Remove tudo o que não é dígito
+        v = v.replace(/(\d{2})(\d)/, "$1/$2");
+        v = v.replace(/(\d{2})(\d)/, "$1/$2");
+
+        v = v.replace(/(\d{2})(\d{2})$/, "$1$2");
+        return v;
+    }
+    function mtempo(v) {
+        v = v.replace(/\D/g, "");                    //Remove tudo o que não é dígito
+        v = v.replace(/(\d{1})(\d{2})(\d{2})/, "$1:$2.$3");
+        return v;
+    }
+    function mhora(v) {
+        v = v.replace(/\D/g, "");                    //Remove tudo o que não é dígito
+        v = v.replace(/(\d{2})(\d)/, "$1h$2");
+        return v;
+    }
+    function mrg(v) {
+        v = v.replace(/\D/g, "");                                      //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{7})$/, "$1.$2");    //Coloca o . antes dos últimos 3 dígitos, e antes do verificador
+        v = v.replace(/(\d)(\d{4})$/, "$1.$2");    //Coloca o . antes dos últimos 3 dígitos, e antes do verificador
+        v = v.replace(/(\d)(\d)$/, "$1-$2");               //Coloca o - antes do último dígito
+        return v;
+    }
+    function mnum(v) {
+        v = v.replace(/\D/g, "");                                      //Remove tudo o que não é dígito
+        return v;
+    }
+    function mvalor(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{8})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{5})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{2})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+    function mvalor4(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{8})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{5})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{4})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+    function mvalorperc(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        //v = v.replace(/(\d)(\d{8})$/, "$1.$2"); //coloca o ponto dos milhões
+        //v = v.replace(/(\d)(\d{5})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{2})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+</script>
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Pedidos de Venda", "Index", "PedidoVenda")
+        <br />
+        <br />
+        <b style="color:red; background-color:Yellow">
+            * CUIDADO!!! CASO CLIQUE NO LINK ACIMA, OS DADOS INFORMADOS DO PEDIDO
+            ANTES DA FINALIZAÇÃO SERÃO PERDIDOS!!!
+        </b>
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/pedidoVenda.png"), "Pedido de Venda")
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+
+<h2>Passo 01.02: Informe os Dados para realizar a Documentação da Exportação</h2>
+<br />
+@using (Html.BeginForm("SaveDadosExportacao", "PedidoVenda", FormMethod.Post))
+{
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Dados Principais:</li>
+    <li data-role="fieldcontain">
+        <b>Data do Pedido:</b>
+        <div class="editor-label">
+            @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+            {
+                @Html.TextBox("dataPedidoVenda", Convert.ToDateTime(Session["dataPedidoVenda"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+            }
+            else
+            {
+                @Html.TextBox("dataPedidoVenda", Convert.ToDateTime(Session["dataPedidoVenda"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+            }
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <b>Data de Coleta / Nascimento:</b>
+        <div class="editor-label">
+            @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+            {
+                @Html.TextBox("dataColetaNascimento", Convert.ToDateTime(Session["dataColetaNascimento"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+            }
+            else
+            {
+                @Html.TextBox("dataColetaNascimento", Convert.ToDateTime(Session["dataColetaNascimento"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+            }
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <b>Data de Saída do Incubatório:</b>
+        <div class="editor-label">
+            @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+            {
+                @Html.TextBox("dataSaidaIncubatorio", Convert.ToDateTime(Session["dataSaidaIncubatorio"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+            }
+            else
+            {
+                @Html.TextBox("dataSaidaIncubatorio", Convert.ToDateTime(Session["dataSaidaIncubatorio"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+            }
+        </div>
+        <b>Hora de Saída do Incubatório:</b>
+        <div class="editor-label">
+            @Html.TextBox("horaSaidaIncubatorioPV", Session["horaSaidaIncubatorioPV"].ToString())
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <b>Data de Envio:</b>
+        <div class="editor-label">
+            @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+            {
+                @Html.TextBox("dataEnvio", Convert.ToDateTime(Session["dataEnvio"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+            }
+            else
+            {
+                @Html.TextBox("dataEnvio", Convert.ToDateTime(Session["dataEnvio"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+            }
+        </div>
+        <b>Hora de Envio:</b>
+        <div class="editor-label">
+            @Html.TextBox("horaEnvioPV", Session["horaEnvioPV"].ToString())
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <b>Data de Entrega:</b>
+        <div class="editor-label">
+            @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+            {
+                @Html.TextBox("dataEntrega", Convert.ToDateTime(Session["dataEntregaInicial"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+            }
+            else
+            {
+                @Html.TextBox("dataEntrega", Convert.ToDateTime(Session["dataEntregaInicial"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+            }
+        </div>
+        <b>Hora de Entrega:</b>
+        <div class="editor-label">
+            @Html.TextBox("horaEntregaPV", Session["horaEntregaPV"].ToString())
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <b>Selecione o Tipo de Venda:</b>
+        <div class="editor-label">
+        @Html.DropDownList(
+            "TipoVenda",
+            (List<SelectListItem>)Session["ListaTipoVenda"])
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <b>Enviado Via:</b>
+        <div class="editor-label">
+            @Html.DropDownList(
+                "EnviadoVia",
+                (List<SelectListItem>)Session["ListViaDeEnvio"])
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <b>Aeroporto / Barreira de Origem:</b>
+        <div class="editor-label">
+            @Html.DropDownList(
+                "AeroportoOrigem",
+                (List<SelectListItem>)Session["ListAeroportoOrigem"])
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <b>AWB - CRT - B/L:</b>
+        <div class="editor-label">
+            @Html.TextBox("awbPV", Session["awbPV"].ToString())
+        </div>
+    </li>
+    <li data-role="list-divider">Caso seja TERRESTRE, informar os seguintes dados:</li>
+    <li data-role="fieldcontain">
+        <b>Placa:</b>
+        <div class="editor-label">
+            @Html.TextBox("placaPV", Session["placaPV"].ToString())
+        </div>
+        <b>Lacre:</b>
+        <div class="editor-label">
+            @Html.TextBox("lacrePV", Session["lacrePV"].ToString())
+        </div>
+        <b>Nome do Motorista:</b>
+        <div class="editor-label">
+            @Html.TextBox("motoristaPV", Session["motoristaPV"].ToString())
+        </div>
+        <b>RG Motorista:</b>
+        <div class="editor-label">
+            @Html.TextBox("rgMotoristaPV", Session["rgMotoristaPV"].ToString())
+        </div>
+    </li>
+    <li data-role="list-divider">Caso seja AÉREO, informar os seguintes dados:</li>
+    <li data-role="fieldcontain">
+        <b>Aeroporto de Destino:</b>
+        <div class="editor-label">
+            @Html.DropDownList(
+                "AeroportoDestino",
+                (List<SelectListItem>)Session["ListAeroportoDestino"])
+        </div>
+        <b>Número do Vôo:</b>
+        <div class="editor-label">
+            @Html.TextBox("numeroVooPV", Session["numeroVooPV"].ToString())
+        </div>
+        <b>Cia. Aérea:</b>
+        <div class="editor-label">
+            @Html.TextBox("ciaAereaPV", Session["ciaAereaPV"].ToString())
+        </div>
+    </li>
+    <li data-role="list-divider">Dados Complementares:</li>
+    <li data-role="fieldcontain">
+        <b>Nº Fatura:</b>
+        <div class="editor-label">
+            @Html.TextBox("numFaturaDE", Session["numFaturaDE"].ToString())
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <b>NCM:</b>
+        <div class="editor-label">
+            @Html.TextBox("ncmPV", Session["ncmPV"].ToString())
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <b>Condição de Pagamento:</b>
+        @*@if (Session["condicaoPagamentoPV"] == null)
+        {
+            <div class="editor-label">
+                @Html.TextBox("condPagPV", Session["condPagPV"].ToString())
+            </div>
+        }
+        else
+        {
+            <div class="editor-label">
+                @(Session["condicaoPagamentoPV"].ToString())
+            </div>
+        }*@
+        <div class="editor-label">
+            @Html.TextBox("condPagPV", Session["condPagPV"].ToString())
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <b>Valor da Documentação:</b>
+        <div class="editor-label">
+            @Html.TextBox("valorDocumentacaoDE", Convert.ToDecimal(Session["valorDocumentacaoDE"]),
+                new { @onkeyup = "mascara(this, mvalor);" })
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <b>Valor do Frete:</b>
+        <div class="editor-label">
+            @Html.TextBox("valorFreteDE", Convert.ToDecimal(Session["valorFreteDE"]),
+                new { @onkeyup = "mascara(this, mvalor);" })
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <b>Nº Caixas:</b>
+        <div class="editor-label">
+            @Html.TextBox("numCaixasDE", Session["numCaixasDE"].ToString(), new { @type = "number" })
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <b>Nº Paletes:</b>
+        <div class="editor-label">
+            @Html.TextBox("numPaletesDE", Session["numPaletesDE"].ToString(), new { @type = "number" })
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <b>Veterinário Responsável:</b>
+        <div class="editor-label">
+            @Html.DropDownList(
+                "Veterinario",
+                (List<SelectListItem>)Session["ListVeterinarioResponsavel"])
+        </div>
+    </li>
+    <li data-role="fieldcontain">
+        <b>Observações p/ Proforma / Invoice / Commercial Invoice:</b>
+        <div class="editor-label">
+            @Html.TextArea("observacaoDE", Session["observacaoPV"].ToString())
+        </div>
+    </li>
+</ul>
+<br />
+            if (Session["origemPV"].ToString().Equals("Alteração"))
+            {
+        <input type="submit" value="Salvar" name="DadosExportacaoNext"  />
+            }
+            else
+            {
+        <input type="submit" value="Próximo" name="DadosExportacaoNext" />
+            }
+}
+@if (Session["origemPV"].ToString().Equals("Alteração"))
+{
+    using (Html.BeginForm("FinalizaPV", "PedidoVenda", FormMethod.Post))
+    {
+       <input type="submit" value="Voltar para a Visualização do Pedido" />
+    }
+}
+else
+{
+    if (Session["selectedTypeAddress"].ToString().Equals("Outro"))
+    {
+        using (Html.BeginForm("SelectShipAddress", "PedidoVenda", FormMethod.Post))
+        {
+            <input type="submit" value="Anterior" />
+        }
+    }
+    else
+    {
+        using (Html.BeginForm("AddClientePV", "PedidoVenda", FormMethod.Post))
+        {
+            <input type="submit" value="Anterior" />
+        }
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

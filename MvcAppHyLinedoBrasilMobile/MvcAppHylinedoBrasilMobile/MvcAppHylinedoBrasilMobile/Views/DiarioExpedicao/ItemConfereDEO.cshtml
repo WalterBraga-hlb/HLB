@@ -1,0 +1,388 @@
+﻿@model IEnumerable<MvcAppHylinedoBrasilMobile.Models.LayoutDiarioExpedicaos>
+@using am = MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController;
+
+@{
+    ViewBag.Title = "";
+    string lg = Session["language"].ToString();
+
+    var dataMaxima = DateTime.Today.ToString("yyyy-MM-dd");
+
+    var listaAgrupada = Model
+        .GroupBy(g => new
+        {
+            g.LoteCompleto,
+            g.DataProducao
+        })
+        .OrderBy(o => o.Key.LoteCompleto)
+        .ThenBy(t => t.Key.DataProducao)
+        .Select(s => new
+        {
+            Lote = s.Key.LoteCompleto,
+            Data = s.Key.DataProducao,
+            Status = s.Max(m => m.Importado),
+            QtdOvos = s.Sum(m => (m.QtdeOvos == null ? 0 : m.QtdeOvos)),
+            QtdDif = s.Sum(m => (m.QtdDiferenca == null ? 0 : m.QtdDiferenca)),
+            TempInternaOvo = s.Max(m => (m.TemperaturaOvoInterna == null ? 0 : m.TemperaturaOvoInterna)),
+            ID = s.Max(m => m.ID)
+        })
+        .ToList();
+}
+<script type='text/javascript'>
+    function atualizaSessionQtdeInformada(valor, pQtdOvosGranja, pLote, dataProducao) {
+        var value = valor.value;
+        $.ajax({
+            url: '/DiarioExpedicao/AtualizaSessionQtdeInformada',
+            type: 'POST',
+            data: JSON.stringify({ valor: value, qtdOvosGranja: pQtdOvosGranja, lote: pLote, data: dataProducao }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                    //$('#saveConfereDEO').button('enable');
+                    //$('[type="submit"]').button('refresh');
+                    document.getElementById('hdQtdeErrosSaldo_' + pLote + '|' + dataProducao).value = 0;
+                } else {
+                    document.getElementById('hdQtdeErrosSaldo_' + pLote + '|' + dataProducao).value = 1;
+                    //var erro = document.getElementById('hdQtdeErrosSaldo_' + pLote + '|' + dataProducao).value;
+                    //alert(erro);
+                    alert(data.toString());
+                    //$('#saveConfereDEO').button('disable');
+                    //$('[type="submit"]').button('refresh');
+                }
+                verificaCampos();
+            }
+        });
+    }
+
+    function verificaCampos() {
+        var existe = 0;
+        $('#tabelaConfereDEO tr').each(function () {
+            $(this).find('td').each(function () {
+                var lote = '';
+                $(this).find('input').each(function () {
+                    if ($(this).attr("id") == "lblid") {
+                        loteData = $(this).val();
+                        //alert(loteData);
+                        //var existeErroSaldo = $("#hdQtdeErrosSaldo_" + loteData).val();
+                        var existeErroSaldo = document.getElementById('hdQtdeErrosSaldo_' + loteData).value;
+                        //alert(existeErroSaldo);
+                        if (existeErroSaldo == 1) {
+                            var errorSaldo = document.getElementById('errorSaldo_' + loteData);
+                            errorSaldo.innerHTML = 'Qtde. sem saldo! Por favor, verifique!';
+                            existe = existe + existeErroSaldo;
+                        } else {
+                            var errorSaldo = document.getElementById('errorSaldo_' + loteData);
+                            errorSaldo.innerHTML = '';
+                        }
+                    }
+                });
+            });
+        });
+        //alert('existe ' + existe);
+        if (existe > 0) {
+            $('#saveConfereDEO').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        } else {
+            $('#saveConfereDEO').button('enable');
+            $('[type="submit"]').button('refresh');
+            return false;
+        }
+    }
+
+//    $('#saveConfereDEO').click(function () {
+//        verificaCampos();
+//
+//        //        if (verificaCampos()) {
+//        //            alert('Existem saldos incorretos! Verifique!');
+//        //            return;
+//        //        }
+    //    });
+
+    /* Máscaras ER */
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mvalor(v) {
+        v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+        v = v.replace(/(\d)(\d{8})$/, "$1.$2"); //coloca o ponto dos milhões
+        v = v.replace(/(\d)(\d{5})$/, "$1.$2"); //coloca o ponto dos milhares
+
+        v = v.replace(/(\d)(\d{2})$/, "$1,$2"); //coloca a virgula antes dos 2 últimos dígitos
+        return v;
+    }
+</script>
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de DEOs p/ Conferência", "ListaConferenciaDEO", "DiarioExpedicao")
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/checkDiarioProducao.png"), "DEO")
+    <h2>Diário de Expedição @Html.Label(Session["dataHoraCarreg"].ToString()) p/ Conferência</h2>
+</div>
+<br />
+<h2>@am.GetTextOnLanguage("Granja / Incubatório de Origem", lg): @Html.Label(Session["incubatorioSelecionadoNome"].ToString())</h2>
+<br />
+<h4 style="color:red;">* Campos com o (*) são obrigatórios!</h4>
+<br />
+@if (ViewBag.Erro != null)
+{
+    <h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+    <br />
+}
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Menu do Item do Diário de Expedição</li>
+    <li>
+        @(Html.ActionLink("Adicionar Item Divergente no DEO", "Create", new { origem = "Conferência" }, new { @class = "add" }))
+    </li>
+</ul>
+@using (Html.BeginForm("ConfereDEOListaCega", "DiarioExpedicao", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        <div class="editor-label">
+            <b>Data do Recebimento no Incubatório:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("dataRecebInc",
+                (Session["dataRecebInc"] != "" && Session["dataRecebInc"] != null ?
+                    Convert.ToDateTime(Session["dataRecebInc"]).ToString("yyyy-MM-dd") : ""),
+                new
+                {
+                    @type = "date",
+                    @required = "true",
+                    @max = dataMaxima
+                })
+        </div>
+        <div class="editor-label" id="errorNFNum" style="color: Red; font-weight:bold;"></div>
+    </fieldset>
+    <br />
+    <div style="overflow:auto;">
+        <table id="tabelaConfereDEO" class="ajuste">
+            <tbody class="ajuste">
+                <tr class="ajuste">
+                    <th class="ajuste"></th>
+                    @*<th class="ajuste">
+            Núcleo
+        </th>
+        <th class="ajuste">
+            Galpão
+        </th>*@
+                    <th class="ajuste">
+                        Lote
+                    </th>
+                    @*<th class="ajuste">
+            Idade
+        </th>*@
+                    @*<th class="ajuste">
+            Linhagem
+        </th>*@
+                    <th class="ajuste">
+                        Data Produção
+                    </th>
+                    @*<th class="ajuste">
+            N.Ref.
+        </th>*@
+                    @*<th class="ajuste">
+            Ovos
+        </th>
+        <th class="ajuste">
+            Band.
+        </th>
+        <th class="ajuste">
+            Carrinho
+        </th>
+        <th class="ajuste">
+            OK*
+        </th>*@
+                    <th class="ajuste">
+                        Qtd. (Ovos) *
+                    </th>
+                    @*<th class="ajuste">
+            Usuário
+        </th>
+        <th class="ajuste">
+            Data / Hora Dig.
+        </th>*@
+                    <th class="ajuste">
+                        Temp. 1 - Início Carrinho
+                    </th>
+                    <th class="ajuste">
+                        Temp. 2 - Meio Carrinho
+                    </th>
+                    <th class="ajuste">
+                        Temp. 3 - Fim Carrinho
+                    </th>
+                    <th class="ajuste">
+                        Observação
+                    </th>
+                </tr>
+
+                @foreach (var item in listaAgrupada)
+                {
+            <tr class="ajuste">
+                <td class="ajuste">
+                    @if (item.Status == "Divergência")
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID, origem = "Conferência" },
+                            new { @class = "delete" });
+                    }
+                </td>
+                @*<td class="ajuste">
+            @Html.DisplayFor(modelItem => item.Nucleo)
+        </td>
+        <td class="ajuste">
+            @Html.DisplayFor(modelItem => item.Galpao)
+        </td>*@
+                <td class="ajuste">
+                    @Html.DisplayFor(modelItem => item.Lote)
+                </td>
+                @*<td class="ajuste">
+            @Html.DisplayFor(modelItem => item.Idade)
+        </td>
+        <td class="ajuste">
+            @Html.DisplayFor(modelItem => item.Linhagem)
+        </td>*@
+                <td class="ajuste">
+                    @String.Format("{0:dd/MM/yyyy}", item.Data)
+                </td>
+                @*<td class="ajuste">
+            @Html.DisplayFor(modelItem => item.NumeroReferencia)
+        </td>*@
+                @*<td class="ajuste">
+            @String.Format("{0:N0}", item.QtdeOvos)
+        </td>
+        <td class="ajuste">
+            @String.Format("{0:N1}", item.QtdeBandejas)
+        </td>
+        <td class="ajuste">
+            @String.Format("{0:N1}", (item.QtdeBandejas / 36))
+        </td>
+        <td>
+            <div align="center" style="width: 98%;">
+                @if (item.Importado.Equals("Conferido"))
+                {
+                    <label style="width: 50px">@Html.CheckBox("importa", true)</label>
+                }
+                else
+                {
+                    <label style="width: 50px">@Html.CheckBox("importa", false)</label>
+                }
+            </div>
+        </td>*@
+                @if (item.Status == "Divergência")
+                {
+                    <td class="ajuste">
+                        @String.Format("{0:N0}", item.QtdDif)
+                    </td>
+                    <td class="ajuste">
+                        @String.Format("{0:N2}", item.TempInternaOvo)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <div align="center" style="width: 98%">
+                            @Html.TextBox("qtdDiferenca_"
+                                    + item.Lote.ToString() + "|"
+                                    + item.Data.ToShortDateString(),
+                                //Convert.ToInt32(Session["qtdDiferenca_" + item.ID.ToString()]),
+                                Session["qtdDiferenca_"
+                                    + item.Lote.ToString() + "|"
+                                    + item.Data.ToShortDateString()].ToString(),
+                                new
+                                {
+                                    @min = "0",
+                                    @type = "number",
+                                    @required = "true",
+                                    @onchange = "atualizaSessionQtdeInformada(this,'"
+                                        + item.QtdOvos.ToString() + "','"
+                                        + item.Lote.ToString() + "','"
+                                        + item.Data.ToShortDateString() + "')"
+                                })
+                            @Html.Hidden("id", item.Lote.ToString() + "|"
+                                + item.Data.ToShortDateString(), new { @id = "lblid" })
+                            @Html.Hidden("hdLoteCompleto", item.Lote)
+                            @Html.Hidden("hdDataProducao", item.Data)
+                            @Html.Hidden("hdQtdeErrosSaldo_" + item.Lote.ToString() + "|"
+                                 + item.Data.ToShortDateString(), 0,
+                                  new
+                                  {
+                                      @id = "hdQtdeErrosSaldo_" + item.Lote.ToString() + "|"
+                                          + item.Data.ToShortDateString()
+                                  })
+                        </div>
+                        <div class="editor-label" id="errorSaldo_@(item.Lote.ToString() + "|"
+                         + item.Data.ToShortDateString())" style="color: Red; font-weight:bold;"></div>
+                    </td>
+                    <td>
+                        <div align="center" style="width: 98%">
+                            @Html.TextBox("temperaturaInternaOvo_" + item.Lote.ToString() + "|" + item.Data.ToShortDateString(),
+                                Session["temperaturaInternaOvo_" + item.Lote.ToString() + "|" + item.Data.ToShortDateString()].ToString(),
+                                new
+                                {
+                                    //@min = "0",
+                                    //@type = "number",
+                                    //@step = "0.01"
+                                    @onkeyup = "mascara(this, mvalor);"
+                                })
+                        </div>
+                    </td>
+                    <td>
+                        <div align="center" style="width: 98%">
+                            @Html.TextBox("temperaturaInternaOvoMeio_" + item.Lote.ToString() + "|" + item.Data.ToShortDateString(),
+                                Session["temperaturaInternaOvoMeio_" + item.Lote.ToString() + "|" + item.Data.ToShortDateString()].ToString(),
+                                new
+                                {
+                                    //@min = "0",
+                                    //@type = "number",
+                                    //@step = "0.01"
+                                    @onkeyup = "mascara(this, mvalor);"
+                                })
+                        </div>
+                    </td>
+                    <td>
+                        <div align="center" style="width: 98%">
+                            @Html.TextBox("temperaturaInternaOvoFim_" + item.Lote.ToString() + "|" + item.Data.ToShortDateString(),
+                                Session["temperaturaInternaOvoFim_" + item.Lote.ToString() + "|" + item.Data.ToShortDateString()].ToString(),
+                                new
+                                {
+                                    //@min = "0",
+                                    //@type = "number",
+                                    //@step = "0.01"
+                                    @onkeyup = "mascara(this, mvalor);"
+                                })
+                        </div>
+                    </td>
+                    <td>
+                        <div align="center" style="width: 98%">
+                            @Html.TextArea("obs_" + item.Lote.ToString() + "|" + item.Data.ToShortDateString(),
+                                Session["obs_" + item.Lote.ToString() + "|" + item.Data.ToShortDateString()].ToString(),
+                                new
+                                {
+                                    @rows = "2"
+                                })
+                        </div>
+                    </td>
+                }
+                @*<td class="ajuste">
+            @Html.DisplayFor(modelItem => item.Usuario)
+        </td>
+        <td class="ajuste">
+            @String.Format("{0:dd/MM/yyyy hh:mm:ss}", item.DataHora)
+        </td>*@
+            </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <br />
+    <fieldset>
+        <p>
+            <input type="submit" value="Salvar Conferência" id="saveConfereDEO" />
+        </p>
+    </fieldset>
+}

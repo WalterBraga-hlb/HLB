@@ -1,0 +1,165 @@
+﻿@{
+    ViewBag.Title = "";
+
+    string loteCompleto = Session["loteRatreabilidadeLote"].ToString();
+    DateTime dataProducao = Convert.ToDateTime(Session["dataProducaoRatreabilidadeLote"]);
+    
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+
+    MvcAppHylinedoBrasilMobile.Models.FLOCK_DATA producao = hlbapp.FLOCK_DATA
+        .Where(w => w.Flock_ID == loteCompleto && w.Trx_Date == dataProducao)
+        .FirstOrDefault();
+
+    var listaDEO = hlbapp.LayoutDiarioExpedicaos
+        .Where(w => w.LoteCompleto == loteCompleto && w.DataProducao == dataProducao)
+        .GroupBy(g => new
+            {
+                g.Granja,
+                g.Incubatorio,
+                g.DataHoraCarreg,
+                g.TipoDEO
+            })
+        .Select(s => new
+            {
+                s.Key.Granja,
+                s.Key.Incubatorio,
+                s.Key.DataHoraCarreg,
+                s.Key.TipoDEO,
+                TotalOvos = s.Sum(u => u.QtdeOvos),
+                Diferenca = s.Sum(u => u.QtdDiferenca)
+            })
+        .OrderBy(o => o.DataHoraCarreg)
+        .ToList();
+
+    var listaIncubacoes = hlbapp.HATCHERY_EGG_DATA
+        .Where(w => w.Flock_id.Contains(loteCompleto) && w.Lay_date == dataProducao)
+        .GroupBy(g => new
+            {
+                g.Hatch_loc,
+                g.Set_date,
+            })
+        .Select(s => new
+            {
+                s.Key.Hatch_loc,
+                s.Key.Set_date,
+                TotalOvos = s.Sum(u => u.Eggs_rcvd)
+            })
+        .OrderBy(o => o.Set_date)
+        .ToList();
+}
+
+<div align="center">
+    <p>
+        @*@Html.ActionLink("Voltar", null, null, null, new { @href = Request.UrlReferrer})*@
+        @if (Session["chamadaRastreabilidade"].ToString() == "Index")
+        {
+            @Html.ActionLink("Voltar p/ o DEO", "ReturnEditDEO", "DiarioExpedicao");
+        }
+        else
+        {
+            @Html.ActionLink("Voltar p/ Rastreabilidade do DEO", "RastreabilidadeDEOReturn", "DiarioExpedicao");
+        }
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/checkDiarioProducao.png"), "DEO")
+    <h2>Rastreabilidade do Lote @Html.Label(loteCompleto) produzido 
+        em @Html.Label(dataProducao.ToShortDateString())</h2>
+</div>
+<div id="tabelaDEO" style="overflow:auto;">
+    <table id="tabela">
+        <tr>
+            <th>
+                Origem
+            </th>
+            <th>
+                Destino
+            </th>
+            <th>
+                Tipo de Movimento
+            </th>
+            <th>
+                Data
+            </th>
+            <th>
+                Qtde.
+            </th>
+            <th>
+                Diferença
+            </th>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <b>Produção</b>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @producao.Farm_ID
+            </td>
+            <td></td>
+            <td>
+                Produção
+            </td>
+            <td>
+                @String.Format("{0:dd/MM/yyyy}", dataProducao)
+            </td>
+            <td>
+                @String.Format("{0:N0}", producao.Hatch_Eggs)
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <b>DEOs</b>
+            </td>
+        </tr>
+        @foreach (var item in listaDEO)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Granja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Incubatorio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoDEO)
+            </td>
+            <td>
+                @String.Format("{0:dd/MM/yyyy hh:mm:ss}", item.DataHoraCarreg)
+            </td>
+            <td>
+                @String.Format("{0:N0}", item.TotalOvos)
+            </td>
+            <td>
+                @String.Format("{0:N0}", item.Diferenca)
+            </td>
+        </tr>
+        }
+        <tr>
+            <td colspan="6">
+                <b>Incubações</b>
+            </td>
+        </tr>
+        @foreach (var item in listaIncubacoes)
+        {
+        <tr>
+            <td>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hatch_loc)
+            </td>
+            <td>
+                Incubação
+            </td>
+            <td>
+                @String.Format("{0:dd/MM/yyyy}", item.Set_date)
+            </td>
+            <td>
+                @String.Format("{0:N0}", item.TotalOvos)
+            </td>
+            <td>
+            </td>
+        </tr>
+        }
+    </table>
+</div>

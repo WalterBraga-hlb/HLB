@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="fluigtesteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'fluigteste.dbo.VW_Manutencao_Preventiva' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VW_Manutencao_Preventiva">
+    <Key>
+      <PropertyRef Name="NUM_PROCES" />
+      <PropertyRef Name="EMAIL" />
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="NUM_PROCES" Type="int" Nullable="false" />
+    <Property Name="LoginSolicitante" Type="varchar" MaxLength="150" />
+    <Property Name="NomeSolicitante" Type="varchar" MaxLength="255" />
+    <Property Name="EMAIL" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="DataSolicitacao" Type="datetime2" Precision="7" />
+    <Property Name="DataManutencao" Type="datetime" />
+    <Property Name="SemanaAnoManutencao" Type="int" />
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="companyid" Type="int" />
+    <Property Name="cardid" Type="int" />
+    <Property Name="documentid" Type="int" />
+    <Property Name="version" Type="int" />
+    <Property Name="tableid" Type="varchar(max)" />
+    <Property Name="equipamento" Type="varchar(max)" />
+    <Property Name="tag" Type="varchar(max)" />
+    <Property Name="localidade" Type="varchar(max)" />
+    <Property Name="periodicidade" Type="varchar(max)" />
+    <Property Name="data_manutencao" Type="varchar(max)" />
+    <Property Name="usuario_manutencao" Type="varchar(max)" />
+    <Property Name="existe_incubacao" Type="varchar(max)" />
+    <Property Name="data_calibracao" Type="varchar(max)" />
+    <Property Name="usuario_calibracao" Type="varchar(max)" />
+    <Property Name="periodo_manutencao" Type="varchar(max)" />
+    <Property Name="grupo_manutencao" Type="varchar(max)" />
+    <Property Name="grupo_gestor" Type="varchar(max)" />
+    <Property Name="planejamento" Type="varchar(max)" />
+    <Property Name="prazo_planejamento" Type="varchar(max)" />
+    <Property Name="pesquisa_equipamento" Type="varchar(max)" />
+  </EntityType>
+  <EntityContainer Name="fluigtesteModelStoreContainer">
+    <EntitySet Name="VW_Manutencao_Preventiva" EntityType="Self.VW_Manutencao_Preventiva" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[VW_Manutencao_Preventiva].[NUM_PROCES] AS [NUM_PROCES], 
+[VW_Manutencao_Preventiva].[LoginSolicitante] AS [LoginSolicitante], 
+[VW_Manutencao_Preventiva].[NomeSolicitante] AS [NomeSolicitante], 
+[VW_Manutencao_Preventiva].[EMAIL] AS [EMAIL], 
+[VW_Manutencao_Preventiva].[DataSolicitacao] AS [DataSolicitacao], 
+[VW_Manutencao_Preventiva].[DataManutencao] AS [DataManutencao], 
+[VW_Manutencao_Preventiva].[SemanaAnoManutencao] AS [SemanaAnoManutencao], 
+[VW_Manutencao_Preventiva].[ID] AS [ID], 
+[VW_Manutencao_Preventiva].[companyid] AS [companyid], 
+[VW_Manutencao_Preventiva].[cardid] AS [cardid], 
+[VW_Manutencao_Preventiva].[documentid] AS [documentid], 
+[VW_Manutencao_Preventiva].[version] AS [version], 
+[VW_Manutencao_Preventiva].[tableid] AS [tableid], 
+[VW_Manutencao_Preventiva].[equipamento] AS [equipamento], 
+[VW_Manutencao_Preventiva].[tag] AS [tag], 
+[VW_Manutencao_Preventiva].[localidade] AS [localidade], 
+[VW_Manutencao_Preventiva].[periodicidade] AS [periodicidade], 
+[VW_Manutencao_Preventiva].[data_manutencao] AS [data_manutencao], 
+[VW_Manutencao_Preventiva].[usuario_manutencao] AS [usuario_manutencao], 
+[VW_Manutencao_Preventiva].[existe_incubacao] AS [existe_incubacao], 
+[VW_Manutencao_Preventiva].[data_calibracao] AS [data_calibracao], 
+[VW_Manutencao_Preventiva].[usuario_calibracao] AS [usuario_calibracao], 
+[VW_Manutencao_Preventiva].[periodo_manutencao] AS [periodo_manutencao], 
+[VW_Manutencao_Preventiva].[grupo_manutencao] AS [grupo_manutencao], 
+[VW_Manutencao_Preventiva].[grupo_gestor] AS [grupo_gestor], 
+[VW_Manutencao_Preventiva].[planejamento] AS [planejamento], 
+[VW_Manutencao_Preventiva].[prazo_planejamento] AS [prazo_planejamento], 
+[VW_Manutencao_Preventiva].[pesquisa_equipamento] AS [pesquisa_equipamento]
+FROM [dbo].[VW_Manutencao_Preventiva] AS [VW_Manutencao_Preventiva]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

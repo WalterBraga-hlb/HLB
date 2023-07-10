@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <style type="text/css">
+            .msgErro 
+            {
+                background-color: Red;
+                color: White;
+                border-radius: 10px;
+                margin: .6em 0;
+            }
+            
+            .msgSucesso
+            {
+                background-color: Green;
+                color: White;
+                border-radius: 10px;
+                margin: .6em 0;
+            }
+            
+            .msgWarning
+            {
+                background-color: Goldenrod;
+                color: White;
+                border-radius: 10px;
+                margin: .6em 0;
+            }
+        </style>
+        <link href="@Url.Content("~/Content/Site.css?v={random number/string}")" rel="stylesheet" type="text/css" />
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title</title>
+        <meta name="viewport" content="width=device-width" />
+        @*@if (Request.Url.Host.Equals("m.app.planaltopostura.com.br"))
+        {
+            <link href="../../Content/images/favicon_planalto.png" rel="shortcut icon" type="image/x-icon" />
+        }
+        else
+        {*@
+            <link href="../../Content/images/Logo_ILD.ico" rel="shortcut icon" type="image/x-icon" />
+        @*}*@
+        @Styles.Render("~/Content/mobileCss", "~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery", "~/bundles/jquerymobile")
+        <script type="text/javascript">
+            $(document).live("pagechangefailed", function (e, data) {
+                //alert("pagechangefailed live");
+                var url = '@Url.Action("GenericError", "Error")';
+                window.location.href = url;
+            }); 
+        </script>
+    </head>
+    <body>
+    @{
+        string cor = "";
+        if (Session["corBody"] != null)
+        {
+            cor = Session["corBody"].ToString();
+        }
+    }
+        <div data-role="@cor" data-theme="b">
+            <div data-role="header">
+                @if (IsSectionDefined("Header"))
+                {
+                    @RenderSection("Header")
+                }
+                else
+                {
+                    <h1>@ViewBag.Title</h1>
+                    @Html.Partial("_LoginPartial")
+                }
+                @if (Session["usuario"] == null)
+                {
+                <div style="text-align: center">
+                    <ul>
+                        <li data-role="fieldcontain">
+                            @using (Html.BeginForm("ChangeLanguage", "AccountMobile"))
+                            {
+                                @Html.DropDownList(
+                                    "Text",
+                                    (List<SelectListItem>)Session["LanguagesList"])
+                                <input type="submit" value="@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Button_Change_Language", Session["language"].ToString())" />
+                            }
+                        </li>
+                    </ul>
+                </div>
+                }
+            </div>
+            <div data-role="content">      
+                @RenderBody()
+            </div>
+        </div>
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

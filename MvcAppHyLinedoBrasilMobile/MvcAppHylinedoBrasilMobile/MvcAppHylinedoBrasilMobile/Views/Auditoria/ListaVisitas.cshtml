@@ -1,0 +1,207 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+    
+    List<MvcAppHylinedoBrasilMobile.Models.Auditoria_Visita> lista =
+        (List<MvcAppHylinedoBrasilMobile.Models.Auditoria_Visita>)Session["ListaVisitas"];
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities apolo = new MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities();
+}
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para o Menu da Auditoria", "MenuAuditoria", "Auditoria", 
+                null,
+                new { @title = "Clique aqui para voltar para o Menu da Auditoria", @class = "auditoria" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/visita_32.png"), "Visita")
+    <h2>Lista de Visitas</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+@using (Html.BeginForm("SearchVisita", "Auditoria"))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <b>Data da Visita Inicial:</b>
+            <div class="editor-label">
+                @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+                {
+                    @Html.TextBox("dataInicialVisita", Convert.ToDateTime(Session["dataInicialVisita"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+                }
+                else
+                {
+                    @Html.TextBox("dataInicialVisita", Convert.ToDateTime(Session["dataInicialVisita"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+                }
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Data da Visita Final:</b>
+            <div class="editor-label">
+                @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+                {
+                    @Html.TextBox("dataFinalVisita", Convert.ToDateTime(Session["dataFinalVisita"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+                }
+                else
+                {
+                    @Html.TextBox("dataFinalVisita", Convert.ToDateTime(Session["dataFinalVisita"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+                }
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Departamento:</b>
+            <div class="editor-field">
+                @Html.DropDownList(
+                "Departamento",
+                (List<SelectListItem>)Session["FiltroDDLListaDepartamentos"],
+                new { @id = "ddlDepartamento" })
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Pesquisar" />
+        </li>
+    </ul>
+}
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Visita</li>
+    <li>
+        @Html.ActionLink("Gerar Nova Visita", "GeraVisita", "Auditoria",
+            null,
+            new { @class = "add", @title = "Clique aqui para gerar uma nova visita." })
+    </li>
+    <li>
+        @Html.ActionLink("Exportar Relatório de Visitas", "GerarRelatorioVisitasGeral", "Auditoria", null,
+            new { @class = "importExcel", @target = "_blank", @title = "Clique aqui para Exportar o Relatório de Visitas." })
+    </li>
+</ul>
+<br />
+<div id="divTabelaIndexPV">
+<table id="tabelaIndexPV" class="ajustetabelaVisita">
+    <tbody class="ajustetabelaVisita">
+    <tr class="ajustetabelaVisita">
+        @*<th class="ajustetabelaVisita">
+            ID
+        </th>*@
+        <th class="ajustetabelaVisita">
+            Data Visita
+        </th>
+        <th class="ajustetabelaVisita">
+            Departamento
+        </th>
+        <th class="ajustetabelaVisita">
+            Núcleo
+        </th>
+        <th class="ajustetabelaVisita">
+            Responsável
+        </th>
+        <th class="ajustetabelaVisita">
+            Status
+        </th>
+        <th class="ajustetabelaVisita">
+            Ações
+        </th>
+    </tr>
+@foreach (var item in lista)
+{
+    string departamento = apolo.FUNCIONARIO.Where(w => w.FuncCod == item.Departamento).FirstOrDefault().FuncNome;
+    string responsavel = apolo.FUNCIONARIO.Where(w => w.FuncCod == item.Responsavel).FirstOrDefault().FuncNome;
+    
+    int qtdeTotal = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == item.ID).Count();
+    int qtdePendente = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == item.ID && w.StatusResolucao == "Pendente").Count();
+    int qtdeEnviado = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == item.ID && w.StatusResolucao == "Enviado").Count();
+    int qtdeResolvido = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == item.ID && w.StatusResolucao == "Resolvido").Count();
+    int qtdeAprovado = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == item.ID && w.StatusResolucao == "Aprovado").Count();
+
+    int qtdeNaoAuditado = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == item.ID && w.Status == "Não Auditado").Count();
+    int qtdeNaoConforme = hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDVisita == item.ID && w.Status == "Não Conforme").Count();
+    
+    string status = "Pendente";
+    if (qtdeAprovado > 0 && qtdeAprovado < qtdeNaoConforme)
+    {
+        status = "Aprovada Parcial";
+    }
+    else if (qtdeAprovado == qtdeNaoConforme && qtdePendente == 0)
+    {
+        status = "Aprovada Total";
+    }
+    else if (qtdeResolvido > 0 && qtdeResolvido < qtdeNaoConforme)
+    {
+        status = "Resolvida Parcial";
+    }
+    else if (qtdeResolvido == qtdeNaoConforme && qtdePendente == 0)
+    {
+        status = "Resolvida Total";
+    }
+    else if (qtdeEnviado > 0)
+    {
+        status = "Enviada";
+    }
+    
+    <tr class="ajustetabelaVisita">
+        @*<td class="ajustetabelaVisita">
+            @(item.ID)
+        </td>*@
+        <td class="ajustetabelaVisita">
+            @(item.DataVisita.ToString("dd/MM/yy"))
+        </td>
+        <td class="ajustetabelaVisita">
+            @(departamento)
+        </td>
+        <td class="ajustetabelaVisita">
+            @(item.Nucleo)
+        </td>
+        <td class="ajustetabelaVisita">
+            @(responsavel)
+        </td>
+        <td class="ajustetabelaVisita">
+            @(status)
+        </td>
+        <td class="ajustetabelaVisita">
+            <table>
+                <tr>
+                    <td align="center">
+                        <div class="tooltip">
+                        @Html.ActionLink("Edit", "EditVisita",
+                            new { id = item.ID },
+                                new { @class = "edit" })
+                            <span class="tooltiptext">Clique aqui para preencher a visita.</span>
+                        </div>
+                    </td>
+                    @if (status == "Pendente")
+                    {
+                    <td align="center">
+                        <div class="tooltip">
+                        @Html.ActionLink("Delete", "ConfirmaDeleteVisita",
+                            new { id = item.ID },
+                                new { @class = "delete" })
+                            <span class="tooltiptext">Clique aqui para excluir a visita.</span>
+                        </div>
+                    </td>
+                    }
+                    @if (qtdeNaoAuditado == 0 && status == "Pendente")
+                    {
+                    <td align="center">
+                        <div class="tooltip">
+                            @Html.ActionLink("Envia", "EnviaRequisitosNaoConforme",
+                                new { id = item.ID },
+                                new { @class = "importar" })
+                                <span class="tooltiptext">Clique aqui para enviar os requisitos "Não Conforme" para os responsáveis.</span>
+                        </div>
+                    </td>
+                    }
+                </tr>
+            </table>
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

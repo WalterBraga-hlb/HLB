@@ -1,0 +1,57 @@
+﻿@using am = MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController;
+
+@{
+    ViewBag.Title = "";
+    string lg = Session["language"].ToString();
+}
+
+<div align="center">
+    <p>
+        @Html.ActionLink(am.GetTextOnLanguage("Voltar p/ Menu Principal", lg), "Index", "HomeMobile")
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/assistencia_tecnica.png"), "")
+    <h2>@am.GetTextOnLanguage("Fechamento da Data de Lançamentos de Produção", lg)</h2>
+    <br />
+    <h4 style="color:Blue;">@ViewBag.Mensagem</h4>
+    @using (Html.BeginForm("FecharDataLancamentos", "DiarioExpedicao"))
+    {
+        <ul data-role="listview" data-inset="true">
+            <li data-role="list-divider">
+                <b>@am.GetTextOnLanguage("Local a ser fechado os lançamentos", lg):</b>
+                @Html.DropDownList(
+                    "LocaisFechLanc",
+                    (List<SelectListItem>)Session["ListaLocaisFechLanc"],
+                    new
+                    {
+                        @required = "true"
+                    })
+            </li>
+            <li data-role="fieldcontain">
+                <b>@am.GetTextOnLanguage("Data de Fechamento", lg):</b>
+                <div class="editor-label">
+                    @Html.TextBox("data", null,
+                        new
+                        {
+                            @type = "date",
+                            @required = "true"
+                        })
+                </div>
+            </li>
+            <li data-role="fieldcontain">
+                <div class="editor-label">
+                    <b>@am.GetTextOnLanguage("Motivo da Alteração", lg):</b>
+                </div>
+                <div class="editor-field">
+                    @Html.TextArea("motivo", "",
+                         new
+                         {
+                             @required = "true"
+                         })
+                </div>
+            </li>
+            <li data-role="fieldcontain">
+                <input type="submit" value="@am.GetTextOnLanguage("Fechar Data de Lançamento", lg)" />
+            </li>
+        </ul>
+    }
+</div>

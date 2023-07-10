@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "";
+
+    List<MvcAppHylinedoBrasilMobile.Models.LOG_Pedido_Venda> listaPV =
+        (List<MvcAppHylinedoBrasilMobile.Models.LOG_Pedido_Venda>)Session["ListaHistorico"];
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities apoloStatic = new MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities();
+}
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Pedidos de Venda", "Index", "PedidoVenda")
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/pedidoVenda.png"), "Pedido de Venda")
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+
+<div align="center">
+    <h2>Histórico de Eventos do Pedido @listaPV[0].IDPedidoVenda</h2>
+</div>
+<br />
+<div id="tabelaLogPV" style="overflow:auto;">
+    <table id="tabela">
+        <tr>
+            <th>
+                Data Hora
+            </th>
+            <th>
+                Operação
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Usuário
+            </th>
+            <th>
+                Data Pedido
+            </th>
+            <th>
+                Cliente
+            </th>
+            <th>
+                Motivo
+            </th>
+            @if (MvcAppHyLinedoBrasil.Controllers.AccountController
+                .GetGroup("HLBAPPM-PedidoVendaAcessoProjecao",
+                (System.Collections.ArrayList)Session["Direitos"]))
+            {
+            <th>Projeção?</th>
+            }
+            <th>
+            </th>
+        </tr>
+        @foreach (var item in listaPV)
+        {
+            <tr>
+                <td>
+                    @item.DataHora
+                </td>
+                <td>
+                    @item.Operacao
+                </td>
+                <td>
+                    @item.Status
+                </td>
+                <td>
+                    @item.Usuario
+                </td>
+                <td>
+                    @String.Format("{0:dd/MM/yyyy}", item.DataPedido)
+                </td>
+                <td>
+                    @(apoloStatic.ENTIDADE.Where(w => w.EntCod == item.CodigoCliente).FirstOrDefault().EntNome)
+                </td>
+                <td>
+                    @*@item.Motivo*@
+                    @if (item.Motivo != null)
+                    {
+                        @Html.Raw(item.Motivo.Replace("\r\n", "<br />"))
+                    }
+                </td>
+                @if (MvcAppHyLinedoBrasil.Controllers.AccountController
+                .GetGroup("HLBAPPM-PedidoVendaAcessoProjecao",
+                (System.Collections.ArrayList)Session["Direitos"]))
+                {
+                <td class="ajustetabelaIndexPV">@item.Projecao</td>
+                }
+                <td>
+                    <div align="center">
+                        @Html.ActionLink("Histórico de Eventos dos Itens", "LogItemPVDetalhe",
+                            new { id = item.ID },
+                            new { @class = "log", @title = "Clique aqui para visualizar o Histórico de Eventos dos Itens" })
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

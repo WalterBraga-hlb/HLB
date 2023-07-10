@@ -1,0 +1,370 @@
+﻿@model IEnumerable<MvcAppHyLinedoBrasil.Models.LayoutOrdemProducao>
+@{ 
+    System.Reflection.PropertyInfo[] listaColunas = null;
+    if (Model.Count() > 0)
+    {
+        listaColunas = Model.FirstOrDefault().GetType().GetProperties();
+    }
+
+    MvcAppHyLinedoBrasil.Models.Apolo.ApoloEntities apoloSession = new MvcAppHyLinedoBrasil.Models.Apolo.ApoloEntities();
+}
+
+<link href="@Url.Content("//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("//code.jquery.com/jquery-1.10.2.js")" type="text/javascript"></script>
+<script src="@Url.Content("//code.jquery.com/ui/1.11.0/jquery-ui.js")" type="text/javascript"></script>
+
+<script language="JavaScript" type="text/javascript">
+    function selectall(origem, destino) {
+        checkboxes = document.getElementsByName(destino);
+        for (var i in checkboxes)
+            checkboxes[i].checked = origem.checked;
+    }
+    //$(function () {
+    //    $("#dataIni").datepicker({ dateFormat: "dd/mm/yy" });
+    //});
+    //$(function () {
+    //    $("#dataFim").datepicker({ dateFormat: "dd/mm/yy" });
+    //});
+
+    /* Máscaras ER */
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mdata(v) {
+        v = v.replace(/\D/g, "");                    //Remove tudo o que não é dígito
+        v = v.replace(/(\d{2})(\d)/, "$1/$2");
+        v = v.replace(/(\d{2})(\d)/, "$1/$2");
+
+        v = v.replace(/(\d{2})(\d{2})$/, "$1$2");
+        return v;
+    }
+</script>
+<br />
+<div align="center">
+    @using (Html.BeginForm("ConsultaImportaDiarioPR", "DiarioProducaoRacao", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <legend>Lista de Fórmulas Importadas:</legend>
+        <br />
+        @*<b>Período: @Html.TextBox("dataIni", Session["sDataInicial"], new { @onkeyup = "mascara(this, mdata);" }) à @Html.TextBox("dataFim", Session["sDataFinal"], new { @onkeyup = "mascara(this, mdata);" })</b>*@
+        <b>Período: @Html.TextBox("dataIni", Convert.ToDateTime(Session["sDataInicial"]).ToString("yyyy-MM-dd"), new { @required = "true", @type = "date" }) 
+            à @Html.TextBox("dataFim", Convert.ToDateTime(Session["sDataFinal"]).ToString("yyyy-MM-dd"), new { @required = "true", @type = "date" })</b>
+        <input type="submit" value="Filtrar Linhas" />
+    }
+</div>
+@if (Model.Count() > 0)
+{    
+<br />
+    using (Html.BeginForm("GerarAcoesSelecionados", "DiarioProducaoRacao", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+<div style="width:100%; height:450px; overflow: auto;">
+<table id="retornoImportacao">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Importar para Apolo
+            <input type="checkbox" id="selectallImp" onclick="selectall(this,'importa')" />
+        </th>
+        <th>
+            Deletar do Apolo
+            <input type="checkbox" id="selectallDel" onclick="selectall(this,'deleta')" />
+        </th>
+        <th>
+            Data Produção
+        </th>
+        <th>
+            Cód.Apolo
+        </th>
+        <th>
+            Cód.Fórmula
+        </th>
+        <th>
+            Tipo Ração
+        </th>
+        <th>
+            Total Produzido
+        </th>
+        <th>
+            Lote
+        </th>
+        <th>
+            Responsável
+        </th>
+        <th>
+            Núcleo / Galpão
+        </th>
+        @if (listaColunas != null)
+        {
+            foreach (var col in listaColunas)
+            {
+                if (col.Name.Contains("Adicional"))
+                {
+                    if (col.GetValue(Model.FirstOrDefault(), null) != null)
+                    {
+                        string codigoProdutoAdicional = col.GetValue(Model.FirstOrDefault(), null).ToString();
+                    <th>
+                        @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(codigoProdutoAdicional)
+                    </th>
+                    }
+                }
+            }
+        }
+        @*<th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional01)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional02)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional03)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional04)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional05)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional06)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional07)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional08)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional09)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional10)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional11)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional12)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional13)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional14)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional15)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional16)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional17)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional18)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional19)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional20)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional21)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional22)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional23)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional24)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional25)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional26)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional27)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional28)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional29)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional30)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional31)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional32)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional33)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional34)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional35)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional36)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional37)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional38)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional39)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional40)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional41)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional42)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional43)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional44)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional45)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional46)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional47)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional48)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional49)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional50)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional51)
+        </th>
+        <th>
+            @MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.DescricaoProdutoStatic(Model.FirstOrDefault().Adicional52)
+        </th>*@
+    </tr>
+@foreach (var item in Model)
+{
+<tr>
+    <td align="center">
+        @item.ID
+    </td>
+    <td align="center">
+        @if (item.Importado == "Nao")
+        {
+            @Html.CheckBox("importa");
+            @Html.Hidden("id", item.ID)
+        }
+        else
+        {
+            @Html.Image(@Url.Content("~/Content/images/" + item.Importado + ".png"), "Importado")
+        }
+    </td>
+    <td align="center">
+        @if (item.Importado != "Nao")
+        {
+            @Html.CheckBox("deleta")
+            @Html.Hidden("idDeleta", item.ID)
+        }
+    </td>
+    <td align="center">
+        @item.DataProducao.ToString("dd/MM/yyyy")
+    </td>
+    <td align="center">
+        @item.CodigoApolo
+    </td>
+    <td align="center">
+        @item.CodFormula
+    </td>
+    <td>
+        @item.TipoRacao
+    </td>
+    <td align="center">
+        @String.Format("{0:N0}", item.TotalProduzido)
+    </td>
+    <td align="center">
+        @item.OrdemProducao
+    </td>
+    <td align="center">
+        @{ 
+            var responsavel = item.Responsavel;
+            var funcApolo = apoloSession.FUNCIONARIO.Where(w => w.FuncCod == item.Responsavel).FirstOrDefault();
+            if (funcApolo != null)
+            {
+                responsavel = funcApolo.FuncNome;
+            }
+        }
+        @responsavel
+    </td>
+    <td align="center">
+        @item.NucleoGalpao
+    </td>
+    @if (listaColunas != null)
+    {
+        foreach (var col in listaColunas)
+        {
+            if (col.Name.Contains("Adicional"))
+            {
+                if (col.GetValue(item, null) != null)
+                {
+                    <td align="center">
+                        @{
+                            string codigoProdutoAdicional = col.GetValue(item, null).ToString();
+                            string numeroAdicional = col.Name.Substring(9, 2);
+                            string nomeQtdeAdicional = "Qtde" + numeroAdicional;
+                            var colQtde = listaColunas.Where(w => w.Name == nomeQtdeAdicional).FirstOrDefault();
+                            if (colQtde != null)
+                            {
+                                decimal qtde = Convert.ToDecimal(colQtde.GetValue(item, null).ToString());
+                                if (qtde > 0)
+                                {
+                                    <b>@qtde.ToString("N2")</b>
+                                    <i><br />@MvcAppHyLinedoBrasil.Controllers.DiarioProducaoRacaoController.VerificaBaixaRequisicaoAdicional(item.OrdemProducao, codigoProdutoAdicional)</i>
+                                }
+                            }
+                        }
+                    </td>
+                }
+                    
+            }
+        }
+    }
+    </tr>
+}
+</table>
+</div>
+<br />
+<div align="center">
+    <input type="submit" value="Gerar Ações dos Itens Selecionados"/>
+</div>
+    }
+}

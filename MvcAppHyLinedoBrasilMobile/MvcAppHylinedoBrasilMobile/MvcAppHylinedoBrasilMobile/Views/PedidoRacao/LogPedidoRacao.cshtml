@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "";
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbappSession =
+        new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities apolo =
+        new MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities();
+
+    int idPR = Convert.ToInt32(Session["IDPedidoRacao"]);
+    
+    var listaLogPR = hlbappSession.LOG_PedidoRacao
+        .Where(w => w.IDPedidoRacao == idPR).ToList();
+
+    string granja = Session["granjaSelecionada"].ToString();
+    string descricaoGranja = ((List<SelectListItem>)Session["ListaGranjas"])
+        .Where(w => w.Value == granja).FirstOrDefault().Text;
+}
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Pedidos de Ração", "Index", "PedidoRacao")
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/graos_32x32.png"), "PedidoRacao")
+    <h2>Histórico do Pedido de Ração ID @(idPR.ToString() + " - " + descricaoGranja)</h2>
+    <br />
+    <h3 style="color:red;">@ViewBag.Erro</h3>
+</div>
+<div id="tabelaDEO" style="overflow:auto;">
+<table id="tabelaIndexPV" class="ajustetabelaIndexPV">
+    <tr>
+        <th>Empresa</th>
+        <th>
+            Data Hora Operação
+        </th>
+        <th>
+            Usuário
+        </th>
+        <th>
+            Operação
+        </th>
+        <th>
+            Data Pedido
+        </th>
+        <th>
+            Qtde. Total (Kg)
+        </th>
+        <th>
+            Rota
+        </th>
+        <th>
+            Motivo
+        </th>
+        <th></th>
+    </tr>
+@foreach (var item in listaLogPR)
+{
+    var itensLogPR = MvcAppHylinedoBrasilMobile.Controllers.PedidoRacaoController.hlbapp
+        .LOG_PedidoRacao_Item.Where(w => w.IDPedidoRacao == item.ID
+            && w.Operacao != "Exclusão").ToList();
+
+    <tr class="ajustetabelaIndexPV">
+        <td>
+            @Html.DisplayFor(modelItem => item.Empresa)
+        </td>
+        <td>
+            @String.Format("{0:dd/MM/yyyy HH:mm}", item.DataOperacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UsuarioOperacao)
+        </td>
+        <td>
+            @(item.Operacao)
+        </td>
+        <td>
+            @String.Format("{0:dd/MM/yyyy}", item.DataInicial)
+        </td>
+        <td>
+            @String.Format("{0:N0}", itensLogPR.Sum(s => s.QtdeKg))
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @{
+                MvcAppHylinedoBrasilMobile.Models.bdApolo.ROTA_ENTREGA rota = 
+                    apolo.ROTA_ENTREGA.Where(w => w.RotaEntregaCod == item.RotaEntregaCod).FirstOrDefault();
+
+                if (rota != null)
+                {
+                    @Html.Label("Rota", rota.RotaEntregaNome)
+                }
+            }
+        </td>
+        <td>
+            @item.Observacao
+        </td>
+        <td>
+            <div align="center">            
+                @Html.ActionLink("LogPedidoRacaoItem", "LogPedidoRacaoItem", new { idLog = item.ID }, 
+                    new { @class = "log" })
+            </div>
+        </td>
+    </tr>
+}
+
+</table>
+</div>

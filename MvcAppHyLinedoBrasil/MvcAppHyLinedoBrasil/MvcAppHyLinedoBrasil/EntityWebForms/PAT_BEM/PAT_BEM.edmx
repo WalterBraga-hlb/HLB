@@ -1,0 +1,400 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Apolo10Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="Apolo10Model1StoreContainer">
+          <EntitySet Name="PAT_BEM" EntityType="Apolo10Model1.Store.PAT_BEM" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="PAT_BEM">
+          <Key>
+            <PropertyRef Name="EmpCod" />
+            <PropertyRef Name="PatBemCodRed" />
+          </Key>
+          <Property Name="EmpCod" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="PatBemCodEstr" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="PlanoCtaEmpCod" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="PlanoCtaCodRed" Type="varchar" Nullable="false" MaxLength="7" />
+          <Property Name="PatBemCodRed" Type="varchar" Nullable="false" MaxLength="7" />
+          <Property Name="PatBemEquip" Type="varchar" MaxLength="5" />
+          <Property Name="EquipCodEstr" Type="varchar" MaxLength="15" />
+          <Property Name="PatBemQtd" Type="int" />
+          <Property Name="PatBemNome" Type="varchar" MaxLength="80" />
+          <Property Name="PatBemNomeAlt1" Type="varchar" MaxLength="255" />
+          <Property Name="PatBemNomeAlt2" Type="varchar" MaxLength="255" />
+          <Property Name="PatBemNomeAlt3" Type="varchar" MaxLength="255" />
+          <Property Name="PatBemGrupo" Type="char" MaxLength="1" />
+          <Property Name="PatBemCodEstrNiv" Type="varchar" MaxLength="30" />
+          <Property Name="PatBemPlanoCtaBemCodEstr" Type="varchar" MaxLength="60" />
+          <Property Name="CCtrlCodEstr" Type="varchar" MaxLength="30" />
+          <Property Name="PatLocCodEstr" Type="varchar" MaxLength="15" />
+          <Property Name="FuncCod" Type="varchar" MaxLength="7" />
+          <Property Name="PatBemDataAquis" Type="datetime" />
+          <Property Name="PatBemTxaNormal" Type="numeric" Precision="10" Scale="4" />
+          <Property Name="PatBemTxaAceler" Type="numeric" Precision="10" Scale="4" />
+          <Property Name="PatBemValOrig" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="PatBemValDepAcum" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="PatBemValOrigOutraMoeda" Type="numeric" Precision="24" Scale="9" />
+          <Property Name="PatBemValDepAcumOutraMoeda" Type="numeric" Precision="24" Scale="9" />
+          <Property Name="PatBemCodPlaq" Type="varchar" MaxLength="30" />
+          <Property Name="PatBemStat" Type="varchar" MaxLength="15" />
+          <Property Name="PatBemVinculo" Type="varchar" MaxLength="10" />
+          <Property Name="TipoDocCod" Type="varchar" MaxLength="3" />
+          <Property Name="PatBemSerieDoc" Type="varchar" MaxLength="3" />
+          <Property Name="PatBemNumDoc" Type="varchar" MaxLength="15" />
+          <Property Name="PatBemDataDoc" Type="datetime" />
+          <Property Name="EntCod" Type="varchar" MaxLength="7" />
+          <Property Name="NatOpCodEstr" Type="varchar" MaxLength="15" />
+          <Property Name="PatBemValBaseIcms" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="PatBemPercIcms" Type="numeric" Precision="10" Scale="4" />
+          <Property Name="PatBemValIcms" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="PatBemDataValidGar" Type="datetime" />
+          <Property Name="PatBemTexto" Type="text" />
+          <Property Name="ProdCodEstr" Type="varchar" MaxLength="30" />
+          <Property Name="MovEstqChv" Type="int" />
+          <Property Name="ItMovEstqSeq" Type="smallint" />
+          <Property Name="PatBemAnoMesCad" Type="varchar" Nullable="false" MaxLength="6" />
+          <Property Name="PatBemValCambioOutraMoeda" Type="numeric" Precision="24" Scale="9" />
+          <Property Name="PatBemPlanoCtaCodRedAquis" Type="varchar" MaxLength="7" />
+          <Property Name="PatBemCCtrlCodEstrAquis" Type="varchar" MaxLength="30" />
+          <Property Name="PatBemPatLocCodEstrAquis" Type="varchar" MaxLength="15" />
+          <Property Name="PatBemFuncCodAquis" Type="varchar" MaxLength="7" />
+          <Property Name="PatBemCodEstrAquis" Type="varchar" MaxLength="30" />
+          <Property Name="PatBemOrigMod" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="PatBemEmpCodMovEstq" Type="varchar" MaxLength="20" />
+          <Property Name="CONTRATONUM" Type="varchar" MaxLength="20" />
+          <Property Name="ITCONTRATOORCAMSEQ" Type="smallint" />
+          <Property Name="PARCITCONTRATOORCAMSEQ" Type="smallint" />
+          <Property Name="PARCITCONTRATOORCAMDESMPAG" Type="smallint" />
+          <Property Name="DOCPARCITCONTRATOORCAMSEQ" Type="smallint" />
+          <Property Name="PatBemNumLRE" Type="varchar" MaxLength="25" />
+          <Property Name="PatBemFolhaLRE" Type="smallint" />
+          <Property Name="PatBemNumCTRC" Type="varchar" MaxLength="10" />
+          <Property Name="PatBemEntCodTransp" Type="varchar" MaxLength="7" />
+          <Property Name="PatBemValIcmsFrete" Type="numeric" Precision="24" Scale="9" />
+          <Property Name="PatBemValIcmsDifAliq" Type="numeric" Precision="24" Scale="9" />
+          <Property Name="PatBemValCiap" Type="numeric" Precision="24" Scale="9" />
+          <Property Name="PatBemParticipProduc" Type="varchar" MaxLength="5" />
+          <Property Name="PatBemQdtMesCredCiap" Type="smallint" />
+          <Property Name="PatBemValFrete" Type="numeric" Precision="24" Scale="9" />
+          <Property Name="PatBemValLiq" Type="numeric" Precision="24" Scale="9" />
+          <Property Name="NumSerCtrl" Type="int" />
+          <Property Name="PATBEMHISTORICO" Type="varchar" MaxLength="5" />
+          <Property Name="PatBemGestaoPublica" Type="varchar" MaxLength="5" />
+          <Property Name="PatBemNumItemGestPub" Type="varchar" MaxLength="20" />
+          <Property Name="PatBemCodHospGestPub" Type="varchar" MaxLength="40" />
+          <Property Name="PatBemNumSerFabricGestPub" Type="varchar" MaxLength="255" />
+          <Property Name="PatBemMarcaModTipoGestPub" Type="varchar" MaxLength="255" />
+          <Property Name="PatBemNumSES" Type="varchar" MaxLength="30" />
+          <Property Name="PatBemComponente" Type="varchar" MaxLength="5" />
+          <Property Name="PatBemValIcmsSt" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="PatBemChaveAcessoNFe" Type="varchar" MaxLength="44" />
+          <Property Name="PatBemCodBaseCred" Type="varchar" MaxLength="60" />
+          <Property Name="PatBemBaseCalcPIS" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="PatBemPercPIS" Type="numeric" Precision="10" Scale="4" />
+          <Property Name="PatBemValPIS" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="PatBemBaseCalcCOFINS" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="PatBemPercCOFINS" Type="numeric" Precision="10" Scale="4" />
+          <Property Name="PatBemValCOFINS" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="PatBemIdentifBemIncorp" Type="varchar" MaxLength="60" />
+          <Property Name="PatBemIndicUtiliz" Type="varchar" MaxLength="40" />
+          <Property Name="PatBemParcAquisDeduzCred" Type="numeric" Precision="14" Scale="2" />
+          <Property Name="PatBemIndicNumParc" Type="char" MaxLength="1" />
+          <Property Name="PatBemParticipEfdPisCofins" Type="varchar" MaxLength="5" />
+          <Property Name="PatBemAnoMesEfdPisCofins" Type="varchar" MaxLength="6" />
+          <Property Name="PatBemAnoMesAprEfdPisCofins" Type="varchar" MaxLength="6" />
+          <Property Name="PatBemValAquisEfdPisCofins" Type="numeric" Precision="24" Scale="9" />
+          <Property Name="PatBemAnoMesInicEfdPisCofins" Type="varchar" MaxLength="6" />
+          <Property Name="PatBemAnoMesFimEfdPisCofins" Type="varchar" MaxLength="6" />
+          <Property Name="PatBemQtdParcApropiar" Type="smallint" />
+          <Property Name="PatBemCst" Type="varchar" MaxLength="7" />
+          <Property Name="PatBemOrigCred" Type="varchar" MaxLength="50" />
+          <Property Name="PatBemAreaTot" Type="numeric" Precision="24" Scale="9" />
+          <Property Name="PatBemAreaConst" Type="numeric" Precision="24" Scale="9" />
+          <Property Name="PatBemPeqVal" Type="varchar" Nullable="false" MaxLength="5" />
+          <Property Name="PatBemVidaUtil" Type="int" />
+          <Property Name="PatBemVidaUtilEm" Type="varchar" MaxLength="10" />
+          <Property Name="PatBemJustAquis" Type="varchar" MaxLength="255" />
+          <Property Name="TipoBemCod" Type="varchar" MaxLength="2" />
+          <Property Name="UsuCod" Type="varchar" MaxLength="31" />
+          <Property Name="PatBemDataHoraDig" Type="datetime" />
+        </EntityType>
+        <Function Name="gerar_codigo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="empresa" Type="varchar" Mode="In" />
+          <Parameter Name="tabela" Type="varchar" Mode="In" />
+          <Parameter Name="codigo" Type="int" Mode="InOut" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Apolo10Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="Apolo10Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PAT_BEM" EntityType="Apolo10Model1.media" />
+          <FunctionImport Name="gerar_codigo" ReturnType="Collection(String)">
+            <Parameter Name="empresa" Mode="In" Type="String" />
+            <Parameter Name="tabela" Mode="In" Type="String" />
+            <Parameter Name="codigo" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="media">
+          <Key>
+            <PropertyRef Name="EmpCod" />
+            <PropertyRef Name="PatBemCodRed" />
+          </Key>
+          <Property Name="EmpCod" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemCodEstr" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="PlanoCtaEmpCod" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="PlanoCtaCodRed" Type="String" Nullable="false" MaxLength="7" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemCodRed" Type="String" Nullable="false" MaxLength="7" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemEquip" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="EquipCodEstr" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemQtd" Type="Int32" />
+          <Property Name="PatBemNome" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemNomeAlt1" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemNomeAlt2" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemNomeAlt3" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemGrupo" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="PatBemCodEstrNiv" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemPlanoCtaBemCodEstr" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="CCtrlCodEstr" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="PatLocCodEstr" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="FuncCod" Type="String" MaxLength="7" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemDataAquis" Type="DateTime" />
+          <Property Name="PatBemTxaNormal" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="PatBemTxaAceler" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="PatBemValOrig" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="PatBemValDepAcum" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="PatBemValOrigOutraMoeda" Type="Decimal" Precision="24" Scale="9" />
+          <Property Name="PatBemValDepAcumOutraMoeda" Type="Decimal" Precision="24" Scale="9" />
+          <Property Name="PatBemCodPlaq" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemStat" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemVinculo" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="TipoDocCod" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemSerieDoc" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemNumDoc" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemDataDoc" Type="DateTime" />
+          <Property Name="EntCod" Type="String" MaxLength="7" Unicode="false" FixedLength="false" />
+          <Property Name="NatOpCodEstr" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemValBaseIcms" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="PatBemPercIcms" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="PatBemValIcms" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="PatBemDataValidGar" Type="DateTime" />
+          <Property Name="PatBemTexto" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="ProdCodEstr" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="MovEstqChv" Type="Int32" />
+          <Property Name="ItMovEstqSeq" Type="Int16" />
+          <Property Name="PatBemAnoMesCad" Type="String" Nullable="false" MaxLength="6" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemValCambioOutraMoeda" Type="Decimal" Precision="24" Scale="9" />
+          <Property Name="PatBemPlanoCtaCodRedAquis" Type="String" MaxLength="7" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemCCtrlCodEstrAquis" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemPatLocCodEstrAquis" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemFuncCodAquis" Type="String" MaxLength="7" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemCodEstrAquis" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemOrigMod" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemEmpCodMovEstq" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="CONTRATONUM" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="ITCONTRATOORCAMSEQ" Type="Int16" />
+          <Property Name="PARCITCONTRATOORCAMSEQ" Type="Int16" />
+          <Property Name="PARCITCONTRATOORCAMDESMPAG" Type="Int16" />
+          <Property Name="DOCPARCITCONTRATOORCAMSEQ" Type="Int16" />
+          <Property Name="PatBemNumLRE" Type="String" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemFolhaLRE" Type="Int16" />
+          <Property Name="PatBemNumCTRC" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemEntCodTransp" Type="String" MaxLength="7" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemValIcmsFrete" Type="Decimal" Precision="24" Scale="9" />
+          <Property Name="PatBemValIcmsDifAliq" Type="Decimal" Precision="24" Scale="9" />
+          <Property Name="PatBemValCiap" Type="Decimal" Precision="24" Scale="9" />
+          <Property Name="PatBemParticipProduc" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemQdtMesCredCiap" Type="Int16" />
+          <Property Name="PatBemValFrete" Type="Decimal" Precision="24" Scale="9" />
+          <Property Name="PatBemValLiq" Type="Decimal" Precision="24" Scale="9" />
+          <Property Name="NumSerCtrl" Type="Int32" />
+          <Property Name="PATBEMHISTORICO" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemGestaoPublica" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemNumItemGestPub" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemCodHospGestPub" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemNumSerFabricGestPub" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemMarcaModTipoGestPub" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemNumSES" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemComponente" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemValIcmsSt" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="PatBemChaveAcessoNFe" Type="String" MaxLength="44" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemCodBaseCred" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemBaseCalcPIS" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="PatBemPercPIS" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="PatBemValPIS" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="PatBemBaseCalcCOFINS" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="PatBemPercCOFINS" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="PatBemValCOFINS" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="PatBemIdentifBemIncorp" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemIndicUtiliz" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemParcAquisDeduzCred" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="PatBemIndicNumParc" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="PatBemParticipEfdPisCofins" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemAnoMesEfdPisCofins" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemAnoMesAprEfdPisCofins" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemValAquisEfdPisCofins" Type="Decimal" Precision="24" Scale="9" />
+          <Property Name="PatBemAnoMesInicEfdPisCofins" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemAnoMesFimEfdPisCofins" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemQtdParcApropiar" Type="Int16" />
+          <Property Name="PatBemCst" Type="String" MaxLength="7" Unicode="false" FixedLength="false" />
+          <Property Name="PatBemOrigCred" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Type="Decimal" Name="PatBemAreaTot" Precision="24" Scale="9" />
+          <Property Type="Decimal" Name="PatBemAreaConst" Precision="24" Scale="9" />
+          <Property Type="String" Name="PatBemPeqVal" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="PatBemVidaUtil" />
+          <Property Type="String" Name="PatBemVidaUtilEm" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PatBemJustAquis" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TipoBemCod" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UsuCod" MaxLength="31" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="PatBemDataHoraDig" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Apolo10Model1StoreContainer" CdmEntityContainer="Apolo10Entities1">
+          <EntitySetMapping Name="PAT_BEM">
+            <EntityTypeMapping TypeName="Apolo10Model1.media">
+              <MappingFragment StoreEntitySet="PAT_BEM">
+                <ScalarProperty Name="PatBemDataHoraDig" ColumnName="PatBemDataHoraDig" />
+                <ScalarProperty Name="UsuCod" ColumnName="UsuCod" />
+                <ScalarProperty Name="TipoBemCod" ColumnName="TipoBemCod" />
+                <ScalarProperty Name="PatBemJustAquis" ColumnName="PatBemJustAquis" />
+                <ScalarProperty Name="PatBemVidaUtilEm" ColumnName="PatBemVidaUtilEm" />
+                <ScalarProperty Name="PatBemVidaUtil" ColumnName="PatBemVidaUtil" />
+                <ScalarProperty Name="PatBemPeqVal" ColumnName="PatBemPeqVal" />
+                <ScalarProperty Name="PatBemAreaConst" ColumnName="PatBemAreaConst" />
+                <ScalarProperty Name="PatBemAreaTot" ColumnName="PatBemAreaTot" />
+                <ScalarProperty Name="EmpCod" ColumnName="EmpCod" />
+                <ScalarProperty Name="PatBemCodEstr" ColumnName="PatBemCodEstr" />
+                <ScalarProperty Name="PlanoCtaEmpCod" ColumnName="PlanoCtaEmpCod" />
+                <ScalarProperty Name="PlanoCtaCodRed" ColumnName="PlanoCtaCodRed" />
+                <ScalarProperty Name="PatBemCodRed" ColumnName="PatBemCodRed" />
+                <ScalarProperty Name="PatBemEquip" ColumnName="PatBemEquip" />
+                <ScalarProperty Name="EquipCodEstr" ColumnName="EquipCodEstr" />
+                <ScalarProperty Name="PatBemQtd" ColumnName="PatBemQtd" />
+                <ScalarProperty Name="PatBemNome" ColumnName="PatBemNome" />
+                <ScalarProperty Name="PatBemNomeAlt1" ColumnName="PatBemNomeAlt1" />
+                <ScalarProperty Name="PatBemNomeAlt2" ColumnName="PatBemNomeAlt2" />
+                <ScalarProperty Name="PatBemNomeAlt3" ColumnName="PatBemNomeAlt3" />
+                <ScalarProperty Name="PatBemGrupo" ColumnName="PatBemGrupo" />
+                <ScalarProperty Name="PatBemCodEstrNiv" ColumnName="PatBemCodEstrNiv" />
+                <ScalarProperty Name="PatBemPlanoCtaBemCodEstr" ColumnName="PatBemPlanoCtaBemCodEstr" />
+                <ScalarProperty Name="CCtrlCodEstr" ColumnName="CCtrlCodEstr" />
+                <ScalarProperty Name="PatLocCodEstr" ColumnName="PatLocCodEstr" />
+                <ScalarProperty Name="FuncCod" ColumnName="FuncCod" />
+                <ScalarProperty Name="PatBemDataAquis" ColumnName="PatBemDataAquis" />
+                <ScalarProperty Name="PatBemTxaNormal" ColumnName="PatBemTxaNormal" />
+                <ScalarProperty Name="PatBemTxaAceler" ColumnName="PatBemTxaAceler" />
+                <ScalarProperty Name="PatBemValOrig" ColumnName="PatBemValOrig" />
+                <ScalarProperty Name="PatBemValDepAcum" ColumnName="PatBemValDepAcum" />
+                <ScalarProperty Name="PatBemValOrigOutraMoeda" ColumnName="PatBemValOrigOutraMoeda" />
+                <ScalarProperty Name="PatBemValDepAcumOutraMoeda" ColumnName="PatBemValDepAcumOutraMoeda" />
+                <ScalarProperty Name="PatBemCodPlaq" ColumnName="PatBemCodPlaq" />
+                <ScalarProperty Name="PatBemStat" ColumnName="PatBemStat" />
+                <ScalarProperty Name="PatBemVinculo" ColumnName="PatBemVinculo" />
+                <ScalarProperty Name="TipoDocCod" ColumnName="TipoDocCod" />
+                <ScalarProperty Name="PatBemSerieDoc" ColumnName="PatBemSerieDoc" />
+                <ScalarProperty Name="PatBemNumDoc" ColumnName="PatBemNumDoc" />
+                <ScalarProperty Name="PatBemDataDoc" ColumnName="PatBemDataDoc" />
+                <ScalarProperty Name="EntCod" ColumnName="EntCod" />
+                <ScalarProperty Name="NatOpCodEstr" ColumnName="NatOpCodEstr" />
+                <ScalarProperty Name="PatBemValBaseIcms" ColumnName="PatBemValBaseIcms" />
+                <ScalarProperty Name="PatBemPercIcms" ColumnName="PatBemPercIcms" />
+                <ScalarProperty Name="PatBemValIcms" ColumnName="PatBemValIcms" />
+                <ScalarProperty Name="PatBemDataValidGar" ColumnName="PatBemDataValidGar" />
+                <ScalarProperty Name="PatBemTexto" ColumnName="PatBemTexto" />
+                <ScalarProperty Name="ProdCodEstr" ColumnName="ProdCodEstr" />
+                <ScalarProperty Name="MovEstqChv" ColumnName="MovEstqChv" />
+                <ScalarProperty Name="ItMovEstqSeq" ColumnName="ItMovEstqSeq" />
+                <ScalarProperty Name="PatBemAnoMesCad" ColumnName="PatBemAnoMesCad" />
+                <ScalarProperty Name="PatBemValCambioOutraMoeda" ColumnName="PatBemValCambioOutraMoeda" />
+                <ScalarProperty Name="PatBemPlanoCtaCodRedAquis" ColumnName="PatBemPlanoCtaCodRedAquis" />
+                <ScalarProperty Name="PatBemCCtrlCodEstrAquis" ColumnName="PatBemCCtrlCodEstrAquis" />
+                <ScalarProperty Name="PatBemPatLocCodEstrAquis" ColumnName="PatBemPatLocCodEstrAquis" />
+                <ScalarProperty Name="PatBemFuncCodAquis" ColumnName="PatBemFuncCodAquis" />
+                <ScalarProperty Name="PatBemCodEstrAquis" ColumnName="PatBemCodEstrAquis" />
+                <ScalarProperty Name="PatBemOrigMod" ColumnName="PatBemOrigMod" />
+                <ScalarProperty Name="PatBemEmpCodMovEstq" ColumnName="PatBemEmpCodMovEstq" />
+                <ScalarProperty Name="CONTRATONUM" ColumnName="CONTRATONUM" />
+                <ScalarProperty Name="ITCONTRATOORCAMSEQ" ColumnName="ITCONTRATOORCAMSEQ" />
+                <ScalarProperty Name="PARCITCONTRATOORCAMSEQ" ColumnName="PARCITCONTRATOORCAMSEQ" />
+                <ScalarProperty Name="PARCITCONTRATOORCAMDESMPAG" ColumnName="PARCITCONTRATOORCAMDESMPAG" />
+                <ScalarProperty Name="DOCPARCITCONTRATOORCAMSEQ" ColumnName="DOCPARCITCONTRATOORCAMSEQ" />
+                <ScalarProperty Name="PatBemNumLRE" ColumnName="PatBemNumLRE" />
+                <ScalarProperty Name="PatBemFolhaLRE" ColumnName="PatBemFolhaLRE" />
+                <ScalarProperty Name="PatBemNumCTRC" ColumnName="PatBemNumCTRC" />
+                <ScalarProperty Name="PatBemEntCodTransp" ColumnName="PatBemEntCodTransp" />
+                <ScalarProperty Name="PatBemValIcmsFrete" ColumnName="PatBemValIcmsFrete" />
+                <ScalarProperty Name="PatBemValIcmsDifAliq" ColumnName="PatBemValIcmsDifAliq" />
+                <ScalarProperty Name="PatBemValCiap" ColumnName="PatBemValCiap" />
+                <ScalarProperty Name="PatBemParticipProduc" ColumnName="PatBemParticipProduc" />
+                <ScalarProperty Name="PatBemQdtMesCredCiap" ColumnName="PatBemQdtMesCredCiap" />
+                <ScalarProperty Name="PatBemValFrete" ColumnName="PatBemValFrete" />
+                <ScalarProperty Name="PatBemValLiq" ColumnName="PatBemValLiq" />
+                <ScalarProperty Name="NumSerCtrl" ColumnName="NumSerCtrl" />
+                <ScalarProperty Name="PATBEMHISTORICO" ColumnName="PATBEMHISTORICO" />
+                <ScalarProperty Name="PatBemGestaoPublica" ColumnName="PatBemGestaoPublica" />
+                <ScalarProperty Name="PatBemNumItemGestPub" ColumnName="PatBemNumItemGestPub" />
+                <ScalarProperty Name="PatBemCodHospGestPub" ColumnName="PatBemCodHospGestPub" />
+                <ScalarProperty Name="PatBemNumSerFabricGestPub" ColumnName="PatBemNumSerFabricGestPub" />
+                <ScalarProperty Name="PatBemMarcaModTipoGestPub" ColumnName="PatBemMarcaModTipoGestPub" />
+                <ScalarProperty Name="PatBemNumSES" ColumnName="PatBemNumSES" />
+                <ScalarProperty Name="PatBemComponente" ColumnName="PatBemComponente" />
+                <ScalarProperty Name="PatBemValIcmsSt" ColumnName="PatBemValIcmsSt" />
+                <ScalarProperty Name="PatBemChaveAcessoNFe" ColumnName="PatBemChaveAcessoNFe" />
+                <ScalarProperty Name="PatBemCodBaseCred" ColumnName="PatBemCodBaseCred" />
+                <ScalarProperty Name="PatBemBaseCalcPIS" ColumnName="PatBemBaseCalcPIS" />
+                <ScalarProperty Name="PatBemPercPIS" ColumnName="PatBemPercPIS" />
+                <ScalarProperty Name="PatBemValPIS" ColumnName="PatBemValPIS" />
+                <ScalarProperty Name="PatBemBaseCalcCOFINS" ColumnName="PatBemBaseCalcCOFINS" />
+                <ScalarProperty Name="PatBemPercCOFINS" ColumnName="PatBemPercCOFINS" />
+                <ScalarProperty Name="PatBemValCOFINS" ColumnName="PatBemValCOFINS" />
+                <ScalarProperty Name="PatBemIdentifBemIncorp" ColumnName="PatBemIdentifBemIncorp" />
+                <ScalarProperty Name="PatBemIndicUtiliz" ColumnName="PatBemIndicUtiliz" />
+                <ScalarProperty Name="PatBemParcAquisDeduzCred" ColumnName="PatBemParcAquisDeduzCred" />
+                <ScalarProperty Name="PatBemIndicNumParc" ColumnName="PatBemIndicNumParc" />
+                <ScalarProperty Name="PatBemParticipEfdPisCofins" ColumnName="PatBemParticipEfdPisCofins" />
+                <ScalarProperty Name="PatBemAnoMesEfdPisCofins" ColumnName="PatBemAnoMesEfdPisCofins" />
+                <ScalarProperty Name="PatBemAnoMesAprEfdPisCofins" ColumnName="PatBemAnoMesAprEfdPisCofins" />
+                <ScalarProperty Name="PatBemValAquisEfdPisCofins" ColumnName="PatBemValAquisEfdPisCofins" />
+                <ScalarProperty Name="PatBemAnoMesInicEfdPisCofins" ColumnName="PatBemAnoMesInicEfdPisCofins" />
+                <ScalarProperty Name="PatBemAnoMesFimEfdPisCofins" ColumnName="PatBemAnoMesFimEfdPisCofins" />
+                <ScalarProperty Name="PatBemQtdParcApropiar" ColumnName="PatBemQtdParcApropiar" />
+                <ScalarProperty Name="PatBemCst" ColumnName="PatBemCst" />
+                <ScalarProperty Name="PatBemOrigCred" ColumnName="PatBemOrigCred" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="gerar_codigo" FunctionName="Apolo10Model1.Store.gerar_codigo" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="PAT_BEM" ZoomLevel="18">
+        <EntityTypeShape EntityType="Apolo10Model1.media" Width="1.5" PointX="0.75" PointY="0.75" Height="19.864319661458335" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

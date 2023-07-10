@@ -1,0 +1,5 @@
+ Type="numeric" Mode="InOut" />
+ Type="numeric" Mode="InOut" Precision="20" Scale="2" />
+
+ Mode="InOut" Type="Decimal" />
+ Mode="InOut" Type="Decimal" Precision="20" Scale="2" />

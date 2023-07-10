@@ -1,0 +1,69 @@
+﻿@model IEnumerable<MvcAppHyLinedoBrasil.Models.Apolo.VU_Lista_Entregas>
+
+@if (Model != null)
+{
+    <fieldset>
+        <p align="center">
+            <legend><u>Lista de Entregas</u></legend>
+        </p>
+        <table style="width: 100%">
+            <tr>
+                <th>
+                </th>
+                <th>
+                    Importado
+                </th>
+                <th>
+                    Data Nascimento
+                </th>
+                <th>
+                    Caminhão
+                </th>
+                <th>
+                    Placa
+                </th>
+                <th>
+                    Marca
+                </th>
+                <th>
+                    Modelo
+                </th>
+                <th>
+                    Baú
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr align="center">
+                    <td>
+                        @Html.RadioButton("entregaSelecionada", (item.Data_Nascimento.ToString() + "|" + item.Placa), Session["marcado"].ToString() == (item.Data_Nascimento.ToString() + "|" + item.Placa) ? true : false)
+                    </td>
+                    <td>
+                        @if (item.Logger_Importado > 0)
+                        {
+                            @Html.Image(@Url.Content("~/Content/images/Sim.png"), "Logger Importado!")
+                        }
+                    </td>
+                    <td>
+                        @String.Format("{0:dd/MM/yyyy}", item.Data_Nascimento)
+                    </td>
+                    <td>
+                        @item.Caminhão
+                    </td>
+                    <td>
+                        @item.Placa
+                    </td>
+                    <td>
+                        @item.Marca
+                    </td>
+                    <td>
+                        @item.Modelo
+                    </td>
+                    <td>
+                        @item.Baú
+                    </td>
+                </tr>
+            }
+        </table>
+    </fieldset>
+}

@@ -1,0 +1,331 @@
+﻿@{
+    ViewBag.Title = "";
+}
+
+<script type='text/javascript'>
+    window.onbeforeunload = function () {
+        return "Se a página for atualizada, os dados alterados serão perdidos!";
+    }
+
+    function verificaDataProducao() {
+        var dataProducao = $('#txtDataProducao').val();
+        var dataAQO = $('#txtDataAQO').val();
+        var errorHolder = document.getElementById('errorHolder');
+        if (dataProducao > dataAQO) {
+            errorHolder.innerHTML = 'A data de produção não pode ser superior a data do AQO!';
+//            $('#add').button('disable');
+//            $('[type="submit"]').button('refresh');
+            return true;
+        } else {
+            errorHolder.innerHTML = '';
+//            $('#add').button('enable');
+//            $('[type="submit"]').button('refresh');
+            return false;
+        }
+    }
+
+    function verificaQtdes() {
+        var amostra = $('#txtAmostra').val();
+        var floatAmostra = parseFloat(amostra.replace(',', '.'));
+
+        var sujo = $('#txtSujo').val();
+        var floatSujo = parseFloat(sujo.replace(',', '.'));
+
+        var sangue = $('#txtSangue').val();
+        var floatSangue = parseFloat(sangue.replace(',', '.'));
+
+        var trincado = $('#txtTrincado').val();
+        var floatTrincado = parseFloat(trincado.replace(',', '.'));
+
+        var virado = $('#txtVirado').val();
+        var floatVirado = parseFloat(virado.replace(',', '.'));
+
+        var pequeno = $('#txtPequeno').val();
+        var floatPequeno = parseFloat(pequeno.replace(',', '.'));
+
+        var grande = $('#txtGrande').val();
+        var floatGrande = parseFloat(grande.replace(',', '.'));
+
+        var qtdeAvaliado = floatSujo + floatSangue + floatTrincado + floatVirado + floatPequeno + floatGrande;
+
+        var errorHolder = document.getElementById('errorHolder');
+        if (qtdeAvaliado > floatAmostra) {
+            errorHolder.innerHTML = 'A quantidade analisada é maior que amostra! Verifique!';
+//            $('#add').button('disable');
+//            $('[type="submit"]').button('refresh');
+            return true;
+        } else {
+            errorHolder.innerHTML = '';
+//            $('#add').button('enable');
+//            $('[type="submit"]').button('refresh');
+            return false;
+        }
+    }
+
+    $('#ddlInc').change(function () {
+        var inc = $('#ddlInc').val();
+        $.ajax({
+            url: 'CarregaNucleosJS',
+            type: 'POST',
+            data: JSON.stringify({ id: inc }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#ddlNucleo').empty();
+                $('select#ddlNucleo').append('<option value="0" selected="selected">(Selecione um Núcleo)</option>');
+                $.each(data, function (key, SelectListItem) {
+                    $('select#ddlNucleo').append('<option value="' + SelectListItem.Text + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#ddlNucleo').selectmenu('refresh');
+            }
+        });
+    });
+
+    $('#ddlNucleo').change(function () {
+        var farm = $('#ddlNucleo').val();
+        var inc = $('#ddlInc').val();
+        $.ajax({
+            url: 'CarregaLotesJS',
+            type: 'POST',
+            data: JSON.stringify({ id: farm, id2: inc }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#ddlLote').empty();
+                $('select#ddlLote').append('<option value="0" selected="selected">(Selecione um Lote)</option>');
+                $.each(data, function (key, SelectListItem) {
+                    $('select#ddlLote').append('<option value="' + SelectListItem.Text + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#ddlLote').selectmenu('refresh');
+            }
+        });
+    });
+
+    $('#ddlLote').change(function () {
+        var lote = $('#ddlLote option:selected').text();
+        $.ajax({
+            url: 'CarregaGalpoesJS',
+            type: 'POST',
+            data: JSON.stringify({ id: lote }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#ddlGalpao').empty();
+                $('select#ddlGalpao').append('<option value="0" selected="selected">(Selecione um Galpão)</option>');
+                $.each(data, function (key, Lotes) {
+                    if (Lotes.Location == 'GP') {
+                        $('select#ddlGalpao').append('<option value="' + Lotes.Galpao + " - " + Lotes.Linhagem + '">' + Lotes.Galpao + " - " + Lotes.Linhagem + '</option>');
+                    }
+                    else {
+                        $('select#ddlGalpao').append('<option value="' + Lotes.Galpao + '">' + Lotes.Galpao + '</option>');
+                    }
+                    $('#hddLinhagem').val(Lotes.Linhagem);
+                });
+                $('select#ddlGalpao').selectmenu('refresh');
+            }
+        });
+    });
+
+    $('#ddlGalpao').change(function () {
+        var lote = $('#ddlLote option:selected').val();
+        var galpao = $('#ddlGalpao option:selected').val();
+        $.ajax({
+            url: 'RetornaLoteCompleto',
+            type: 'POST',
+            data: JSON.stringify({ id: lote, id2: galpao }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('#loteCompleto').val(data.LoteCompleto);
+                $('#hddLinhagem').val(data.Linhagem);
+            }
+        });
+    });
+
+    $('#add').click(function () {
+        if (verificaDataProducao()) { return false; }
+        if (verificaQtdes()) { return false; }
+    });
+</script>
+
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para a Lista de AQO", "ListaAQO", "AQO", 
+                null,
+                new { @class = "AQO", @title = "Clique aqui para voltar para a Lista de AQO." })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/egg.png"), "AQO")
+    <h2>Nova AQO</h2>
+</div>
+<h4 style="color:red;">@ViewBag.Erro</h4>
+@using (Html.BeginForm("SaveAQO", "AQO", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<fieldset>
+    <div class="editor-label">
+        <b>Incubatório:</b>
+    </div>
+    <div class="editor-field">
+        @Html.DropDownList(
+        "Incubatorio",
+        (List<SelectListItem>)Session["DDLIncubatorio"],
+        "(Selecione um Incubatório)",
+        new { @id = "ddlInc", @required = "true" })
+    </div>
+    <div class="editor-label">
+        <b>Data AQO:</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox("dataAQO", Convert.ToDateTime(Session["dataAQO"]).ToString("yyyy-MM-dd"), new
+        {
+            @id = "txtDataAQO",
+            @type = "date",
+            @required = "true",
+            @max = DateTime.Today.ToString("yyyy-MM-dd")
+        })
+    </div>
+    <div class="editor-label">
+        <b>Núcleo:</b>
+    </div>
+    <div class="editor-field">
+        @Html.DropDownList(
+        "Nucleo",
+     (List<SelectListItem>)Session["DDLNucleo"],
+        "(Selecione um Núcleo)",
+        new { @id = "ddlNucleo", @required = "true" })
+    </div>
+    <div class="editor-label">
+        <b>Lote:</b>
+    </div>
+    <div class="editor-field">
+        @Html.DropDownList(
+        "Lote",
+     (List<SelectListItem>)Session["DDLLotes"],
+        new { @id = "ddlLote", @required = "true" })
+    </div>
+    <div class="editor-label">
+        <b>Galpão:</b>
+    </div>
+    <div class="editor-field">
+        @Html.DropDownList(
+        "Galpao",
+     (List<SelectListItem>)Session["DDLGalpoes"],
+        new { @id = "ddlGalpao", @required = "true" })
+    </div>
+
+    @Html.Hidden("linhagem", new { @id = "hddLinhagem" })
+    @Html.Hidden("loteCompleto", Session["loteCompleto"].ToString(), new { @id = "loteCompleto" })
+
+    <div class="editor-label">
+        <b>Data de Produção:</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox("dataProducao", Convert.ToDateTime(Session["DataProducao"]).ToString("yyyy-MM-dd"), new { @id = "txtDataProducao", @type = "date", @required = "true" })
+    </div>
+    <div class="editor-label">
+        <b>Responsável(is) pela Coleta:</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox("ResponsavelColeta", Session["ResponsavelColeta"].ToString(), new { @id = "txtResponsavelColeta", @required = "true", @onkeyup = "this.value = this.value.toUpperCase();" })
+    </div>
+    <div class="editor-label">
+        <b>Amostra:</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox("Amostra", Convert.ToInt32(Session["Amostra"]), new { @type = "number", @id = "txtAmostra", @required = "true", @min = "1" })
+    </div>
+    <div class="editor-label">
+        <b>Sujo (Fezes):</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox("Sujo", Convert.ToInt32(Session["Sujo"]), new { @type = "number", @id = "txtSujo", @required = "true" })
+    </div>
+    <div class="editor-label">
+        <b>Sujo (Sangue):</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox("Sangue", Convert.ToInt32(Session["Sangue"]), new { @type = "number", @id = "txtSangue", @required = "true" })
+    </div>
+    <div class="editor-label">
+        <b>Trincado:</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox("Trincado", Convert.ToInt32(Session["Trincado"]), new { @type = "number", @id = "txtTrincado", @required = "true" })
+    </div>
+    <div class="editor-label">
+        <b>Virado:</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox("Virado", Convert.ToInt32(Session["Virado"]), new { @type = "number", @id = "txtVirado", @required = "true" })
+    </div>
+    <div class="editor-label">
+        <b>Pequeno:</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox("Pequeno", Convert.ToInt32(Session["Pequeno"]), new { @type = "number", @id = "txtPequeno", @required = "true" })
+    </div>
+    <div class="editor-label">
+        <b>Grande:</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox("Grande", Convert.ToInt32(Session["Grande"]), new { @type = "number", @id = "txtGrande", @required = "true" })
+    </div>
+    <div class="editor-label">
+        <b>Defeituoso:</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox("Defeituoso", Convert.ToInt32(Session["Defeituoso"]), new { @type = "number", @id = "txtDefeituoso", @required = "true" })
+    </div>
+    <div class="editor-label">
+        <b>Gravidade Específica do Ovo:</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox("GravidadeEspecificaOvo", Convert.ToInt32(Session["GravidadeEspecificaOvo"]),
+            new
+                 {
+                @required = true,
+                @placeholder = "Exemplo: 10,54",
+                @type = "number",
+                @step = "0.01",
+                @lang = "pt-BR",
+                @id = "txtGravidadeEspecificaOvo"
+            })
+    </div>
+    @*<div class="editor-label">
+            <b>Temperatura do Ovo:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("TemperaturaOvo", Convert.ToInt32(Session["TemperaturaOvo"]),
+                new {
+                    @required = true,
+                    @placeholder = "Exemplo: 10,54",
+                    @type = "number",
+                    @step = "0.01",
+                    @lang = "pt-BR",
+                    @id = "txtTemperaturaOvo"
+                })
+        </div>*@
+    <div class="editor-label">
+        <b>Número da N.F.:</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox("nfNum", (string)Session["nfNum"], new { @type = "number", @required = true })
+    </div>
+    <div class="editor-label">
+        <b>Observação:</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextArea("observacao", Session["observacao"].ToString(),
+            new { @id = "txtObservacao", @required = "true" })
+    </div>
+    <div class="editor-label" id="errorHolder" style="color: Red; font-weight:bold;"></div>
+    <p>
+        <input type="submit" value="Salvar AQO" id="add" />
+    </p>
+</fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

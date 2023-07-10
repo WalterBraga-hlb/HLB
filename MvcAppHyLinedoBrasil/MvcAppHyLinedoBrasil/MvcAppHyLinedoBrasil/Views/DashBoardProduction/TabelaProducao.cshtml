@@ -1,0 +1,145 @@
+﻿@model MvcAppHyLinedoBrasil.Data.FLIPDataSet.VU_ProducaoPorLoteDataTable
+
+@{
+    ViewBag.Title = "Tabela de Produção Diária";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-1.4.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Scripts/jquery-1.8.2.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+
+    @*<link href="@Url.Content("~/Content/icons/logo_hyline.ico")" rel="Shortcut Icon" type="text/css" />*@
+
+
+    <!--jQuery UI -->
+    <script src="@Url.Content("~/Scripts/jquery-1.9.1.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/ui/jquery.ui.core.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/ui/jquery.ui.widget.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/ui/jquery.ui.mouse.js")")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/ui/jquery.ui.draggable.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/ui/jquery.ui.position.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/ui/jquery.ui.resizable.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/ui/jquery.ui.button.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/ui/jquery.ui.dialog.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/ui/jquery.ui.menu.js")" type="text/javascript"></script>
+    
+    <link href="@Url.Content("~/Scripts/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+
+    <link href="@Url.Content("//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("//code.jquery.com/jquery-1.10.2.js")" type="text/javascript"></script>
+    <script src="@Url.Content("//code.jquery.com/ui/1.11.0/jquery-ui.js")" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#dataTabela").datepicker({ dateFormat: "dd/mm/yy" });
+        });
+    </script>
+</head>
+<body class="@Session["empresa"].ToString()"> 
+    <div class="page">
+        <div id="header">
+            <div id="title">
+                @Html.Image(@Url.Content("~/Content/images/Logo_" + Session["logo"].ToString() + ".png"), "Logo")
+            </div>
+        </div>
+        <div id="main">
+            <div align="center">
+                <h1>Tabela de Produção Diária</h1>
+            </div>
+            @*<p align="center">
+                Parâmetros selecionados:
+                <br />
+                Período: @Html.Label(Session["sDataInicial"].ToString()) à @Html.Label(Session["sDataFinal"].ToString())
+                Linhagem:
+                @Html.Label(Session["sLinhagem"].ToString())
+                Fazenda:
+                @Html.Label(Session["sFazenda"].ToString())
+                Granja:
+                @Html.Label(Session["sGranja"].ToString())
+            </p>*@
+            @using (Html.BeginForm("AtualizaTabelaProducao", "DashBoardProduction", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <p align="center">
+                    Selecione o Dia da Produção: @Html.TextBox("dataTabela", Session["sDataInicialTabela"])
+                    <input id="Anual" type="submit" value="Atualizar Tabela" />
+                </p>
+            }
+            <table>
+                <tr>
+                    <th>
+                        Linhagem
+                    </th>
+                    <th>
+                        Lote / Galpão / Linha
+                    </th>
+                    <th>
+                        Idade
+                    </th>
+                    <th>
+                        Produção Real
+                    </th>
+                    <th>
+                        Ovos Incubáveis
+                    </th>
+                </tr>
+                @foreach (var linhagem in Model
+                    .GroupBy(m => new { m.Linhagem })
+                    .OrderBy(o => o.Key.Linhagem)
+                    .Select(n => new { 
+                                        type = n.Key,
+                                        totalProducao = n.Sum(x => x.Qtde__Produzida),
+                                        totalIncubavel = n.Sum(x => x.Ovos_Incubáveis)
+                                     }).ToList())
+	            {
+                    <tr>
+                        <td align="center" rowspan="@(Model.Where(m => m.Linhagem == linhagem.type.Linhagem).Count() + 1).ToString()">
+                            <b>@linhagem.type.Linhagem</b>
+                        </td>
+                    </tr>
+		                foreach (var item in Model.Where(m => m.Linhagem == linhagem.type.Linhagem).OrderBy(o => o._Lote___Galpão___Linha).ToList())
+                        {
+                            <tr>
+                                <td align="center">
+                                    @item._Lote___Galpão___Linha
+                                </td>
+                                <td align="center">
+                                    @item.Idade
+                                </td>
+                                <td align="center">
+                                    @String.Format("{0:0,0}", item.Qtde__Produzida)
+                                </td>
+                                <td align="center">
+                                    @String.Format("{0:0,0}", item.Ovos_Incubáveis)
+                                </td>
+                            </tr>
+                        }
+                    <tr>
+                        <td align="right" colspan="3">
+                            <b>Total da Linhagem @linhagem.type.Linhagem :</b>
+                        </td>
+                        <td align="center">
+                            <b>@String.Format("{0:0,0}", linhagem.totalProducao)</b>
+                        </td>
+                        <td align="center">
+                            <b>@String.Format("{0:0,0}", linhagem.totalIncubavel)</b>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div id="footer">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

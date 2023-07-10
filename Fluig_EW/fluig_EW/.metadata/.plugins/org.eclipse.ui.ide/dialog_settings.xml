@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="installedFeatures">
+		<item value="com.microsoft.tfs.client.eclipse.feature:14.0.3.201603291051"/>
+		<item value="org.eclipse.datatools.connectivity.feature:1.12.0.v201406061321-7C7n9DEsxcwtN5odeWrQrgwYHq8"/>
+		<item value="org.eclipse.datatools.connectivity.oda.designer.core.feature:1.12.0.v201406061321-787B7PBgJ9DUBNCVAaSZ"/>
+		<item value="org.eclipse.datatools.connectivity.oda.designer.feature:1.12.0.v201406061321-4147w312514242925"/>
+		<item value="org.eclipse.datatools.connectivity.oda.feature:1.12.0.v201406061321-7E7C7YBgJ9ET9OHLDfLZ"/>
+		<item value="org.eclipse.datatools.modelbase.feature:1.12.0.v201406061321-7707GCcNBHLDaKTEcRi"/>
+		<item value="org.eclipse.datatools.sqldevtools.feature:1.12.0.v201406061321-7N8P7IFDri6qjCyg6Q61VhVsihvO"/>
+		<item value="org.eclipse.datatools.sqldevtools.parsers.feature:1.12.0.v201406061321-623BgJ9EE9ZJRDZLA"/>
+		<item value="org.eclipse.draw2d:3.9.101.201408150207"/>
+		<item value="org.eclipse.emf.common.ui:2.9.0.v20150123-0452"/>
+		<item value="org.eclipse.emf.common:2.16.0.v20190625-1131"/>
+		<item value="org.eclipse.emf.ecore.edit:2.9.0.v20150123-0452"/>
+		<item value="org.eclipse.emf.ecore:2.19.0.v20190822-1451"/>
+		<item value="org.eclipse.emf.edit.ui:2.10.2.v20150123-0452"/>
+		<item value="org.eclipse.emf.edit:2.10.1.v20150123-0452"/>
+		<item value="org.eclipse.emf:2.10.2.v20150123-0452"/>
+		<item value="org.eclipse.gef:3.9.101.201408150207"/>
+		<item value="org.eclipse.help:2.0.103.v20150204-1700"/>
+		<item value="org.eclipse.platform:4.4.2.v20150204-1700"/>
+		<item value="org.eclipse.rcp:4.4.2.v20150204-1700"/>
+		<item value="org.eclipse.wst.jsdt.feature:1.6.100.v201410221502"/>
+		<item value="org.eclipse.wst.web_ui.feature:3.6.3.v201501312139"/>
+		<item value="org.eclipse.wst.xml_ui.feature:3.6.3.v201501292352"/>
+	</list>
+	<section name="WORKBENCH_SETTINGS">
+		<list key="ENABLED_TRANSFERS">
+		</list>
+	</section>
+	<section name="ChooseWorkspaceDialogSettings">
+		<item value="582" key="DIALOG_X_ORIGIN"/>
+		<item value="274" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="BasicNewProjectResourceWizard">
+	</section>
+</section>

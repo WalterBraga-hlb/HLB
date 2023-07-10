@@ -1,0 +1,119 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+}
+
+<script src="../../Scripts/jquery.maskedinput.js" type="text/javascript"></script>
+
+<script language="javascript" type="text/javascript">
+    //    window.onbeforeunload = function () {
+    //        return "Não é possível atualizar a página porque os dados serão perdidos! Sendo assim, a página será fechada!";
+    //    }
+
+    window.onkeydown = function (e) {
+        if (e.keyCode === 116) {
+            alert("Função não permitida");
+            e.keyCode = 0;
+            e.returnValue = false;
+            return false;
+        }
+    }
+
+    $(document).ready(function () {
+        if (document.getElementById("ddlNucleoC").length == 0) {
+            $('#pnlNucleoC').hide();
+        } else {
+            $('#pnlNucleoC').show();
+        }
+    });
+
+    $('#ddlDepartamentoVisC').change(function () {
+        var departamento = $('#ddlDepartamentoVisC').val();
+        $.ajax({
+            url: '/Auditoria/CarregaListaNucleosJS',
+            type: 'POST',
+            data: JSON.stringify({ unidade: departamento }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data.length > 0) {
+                    $('#pnlNucleoC').show();
+                    $('select#ddlNucleoC').empty();
+                    $('select#ddlNucleoC').append('<option value="" selected="selected">(Selecione um Núcleo)</option>');
+                    $.each(data, function (key, SelectListItem) {
+                        $('select#ddlNucleoC').append('<option value="' + SelectListItem.Text + '">' + SelectListItem.Text + '</option>');
+                    });
+                    $('select#ddlNucleoC').selectmenu('refresh');
+                    document.getElementById("ddlNucleo").required = true;
+                } else {
+                    $('select#ddlNucleoC').empty();
+                    $('select#ddlNucleoC').selectmenu('refresh');
+                    document.getElementById("ddlNucleoC").required = false;
+                    $('#pnlNucleoC').hide();
+                }
+            }
+        });
+    });
+</script>
+
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para a Lista de Visitas", "ListaVisitas", "Auditoria", 
+                null, new { @title = "Clique aqui para voltar para a Lista de Visitas", @class = "visita" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/visita_32.png"), "Visita")
+    <h2>Visita</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+@using (Html.BeginForm("SaveGeraVisita", "Auditoria", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        <div class="editor-label">
+            <b>Data da Visita:</b>
+            @Html.TextBox("dataVisita", Convert.ToDateTime(Session["dataVisita"]).ToString("yyyy-MM-dd"), 
+                new { @type = "date", @required = true })
+        </div>
+        <div class="editor-label">
+            <b>Departamento:</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList(
+                "Departamento",
+                (List<SelectListItem>)Session["DLListaDepartamentos"],
+                "(Selecione um Departamento)",
+                new { @id = "ddlDepartamentoVisC", @required = true })
+        </div>
+        <div id="pnlNucleoC">
+            <div class="editor-label">
+                <b>Núcleo:</b>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList(
+                    "Nucleo",
+                    (List<SelectListItem>)Session["ListaNucleos"],
+                    new { @id = "ddlNucleoC" })
+            </div>
+        </div>
+        <div class="editor-label">
+            <b>Responsável:</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList(
+                "Responsavel",
+                (List<SelectListItem>)Session["DLListaResponsaveis"],
+                "(Selecione um Responsável)",
+                new { @id = "ddlResponsavelC", @required = true })
+        </div>
+        <br />
+        @Html.Partial("_ListaRequisitosVisita")
+        <p>
+            <input type="submit" value="Gerar Visita" id="add" />
+        </p>
+    </fieldset>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,128 @@
+﻿@{
+    ViewBag.Title = "";
+
+    var itensVacinaList = (List<MvcAppHylinedoBrasilMobile.Models.Vacinas_Secundaria_Pedido_Venda>)Session["VacinasSecundariaItemPVListExibe"];
+
+    if (itensVacinaList == null)
+    {
+        itensVacinaList = new List<MvcAppHylinedoBrasilMobile.Models.Vacinas_Secundaria_Pedido_Venda>();
+    }
+
+    string vacinaPrimaria = Session["vacinaPrimariaItemPV"].ToString();
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities apoloSession = new MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities();
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.PRODUTO produto = apoloSession.PRODUTO.Where(w => w.ProdCodEstr == vacinaPrimaria).FirstOrDefault();
+
+    int sequenciaItem = 0;
+    MvcAppHylinedoBrasilMobile.Models.Item_Pedido_Venda itemPV =
+        new MvcAppHylinedoBrasilMobile.Models.Item_Pedido_Venda();
+    if (Session["idItemSelecionado"] != null)
+    {
+        List<MvcAppHylinedoBrasilMobile.Models.Item_Pedido_Venda> listItensPV =
+            (List<MvcAppHylinedoBrasilMobile.Models.Item_Pedido_Venda>)Session["ItensPVList"];
+
+        sequenciaItem = Convert.ToInt32(Session["idItemSelecionado"]);
+        itemPV = listItensPV.Where(w => w.Sequencia == sequenciaItem).FirstOrDefault();
+    }
+}
+
+<script type='text/javascript'>
+//    $('#Text').change(function () {
+//        var vacina = $('#Text').val();
+//        $.ajax({
+//            url: '/PedidoVenda/AtualizaVacinaPrimaria',
+//            type: 'POST',
+//            data: JSON.stringify({ id: vacina }),
+//            dataType: 'json',
+//            contentType: 'application/json',
+//            success: function (data) {
+//                if (data == '') {
+//                } else {
+//                    alert(data.toString());
+//                }
+//            }
+//        });
+//    });
+</script>
+
+<div align="center">
+    @if (!Convert.ToBoolean(Session["visualizaPV"]))
+    {
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Pedidos de Venda", "Index", "PedidoVenda");
+        <br />
+        <br />
+        <b style="color:red; background-color:Yellow">
+            * CUIDADO!!! CASO CLIQUE NO LINK ACIMA, OS DADOS INFORMADOS DO PEDIDO
+            ANTES DA FINALIZAÇÃO SERÃO PERDIDOS!!!
+        </b>
+    </p>
+    }
+    @Html.Image(@Url.Content("~/Content/icons/pedidoVenda.png"), "Pedido de Venda")
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+@if (!Convert.ToBoolean(Session["visualizaPV"]))
+{
+    <h2>Passo 03: Selecione a Vacina Primária que será utilizada e as Vacinas que combinarem com a mesma</h2>
+    <br />
+}
+else
+{
+    <h2>
+        Vacina Primária do Item @Session["idItemSelecionado"].ToString(): 
+        @itemPV.ProdCodEstr - @itemPV.DataEntregaInicial.ToShortDateString() a 
+        @itemPV.DataEntregaFinal.ToShortDateString()
+    </h2>
+    <br />
+}
+
+@using (Html.BeginForm("ListSecVacinas", "PedidoVenda", FormMethod.Post))
+{
+<ul data-role="listview" data-inset="true">
+    <li data-role="fieldcontain">
+        <b>Selecione a Vacina Primária:</b>
+        @if (itensVacinaList.Count == 0)
+        {
+            @Html.DropDownList(
+                "Text",
+                (List<SelectListItem>)Session["ListaVacinasPrimarias"])
+        }
+        else
+        {
+            <br />
+            @produto.ProdNomeAlt1
+            <br />
+            <b style="color: Red">
+                Para selecionar outra Vacina Primária, primeiro delete 
+                as Vacinas Secundárias!
+            </b>
+        }
+    </li>
+</ul>
+<br />
+    <input type="submit" value="Próximo" />
+}
+
+@if (!Convert.ToBoolean(Session["visualizaPV"]))
+{
+    if (!Session["origemPV"].ToString().Equals("Alteração"))
+    {
+        using (Html.BeginForm("VerificaVacina", "PedidoVenda", FormMethod.Post))
+        {
+            <input type="submit" value="Anterior" />
+        }
+    }
+}
+else
+{
+    using (Html.BeginForm("FinalizaPV", "PedidoVenda", FormMethod.Post))
+    {
+        <input type="submit" value="Anterior" />
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

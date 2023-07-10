@@ -1,0 +1,331 @@
+﻿@model MvcAppHylinedoBrasilMobile.Models.PedidoRacao_Item
+
+@{
+    ViewBag.Title = "";
+}
+
+<script type='text/javascript'>
+    function verificaSaldoQtdeKg() {
+        var qtdeKg = $('#qtdeKg').val();
+        var errorHolder = document.getElementById('errorQtdeKg');
+        $.ajax({
+            url: 'RetornaQtdeKg',
+            type: 'POST',
+            data: JSON.stringify({ id: qtdeKg }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                    errorHolder.innerHTML = '';
+                    $('#additem').button('enable');
+                    $('[type="submit"]').button('refresh');
+                    return false;
+                } else {
+                    errorHolder.innerHTML = data;
+                    $('#qtdeKg').focus();
+                    $('#additem').button('disable');
+                    $('[type="submit"]').button('refresh');
+                    return true;
+                }
+            }
+        });
+    }
+
+    function verificaCampos() {
+        var nucleo = $('#Nucleo').val();
+        var errorHolderNucleo = document.getElementById('errorNucleo');
+        if (nucleo == "") {
+            errorHolderNucleo.innerHTML = "Obrigatório selecionar um Núcleo!";
+            $('#additem').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        }
+        var galpao = $('#Galpao').val();
+        var errorHolderGalpao = document.getElementById('errorGalpao');
+        if (galpao == "") {
+            errorHolderGalpao.innerHTML = "Obrigatório selecionar um Galpão!";
+            $('#additem').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        }
+        var linhagem = $('#Linhagem').val();
+        var errorHolderLinhagem = document.getElementById('errorLinhagem');
+        if (linhagem == "") {
+            errorHolderLinhagem.innerHTML = "Obrigatório selecionar uma Linhagem!";
+            $('#additem').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        }
+        var codFormula = $('#CodFormula').val();
+        var errorHolderFormula = document.getElementById('errorCodFormula');
+        if (codFormula == "") {
+            errorHolderFormula.innerHTML = "Obrigatório selecionar uma Fórmula!";
+            $('#additem').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        }
+        var qtdeKg = $('#qtdeKg').val();
+        var errorHolderQtdeKg = document.getElementById('errorQtdeKg');
+        if (qtdeKg == "" || qtdeKg == 0) {
+            errorHolderQtdeKg.innerHTML = "Obrigatório infomar uma quantidade!";
+            $('#additem').button('disable');
+            $('[type="submit"]').button('refresh');
+            return true;
+        }
+        errorHolderNucleo.innerHTML = '';
+        errorHolderGalpao.innerHTML = '';
+        errorHolderLinhagem.innerHTML = '';
+        errorHolderFormula.innerHTML = '';
+        errorHolderQtdeKg.innerHTML = '';
+        $('#additem').button('enable');
+        $('[type="submit"]').button('refresh');
+        return false;
+    }
+
+    $('#Nucleo').change(function () {
+        var farm = $('#Nucleo').val();
+        $.ajax({
+            url: 'CarregaGalpoes',
+            type: 'POST',
+            data: JSON.stringify({ id: farm }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#Galpao').empty();
+                $('select#Galpao').append('<option value="" selected="selected">(Selecione um Galpão)</option>');
+                $.each(data, function (key, SelectListItem) {
+                    $('select#Galpao').append('<option value="' + SelectListItem.Text + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#Galpao').selectmenu('refresh');
+                var errorHolder = document.getElementById('errorNucleo');
+                errorHolder.innerHTML = '';
+                $('#additem').button('enable');
+                $('[type="submit"]').button('refresh');
+            }
+        });
+    });
+
+    $('#Galpao').change(function () {
+        var galpao = $('#Galpao').val();
+        $.ajax({
+            url: 'CarregaLinhagens',
+            type: 'POST',
+            data: JSON.stringify({ id: galpao }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#Linhagem').empty();
+                $('select#Linhagem').append('<option value="" selected="selected">(Selecione uma Linhagem)</option>');
+                $.each(data, function (key, SelectListItem) {
+                    $('select#Linhagem').append('<option value="' + SelectListItem.Text + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#Linhagem').selectmenu('refresh');
+                var errorHolder = document.getElementById('errorGalpao');
+                errorHolder.innerHTML = '';
+                $('#additem').button('enable');
+                $('[type="submit"]').button('refresh');
+            }
+        });
+    });
+
+    $('#CodFormula').change(function () {
+        var formula = $('#CodFormula option:selected').val();
+        $.ajax({
+            url: 'RetornaCodigoProduto',
+            type: 'POST',
+            data: JSON.stringify({ id: formula }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('#produto').val(data);
+                var errorHolder = document.getElementById('errorCodFormula');
+                errorHolder.innerHTML = '';
+                $('#additem').button('enable');
+                $('[type="submit"]').button('refresh');
+            }
+        });
+    });
+
+    $('#Linhagem').change(function () {
+        var formula = $('#Linhagem option:selected').val();
+        $.ajax({
+            url: 'RetornaLinhagemSelecionada',
+            type: 'POST',
+            data: JSON.stringify({ id: formula }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#CodFormula').empty();
+                $('select#CodFormula').append('<option value="" selected="selected">(Selecione uma Fórmula)</option>');
+                $.each(data, function (key, SelectListItem) {
+                    $('select#CodFormula').append('<option value="' + SelectListItem.Value + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#CodFormula').selectmenu('refresh');
+                var errorHolder = document.getElementById('errorLinhagem');
+                errorHolder.innerHTML = '';
+                $('#additem').button('enable');
+                $('[type="submit"]').button('refresh');
+            }
+        });
+    });
+
+    $('#qtdeKg').keyup(function () {
+        verificaSaldoQtdeKg();
+    });
+
+    $('#additem').click(function () {
+        if (verificaCampos()) { return; }
+    });
+
+    /* Máscaras ER */
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+    function mnum(v) {
+        v = v.replace(/\D/g, "");                                      //Remove tudo o que não é dígito
+        return v;
+    }
+</script>
+
+<div align="center">
+    @Html.ActionLink("Voltar p/ o Pedido de Ração", "EditPedidoRacao", new { id = Convert.ToInt32(Session["IDPedidoRacao"]) })
+</div>
+<br />
+<div align="center">
+    @Html.Image(@Url.Content("~/Content/icons/graos_32x32.png"), "PedidoRacao")
+    <h2>Inserir Item do Pedido de Ração</h2>
+</div>
+<h4 style="color:red;">@ViewBag.Erro</h4>
+@using (Html.BeginForm("SavePedidoRacaoItem", "PedidoRacao", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    
+    <fieldset>
+        <div class="editor-label">
+            <b>Núcleo:</b>
+        </div>        
+        <div class="editor-field">
+            @Html.DropDownListFor(
+            n => n.Nucleo,
+            (List<SelectListItem>)Session["ListaNucleos"],
+            "(Selecione um Núcleo)",
+            new { @id = "Nucleo" })
+            @Html.ValidationMessageFor(model => model.Nucleo)
+            <div class="editor-label" id="errorNucleo" style="color: Red; font-weight:bold;"></div>
+        </div>
+        <div class="editor-label">
+            <b>Galpão:</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(
+            g => g.Galpao,
+            //Enumerable.Empty<SelectListItem>(),
+            (List<SelectListItem>)Session["ListaGalpoesSelecionados"],
+            new { @id = "Galpao" })
+            @Html.ValidationMessageFor(model => model.Galpao)
+            <div class="editor-label" id="errorGalpao" style="color: Red; font-weight:bold;"></div>
+        </div>
+
+        <div class="editor-label">
+            <b>Linhagem:</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(
+            g => g.Linhagem,
+            //Enumerable.Empty<SelectListItem>(),
+            (List<SelectListItem>)Session["ListaLinhagensSelecionadas"],
+            new { @id = "Linhagem" })
+            @Html.ValidationMessageFor(model => model.Linhagem)
+            <div class="editor-label" id="errorLinhagem" style="color: Red; font-weight:bold;"></div>
+        </div>
+        
+        <div class="editor-label">
+            <b>Fórmula da Ração:</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(
+            n => n.CodFormulaRacao,
+            (List<SelectListItem>)Session["ListaFormulas"],
+            //"(Selecione uma Fórmula)",
+            new { @id = "CodFormula" })
+            @Html.ValidationMessageFor(model => model.Nucleo)
+            <div class="editor-label" id="errorCodFormula" style="color: Red; font-weight:bold;"></div>
+        </div>
+
+        <div class="editor-label">
+            <b>Qtde. Kg.:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.QtdeKg, "{0:N0}",  new { @id = "qtdeKg", @onkeyup = "mascara(this, mnum);" })
+            @Html.ValidationMessageFor(model => model.QtdeKg)
+        </div>
+        <div class="editor-label" id="errorQtdeKg" style="color: Red; font-weight:bold;"></div>
+        @Html.HiddenFor(model => model.ProdCodEstr, new { @id = "produto" })
+
+    <br />
+    </fieldset>
+    <br />
+    <div align="center">
+        <h2>Aditivos</h2>
+    </div>
+    
+    <ul data-role="listview" data-inset="true">
+        <li data-role="list-divider">Menu dos Aditivos dos Itens do Pedido de Ração</li>
+        <li>
+            @Html.ActionLink("Adicionar Novo Aditivo do Item do Pedido de Ração", "CreatePedidoRacaoItemAditivo", "PedidoRacao", null,
+             new { @class = "add", @title = "Clique aqui para Inserir novo Aditivo do Item do Pedido de Ração" })
+        </li>
+    </ul>
+    
+    <div style="overflow:auto;">
+    <table class="ajuste">
+        <tbody class="ajuste">
+        <tr class="ajuste">
+            <th class="ajuste"></th>
+            <th class="ajuste">
+                ID
+            </th>
+            <th class="ajuste">
+                Produto
+            </th>
+            <th class="ajuste">
+                Qtde. (Kg. / Ton)
+            </th>
+        </tr>
+
+    @foreach (var item in MvcAppHylinedoBrasilMobile.Controllers.PedidoRacaoController.hlbapp.PedidoRacao_Item_Aditivo.Where(w => w.IDPedidoRacao == Model.IDPedidoRacao && w.IDPedidoRacao_Item == Model.ID).ToList())
+    {
+        <tr class="ajuste">
+            <td class="ajuste">
+                <div align="center">            
+                    @Html.ActionLink("Delete", "DeletePedidoRacaoItemAditivo", "PedidoRacao", new { idPedidoRacao = item.IDPedidoRacao, idPedidoRacaoItem = item.IDPedidoRacao_Item, idPedidoRacaoItemAditivo = item.ID }, new { @class = "delete" })
+                </div>
+            </td>
+            <td class="ajuste">
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td class="ajuste">
+                @(Html.DisplayFor(modelItem => item.ProdCodEstr) + " - " + (MvcAppHylinedoBrasilMobile.Controllers.PedidoRacaoController.bdApolo.PRODUTO.Where(w => w.ProdCodEstr == item.ProdCodEstr).FirstOrDefault().ProdNome))
+            </td>
+            <td class="ajuste">
+                @String.Format("{0:N4}", item.QtdeKgPorTon)
+            </td>
+        </tr>
+    }
+    </tbody>
+    </table>
+    </div>
+    
+    <p>
+        <input type="submit" value="Salvar" id="additem" />
+    </p>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

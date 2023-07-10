@@ -1,0 +1,345 @@
+﻿@model IEnumerable<MvcAppHylinedoBrasilMobile.Models.LayoutDiarioExpedicaoPai>
+@using am = MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController;
+
+@{
+    ViewBag.Title = "";
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+    string lg = Session["language"].ToString();
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+
+    string empresa = Session["granjaSelecionada"].ToString();
+    bool localOvosComercio = false;
+    if (empresa.Length == 3)
+    {
+        if (empresa.Substring(2, 1) == "C")
+        {
+            localOvosComercio = true;
+        }
+    }
+}
+
+@if (browser.Browser.Equals("Firefox"))
+{
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
+    @*<script type="text/javascript">
+            $(document).on('pageshow', '#pageAccount', function () {
+                $("#dataInicial").datepicker({ dateFormat: "dd/mm/yy" });
+            });
+        </script>*@
+}
+
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink(am.GetTextOnLanguage("Voltar p/ Menu de Controle de Estoque de Ovos", lg), "MenuControleEstoqueOvos", "DiarioExpedicao", new { @class = "AQO" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/diario_expedicao.png"), "DEO")
+    <h2>Lista de DEOs</h2>
+</div>
+<br />
+@if (ViewBag.Erro != null)
+{
+    <h4 id="lblMsgErro" class="msgErro ui-li ui-li-static">
+        @Html.Raw(ViewBag.Erro)
+    </h4>
+}
+<br />
+@using (Html.BeginForm("CarregarListaDEOFiltroView", "DiarioExpedicao"))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="list-divider">
+            <b>Granja / Incubatório:</b>
+            @Html.DropDownList(
+                "Text",
+                (List<SelectListItem>)Session["ListaGranjas"])
+        </li>
+        <li data-role="fieldcontain">
+            <b>Data Inicial:</b>
+            <div class="editor-label">
+                @Html.TextBox("dataInicial", Convert.ToDateTime(Session["dataInicial"]).ToString("yyyy-MM-dd"),
+                new { @type = "date", @lang="es" })
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Data Final:</b>
+            <div class="editor-label">
+                @Html.TextBox("dataFinal", Convert.ToDateTime(Session["dataFinal"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+            </div>
+        </li>
+        <li data-role="list-divider">
+            <b>Tipo do DEO:</b>
+            @Html.DropDownList(
+                "TipoDEO",
+                (List<SelectListItem>)Session["ListaTiposDEOFiltro"],
+                new { @id = "dropBoxTipoDEOMain" })
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Pesquisar" />
+        </li>
+    </ul>
+}
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Menu do Diário de Expedição</li>
+    @if ((MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-GerarDiarioExpedicao",
+            (System.Collections.ArrayList)Session["Direitos"]))
+            && (Session["granjaSelecionada"].ToString().Equals("SB")))
+    {
+        <li>
+            @Html.ActionLink("Gerar Novo DEO Automaticamente", "ParametrosGerarDEO", "DiarioExpedicao",
+                null,
+                new
+                {
+                    @class = "add",
+                    @title = "Clique aqui para Gerar novo DEO Automaticamente"
+                })
+        </li>
+    }
+    else
+    {
+        <li>
+            @Html.ActionLink("Adicionar Novo DEO", "CreateDEO", "DiarioExpedicao",
+                new { transferenciaLinhagens = false },
+                new { @class = "add", @title = "Clique aqui para Inserir novo DEO" })
+        </li>
+    }
+    @if ((MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-TransferenciaLinhagens",
+            (System.Collections.ArrayList)Session["Direitos"]))
+            && (Convert.ToBoolean(Session["isIncubatorio"]) && !localOvosComercio))
+    {
+        <li>
+            @Html.ActionLink("Adicionar Transferência de Linhagens", "CreateDEO", "DiarioExpedicao",
+                new { transferenciaLinhagens = true },
+                new
+                {
+                    @class = "transferenciaLinhagens",
+                    @title = "Clique aqui para Inserir DEO de Transferência de Linhagens"
+                })
+        </li>
+    }
+    <li>
+        @Html.ActionLink("Gerar Relatório de DEOs - Sintético", "GerarRelatorioSinteticoDEO", "DiarioExpedicao", null,
+            new { @class = "importExcel", @target = "_blank", @title = "Clique aqui para Gerar o Relatório de DEOs - Sintético" })
+    </li>
+</ul>
+<br />
+<h4 style="color:red;">
+    Os itens que estiverem destacados com o ícone
+    @Html.Image(@Url.Content("~/Content/icons/lotes_16x16.png"), "Existem Lançamentos Posteriores!"),
+    significa que existem Lançamentos Futuros (Transferência, Classificação, Incubações, etc.)
+    onde, caso seja Excluído esse DEO, a quantidade ficará negativa.
+    Caso aconteça isso, clique no ícone para analisar os lotes que poderão ficar negativos
+    e sua rastreabilidade!!!
+</h4>
+<br />
+<div id="tabelaDEO" style="overflow:auto;">
+    <table id="tabela">
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>
+                ID
+            </th>
+            <th>
+                Origem
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataHoraCarreg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NFNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GTANum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lacre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoDEO)
+            </th>
+            <th>
+                Destino
+            </th>
+            <th>
+                Qtde. Total Ovos
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            decimal qtdeTotalOvos = hlbapp.LayoutDiarioExpedicaos
+                .Where(w => w.DataHoraCarreg == item.DataHoraCarreg && w.Granja == item.Granja
+                    && w.TipoDEO == item.TipoDEO).Sum(s => s.QtdeOvos);
+
+            //string numIdentificacao = hlbapp.LayoutDiarioExpedicaos
+            //    .Where(w => w.DataHoraCarreg == item.DataHoraCarreg && w.Granja == item.Granja
+            //        && w.TipoDEO == item.TipoDEO).Max(s => s.NumIdentificacao);
+
+            <tr>
+                <td class="ajuste">
+                    <div align="center">
+                        @Html.ActionLink("Edit", "EditDEO",
+                            new
+                            {
+                                dataFiltro = item.DataHoraCarreg,
+                                nfNUm = item.NFNum,
+                                tipoDEO = item.TipoDEO,
+                                gta = item.GTANum,
+                                lacre = item.Lacre,
+                                operacaoMetodo = "Edit",
+                                numIdentificacao = item.NumIdentificacao
+                            },
+                         new { @class = "edit", @title = "Clique aqui para Alterar este DEO" })
+                    </div>
+                </td>
+                <td class="ajuste">
+                    <div align="center">
+                        @if (item.TipoDEO.Equals("Ovos Incubáveis") || item.TipoDEO.Equals("Transf. Ovos Incubáveis"))
+                        {
+                            if (
+                                ((!MvcAppHylinedoBrasilMobile.Controllers.DiarioExpedicaoController
+                                    .ExisteItensConferidosDEO(item.Granja, item.DataHoraCarreg, item.NumIdentificacao) && item.TipoDEO.Equals("Ovos Incubáveis")))
+                                ||
+                                ((MvcAppHylinedoBrasilMobile.Controllers.DiarioExpedicaoController
+                                .ExisteSaldoDEO(item.Granja, item.DataHoraCarreg, item.NumIdentificacao, false))
+                                &&
+                                !item.TipoDEO.Equals("Ovos Incubáveis")))
+                            {
+                                @Html.ActionLink("Delete", "DeleteDEO",
+                                new { dataFiltro = item.DataHoraCarreg, numIdentificacao = item.NumIdentificacao
+                                },
+                                     new { @class = "delete", @title = "Clique aqui para Excluir este DEO" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Rastreabilidade", "RastreabilidadeDEO",
+                                    new { granja = item.Granja, dataHoraCarreg = item.DataHoraCarreg,
+                                        numIdentificacao = item.NumIdentificacao
+                                    },
+                                    new { @class = "lote" })
+                            }
+                        }
+                        else if (item.TipoDEO.Equals("Ovos p/ Comércio"))
+                        {
+                            if (MvcAppHylinedoBrasilMobile.Controllers.DiarioExpedicaoController
+                                .ExisteSaldoDEO(item.Granja, item.DataHoraCarreg, 
+                                    item.NumIdentificacao, true))
+                            {
+                                @Html.ActionLink("Delete", "DeleteDEO",
+                                new { dataFiltro = item.DataHoraCarreg, numIdentificacao = item.NumIdentificacao
+                                },
+                                     new { @class = "delete", @title = "Clique aqui para Excluir este DEO" })
+                            }
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Delete", "DeleteDEO",
+                                new { dataFiltro = item.DataHoraCarreg, numIdentificacao = item.NumIdentificacao },
+                                    new { @class = "delete", @title = "Clique aqui para Excluir este DEO" })
+                        }
+                    </div>
+                </td>
+                <td class="ajuste">
+                    <div align="center">
+                        @(!item.NFNum.Equals("") ? Html.ActionLink("Imprimir", "PrintDEO",
+                                    new { dataFiltro = item.DataHoraCarreg, download = false, numIdentificacao = item.NumIdentificacao },
+                                    new
+                                    {
+                                        @class = "print",
+                                        @target = "_blank",
+                                        @title = "Clique aqui para Imprimir este DEO em PDF"
+                                    }) : Html.Label(""))
+                    </div>
+                </td>
+                <td class="ajuste">
+                    <div align="center">
+                        @(!item.NFNum.Equals("") ? Html.ActionLink("Imprimir", "PrintDEO",
+                                    new { dataFiltro = item.DataHoraCarreg, download = true, numIdentificacao = item.NumIdentificacao },
+                                    new
+                                    {
+                                        @class = "download",
+                                        @target = "_blank",
+                                        @title = "Clique aqui para fazer Download deste DEO em PDF"
+                                    }) : Html.Label(""))
+                    </div>
+                </td>
+                <td class="ajuste">
+                    <div align="center">
+                        @if (!(
+                        ((!MvcAppHylinedoBrasilMobile.Controllers.DiarioExpedicaoController
+                        .ExisteItensConferidosDEO(item.Granja, item.DataHoraCarreg, item.NumIdentificacao) && item.TipoDEO.Equals("Ovos Incubáveis")))
+                        ||
+                        ((MvcAppHylinedoBrasilMobile.Controllers.DiarioExpedicaoController
+                        .ExisteSaldoDEO(item.Granja, item.DataHoraCarreg, item.NumIdentificacao, false))
+                        &&
+                        !item.TipoDEO.Equals("Ovos Incubáveis"))))
+                        {
+                            @(!item.NFNum.Equals("") ? Html.ActionLink("Imprimir", "PrintConfereDEO",
+                                            new { dataFiltro = item.DataHoraCarreg, download = false, numIdentificacao = item.NumIdentificacao },
+                                            new
+                                            {
+                                                @class = "eggbox",
+                                                @target = "_blank",
+                                                @title = "Clique aqui para fazer Imprimir a conferência deste DEO em PDF"
+                                            }) : Html.Label(""))
+                        }
+                    </div>
+                </td>
+                <td class="ajuste">
+                    <div align="center">
+                        @*@if ((MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetGroup("HLBAPPM-AjusteInvetario",
+                                  (System.Collections.ArrayList)Session["Direitos"]))
+                                  && (item.TipoDEO.Equals("Inventário de Ovos")))
+                             {
+
+                                 @Html.ActionLink("AjusteInventario", "VerificaAjusteInventario", new
+                            {
+                                granja = item.Granja,
+                                dataFiltro = item.DataHoraCarreg
+                            },
+                                     new { @class = "ajuste", @title = "Clique aqui para Ajustar p/ Controle de Inventário este DEO" })
+                             }*@
+                        @item.NumIdentificacao
+                    </div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Granja)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataHoraCarreg)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NFNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GTANum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lacre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoDEO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IncubatorioDestino)
+                </td>
+                <td>
+                    @Html.Label("qtdeOvosLista", String.Format("{0:N0}", qtdeTotalOvos))
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

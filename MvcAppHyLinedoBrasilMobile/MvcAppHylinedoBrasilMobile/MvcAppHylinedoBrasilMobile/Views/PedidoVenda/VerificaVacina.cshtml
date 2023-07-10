@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "";
+
+    string codigoCliente = Session["selectedCustomer"].ToString();
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.ENTIDADE entidade = 
+        MvcAppHylinedoBrasilMobile.Controllers.PedidoVendaController.apoloStatic
+        .ENTIDADE.Where(w => w.EntCod == codigoCliente)
+            .FirstOrDefault();
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.CIDADE cidade =
+        MvcAppHylinedoBrasilMobile.Controllers.PedidoVendaController.apoloStatic
+        .CIDADE.Where(c => c.CidCod == entidade.CidCod).FirstOrDefault();
+}
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Pedidos de Venda", "Index", "PedidoVenda")
+        <br />
+        <br />
+        <b style="color:red; background-color:Yellow">
+            * CUIDADO!!! CASO CLIQUE NO LINK ACIMA, OS DADOS INFORMADOS DO PEDIDO
+            ANTES DA FINALIZAÇÃO SERÃO PERDIDOS!!!
+        </b>
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/pedidoVenda.png"), "Pedido de Venda")
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+
+<h2>Passo 03: Irá realizar Vacinação?</h2>
+<br />
+
+@using (Html.BeginForm("ListVacinasPV", "PedidoVenda", FormMethod.Post))
+{
+    <input type="submit" value="Sim" />
+}
+
+@if (!MvcAppHyLinedoBrasil.Controllers.AccountController
+    .GetGroup("HLBAPPM-PedidoVendaDadosExportacao",
+    (System.Collections.ArrayList)Session["Direitos"])
+    && !cidade.PaisSigla.Equals("BRA"))
+{
+    using (Html.BeginForm("OtherInformations", "PedidoVenda", FormMethod.Post))
+    {
+        @Html.Hidden("origem", "Não")
+        <input type="submit" value="Não" />
+    }
+}
+else
+{
+    using (Html.BeginForm("FinalizaPV", "PedidoVenda", FormMethod.Post))
+    {
+        @Html.Hidden("origem", "Não")
+        <input type="submit" value="Não" />
+    }
+}
+<br />
+<br />
+@if (Session["origemPV"].ToString().Equals("Alteração"))
+{
+    using (Html.BeginForm("FinalizaPV", "PedidoVenda", FormMethod.Post))
+    {
+       <input type="submit" value="Voltar para a Visualização do Pedido" />
+    }
+}
+else
+{
+    using (Html.BeginForm("ListItensPVReturn", "PedidoVenda", FormMethod.Post))
+    {
+       <input type="submit" value="Anterior" />
+    }
+}

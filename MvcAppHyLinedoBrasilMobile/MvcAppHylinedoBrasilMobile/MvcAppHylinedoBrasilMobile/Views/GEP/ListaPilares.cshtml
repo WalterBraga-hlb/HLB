@@ -1,0 +1,126 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+    
+    List<MvcAppHylinedoBrasilMobile.Models.GEP_Pilar> listaPilares =
+        (List<MvcAppHylinedoBrasilMobile.Models.GEP_Pilar>)Session["ListaPilares"];
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+}
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para o Menu do GEP", "MenuGEP", "GEP", 
+                null,
+                new { @title = "Clique aqui para voltar para o Menu do GEP", @class = "gep" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/pilar.png"), "Pilar")
+    <h2>Lista de Pilares</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+@using (Html.BeginForm("SearchPilar", "GEP"))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <b>Informe parte da descrição:</b>
+            <div class="editor-field">
+                @Html.TextBox("pesquisa", Session["pesquisaSession"])
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Pesquisar" />
+        </li>
+    </ul>
+}
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Pilar</li>
+    <li>
+        @Html.ActionLink("Adicionar Novo Pilar", "CreatePilar", "GEP",
+            null,
+            new { @class = "add", @title = "Clique aqui para inserir um novo pilar" })
+    </li>
+</ul>
+<br />
+<div class="editor-label"  align="center">
+    <table style="width: 90%">
+        <tr style="font-size: xx-small; background-color:Gray">
+            <th colspan="6" style="font-size: xx-small; background-color:Gray">
+                <u>Legenda de Ações:</u>
+            </th>
+        </tr>
+        <tr style="font-size: xx-small">
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/kjots.png"), "")
+                <i>Alterar Pilar</i>
+            </td>
+            <td style="font-size: xx-small">
+                @Html.Image(@Url.Content("~/Content/icons/button_cancel.png"), "")
+                <i>Excluir Pilar</i>
+            </td>
+        </tr>
+    </table>
+</div>
+<br />
+<div id="divTabelaIndexPV" style="overflow:auto" >
+<table id="tabelaIndexPV" class="ajustetabelaIndexPV">
+    <tbody class="ajustetabelaIndexPV">
+    <tr class="ajustetabelaIndexPV">
+        <th class="ajustetabelaIndexPV">
+            ID
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Pilar
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Usuário
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Data Cadastro
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Ações
+        </th>
+    </tr>
+@foreach (var item in listaPilares)
+{
+    <tr class="ajustetabelaIndexPV">
+        <td class="ajustetabelaIndexPV">
+            @(item.ID)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(item.Descricao)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(item.Usuario)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(Convert.ToDateTime(item.DataHoraCadastro).ToString("dd/MM/yy HH:ss"))
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td align="center">
+                        @Html.ActionLink("Edit", "EditPilar",
+                            new { id = item.ID },
+                                new { @class = "edit", @title = "Clique aqui para alterar o pilar." })
+                    </td>
+                    <td align="center">
+                        @Html.ActionLink("Delete", "ConfirmaDeletePilar",
+                            new { id = item.ID },
+                                     new { @class = "delete", @title = "Clique aqui para excluir o pilar." })
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

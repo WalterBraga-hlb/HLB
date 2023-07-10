@@ -1,0 +1,2997 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Apolo10Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AEROPORTO">
+    <Key>
+      <PropertyRef Name="AeropCod" />
+    </Key>
+    <Property Name="AeropCod" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="AeropNome" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="CidCod" Type="varchar" MaxLength="8" />
+    <Property Name="AeropCateg" Type="char" MaxLength="1" />
+    <Property Name="AeropTxEmbNac" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AeropIndEconCodNac" Type="varchar" MaxLength="7" />
+    <Property Name="AeropTxEmbInt" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AeropIndEconCodInt" Type="varchar" MaxLength="7" />
+    <Property Name="AeropTxExtra" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AeropIndEconCodExtra" Type="varchar" MaxLength="7" />
+    <Property Name="AeropTxExtraTipo" Type="varchar" MaxLength="10" />
+    <Property Name="AeropTxExtraSobre" Type="varchar" MaxLength="10" />
+    <Property Name="AeropEntraPesqInternet" Type="varchar" MaxLength="5" />
+    <Property Name="USERTipoTransporte" Type="varchar" MaxLength="20" />
+    <Property Name="USERLocalIngressoPais" Type="varchar" MaxLength="50" />
+    <Property Name="EnderSeq" Type="int" />
+  </EntityType>
+  <EntityType Name="APROV_COMP">
+    <Key>
+      <PropertyRef Name="UsuCod" />
+      <PropertyRef Name="AprovCompTipo" />
+    </Key>
+    <Property Name="UsuCod" Type="varchar" MaxLength="31" Nullable="false" />
+    <Property Name="AprovCompTipo" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="AprovCompLim" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="AprovCompTodosNec" Type="varchar" MaxLength="5" />
+    <Property Name="AprovCompLimRecPercMenorQtd" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="AprovCompLimRecPercMaiorQtd" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="AprovCompLimRecPercMenorVal" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="AprovCompLimRecPercMaiorVal" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="AprovCompPorFinalidade" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="APROV_COMP_FINALIDADE">
+    <Key>
+      <PropertyRef Name="UsuCod" />
+      <PropertyRef Name="AprovCompTipo" />
+      <PropertyRef Name="FinCompCod" />
+    </Key>
+    <Property Name="UsuCod" Type="varchar" MaxLength="31" Nullable="false" />
+    <Property Name="AprovCompTipo" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="FinCompCod" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="AprovCompFinValLimPed" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="AprovCompFinValLimDiario" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="AprovCompFinValLimMensal" Type="numeric" Precision="14" Scale="2" />
+  </EntityType>
+  <EntityType Name="ATIVIDADE">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="CCtrlCodEstr" />
+      <PropertyRef Name="AtivGrpCodEstr" />
+    </Key>
+    <Property Name="EmpCod" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CCtrlCodEstr" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="AtivDisp" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="UnidMedCodDisp" Type="varchar" MaxLength="7" />
+    <Property Name="PlanoCtaEmpCod" Type="varchar" MaxLength="20" />
+    <Property Name="PlanoCtaCodRed" Type="varchar" MaxLength="7" />
+    <Property Name="AtivMOValFixo" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AtivMOValVar" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AtivEquipValFixo" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AtivEquipValVar" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AtivCtaValFixo" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AtivCtaValVar" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AtivAuxValFixo" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AtivAuxValVar" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AtivMatValFixo" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AtivMatValVar" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AtivValFixo" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AtivValVar" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AtivUepDirecValFixo" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AtivUepDirecValVar" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AtivStat" Type="varchar" MaxLength="10" />
+    <Property Name="EntCod" Type="varchar" MaxLength="7" />
+    <Property Name="AtivCodAlt" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="AtivContCalcRecursivo" Type="smallint" />
+    <Property Name="AtivTexto" Type="text" />
+    <Property Name="AtivMOIndirValFixo" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AtivMOIndirValVar" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AtivGrpCodEstr" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="ATIVDTVALIDINI" Type="datetime" />
+    <Property Name="ATIVDTVALIDFIN" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ATIVIDADE_GRUPO">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="AtivGrpCodEstr" />
+    </Key>
+    <Property Name="EmpCod" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="AtivGrpCodEstr" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="AtivGrpCodAlt" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="AtivGrpNome" Type="varchar" MaxLength="40" />
+    <Property Name="AtivGrpCodEstrNiv" Type="varchar" MaxLength="30" />
+    <Property Name="AtivGrpGrupo" Type="char" MaxLength="1" />
+    <Property Name="AtivGrpAtiva" Type="varchar" MaxLength="5" />
+    <Property Name="AtivGrpObs" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="CATEGORIA_PRODUTO">
+    <Key>
+      <PropertyRef Name="CategProdCod" />
+    </Key>
+    <Property Name="CategProdCod" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="CategProdNome" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CIDADE">
+    <Key>
+      <PropertyRef Name="CidCod" />
+    </Key>
+    <Property Name="CidCod" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="CidNome" Type="varchar" MaxLength="15" />
+    <Property Name="CidNomeComp" Type="varchar" MaxLength="60" />
+    <Property Name="PaisSigla" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="UfSigla" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="CidZonaFranca" Type="varchar" MaxLength="5" />
+    <Property Name="CidPercIss" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="CidDDD" Type="varchar" MaxLength="6" />
+    <Property Name="CidSiglaGDS" Type="varchar" MaxLength="3" />
+    <Property Name="CidEntraPesqInternet" Type="varchar" MaxLength="5" />
+    <Property Name="CidNatur" Type="varchar" MaxLength="20" />
+    <Property Name="FxaCod" Type="varchar" MaxLength="7" />
+    <Property Name="CidEntCodISS" Type="varchar" MaxLength="7" />
+    <Property Name="TipoDiariaCod" Type="varchar" MaxLength="7" />
+    <Property Name="CidCodMunGia" Type="varchar" MaxLength="5" />
+    <Property Name="CidCodMunZFMGia" Type="varchar" MaxLength="5" />
+    <Property Name="CidCodMix" Type="int" />
+    <Property Name="CidCodRais" Type="varchar" MaxLength="7" />
+    <Property Name="CidDescEntraBaseCalcIss" Type="varchar" MaxLength="5" />
+    <Property Name="CidValTetoRetIss" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="cidtexto" Type="text" />
+    <Property Name="CidPathRelGuiaRecIssRet" Type="varchar" MaxLength="255" />
+    <Property Name="RegCodEstr" Type="varchar" MaxLength="15" />
+    <Property Name="CidCodMunDipj" Type="varchar" MaxLength="10" />
+    <Property Name="CidAderenteSimples" Type="varchar" MaxLength="5" />
+    <Property Name="CidISSIsenPrestServEntGovMun" Type="varchar" MaxLength="5" />
+    <Property Name="CidCodAlt" Type="varchar" MaxLength="10" />
+    <Property Name="CidRegExportado" Type="varchar" MaxLength="5" />
+    <Property Name="CidCodSiafi" Type="varchar" MaxLength="10" />
+    <Property Name="CIDFUSOHOR" Type="smallint" />
+    <Property Name="CidTotHabit" Type="int" />
+    <Property Name="UsuCod" Type="varchar" MaxLength="31" />
+    <Property Name="CidQtdPontVenda" Type="int" />
+    <Property Name="CidCodMunRef" Type="varchar" MaxLength="8" />
+    <Property Name="USERBolsaoLT" Type="varchar" MaxLength="30" />
+    <Property Name="CidDtUltAtualiz" Type="datetime" />
+    <Property Name="CidLongitudeDecimal" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="CidLongitudePadrao" Type="varchar" MaxLength="20" />
+    <Property Name="CidLatitudeDecimal" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="CidLatitudePadrao" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="COND_PAG">
+    <Key>
+      <PropertyRef Name="CondPagCod" />
+    </Key>
+    <Property Name="CondPagCod" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="CondPagNome" Type="varchar" MaxLength="80" />
+    <Property Name="CondPagQtdParc" Type="smallint" />
+    <Property Name="CondPagTipoParc" Type="varchar" MaxLength="10" />
+    <Property Name="CondPagPerVenc" Type="varchar" MaxLength="10" />
+    <Property Name="CondPagQtdPerVenc" Type="smallint" />
+    <Property Name="TabFinCod" Type="varchar" MaxLength="7" />
+    <Property Name="CondPagIntegFin" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagVencFora" Type="varchar" MaxLength="10" />
+    <Property Name="CondPagPercJuros" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="CondPagJurosApos" Type="smallint" />
+    <Property Name="CondPagPrazoMed" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="CondPagDataInic" Type="datetime" />
+    <Property Name="CondPagDataFim" Type="datetime" />
+    <Property Name="CondPagEntraPesqInternet" Type="varchar" MaxLength="10" />
+    <Property Name="CondPagPerVencFixo" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagDiaVencFixo" Type="varchar" MaxLength="2" />
+    <Property Name="CondPagAntecip" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagGeraNDebCred" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagGeraFatura" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagOper" Type="varchar" MaxLength="10" />
+    <Property Name="CondPagCodEstr" Type="varchar" MaxLength="15" />
+    <Property Name="CondPagCodEstrNiv" Type="varchar" MaxLength="15" />
+    <Property Name="CondPagGrupo" Type="char" MaxLength="1" />
+    <Property Name="CondPagAntecipSemJuros" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagIntegTEF" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagEmisFatPost" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagGeraComis" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagNaoRecalcDataVenc" Type="char" MaxLength="1" />
+    <Property Name="CondPagGeraReemb" Type="varchar" MaxLength="5" />
+    <Property Name="TipoCobCod" Type="varchar" MaxLength="7" />
+    <Property Name="TipoRecCxaLojaCod" Type="varchar" MaxLength="3" />
+    <Property Name="CondPagDiasEntreParc" Type="smallint" />
+    <Property Name="CondPagBloqVendaCliSemCred" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagBloqVendaCliEmAtraso" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagGeraDup" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagMovPedTurEncerGeraBco" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagGeraMovPedTur" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagVencForaAntesDepois" Type="varchar" MaxLength="10" />
+    <Property Name="CondPagVencSegunda" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagVencTerca" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagVencQuarta" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagVencQuinta" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagVencSexta" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagVencDia1" Type="varchar" MaxLength="2" />
+    <Property Name="CondPagVencDia2" Type="varchar" MaxLength="2" />
+    <Property Name="CondPagVencDia3" Type="varchar" MaxLength="2" />
+    <Property Name="CondPagVencDia4" Type="varchar" MaxLength="2" />
+    <Property Name="CondPagVencDia5" Type="varchar" MaxLength="2" />
+    <Property Name="CondPagVencAjuste" Type="varchar" MaxLength="15" />
+    <Property Name="CondPagForcVencPor" Type="varchar" MaxLength="20" />
+    <Property Name="CondPagVencQtdDiaApos" Type="smallint" />
+    <Property Name="BcoNum" Type="varchar" MaxLength="3" />
+    <Property Name="AgNum" Type="varchar" MaxLength="7" />
+    <Property Name="CondPagMovPedTurEncerNecComp" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagJurBancPerc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="CondPagJurBancAntecipado" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagJurBancDeb" Type="varchar" MaxLength="10" />
+    <Property Name="CondPagJurBancTot" Type="varchar" MaxLength="10" />
+    <Property Name="CondPagJurBancIntFinValLiq" Type="varchar" MaxLength="5" />
+    <Property Name="CONDPAGDATAFATAUTOMCOPET" Type="varchar" MaxLength="15" />
+    <Property Name="CONDPAGFATAUTOMCOPET" Type="varchar" MaxLength="5" />
+    <Property Name="PlanoCtaEmpCod" Type="varchar" MaxLength="20" />
+    <Property Name="PlanoCtaCodRed" Type="varchar" MaxLength="7" />
+    <Property Name="CondPagCodAlt" Type="varchar" MaxLength="10" />
+    <Property Name="CondPagRegExportado" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagUsuCod" Type="varchar" MaxLength="31" />
+    <Property Name="CondPagGeraOcor" Type="varchar" MaxLength="5" />
+    <Property Name="MotOcorCodEstr" Type="varchar" MaxLength="30" />
+    <Property Name="CondPagAdiantamento" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagDiasTolerancia" Type="smallint" />
+    <Property Name="CondPagTipoPagRec" Type="varchar" MaxLength="10" />
+    <Property Name="CONDPAGNECLIBFAT" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagValLimiteCond" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="CondPagCodDest" Type="varchar" MaxLength="7" />
+    <Property Name="CONDPAGDTPRIMVENCFINQTDDIAS" Type="smallint" />
+    <Property Name="CONDPAGDTPRIMVENCFINANTDEP" Type="varchar" MaxLength="10" />
+    <Property Name="CondPagVencPartirData" Type="varchar" MaxLength="20" />
+    <Property Name="condpagpercentradarestur" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="fxacod" Type="varchar" MaxLength="7" />
+    <Property Name="CONDPAGCOEFCOMIS" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="CONDPAGCODTAXADU" Type="varchar" MaxLength="7" />
+    <Property Name="CondPagEntCodRelac" Type="varchar" MaxLength="7" />
+    <Property Name="CondPagEntTipoFJ" Type="varchar" MaxLength="10" />
+    <Property Name="CondPagGerAmortVal" Type="varchar" MaxLength="5" />
+    <Property Name="CONDPAGENTCODRELACDEST" Type="varchar" MaxLength="20" />
+    <Property Name="CondPagDtUltAtualiz" Type="datetime" />
+    <Property Name="CondPagFreteAdicSegParc" Type="varchar" MaxLength="5" />
+    <Property Name="CondPagHabRatPagReemb" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="CondPagCompCalcRentRes" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="USERNomeEspanhol" Type="varchar" MaxLength="100" />
+    <Property Name="USERNomeIngles" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="COND_PAG_ENT">
+    <Key>
+      <PropertyRef Name="EntCod" />
+      <PropertyRef Name="CondPagCod" />
+    </Key>
+    <Property Name="EntCod" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="CondPagCod" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="CondPagEntValAte" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="RowGuid" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="COND_PAG_PED_COMP">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="PedCompNum" />
+    </Key>
+    <Property Name="EmpCod" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PedCompNum" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="CondPagCod" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="CondPagPedCompNome" Type="varchar" MaxLength="80" />
+    <Property Name="TabFinCod" Type="varchar" MaxLength="7" />
+  </EntityType>
+  <EntityType Name="DOC_ENTIDADE">
+    <Key>
+      <PropertyRef Name="EntCod" />
+      <PropertyRef Name="DocEntSeq" />
+    </Key>
+    <Property Name="EntCod" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="DocEntSeq" Type="int" Nullable="false" />
+    <Property Name="DocEntPathArq" Type="varchar" MaxLength="255" />
+    <Property Name="DocEntObs" Type="varchar" MaxLength="255" />
+    <Property Name="UsuCod" Type="varchar" MaxLength="31" />
+    <Property Name="DocEntData" Type="datetime" />
+    <Property Name="RowGuid" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EMPRESA_FILIAL">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+    </Key>
+    <Property Name="EmpCod" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EmpNome" Type="varchar" MaxLength="100" />
+    <Property Name="EmpNomeFant" Type="varchar" MaxLength="40" />
+    <Property Name="TipoLogradAbrev" Type="varchar" MaxLength="10" />
+    <Property Name="EmpEnder" Type="varchar" MaxLength="40" />
+    <Property Name="EmpEnderNo" Type="varchar" MaxLength="6" />
+    <Property Name="EmpEnderComp" Type="varchar" MaxLength="40" />
+    <Property Name="EmpBair" Type="varchar" MaxLength="30" />
+    <Property Name="CidCod" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="EmpCep" Type="varchar" MaxLength="9" />
+    <Property Name="EmpCpfCgc" Type="varchar" MaxLength="14" />
+    <Property Name="EmpRgIe" Type="varchar" MaxLength="15" />
+    <Property Name="EmpRgOrgExped" Type="varchar" MaxLength="10" />
+    <Property Name="EmpCxaPost" Type="varchar" MaxLength="6" />
+    <Property Name="EmpEMail" Type="varchar" MaxLength="50" />
+    <Property Name="EmpWWW" Type="varchar" MaxLength="255" />
+    <Property Name="EmpRegJuntaCom" Type="varchar" MaxLength="15" />
+    <Property Name="EmpDataRegJuntaCom" Type="datetime" />
+    <Property Name="EmpInscMunic" Type="varchar" MaxLength="18" />
+    <Property Name="AtivEconCodEstr" Type="varchar" MaxLength="15" />
+    <Property Name="EmpCodAtivEst" Type="varchar" MaxLength="11" />
+    <Property Name="EmpCodAtivFed" Type="varchar" MaxLength="11" />
+    <Property Name="EmpCodSci" Type="varchar" MaxLength="11" />
+    <Property Name="EmpAvisoSac" Type="varchar" MaxLength="5" />
+    <Property Name="EmpObs" Type="varchar" MaxLength="255" />
+    <Property Name="EmpFone1DDD" Type="varchar" MaxLength="6" />
+    <Property Name="EmpFone1" Type="varchar" MaxLength="20" />
+    <Property Name="EmpFone1Ramal" Type="varchar" MaxLength="5" />
+    <Property Name="EmpFone2DDD" Type="varchar" MaxLength="6" />
+    <Property Name="EmpFone2" Type="varchar" MaxLength="20" />
+    <Property Name="EmpFone2Ramal" Type="varchar" MaxLength="5" />
+    <Property Name="EmpFonePrinc" Type="varchar" MaxLength="10" />
+    <Property Name="EmpFoneFaxDDD" Type="varchar" MaxLength="6" />
+    <Property Name="EmpFoneFax" Type="varchar" MaxLength="20" />
+    <Property Name="EmpFoneFaxRamal" Type="varchar" MaxLength="5" />
+    <Property Name="EmpFoneCelDDD" Type="varchar" MaxLength="6" />
+    <Property Name="EmpFoneCel" Type="varchar" MaxLength="20" />
+    <Property Name="EmpDataFund" Type="datetime" />
+    <Property Name="EmpContato" Type="varchar" MaxLength="40" />
+    <Property Name="CargoCodEstr" Type="varchar" MaxLength="20" />
+    <Property Name="EmpGrauDecisContato" Type="varchar" MaxLength="10" />
+    <Property Name="EmpCodNiv" Type="varchar" MaxLength="20" />
+    <Property Name="EmpGrupo" Type="char" MaxLength="1" />
+    <Property Name="EmpNat" Type="varchar" MaxLength="25" />
+    <Property Name="EmpTipoFJ" Type="varchar" MaxLength="10" />
+    <Property Name="EmpAgrop" Type="varchar" MaxLength="5" />
+    <Property Name="EmpAgropInsc" Type="varchar" MaxLength="15" />
+    <Property Name="EmpPlanoCta" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EmpMeEppOptSimples" Type="varchar" MaxLength="5" />
+    <Property Name="EmpMeEpp" Type="varchar" MaxLength="5" />
+    <Property Name="EmpEppAB" Type="char" MaxLength="1" />
+    <Property Name="EmpEppPercIcms" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="EmpCodOperFoneNaUf" Type="varchar" MaxLength="2" />
+    <Property Name="EmpCodOperFoneForaUf" Type="varchar" MaxLength="2" />
+    <Property Name="RegCodEstr" Type="varchar" MaxLength="15" />
+    <Property Name="EmpRede" Type="varchar" MaxLength="40" />
+    <Property Name="EmpInscIata" Type="varchar" MaxLength="15" />
+    <Property Name="EmpInscEmbratur" Type="varchar" MaxLength="15" />
+    <Property Name="EmpAtiva" Type="varchar" MaxLength="5" />
+    <Property Name="EntCod" Type="varchar" MaxLength="7" />
+    <Property Name="EmpSitPrestServRefIss" Type="varchar" MaxLength="25" />
+    <Property Name="EmpMxDominio" Type="int" />
+    <Property Name="EmpMxEsIdEstrutura" Type="varchar" MaxLength="40" />
+    <Property Name="EmpNaoRetCofinsAmparPor" Type="varchar" MaxLength="15" />
+    <Property Name="EmpNaoRetCsllAmparPor" Type="varchar" MaxLength="15" />
+    <Property Name="EmpNaoRetPisAmparPor" Type="varchar" MaxLength="15" />
+    <Property Name="USERRelatorio" Type="varchar" MaxLength="30" />
+    <Property Name="EmpLogotipo" Type="image" />
+    <Property Name="NatJurCod" Type="varchar" MaxLength="5" />
+    <Property Name="TabRecSimpEstCod" Type="varchar" MaxLength="7" />
+    <Property Name="EmpMeEppOptSimplesFed" Type="varchar" MaxLength="5" />
+    <Property Name="TabRecSimpFedCod" Type="varchar" MaxLength="7" />
+    <Property Name="EMPFUSOHORARIOLOJA" Type="smallint" />
+    <Property Name="EmpEquipIndust" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="EmpValLimApolice" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="EmpDataOpcSimpFed" Type="datetime" />
+    <Property Name="EmpDataOpcSimpEst" Type="datetime" />
+    <Property Name="EmpMeEppConvPercIssSimplesFed" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="EmpMeEppConvPercIcmsSimplesFed" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="EmpMeEppConvPercIssIcmsSimpFed" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="EmpInscSuframa" Type="varchar" MaxLength="15" />
+    <Property Name="EmpObra" Type="varchar" MaxLength="5" />
+    <Property Name="EmpGeraInventFiscal" Type="varchar" MaxLength="5" />
+    <Property Name="EmpPossuiRegimeST" Type="varchar" MaxLength="5" />
+    <Property Name="RegEspecNum" Type="varchar" MaxLength="15" />
+    <Property Name="EmpOptSimplesNac" Type="varchar" MaxLength="5" />
+    <Property Name="EmpDataAdesaoSimplesNac" Type="datetime" />
+    <Property Name="EmpDataEncerSimpFed" Type="datetime" />
+    <Property Name="EmpDataEncerSimpEst" Type="datetime" />
+    <Property Name="EmpCodIdentRegEspecTribMun" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="EmpUltDataMod" Type="datetime" />
+    <Property Name="TipoAssinCod" Type="int" />
+    <Property Name="EmpTpLigacao" Type="varchar" MaxLength="20" />
+    <Property Name="GrupTensaoCod" Type="varchar" MaxLength="2" />
+    <Property Name="EmpExcSubLimRecBruta" Type="varchar" MaxLength="5" />
+    <Property Name="EmpCalICMSVenEmpConsIsenIE" Type="varchar" MaxLength="5" />
+    <Property Name="USEREmailSAC" Type="varchar" MaxLength="50" />
+    <Property Name="USERFLIPCod" Type="varchar" MaxLength="5" />
+    <Property Name="USERTipoUnidadeFLIP" Type="varchar" MaxLength="15" />
+    <Property Name="USERRegistroMAPA" Type="varchar" MaxLength="10" />
+    <Property Name="USERUFRegistroMAPA" Type="varchar" MaxLength="5" />
+    <Property Name="USERNomeGranjaMAPA" Type="varchar" MaxLength="50" />
+    <Property Name="USERCodigoCHIC" Type="varchar" MaxLength="10" />
+    <Property Name="USEREmpresaAtiva" Type="varchar" MaxLength="5" />
+    <Property Name="EmpAssSAT" Type="varchar" MaxLength="400" />
+    <Property Name="EmpDtUltAtualiz" Type="datetime" />
+    <Property Name="EmpMicroEmpreendIndiv" Type="varchar" MaxLength="5" />
+    <Property Name="IDClasContribIPI" Type="int" />
+    <Property Name="USERDadosRecebMercad" Type="varchar" MaxLength="255" />
+    <Property Name="USERNomeMarcaNF" Type="varchar" MaxLength="30" />
+    <Property Name="USERClassUnidade" Type="varchar" MaxLength="50" />
+    <Property Name="EmpNFSeUsuario" Type="varchar" MaxLength="100" />
+    <Property Name="EmpNFSeSenha" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ENDER_ENT">
+    <Key>
+      <PropertyRef Name="EntCod" />
+      <PropertyRef Name="EnderEntSeq" />
+    </Key>
+    <Property Name="EntCod" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="EnderEntSeq" Type="smallint" Nullable="false" />
+    <Property Name="EnderEntEntrega" Type="varchar" MaxLength="5" />
+    <Property Name="EnderEntCobranca" Type="varchar" MaxLength="5" />
+    <Property Name="EnderEntNome" Type="varchar" MaxLength="100" />
+    <Property Name="EnderEnt" Type="varchar" MaxLength="40" />
+    <Property Name="TipoLogradAbrev" Type="varchar" MaxLength="10" />
+    <Property Name="EnderEntNo" Type="varchar" MaxLength="6" />
+    <Property Name="EnderEntNoPI" Type="varchar" MaxLength="5" />
+    <Property Name="EnderEntComp" Type="varchar" MaxLength="40" />
+    <Property Name="EnderEntBair" Type="varchar" MaxLength="30" />
+    <Property Name="CidCod" Type="varchar" MaxLength="8" />
+    <Property Name="EnderEntCep" Type="varchar" MaxLength="9" />
+    <Property Name="EnderEntTipoFJ" Type="varchar" MaxLength="10" />
+    <Property Name="EnderEntCpfCgc" Type="varchar" MaxLength="14" />
+    <Property Name="EnderEntRgIe" Type="varchar" MaxLength="15" />
+    <Property Name="EnderEntRgOrgExped" Type="varchar" MaxLength="10" />
+    <Property Name="EnderEntCxaPost" Type="varchar" MaxLength="6" />
+    <Property Name="EnderEntEMail" Type="varchar" MaxLength="80" />
+    <Property Name="EnderEntWWW" Type="varchar" MaxLength="255" />
+    <Property Name="EnderEntContato" Type="varchar" MaxLength="40" />
+    <Property Name="EnderEntTexto" Type="text" />
+    <Property Name="EnderEntCod" Type="varchar" MaxLength="7" />
+    <Property Name="EnderEntFaturam" Type="varchar" MaxLength="5" />
+    <Property Name="EnderEntColeta" Type="varchar" MaxLength="5" />
+    <Property Name="EnderEntDataValInic" Type="datetime" />
+    <Property Name="EnderEntDataValFinal" Type="datetime" />
+    <Property Name="EnderEntCertificado" Type="varchar" MaxLength="5" />
+    <Property Name="EnderSeq" Type="int" />
+    <Property Name="RowGuid" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ENT_OBJ">
+    <Key>
+      <PropertyRef Name="EntCod" />
+      <PropertyRef Name="ObjCodEstr" />
+      <PropertyRef Name="EntObjSeq" />
+    </Key>
+    <Property Name="EntCod" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="ObjCodEstr" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="EntObjSeq" Type="smallint" Nullable="false" />
+    <Property Name="EntObjConteudo" Type="varchar" MaxLength="255" />
+    <Property Name="USERParcelaDiaInicial" Type="smallint" />
+    <Property Name="USERParcelaDiaFinal" Type="smallint" />
+    <Property Name="USERParcelaDiaVencimento" Type="smallint" />
+    <Property Name="USERParcelaMesVencimento" Type="varchar" MaxLength="15" />
+    <Property Name="RowGuid" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FAIXA_PRODUTO">
+    <Key>
+      <PropertyRef Name="FxaProdCod" />
+    </Key>
+    <Property Name="FxaProdCod" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="FxaProdNome" Type="varchar" MaxLength="40" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FUNC_ATIVIDADE_GRUPO">
+    <Key>
+      <PropertyRef Name="FuncCod" />
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="AtivGrpCodEstr" />
+    </Key>
+    <Property Name="FuncCod" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="EmpCod" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="AtivGrpCodEstr" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FUNCIONARIO">
+    <Key>
+      <PropertyRef Name="FuncCod" />
+    </Key>
+    <Property Name="FuncCod" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="FuncNome" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="FuncApelido" Type="varchar" MaxLength="20" />
+    <Property Name="FuncDataAdm" Type="datetime" />
+    <Property Name="FuncStat" Type="varchar" MaxLength="15" />
+    <Property Name="CargoCodEstr" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="TurnoTrabCod" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="CCtrlCodEstr" Type="varchar" MaxLength="30" />
+    <Property Name="FuncSexo" Type="varchar" MaxLength="1" />
+    <Property Name="FuncValLimCompra" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="FuncDataNasc" Type="datetime" />
+    <Property Name="TipoLogradAbrev" Type="varchar" MaxLength="10" />
+    <Property Name="FuncEnder" Type="varchar" MaxLength="40" />
+    <Property Name="FuncBair" Type="varchar" MaxLength="30" />
+    <Property Name="CidCod" Type="varchar" MaxLength="8" />
+    <Property Name="FuncCep" Type="varchar" MaxLength="9" />
+    <Property Name="FuncCpf" Type="varchar" MaxLength="14" />
+    <Property Name="FuncCnh" Type="varchar" MaxLength="10" />
+    <Property Name="FuncPis" Type="varchar" MaxLength="15" />
+    <Property Name="FuncCtps" Type="varchar" MaxLength="15" />
+    <Property Name="FuncRg" Type="varchar" MaxLength="15" />
+    <Property Name="FuncNomePai" Type="varchar" MaxLength="40" />
+    <Property Name="FuncNomeMae" Type="varchar" MaxLength="40" />
+    <Property Name="FuncFone1DDD" Type="varchar" MaxLength="6" />
+    <Property Name="FuncFone1" Type="varchar" MaxLength="20" />
+    <Property Name="FuncFone2DDD" Type="varchar" MaxLength="6" />
+    <Property Name="FuncFone2" Type="varchar" MaxLength="20" />
+    <Property Name="FuncCracha" Type="varchar" MaxLength="15" />
+    <Property Name="FuncNecAutorizUsoVeic" Type="varchar" MaxLength="5" />
+    <Property Name="FuncObs" Type="varchar" MaxLength="255" />
+    <Property Name="UsuCod" Type="varchar" MaxLength="31" />
+    <Property Name="RegCodEstr" Type="varchar" MaxLength="15" />
+    <Property Name="EmpCod" Type="varchar" MaxLength="20" />
+    <Property Name="EntCod" Type="varchar" MaxLength="7" />
+    <Property Name="FuncCodMix" Type="int" />
+    <Property Name="FuncDominioMix" Type="int" />
+    <Property Name="TurmaCod" Type="varchar" MaxLength="3" />
+    <Property Name="FuncCodChapaMix" Type="varchar" MaxLength="20" />
+    <Property Name="USERValorAdicCelular" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="USERTarifaZero" Type="varchar" MaxLength="20" />
+    <Property Name="USERPacoteDados" Type="varchar" MaxLength="20" />
+    <Property Name="USEREmpres" Type="varchar" MaxLength="10" />
+    <Property Name="USERNomeCartaoCorporativo" Type="varchar" MaxLength="100" />
+    <Property Name="USERParticipaControleRDVWeb" Type="varchar" MaxLength="5" />
+    <Property Name="USER04UltimosDigitosCartaoBB" Type="varchar" MaxLength="4" />
+    <Property Name="USER04UltimosDigIdentifBB" Type="varchar" MaxLength="4" />
+    <Property Name="FuncDataValidCNH" Type="datetime" />
+    <Property Name="FuncCategCNH" Type="varchar" MaxLength="10" />
+    <Property Name="FuncSenhaNfse" Type="varchar" MaxLength="32" />
+    <Property Name="USERDeptoSistemaOrcamento" Type="varchar" MaxLength="10" />
+    <Property Name="USERParticipaGEP" Type="varchar" MaxLength="5" />
+    <Property Name="USERResponsavelAuditoria" Type="varchar" MaxLength="5" />
+    <Property Name="USERUnidadeSistAuditoria" Type="varchar" MaxLength="5" />
+    <Property Name="USERTipoUnidade" Type="varchar" MaxLength="20" />
+    <Property Name="USERCodigoFLIP" Type="varchar" MaxLength="10" />
+    <Property Name="USERResponsavelUnidadeAuditoria" Type="varchar" MaxLength="10" />
+    <Property Name="USERFinCompraDeptoOrcamento" Type="varchar" MaxLength="7" />
+    <Property Name="FuncEnderNo" Type="varchar" MaxLength="6" />
+    <Property Name="FuncEnderComp" Type="varchar" MaxLength="40" />
+    <Property Name="USERNomeCartaoCorpItau" Type="varchar" MaxLength="100" />
+    <Property Name="USERNumeroCartaoCorpItau" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="GRP_FUNC">
+    <Key>
+      <PropertyRef Name="FuncCod" />
+      <PropertyRef Name="GrpFuncCod" />
+    </Key>
+    <Property Name="FuncCod" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="GrpFuncCod" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="GrpFuncDataInic" Type="datetime" />
+    <Property Name="GrpFuncDataFim" Type="datetime" />
+    <Property Name="GrpFuncObs" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="IND_ECONOMICO">
+    <Key>
+      <PropertyRef Name="IndEconCod" />
+    </Key>
+    <Property Name="IndEconCod" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="IndEconNome" Type="varchar" MaxLength="20" />
+    <Property Name="IndEconPer" Type="varchar" MaxLength="10" />
+    <Property Name="IndEconSimb" Type="varchar" MaxLength="7" />
+    <Property Name="IndEconTipo" Type="varchar" MaxLength="10" />
+    <Property Name="IndEconQtdDec" Type="smallint" />
+    <Property Name="IndEconExtIntSing" Type="varchar" MaxLength="30" />
+    <Property Name="IndEconExtIntPlur" Type="varchar" MaxLength="30" />
+    <Property Name="IndEconExtFracSing" Type="varchar" MaxLength="30" />
+    <Property Name="IndEconExtFracPlur" Type="varchar" MaxLength="30" />
+    <Property Name="IndEconDataInic" Type="datetime" Nullable="false" />
+    <Property Name="IndEconDataFim" Type="datetime" />
+    <Property Name="IndEconAnt" Type="varchar" MaxLength="7" />
+    <Property Name="IndEconPost" Type="varchar" MaxLength="7" />
+    <Property Name="IndEconCorrente" Type="varchar" MaxLength="5" />
+    <Property Name="IndEconCodRef" Type="varchar" MaxLength="7" />
+    <Property Name="IndEconSiglaIata" Type="varchar" MaxLength="3" />
+    <Property Name="IndEconCodFGV" Type="varchar" MaxLength="8" />
+    <Property Name="IndEconDescrFGV" Type="varchar" MaxLength="90" />
+  </EntityType>
+  <EntityType Name="ITEM_PED_COMP">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="PedCompNum" />
+      <PropertyRef Name="ProdCodEstr" />
+      <PropertyRef Name="ItPedCompSeq" />
+    </Key>
+    <Property Name="EmpCod" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PedCompNum" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="ProdCodEstr" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="ItPedCompSeq" Type="smallint" Nullable="false" />
+    <Property Name="ItPedCompServ" Type="varchar" MaxLength="5" />
+    <Property Name="ProdDivNome" Type="varchar" MaxLength="80" />
+    <Property Name="ItPedCompUnidMedCod" Type="varchar" MaxLength="7" />
+    <Property Name="ItPedCompUnidMedPos" Type="smallint" />
+    <Property Name="ItPedCompQtdUnidMed" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompQtd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompQtdDesm" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompValTabPV" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompStrDesc" Type="varchar" MaxLength="20" />
+    <Property Name="ItPedCompValUnit" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompValUnitLiq" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompValTot" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompPercAcrescFin" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ItPedCompValAcrescFin" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompPercDescEspec" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ItPedCompValDescEspec" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompValFinal" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompValBaseIss" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompPercIss" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ItPedCompValIss" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompValBaseIrrf" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompPercIrrf" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ItPedCompValIrrf" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompPercRedIcms" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ItPedCompValBaseIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompPercIcms" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ItPedCompValIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompValBaseIpi" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompPercIpi" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ItPedCompValIpi" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompNomeProd" Type="varchar" MaxLength="20" />
+    <Property Name="ItPedCompSaldoQtd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompAprovUsuCod" Type="varchar" MaxLength="31" />
+    <Property Name="ItPedCompAprovData" Type="datetime" />
+    <Property Name="ItPedCompCanc" Type="varchar" MaxLength="10" />
+    <Property Name="ItPedCompCancData" Type="datetime" />
+    <Property Name="ItPedCompCancUsuCod" Type="varchar" MaxLength="31" />
+    <Property Name="IndEconCod" Type="varchar" MaxLength="7" />
+    <Property Name="ItPedCompValCambio" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="CCTRLCODESTR" Type="varchar" MaxLength="30" />
+    <Property Name="ItPedCompBloq" Type="varchar" MaxLength="5" />
+    <Property Name="ItPedCompLibBloqUsuCod" Type="varchar" MaxLength="31" />
+    <Property Name="ItPedCompLibBloqData" Type="datetime" />
+    <Property Name="ItPedCompLibBloqAtualTabPV" Type="varchar" MaxLength="5" />
+    <Property Name="ItPedCompUnidMedCodVal" Type="varchar" MaxLength="7" />
+    <Property Name="ItPedCompUnidMedPosVal" Type="smallint" />
+    <Property Name="ItPedCompQtdCalc" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompCalcSTPrecoLista" Type="varchar" MaxLength="5" />
+    <Property Name="ItPedCompMargLucroST" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ItPedCompPrecoListaST" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompPercRedIcmsST" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ItPedCompValBaseIcmsST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompPercIcmsST" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ItPedCompValIcmsST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompValIcmsRetST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompValEmbalagemST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompValIcmsEmbalagemST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompValFreteST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompValIcmsFreteST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompValSeguroST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompValIcmsSeguroST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompValDespesaST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompValIcmsDespesaST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompValCalcFreteST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompValIcmsCalcFreteST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ClasFiscCod" Type="varchar" MaxLength="7" />
+    <Property Name="TribCod" Type="varchar" MaxLength="3" />
+    <Property Name="ItPedCompValBaseII" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompPercII" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ItPedCompValII" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="TribACod" Type="char" MaxLength="1" />
+    <Property Name="TribBCod" Type="varchar" MaxLength="2" />
+    <Property Name="ItPedCompCancMotivo" Type="varchar" MaxLength="255" />
+    <Property Name="ItPedCompDataEntregaPromForn" Type="datetime" />
+    <Property Name="ItPedCompUnidMedValUnit" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompUnidMedCodEmb" Type="varchar" MaxLength="7" />
+    <Property Name="ItPedCompQtdEmb" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompValUnitEmb" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompValCalcIssDedTot" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompCalcDifIcms" Type="varchar" MaxLength="5" />
+    <Property Name="ItPedCompPercDifIcms" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ItPedCompValDifIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompValBaseCofins" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompPercCofinsRF" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ItPedCompValCofinsRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompValBasePis" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompPercPisRF" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ItPedCompValPisRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompValBaseCsll" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompPercCsllRF" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ItPedCompValCsllRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompNumPedEntOrig" Type="varchar" MaxLength="40" />
+    <Property Name="ItPedCompDataSolic" Type="datetime" />
+    <Property Name="ItPedCompDataPrevEntrega" Type="datetime" />
+    <Property Name="ItPedCompQtdEntregaParc" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompObs" Type="varchar" MaxLength="255" />
+    <Property Name="ItPedCompNumProdEntOrig" Type="varchar" MaxLength="30" />
+    <Property Name="ItPedCompEntCodOrig" Type="varchar" MaxLength="7" />
+    <Property Name="ItPedCompNumShortForm" Type="varchar" MaxLength="10" />
+    <Property Name="ItPedCompMultValTabPv" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="DescrTecnProdNum" Type="varchar" MaxLength="7" />
+    <Property Name="ItPedCompValAcrescCustoComp" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompValDescCustoComp" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompProdNome" Type="varchar" MaxLength="255" />
+    <Property Name="ReqCompNum" Type="varchar" MaxLength="7" />
+    <Property Name="FornItReqCompSeq" Type="smallint" />
+    <Property Name="ItPedCompUtilizProm" Type="varchar" MaxLength="5" />
+    <Property Name="ItPedCompRepIcmsDifPercDesc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ItPedCompRepIcmsDifValDesc" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompRepIcmsRedValDesc" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ItPedCompDtEntrCliente" Type="datetime" />
+    <Property Name="ItPedCompEntrCliente" Type="varchar" MaxLength="5" />
+    <Property Name="ItPedCompPesoLiq" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompPesoBruto" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompIpiBaseIcms" Type="varchar" MaxLength="5" />
+    <Property Name="ItPedCompPercRedInss" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="TipoLancCod" Type="varchar" MaxLength="10" />
+    <Property Name="ItPedCompStatDev" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ItPedCompStatDevQtd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompUrgente" Type="varchar" MaxLength="5" />
+    <Property Name="TribBModBCCod" Type="varchar" MaxLength="2" />
+    <Property Name="TribBModBCSTCod" Type="varchar" MaxLength="2" />
+    <Property Name="ItPedCompConfTribTipoIpi" Type="varchar" MaxLength="10" />
+    <Property Name="ItPedCompConfTribTipoPis" Type="varchar" MaxLength="10" />
+    <Property Name="ItPedCompConfTribTipoCofins" Type="varchar" MaxLength="10" />
+    <Property Name="ItPedCompConfTribIpiCod" Type="varchar" MaxLength="2" />
+    <Property Name="ItPedCompConfTribPisCod" Type="varchar" MaxLength="2" />
+    <Property Name="ItPedCompConfTribCofinsCod" Type="varchar" MaxLength="2" />
+    <Property Name="ITPEDCOMPFATORMULTIPLPROD" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompQtdBaseIpiPauta" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompValUnitIpiPauta" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompQtdBasePisPauta" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompValUnitPisPauta" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompQtdBaseCofinsPauta" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompValUnitCofinsPauta" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompDataSaidaPassag" Type="datetime" />
+    <Property Name="ItPedCompTrecho" Type="varchar" MaxLength="500" />
+    <Property Name="ItPedCompHoraSaidaPassag" Type="datetime" />
+    <Property Name="ItPedCompHoraChegada" Type="datetime" />
+    <Property Name="ItPedCompCidHosped" Type="varchar" MaxLength="255" />
+    <Property Name="ItPedCompDataCheckIn" Type="datetime" />
+    <Property Name="ItPedCompDataCheckOut" Type="datetime" />
+    <Property Name="ItPedCompNomeHotel" Type="varchar" MaxLength="255" />
+    <Property Name="ItPedCompCidLocacaoVeic" Type="varchar" MaxLength="255" />
+    <Property Name="ItPedCompDataRetVeic" Type="datetime" />
+    <Property Name="ItPedCompDataDevVeic" Type="datetime" />
+    <Property Name="ItPedCompNomeLocadVeic" Type="varchar" MaxLength="255" />
+    <Property Name="ItPedCompMultipProd" Type="varchar" MaxLength="10" />
+    <Property Name="ItPedCompQtdCanc" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompDescrProdAlt" Type="text" />
+    <Property Name="USERDataPreAprovacao" Type="datetime" />
+    <Property Name="USERUsuCodPreAprovacao" Type="varchar" MaxLength="31" />
+    <Property Name="ItPedCompPercRedIPI" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="TribCCod" Type="char" MaxLength="1" />
+    <Property Name="ItPedCompQtdPlan" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItPedCompProdCodAlt" Type="varchar" MaxLength="30" />
+    <Property Name="ItPedCompImpZerado" Type="varchar" MaxLength="5" />
+    <Property Name="ItPedCompDataHoraInicEntreg" Type="datetime" />
+    <Property Name="ItPedCompDataHoraFimEntreg" Type="datetime" />
+    <Property Name="USERVeiculo" Type="varchar" MaxLength="50" />
+    <Property Name="ItPedCompNumAgrup" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="ITEM_REQ_COMP">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="ReqCompNum" />
+      <PropertyRef Name="ItReqCompSeq" />
+    </Key>
+    <Property Name="EmpCod" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ReqCompNum" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="ItReqCompSeq" Type="smallint" Nullable="false" />
+    <Property Name="ItReqCompServ" Type="varchar" MaxLength="5" />
+    <Property Name="ProdCodEstr" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="ProdDivNome" Type="varchar" MaxLength="80" />
+    <Property Name="ItReqCompUnidMedCod" Type="varchar" MaxLength="7" />
+    <Property Name="ItReqCompUnidMedPos" Type="smallint" />
+    <Property Name="ItReqCompQtdUnidMed" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItReqCompQtd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItReqCompDataNec" Type="datetime" />
+    <Property Name="ItReqCompCot" Type="char" MaxLength="1" />
+    <Property Name="ItReqCompObs" Type="varchar" MaxLength="255" />
+    <Property Name="ItReqCompAprovUsuCod" Type="varchar" MaxLength="31" />
+    <Property Name="ItReqCompAprovData" Type="datetime" />
+    <Property Name="ItReqCompPed" Type="char" MaxLength="1" />
+    <Property Name="ItReqCompQtdCalc" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItReqCompFinalidade" Type="varchar" MaxLength="10" />
+    <Property Name="ItReqCompUrgente" Type="varchar" MaxLength="5" />
+    <Property Name="ItReqCompSeqItOrig" Type="smallint" />
+    <Property Name="ItReqCompSeqCompItOrig" Type="smallint" />
+    <Property Name="ItReqCompNumPedEnt" Type="varchar" MaxLength="40" />
+    <Property Name="ItReqCompDataSolic" Type="datetime" />
+    <Property Name="ItReqCompDataProm" Type="datetime" />
+    <Property Name="ItReqCompQtdEntregaParc" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ItReqCompNumProdEnt" Type="varchar" MaxLength="30" />
+    <Property Name="ItReqCompUtilizProm" Type="varchar" MaxLength="5" />
+    <Property Name="ItReqCompUtilizShortForm" Type="varchar" MaxLength="5" />
+    <Property Name="ItReqCompValShortForm" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ItReqCompDataPedEnt" Type="datetime" />
+    <Property Name="GrpCompraCod" Type="varchar" MaxLength="7" />
+    <Property Name="ItReqCompAprov" Type="varchar" MaxLength="10" />
+    <Property Name="ItReqCompOcorMotReprov" Type="varchar" MaxLength="255" />
+    <Property Name="ItReqCompPrzComercDias" Type="smallint" />
+    <Property Name="ItReqCompNumShortForm" Type="varchar" MaxLength="10" />
+    <Property Name="ItReqCompRes" Type="char" MaxLength="1" />
+    <Property Name="ItReqCompSelec" Type="varchar" MaxLength="5" />
+    <Property Name="ItReqCompTipoEntrega" Type="varchar" MaxLength="10" />
+    <Property Name="ItReqCompSugestaoComp" Type="varchar" MaxLength="100" />
+    <Property Name="ItReqCompValLimite" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ITREQCOMPSTATDISPONIB" Type="varchar" MaxLength="10" />
+    <Property Name="ITREQCOMPEMUSOPOR" Type="varchar" MaxLength="10" />
+    <Property Name="VerbaCompCod" Type="varchar" MaxLength="7" />
+    <Property Name="ItReqCompDataSaidaPassag" Type="datetime" />
+    <Property Name="ItReqCompTrecho" Type="varchar" MaxLength="500" />
+    <Property Name="ItReqCompHoraSaidaPassag" Type="datetime" />
+    <Property Name="ItReqCompHoraChegada" Type="datetime" />
+    <Property Name="ItReqCompCidHosped" Type="varchar" MaxLength="255" />
+    <Property Name="ItReqCompDataCheckIn" Type="datetime" />
+    <Property Name="ItReqCompDataCheckOut" Type="datetime" />
+    <Property Name="ItReqCompNomeHotel" Type="varchar" MaxLength="255" />
+    <Property Name="ItReqCompCidLocacaoVeic" Type="varchar" MaxLength="255" />
+    <Property Name="ItReqCompDataRetVeic" Type="datetime" />
+    <Property Name="ItReqCompDataDevVeic" Type="datetime" />
+    <Property Name="ItReqCompNomeLocadVeic" Type="varchar" MaxLength="255" />
+    <Property Name="USERSetor" Type="varchar" MaxLength="20" />
+    <Property Name="USERUsuCodPreAprovacao" Type="varchar" MaxLength="31" />
+    <Property Name="USERDataPreAprovacao" Type="datetime" />
+    <Property Name="USERQtdParcial" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ITREQCOMPCOTCOMPNUM" Type="varchar" MaxLength="7" />
+    <Property Name="ITREQCOMPPEDCOMPNUM" Type="varchar" MaxLength="10" />
+    <Property Name="CCtrlCodEstr" Type="varchar" MaxLength="30" />
+    <Property Name="ItReqCompQtdUnidProduc" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="USERVeiculo" Type="varchar" MaxLength="100" />
+    <Property Name="ItReqCompProdCodAlt" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="ITEM_REQ_COMP_PED_COMP">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="PedCompNum" />
+      <PropertyRef Name="ProdCodEstr" />
+      <PropertyRef Name="ItPedCompSeq" />
+      <PropertyRef Name="ReqCompNum" />
+      <PropertyRef Name="ItReqCompSeq" />
+      <PropertyRef Name="EmpReqComp" />
+    </Key>
+    <Property Name="EmpCod" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PedCompNum" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="ProdCodEstr" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="ItPedCompSeq" Type="smallint" Nullable="false" />
+    <Property Name="ReqCompNum" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="ItReqCompSeq" Type="smallint" Nullable="false" />
+    <Property Name="EmpReqComp" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NOTA_FISCAL">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="CtrlDFModForm" />
+      <PropertyRef Name="CtrlDFSerie" />
+      <PropertyRef Name="NFNum" />
+    </Key>
+    <Property Name="EmpCod" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CtrlDFModForm" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="CtrlDFSerie" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="NFNum" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="NFSaidaEntrada" Type="varchar" MaxLength="10" />
+    <Property Name="NFNatOpProd" Type="varchar" MaxLength="15" />
+    <Property Name="NFNatOpServ" Type="varchar" MaxLength="15" />
+    <Property Name="EntCod" Type="varchar" MaxLength="7" />
+    <Property Name="NFDataEmis" Type="datetime" />
+    <Property Name="NFDataSaidaEntrada" Type="datetime" />
+    <Property Name="NFHoraSaida" Type="datetime" />
+    <Property Name="NFBaseCalcIss" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIss" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseCalcIrrf" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIrrf" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValTotServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFIdentAcrescFin" Type="varchar" MaxLength="40" />
+    <Property Name="NFPercAcrescFin" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFValAcrescFin" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFPercIpiAcrescFin" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFValIpiAcrescFin" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFIdentDescEspec" Type="varchar" MaxLength="40" />
+    <Property Name="NFPercDescEspec" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFValDescEspec" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseCalcIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseCalcIcmsPropST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIcmsPropST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseIcmsSTLista" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIcmsSTLista" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseIcmsSTLucro" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIcmsSTLucro" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseCalcIcmsST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIcmsST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIcmsRetST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValTotProduto" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValEmbalagem" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValFrete" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValSeguro" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValDespesa" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseCalcIpilista" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIpilista" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseCalcIpicalc" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIpicalc" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseCalcIpi" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIpi" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValTotNota" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="TabFinCod" Type="varchar" MaxLength="7" />
+    <Property Name="NFStatFrete" Type="varchar" MaxLength="15" />
+    <Property Name="NFVeicPlaca" Type="varchar" MaxLength="10" />
+    <Property Name="NFVeicPaisSigla" Type="varchar" MaxLength="3" />
+    <Property Name="NFVeicUfSigla" Type="varchar" MaxLength="2" />
+    <Property Name="NFNomeMotor" Type="varchar" MaxLength="40" />
+    <Property Name="NFRespIcmsFrete" Type="varchar" MaxLength="15" />
+    <Property Name="NFValUnitFrete" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFPercIcmsFrete" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFPercRedBaseIcmsFrete" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFValCalcFrete" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseCalcIcmsFrete" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIcmsFrete" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFQtdVol" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFEspecVol" Type="varchar" MaxLength="20" />
+    <Property Name="NFMarcaVol" Type="varchar" MaxLength="20" />
+    <Property Name="NFNumVol" Type="varchar" MaxLength="60" />
+    <Property Name="NFPesoBruto" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFPesoLiq" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFCompet" Type="datetime" />
+    <Property Name="UsuCod" Type="varchar" MaxLength="31" />
+    <Property Name="NFDadosAdic" Type="text" />
+    <Property Name="NFPedVenda" Type="varchar" MaxLength="10" />
+    <Property Name="NFPedEnt" Type="varchar" MaxLength="40" />
+    <Property Name="NFBxaEstq" Type="varchar" MaxLength="5" />
+    <Property Name="NFIntegFin" Type="varchar" MaxLength="5" />
+    <Property Name="NFDupEmit" Type="varchar" MaxLength="5" />
+    <Property Name="FatNum" Type="varchar" MaxLength="10" />
+    <Property Name="NFViaTransp" Type="varchar" MaxLength="20" />
+    <Property Name="TipoVendaCod" Type="varchar" MaxLength="7" />
+    <Property Name="NFSimplesRemFat" Type="varchar" MaxLength="5" />
+    <Property Name="NFDataDig" Type="datetime" />
+    <Property Name="NFIdentAcrescFinProd" Type="varchar" MaxLength="40" />
+    <Property Name="NFPercAcrescFinProd" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFValAcrescFinProd" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFIdentDescEspecProd" Type="varchar" MaxLength="40" />
+    <Property Name="NFPercDescEspecProd" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFValDescEspecProd" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFIdentAcrescFinServ" Type="varchar" MaxLength="40" />
+    <Property Name="NFPercAcrescFinServ" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFValAcrescFinServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFIdentDescEspecServ" Type="varchar" MaxLength="40" />
+    <Property Name="NFPercDescEspecServ" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFValDescEspecServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseCalcFunrural" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValFunrural" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFNumAutGuiaRecIcms" Type="varchar" MaxLength="20" />
+    <Property Name="NFDataAutGuiaRecIcms" Type="datetime" />
+    <Property Name="NFImpressa" Type="varchar" MaxLength="5" />
+    <Property Name="TipoLancCod" Type="varchar" MaxLength="10" />
+    <Property Name="NFBaseCalcDescIcmsZFM" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFPercDescIcmsZFM" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFValDescIcmsZFM" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFEnderCobrancaOMesmo" Type="varchar" MaxLength="5" />
+    <Property Name="NFEnderEntCodCobranca" Type="varchar" MaxLength="7" />
+    <Property Name="NFEnderEntSeqCobranca" Type="smallint" />
+    <Property Name="NFEnderEntregaOMesmo" Type="varchar" MaxLength="5" />
+    <Property Name="NFEnderEntCodEntrega" Type="varchar" MaxLength="7" />
+    <Property Name="NFEnderEntSeqEntrega" Type="smallint" />
+    <Property Name="NFTranspOMesmo" Type="varchar" MaxLength="5" />
+    <Property Name="NFTranspEntCod" Type="varchar" MaxLength="7" />
+    <Property Name="NFCancelada" Type="varchar" MaxLength="5" />
+    <Property Name="NFCanceladaData" Type="datetime" />
+    <Property Name="NFCanceladaUsuCod" Type="varchar" MaxLength="31" />
+    <Property Name="NFIcmsFreteSomaIcmsST" Type="varchar" MaxLength="5" />
+    <Property Name="NFValGerIcmsRat" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerIpiRat" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerBaseIcmsSTRat" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerIcmsSTRat" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValMercST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseCalcInss" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValInss" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFIntegFisc" Type="varchar" MaxLength="5" />
+    <Property Name="NFValInssDedTot" Type="varchar" MaxLength="5" />
+    <Property Name="NFValIssDedTot" Type="varchar" MaxLength="5" />
+    <Property Name="NFMotorEntCod" Type="varchar" MaxLength="7" />
+    <Property Name="TipoEnvioCod" Type="varchar" MaxLength="7" />
+    <Property Name="NFPathCondGerFornec" Type="varchar" MaxLength="255" />
+    <Property Name="NFPathCondGerFornecRed" Type="varchar" MaxLength="255" />
+    <Property Name="NFValGerBaseIcmsRat" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerBaseIpiRat" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseCalcIcmsUfesp" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFValBasePisProd" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValPisProd" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValBaseCofinsProd" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValCofinsProd" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValBasePisServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValPisServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValBaseCofinsServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValCofinsServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerBasePisRat" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerPisRat" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerBaseCofinsRat" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerCofinsRat" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFIntegExped" Type="varchar" MaxLength="5" />
+    <Property Name="NFGerouComis" Type="varchar" MaxLength="5" />
+    <Property Name="NFQtdVolServ" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFEspecVolServ" Type="varchar" MaxLength="20" />
+    <Property Name="NFMarcaVolServ" Type="varchar" MaxLength="20" />
+    <Property Name="NFNumVolServ" Type="varchar" MaxLength="60" />
+    <Property Name="NFPesoBrutoServ" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFPesoLiqServ" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFTotCustoCompra" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFCustoCompraProd" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFCustoCompraServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFTotValTabPV" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValTabPVProd" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValTabPVServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFMarkup" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFEntNat" Type="varchar" MaxLength="25" />
+    <Property Name="MotResOrcCod" Type="varchar" MaxLength="3" />
+    <Property Name="NFValBaseParcPag" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFDedIrrfValServ" Type="varchar" MaxLength="5" />
+    <Property Name="NFDataValidOper" Type="datetime" />
+    <Property Name="NFValJuros" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValTotComJuros" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFPrazoMedParc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFPercIIAcrescFin" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFValIIAcrescFin" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseCalcII" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValII" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerBaseIIRat" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerIIRat" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFNumRegExport" Type="varchar" MaxLength="15" />
+    <Property Name="NFDataRegExport" Type="datetime" />
+    <Property Name="NFNumDespachoExport" Type="varchar" MaxLength="12" />
+    <Property Name="TipoServCod" Type="varchar" MaxLength="3" />
+    <Property Name="OrigCodEstr" Type="varchar" MaxLength="20" />
+    <Property Name="NFVALNENTRABASEPARCPAG" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValSiscomex" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValCalcIssDedTot" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValDifIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFPercCofinsServRF" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFValCofinsServRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFDedCofinsValServ" Type="varchar" MaxLength="5" />
+    <Property Name="NFPercPisServRF" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFValPisServRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFDedPisValServ" Type="varchar" MaxLength="5" />
+    <Property Name="NFPercCsllServRF" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFValCsllServRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFDedCsllValServ" Type="varchar" MaxLength="5" />
+    <Property Name="NFValDescRepasseFin" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValAcrescRepasseFin" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValFreteRepasseEstq" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFMotResOrcCodNFRel" Type="varchar" MaxLength="3" />
+    <Property Name="NFValRebate" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValDescRepasseComp" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValAcrescRepasseComp" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFMargemPad" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFBloqMarkup" Type="varchar" MaxLength="5" />
+    <Property Name="NFValBaseCsllServRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValBaseCofinsRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValBasePisRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseCalcDescIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFPercDescIcms" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFValDescIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseCalcIrrfProd" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIrrfProd" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseCalcIrrfServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIrrfServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFIdentVeicTranspImport" Type="varchar" MaxLength="40" />
+    <Property Name="NFValMercIndEcon" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFFreteImportIndEconCod" Type="varchar" MaxLength="7" />
+    <Property Name="NFFreteImportValCambio" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFFreteImportValIndEcon" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFSegImportIndEconCod" Type="varchar" MaxLength="7" />
+    <Property Name="NFSegImportValCambio" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFSegImportValIndEcon" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFDespImportIndEconCod" Type="varchar" MaxLength="7" />
+    <Property Name="NFDespImportValCambio" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFDespImportValIndEcon" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerDifBasePis" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerDifBaseCofins" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValCalcIrrfDedTot" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="USERNFInvoiceNum" Type="varchar" MaxLength="20" />
+    <Property Name="USERNFRENum" Type="varchar" MaxLength="20" />
+    <Property Name="USERNFTRANSNum" Type="varchar" MaxLength="20" />
+    <Property Name="USERPedVendComiss" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="USERPedVendCorpo1" Type="varchar" MaxLength="140" />
+    <Property Name="USERPedVendCorpo2" Type="varchar" MaxLength="140" />
+    <Property Name="USERPedVendCorpo3" Type="varchar" MaxLength="140" />
+    <Property Name="USERRastreab" Type="varchar" MaxLength="10" />
+    <Property Name="NFQtdCasaDecPrec" Type="smallint" />
+    <Property Name="NFRepIcmsDifValDesc" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFRepIcmsRedValDesc" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFDedCofinsValParc" Type="varchar" MaxLength="5" />
+    <Property Name="NFDedPisValParc" Type="varchar" MaxLength="5" />
+    <Property Name="NFDedCsllValParc" Type="varchar" MaxLength="5" />
+    <Property Name="NFRateioFretePorPeso" Type="varchar" MaxLength="5" />
+    <Property Name="NFPercDescPisZFM" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFPercDescCofinsZFM" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFBaseCalcDescPisZFM" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseCalcDescCofinsZFM" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValDescPisZFM" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValDescCofinsZFM" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFENTNOME" Type="varchar" MaxLength="100" />
+    <Property Name="NFENTCPFCGC" Type="varchar" MaxLength="14" />
+    <Property Name="NFENTRGIE" Type="varchar" MaxLength="15" />
+    <Property Name="NFENTENDER" Type="varchar" MaxLength="40" />
+    <Property Name="NFENTENDERNO" Type="varchar" MaxLength="6" />
+    <Property Name="NFENTBAIR" Type="varchar" MaxLength="30" />
+    <Property Name="NFENTCEP" Type="varchar" MaxLength="9" />
+    <Property Name="NFENTFONENUM" Type="varchar" MaxLength="100" />
+    <Property Name="NFCIDNOME" Type="varchar" MaxLength="15" />
+    <Property Name="NFUFSIGLA" Type="varchar" MaxLength="2" />
+    <Property Name="NFNumShortForm" Type="varchar" MaxLength="10" />
+    <Property Name="NFMargemComis" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFValCustoRebate" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFDespEmbutida" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFEntCodUsuFinal" Type="varchar" MaxLength="7" />
+    <Property Name="NFEntNomeUsuFinal" Type="varchar" MaxLength="100" />
+    <Property Name="NFEntCnpjUsuFinal" Type="varchar" MaxLength="14" />
+    <Property Name="NFValCap" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFRateioCapPorPeso" Type="varchar" MaxLength="5" />
+    <Property Name="NFValCustoLiqProd" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValVendaLiqProd" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValCustoLiqServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValVendaLiqServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFTotCustoLiq" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFTotVendaLiq" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFDataDespachoExport" Type="datetime" />
+    <Property Name="NFNumConhecEmb" Type="varchar" MaxLength="15" />
+    <Property Name="NFDataConhecEmb" Type="datetime" />
+    <Property Name="NFTipoConhecEmb" Type="varchar" MaxLength="30" />
+    <Property Name="NFDataAverbDecExport" Type="datetime" />
+    <Property Name="NFValBaseDescISS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFPercDescISS" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFValDescISS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerBaseDescISS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerDescISS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValDiferimIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValICMSDevido" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValCredPresumICMS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValICMSRecolher" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFDeduzFreteComis" Type="varchar" MaxLength="5" />
+    <Property Name="NFVALBASECOFINSPRODRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFVALCOFINSPRODRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFVALBASEPISPRODRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFVALPISPRODRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFVALBASECSLLPRODRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFVALCSLLPRODRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NfDedCofinsProdValParc" Type="varchar" MaxLength="5" />
+    <Property Name="NfDedPisProdValParc" Type="varchar" MaxLength="5" />
+    <Property Name="NfDedCsllProdValParc" Type="varchar" MaxLength="5" />
+    <Property Name="NFValBaseIcmsServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIcmsServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValBaseIcmsPropSTServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIcmsPropSTServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValBaseIcmsSTServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIcmsSTServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIcmsRetSTServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerBaseIcmsServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerIcmsServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerBaseIcmsPropSTServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerIcmsPropSTServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerBaseIcmsSTServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerIcmsSTServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerIcmsRetSTServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerBaseIcmsRatServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerIcmsRatServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerBaseIcmsSTRatServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerIcmsSTRatServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValDifIcmsServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValBaseDescIcmsServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFPercDescIcmsServ" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFValDescIcmsServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerBaseDescIcmsServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerDescIcmsServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFCodRetornoNFEletronica" Type="varchar" MaxLength="20" />
+    <Property Name="NFOperacao" Type="varchar" MaxLength="15" />
+    <Property Name="NFEspecie" Type="varchar" MaxLength="20" />
+    <Property Name="NFPedVendaCancelamento" Type="varchar" MaxLength="10" />
+    <Property Name="NSUSeq" Type="int" />
+    <Property Name="NSUNum" Type="varchar" MaxLength="10" />
+    <Property Name="NFDATAIMPRELAT" Type="datetime" />
+    <Property Name="NFNumRetornoNFEletronica" Type="varchar" MaxLength="20" />
+    <Property Name="NFDataRetornoNFEletronica" Type="datetime" />
+    <Property Name="NFUsuCodAtualRetornoNFE" Type="varchar" MaxLength="31" />
+    <Property Name="NFDtAtualRetornoNFE" Type="datetime" />
+    <Property Name="NFIndEconCodOrig" Type="varchar" MaxLength="7" />
+    <Property Name="NFValCambioOrig" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFRatFreteIntPorPeso" Type="varchar" MaxLength="5" />
+    <Property Name="NFRatSeguroIntPorPeso" Type="varchar" MaxLength="5" />
+    <Property Name="NFVALORIG" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFCodif" Type="varchar" MaxLength="20" />
+    <Property Name="NFVeicPlaca2" Type="varchar" MaxLength="20" />
+    <Property Name="NFVeicPlaca3" Type="varchar" MaxLength="20" />
+    <Property Name="NFVeic2UfSigla" Type="varchar" MaxLength="2" />
+    <Property Name="NFVeic2PaisSigla" Type="varchar" MaxLength="3" />
+    <Property Name="NFVeic3UfSigla" Type="varchar" MaxLength="2" />
+    <Property Name="NFVeic3PaisSigla" Type="varchar" MaxLength="3" />
+    <Property Name="EntCodMedico" Type="varchar" MaxLength="7" />
+    <Property Name="EntCodPaciente" Type="varchar" MaxLength="7" />
+    <Property Name="NFDtUtiliz" Type="datetime" />
+    <Property Name="EntCodConvenio" Type="varchar" MaxLength="7" />
+    <Property Name="NFNomePaciente" Type="varchar" MaxLength="100" />
+    <Property Name="NFSeloCtrl" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFValBaseIcmsOper" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIcmsOper" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFPrecoVendaVarejo" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="TabPVCod" Type="varchar" MaxLength="15" />
+    <Property Name="TipoFatCod" Type="varchar" MaxLength="7" />
+    <Property Name="NFValGerBasePisRFRat" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerPisRFRat" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerBaseCofinsRFRat" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerCofinsRFRat" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFTempTanqueVeic" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFMassaEspec" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFMassaEspec20C" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFGrauInpm" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFCapacVeicSeta" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFFatRedVol" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFVol20C" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFVolFat" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFVol20CSeta" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFNumPasseFiscal" Type="varchar" MaxLength="44" />
+    <Property Name="NFEnderColetaOMesmo" Type="varchar" MaxLength="5" />
+    <Property Name="NFEnderEntCodColeta" Type="varchar" MaxLength="7" />
+    <Property Name="NFEnderEntSeqColeta" Type="smallint" />
+    <Property Name="NFTipoServNome" Type="varchar" MaxLength="40" />
+    <Property Name="MarcaProdCod" Type="varchar" MaxLength="7" />
+    <Property Name="CCtrlCodEstr" Type="varchar" MaxLength="30" />
+    <Property Name="NFNumDocDI" Type="varchar" MaxLength="20" />
+    <Property Name="NFDataDI" Type="datetime" />
+    <Property Name="CidCod" Type="varchar" MaxLength="8" />
+    <Property Name="NFDataDesembDI" Type="datetime" />
+    <Property Name="NFCodExportDI" Type="varchar" MaxLength="60" />
+    <Property Name="NFEntLograd" Type="varchar" MaxLength="10" />
+    <Property Name="NFEntEnderComp" Type="varchar" MaxLength="40" />
+    <Property Name="NFCidCod" Type="varchar" MaxLength="8" />
+    <Property Name="NFPaisSigla" Type="varchar" MaxLength="3" />
+    <Property Name="NFPaisNome" Type="varchar" MaxLength="40" />
+    <Property Name="NFEntInscSuframa" Type="varchar" MaxLength="15" />
+    <Property Name="NFRENTABRES" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFAnoSafra" Type="varchar" MaxLength="10" />
+    <Property Name="NFMesAnoRef" Type="varchar" MaxLength="10" />
+    <Property Name="NFDiaEntCana" Type="datetime" />
+    <Property Name="NFQtdTotMes" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFQtdTotMesAnt" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFQtdTotal" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFQtdTotGeral" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFEntNomeFant" Type="varchar" MaxLength="40" />
+    <Property Name="NFEntAgropInsc" Type="varchar" MaxLength="20" />
+    <Property Name="NFEntTipoFJ" Type="varchar" MaxLength="10" />
+    <Property Name="NFEntInscIata" Type="varchar" MaxLength="15" />
+    <Property Name="NFNumAcDraw" Type="varchar" MaxLength="15" />
+    <Property Name="NFQtdPrev" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFCalcBonif" Type="varchar" MaxLength="5" />
+    <Property Name="NFValDescBonif" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFValBaseIcmsSTDaeGnre" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIcmsSTDaeGnre" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIcmsRetSTDaeGnre" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFRecopi" Type="varchar" MaxLength="30" />
+    <Property Name="NFMultCompUtiliz" Type="varchar" MaxLength="10" />
+    <Property Name="NFNumCertificacao" Type="varchar" MaxLength="50" />
+    <Property Name="NFCertificado" Type="varchar" MaxLength="5" />
+    <Property Name="NFPesoCubado" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFValTotDesc" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFPercTotDesc" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFAreaTot" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValTotMtQuad" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFDescGerEspecVal" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFDescGerEspecPerc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFAcrescGerEspecVal" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFAcrescGerEspecPerc" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="NFCodANTTVeic" Type="varchar" MaxLength="20" />
+    <Property Name="NFCodANTTVeic2" Type="varchar" MaxLength="20" />
+    <Property Name="NFCodANTTVeic3" Type="varchar" MaxLength="20" />
+    <Property Name="NFTxaMarMerc" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFRatTxaMarMercPorPeso" Type="varchar" MaxLength="5" />
+    <Property Name="NFRatSiscomexPorPeso" Type="varchar" MaxLength="5" />
+    <Property Name="NFRatDespImportPorPeso" Type="varchar" MaxLength="5" />
+    <Property Name="NFValGerBaseCSLLRFRat" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValGerCSLLRFRat" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFAIH" Type="varchar" MaxLength="15" />
+    <Property Name="NFProntuario" Type="varchar" MaxLength="15" />
+    <Property Name="ContratoNum" Type="varchar" MaxLength="20" />
+    <Property Name="NFResolDiretoria" Type="varchar" MaxLength="40" />
+    <Property Name="NFTipoLancCodEstqProd" Type="varchar" MaxLength="10" />
+    <Property Name="NFTipoLancCodEstqServ" Type="varchar" MaxLength="10" />
+    <Property Name="NFNumPedInterno" Type="varchar" MaxLength="40" />
+    <Property Name="NFCancExtemp" Type="varchar" MaxLength="5" />
+    <Property Name="NFDtHrLibBlocFin" Type="datetime" />
+    <Property Name="USERQtdeMortW36" Type="smallint" />
+    <Property Name="USERQtdeMortBrown" Type="smallint" />
+    <Property Name="USERObsMotorista" Type="varchar" MaxLength="255" />
+    <Property Name="USERMotorista01" Type="varchar" MaxLength="40" />
+    <Property Name="USERMotorista02" Type="varchar" MaxLength="40" />
+    <Property Name="USERMortChegada" Type="smallint" />
+    <Property Name="USERElimnacaoRefug" Type="smallint" />
+    <Property Name="USERObsCliente" Type="varchar" MaxLength="255" />
+    <Property Name="USERClienteTOP" Type="varchar" MaxLength="5" />
+    <Property Name="USERReclamacao" Type="varchar" MaxLength="5" />
+    <Property Name="USERObsReclamacao" Type="varchar" MaxLength="255" />
+    <Property Name="USERErroSexagem" Type="smallint" />
+    <Property Name="NFTpImp" Type="varchar" MaxLength="1" />
+    <Property Name="ObjCodEstr" Type="varchar" MaxLength="30" />
+    <Property Name="NFNumCTExpresso" Type="varchar" MaxLength="20" />
+    <Property Name="NFIpiBaseIcms" Type="varchar" MaxLength="5" />
+    <Property Name="USERNFMaeLoteVendPVenda" Type="varchar" MaxLength="30" />
+    <Property Name="USERSacObs1Semana" Type="varchar" MaxLength="255" />
+    <Property Name="USERSacObs1Semana2" Type="varchar" MaxLength="255" />
+    <Property Name="USERSacObsErrSex" Type="varchar" MaxLength="255" />
+    <Property Name="USERSacReclam1Semana" Type="varchar" MaxLength="5" />
+    <Property Name="USERSacObsReclam1Semana" Type="varchar" MaxLength="255" />
+    <Property Name="USERRRCDataReclam" Type="datetime" />
+    <Property Name="USERRRCDataNasc" Type="datetime" />
+    <Property Name="USERRRCCondEstrGranjaTit" Type="varchar" MaxLength="15" />
+    <Property Name="USERRRCCondAloj" Type="varchar" MaxLength="15" />
+    <Property Name="USERRRCResponsavel" Type="varchar" MaxLength="50" />
+    <Property Name="USERRRCData" Type="datetime" />
+    <Property Name="USERRRCComentarios" Type="varchar" MaxLength="255" />
+    <Property Name="USERRRCDescrFatos1" Type="varchar" MaxLength="255" />
+    <Property Name="USERRRCDescrFatos2" Type="varchar" MaxLength="255" />
+    <Property Name="USERRRCComentDeptoCom1" Type="varchar" MaxLength="255" />
+    <Property Name="USERRRCComentDeptoCom2" Type="varchar" MaxLength="255" />
+    <Property Name="USERRRCAcaoAutorizadaPor" Type="varchar" MaxLength="25" />
+    <Property Name="USERRRCDataAutorizacao" Type="datetime" />
+    <Property Name="USERRRCAgua" Type="varchar" MaxLength="10" />
+    <Property Name="USERRRCLuz" Type="varchar" MaxLength="10" />
+    <Property Name="USERRRCTempAmb" Type="varchar" MaxLength="10" />
+    <Property Name="USERRRCSanid" Type="varchar" MaxLength="10" />
+    <Property Name="USERDataChegada" Type="datetime" />
+    <Property Name="USERRRCLinhagem" Type="varchar" MaxLength="100" />
+    <Property Name="USERDataRespSAC" Type="datetime" />
+    <Property Name="USERRespSAC01" Type="varchar" MaxLength="255" />
+    <Property Name="USERRRCTpReclamacao" Type="varchar" MaxLength="40" />
+    <Property Name="USERRRCAcaoEmergTomada" Type="varchar" MaxLength="25" />
+    <Property Name="USERRespSAC02" Type="varchar" MaxLength="255" />
+    <Property Name="USERRespSAC03" Type="varchar" MaxLength="255" />
+    <Property Name="USERRespSAC04" Type="varchar" MaxLength="255" />
+    <Property Name="USERRespSAC06" Type="varchar" MaxLength="255" />
+    <Property Name="USERREHoraChegGranja" Type="varchar" MaxLength="5" />
+    <Property Name="USERREHoraFinalDescarreg" Type="varchar" MaxLength="5" />
+    <Property Name="USERRERespRecebCliente" Type="varchar" MaxLength="50" />
+    <Property Name="USERMortChegVermelha" Type="smallint" />
+    <Property Name="USERQtdMortBranca02" Type="smallint" />
+    <Property Name="USERQtdMortBranca03" Type="smallint" />
+    <Property Name="USERQtdMortBranca04" Type="smallint" />
+    <Property Name="USERQtdMortBranca05" Type="smallint" />
+    <Property Name="USERQtdMortBranca06" Type="smallint" />
+    <Property Name="USERQtdMortBranca07" Type="smallint" />
+    <Property Name="USERQtdMortVerm02" Type="smallint" />
+    <Property Name="USERQtdMortVerm03" Type="smallint" />
+    <Property Name="USERQtdMortVerm04" Type="smallint" />
+    <Property Name="USERQtdMortVerm05" Type="smallint" />
+    <Property Name="USERQtdMortVerm06" Type="smallint" />
+    <Property Name="USERQtdMortVerm07" Type="smallint" />
+    <Property Name="USERObsMotorista2" Type="varchar" MaxLength="255" />
+    <Property Name="USERObsMotorista3" Type="varchar" MaxLength="255" />
+    <Property Name="USERREDistanciaPerco" Type="int" />
+    <Property Name="USERRETempoViagem" Type="varchar" MaxLength="20" />
+    <Property Name="USERSACStatus" Type="varchar" MaxLength="10" />
+    <Property Name="USERSacQtdeTentativasContato" Type="smallint" />
+    <Property Name="USERQtdMortBranca08" Type="smallint" />
+    <Property Name="USERQtdMortBranca09" Type="smallint" />
+    <Property Name="USERQtdMortBranca10" Type="smallint" />
+    <Property Name="USERQtdMortVerm08" Type="smallint" />
+    <Property Name="USERQtdMortVerm09" Type="smallint" />
+    <Property Name="USERQtdMortVerm10" Type="smallint" />
+    <Property Name="USERChaveMDFe" Type="varchar" MaxLength="100" />
+    <Property Name="USERRRCMotivMort01Semana" Type="varchar" MaxLength="20" />
+    <Property Name="USERRRCAETQtdeValorBonificado" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="USERRRCAETQuando" Type="varchar" MaxLength="15" />
+    <Property Name="USERRRCAETData" Type="datetime" />
+    <Property Name="USERRRCAETStatus" Type="varchar" MaxLength="15" />
+    <Property Name="USERRRCATELinhagem" Type="varchar" MaxLength="30" />
+    <Property Name="USERSacLinhagemBrancaSAC" Type="varchar" MaxLength="20" />
+    <Property Name="NFQtdVolOrig" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFPesoBrutoOrig" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFPesoLiqOrig" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFQtdVolServOrig" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFPesoBrutoServOrig" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFPesoLiqServOrig" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NFIntegPat" Type="varchar" MaxLength="5" />
+    <Property Name="NFDenegada" Type="varchar" MaxLength="5" />
+    <Property Name="NFDenegadaData" Type="datetime" />
+    <Property Name="NFValFCP" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFValICMSRem" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFValICMSDest" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFAcresTotCusto" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFDescTotCusto" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFEntNomeEntrega" Type="varchar" MaxLength="100" />
+    <Property Name="NFValBaseIpiOper" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIpiOper" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValBaseIIOper" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValIIOper" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseFCPICMS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValFCPICMS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseFCPICMSST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValFCPICMSST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseFCPUFDest" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFCnoCei" Type="varchar" MaxLength="30" />
+    <Property Name="USERColetadaInfoMortalidade" Type="varchar" MaxLength="5" />
+    <Property Name="NFVlrServicos15" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFVlrServicos20" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFVlrServicos25" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFVlrAdicional" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFVlrNRetAdic" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFNaoDevBsINSS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFNaoDevVlrINSS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFNaoDevBsIR" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFNaoDevVlrIR" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFNaoDevBsPIS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFNaoDevVlrPIS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFNaoDevBsCOFINS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFNaoDevVlrCOFINS" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFNaoDevBsCSLL" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFNaoDevVlrCSLL" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFBaseFCPICMSPropST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValFCPICMSPropST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValFCPRetST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFRENTABREAL" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValBasePISOper" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValPISOper" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValBaseCOFINSOper" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFValCOFINSOper" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFSubstituida" Type="varchar" MaxLength="5" />
+    <Property Name="NFSubstituidaData" Type="datetime" />
+    <Property Name="NFNumRPS" Type="varchar" MaxLength="10" />
+    <Property Name="NFValBaseCalcComis" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFPercComis" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFValComis" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFVrCpDescPR" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFVrRatDescPR" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFVrSenarDesc" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFVrCPNRet" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFVrRatNRet" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFVrSenarNRet" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="NFVENDPRINC" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="OBJETO">
+    <Key>
+      <PropertyRef Name="ObjCodEstr" />
+    </Key>
+    <Property Name="ObjCodEstr" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="ObjNome" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="ObjCodEstrNiv" Type="varchar" MaxLength="30" />
+    <Property Name="ObjGrupo" Type="char" MaxLength="1" />
+    <Property Name="ObjFoto" Type="image" />
+    <Property Name="USERTipoDocumento" Type="varchar" MaxLength="20" />
+    <Property Name="USERCodTipoManutEquip" Type="varchar" MaxLength="10" />
+    <Property Name="USERDescrCompTipoManutEquip" Type="varchar" MaxLength="255" />
+    <Property Name="USERPeriodicidadeSemana" Type="smallint" />
+    <Property Name="USERCriticidade" Type="varchar" MaxLength="5" />
+    <Property Name="USERQtdeHoras" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="USERDEQtdeCopias" Type="smallint" />
+    <Property Name="USERTipoPeriodo" Type="varchar" MaxLength="50" />
+    <Property Name="USERQtdeOSPeriodo" Type="smallint" />
+  </EntityType>
+  <EntityType Name="PAIS">
+    <Key>
+      <PropertyRef Name="PaisSigla" />
+    </Key>
+    <Property Name="PaisSigla" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="PaisNome" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="PaisDDI" Type="varchar" MaxLength="4" />
+    <Property Name="PaisNacion" Type="varchar" MaxLength="20" />
+    <Property Name="PaisCorrente" Type="varchar" MaxLength="5" />
+    <Property Name="TarPostGrpPaisCod" Type="varchar" MaxLength="2" />
+    <Property Name="PaisCodSiscomex" Type="varchar" MaxLength="4" />
+    <Property Name="PaisCodFedGia" Type="varchar" MaxLength="5" />
+    <Property Name="CONTCOD" Type="varchar" MaxLength="7" />
+    <Property Name="PaisSiglaPadraoISO" Type="varchar" MaxLength="5" />
+    <Property Name="PaisPartMercosul" Type="varchar" MaxLength="5" />
+    <Property Name="PaisLongitudeDecimal" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PaisLongitudePadrao" Type="varchar" MaxLength="20" />
+    <Property Name="PaisLatitudeDecimal" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PaisLatitudePadrao" Type="varchar" MaxLength="20" />
+    <Property Name="PaisExigeNIF" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="PARC_PAG_PED_COMP">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="PedCompNum" />
+      <PropertyRef Name="ParcPagPedCompSeq" />
+    </Key>
+    <Property Name="EmpCod" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PedCompNum" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="ParcPagPedCompSeq" Type="smallint" Nullable="false" />
+    <Property Name="ParcPagPedCompNumDup" Type="varchar" MaxLength="20" />
+    <Property Name="ParcPagPedCompDiasParc" Type="smallint" />
+    <Property Name="ParcPagPedCompPercFrac" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ParcPagPedCompVal" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ParcPagPedCompDataVenc" Type="datetime" Nullable="false" />
+    <Property Name="ParcPagPedCompAdiant" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="PED_COMP">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="PedCompNum" />
+    </Key>
+    <Property Name="EmpCod" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PedCompNum" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="PedCompTipo" Type="varchar" MaxLength="10" />
+    <Property Name="PedCompDesm" Type="char" MaxLength="1" />
+    <Property Name="PedCompData" Type="datetime" />
+    <Property Name="PedCompDataCad" Type="datetime" />
+    <Property Name="PedCompDataValidade" Type="datetime" />
+    <Property Name="PedCompAlarmeValidade" Type="varchar" MaxLength="5" />
+    <Property Name="PedCompDataEntrega" Type="datetime" />
+    <Property Name="PedCompDataBaseVencParc" Type="datetime" />
+    <Property Name="PedCompCompet" Type="datetime" />
+    <Property Name="EntCod" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="PedCompNumPedEnt" Type="varchar" MaxLength="10" />
+    <Property Name="TabPVCod" Type="varchar" MaxLength="15" />
+    <Property Name="PedCompStrDesc" Type="varchar" MaxLength="20" />
+    <Property Name="PedCompPercDesc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="PedCompIpiBaseIcms" Type="varchar" MaxLength="5" />
+    <Property Name="PedCompIdentAcrescFin" Type="varchar" MaxLength="40" />
+    <Property Name="PedCompPercAcrescFin" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="PedCompValAcrescFin" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompPercIpiAcrescFin" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="PedCompValIpiAcrescFin" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompIdentDescEspec" Type="varchar" MaxLength="40" />
+    <Property Name="PedCompPercDescEspec" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="PedCompValDescEspec" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValMerc" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValBaseIss" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValIss" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValBaseIrrf" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValMinIrrf" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValCalcIrrf" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValBaseIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValEmbalagem" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValFrete" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValSeguro" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValDespesa" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValBaseIpi" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValIpi" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerBaseIss" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerIss" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerBaseIrrf" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerCalcIrrf" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerIrrf" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerServTot" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerBaseIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerBaseIpi" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerIpi" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValTotal" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="CompradCod" Type="varchar" MaxLength="7" />
+    <Property Name="PedCompTranspCod" Type="varchar" MaxLength="7" />
+    <Property Name="PedCompStatFrete" Type="varchar" MaxLength="15" />
+    <Property Name="CCtrlCodEstr" Type="varchar" MaxLength="30" />
+    <Property Name="PedCompRef" Type="varchar" MaxLength="10" />
+    <Property Name="PedCompIntegFin" Type="varchar" MaxLength="5" />
+    <Property Name="PedCompViaTransp" Type="varchar" MaxLength="15" />
+    <Property Name="PedCompEntCodContato" Type="varchar" MaxLength="7" />
+    <Property Name="PedCompIdentAcrescFinProd" Type="varchar" MaxLength="40" />
+    <Property Name="PedCompPercAcrescFinProd" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="PedCompValAcrescFinProd" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompIdentDescEspecProd" Type="varchar" MaxLength="40" />
+    <Property Name="PedCompPercDescEspecProd" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="PedCompValDescEspecProd" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompIdentAcrescFinServ" Type="varchar" MaxLength="40" />
+    <Property Name="PedCompPercAcrescFinServ" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="PedCompValAcrescFinServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompIdentDescEspecServ" Type="varchar" MaxLength="40" />
+    <Property Name="PedCompPercDescEspecServ" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="PedCompValDescEspecServ" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompAprov" Type="varchar" MaxLength="10" />
+    <Property Name="PedVendaEmpCod" Type="varchar" MaxLength="20" />
+    <Property Name="PedVendaNum" Type="varchar" MaxLength="10" />
+    <Property Name="PedCompEmpCodLocEnt" Type="varchar" MaxLength="20" />
+    <Property Name="PedCompComprado" Type="varchar" MaxLength="5" />
+    <Property Name="IndEconCod" Type="varchar" MaxLength="7" />
+    <Property Name="PedCompValCambio" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PedCompStat" Type="varchar" MaxLength="20" />
+    <Property Name="PedCompLibBloqData" Type="datetime" />
+    <Property Name="PedCompLibBloqUsuCod" Type="varchar" MaxLength="31" />
+    <Property Name="UsuCod" Type="varchar" MaxLength="31" Nullable="false" />
+    <Property Name="PedCompTexto" Type="text" />
+    <Property Name="PedCompPercFreteEmbut" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="PedCompValFreteEmbut" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompPercFinancEmbut" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="PedCompValFinancEmbut" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompOrig" Type="varchar" MaxLength="15" />
+    <Property Name="ReqCompEmpCod" Type="varchar" MaxLength="20" />
+    <Property Name="ReqCompNum" Type="varchar" MaxLength="7" />
+    <Property Name="ResReqCompNum" Type="int" />
+    <Property Name="PedCompValBaseIcmsPropST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValIcmsPropST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValBaseIcmsSTLista" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValIcmsSTLista" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValBaseIcmsSTLucro" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValIcmsSTLucro" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValBaseIcmsST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValIcmsST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValIcmsRetST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerBaseIcmsPropST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerIcmsPropST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerBaseIcmsSTLista" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerIcmsSTLista" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerBaseIcmsSTLucro" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerIcmsSTLucro" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerBaseIcmsST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerIcmsST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerIcmsRetST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompIcmsFreteSomaIcmsST" Type="varchar" MaxLength="5" />
+    <Property Name="PedCompValGerBaseIcmsSTRat" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerIcmsSTRat" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValMercST" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompPercIIAcrescFin" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="PedCompValIIAcrescFin" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValBaseII" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValII" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerBaseII" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValGerII" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompDataEntregaInic" Type="datetime" />
+    <Property Name="TipoPagRecCod" Type="varchar" MaxLength="7" />
+    <Property Name="PedCompValSiscomex" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValCalcIssDedTot" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValDifIcms" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValBaseCofins" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompPercCofinsRF" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="PedCompValCofinsRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValBasePis" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompPercPisRF" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="PedCompValPisRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompValBaseCsll" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompPercCsllRF" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="PedCompValCsllRF" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompNumPedEntOrig" Type="varchar" MaxLength="40" />
+    <Property Name="OrcNum" Type="varchar" MaxLength="10" />
+    <Property Name="PedCompTipoEntrega" Type="varchar" MaxLength="10" />
+    <Property Name="GrpCompraCod" Type="varchar" MaxLength="7" />
+    <Property Name="USERPedCompFunRural" Type="varchar" MaxLength="5" />
+    <Property Name="USERPedCompraLocDesembarque" Type="varchar" MaxLength="50" />
+    <Property Name="USERForma_Pag" Type="varchar" MaxLength="8" />
+    <Property Name="USERImpresso" Type="varchar" MaxLength="5" />
+    <Property Name="PedCompRepIcmsDifValDesc" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompRepIcmsRedValDesc" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompPesoLiq" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PedCompPesoBruto" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PeCompRateioFretePorPeso" Type="varchar" MaxLength="5" />
+    <Property Name="PedCompTransf" Type="varchar" MaxLength="5" />
+    <Property Name="PedCompTextoHist" Type="text" />
+    <Property Name="PedCompValAbaixoMinForn" Type="varchar" MaxLength="5" />
+    <Property Name="PedCompRateioFretePorPeso" Type="varchar" MaxLength="5" />
+    <Property Name="PedCompOrigDataBaseVencParc" Type="varchar" MaxLength="20" />
+    <Property Name="PedCompValCap" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="TipoLancCod" Type="varchar" MaxLength="10" />
+    <Property Name="PedCompEntCodLocEnt" Type="varchar" MaxLength="7" />
+    <Property Name="PedCompFreteTerc" Type="varchar" MaxLength="5" />
+    <Property Name="PedCompExportado" Type="varchar" MaxLength="5" />
+    <Property Name="FinCompCod" Type="varchar" MaxLength="7" />
+    <Property Name="PedCompTerc" Type="varchar" MaxLength="5" />
+    <Property Name="CtrlProjNum" Type="varchar" MaxLength="10" />
+    <Property Name="MatrizCod" Type="varchar" MaxLength="7" />
+    <Property Name="LinhaCod" Type="varchar" MaxLength="7" />
+    <Property Name="ColunaCod" Type="varchar" MaxLength="7" />
+    <Property Name="VerbaCtrlProjSeq" Type="int" />
+    <Property Name="ReqMatNum" Type="varchar" MaxLength="10" />
+    <Property Name="PedCompStatDev" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PedCompCondPagCodAdiant" Type="varchar" MaxLength="7" />
+    <Property Name="PedCompValAdiant" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PedCompAtualEstimCCtrl" Type="varchar" MaxLength="5" />
+    <Property Name="PedCompValPISProdRF" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PedCompValCofinsProdRF" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PedCompCertific" Type="varchar" MaxLength="5" />
+    <Property Name="USERAprovador" Type="varchar" MaxLength="25" />
+    <Property Name="USERGeradoDeCopia" Type="varchar" MaxLength="5" />
+    <Property Name="USERLiberaAprovacao" Type="varchar" MaxLength="5" />
+    <Property Name="USERPedidoCotado" Type="varchar" MaxLength="5" />
+    <Property Name="PedCompStatDisponib" Type="varchar" MaxLength="10" />
+    <Property Name="PedCompUsuCodEmUso" Type="varchar" MaxLength="31" />
+    <Property Name="USERMotivoManutencaoVeiculo" Type="varchar" MaxLength="500" />
+    <Property Name="USERPlacaVeiculo" Type="varchar" MaxLength="50" />
+    <Property Name="PedCompDataHoraInicEntrega" Type="datetime" />
+    <Property Name="PedCompDataHoraFimEntrega" Type="datetime" />
+    <Property Name="PEDCOMPENTNOME" Type="varchar" MaxLength="100" />
+    <Property Name="IdGerencProj" Type="int" />
+    <Property Name="IdVerbaGerencProj" Type="int" />
+    <Property Name="USERNumFluig" Type="int" />
+    <Property Name="USERRecebido" Type="varchar" MaxLength="5" />
+    <Property Name="PEDCOMPJUST" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="PROD_UNID_MED">
+    <Key>
+      <PropertyRef Name="ProdCodEstr" />
+      <PropertyRef Name="ProdUnidMedCod" />
+      <PropertyRef Name="ProdUnidMedPos" />
+    </Key>
+    <Property Name="ProdCodEstr" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="ProdUnidMedCod" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="ProdUnidMedPos" Type="smallint" Nullable="false" />
+    <Property Name="ProdUnidMedPeso" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdUnidMedPesoFD" Type="varchar" MaxLength="10" />
+    <Property Name="ProdUnidMedCodBar" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ProdUnidMedQtdMinFat" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdUnidMedPesoQtd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdUnidMedFatorMult" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdUnidMedDataValidInic" Type="datetime" />
+    <Property Name="ProdUnidMedDataValidFim" Type="datetime" />
+    <Property Name="ProdUnidMedLoteUnico" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedEstat" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedCompra" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedProduc" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedPadVenda" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedSeq" Type="smallint" />
+    <Property Name="ProdUnidMedExibeComprimVenda" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedExibeLargVenda" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedExibeAltVenda" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedDep" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedCodAlt" Type="varchar" MaxLength="7" />
+    <Property Name="ProdUnidMedPadMovEstq" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedUltDataMod" Type="datetime" />
+    <Property Name="ProdUnidMedCubagRod" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdUnidMedEntrega" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedObjVenda" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedFatorMultFornecto" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdUnidMedFatorFCI" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdUnidMedSeqFCI" Type="int" />
+    <Property Name="PRODUNIDMEDTRIBUT" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedTributExport" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedCodBarUnidTrib" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedPrNeg" Type="varchar" MaxLength="5" />
+    <Property Name="PRODUNIDMEDCOMPBRUTO" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PRODUNIDMEDCOMPLIQ" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PRODUNIDMEDLARGBRUTA" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PRODUNIDMEDLARGLIQ" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PRODUNIDMEDALTBRUTA" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PRODUNIDMEDALTLIQ" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PRODUNIDMEDPALETIZACAO" Type="varchar" MaxLength="50" />
+    <Property Name="PRODUNIDMEDACONDPALET" Type="int" />
+    <Property Name="USERExibeRastrIncubatorio" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedVisualAplicExt" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="REQ_COMP">
+    <Key>
+      <PropertyRef Name="EmpCod" />
+      <PropertyRef Name="ReqCompNum" />
+    </Key>
+    <Property Name="EmpCod" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ReqCompNum" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="CCtrlCodEstr" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="FuncCod" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="ReqCompDescr" Type="varchar" MaxLength="100" />
+    <Property Name="ReqCompData" Type="datetime" />
+    <Property Name="ReqCompDataNec" Type="datetime" />
+    <Property Name="ReqCompStat" Type="varchar" MaxLength="15" />
+    <Property Name="ReqCompCot" Type="varchar" MaxLength="10" />
+    <Property Name="ReqCompEmpCodDoc" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ReqCompEspecDoc" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="ReqCompSerieDoc" Type="varchar" MaxLength="3" />
+    <Property Name="ReqCompNumDoc" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="ReqCompAprov" Type="varchar" MaxLength="10" />
+    <Property Name="ReqCompTexto" Type="text" />
+    <Property Name="UsuCod" Type="varchar" MaxLength="31" Nullable="false" />
+    <Property Name="ReqCompPed" Type="varchar" MaxLength="10" />
+    <Property Name="PedVendaNum" Type="varchar" MaxLength="10" />
+    <Property Name="EntCod" Type="varchar" MaxLength="7" />
+    <Property Name="ReqCompNumPedEnt" Type="varchar" MaxLength="40" />
+    <Property Name="ReqCompReprov" Type="varchar" MaxLength="10" />
+    <Property Name="ReqCompSeqDoc" Type="smallint" />
+    <Property Name="ReqCompNumAltDoc" Type="varchar" MaxLength="20" />
+    <Property Name="ReqCompRes" Type="varchar" MaxLength="10" />
+    <Property Name="ReqCompTipoReq" Type="varchar" MaxLength="10" />
+    <Property Name="ReqCompEmpCodLocEnt" Type="varchar" MaxLength="20" />
+    <Property Name="ReqCompEntCodLocEnt" Type="varchar" MaxLength="7" />
+    <Property Name="ReqCompControle" Type="varchar" MaxLength="15" />
+    <Property Name="FinCompCod" Type="varchar" MaxLength="7" />
+    <Property Name="ReqCompTerc" Type="varchar" MaxLength="5" />
+    <Property Name="ReqCompValLimite" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="CtrlProjNum" Type="varchar" MaxLength="10" />
+    <Property Name="MatrizCod" Type="varchar" MaxLength="7" />
+    <Property Name="LinhaCod" Type="varchar" MaxLength="7" />
+    <Property Name="ColunaCod" Type="varchar" MaxLength="7" />
+    <Property Name="VerbaCtrlProjSeq" Type="int" />
+    <Property Name="ReqCompNumOrig" Type="varchar" MaxLength="10" />
+    <Property Name="ReqCompHist" Type="text" />
+    <Property Name="VendCod" Type="varchar" MaxLength="7" />
+    <Property Name="USERAprovador" Type="varchar" MaxLength="25" />
+    <Property Name="USERRecebido" Type="varchar" MaxLength="10" />
+    <Property Name="USERObsRecebimento" Type="varchar" MaxLength="255" />
+    <Property Name="USEREnviarAprovacao" Type="varchar" MaxLength="5" />
+    <Property Name="USERRequisicaoCotada" Type="varchar" MaxLength="15" />
+    <Property Name="USERPlacaVeiculo" Type="varchar" MaxLength="50" />
+    <Property Name="USERMotivoManutencaoVeiculo" Type="varchar" MaxLength="500" />
+    <Property Name="REQCOMPDATAHORADIG" Type="datetime" />
+    <Property Name="REQCOMPORIG" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="TIPO_DESPESA">
+    <Key>
+      <PropertyRef Name="TipoDespCod" />
+    </Key>
+    <Property Name="TipoDespCod" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="TipoDespNome" Type="varchar" MaxLength="40" />
+    <Property Name="TipoDespValUnit" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="TipoDespValUnitMin" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="TipoDespValUnitMax" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="TipoDespAltValUnit" Type="varchar" MaxLength="5" />
+    <Property Name="TipoDespCasaDecQtd" Type="smallint" />
+    <Property Name="TipoDespClasseDespCodEstr" Type="varchar" MaxLength="30" />
+    <Property Name="USERNaturezaDespesa" Type="varchar" MaxLength="10" />
+    <Property Name="TipoDespHorario" Type="datetime" />
+  </EntityType>
+  <EntityType Name="USUARIO">
+    <Key>
+      <PropertyRef Name="UsuCod" />
+    </Key>
+    <Property Name="UsuCod" Type="varchar" MaxLength="31" Nullable="false" />
+    <Property Name="UsuNome" Type="varchar" MaxLength="40" />
+    <Property Name="UsuDepto" Type="varchar" MaxLength="40" />
+    <Property Name="UsuEmail" Type="varchar" MaxLength="50" />
+    <Property Name="UsuRamal" Type="varchar" MaxLength="5" />
+    <Property Name="UsuAdmin" Type="char" MaxLength="1" />
+    <Property Name="UsuSenha" Type="varchar" MaxLength="32" />
+    <Property Name="UsuNomeAcesInternet" Type="varchar" MaxLength="255" />
+    <Property Name="UsuSenhaInternet" Type="varchar" MaxLength="32" />
+    <Property Name="UsuServidorSMTP" Type="varchar" MaxLength="255" />
+    <Property Name="UsuServidorPOP3" Type="varchar" MaxLength="255" />
+    <Property Name="UsuStat" Type="varchar" MaxLength="10" />
+    <Property Name="UsuDataHoraInicAfast" Type="datetime" />
+    <Property Name="UsuDataHoraFimAfast" Type="datetime" />
+    <Property Name="UsuNum" Type="smallint" Nullable="false" />
+    <Property Name="UsuPercMaxDesc" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="UsuComisFixaVar" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="UsuLibMarkupMin" Type="numeric" Precision="24" Scale="9" Nullable="false" />
+    <Property Name="UsuLibMarkupMax" Type="numeric" Precision="24" Scale="9" Nullable="false" />
+    <Property Name="UsuMix" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="UsuValLimLibCredEnt" Type="numeric" Precision="14" Scale="2" Nullable="false" />
+    <Property Name="UsuCodAtribAdminWeb" Type="varchar" MaxLength="31" />
+    <Property Name="UsuUtilCorTempoEtapaOS" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="UsuDataSenha" Type="datetime" />
+    <Property Name="UsuPercLimAjusteContrato" Type="numeric" Precision="24" Scale="9" Nullable="false" />
+    <Property Name="UsuUltDataMod" Type="datetime" />
+    <Property Name="USUCHECACONFBDE" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="EntCod" Type="varchar" MaxLength="7" />
+    <Property Name="UsuTipoLoginAd" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="UsuLoginAd" Type="varchar" MaxLength="40" />
+    <Property Name="UsuVisualFav" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="IDMenuSistema" Type="int" />
+  </EntityType>
+  <Association Name="FK__AEROPORTO__Aerop__4EC9A017">
+    <End Role="IND_ECONOMICO" Type="Self.IND_ECONOMICO" Multiplicity="0..1" />
+    <End Role="AEROPORTO" Type="Self.AEROPORTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IND_ECONOMICO">
+        <PropertyRef Name="IndEconCod" />
+      </Principal>
+      <Dependent Role="AEROPORTO">
+        <PropertyRef Name="AeropIndEconCodExtra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__APROV_COMP_FINAL__6091E5B3">
+    <End Role="APROV_COMP" Type="Self.APROV_COMP" Multiplicity="1" />
+    <End Role="APROV_COMP_FINALIDADE" Type="Self.APROV_COMP_FINALIDADE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="APROV_COMP">
+        <PropertyRef Name="UsuCod" />
+        <PropertyRef Name="AprovCompTipo" />
+      </Principal>
+      <Dependent Role="APROV_COMP_FINALIDADE">
+        <PropertyRef Name="UsuCod" />
+        <PropertyRef Name="AprovCompTipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Atividade__7B7556B8">
+    <End Role="ATIVIDADE_GRUPO" Type="Self.ATIVIDADE_GRUPO" Multiplicity="1" />
+    <End Role="ATIVIDADE" Type="Self.ATIVIDADE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ATIVIDADE_GRUPO">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="AtivGrpCodEstr" />
+      </Principal>
+      <Dependent Role="ATIVIDADE">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="AtivGrpCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ATIVIDADE__EmpCo__77A4C5D4">
+    <End Role="EMPRESA_FILIAL" Type="Self.EMPRESA_FILIAL" Multiplicity="1" />
+    <End Role="ATIVIDADE_GRUPO" Type="Self.ATIVIDADE_GRUPO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPRESA_FILIAL">
+        <PropertyRef Name="EmpCod" />
+      </Principal>
+      <Dependent Role="ATIVIDADE_GRUPO">
+        <PropertyRef Name="EmpCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CIDADE__CidCodMu__68958DFD">
+    <End Role="CIDADE" Type="Self.CIDADE" Multiplicity="0..1" />
+    <End Role="CIDADE1" Type="Self.CIDADE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CIDADE">
+        <PropertyRef Name="CidCod" />
+      </Principal>
+      <Dependent Role="CIDADE1">
+        <PropertyRef Name="CidCodMunRef" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CIDADE__UsuCod__506FF2F6">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+    <End Role="CIDADE" Type="Self.CIDADE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="UsuCod" />
+      </Principal>
+      <Dependent Role="CIDADE">
+        <PropertyRef Name="UsuCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__COND_PAG___CondP__7EF0168A">
+    <End Role="COND_PAG" Type="Self.COND_PAG" Multiplicity="1" />
+    <End Role="COND_PAG_ENT" Type="Self.COND_PAG_ENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COND_PAG">
+        <PropertyRef Name="CondPagCod" />
+      </Principal>
+      <Dependent Role="COND_PAG_ENT">
+        <PropertyRef Name="CondPagCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__COND_PAG__CondPa__171DA2F7">
+    <End Role="COND_PAG" Type="Self.COND_PAG" Multiplicity="0..1" />
+    <End Role="COND_PAG1" Type="Self.COND_PAG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COND_PAG">
+        <PropertyRef Name="CondPagCod" />
+      </Principal>
+      <Dependent Role="COND_PAG1">
+        <PropertyRef Name="CondPagCodDest" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__COND_PAG__CondPa__73C5810F">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+    <End Role="COND_PAG" Type="Self.COND_PAG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="UsuCod" />
+      </Principal>
+      <Dependent Role="COND_PAG">
+        <PropertyRef Name="CondPagUsuCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__COND_PAG__CONDPA__7E4B00E8">
+    <End Role="COND_PAG" Type="Self.COND_PAG" Multiplicity="0..1" />
+    <End Role="COND_PAG1" Type="Self.COND_PAG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COND_PAG">
+        <PropertyRef Name="CondPagCod" />
+      </Principal>
+      <Dependent Role="COND_PAG1">
+        <PropertyRef Name="CONDPAGCODTAXADU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DOC_ENTID__UsuCo__7309945C">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+    <End Role="DOC_ENTIDADE" Type="Self.DOC_ENTIDADE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="UsuCod" />
+      </Principal>
+      <Dependent Role="DOC_ENTIDADE">
+        <PropertyRef Name="UsuCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FUNC_ATIV__FuncC__0C1C5F57">
+    <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="1" />
+    <End Role="FUNC_ATIVIDADE_GRUPO" Type="Self.FUNC_ATIVIDADE_GRUPO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FUNCIONARIO">
+        <PropertyRef Name="FuncCod" />
+      </Principal>
+      <Dependent Role="FUNC_ATIVIDADE_GRUPO">
+        <PropertyRef Name="FuncCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FUNC_ATIVIDADE_G__0D108390">
+    <End Role="ATIVIDADE_GRUPO" Type="Self.ATIVIDADE_GRUPO" Multiplicity="1" />
+    <End Role="FUNC_ATIVIDADE_GRUPO" Type="Self.FUNC_ATIVIDADE_GRUPO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ATIVIDADE_GRUPO">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="AtivGrpCodEstr" />
+      </Principal>
+      <Dependent Role="FUNC_ATIVIDADE_GRUPO">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="AtivGrpCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FUNCIONAR__EmpCo__6D03431D">
+    <End Role="EMPRESA_FILIAL" Type="Self.EMPRESA_FILIAL" Multiplicity="0..1" />
+    <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPRESA_FILIAL">
+        <PropertyRef Name="EmpCod" />
+      </Principal>
+      <Dependent Role="FUNCIONARIO">
+        <PropertyRef Name="EmpCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FUNCIONAR__UsuCo__358D8341">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+    <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="UsuCod" />
+      </Principal>
+      <Dependent Role="FUNCIONARIO">
+        <PropertyRef Name="UsuCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GRP_FUNC__FuncCo__030DBBC3">
+    <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="1" />
+    <End Role="GRP_FUNC" Type="Self.GRP_FUNC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FUNCIONARIO">
+        <PropertyRef Name="FuncCod" />
+      </Principal>
+      <Dependent Role="GRP_FUNC">
+        <PropertyRef Name="FuncCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GRP_FUNC__GrpFun__0219978A">
+    <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="1" />
+    <End Role="GRP_FUNC" Type="Self.GRP_FUNC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FUNCIONARIO">
+        <PropertyRef Name="FuncCod" />
+      </Principal>
+      <Dependent Role="GRP_FUNC">
+        <PropertyRef Name="GrpFuncCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ITEM_REQ_COMP_PE__19DDDAFA">
+    <End Role="ITEM_REQ_COMP" Type="Self.ITEM_REQ_COMP" Multiplicity="1" />
+    <End Role="ITEM_REQ_COMP_PED_COMP" Type="Self.ITEM_REQ_COMP_PED_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ITEM_REQ_COMP">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="ReqCompNum" />
+        <PropertyRef Name="ItReqCompSeq" />
+      </Principal>
+      <Dependent Role="ITEM_REQ_COMP_PED_COMP">
+        <PropertyRef Name="EmpReqComp" />
+        <PropertyRef Name="ReqCompNum" />
+        <PropertyRef Name="ItReqCompSeq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ITEM_REQ_COMP_PE__57EF50B5">
+    <End Role="ITEM_PED_COMP" Type="Self.ITEM_PED_COMP" Multiplicity="1" />
+    <End Role="ITEM_REQ_COMP_PED_COMP" Type="Self.ITEM_REQ_COMP_PED_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ITEM_PED_COMP">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="PedCompNum" />
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ItPedCompSeq" />
+      </Principal>
+      <Dependent Role="ITEM_REQ_COMP_PED_COMP">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="PedCompNum" />
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ItPedCompSeq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__NOTA_FISC__CidCo__10EFC855">
+    <End Role="CIDADE" Type="Self.CIDADE" Multiplicity="0..1" />
+    <End Role="NOTA_FISCAL" Type="Self.NOTA_FISCAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CIDADE">
+        <PropertyRef Name="CidCod" />
+      </Principal>
+      <Dependent Role="NOTA_FISCAL">
+        <PropertyRef Name="CidCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__NOTA_FISC__NFCid__02C1A48F">
+    <End Role="CIDADE" Type="Self.CIDADE" Multiplicity="0..1" />
+    <End Role="NOTA_FISCAL" Type="Self.NOTA_FISCAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CIDADE">
+        <PropertyRef Name="CidCod" />
+      </Principal>
+      <Dependent Role="NOTA_FISCAL">
+        <PropertyRef Name="NFCidCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__NOTA_FISC__NFDes__443899B9">
+    <End Role="IND_ECONOMICO" Type="Self.IND_ECONOMICO" Multiplicity="0..1" />
+    <End Role="NOTA_FISCAL" Type="Self.NOTA_FISCAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IND_ECONOMICO">
+        <PropertyRef Name="IndEconCod" />
+      </Principal>
+      <Dependent Role="NOTA_FISCAL">
+        <PropertyRef Name="NFDespImportIndEconCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__NOTA_FISC__NFFre__42505147">
+    <End Role="IND_ECONOMICO" Type="Self.IND_ECONOMICO" Multiplicity="0..1" />
+    <End Role="NOTA_FISCAL" Type="Self.NOTA_FISCAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IND_ECONOMICO">
+        <PropertyRef Name="IndEconCod" />
+      </Principal>
+      <Dependent Role="NOTA_FISCAL">
+        <PropertyRef Name="NFFreteImportIndEconCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__NOTA_FISC__NFInd__434179EE">
+    <End Role="IND_ECONOMICO" Type="Self.IND_ECONOMICO" Multiplicity="0..1" />
+    <End Role="NOTA_FISCAL" Type="Self.NOTA_FISCAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IND_ECONOMICO">
+        <PropertyRef Name="IndEconCod" />
+      </Principal>
+      <Dependent Role="NOTA_FISCAL">
+        <PropertyRef Name="NFIndEconCodOrig" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__NOTA_FISC__NFSeg__43447580">
+    <End Role="IND_ECONOMICO" Type="Self.IND_ECONOMICO" Multiplicity="0..1" />
+    <End Role="NOTA_FISCAL" Type="Self.NOTA_FISCAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IND_ECONOMICO">
+        <PropertyRef Name="IndEconCod" />
+      </Principal>
+      <Dependent Role="NOTA_FISCAL">
+        <PropertyRef Name="NFSegImportIndEconCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__NOTA_FISC__NFUsu__3E7CC4D1">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+    <End Role="NOTA_FISCAL" Type="Self.NOTA_FISCAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="UsuCod" />
+      </Principal>
+      <Dependent Role="NOTA_FISCAL">
+        <PropertyRef Name="NFUsuCodAtualRetornoNFE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__NOTA_FISCAL__2183C0CC">
+    <End Role="ENDER_ENT" Type="Self.ENDER_ENT" Multiplicity="0..1" />
+    <End Role="NOTA_FISCAL" Type="Self.NOTA_FISCAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ENDER_ENT">
+        <PropertyRef Name="EntCod" />
+        <PropertyRef Name="EnderEntSeq" />
+      </Principal>
+      <Dependent Role="NOTA_FISCAL">
+        <PropertyRef Name="NFEnderEntCodColeta" />
+        <PropertyRef Name="NFEnderEntSeqColeta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PED_COMP__20A080AF">
+    <End Role="REQ_COMP" Type="Self.REQ_COMP" Multiplicity="0..1" />
+    <End Role="PED_COMP" Type="Self.PED_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="REQ_COMP">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="ReqCompNum" />
+      </Principal>
+      <Dependent Role="PED_COMP">
+        <PropertyRef Name="ReqCompEmpCod" />
+        <PropertyRef Name="ReqCompNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PED_COMP__PedCom__35B40B54">
+    <End Role="COND_PAG" Type="Self.COND_PAG" Multiplicity="0..1" />
+    <End Role="PED_COMP" Type="Self.PED_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COND_PAG">
+        <PropertyRef Name="CondPagCod" />
+      </Principal>
+      <Dependent Role="PED_COMP">
+        <PropertyRef Name="PedCompCondPagCodAdiant" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__REQ_COMP__ReqCom__0B5AB179">
+    <End Role="EMPRESA_FILIAL" Type="Self.EMPRESA_FILIAL" Multiplicity="0..1" />
+    <End Role="REQ_COMP" Type="Self.REQ_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPRESA_FILIAL">
+        <PropertyRef Name="EmpCod" />
+      </Principal>
+      <Dependent Role="REQ_COMP">
+        <PropertyRef Name="ReqCompEmpCodLocEnt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__REQ_COMP__UsuCod__2676283A">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="REQ_COMP" Type="Self.REQ_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="UsuCod" />
+      </Principal>
+      <Dependent Role="REQ_COMP">
+        <PropertyRef Name="UsuCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__USUARIO__UsuCodA__73F3652A">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+    <End Role="USUARIO1" Type="Self.USUARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="UsuCod" />
+      </Principal>
+      <Dependent Role="USUARIO1">
+        <PropertyRef Name="UsuCodAtribAdminWeb" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AEROPORT_REF_8829_IND_ECON">
+    <End Role="IND_ECONOMICO" Type="Self.IND_ECONOMICO" Multiplicity="0..1" />
+    <End Role="AEROPORTO" Type="Self.AEROPORTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IND_ECONOMICO">
+        <PropertyRef Name="IndEconCod" />
+      </Principal>
+      <Dependent Role="AEROPORTO">
+        <PropertyRef Name="AeropIndEconCodInt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AEROPORT_REF_8832_IND_ECON">
+    <End Role="IND_ECONOMICO" Type="Self.IND_ECONOMICO" Multiplicity="0..1" />
+    <End Role="AEROPORTO" Type="Self.AEROPORTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IND_ECONOMICO">
+        <PropertyRef Name="IndEconCod" />
+      </Principal>
+      <Dependent Role="AEROPORTO">
+        <PropertyRef Name="AeropIndEconCodNac" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AEROPORT_REF_8835_CIDADE">
+    <End Role="CIDADE" Type="Self.CIDADE" Multiplicity="0..1" />
+    <End Role="AEROPORTO" Type="Self.AEROPORTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CIDADE">
+        <PropertyRef Name="CidCod" />
+      </Principal>
+      <Dependent Role="AEROPORTO">
+        <PropertyRef Name="CidCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_APROV_CO_REF_5284_USUARIO">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="APROV_COMP" Type="Self.APROV_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="UsuCod" />
+      </Principal>
+      <Dependent Role="APROV_COMP">
+        <PropertyRef Name="UsuCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COND_PAG_REF_11216_COND_PAG">
+    <End Role="COND_PAG" Type="Self.COND_PAG" Multiplicity="1" />
+    <End Role="COND_PAG_PED_COMP" Type="Self.COND_PAG_PED_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COND_PAG">
+        <PropertyRef Name="CondPagCod" />
+      </Principal>
+      <Dependent Role="COND_PAG_PED_COMP">
+        <PropertyRef Name="CondPagCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COND_PAG_REF_11219_PED_COMP">
+    <End Role="PED_COMP" Type="Self.PED_COMP" Multiplicity="1" />
+    <End Role="COND_PAG_PED_COMP" Type="Self.COND_PAG_PED_COMP" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="PED_COMP">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="PedCompNum" />
+      </Principal>
+      <Dependent Role="COND_PAG_PED_COMP">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="PedCompNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EMPRESA__REF_337_EMPRESA_">
+    <End Role="EMPRESA_FILIAL" Type="Self.EMPRESA_FILIAL" Multiplicity="1" />
+    <End Role="EMPRESA_FILIAL1" Type="Self.EMPRESA_FILIAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPRESA_FILIAL">
+        <PropertyRef Name="EmpCod" />
+      </Principal>
+      <Dependent Role="EMPRESA_FILIAL1">
+        <PropertyRef Name="EmpPlanoCta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EMPRESA__REF_349_CIDADE">
+    <End Role="CIDADE" Type="Self.CIDADE" Multiplicity="1" />
+    <End Role="EMPRESA_FILIAL" Type="Self.EMPRESA_FILIAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CIDADE">
+        <PropertyRef Name="CidCod" />
+      </Principal>
+      <Dependent Role="EMPRESA_FILIAL">
+        <PropertyRef Name="CidCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ENDER_EN_REF_721_CIDADE">
+    <End Role="CIDADE" Type="Self.CIDADE" Multiplicity="0..1" />
+    <End Role="ENDER_ENT" Type="Self.ENDER_ENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CIDADE">
+        <PropertyRef Name="CidCod" />
+      </Principal>
+      <Dependent Role="ENDER_ENT">
+        <PropertyRef Name="CidCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ENT_OBJ_REF_8538_OBJETO">
+    <End Role="OBJETO" Type="Self.OBJETO" Multiplicity="1" />
+    <End Role="ENT_OBJ" Type="Self.ENT_OBJ" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OBJETO">
+        <PropertyRef Name="ObjCodEstr" />
+      </Principal>
+      <Dependent Role="ENT_OBJ">
+        <PropertyRef Name="ObjCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FUNCIONA_REF_2126_CIDADE">
+    <End Role="CIDADE" Type="Self.CIDADE" Multiplicity="0..1" />
+    <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CIDADE">
+        <PropertyRef Name="CidCod" />
+      </Principal>
+      <Dependent Role="FUNCIONARIO">
+        <PropertyRef Name="CidCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IND_ECON_REF_993_IND_ECON">
+    <End Role="IND_ECONOMICO" Type="Self.IND_ECONOMICO" Multiplicity="0..1" />
+    <End Role="IND_ECONOMICO1" Type="Self.IND_ECONOMICO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IND_ECONOMICO">
+        <PropertyRef Name="IndEconCod" />
+      </Principal>
+      <Dependent Role="IND_ECONOMICO1">
+        <PropertyRef Name="IndEconCodRef" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IT_PED_COMP_REF_19421_USUAR">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+    <End Role="ITEM_PED_COMP" Type="Self.ITEM_PED_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="UsuCod" />
+      </Principal>
+      <Dependent Role="ITEM_PED_COMP">
+        <PropertyRef Name="ItPedCompLibBloqUsuCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ITEM_PED_REF_11134_IND_ECON">
+    <End Role="IND_ECONOMICO" Type="Self.IND_ECONOMICO" Multiplicity="0..1" />
+    <End Role="ITEM_PED_COMP" Type="Self.ITEM_PED_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IND_ECONOMICO">
+        <PropertyRef Name="IndEconCod" />
+      </Principal>
+      <Dependent Role="ITEM_PED_COMP">
+        <PropertyRef Name="IndEconCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ITEM_PED_REF_11137_USUARIO">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+    <End Role="ITEM_PED_COMP" Type="Self.ITEM_PED_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="UsuCod" />
+      </Principal>
+      <Dependent Role="ITEM_PED_COMP">
+        <PropertyRef Name="ItPedCompCancUsuCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ITEM_PED_REF_11140_USUARIO">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+    <End Role="ITEM_PED_COMP" Type="Self.ITEM_PED_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="UsuCod" />
+      </Principal>
+      <Dependent Role="ITEM_PED_COMP">
+        <PropertyRef Name="ItPedCompAprovUsuCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ITEM_PED_REF_11152_PED_COMP">
+    <End Role="PED_COMP" Type="Self.PED_COMP" Multiplicity="1" />
+    <End Role="ITEM_PED_COMP" Type="Self.ITEM_PED_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PED_COMP">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="PedCompNum" />
+      </Principal>
+      <Dependent Role="ITEM_PED_COMP">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="PedCompNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ITEM_REQ_REF_11015_USUARIO">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+    <End Role="ITEM_REQ_COMP" Type="Self.ITEM_REQ_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="UsuCod" />
+      </Principal>
+      <Dependent Role="ITEM_REQ_COMP">
+        <PropertyRef Name="ItReqCompAprovUsuCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ITEM_REQ_REF_11027_REQ_COMP">
+    <End Role="REQ_COMP" Type="Self.REQ_COMP" Multiplicity="1" />
+    <End Role="ITEM_REQ_COMP" Type="Self.ITEM_REQ_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="REQ_COMP">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="ReqCompNum" />
+      </Principal>
+      <Dependent Role="ITEM_REQ_COMP">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="ReqCompNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOTA_FIS_REF_2447_ENDER_EN">
+    <End Role="ENDER_ENT" Type="Self.ENDER_ENT" Multiplicity="0..1" />
+    <End Role="NOTA_FISCAL" Type="Self.NOTA_FISCAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ENDER_ENT">
+        <PropertyRef Name="EntCod" />
+        <PropertyRef Name="EnderEntSeq" />
+      </Principal>
+      <Dependent Role="NOTA_FISCAL">
+        <PropertyRef Name="NFEnderEntCodEntrega" />
+        <PropertyRef Name="NFEnderEntSeqEntrega" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOTA_FIS_REF_2452_ENDER_EN">
+    <End Role="ENDER_ENT" Type="Self.ENDER_ENT" Multiplicity="0..1" />
+    <End Role="NOTA_FISCAL" Type="Self.NOTA_FISCAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ENDER_ENT">
+        <PropertyRef Name="EntCod" />
+        <PropertyRef Name="EnderEntSeq" />
+      </Principal>
+      <Dependent Role="NOTA_FISCAL">
+        <PropertyRef Name="NFEnderEntCodCobranca" />
+        <PropertyRef Name="NFEnderEntSeqCobranca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOTA_FIS_REF_2460_USUARIO">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+    <End Role="NOTA_FISCAL" Type="Self.NOTA_FISCAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="UsuCod" />
+      </Principal>
+      <Dependent Role="NOTA_FISCAL">
+        <PropertyRef Name="NFCanceladaUsuCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOTA_FIS_REF_2483_USUARIO">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+    <End Role="NOTA_FISCAL" Type="Self.NOTA_FISCAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="UsuCod" />
+      </Principal>
+      <Dependent Role="NOTA_FISCAL">
+        <PropertyRef Name="UsuCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PARC_PAG_REF_11198_PED_COMP">
+    <End Role="PED_COMP" Type="Self.PED_COMP" Multiplicity="1" />
+    <End Role="PARC_PAG_PED_COMP" Type="Self.PARC_PAG_PED_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PED_COMP">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="PedCompNum" />
+      </Principal>
+      <Dependent Role="PARC_PAG_PED_COMP">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="PedCompNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PED_COMP_REF_5388_IND_ECON">
+    <End Role="IND_ECONOMICO" Type="Self.IND_ECONOMICO" Multiplicity="0..1" />
+    <End Role="PED_COMP" Type="Self.PED_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IND_ECONOMICO">
+        <PropertyRef Name="IndEconCod" />
+      </Principal>
+      <Dependent Role="PED_COMP">
+        <PropertyRef Name="IndEconCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PED_COMP_REF_5391_EMPRESA_">
+    <End Role="EMPRESA_FILIAL" Type="Self.EMPRESA_FILIAL" Multiplicity="0..1" />
+    <End Role="PED_COMP" Type="Self.PED_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPRESA_FILIAL">
+        <PropertyRef Name="EmpCod" />
+      </Principal>
+      <Dependent Role="PED_COMP">
+        <PropertyRef Name="PedCompEmpCodLocEnt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PED_COMP_REF_5399_USUARIO">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="PED_COMP" Type="Self.PED_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="UsuCod" />
+      </Principal>
+      <Dependent Role="PED_COMP">
+        <PropertyRef Name="UsuCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PED_COMP_REF_5414_PED_COMP">
+    <End Role="PED_COMP" Type="Self.PED_COMP" Multiplicity="0..1" />
+    <End Role="PED_COMP1" Type="Self.PED_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PED_COMP">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="PedCompNum" />
+      </Principal>
+      <Dependent Role="PED_COMP1">
+        <PropertyRef Name="EmpCod" />
+        <PropertyRef Name="PedCompRef" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PED_COMP_REF_5419_EMPRESA_">
+    <End Role="EMPRESA_FILIAL" Type="Self.EMPRESA_FILIAL" Multiplicity="1" />
+    <End Role="PED_COMP" Type="Self.PED_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPRESA_FILIAL">
+        <PropertyRef Name="EmpCod" />
+      </Principal>
+      <Dependent Role="PED_COMP">
+        <PropertyRef Name="EmpCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PEDCOMP_01">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+    <End Role="PED_COMP" Type="Self.PED_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="UsuCod" />
+      </Principal>
+      <Dependent Role="PED_COMP">
+        <PropertyRef Name="PedCompUsuCodEmUso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_REQ_COMP_REF_10984_EMPRESA_">
+    <End Role="EMPRESA_FILIAL" Type="Self.EMPRESA_FILIAL" Multiplicity="1" />
+    <End Role="REQ_COMP" Type="Self.REQ_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPRESA_FILIAL">
+        <PropertyRef Name="EmpCod" />
+      </Principal>
+      <Dependent Role="REQ_COMP">
+        <PropertyRef Name="ReqCompEmpCodDoc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_REQ_COMP_REF_10987_FUNCIONA">
+    <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="1" />
+    <End Role="REQ_COMP" Type="Self.REQ_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FUNCIONARIO">
+        <PropertyRef Name="FuncCod" />
+      </Principal>
+      <Dependent Role="REQ_COMP">
+        <PropertyRef Name="FuncCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_REQ_COMP_REF_10993_EMPRESA_">
+    <End Role="EMPRESA_FILIAL" Type="Self.EMPRESA_FILIAL" Multiplicity="1" />
+    <End Role="REQ_COMP" Type="Self.REQ_COMP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPRESA_FILIAL">
+        <PropertyRef Name="EmpCod" />
+      </Principal>
+      <Dependent Role="REQ_COMP">
+        <PropertyRef Name="EmpCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="aprovacao_compras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="empresa" Type="varchar" Mode="In" />
+    <Parameter Name="numero" Type="varchar" Mode="In" />
+    <Parameter Name="sequencia" Type="smallint" Mode="In" />
+    <Parameter Name="produto" Type="varchar" Mode="In" />
+    <Parameter Name="usuario" Type="varchar" Mode="In" />
+    <Parameter Name="chamou" Type="varchar" Mode="In" />
+    <Parameter Name="motivo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="atualiza_requisicao_pedcomp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="empresa" Type="varchar" Mode="In" />
+    <Parameter Name="requisicao" Type="varchar" Mode="In" />
+    <Parameter Name="operacao" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="atualiza_status_pedcomp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="empcod" Type="varchar" Mode="In" />
+    <Parameter Name="pedcompnum" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="CONCAT_ZERO_ESQUERDA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CODIGO" Type="varchar" Mode="In" />
+    <Parameter Name="TAMANHO" Type="int" Mode="In" />
+    <Parameter Name="NUMERO" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="delete_pedcomp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="empcod" Type="varchar" Mode="In" />
+    <Parameter Name="pedcompnum" Type="varchar" Mode="In" />
+    <Parameter Name="entcod" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="delete_reqcomp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="empcod" Type="varchar" Mode="In" />
+    <Parameter Name="reqcompnum" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="gerar_codigo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="empresa" Type="varchar" Mode="In" />
+    <Parameter Name="tabela" Type="varchar" Mode="In" />
+    <Parameter Name="codigo" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="parcela_ped_comp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="empresa" Type="varchar" Mode="In" />
+    <Parameter Name="numero" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="requisicao_gera_itempedcomp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="empresa" Type="varchar" Mode="In" />
+    <Parameter Name="requisicao" Type="varchar" Mode="In" />
+    <Parameter Name="pedido" Type="varchar" Mode="In" />
+    <Parameter Name="produto" Type="varchar" Mode="In" />
+    <Parameter Name="sequencia" Type="int" Mode="In" />
+    <Parameter Name="aprova" Type="varchar" Mode="In" />
+    <Parameter Name="seqforn" Type="int" Mode="In" />
+    <Parameter Name="empresaatual" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="requisicao_gera_pedcomp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="empresa" Type="varchar" Mode="In" />
+    <Parameter Name="requisicao" Type="varchar" Mode="In" />
+    <Parameter Name="fornecedor" Type="varchar" Mode="In" />
+    <Parameter Name="pedido" Type="varchar" Mode="In" />
+    <Parameter Name="usuario" Type="varchar" Mode="In" />
+    <Parameter Name="tipo" Type="varchar" Mode="In" />
+    <Parameter Name="comprador" Type="varchar" Mode="In" />
+    <Parameter Name="pedcompragerado" Type="varchar" Mode="InOut" />
+    <Parameter Name="empresaatual" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="Apolo10ModelStoreContainer">
+    <EntitySet Name="AEROPORTO" EntityType="Self.AEROPORTO" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="APROV_COMP" EntityType="Self.APROV_COMP" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="APROV_COMP_FINALIDADE" EntityType="Self.APROV_COMP_FINALIDADE" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="ATIVIDADE" EntityType="Self.ATIVIDADE" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="ATIVIDADE_GRUPO" EntityType="Self.ATIVIDADE_GRUPO" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="CATEGORIA_PRODUTO" EntityType="Self.CATEGORIA_PRODUTO" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="CIDADE" EntityType="Self.CIDADE" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="COND_PAG" EntityType="Self.COND_PAG" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="COND_PAG_ENT" EntityType="Self.COND_PAG_ENT" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="COND_PAG_PED_COMP" EntityType="Self.COND_PAG_PED_COMP" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DOC_ENTIDADE" EntityType="Self.DOC_ENTIDADE" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="EMPRESA_FILIAL" EntityType="Self.EMPRESA_FILIAL" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="ENDER_ENT" EntityType="Self.ENDER_ENT" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="ENT_OBJ" EntityType="Self.ENT_OBJ" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="FAIXA_PRODUTO" EntityType="Self.FAIXA_PRODUTO" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="FUNC_ATIVIDADE_GRUPO" EntityType="Self.FUNC_ATIVIDADE_GRUPO" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="FUNCIONARIO" EntityType="Self.FUNCIONARIO" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="GRP_FUNC" EntityType="Self.GRP_FUNC" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="IND_ECONOMICO" EntityType="Self.IND_ECONOMICO" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="ITEM_PED_COMP" EntityType="Self.ITEM_PED_COMP" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="ITEM_REQ_COMP" EntityType="Self.ITEM_REQ_COMP" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="ITEM_REQ_COMP_PED_COMP" EntityType="Self.ITEM_REQ_COMP_PED_COMP" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="NOTA_FISCAL" EntityType="Self.NOTA_FISCAL" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="OBJETO" EntityType="Self.OBJETO" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="PARC_PAG_PED_COMP" EntityType="Self.PARC_PAG_PED_COMP" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="PED_COMP" EntityType="Self.PED_COMP" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="PROD_UNID_MED" EntityType="Self.PROD_UNID_MED" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="REQ_COMP" EntityType="Self.REQ_COMP" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="TIPO_DESPESA" EntityType="Self.TIPO_DESPESA" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <AssociationSet Name="FK__AEROPORTO__Aerop__4EC9A017" Association="Self.FK__AEROPORTO__Aerop__4EC9A017">
+      <End Role="IND_ECONOMICO" EntitySet="IND_ECONOMICO" />
+      <End Role="AEROPORTO" EntitySet="AEROPORTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__APROV_COMP_FINAL__6091E5B3" Association="Self.FK__APROV_COMP_FINAL__6091E5B3">
+      <End Role="APROV_COMP" EntitySet="APROV_COMP" />
+      <End Role="APROV_COMP_FINALIDADE" EntitySet="APROV_COMP_FINALIDADE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Atividade__7B7556B8" Association="Self.FK__Atividade__7B7556B8">
+      <End Role="ATIVIDADE_GRUPO" EntitySet="ATIVIDADE_GRUPO" />
+      <End Role="ATIVIDADE" EntitySet="ATIVIDADE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ATIVIDADE__EmpCo__77A4C5D4" Association="Self.FK__ATIVIDADE__EmpCo__77A4C5D4">
+      <End Role="EMPRESA_FILIAL" EntitySet="EMPRESA_FILIAL" />
+      <End Role="ATIVIDADE_GRUPO" EntitySet="ATIVIDADE_GRUPO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CIDADE__CidCodMu__68958DFD" Association="Self.FK__CIDADE__CidCodMu__68958DFD">
+      <End Role="CIDADE" EntitySet="CIDADE" />
+      <End Role="CIDADE1" EntitySet="CIDADE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CIDADE__UsuCod__506FF2F6" Association="Self.FK__CIDADE__UsuCod__506FF2F6">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="CIDADE" EntitySet="CIDADE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__COND_PAG___CondP__7EF0168A" Association="Self.FK__COND_PAG___CondP__7EF0168A">
+      <End Role="COND_PAG" EntitySet="COND_PAG" />
+      <End Role="COND_PAG_ENT" EntitySet="COND_PAG_ENT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__COND_PAG__CondPa__171DA2F7" Association="Self.FK__COND_PAG__CondPa__171DA2F7">
+      <End Role="COND_PAG" EntitySet="COND_PAG" />
+      <End Role="COND_PAG1" EntitySet="COND_PAG" />
+    </AssociationSet>
+    <AssociationSet Name="FK__COND_PAG__CondPa__73C5810F" Association="Self.FK__COND_PAG__CondPa__73C5810F">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="COND_PAG" EntitySet="COND_PAG" />
+    </AssociationSet>
+    <AssociationSet Name="FK__COND_PAG__CONDPA__7E4B00E8" Association="Self.FK__COND_PAG__CONDPA__7E4B00E8">
+      <End Role="COND_PAG" EntitySet="COND_PAG" />
+      <End Role="COND_PAG1" EntitySet="COND_PAG" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DOC_ENTID__UsuCo__7309945C" Association="Self.FK__DOC_ENTID__UsuCo__7309945C">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="DOC_ENTIDADE" EntitySet="DOC_ENTIDADE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FUNC_ATIV__FuncC__0C1C5F57" Association="Self.FK__FUNC_ATIV__FuncC__0C1C5F57">
+      <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
+      <End Role="FUNC_ATIVIDADE_GRUPO" EntitySet="FUNC_ATIVIDADE_GRUPO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FUNC_ATIVIDADE_G__0D108390" Association="Self.FK__FUNC_ATIVIDADE_G__0D108390">
+      <End Role="ATIVIDADE_GRUPO" EntitySet="ATIVIDADE_GRUPO" />
+      <End Role="FUNC_ATIVIDADE_GRUPO" EntitySet="FUNC_ATIVIDADE_GRUPO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FUNCIONAR__EmpCo__6D03431D" Association="Self.FK__FUNCIONAR__EmpCo__6D03431D">
+      <End Role="EMPRESA_FILIAL" EntitySet="EMPRESA_FILIAL" />
+      <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FUNCIONAR__UsuCo__358D8341" Association="Self.FK__FUNCIONAR__UsuCo__358D8341">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GRP_FUNC__FuncCo__030DBBC3" Association="Self.FK__GRP_FUNC__FuncCo__030DBBC3">
+      <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
+      <End Role="GRP_FUNC" EntitySet="GRP_FUNC" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GRP_FUNC__GrpFun__0219978A" Association="Self.FK__GRP_FUNC__GrpFun__0219978A">
+      <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
+      <End Role="GRP_FUNC" EntitySet="GRP_FUNC" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ITEM_REQ_COMP_PE__19DDDAFA" Association="Self.FK__ITEM_REQ_COMP_PE__19DDDAFA">
+      <End Role="ITEM_REQ_COMP" EntitySet="ITEM_REQ_COMP" />
+      <End Role="ITEM_REQ_COMP_PED_COMP" EntitySet="ITEM_REQ_COMP_PED_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ITEM_REQ_COMP_PE__57EF50B5" Association="Self.FK__ITEM_REQ_COMP_PE__57EF50B5">
+      <End Role="ITEM_PED_COMP" EntitySet="ITEM_PED_COMP" />
+      <End Role="ITEM_REQ_COMP_PED_COMP" EntitySet="ITEM_REQ_COMP_PED_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK__NOTA_FISC__CidCo__10EFC855" Association="Self.FK__NOTA_FISC__CidCo__10EFC855">
+      <End Role="CIDADE" EntitySet="CIDADE" />
+      <End Role="NOTA_FISCAL" EntitySet="NOTA_FISCAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__NOTA_FISC__NFCid__02C1A48F" Association="Self.FK__NOTA_FISC__NFCid__02C1A48F">
+      <End Role="CIDADE" EntitySet="CIDADE" />
+      <End Role="NOTA_FISCAL" EntitySet="NOTA_FISCAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__NOTA_FISC__NFDes__443899B9" Association="Self.FK__NOTA_FISC__NFDes__443899B9">
+      <End Role="IND_ECONOMICO" EntitySet="IND_ECONOMICO" />
+      <End Role="NOTA_FISCAL" EntitySet="NOTA_FISCAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__NOTA_FISC__NFFre__42505147" Association="Self.FK__NOTA_FISC__NFFre__42505147">
+      <End Role="IND_ECONOMICO" EntitySet="IND_ECONOMICO" />
+      <End Role="NOTA_FISCAL" EntitySet="NOTA_FISCAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__NOTA_FISC__NFInd__434179EE" Association="Self.FK__NOTA_FISC__NFInd__434179EE">
+      <End Role="IND_ECONOMICO" EntitySet="IND_ECONOMICO" />
+      <End Role="NOTA_FISCAL" EntitySet="NOTA_FISCAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__NOTA_FISC__NFSeg__43447580" Association="Self.FK__NOTA_FISC__NFSeg__43447580">
+      <End Role="IND_ECONOMICO" EntitySet="IND_ECONOMICO" />
+      <End Role="NOTA_FISCAL" EntitySet="NOTA_FISCAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__NOTA_FISC__NFUsu__3E7CC4D1" Association="Self.FK__NOTA_FISC__NFUsu__3E7CC4D1">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="NOTA_FISCAL" EntitySet="NOTA_FISCAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__NOTA_FISCAL__2183C0CC" Association="Self.FK__NOTA_FISCAL__2183C0CC">
+      <End Role="ENDER_ENT" EntitySet="ENDER_ENT" />
+      <End Role="NOTA_FISCAL" EntitySet="NOTA_FISCAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PED_COMP__20A080AF" Association="Self.FK__PED_COMP__20A080AF">
+      <End Role="REQ_COMP" EntitySet="REQ_COMP" />
+      <End Role="PED_COMP" EntitySet="PED_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PED_COMP__PedCom__35B40B54" Association="Self.FK__PED_COMP__PedCom__35B40B54">
+      <End Role="COND_PAG" EntitySet="COND_PAG" />
+      <End Role="PED_COMP" EntitySet="PED_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK__REQ_COMP__ReqCom__0B5AB179" Association="Self.FK__REQ_COMP__ReqCom__0B5AB179">
+      <End Role="EMPRESA_FILIAL" EntitySet="EMPRESA_FILIAL" />
+      <End Role="REQ_COMP" EntitySet="REQ_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK__REQ_COMP__UsuCod__2676283A" Association="Self.FK__REQ_COMP__UsuCod__2676283A">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="REQ_COMP" EntitySet="REQ_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK__USUARIO__UsuCodA__73F3652A" Association="Self.FK__USUARIO__UsuCodA__73F3652A">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="USUARIO1" EntitySet="USUARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AEROPORT_REF_8829_IND_ECON" Association="Self.FK_AEROPORT_REF_8829_IND_ECON">
+      <End Role="IND_ECONOMICO" EntitySet="IND_ECONOMICO" />
+      <End Role="AEROPORTO" EntitySet="AEROPORTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AEROPORT_REF_8832_IND_ECON" Association="Self.FK_AEROPORT_REF_8832_IND_ECON">
+      <End Role="IND_ECONOMICO" EntitySet="IND_ECONOMICO" />
+      <End Role="AEROPORTO" EntitySet="AEROPORTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AEROPORT_REF_8835_CIDADE" Association="Self.FK_AEROPORT_REF_8835_CIDADE">
+      <End Role="CIDADE" EntitySet="CIDADE" />
+      <End Role="AEROPORTO" EntitySet="AEROPORTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_APROV_CO_REF_5284_USUARIO" Association="Self.FK_APROV_CO_REF_5284_USUARIO">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="APROV_COMP" EntitySet="APROV_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COND_PAG_REF_11216_COND_PAG" Association="Self.FK_COND_PAG_REF_11216_COND_PAG">
+      <End Role="COND_PAG" EntitySet="COND_PAG" />
+      <End Role="COND_PAG_PED_COMP" EntitySet="COND_PAG_PED_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COND_PAG_REF_11219_PED_COMP" Association="Self.FK_COND_PAG_REF_11219_PED_COMP">
+      <End Role="PED_COMP" EntitySet="PED_COMP" />
+      <End Role="COND_PAG_PED_COMP" EntitySet="COND_PAG_PED_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EMPRESA__REF_337_EMPRESA_" Association="Self.FK_EMPRESA__REF_337_EMPRESA_">
+      <End Role="EMPRESA_FILIAL" EntitySet="EMPRESA_FILIAL" />
+      <End Role="EMPRESA_FILIAL1" EntitySet="EMPRESA_FILIAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EMPRESA__REF_349_CIDADE" Association="Self.FK_EMPRESA__REF_349_CIDADE">
+      <End Role="CIDADE" EntitySet="CIDADE" />
+      <End Role="EMPRESA_FILIAL" EntitySet="EMPRESA_FILIAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ENDER_EN_REF_721_CIDADE" Association="Self.FK_ENDER_EN_REF_721_CIDADE">
+      <End Role="CIDADE" EntitySet="CIDADE" />
+      <End Role="ENDER_ENT" EntitySet="ENDER_ENT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ENT_OBJ_REF_8538_OBJETO" Association="Self.FK_ENT_OBJ_REF_8538_OBJETO">
+      <End Role="OBJETO" EntitySet="OBJETO" />
+      <End Role="ENT_OBJ" EntitySet="ENT_OBJ" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FUNCIONA_REF_2126_CIDADE" Association="Self.FK_FUNCIONA_REF_2126_CIDADE">
+      <End Role="CIDADE" EntitySet="CIDADE" />
+      <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IND_ECON_REF_993_IND_ECON" Association="Self.FK_IND_ECON_REF_993_IND_ECON">
+      <End Role="IND_ECONOMICO" EntitySet="IND_ECONOMICO" />
+      <End Role="IND_ECONOMICO1" EntitySet="IND_ECONOMICO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IT_PED_COMP_REF_19421_USUAR" Association="Self.FK_IT_PED_COMP_REF_19421_USUAR">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="ITEM_PED_COMP" EntitySet="ITEM_PED_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ITEM_PED_REF_11134_IND_ECON" Association="Self.FK_ITEM_PED_REF_11134_IND_ECON">
+      <End Role="IND_ECONOMICO" EntitySet="IND_ECONOMICO" />
+      <End Role="ITEM_PED_COMP" EntitySet="ITEM_PED_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ITEM_PED_REF_11137_USUARIO" Association="Self.FK_ITEM_PED_REF_11137_USUARIO">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="ITEM_PED_COMP" EntitySet="ITEM_PED_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ITEM_PED_REF_11140_USUARIO" Association="Self.FK_ITEM_PED_REF_11140_USUARIO">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="ITEM_PED_COMP" EntitySet="ITEM_PED_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ITEM_PED_REF_11152_PED_COMP" Association="Self.FK_ITEM_PED_REF_11152_PED_COMP">
+      <End Role="PED_COMP" EntitySet="PED_COMP" />
+      <End Role="ITEM_PED_COMP" EntitySet="ITEM_PED_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ITEM_REQ_REF_11015_USUARIO" Association="Self.FK_ITEM_REQ_REF_11015_USUARIO">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="ITEM_REQ_COMP" EntitySet="ITEM_REQ_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ITEM_REQ_REF_11027_REQ_COMP" Association="Self.FK_ITEM_REQ_REF_11027_REQ_COMP">
+      <End Role="REQ_COMP" EntitySet="REQ_COMP" />
+      <End Role="ITEM_REQ_COMP" EntitySet="ITEM_REQ_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTA_FIS_REF_2447_ENDER_EN" Association="Self.FK_NOTA_FIS_REF_2447_ENDER_EN">
+      <End Role="ENDER_ENT" EntitySet="ENDER_ENT" />
+      <End Role="NOTA_FISCAL" EntitySet="NOTA_FISCAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTA_FIS_REF_2452_ENDER_EN" Association="Self.FK_NOTA_FIS_REF_2452_ENDER_EN">
+      <End Role="ENDER_ENT" EntitySet="ENDER_ENT" />
+      <End Role="NOTA_FISCAL" EntitySet="NOTA_FISCAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTA_FIS_REF_2460_USUARIO" Association="Self.FK_NOTA_FIS_REF_2460_USUARIO">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="NOTA_FISCAL" EntitySet="NOTA_FISCAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTA_FIS_REF_2483_USUARIO" Association="Self.FK_NOTA_FIS_REF_2483_USUARIO">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="NOTA_FISCAL" EntitySet="NOTA_FISCAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PARC_PAG_REF_11198_PED_COMP" Association="Self.FK_PARC_PAG_REF_11198_PED_COMP">
+      <End Role="PED_COMP" EntitySet="PED_COMP" />
+      <End Role="PARC_PAG_PED_COMP" EntitySet="PARC_PAG_PED_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PED_COMP_REF_5388_IND_ECON" Association="Self.FK_PED_COMP_REF_5388_IND_ECON">
+      <End Role="IND_ECONOMICO" EntitySet="IND_ECONOMICO" />
+      <End Role="PED_COMP" EntitySet="PED_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PED_COMP_REF_5391_EMPRESA_" Association="Self.FK_PED_COMP_REF_5391_EMPRESA_">
+      <End Role="EMPRESA_FILIAL" EntitySet="EMPRESA_FILIAL" />
+      <End Role="PED_COMP" EntitySet="PED_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PED_COMP_REF_5399_USUARIO" Association="Self.FK_PED_COMP_REF_5399_USUARIO">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="PED_COMP" EntitySet="PED_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PED_COMP_REF_5414_PED_COMP" Association="Self.FK_PED_COMP_REF_5414_PED_COMP">
+      <End Role="PED_COMP" EntitySet="PED_COMP" />
+      <End Role="PED_COMP1" EntitySet="PED_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PED_COMP_REF_5419_EMPRESA_" Association="Self.FK_PED_COMP_REF_5419_EMPRESA_">
+      <End Role="EMPRESA_FILIAL" EntitySet="EMPRESA_FILIAL" />
+      <End Role="PED_COMP" EntitySet="PED_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PEDCOMP_01" Association="Self.FK_PEDCOMP_01">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="PED_COMP" EntitySet="PED_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_REQ_COMP_REF_10984_EMPRESA_" Association="Self.FK_REQ_COMP_REF_10984_EMPRESA_">
+      <End Role="EMPRESA_FILIAL" EntitySet="EMPRESA_FILIAL" />
+      <End Role="REQ_COMP" EntitySet="REQ_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_REQ_COMP_REF_10987_FUNCIONA" Association="Self.FK_REQ_COMP_REF_10987_FUNCIONA">
+      <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
+      <End Role="REQ_COMP" EntitySet="REQ_COMP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_REQ_COMP_REF_10993_EMPRESA_" Association="Self.FK_REQ_COMP_REF_10993_EMPRESA_">
+      <End Role="EMPRESA_FILIAL" EntitySet="EMPRESA_FILIAL" />
+      <End Role="REQ_COMP" EntitySet="REQ_COMP" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

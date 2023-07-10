@@ -1,0 +1,134 @@
+﻿@using am = MvcAppHyLinedoBrasil.Controllers.AccountController;
+@{
+    Layout = null;
+    string lg = Session["language"].ToString();
+}
+
+@using (Html.BeginForm("SaveClienteHLB", "ImportaDadosAssistTecnica", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div id="pnlNovoClienteHLB">
+        <form>
+            <table>
+                <tr>
+                    <td colspan="4" align="center">
+                        <p align="center">
+                            <legend><u>@am.Translate("Novo Cliente", lg)</u></legend>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <b>@am.Translate("Nome do Cliente:", lg)</b>
+                    </td>
+                    <td colspan="3">
+                        @Html.Hidden("id", Session["idClienteBDC"].ToString(), new { @id = "hdID" })
+                        @Html.TextBox("nomeCliente", Session["nomeClienteBDC"].ToString(),
+                            new { @onkeyup = "this.value = this.value.toUpperCase();", @required = "true", 
+                                @style = "width: 99%",
+                                @placeholder = "Insira o nome do cliente."
+                            })
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <b>@am.Translate("Endereço:", lg)</b>
+                    </td>
+                    <td colspan="3">
+                        @Html.TextBox("endereco", Session["enderecoBDC"].ToString(),
+                            new { @onkeyup = "this.value = this.value.toUpperCase();", @required = "true",
+                                @style = "width: 99%",
+                                @placeholder = "Insira o endereço completo do cliente."
+                            })
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <b>@am.Translate("Cidade:", lg)</b>
+                    </td>
+                    <td>
+                        @Html.TextBox("cidade", Session["cidadeBDC"].ToString(),
+                            new { @onkeyup = "this.value = this.value.toUpperCase();", @required = "true",
+                                @style = "width: 99%",
+                                @placeholder = "Insira o nome da cidade do cliente."
+                            })
+                    </td>
+                    <td align="right">
+                        <b>@am.Translate("Estado:", lg)</b>
+                    </td>
+                    <td>
+                        @Html.TextBox("estado", Session["estadoBDC"].ToString(), 
+                            new { @onkeyup = "this.value = this.value.toUpperCase();", @required = "true",
+                                @style = "width: 99%",
+                                @placeholder = "Insira o estado de onde fica a cidade do cliente."
+                            })
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <b>@am.Translate("País:", lg)</b>
+                    </td>
+                    <td>
+                        @Html.DropDownList("pais", (List<SelectListItem>)Session["ListaPaisesHLBAPP"], new { @required = "true" })
+                    </td>
+                    <td align="right">
+                        <b>@am.Translate("CEP:", lg)</b>
+                    </td>
+                    <td>
+                        @Html.TextBox("cep", Session["cepBDC"].ToString(), 
+                            new { @onkeyup = "this.value = this.value.toUpperCase();", @required = "true", @style = "width: 99%" })
+                    </td>
+                </tr>
+                @*<tr>
+                    <td align="right">
+                        <b>@am.Translate("Unid. Med. p/ Volume:", lg)</b>
+                    </td>
+                    <td>
+                        @Html.DropDownList("unidMedVolume", (List<SelectListItem>)Session["ListaUnidMedVolume"], new { @required = "true" })
+                    </td>
+                    <td align="right">
+                        <b>@am.Translate("Unid. Med. p/ Peso:", lg)</b>
+                    </td>
+                    <td>
+                        @Html.DropDownList("unidMedPeso", (List<SelectListItem>)Session["ListaUnidMedPeso"], new { @required = "true" })
+                    </td>
+                </tr>*@
+                <tr>
+                    <td align="right">
+                        <b>@am.Translate("Período da Coleta:", lg)</b>
+                    </td>
+                    <td>
+                        @Html.DropDownList("periodoColeta", (List<SelectListItem>)Session["ListaPeriodoColeta"], new { @required = "true" })
+                    </td>
+                    <td align="right">
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <b>@am.Translate("Contato:", lg)</b>
+                    </td>
+                    <td>
+                        @Html.TextBox("contato", Session["contatoBDC"].ToString(),
+                            new { @onkeyup = "this.value = this.value.toUpperCase();", @required = "true",
+                                @style = "width: 99%",
+                                @placeholder = "Insira o nome do contato do cliente."
+                            })
+                    </td>
+                    <td align="right">
+                        <b>@am.Translate("E-mail do Contato:", lg)</b>
+                    </td>
+                    <td>
+                        @Html.TextBox("contatoEmail", Session["contatoEmailBDC"].ToString(),
+                            new { @required = "true", @style = "width: 99%", @type = "email" })
+                    </td>
+                </tr>
+                <tr>
+                    <td  align="center" colspan="4">
+                        <input type="submit" value="Salvar" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+}

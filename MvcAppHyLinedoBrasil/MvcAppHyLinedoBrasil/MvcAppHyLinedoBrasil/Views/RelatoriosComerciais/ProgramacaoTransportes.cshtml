@@ -1,0 +1,114 @@
+﻿@model MvcAppHyLinedoBrasil.Models.DropDownListParametros
+@using MvcAppHyLinedoBrasil.Models
+
+@{
+    ViewBag.Title = "Programação de Transportes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="@Url.Content("//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("//code.jquery.com/jquery-1.10.2.js")" type="text/javascript"></script>
+<script src="@Url.Content("//code.jquery.com/ui/1.11.0/jquery-ui.js")" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#dataIni").datepicker({ dateFormat: "dd/mm/yy" });
+    });
+    $(function () {
+        $("#dataFim").datepicker({ dateFormat: "dd/mm/yy" });
+    });
+    $(function () {
+        $("#dataNascimento").datepicker({ dateFormat: "dd/mm/yy" });
+    });
+
+    $(document).ready(function () {
+        $('#pnlPeriodo').show();
+        $('#pnlDiario').hide();
+    });
+
+    function fDDLTipoRel() {
+        var value = $('#ddlTipoRelatorio').val();
+        if (value == 'Diario') {
+            $('#pnlPeriodo').hide();
+            $('#pnlDiario').show();
+            $('#ddlPL').prop('checked', false);
+            $('#ddlPL').prop('disabled', true).checkboxradio('refresh');
+        } else {
+            $('#pnlPeriodo').show();
+            $('#pnlDiario').hide();
+            $('#ddlPL').prop('disabled', false).checkboxradio('refresh');
+        }
+    }
+</script>
+
+@Html.Partial("Menu")
+
+<h3>Programação de Transportes</h3>
+
+@using (Html.BeginForm("GerarProgramacaoDiariaTransportes", "RelatoriosComerciais", FormMethod.Post,
+    new { enctype = "multipart/form-data", target = "_blank" }))
+{
+    <fieldset>
+        <div align="left">
+        Informe os parâmetros a seguir:
+            <br />
+            <br />
+        <b>Selecione o(s) Incubatório(s): </b>
+        <br />
+        @foreach (var item in (List<SelectListItem>)Session["ListaIncubatorios"])
+        {
+            @Html.CheckBox(item.Value, item.Selected) <b>@(item.Text)</b>
+            <br />
+        }
+        <br />
+        <b>Selecione a(s) Empresa(s): </b>
+        <br />
+        @foreach (var item in (List<SelectListItem>)Session["ListaEmpresas"])
+        {
+            @Html.CheckBox(item.Value, item.Selected) <b>@(item.Text)</b>
+            <br />
+        }
+        <br />
+        <b>Selecione a(s) Empresa(s) Responsável(eis) pelo Transporte: </b>
+        <br />
+        @foreach (var item in (List<SelectListItem>)Session["ListaEmpresaTransportador"])
+        {
+            @Html.CheckBox(item.Value + "T", item.Selected, new { @id = "ddl" + item.Value }) <b>@(item.Text)</b>
+            <br />
+        }
+        <br />
+        <b>Selecione o Tipo do Relatório: </b>
+        @Html.DropDownList("TipoRelatorio", (List<SelectListItem>)Session["ListaTipoRelatorioProgDiarioTransp"],
+        new
+        {
+            @id = "ddlTipoRelatorio",
+            @onchange = "fDDLTipoRel()"
+        })
+        <br />
+        <br />
+        <div id="pnlPeriodo">
+            <b>Período de Nascimento: @Html.TextBox("dataIni", Session["sDataInicial"]) à @Html.TextBox("dataFim", Session["sDataFinal"])</b>
+        </div>
+        <div id="pnlDiario">
+            <b>Data de Nascimento: @Html.TextBox("dataNascimento", Session["sDataInicial"])</b>
+        </div>
+        @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-AcessoListaVendedoresRelComercial", (System.Collections.ArrayList)Session["Direitos"]))
+        {
+        <br />
+        <b>Selecione o Vendedor / Representante: </b>
+        @Html.DropDownListFor(
+            d => d.Vendedor,
+            (IEnumerable<SelectListItem>)Session["ListaVendedoresRelComercial"])
+        }
+        </div>
+    </fieldset>
+
+    <div id="divUltimaReview">
+        <h4>@ViewBag.fileName</h4>
+        <h4 style="color:red;">@ViewBag.erro</h4>
+    </div>
+    <div class="editor-field">
+        <input type="submit" value="Download Programação de Transportes" id="downloadProgTransp"/>
+    </div>
+}
+

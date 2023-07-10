@@ -1,0 +1,19 @@
+﻿<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">INVESTIMENTOS</li>
+    <li>
+        @Html.ActionLink("Lista de Investimentos", "ListaInvestimentos", "Orcamento",
+            null, new { @class = "chart", @title = "Clique aqui para abrir a lista de investimentos" } )
+    </li>
+    <li>
+        @Html.ActionLink("Tabela de Investimentos / Mês", "TabelaInvestimentoMes", "Orcamento",
+            null, new { @class = "table_invest", @title = "Clique aqui para abrir a tabela de investimentos / mês" })
+    </li>
+    <li>
+        @Html.ActionLink("Aprovação de Transferência de Saldo", "ListaInvestimentoMesMovimentacaoSaldo", "Orcamento",
+            null, new { @class = "check_button", @title = "Clique aqui para abrir a lista de aprovação de transferência" })
+    </li>
+    <li>
+        @Html.ActionLink("Solicitação de Investimento", "ListaSolicitacaoInvestimento", "Orcamento",
+            null, new { @class = "solInvestimento", @title = "Clique aqui para abrir a lista de solicitação de investimento" })
+    </li>
+</ul>

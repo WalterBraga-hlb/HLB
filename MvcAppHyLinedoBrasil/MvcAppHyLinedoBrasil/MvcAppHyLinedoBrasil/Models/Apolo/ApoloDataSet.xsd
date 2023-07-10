@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ApoloDataSet" targetNamespace="http://tempuri.org/ApoloDataSet.xsd" xmlns:mstns="http://tempuri.org/ApoloDataSet.xsd" xmlns="http://tempuri.org/ApoloDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="Apolo10ConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="Apolo10ConnectionString1 (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.Apolo10ConnectionString1.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="VU_USER_Veiculo_Entrega_PedidoTableAdapter" GeneratorDataComponentClassName="VU_USER_Veiculo_Entrega_PedidoTableAdapter" Name="VU_USER_Veiculo_Entrega_Pedido" UserDataComponentName="VU_USER_Veiculo_Entrega_PedidoTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="Apolo10ConnectionString1 (Web.config)" DbObjectName="Apolo10.dbo.VU_USER_Veiculo_Entrega_Pedido" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT USERPEDCHIC, PedVendaVeicPlaca, EquipVeicCarroc, EquipVeicTipo, USERREDistanciaPerco, USERRETempoViagem, ProdNomeAlt3, ProdNomeAlt2, Data_Entrega, Data_Chegada, Hora_Chegada, Hora_Descarga FROM dbo.VU_USER_Veiculo_Entrega_Pedido</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="USERPEDCHIC" DataSetColumn="USERPEDCHIC" />
+              <Mapping SourceColumn="PedVendaVeicPlaca" DataSetColumn="PedVendaVeicPlaca" />
+              <Mapping SourceColumn="EquipVeicCarroc" DataSetColumn="EquipVeicCarroc" />
+              <Mapping SourceColumn="EquipVeicTipo" DataSetColumn="EquipVeicTipo" />
+              <Mapping SourceColumn="USERREDistanciaPerco" DataSetColumn="USERREDistanciaPerco" />
+              <Mapping SourceColumn="USERRETempoViagem" DataSetColumn="USERRETempoViagem" />
+              <Mapping SourceColumn="ProdNomeAlt3" DataSetColumn="ProdNomeAlt3" />
+              <Mapping SourceColumn="ProdNomeAlt2" DataSetColumn="ProdNomeAlt2" />
+              <Mapping SourceColumn="Data_Entrega" DataSetColumn="Data_Entrega" />
+              <Mapping SourceColumn="Data_Chegada" DataSetColumn="Data_Chegada" />
+              <Mapping SourceColumn="Hora_Chegada" DataSetColumn="Hora_Chegada" />
+              <Mapping SourceColumn="Hora_Descarga" DataSetColumn="Hora_Descarga" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="Apolo10ConnectionString1 (Web.config)" DbObjectName="Apolo10.dbo.VU_USER_Veiculo_Entrega_Pedido" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByUSERPEDCHIC" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByUSERPEDCHIC" GeneratorSourceName="FillByUSERPEDCHIC" GetMethodModifier="Public" GetMethodName="GetDataByUSERPEDCHIC" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByUSERPEDCHIC" UserSourceName="FillByUSERPEDCHIC">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT USERPEDCHIC, PedVendaVeicPlaca, EquipVeicCarroc, EquipVeicTipo, USERREDistanciaPerco, USERRETempoViagem, ProdNomeAlt3, ProdNomeAlt2, Data_Entrega, Data_Chegada, Hora_Chegada, Hora_Descarga FROM dbo.VU_USER_Veiculo_Entrega_Pedido
+WHERE USERPEDCHIC = @USERPEDCHIC</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="USERPEDCHIC" ColumnName="USERPEDCHIC" DataSourceName="Apolo10.dbo.VU_USER_Veiculo_Entrega_Pedido" DataTypeServer="varchar(15)" DbType="AnsiString" Direction="Input" ParameterName="@USERPEDCHIC" Precision="0" ProviderType="VarChar" Scale="0" Size="15" SourceColumn="USERPEDCHIC" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ApoloDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ApoloDataSet" msprop:Generator_UserDSName="ApoloDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="VU_USER_Veiculo_Entrega_Pedido" msprop:Generator_TableClassName="VU_USER_Veiculo_Entrega_PedidoDataTable" msprop:Generator_TableVarName="tableVU_USER_Veiculo_Entrega_Pedido" msprop:Generator_TablePropName="VU_USER_Veiculo_Entrega_Pedido" msprop:Generator_RowDeletingName="VU_USER_Veiculo_Entrega_PedidoRowDeleting" msprop:Generator_RowChangingName="VU_USER_Veiculo_Entrega_PedidoRowChanging" msprop:Generator_RowEvHandlerName="VU_USER_Veiculo_Entrega_PedidoRowChangeEventHandler" msprop:Generator_RowDeletedName="VU_USER_Veiculo_Entrega_PedidoRowDeleted" msprop:Generator_UserTableName="VU_USER_Veiculo_Entrega_Pedido" msprop:Generator_RowChangedName="VU_USER_Veiculo_Entrega_PedidoRowChanged" msprop:Generator_RowEvArgName="VU_USER_Veiculo_Entrega_PedidoRowChangeEvent" msprop:Generator_RowClassName="VU_USER_Veiculo_Entrega_PedidoRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="USERPEDCHIC" msprop:Generator_ColumnVarNameInTable="columnUSERPEDCHIC" msprop:Generator_ColumnPropNameInRow="USERPEDCHIC" msprop:Generator_ColumnPropNameInTable="USERPEDCHICColumn" msprop:Generator_UserColumnName="USERPEDCHIC" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PedVendaVeicPlaca" msprop:Generator_ColumnVarNameInTable="columnPedVendaVeicPlaca" msprop:Generator_ColumnPropNameInRow="PedVendaVeicPlaca" msprop:Generator_ColumnPropNameInTable="PedVendaVeicPlacaColumn" msprop:Generator_UserColumnName="PedVendaVeicPlaca" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EquipVeicCarroc" msprop:Generator_ColumnVarNameInTable="columnEquipVeicCarroc" msprop:Generator_ColumnPropNameInRow="EquipVeicCarroc" msprop:Generator_ColumnPropNameInTable="EquipVeicCarrocColumn" msprop:Generator_UserColumnName="EquipVeicCarroc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EquipVeicTipo" msprop:Generator_ColumnVarNameInTable="columnEquipVeicTipo" msprop:Generator_ColumnPropNameInRow="EquipVeicTipo" msprop:Generator_ColumnPropNameInTable="EquipVeicTipoColumn" msprop:Generator_UserColumnName="EquipVeicTipo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="USERREDistanciaPerco" msprop:Generator_ColumnVarNameInTable="columnUSERREDistanciaPerco" msprop:Generator_ColumnPropNameInRow="USERREDistanciaPerco" msprop:Generator_ColumnPropNameInTable="USERREDistanciaPercoColumn" msprop:Generator_UserColumnName="USERREDistanciaPerco" type="xs:short" minOccurs="0" />
+              <xs:element name="USERRETempoViagem" msprop:Generator_ColumnVarNameInTable="columnUSERRETempoViagem" msprop:Generator_ColumnPropNameInRow="USERRETempoViagem" msprop:Generator_ColumnPropNameInTable="USERRETempoViagemColumn" msprop:Generator_UserColumnName="USERRETempoViagem" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ProdNomeAlt3" msprop:Generator_ColumnVarNameInTable="columnProdNomeAlt3" msprop:Generator_ColumnPropNameInRow="ProdNomeAlt3" msprop:Generator_ColumnPropNameInTable="ProdNomeAlt3Column" msprop:Generator_UserColumnName="ProdNomeAlt3" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ProdNomeAlt2" msprop:Generator_ColumnVarNameInTable="columnProdNomeAlt2" msprop:Generator_ColumnPropNameInRow="ProdNomeAlt2" msprop:Generator_ColumnPropNameInTable="ProdNomeAlt2Column" msprop:Generator_UserColumnName="ProdNomeAlt2" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Data_Entrega" msprop:Generator_ColumnVarNameInTable="columnData_Entrega" msprop:Generator_ColumnPropNameInRow="Data_Entrega" msprop:Generator_ColumnPropNameInTable="Data_EntregaColumn" msprop:Generator_UserColumnName="Data_Entrega" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Data_Chegada" msprop:Generator_ColumnVarNameInTable="columnData_Chegada" msprop:Generator_ColumnPropNameInRow="Data_Chegada" msprop:Generator_ColumnPropNameInTable="Data_ChegadaColumn" msprop:Generator_UserColumnName="Data_Chegada" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Hora_Chegada" msprop:Generator_ColumnVarNameInTable="columnHora_Chegada" msprop:Generator_ColumnPropNameInRow="Hora_Chegada" msprop:Generator_ColumnPropNameInTable="Hora_ChegadaColumn" msprop:Generator_UserColumnName="Hora_Chegada" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Hora_Descarga" msprop:Generator_ColumnVarNameInTable="columnHora_Descarga" msprop:Generator_ColumnPropNameInRow="Hora_Descarga" msprop:Generator_ColumnPropNameInTable="Hora_DescargaColumn" msprop:Generator_UserColumnName="Hora_Descarga" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

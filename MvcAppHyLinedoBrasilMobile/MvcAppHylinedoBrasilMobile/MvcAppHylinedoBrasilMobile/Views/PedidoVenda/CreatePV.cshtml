@@ -1,0 +1,162 @@
+﻿@model IEnumerable<MvcAppHylinedoBrasilMobile.Models.Item_Pedido_Venda>
+
+@{
+    ViewBag.Title = "";
+}
+
+<script type="text/javascript">
+    $('#dataInicialPedidoRacao').change(function () {
+        var lote = $('#dataInicialPedidoRacao').val();
+        $.ajax({
+            url: '/PedidoRacao/AtualizaSessionData',
+            type: 'POST',
+            data: JSON.stringify({ id: lote, chamada: '1' }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                } else {
+                    alert(data.toString());
+                }
+            }
+        });
+    });
+
+    $('#dataFinalPedidoRacao').change(function () {
+        var lote = $('#dataFinalPedidoRacao').val();
+        $.ajax({
+            url: '/PedidoRacao/AtualizaSessionData',
+            type: 'POST',
+            data: JSON.stringify({ id: lote, chamada: '2' }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                } else {
+                    alert(data.toString());
+                }
+            }
+        });
+    });
+
+    $('#dropBoxStatusPedidoRacao').change(function () {
+        var lote = $('#dropBoxStatusPedidoRacao option:selected').text();
+        $.ajax({
+            url: '/PedidoRacao/AtualizaSessionData',
+            type: 'POST',
+            data: JSON.stringify({ id: lote, chamada: '3' }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                } else {
+                    alert(data.toString());
+                }
+            }
+        });
+    });
+</script>
+
+@using (Html.BeginForm("SavePV", "PedidoVenda", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Pedidos de Venda", "Index", "PedidoVenda")
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/graos_32x32.png"), "PedidoRacao")
+    <h2>Pedido de Ração</h2>
+    <br />
+    <div class="editor-label">
+        <b>Data Inicial:</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox("dataInicialPedidoRacao", Convert.ToDateTime(Session["dataInicialPedidoRacao"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+    </div>
+    <div class="editor-label">
+        <b>Data Final:</b>
+    </div>
+    <div class="editor-field">
+        @Html.TextBox("dataFinalPedidoRacao", Convert.ToDateTime(Session["dataFinalPedidoRacao"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+    </div>
+    
+    <br />
+    <div class="editor-label">
+        <b>Status:</b>
+    </div>
+    <div class="editor-field">
+        @Html.DropDownList(
+            "Text",
+            (List<SelectListItem>)Session["ListaStatusPedidosRacao"],
+            new { @id = "dropBoxStatusPedidoRacao"})
+    </div>
+</div>
+<br />
+<div align="center">
+    <h2>Itens</h2>
+</div>
+
+<br />
+<h3 style="color:red;">@ViewBag.Erro</h3>    
+    
+<p class="ajuste">
+    @Html.ActionLink("Adicionar", "CreatePedidoRacaoItem", null, new { @class = "add" })
+</p>
+<div style="overflow:auto;">
+<table class="ajuste">
+    <tbody class="ajuste">
+    <tr class="ajuste">
+        <th class="ajuste"></th>
+        <th class="ajuste"></th>
+        <th class="ajuste">
+            ID
+        </th>
+        <th class="ajuste">
+            Núcleo
+        </th>
+        <th class="ajuste">
+            Galpão
+        </th>
+        <th class="ajuste">
+            Linhagem
+        </th>
+        <th class="ajuste">
+            Cód. Fórmula
+        </th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr class="ajuste">
+        <td class="ajuste">
+            <div align="center">
+                @Html.ActionLink("Edit", "EditPedidoRacaoItem", new { idPedidoRacao = item.IDPedidoRacao, idPedidoRacaoItem = item.ID }, new { @class = "edit" })
+            </div>
+        </td>
+        <td class="ajuste">
+            <div align="center">            
+                @Html.ActionLink("Delete", "DeletePedidoRacaoItem", new { idPedidoRacao = item.IDPedidoRacao, idPedidoRacaoItem = item.ID }, new { @class = "delete" })
+            </div>
+        </td>
+        <td class="ajuste">
+            @Html.DisplayFor(modelItem => item.ID)
+        </td>
+        <td class="ajuste">
+            @Html.DisplayFor(modelItem => item.Nucleo)
+        </td>
+        <td class="ajuste">
+            @Html.DisplayFor(modelItem => item.Galpao)
+        </td>
+        <td class="ajuste">
+            @Html.DisplayFor(modelItem => item.Linhagem)
+        </td>
+        <td class="ajuste">
+            @(Html.DisplayFor(modelItem => item.CodFormulaRacao) + " - " + MvcAppHylinedoBrasilMobile.Controllers.PedidoRacaoController.bdApolo.PRODUTO.Where(w => w.USERNumFormula == item.CodFormulaRacao).FirstOrDefault().ProdNome)
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+</div>
+<br />
+<input type="submit" value="Salvar" />
+}

@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "";
+
+    List<MvcAppHylinedoBrasilMobile.Models.LOG_LayoutDiarioExpedicaos> lista =
+        (List<MvcAppHylinedoBrasilMobile.Models.LOG_LayoutDiarioExpedicaos>)Session["ListaHistoricoDEO"];
+}
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ o DEO", "ReturnEditDEO", "DiarioExpedicao")
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/diario_expedicao.png"), "DEO")
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+
+<div align="center">
+    <h2>Histórico de Eventos</h2>
+    <h2>Diário de Expedição: @Html.Label(Session["dataHoraCarreg"].ToString())</h2>
+    <h2>Lote @lista.FirstOrDefault().LoteCompleto - @lista.FirstOrDefault().DataProducao.ToShortDateString()</h2>
+</div>
+<br />
+<div id="tabelaLogPV" style="overflow:auto;">
+    <table id="tabela">
+        <tr>
+            <th>
+                Data Hora
+            </th>
+            <th>
+                Operação
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Usuário
+            </th>
+            <th>
+                Granja
+            </th>
+            <th>
+                Inc.
+            </th>
+            <th>
+                Dif.
+            </th>
+            <th>
+                Motivo Diverg.
+            </th>
+            <th>
+                Obs.
+            </th>
+            <th>
+            </th>
+        </tr>
+        @foreach (var item in lista)
+        {
+            <tr>
+                <td>
+                    @String.Format("{0:dd/MM/yyyy HH:mm:ss}",item.DataHoraOper)
+                </td>
+                <td>
+                    @item.Operacao
+                </td>
+                <td>
+                    @item.Importado
+                </td>
+                <td>
+                    @item.UsuarioOperacao
+                </td>
+                <td>
+                    @String.Format("{0:N0}", item.QtdeOvos)
+                </td>
+                <td>
+                    @String.Format("{0:N0}", (item.QtdeOvos + (item.QtdFalta == null ? 0 : item.QtdFalta)))
+                </td>
+                <td style="color:red;" class="ajuste">
+                    @String.Format("{0:N0}", item.QtdFalta)
+                </td>
+                <td>
+                    @item.MotivoDivergenciaDEO
+                </td>
+                <td>
+                    @item.Observacao
+                </td>
+            </tr>
+        }
+    </table>
+</div>

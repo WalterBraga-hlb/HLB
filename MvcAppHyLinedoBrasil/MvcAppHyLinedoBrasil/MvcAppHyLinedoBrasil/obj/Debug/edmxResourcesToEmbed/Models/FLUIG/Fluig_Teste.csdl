@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="fluigtesteModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="fluigtesteEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="VW_Manutencao_Preventiva" EntityType="fluigtesteModel.VW_Manutencao_Preventiva" />
+  </EntityContainer>
+  <EntityType Name="VW_Manutencao_Preventiva">
+    <Key>
+      <PropertyRef Name="NUM_PROCES" />
+      <PropertyRef Name="EMAIL" />
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="NUM_PROCES" Type="Int32" Nullable="false" />
+    <Property Name="LoginSolicitante" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="NomeSolicitante" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="DataSolicitacao" Type="DateTime" Precision="7" />
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="companyid" Type="Int32" />
+    <Property Name="cardid" Type="Int32" />
+    <Property Name="documentid" Type="Int32" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="tableid" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="equipamento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="tag" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="localidade" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="periodicidade" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="data_manutencao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="usuario_manutencao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="existe_incubacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="data_calibracao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="usuario_calibracao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="periodo_manutencao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="grupo_manutencao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="grupo_gestor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="planejamento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="prazo_planejamento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="pesquisa_equipamento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DataManutencao" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="SemanaAnoManutencao" Type="Int32" />
+  </EntityType>
+</Schema>

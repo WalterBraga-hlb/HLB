@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "";
+}
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Pedidos de Ração", "Index", "PedidoRacao")
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/graos_32x32.png"), "PedidoRacao")
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+
+<h1 style="color:red; background-color:Yellow">
+    * CONFIRMA A EXCLUSÃO DO PEDIDO @ViewBag.DadosPedido ???
+</h1>
+<br />
+@using (Html.BeginForm("Index", "PedidoRacao", FormMethod.Post))
+{
+    <input type="submit" value="Não" />
+}
+
+@using (Html.BeginForm("DeletePedidoRacaoNovo", "PedidoRacao", FormMethod.Post))
+{
+    if (!Convert.ToBoolean(Session["dentroPeriodoPermitido"]))
+    {
+    <fieldset>
+        <div class="editor-label">
+            <b>Motivo da Exclusão:</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextArea("observacao", null,
+                new { @id = "txtObservacao", @required = "true" })
+        </div>
+    </fieldset>
+    }
+    
+    <input type="submit" value="Sim" />
+}

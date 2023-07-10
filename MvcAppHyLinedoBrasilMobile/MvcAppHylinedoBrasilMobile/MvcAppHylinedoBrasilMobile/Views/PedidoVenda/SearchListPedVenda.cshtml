@@ -1,0 +1,165 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+}
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Pedidos de Venda", "Index", "PedidoVenda")
+    </p>
+    @*@if (Session["login"].ToString().Equals("palves"))
+    {
+        <p>
+            @Html.ActionLink("Importar Dados do CHIC p/ BD", "ImportaDadosAntigos", "PedidoVenda")
+        </p>
+    }*@
+    @Html.Image(@Url.Content("~/Content/icons/pedidoVenda.png"), "Informe os campos abaixo para Filtrar Pesquisa")
+    <h2>Informe os campos abaixo para Filtrar Pesquisa</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+@using (Html.BeginForm("CarregarListaPVFiltroView", "PedidoVenda"))
+{
+    <ul data-role="listview" data-inset="true">
+        @if (Session["empresa"].ToString().Length > 2)
+        {
+        <li data-role="list-divider">
+            <b>Empresa:</b>
+            @Html.DropDownList(
+                "Empresa",
+                (List<SelectListItem>)Session["ListaEmpresasPV"])
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Filtrar Empresa p/ Carregar Vendedores" />
+        </li>
+        }
+        @if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-AcessoListaVendedoresRelComercial",
+                (System.Collections.ArrayList)Session["Direitos"]))
+        {
+        <li data-role="list-divider">
+            <b>Vendedor / Representante:</b>
+            @Html.DropDownList(
+                "Vendedor",
+                (List<SelectListItem>)Session["ListaVendedoresPV"])
+        </li>
+        }
+        <li data-role="fieldcontain">
+            <b>Data Inicial de Entrega:</b>
+            <div class="editor-label">
+                @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+                {
+                    @Html.TextBox("dataInicial", Convert.ToDateTime(Session["dataInicial"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+                }
+                else
+                {
+                    @Html.TextBox("dataInicial", Convert.ToDateTime(Session["dataInicial"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+                }
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Data Final de Entrega:</b>
+            <div class="editor-label">
+                @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+                {
+                    @Html.TextBox("dataFinal", Convert.ToDateTime(Session["dataFinal"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+                }
+                else
+                {
+                    @Html.TextBox("dataFinal", Convert.ToDateTime(Session["dataFinal"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+                }
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Informe parte do nome do Cliente:</b>
+            <div class="editor-label">
+                @Html.TextBox("customerName", Session["customerNameSearchPedVenda"].ToString())
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Código do Pedido no AniPlan:</b>
+            <div class="editor-label">
+                @Html.TextBox("codigoCHIC", Session["codigoCHICSearchPedVenda"].ToString(), new { @type = "number" })
+            </div>
+        </li>
+
+        <li data-role="fieldcontain">
+            <b>ID do Pedido no Sistema WEB:</b>
+            <div class="editor-label">
+                @Html.TextBox("idPedido", Session["idPedidoSearchPedVenda"].ToString(), new { @type = "number" })
+            </div>
+        </li>
+        @if ((MvcAppHyLinedoBrasil.Controllers.AccountController
+                .GetGroup("HLBAPPM-PedidoVendaVisualizarTodosPedidos",
+                (System.Collections.ArrayList)Session["Direitos"]))
+            ||
+            (!MvcAppHyLinedoBrasil.Controllers.AccountController
+                .GetGroup("HLBAPPM-PedidoVendaDadosExportacao",
+                (System.Collections.ArrayList)Session["Direitos"])
+            &&
+            !MvcAppHyLinedoBrasil.Controllers.AccountController
+                .GetGroup("HLBAPPM-PedidoVendaVisualizarTodosPedidos",
+                (System.Collections.ArrayList)Session["Direitos"])))
+        {
+        <li data-role="list-divider">
+            <b>Status:</b>
+            @*@Html.DropDownList(
+                "Text",
+                (List<SelectListItem>)Session["ListaStatus"])*@
+            <div id="tabelaStatus" style="overflow:auto; height: 200px;">
+                @foreach (var item in (List<SelectListItem>)Session["ListaStatus"])
+                {
+                    <label style="width: 100%">
+                        @if (item.Selected)
+                        {
+                            @Html.CheckBox("statusSelect", true)
+                            @item.Text
+                            @Html.Hidden("name", item.Text)
+                        }
+                        else
+                        {
+                            @Html.CheckBox("statusSelect")
+                            @item.Text
+                            @Html.Hidden("name", item.Text)
+                        }    
+                    </label>
+                }
+            </div>
+        </li>
+        }
+        <li data-role="list-divider">
+            <b>Linhas:</b>
+            <div id="tabelaLinhas" style="overflow:auto; height: 200px;">
+                @foreach (var item in (List<SelectListItem>)Session["ListaLinhagensFiltro"])
+                {
+                    <label style="width: 100%">
+                        @if (item.Selected)
+                        {
+                            @Html.CheckBox("linhaSelect", true)
+                            @item.Text
+                            @Html.Hidden("linha", item.Text)
+                        }
+                        else
+                        {
+                            @Html.CheckBox("linhaSelect")
+                            @item.Text
+                            @Html.Hidden("linha", item.Text)
+                        }    
+                    </label>
+                }
+            </div>
+        </li>
+        <li data-role="list-divider">
+            <label style="width: 100%">
+                @Html.CheckBox("salvarParametros")
+                <b>Salvar Parâmetros? (Os parâmetros salvos são somente Data e Status!)</b>
+            </label>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Pesquisar" />
+        </li>
+    </ul>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

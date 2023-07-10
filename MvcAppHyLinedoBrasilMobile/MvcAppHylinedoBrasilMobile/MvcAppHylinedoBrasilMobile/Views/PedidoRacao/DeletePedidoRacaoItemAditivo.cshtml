@@ -1,0 +1,14 @@
+﻿@model MvcAppHylinedoBrasilMobile.Models.PedidoRacao_Item_Aditivo
+
+@{
+    ViewBag.Title = "";
+}
+
+<h3>Confirma a exclusão desse registro?</h3>
+@using (Html.BeginForm("DeletePedidoRacaoItemAditivo", "PedidoRacao", new { Model.IDPedidoRacao, Model.IDPedidoRacao_Item, Model.ID }, FormMethod.Post))
+{
+    <p>
+        <input type="submit" value="Delete" />
+        @Html.ActionLink("Voltar p/ os Itens do Pedido da Ração", "EditPedidoRacaoItem", new { Model.IDPedidoRacao, Model.IDPedidoRacao_Item })
+    </p>
+}

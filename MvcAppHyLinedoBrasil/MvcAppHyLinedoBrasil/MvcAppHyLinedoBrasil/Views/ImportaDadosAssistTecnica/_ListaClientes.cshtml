@@ -1,0 +1,73 @@
+﻿@model IEnumerable<MvcAppHyLinedoBrasil.Models.Cliente>
+
+@if (Model != null)
+{
+    if (Model.Count() > 0)
+    {
+        <fieldset>
+            <p align="center">
+                <legend><u>Lista de Clientes</u></legend>
+            </p>
+            <table style="width: 100%">
+                <tr>
+                    <th>
+                    </th>
+                    <th>
+                        Código
+                    </th>
+                    <th>
+                        Razão Social
+                    </th>
+                    <th>
+                        Nome Fantasia
+                    </th>
+                    <th>
+                        Cidade
+                    </th>
+                    <th>
+                        Estado
+                    </th>
+                    <th>
+                        País
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr align="center">
+                        <td>
+                            @Html.RadioButton("clienteSelecionado", item.EntCod, Session["marcado"].ToString() == item.EntCod ? true : false)
+                            @if (item.Origem == "HLBAPP")
+                            {
+                                @Html.ActionLink("Alterar", "UpdClienteHLB", new { customerCode = item.EntCod }, new { @title = "Clique aqui Alterar o Cadastro" })
+                            }
+                        </td>
+                        <td>
+                            @item.EntCod
+                        </td>
+                        <td>
+                            @item.EntNome
+                        </td>
+                        <td>
+                            @item.EntNomeFant
+                        </td>
+                        <td>
+                            @item.CidNomeComp
+                        </td>
+                        <td>
+                            @item.UfSigla
+                        </td>
+                        <td>
+                            @item.PaisSigla
+                        </td>
+                    </tr>
+                }
+            </table>
+        </fieldset>
+    }
+    else
+    {
+        <p align="center">
+            <legend><u>Não existem clientes com esses dados de pesquisa!</u></legend>
+        </p>
+    }
+}

@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = @ViewBag.Message;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+       // Modal popup
+       $(function () {
+           $("#dialog").dialog("destroy");
+  
+           $("#categories-dialog-modal").dialog({
+               autoOpen: false,
+               height: 140,
+               modal: true,
+               hide: "blind",
+               draggable: true
+           });
+           $("#catopener").click(function () {
+               $("#categories-dialog-modal").dialog("open");
+               return false;
+           });
+       });
+</script>
+
+<h2>@ViewBag.Message</h2>
+<p>
+    @MvcAppHyLinedoBrasil.Controllers.AccountController.GetTextOnLanguage("Description_Home_WebDesktop", Session["language"].ToString())
+</p>
+
+@*<a href="javascript:return void(0):" id="catopener">Teste Modal</a>
+<div id="categories-dialog-modal" title="Teste">
+    <form id="formCategory">
+        <input type="text" name="category.Title" />
+        <input type="button" value="Save" onclick="SaveCategory()"/>
+    </form>
+</div>*@

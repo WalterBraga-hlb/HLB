@@ -1,0 +1,32 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
+    ViewBag.Title = "Erro";
+}
+<div class="list-header clearfix">
+    <span>Erro ao Carregar a página!</span>
+</div>
+<div class="list-sfs-holder">
+    <div class="alert alert-error">
+        Um erro inesperado foi ocorrido. Por favor, tirar um print do erro e envie para o administrador!
+        Para usar o sistema novamente, feche o Navegador e entre novamente!
+    </div>
+    <div>
+        @ViewBag.Message
+    </div>
+    @if (Model != null)
+    //if (Model != null && HttpContext.Current.IsDebuggingEnabled)
+    {
+        <div>
+            <p>
+                <b>Exception:</b> @Model.Exception.Message<br />
+                <b>Controller:</b> @Model.ControllerName<br />
+                <b>Action:</b> @Model.ActionName<br />
+            </p>
+            <div style="overflow:scroll">
+                <pre>
+                    @Model.Exception.StackTrace
+                </pre>
+            </div>
+        </div>
+    }
+</div>

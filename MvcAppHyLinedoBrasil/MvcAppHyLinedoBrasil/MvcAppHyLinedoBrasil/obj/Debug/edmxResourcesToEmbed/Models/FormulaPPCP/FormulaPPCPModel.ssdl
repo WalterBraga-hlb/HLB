@@ -1,0 +1,928 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Apolo10Model2.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="Apolo10Model2StoreContainer">
+    <EntitySet Name="DESCR_TECN_PROD" EntityType="Apolo10Model2.Store.DESCR_TECN_PROD" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FIC_TEC_PROD" EntityType="Apolo10Model2.Store.FIC_TEC_PROD" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FIC_TEC_PROD_DATA" EntityType="Apolo10Model2.Store.FIC_TEC_PROD_DATA" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PROD_OPER" EntityType="Apolo10Model2.Store.PROD_OPER" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PROD_OPER_ITEM" EntityType="Apolo10Model2.Store.PROD_OPER_ITEM" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PROD_UNID_MED" EntityType="Apolo10Model2.Store.PROD_UNID_MED" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PRODUTO" EntityType="Apolo10Model2.Store.PRODUTO" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PRODUTO1" EntityType="Apolo10Model2.Store.PRODUTO1" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__DESCR_TEC__ProdC__148A83B8" Association="Apolo10Model2.Store.FK__DESCR_TEC__ProdC__148A83B8">
+      <End Role="PRODUTO1" EntitySet="PRODUTO1" />
+      <End Role="DESCR_TECN_PROD" EntitySet="DESCR_TECN_PROD" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FIC_TEC_P__FicTe__7A5CA4AE" Association="Apolo10Model2.Store.FK__FIC_TEC_P__FicTe__7A5CA4AE">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="FIC_TEC_PROD" EntitySet="FIC_TEC_PROD" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FIC_TEC_P__ProdC__30329E2D" Association="Apolo10Model2.Store.FK__FIC_TEC_P__ProdC__30329E2D">
+      <End Role="PRODUTO1" EntitySet="PRODUTO1" />
+      <End Role="FIC_TEC_PROD" EntitySet="FIC_TEC_PROD" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FIC_TEC_PROD__6D626A79" Association="Apolo10Model2.Store.FK__FIC_TEC_PROD__6D626A79">
+      <End Role="PROD_UNID_MED" EntitySet="PROD_UNID_MED" />
+      <End Role="FIC_TEC_PROD" EntitySet="FIC_TEC_PROD" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FIC_TEC_PROD_DAT__459B6486" Association="Apolo10Model2.Store.FK__FIC_TEC_PROD_DAT__459B6486">
+      <End Role="FIC_TEC_PROD" EntitySet="FIC_TEC_PROD" />
+      <End Role="FIC_TEC_PROD_DATA" EntitySet="FIC_TEC_PROD_DATA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__prod_oper__ProdC__4D719078" Association="Apolo10Model2.Store.FK__prod_oper__ProdC__4D719078">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PROD_OPER" EntitySet="PROD_OPER" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PROD_OPER_ITEM__7710F7E2" Association="Apolo10Model2.Store.FK__PROD_OPER_ITEM__7710F7E2">
+      <End Role="PROD_OPER" EntitySet="PROD_OPER" />
+      <End Role="PROD_OPER_ITEM" EntitySet="PROD_OPER_ITEM" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PROD_UNID__ProdC__14B141C4" Association="Apolo10Model2.Store.FK__PROD_UNID__ProdC__14B141C4">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PROD_UNID_MED" EntitySet="PROD_UNID_MED" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRODUTO__ProdCod__0962B805" Association="Apolo10Model2.Store.FK__PRODUTO__ProdCod__0962B805">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PRODUTO1" EntitySet="PRODUTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRODUTO__ProdCod__2E1B42B5" Association="Apolo10Model2.Store.FK__PRODUTO__ProdCod__2E1B42B5">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PRODUTO1" EntitySet="PRODUTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRODUTO__ProdCod__4DFBD227" Association="Apolo10Model2.Store.FK__PRODUTO__ProdCod__4DFBD227">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PRODUTO1" EntitySet="PRODUTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Produto__ProdTax__4E278607" Association="Apolo10Model2.Store.FK__Produto__ProdTax__4E278607">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PRODUTO1" EntitySet="PRODUTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRODUTO1__ProdCo__053D5330" Association="Apolo10Model2.Store.FK__PRODUTO1__ProdCo__053D5330">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PRODUTO1" EntitySet="PRODUTO1" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRODUTO1__ProdCo__68D880B1" Association="Apolo10Model2.Store.FK__PRODUTO1__ProdCo__68D880B1">
+      <End Role="PRODUTO1" EntitySet="PRODUTO1" />
+      <End Role="PRODUTO11" EntitySet="PRODUTO1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FIC_TEC__REF_10254_PRODUTO" Association="Apolo10Model2.Store.FK_FIC_TEC__REF_10254_PRODUTO">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="FIC_TEC_PROD" EntitySet="FIC_TEC_PROD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PROD_OPE_REF_10148_PRODUTO" Association="Apolo10Model2.Store.FK_PROD_OPE_REF_10148_PRODUTO">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PROD_OPER" EntitySet="PROD_OPER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PROD_OPE_REF_10151_PRODUTO" Association="Apolo10Model2.Store.FK_PROD_OPE_REF_10151_PRODUTO">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PROD_OPER" EntitySet="PROD_OPER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PROD_OPE_REF_13511_PRODUTO" Association="Apolo10Model2.Store.FK_PROD_OPE_REF_13511_PRODUTO">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PROD_OPER_ITEM" EntitySet="PROD_OPER_ITEM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRODUTO_REF_1167_PRODUTO" Association="Apolo10Model2.Store.FK_PRODUTO_REF_1167_PRODUTO">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PRODUTO1" EntitySet="PRODUTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRODUTO_REF_1173_PRODUTO" Association="Apolo10Model2.Store.FK_PRODUTO_REF_1173_PRODUTO">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PRODUTO1" EntitySet="PRODUTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRODUTO_REF_1179_PRODUTO" Association="Apolo10Model2.Store.FK_PRODUTO_REF_1179_PRODUTO">
+      <End Role="PRODUTO" EntitySet="PRODUTO" />
+      <End Role="PRODUTO1" EntitySet="PRODUTO" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="DESCR_TECN_PROD">
+    <Key>
+      <PropertyRef Name="ProdCodEstr" />
+      <PropertyRef Name="DescrTecnProdNum" />
+    </Key>
+    <Property Name="ProdCodEstr" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="DescrTecnProdNum" Type="varchar" Nullable="false" MaxLength="7" />
+    <Property Name="DescrTecnProdTexto" Type="text" />
+    <Property Name="DescrTecnProdEntraPesqInternet" Type="varchar" MaxLength="5" />
+    <Property Name="DescrTecnProdTitulo" Type="varchar" MaxLength="50" />
+    <Property Name="descrtecnproddata" Type="datetime" />
+    <Property Name="DescrTecnProdDataIni" Type="datetime" />
+    <Property Name="DescrTecnProdDataFim" Type="datetime" />
+    <Property Name="DescrTecnProdTextoPara" Type="varchar" MaxLength="15" />
+    <Property Name="LingCod" Type="varchar" MaxLength="7" />
+    <Property Name="EmpCod" Type="varchar" MaxLength="20" />
+    <Property Name="ProdContrTurCod" Type="varchar" MaxLength="7" />
+    <Property Name="CLASTURCODESTR" Type="varchar" MaxLength="15" />
+    <Property Name="REGIMETURCODESTR" Type="varchar" MaxLength="15" />
+    <Property Name="DESCRTECNPATH" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="FIC_TEC_PROD">
+    <Key>
+      <PropertyRef Name="ProdCodEstr" />
+      <PropertyRef Name="FicTecProdSeq" />
+    </Key>
+    <Property Name="ProdCodEstr" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="FicTecProdSeq" Type="int" Nullable="false" />
+    <Property Name="ProdGradeCorCod" Type="varchar" MaxLength="20" />
+    <Property Name="FicTecProdCodEstr" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="FicTecProdGradeCorCod" Type="varchar" MaxLength="20" />
+    <Property Name="FicTecProdQtd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FicTecProdPerc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FicTecProdPercTipo" Type="varchar" MaxLength="15" />
+    <Property Name="FicTecProdQtdCalc" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FicTecProdCustoPerc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FicTecProdCustoPercTipo" Type="varchar" MaxLength="15" />
+    <Property Name="FicTecProdCustoQtd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FicTecProdDataInic" Type="datetime" />
+    <Property Name="FicTecProdDataFim" Type="datetime" />
+    <Property Name="FicTecProdCompCusto" Type="varchar" MaxLength="5" />
+    <Property Name="FicTecProdGeraOP" Type="varchar" MaxLength="5" />
+    <Property Name="FicTecProdPercPartic" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FicTecProdPartVenda" Type="varchar" MaxLength="5" />
+    <Property Name="FicTecProdPartVendaPercDesc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FicTecProdPartVendaPercAcresc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FicTecProdUnidMedCodDig" Type="varchar" MaxLength="7" />
+    <Property Name="FicTecProdUnidMedPosDig" Type="smallint" />
+    <Property Name="FicTecProdUnidMedQtdDig" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FicTecProdAcessorio" Type="varchar" MaxLength="5" />
+    <Property Name="FicTecProdPartVendaUnidMedPos" Type="smallint" />
+    <Property Name="FicTecProdDiscOpt" Type="varchar" MaxLength="5" />
+    <Property Name="FicTecProdPercRatDif" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FicTecProdFormula" Type="text" />
+    <Property Name="FicTecProdTerc" Type="varchar" MaxLength="5" />
+    <Property Name="FicTecProdNumSeq" Type="int" />
+    <Property Name="FicTecProdSubstPor" Type="varchar" MaxLength="30" />
+    <Property Name="FicTecProdSubstPorSeq" Type="int" />
+    <Property Name="FicTecProdGeraNFRetorno" Type="varchar" MaxLength="20" />
+    <Property Name="FicTecProdOperCalculo" Type="varchar" MaxLength="20" />
+    <Property Name="fictecprodcalccustovalinsumo" Type="varchar" Nullable="false" MaxLength="5" />
+    <Property Name="FicTecProdCompCustoAnaFinanc" Type="varchar" MaxLength="5" />
+    <Property Name="FicTecProdBloqueada" Type="varchar" MaxLength="5" />
+    <Property Name="FicTecProdParCalcLoteApon" Type="varchar" MaxLength="5" />
+    <Property Name="FicTecProdCondPesoBrtAtend" Type="varchar" MaxLength="5" />
+    <Property Name="FicTecProdBaseNumLote" Type="varchar" MaxLength="5" />
+    <Property Name="FicTecProdImpEtiq" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="FIC_TEC_PROD_DATA">
+    <Key>
+      <PropertyRef Name="ProdCodEstr" />
+      <PropertyRef Name="FicTecProdSeq" />
+      <PropertyRef Name="FicTecProdDataSeq" />
+    </Key>
+    <Property Name="ProdCodEstr" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="FicTecProdSeq" Type="int" Nullable="false" />
+    <Property Name="FicTecProdDataSeq" Type="int" Nullable="false" />
+    <Property Name="FicTecProdDataInicio" Type="datetime" />
+    <Property Name="FicTecProdDataFinal" Type="datetime" />
+    <Property Name="FicTecProdDataQtd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FicTecProdDataPerc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FicTecProdDataPercTipo" Type="varchar" MaxLength="15" />
+    <Property Name="FicTecProdDataQtdCalc" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FicTecProdDataCustoPerc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FicTecProdDataCustoPercTipo" Type="varchar" MaxLength="15" />
+    <Property Name="FicTecProdDataCustoQtd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="FicTecProdDataCompCusto" Type="varchar" MaxLength="5" />
+    <Property Name="FicTecProdDataGeraOP" Type="varchar" MaxLength="5" />
+    <Property Name="FicTecProdDataPercPartic" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FicTecProdDataPartVenda" Type="varchar" MaxLength="5" />
+    <Property Name="FicTecProdDataPartVenPcDesc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="FicTecProdDataPartVenPcAcresc" Type="numeric" Precision="10" Scale="4" />
+  </EntityType>
+  <EntityType Name="PROD_OPER">
+    <Key>
+      <PropertyRef Name="ProdCodEstr" />
+      <PropertyRef Name="ProdOperSeq" />
+    </Key>
+    <Property Name="ProdCodEstr" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="ProdOperSeq" Type="smallint" Nullable="false" />
+    <Property Name="OperCod" Type="varchar" Nullable="false" MaxLength="7" />
+    <Property Name="EquipCodEstr" Type="varchar" MaxLength="15" />
+    <Property Name="ProdOperQtdDias" Type="smallint" />
+    <Property Name="ProdOperHoraEntrega" Type="datetime" />
+    <Property Name="ProdOperTemApont" Type="varchar" MaxLength="5" />
+    <Property Name="ProdOperTemReaprov" Type="varchar" MaxLength="5" />
+    <Property Name="ProdCodEstrSucata" Type="varchar" MaxLength="30" />
+    <Property Name="CCtrlCodEstrSucata" Type="varchar" MaxLength="30" />
+    <Property Name="ProdOperDataInic" Type="datetime" />
+    <Property Name="ProdOperDataFim" Type="datetime" />
+    <Property Name="ProdOperTexto" Type="text" />
+    <Property Name="LocArmazCodEstr" Type="varchar" MaxLength="20" />
+    <Property Name="ProdCodEstrRetalho" Type="varchar" MaxLength="30" />
+    <Property Name="CCtrlCodEstrRetalho" Type="varchar" MaxLength="30" />
+    <Property Name="ProdOperRetalhoMovEstq" Type="varchar" MaxLength="5" />
+    <Property Name="ProdOperRetalhoBxaComp" Type="varchar" MaxLength="5" />
+    <Property Name="ProdOperProcConfApont" Type="varchar" MaxLength="5" />
+    <Property Name="ProdOperObs" Type="text" />
+    <Property Name="ProdOperEnrolamento" Type="varchar" MaxLength="10" />
+    <Property Name="ProdOperImprimeEtiqueta" Type="varchar" MaxLength="5" />
+    <Property Name="ProdOperIntegraBalanca" Type="varchar" MaxLength="5" />
+    <Property Name="ProdOperAtualizaLote" Type="varchar" MaxLength="5" />
+    <Property Name="ProdOperGerPVRemInd" Type="varchar" MaxLength="5" />
+    <Property Name="ProdOperGeraLote" Type="varchar" MaxLength="5" />
+    <Property Name="ProdOperCtrlEsteriliz" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="PROD_OPER_ITEM">
+    <Key>
+      <PropertyRef Name="ProdCodEstr" />
+      <PropertyRef Name="ProdOperSeq" />
+      <PropertyRef Name="ProdOperItProdCodEstr" />
+      <PropertyRef Name="ProdOperItSeq" />
+    </Key>
+    <Property Name="ProdCodEstr" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="ProdOperSeq" Type="smallint" Nullable="false" />
+    <Property Name="ProdOperItProdCodEstr" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="ProdOperItSeq" Type="int" Nullable="false" />
+    <Property Name="ProdGradeCorCod" Type="varchar" MaxLength="20" />
+    <Property Name="ProdOperItQtd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdOperItDataValidInic" Type="datetime" />
+    <Property Name="ProdOperItDataValidFim" Type="datetime" />
+    <Property Name="ProdOperItQtdFicTecAlter" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="PROD_UNID_MED">
+    <Key>
+      <PropertyRef Name="ProdCodEstr" />
+      <PropertyRef Name="ProdUnidMedCod" />
+      <PropertyRef Name="ProdUnidMedPos" />
+    </Key>
+    <Property Name="ProdCodEstr" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="ProdUnidMedCod" Type="varchar" Nullable="false" MaxLength="7" />
+    <Property Name="ProdUnidMedPos" Type="smallint" Nullable="false" />
+    <Property Name="ProdUnidMedPeso" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdUnidMedPesoFD" Type="varchar" MaxLength="10" />
+    <Property Name="ProdUnidMedCodBar" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="ProdUnidMedQtdMinFat" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdUnidMedPesoQtd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdUnidMedFatorMult" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdUnidMedDataValidInic" Type="datetime" />
+    <Property Name="ProdUnidMedDataValidFim" Type="datetime" />
+    <Property Name="ProdUnidMedLoteUnico" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedEstat" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedCompra" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedProduc" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedPadVenda" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedSeq" Type="smallint" />
+    <Property Name="ProdUnidMedExibeComprimVenda" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedExibeLargVenda" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedExibeAltVenda" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedDep" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedCodAlt" Type="varchar" MaxLength="7" />
+    <Property Name="ProdUnidMedPadMovEstq" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedUltDataMod" Type="datetime" />
+    <Property Name="ProdUnidMedCubagRod" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdUnidMedEntrega" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedObjVenda" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedFatorMultFornecto" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdUnidMedFatorFCI" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdUnidMedSeqFCI" Type="int" />
+    <Property Name="PRODUNIDMEDTRIBUT" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUnidMedTributExport" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="PRODUTO">
+    <Key>
+      <PropertyRef Name="ProdCodEstr" />
+    </Key>
+    <Property Name="ProdCodEstr" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="ProdCodRed" Type="varchar" Nullable="false" MaxLength="7" />
+    <Property Name="ProdCodAlt" Type="varchar" MaxLength="30" />
+    <Property Name="ProdCodBar" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="ProdNome" Type="varchar" MaxLength="80" />
+    <Property Name="ProdNomeAlt1" Type="varchar" MaxLength="255" />
+    <Property Name="ProdNomeAlt2" Type="varchar" MaxLength="255" />
+    <Property Name="ProdNomeAlt3" Type="varchar" MaxLength="255" />
+    <Property Name="ProdCodEstrNiv" Type="varchar" MaxLength="30" />
+    <Property Name="ProdGrupo" Type="char" MaxLength="1" />
+    <Property Name="TipoProdCod" Type="varchar" MaxLength="7" />
+    <Property Name="ProdPesoBruto" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdPesoLiq" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdPesoPadrao" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ClasFiscCod" Type="varchar" MaxLength="7" />
+    <Property Name="ProdRecIcms" Type="varchar" MaxLength="5" />
+    <Property Name="ProdRecIcmsPerc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ProdRecIpi" Type="varchar" MaxLength="5" />
+    <Property Name="ProdRecIpiPerc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ProdRecIcmsST" Type="varchar" MaxLength="5" />
+    <Property Name="ProdRecIcmsSTPerc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ProdPrazoMedEnt" Type="smallint" />
+    <Property Name="CompPVCod" Type="varchar" MaxLength="7" />
+    <Property Name="GradeCod" Type="varchar" MaxLength="3" />
+    <Property Name="ProdNumSer" Type="varchar" MaxLength="5" />
+    <Property Name="ProdCalcMed" Type="varchar" MaxLength="5" />
+    <Property Name="ProdVerSaldoVenda" Type="varchar" MaxLength="5" />
+    <Property Name="ProdEntCodFab" Type="varchar" MaxLength="7" />
+    <Property Name="IndEconCod" Type="varchar" MaxLength="7" />
+    <Property Name="ProdCoefComis" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdDivPv" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdHost" Type="varchar" MaxLength="50" />
+    <Property Name="ProdQtdLimOrdProduc" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdQtdLoteEconProduc" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdConstaTabPV" Type="varchar" MaxLength="5" />
+    <Property Name="ProdCtrlUEP" Type="varchar" MaxLength="5" />
+    <Property Name="ProdDataCad" Type="datetime" />
+    <Property Name="ProdDataValidInic" Type="datetime" />
+    <Property Name="ProdDataValidFim" Type="datetime" />
+    <Property Name="ProdCompBruto" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdCompLiq" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdCompToler" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdLargBruta" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdLargLiq" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdLargToler" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdAltBruta" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdAltLiq" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdAltToler" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdPesoToler" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdPrazoMedEntCalc" Type="smallint" />
+    <Property Name="ProdNecCertQual" Type="varchar" MaxLength="5" />
+    <Property Name="ProdCodEstrSubst" Type="varchar" MaxLength="30" />
+    <Property Name="ProdStat" Type="varchar" MaxLength="10" />
+    <Property Name="CCtrlCodEstr" Type="varchar" MaxLength="30" />
+    <Property Name="ProdCodEstrQualPap" Type="varchar" MaxLength="30" />
+    <Property Name="TipoCxaPapCod" Type="varchar" MaxLength="7" />
+    <Property Name="ProdCorCxa" Type="varchar" MaxLength="80" />
+    <Property Name="ProdTranspasse" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdAba" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdVisor" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdFecham" Type="varchar" MaxLength="10" />
+    <Property Name="ProdQtdM2" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdQtdM3" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdCusto" Type="varchar" MaxLength="10" />
+    <Property Name="ProdNecAprovCompra" Type="varchar" MaxLength="5" />
+    <Property Name="ProdProducPerc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ProdProducPercTipo" Type="varchar" MaxLength="15" />
+    <Property Name="ProdProducQtdCalc" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdCustoPerc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ProdCustoPercTipo" Type="varchar" MaxLength="15" />
+    <Property Name="ProdCustoQtdCalc" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdPossuiIpiEmReal" Type="varchar" MaxLength="5" />
+    <Property Name="ProdValIpiEmReal" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ProdQtdParaIpiEmReal" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdCodEstrGrupoFat" Type="varchar" MaxLength="30" />
+    <Property Name="ProdEntraCalcCaracVol" Type="varchar" MaxLength="5" />
+    <Property Name="ProdMarkup" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdCtrlExped" Type="varchar" MaxLength="5" />
+    <Property Name="ProdTxaEmisValVenda" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ProdTxaEmisValCusto" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ProdSetorUtiliz" Type="varchar" MaxLength="15" />
+    <Property Name="ProdIncideTxaServ" Type="varchar" MaxLength="5" />
+    <Property Name="ProdImpRelRepos" Type="varchar" MaxLength="5" />
+    <Property Name="ProdCtrlEstq" Type="varchar" MaxLength="5" />
+    <Property Name="ProdServPossuiIrrf" Type="varchar" MaxLength="5" />
+    <Property Name="ProdServPossuiInss" Type="varchar" MaxLength="5" />
+    <Property Name="ProdObs" Type="varchar" MaxLength="255" />
+    <Property Name="ProdPasta" Type="text" />
+    <Property Name="FxaCod" Type="varchar" MaxLength="7" />
+    <Property Name="ProdPossuiPVDiario" Type="varchar" MaxLength="15" />
+    <Property Name="ProdBaixaEstqExped" Type="varchar" MaxLength="5" />
+    <Property Name="ProdBaixaEstqVenda" Type="varchar" MaxLength="5" />
+    <Property Name="ProdBaixaEstqOcor" Type="varchar" MaxLength="5" />
+    <Property Name="ProdBaixaEstqOrdServ" Type="varchar" MaxLength="5" />
+    <Property Name="ProdBaixaEstqTur" Type="varchar" MaxLength="5" />
+    <Property Name="ProdBaixaEstqProduc" Type="varchar" MaxLength="5" />
+    <Property Name="ProdBaixaEstqLoja" Type="varchar" MaxLength="5" />
+    <Property Name="ProdBaixaEstqReqMat" Type="varchar" MaxLength="5" />
+    <Property Name="ProdConfirmAutomTur" Type="varchar" MaxLength="5" />
+    <Property Name="ProdEmiteVouc" Type="varchar" MaxLength="5" />
+    <Property Name="ProdQtdDependeUsuTur" Type="varchar" MaxLength="5" />
+    <Property Name="ProdDependeForm" Type="varchar" MaxLength="5" />
+    <Property Name="ProdMultQtdDiaNoite" Type="varchar" MaxLength="5" />
+    <Property Name="ProdCtrlEstqLote" Type="varchar" MaxLength="5" />
+    <Property Name="ProdNecCalcMedidaComp" Type="varchar" MaxLength="5" />
+    <Property Name="ProdConfDadosCompl" Type="varchar" MaxLength="5" />
+    <Property Name="FormProdCodEstr" Type="varchar" MaxLength="30" />
+    <Property Name="ProdPossuiCompNaVenda" Type="varchar" MaxLength="5" />
+    <Property Name="GrpProdCod" Type="varchar" MaxLength="7" />
+    <Property Name="SubGrpProdCod" Type="varchar" MaxLength="7" />
+    <Property Name="MarcaProdCod" Type="varchar" MaxLength="7" />
+    <Property Name="ProdUnidMedProp" Type="varchar" MaxLength="10" />
+    <Property Name="ProdPrecoListaCalc" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdStrDesc" Type="varchar" MaxLength="20" />
+    <Property Name="ProdPercDesc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ProdCompPVCodCusto" Type="varchar" MaxLength="7" />
+    <Property Name="ProdCodCorProp" Type="varchar" MaxLength="15" />
+    <Property Name="ProdCodCorFabric" Type="varchar" MaxLength="15" />
+    <Property Name="ProdCodCorMontad" Type="varchar" MaxLength="15" />
+    <Property Name="ProdAnoCor" Type="varchar" MaxLength="4" />
+    <Property Name="ProdEmiteVoucGrpIndiv" Type="varchar" MaxLength="10" />
+    <Property Name="ProdMedChapaPap" Type="varchar" MaxLength="25" />
+    <Property Name="ProdPermVendaFrenteLoja" Type="varchar" MaxLength="5" />
+    <Property Name="ProdGarCodVenda" Type="varchar" MaxLength="7" />
+    <Property Name="ProdGarCodCompra" Type="varchar" MaxLength="7" />
+    <Property Name="ProdCodEstrGrupoBloq" Type="varchar" MaxLength="30" />
+    <Property Name="ProdTipoConsumo" Type="varchar" MaxLength="25" />
+    <Property Name="ProdHomologado" Type="varchar" MaxLength="5" />
+    <Property Name="ProdNecLaudo" Type="varchar" MaxLength="5" />
+    <Property Name="ProdCodDesenho" Type="varchar" MaxLength="30" />
+    <Property Name="CategCodEstr" Type="varchar" MaxLength="30" />
+    <Property Name="PlanoCtaEmpCod" Type="varchar" MaxLength="20" />
+    <Property Name="ProdCContabCred" Type="varchar" MaxLength="7" />
+    <Property Name="ProdCContabCred2" Type="varchar" MaxLength="7" />
+    <Property Name="ProdCContabCred3" Type="varchar" MaxLength="7" />
+    <Property Name="ProdCContabDeb" Type="varchar" MaxLength="7" />
+    <Property Name="ProdCContabDeb2" Type="varchar" MaxLength="7" />
+    <Property Name="ProdCContabDeb3" Type="varchar" MaxLength="7" />
+    <Property Name="ProdRecII" Type="varchar" MaxLength="5" />
+    <Property Name="ProdRecIIPerc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="TribACod" Type="char" MaxLength="1" />
+    <Property Name="ProdVidaUtil" Type="int" />
+    <Property Name="ProdVidaUtilEm" Type="varchar" MaxLength="10" />
+    <Property Name="ProdPercValRevenda" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ProdValCustoOperacao" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ProdCustoOperacaoEm" Type="varchar" MaxLength="10" />
+    <Property Name="ProdValCustoMan" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="ProdCustoManEm" Type="varchar" MaxLength="10" />
+    <Property Name="ProdTribIssAliqOrigDest" Type="varchar" MaxLength="20" />
+    <Property Name="ProdServAliqIrrf" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ProdTurFinalSemanaInic" Type="varchar" MaxLength="10" />
+    <Property Name="ProdTurFinalSemanaFim" Type="varchar" MaxLength="10" />
+    <Property Name="ProdMixDomOrig" Type="int" />
+    <Property Name="ProdMixCodOrig" Type="varchar" MaxLength="7" />
+    <Property Name="ProdVendaGeraMovEstq" Type="varchar" MaxLength="5" />
+    <Property Name="ProdRecPis" Type="varchar" MaxLength="5" />
+    <Property Name="ProdRecPisPerc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ProdRecCofins" Type="varchar" MaxLength="5" />
+    <Property Name="ProdRecCofinsPerc" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ProdServCofinsRF" Type="varchar" MaxLength="5" />
+    <Property Name="ProdServPisRF" Type="varchar" MaxLength="5" />
+    <Property Name="ProdServCsllRF" Type="varchar" MaxLength="5" />
+    <Property Name="ProgDescCod" Type="varchar" MaxLength="7" />
+    <Property Name="ProdServPartCalcMargemLucro" Type="varchar" MaxLength="5" />
+    <Property Name="ProgDescCodPGC" Type="varchar" MaxLength="7" />
+    <Property Name="ProdUnidNegocio" Type="varchar" MaxLength="10" />
+    <Property Name="ProdAplicaFM" Type="varchar" MaxLength="5" />
+    <Property Name="ProdConjExc" Type="varchar" MaxLength="5" />
+    <Property Name="ProdCursoCargaHorOpt" Type="smallint" />
+    <Property Name="GrpCompraCod" Type="varchar" MaxLength="7" />
+    <Property Name="ProdGenero" Type="char" MaxLength="1" />
+    <Property Name="ProdCodDNF" Type="varchar" MaxLength="5" />
+    <Property Name="ProdPartCtrlResCompVenda" Type="varchar" MaxLength="5" />
+    <Property Name="ProdPartCtrlResCompCalcAprov" Type="varchar" MaxLength="5" />
+    <Property Name="ProdQtdMBruto" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdQtdMLiq" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdQtdMToler" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdQtdM2Liq" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdQtdM2Toler" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdQtdM3Liq" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdQtdM3Toler" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdCxaEmbalagem" Type="varchar" MaxLength="10" />
+    <Property Name="ProdCodEstrRetorno" Type="varchar" MaxLength="30" />
+    <Property Name="ProdServIrrfDedParc" Type="varchar" MaxLength="5" />
+    <Property Name="ProdNecAprovCotacCompra" Type="varchar" MaxLength="5" />
+    <Property Name="ProdNecAprovReqCompra" Type="varchar" MaxLength="5" />
+    <Property Name="ProdCodAlt1" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="ProdCapVolDNF" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdAtualInformProd" Type="varchar" MaxLength="5" />
+    <Property Name="ProdNumCliche" Type="varchar" MaxLength="20" />
+    <Property Name="ProdNumFaca" Type="varchar" MaxLength="20" />
+    <Property Name="ProdStrechFilm" Type="varchar" MaxLength="5" />
+    <Property Name="ProdCompDesativado" Type="varchar" MaxLength="5" />
+    <Property Name="PRODPATHVOUCHER" Type="varchar" MaxLength="255" />
+    <Property Name="EstrutCustoCodEstr" Type="varchar" MaxLength="30" />
+    <Property Name="PesoMensMedEstqCod" Type="varchar" MaxLength="3" />
+    <Property Name="ProdCtrlEstqLoteNumAutom" Type="varchar" MaxLength="5" />
+    <Property Name="ProdContratoPartListaPadMat" Type="varchar" MaxLength="5" />
+    <Property Name="ProdPathArqDesenho" Type="varchar" MaxLength="80" />
+    <Property Name="ProdCodEstrOrigProc" Type="varchar" MaxLength="30" />
+    <Property Name="ProdVendaPor" Type="varchar" MaxLength="10" />
+    <Property Name="ProdBxaEstqMedApontProduc" Type="varchar" MaxLength="5" />
+    <Property Name="ProdCompEntraCalcEspaco" Type="varchar" MaxLength="5" />
+    <Property Name="ProdLargEntraCalcEspaco" Type="varchar" MaxLength="5" />
+    <Property Name="ProdAltEntraCalcEspaco" Type="varchar" MaxLength="5" />
+    <Property Name="ProdPossuiCompPPCP" Type="varchar" MaxLength="5" />
+    <Property Name="ProdAltEntraCalcQtdPPCP" Type="varchar" MaxLength="5" />
+    <Property Name="ProdQtdDiasDataValidLotePPCP" Type="smallint" />
+    <Property Name="ProdUtilizDimensaoLote" Type="varchar" MaxLength="5" />
+    <Property Name="ProdGeraLoteAutomPPCP" Type="varchar" MaxLength="20" />
+    <Property Name="ProdEntraPesqInternet" Type="varchar" MaxLength="5" />
+    <Property Name="ProdIgnoraHomForn" Type="varchar" MaxLength="5" />
+    <Property Name="TribBCod" Type="varchar" MaxLength="2" />
+    <Property Name="ProdTaxaAdm" Type="varchar" MaxLength="30" />
+    <Property Name="ProdRestritivo" Type="varchar" MaxLength="5" />
+    <Property Name="AtivEconCodEstr" Type="varchar" MaxLength="15" />
+    <Property Name="ProdAtivEconCodEstrSubDiv" Type="varchar" MaxLength="2" />
+    <Property Name="GENSERVCOD" Type="varchar" MaxLength="5" />
+    <Property Name="ProdModelo" Type="varchar" MaxLength="10" />
+    <Property Name="ProdEstqAtualizaCustoOnLine" Type="varchar" MaxLength="5" />
+    <Property Name="ProdTextoHist" Type="text" />
+    <Property Name="ProdIncluiISSPrecoVenda" Type="varchar" MaxLength="10" />
+    <Property Name="ProdIncluiISSPrecoCusto" Type="varchar" MaxLength="10" />
+    <Property Name="ProdVisPagInicWeb" Type="varchar" MaxLength="5" />
+    <Property Name="ProdApareceDestacadoWeb" Type="varchar" MaxLength="5" />
+    <Property Name="ProdProducPorKanban" Type="varchar" MaxLength="5" />
+    <Property Name="ProdAgrupaQtdRes" Type="varchar" MaxLength="5" />
+    <Property Name="ProdTipoUtiliz" Type="varchar" MaxLength="10" />
+    <Property Name="ProdCalcDiariaPor" Type="varchar" MaxLength="5" />
+    <Property Name="ProdPossuiDetalhamentoDimen" Type="varchar" MaxLength="5" />
+    <Property Name="ProdPercMaxDetalhamento" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ProdPercMinDetalhamento" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="ProdQtdMaiorOrdProduc" Type="varchar" MaxLength="15" />
+    <Property Name="PRODGERARESTURSEMDADOSCOMPL" Type="varchar" MaxLength="5" />
+    <Property Name="ProdRegExportado" Type="varchar" MaxLength="5" />
+    <Property Name="EspecProdCod" Type="varchar" MaxLength="2" />
+    <Property Name="AptProdCod" Type="varchar" MaxLength="1" />
+    <Property Name="CategProdCod" Type="varchar" MaxLength="1" />
+    <Property Name="FxaProdCod" Type="varchar" MaxLength="2" />
+    <Property Name="ProdLoteEmbalagVenda" Type="varchar" MaxLength="5" />
+    <Property Name="ProdIncluiReservaOnLine" Type="varchar" MaxLength="5" />
+    <Property Name="ProdExcluiReservaOnLine" Type="varchar" MaxLength="5" />
+    <Property Name="ProdAlteraReservaOnLine" Type="varchar" MaxLength="5" />
+    <Property Name="ProdTipoComb" Type="varchar" MaxLength="15" />
+    <Property Name="ProdEntraCtrlEsterilizacao" Type="varchar" MaxLength="5" />
+    <Property Name="ProdQtdDiasLiberaAeracao" Type="smallint" />
+    <Property Name="ProdAplicOrdServ" Type="varchar" MaxLength="5" />
+    <Property Name="ProdRelatorio" Type="varchar" MaxLength="5" />
+    <Property Name="ProdPossuiICMSSTValor" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUtilizPesoPadCalcVol" Type="varchar" MaxLength="5" />
+    <Property Name="ProdEntraArqPosicaoEstq" Type="varchar" MaxLength="5" />
+    <Property Name="ProdQtdFixacao" Type="int" />
+    <Property Name="ProdCodAnp" Type="varchar" MaxLength="10" />
+    <Property Name="ProdGrauConcentracao" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdComponPossuiRecalcQtd" Type="varchar" MaxLength="5" />
+    <Property Name="ProdPossuiPesoFixo" Type="varchar" MaxLength="5" />
+    <Property Name="ProdPesoFixo" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdPesoFixoMinimo" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdTaraPesoFixo" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdQtdLoteSaldoLote" Type="varchar" MaxLength="5" />
+    <Property Name="ProdCalcQtdItPvQtdLote" Type="varchar" MaxLength="5" />
+    <Property Name="ClasTurCodEstr" Type="varchar" MaxLength="15" />
+    <Property Name="ProdEntraRotSac" Type="varchar" MaxLength="5" />
+    <Property Name="ProdBaixaEstqComp" Type="varchar" MaxLength="5" />
+    <Property Name="ProdPossuiTribPauta" Type="varchar" MaxLength="5" />
+    <Property Name="TipoProdPautaCod" Type="varchar" MaxLength="2" />
+    <Property Name="ProdCapacEmbalagem" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdPercMenorQtd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdPercMaiorQtd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdPercMenorValor" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdPercMaiorValor" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdUtilizacao" Type="varchar" MaxLength="255" />
+    <Property Name="ProdInspFabrica" Type="varchar" MaxLength="5" />
+    <Property Name="ProdInspFabricaObs" Type="varchar" MaxLength="255" />
+    <Property Name="ProdQtdInstalEquipSist" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdQtdInstalTotal" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdPrzValid" Type="varchar" MaxLength="15" />
+    <Property Name="ProdPrzValidDias" Type="int" />
+    <Property Name="ToxidadeCod" Type="varchar" MaxLength="3" />
+    <Property Name="PericulosidadeCod" Type="varchar" MaxLength="3" />
+    <Property Name="FragilidadeCod" Type="varchar" MaxLength="3" />
+    <Property Name="EstFisCod" Type="varchar" MaxLength="3" />
+    <Property Name="EmbalagemCod" Type="varchar" MaxLength="3" />
+    <Property Name="ManuseioCod" Type="varchar" MaxLength="3" />
+    <Property Name="ModoEstocCod" Type="varchar" MaxLength="3" />
+    <Property Name="ModoConservCod" Type="varchar" MaxLength="3" />
+    <Property Name="ProdPautaCoefConvPisCofins" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="TipoProdFiscCod" Type="varchar" MaxLength="2" />
+    <Property Name="ProdIndicTipoArmaFogo" Type="varchar" MaxLength="15" />
+    <Property Name="ProdTipoMedic" Type="varchar" MaxLength="20" />
+    <Property Name="ProdValUnitVendaTabPV" Type="varchar" MaxLength="5" />
+    <Property Name="ProdNecConferDescarga" Type="varchar" MaxLength="5" />
+    <Property Name="ProdRetornavel" Type="varchar" MaxLength="5" />
+    <Property Name="ProdCodBEC" Type="varchar" MaxLength="30" />
+    <Property Name="ProdDataSolicCodBEC" Type="datetime" />
+    <Property Name="ProdDataRecCodBEC" Type="datetime" />
+    <Property Name="ProdDataSolicNatDesp" Type="datetime" />
+    <Property Name="ClasseBecCod" Type="varchar" MaxLength="7" />
+    <Property Name="ProdDescrBec" Type="varchar" MaxLength="255" />
+    <Property Name="ProdEntraCtrlCarga" Type="varchar" Nullable="false" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="PRODUTO1">
+    <Key>
+      <PropertyRef Name="ProdCodEstr" />
+    </Key>
+    <Property Name="ProdCodEstr" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="ProdVisPocket" Type="varchar" MaxLength="5" />
+    <Property Name="ProdUltDataMod" Type="datetime" />
+    <Property Name="ProdServMobilDesmobil" Type="varchar" MaxLength="5" />
+    <Property Name="ProdEntraCalcVerbaProjeto" Type="varchar" MaxLength="5" />
+    <Property Name="ProdTipoTabPV" Type="varchar" MaxLength="10" />
+    <Property Name="ProdCidCodBloq" Type="varchar" MaxLength="8" />
+    <Property Name="ProdPrefer" Type="varchar" MaxLength="5" />
+    <Property Name="ProdVisualReembOnline" Type="varchar" MaxLength="5" />
+    <Property Name="ProdRetPermSelManualCarga" Type="varchar" MaxLength="5" />
+    <Property Name="ProdGeraReqMatTransf" Type="varchar" MaxLength="5" />
+    <Property Name="ProdObrigRelacLoteOP" Type="varchar" MaxLength="5" />
+    <Property Name="ProdModoAtualizacao" Type="varchar" MaxLength="10" />
+    <Property Name="ProdPossuiTarget" Type="varchar" MaxLength="5" />
+    <Property Name="ProdCalcQtdPorParticipItOS" Type="varchar" MaxLength="5" />
+    <Property Name="ProdCorteDedo" Type="varchar" MaxLength="50" />
+    <Property Name="ProdCodEnquadIPI" Type="varchar" MaxLength="10" />
+    <Property Name="ProdCodSeloControleIPI" Type="varchar" MaxLength="10" />
+    <Property Name="ProdEntraRegInventSpedSinteg" Type="varchar" MaxLength="5" />
+    <Property Name="ProdCodEstrProdPaiProj" Type="varchar" MaxLength="30" />
+    <Property Name="ProdImprimeNumSerNFe" Type="varchar" MaxLength="5" />
+    <Property Name="ProdTabIncidPisCofinsCod" Type="varchar" MaxLength="3" />
+    <Property Name="ProdCodGrupoIncidPisCofins" Type="varchar" MaxLength="3" />
+    <Property Name="ProdMarcaComerc" Type="varchar" MaxLength="60" />
+    <Property Name="ProdTaxaDuBruLiq" Type="varchar" MaxLength="10" />
+    <Property Name="MarcaProdCodObjVend" Type="varchar" MaxLength="7" />
+    <Property Name="GrpProdCodObjVend" Type="varchar" MaxLength="7" />
+    <Property Name="ProdCtrlCustoFIFO" Type="varchar" MaxLength="5" />
+    <Property Name="ProdDeduzICMSSegCusto" Type="varchar" MaxLength="5" />
+    <Property Name="ProdDeduzICMSSTSegCusto" Type="varchar" MaxLength="5" />
+    <Property Name="ProdDeduzIPISegCusto" Type="varchar" MaxLength="5" />
+    <Property Name="ProdDeduzPISSegCusto" Type="varchar" MaxLength="5" />
+    <Property Name="ProdDeduzCOFINSSegCusto" Type="varchar" MaxLength="5" />
+    <Property Name="ProdCertificado" Type="varchar" MaxLength="5" />
+    <Property Name="ProdTurDataBase" Type="varchar" MaxLength="15" />
+    <Property Name="ProdBloqVendConectExterno" Type="varchar" MaxLength="5" />
+    <Property Name="ProdCodMS" Type="varchar" MaxLength="30" />
+    <Property Name="ProdEntraCalcQtdTotVenda" Type="varchar" MaxLength="5" />
+    <Property Name="ProdCodART" Type="varchar" MaxLength="15" />
+    <Property Name="ProdVacina" Type="varchar" MaxLength="5" />
+    <Property Name="ProdNecessitaCA" Type="varchar" MaxLength="5" />
+    <Property Name="RegraPagtoEntCod" Type="varchar" MaxLength="7" />
+    <Property Name="DesCodEstr" Type="varchar" MaxLength="30" />
+    <Property Name="ProdEntEstqApontUltOper" Type="varchar" MaxLength="5" />
+    <Property Name="ProdPercTotAproxImpost" Type="numeric" Precision="10" Scale="4" />
+    <Property Name="PRODSTATDMI" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="RefPautaCod" Type="varchar" MaxLength="7" />
+    <Property Name="ProdFabricProp" Type="varchar" MaxLength="5" />
+    <Property Name="ProdBenefic" Type="varchar" MaxLength="5" />
+    <Property Name="ProdHotelQtdEstrela" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdTerc" Type="varchar" Nullable="false" MaxLength="5" />
+    <Property Name="PRODCTRLCARGAORDEMIMPRESS" Type="varchar" MaxLength="3" />
+    <Property Name="ProdDtUltAtualiz" Type="datetime" />
+    <Property Name="ProdPesoFixoMaximo" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ProdObrigEmbAtendPv" Type="varchar" MaxLength="5" />
+    <Property Name="ProdNomeRelat" Type="varchar" MaxLength="255" />
+    <Property Name="ProdNecessitaSSCC" Type="varchar" MaxLength="5" />
+    <Property Name="ProdDesconsidPesagem" Type="varchar" MaxLength="5" />
+    <Property Name="PRODNOMERELAT2" Type="varchar" MaxLength="255" />
+    <Property Name="PRODPATHARQUIVO2" Type="varchar" MaxLength="80" />
+    <Property Name="PRODOPFINALIZAPONTQTDNEC" Type="varchar" MaxLength="5" />
+    <Property Name="USERCodigoCHIC" Type="varchar" MaxLength="10" />
+    <Property Name="USEREmpresaLinha" Type="varchar" MaxLength="10" />
+    <Property Name="USERLinhagemRRC" Type="varchar" MaxLength="30" />
+    <Property Name="USERNumFormula" Type="smallint" />
+    <Property Name="USERPpcpKg01Batida" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="USERPRODCODICMSST" Type="varchar" MaxLength="3" />
+    <Property Name="USERPRODDATAICMSST" Type="datetime" />
+    <Property Name="USERTipoLancEntradaProd" Type="varchar" MaxLength="10" />
+    <Property Name="USERTipoLancSaidaProd" Type="varchar" MaxLength="10" />
+    <Property Name="USERTipoLinha" Type="varchar" MaxLength="50" />
+    <Property Name="USERTLBaixaAdicProd" Type="varchar" MaxLength="10" />
+    <Property Name="ProdIndEscRelev" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <Association Name="FK__DESCR_TEC__ProdC__148A83B8">
+    <End Role="PRODUTO1" Type="Apolo10Model2.Store.PRODUTO1" Multiplicity="1" />
+    <End Role="DESCR_TECN_PROD" Type="Apolo10Model2.Store.DESCR_TECN_PROD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="DESCR_TECN_PROD">
+        <PropertyRef Name="ProdCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FIC_TEC_P__FicTe__7A5CA4AE">
+    <End Role="PRODUTO" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="0..1" />
+    <End Role="FIC_TEC_PROD" Type="Apolo10Model2.Store.FIC_TEC_PROD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="FIC_TEC_PROD">
+        <PropertyRef Name="FicTecProdSubstPor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FIC_TEC_P__ProdC__30329E2D">
+    <End Role="PRODUTO1" Type="Apolo10Model2.Store.PRODUTO1" Multiplicity="1" />
+    <End Role="FIC_TEC_PROD" Type="Apolo10Model2.Store.FIC_TEC_PROD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="FIC_TEC_PROD">
+        <PropertyRef Name="ProdCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FIC_TEC_PROD__6D626A79">
+    <End Role="PROD_UNID_MED" Type="Apolo10Model2.Store.PROD_UNID_MED" Multiplicity="0..1" />
+    <End Role="FIC_TEC_PROD" Type="Apolo10Model2.Store.FIC_TEC_PROD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROD_UNID_MED">
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ProdUnidMedCod" />
+        <PropertyRef Name="ProdUnidMedPos" />
+      </Principal>
+      <Dependent Role="FIC_TEC_PROD">
+        <PropertyRef Name="FicTecProdCodEstr" />
+        <PropertyRef Name="FicTecProdUnidMedCodDig" />
+        <PropertyRef Name="FicTecProdUnidMedPosDig" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FIC_TEC_PROD_DAT__459B6486">
+    <End Role="FIC_TEC_PROD" Type="Apolo10Model2.Store.FIC_TEC_PROD" Multiplicity="1" />
+    <End Role="FIC_TEC_PROD_DATA" Type="Apolo10Model2.Store.FIC_TEC_PROD_DATA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FIC_TEC_PROD">
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="FicTecProdSeq" />
+      </Principal>
+      <Dependent Role="FIC_TEC_PROD_DATA">
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="FicTecProdSeq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__prod_oper__ProdC__4D719078">
+    <End Role="PRODUTO" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="0..1" />
+    <End Role="PROD_OPER" Type="Apolo10Model2.Store.PROD_OPER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PROD_OPER">
+        <PropertyRef Name="ProdCodEstrRetalho" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PROD_OPER_ITEM__7710F7E2">
+    <End Role="PROD_OPER" Type="Apolo10Model2.Store.PROD_OPER" Multiplicity="1" />
+    <End Role="PROD_OPER_ITEM" Type="Apolo10Model2.Store.PROD_OPER_ITEM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROD_OPER">
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ProdOperSeq" />
+      </Principal>
+      <Dependent Role="PROD_OPER_ITEM">
+        <PropertyRef Name="ProdCodEstr" />
+        <PropertyRef Name="ProdOperSeq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PROD_UNID__ProdC__14B141C4">
+    <End Role="PRODUTO" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="1" />
+    <End Role="PROD_UNID_MED" Type="Apolo10Model2.Store.PROD_UNID_MED" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PROD_UNID_MED">
+        <PropertyRef Name="ProdCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRODUTO__ProdCod__0962B805">
+    <End Role="PRODUTO" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="0..1" />
+    <End Role="PRODUTO1" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstrRetorno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRODUTO__ProdCod__2E1B42B5">
+    <End Role="PRODUTO" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="0..1" />
+    <End Role="PRODUTO1" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstrGrupoBloq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRODUTO__ProdCod__4DFBD227">
+    <End Role="PRODUTO" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="0..1" />
+    <End Role="PRODUTO1" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstrOrigProc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Produto__ProdTax__4E278607">
+    <End Role="PRODUTO" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="0..1" />
+    <End Role="PRODUTO1" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PRODUTO1">
+        <PropertyRef Name="ProdTaxaAdm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRODUTO1__ProdCo__053D5330">
+    <End Role="PRODUTO" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="1" />
+    <End Role="PRODUTO1" Type="Apolo10Model2.Store.PRODUTO1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRODUTO1__ProdCo__68D880B1">
+    <End Role="PRODUTO1" Type="Apolo10Model2.Store.PRODUTO1" Multiplicity="0..1" />
+    <End Role="PRODUTO11" Type="Apolo10Model2.Store.PRODUTO1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PRODUTO11">
+        <PropertyRef Name="ProdCodEstrProdPaiProj" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FIC_TEC__REF_10254_PRODUTO">
+    <End Role="PRODUTO" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="1" />
+    <End Role="FIC_TEC_PROD" Type="Apolo10Model2.Store.FIC_TEC_PROD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="FIC_TEC_PROD">
+        <PropertyRef Name="FicTecProdCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PROD_OPE_REF_10148_PRODUTO">
+    <End Role="PRODUTO" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="0..1" />
+    <End Role="PROD_OPER" Type="Apolo10Model2.Store.PROD_OPER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PROD_OPER">
+        <PropertyRef Name="ProdCodEstrSucata" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PROD_OPE_REF_10151_PRODUTO">
+    <End Role="PRODUTO" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="1" />
+    <End Role="PROD_OPER" Type="Apolo10Model2.Store.PROD_OPER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PROD_OPER">
+        <PropertyRef Name="ProdCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PROD_OPE_REF_13511_PRODUTO">
+    <End Role="PRODUTO" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="1" />
+    <End Role="PROD_OPER_ITEM" Type="Apolo10Model2.Store.PROD_OPER_ITEM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PROD_OPER_ITEM">
+        <PropertyRef Name="ProdOperItProdCodEstr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRODUTO_REF_1167_PRODUTO">
+    <End Role="PRODUTO" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="0..1" />
+    <End Role="PRODUTO1" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstrGrupoFat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRODUTO_REF_1173_PRODUTO">
+    <End Role="PRODUTO" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="0..1" />
+    <End Role="PRODUTO1" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstrQualPap" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRODUTO_REF_1179_PRODUTO">
+    <End Role="PRODUTO" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="0..1" />
+    <End Role="PRODUTO1" Type="Apolo10Model2.Store.PRODUTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUTO">
+        <PropertyRef Name="ProdCodEstr" />
+      </Principal>
+      <Dependent Role="PRODUTO1">
+        <PropertyRef Name="ProdCodEstrSubst" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="CUSTO_FIC_TEC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CODIGO_PRODUTO" Type="varchar" Mode="In" />
+    <Parameter Name="CODIGO_EMPRESA" Type="varchar" Mode="In" />
+    <Parameter Name="CHAVE" Type="int" Mode="In" />
+    <Parameter Name="ITMOVESTQSEQ" Type="int" Mode="In" />
+  </Function>
+</Schema>

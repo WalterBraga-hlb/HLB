@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Chart BackColor="#D3DFF0" BackGradientStyle="TopBottom" BackSecondaryColor="White" BorderColor="26, 59, 105" 
+       BorderlineDashStyle="Solid" BorderWidth="10" Palette="BrightPastel">
+  <ChartAreas>
+    <ChartArea Name="% Incubável" _Template_="All" BackColor="64, 165, 191, 228" BackGradientStyle="TopBottom" 
+               BackSecondaryColor="White" BorderColor="64, 64, 64, 64" BorderDashStyle="Solid"
+               ShadowColor="Transparent">
+      <AxisY>
+        <MajorGrid Interval="Auto" LineColor="64, 64, 64, 64" />
+        <LabelStyle Font="Verdana, 28pt" />
+      </AxisY>
+    </ChartArea>
+  </ChartAreas>
+  <Legends>
+    <Legend _Template_="All" BackColor="Transparent" Font="Trebuchet MS, 8.25pt, style=Bold" IsTextAutoFit="False" />
+  </Legends>
+  <BorderSkin SkinStyle="Emboss" />
+</Chart>

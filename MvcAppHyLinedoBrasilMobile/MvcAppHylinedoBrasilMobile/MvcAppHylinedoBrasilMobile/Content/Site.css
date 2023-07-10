@@ -1,0 +1,1795 @@
+﻿/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #f00;
+    display: block;
+    margin-top: 8px;
+    text-align: center;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+
+/* jQuery mobile styles
+-----------------------------------------------------------*/
+
+/* Make listview buttons fill the whole horizontal width of the screen */
+.ui-li .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li {
+    padding-right: 15px;
+}
+
+.ui-bar-a, .ui-body-a, .ui-btn-up-a, .ui-btn-hover-a, .ui-btn-down-a,
+.ui-bar-b, .ui-body-b, .ui-btn-up-b, .ui-btn-hover-b, .ui-btn-down-b,
+.ui-bar-c, .ui-body-c, .ui-btn-up-c, .ui-btn-hover-c, .ui-btn-down-c,
+.ui-bar-d, .ui-body-d, .ui-btn-up-d, .ui-btn-hover-d, .ui-btn-down-d,
+.ui-bar-e, .ui-body-e, .ui-btn-up-e, .ui-btn-hover-e, .ui-btn-down-e,
+.ui-btn-active  {
+    text-shadow: none;
+}
+
+/* TABLE
+----------------------------------------------------------*/
+/*
+table
+{
+  border: solid 1px #e8eef4;
+  border-collapse: collapse;
+  font-size: 10px;
+  height: 100%;
+  width: 100%;
+}
+
+table td 
+{
+  padding: 5px;   
+  border: solid 1px #e8eef4;
+  text-align: center;
+}
+
+table th
+{
+  padding: 6px 5px;
+  text-align: center;
+  background-color: #e8eef4; 
+  border: solid 1px #e8eef4;   
+}
+*/
+* { 
+	margin: 0; 
+	padding: 0; 
+}
+body { 
+	font: 14px/1.4 Georgia, Serif; 
+}
+#page-wrap {
+	margin: 50px;
+}
+p {
+	margin: 20px 0; 
+}
+
+	/* 
+	Generic Styling, for Desktops/Laptops 
+	*/
+	table { 
+		width: 100%; 
+		border-collapse: collapse; 
+		text-align: center;
+	}
+	/* Zebra striping */
+	tr:nth-of-type(odd) { 
+		background: #eee; 
+	}
+	th { 
+		background: #333; 
+		color: white; 
+		font-weight: bold; 
+		text-align: center;
+	}
+	td, th { 
+		padding: 6px; 
+		border: 1px solid #ccc; 
+	}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 180px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    top: -100px;
+    right: -50px;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+/******* AJUSTE TABELA ********/
+	
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+/*only screen and (max-width: 50px),
+(min-device-width: 50px) and (max-device-width: 1024px)  { */
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)   {
+    
+    /* Force table to not be like tables anymore  */
+	table.ajustetabelaItensFinalizaPV, thead.ajustetabelaItensFinalizaPV, tbody.ajustetabelaItensFinalizaPV, 
+	    th.ajustetabelaItensFinalizaPV, td.ajustetabelaItensFinalizaPV, tr.ajustetabelaItensFinalizaPV { 
+		display: block; 
+		text-align: left;
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility)  */
+	th.ajustetabelaItensFinalizaPV { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr.ajustetabelaItensFinalizaPV { border: 1px solid #ccc; }
+	
+	td.ajustetabelaItensFinalizaPV { 
+		/* Behave  like a "row" */
+		border: 1px solid #ccc;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	td.ajustetabelaItensFinalizaPV:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*Label the data*/
+	
+	td.ajustetabelaItensFinalizaPV:nth-of-type(1):before { content: "Sequência:"; font-weight: bold; }
+	td.ajustetabelaItensFinalizaPV:nth-of-type(2):before { content: "De:"; font-weight: bold; }
+	td.ajustetabelaItensFinalizaPV:nth-of-type(3):before { content: "A:"; font-weight: bold; }
+	td.ajustetabelaItensFinalizaPV:nth-of-type(4):before { content: "Dias de Atraso:"; font-weight: bold; }
+	td.ajustetabelaItensFinalizaPV:nth-of-type(5):before { content: "Linha:"; font-weight: bold; }
+	td.ajustetabelaItensFinalizaPV:nth-of-type(6):before { content: "Qtd. Líquida:"; font-weight: bold; }
+	td.ajustetabelaItensFinalizaPV:nth-of-type(7):before { content: "% Bonificação:"; font-weight: bold; }
+	td.ajustetabelaItensFinalizaPV:nth-of-type(8):before { content: "Qtde. Bonificação:"; font-weight: bold; }
+	td.ajustetabelaItensFinalizaPV:nth-of-type(9):before { content: "Qtde. Reposição"; font-weight: bold; }
+	td.ajustetabelaItensFinalizaPV:nth-of-type(10):before { content: "Qtde. Total:"; font-weight: bold; }
+	td.ajustetabelaItensFinalizaPV:nth-of-type(11):before { content: "Preço Pinto"; font-weight: bold; }
+	td.ajustetabelaItensFinalizaPV:nth-of-type(12):before { content: "Valor Total do Pinto"; font-weight: bold; }
+	td.ajustetabelaItensFinalizaPV:nth-of-type(13):before { content: "Preço Total:"; font-weight: bold; }
+	td.ajustetabelaItensFinalizaPV:nth-of-type(14):before { content: "Valor Total:"; font-weight: bold; }
+	td.ajustetabelaItensFinalizaPV:nth-of-type(15):before { content: "CHIC:"; font-weight: bold; }
+	td.ajustetabelaItensFinalizaPV:nth-of-type(16):before { content: "CHIC Reposição:"; font-weight: bold; }
+	td.ajustetabelaItensFinalizaPV:nth-of-type(17):before { content: "Ações:"; font-weight: bold; }
+}
+	
+/******* AJUSTE DE TABELA PELO TAMANHO SEM CABEÇALHO ******/
+
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)   { 
+    
+    /* Force table to not be like tables anymore  */
+	table.ajusteWithoutHeader, thead.ajusteWithoutHeader, tbody.ajusteWithoutHeader, th.ajusteWithoutHeader, 
+	    td.ajusteWithoutHeader, tr.ajusteWithoutHeader { 
+		display: block; 
+		text-align: left;
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility)  */
+	th.ajusteWithoutHeader { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr.ajusteWithoutHeader { border: 1px solid #ccc; }
+	
+	/*td.ajusteWithoutHeader { 
+		/* Behave  like a "row" 
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}*/
+	
+	td.ajusteWithoutHeader:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+}
+
+/******* AJUSTE DE TABELA PELO TAMANHO RDV ******/
+
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)   { 
+    
+    /* Force table to not be like tables anymore  */
+	table.ajusteRDV, thead.ajusteRDV, tbody.ajusteRDV, th.ajusteRDV, 
+	    td.ajusteRDV, tr.ajusteRDV { 
+		display: block; 
+		text-align: left;
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility)  */
+	th.ajusteRDV { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr.ajusteRDV { border: 1px solid #ccc; }
+	
+	/*td.ajusteWithoutHeader { 
+		/* Behave  like a "row" 
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}*/
+	
+	td.ajusteRDV:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*Label the data*/
+	
+	td.ajusteRDV:nth-of-type(1):before { content: "ID:"; font-weight: bold; }
+	td.ajusteRDV:nth-of-type(2):before { content: "Empresa:"; font-weight: bold; }
+	td.ajusteRDV:nth-of-type(2):before { content: "Empresa:"; font-weight: bold; }
+}
+
+/******* AJUSTE TABELA LISTA DE ACOES - GEP ********/
+	
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+/*only screen and (max-width: 50px),
+(min-device-width: 50px) and (max-device-width: 1024px)  { */
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)   {
+    
+    /* Force table to not be like tables anymore  */
+	table.ajustetabelaAcaoGEP, thead.ajustetabelaAcaoGEP, tbody.ajustetabelaAcaoGEP, 
+	    th.ajustetabelaAcaoGEP, td.ajustetabelaAcaoGEP, tr.ajustetabelaAcaoGEP { 
+		display: block; 
+		text-align: left;
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility)  */
+	th.ajustetabelaAcaoGEP { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr.ajustetabelaAcaoGEP { border: 1px solid #000000; }
+	
+	td.ajustetabelaAcaoGEP { 
+		/* Behave  like a "row" */
+		border: 1px solid #ccc;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	td.ajustetabelaAcaoGEP:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*Label the data*/
+	
+	td.ajustetabelaAcaoGEP:nth-of-type(1):before { content: "Semana / Ano:"; font-weight: bold; }
+	td.ajustetabelaAcaoGEP:nth-of-type(2):before { content: "Ação:"; font-weight: bold; }
+	td.ajustetabelaAcaoGEP:nth-of-type(3):before { content: "Pilar:"; font-weight: bold; }
+	td.ajustetabelaAcaoGEP:nth-of-type(4):before { content: "Objetivo:"; font-weight: bold; }
+	td.ajustetabelaAcaoGEP:nth-of-type(5):before { content: "Prazo:"; font-weight: bold; }
+	td.ajustetabelaAcaoGEP:nth-of-type(6):before { content: "Status:"; font-weight: bold; }
+	td.ajustetabelaAcaoGEP:nth-of-type(7):before { content: "Usuário:"; font-weight: bold; }
+	td.ajustetabelaAcaoGEP:nth-of-type(8):before { content: "Data Cadastro:"; font-weight: bold; }
+	td.ajustetabelaAcaoGEP:nth-of-type(9):before { content: "Ações:"; font-weight: bold; }
+}
+
+/******* AJUSTE TABELA INVESTIMENTOS - Sistema de Orçamentos ********/
+	
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+/*only screen and (max-width: 50px),
+(min-device-width: 50px) and (max-device-width: 1024px)  { */
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)   {
+    
+    /* Force table to not be like tables anymore  */
+	table.ajustetabelaInvestimentoMes, thead.ajustetabelaInvestimentoMes, tbody.ajustetabelaInvestimentoMes, 
+	    th.ajustetabelaInvestimentoMes, td.ajustetabelaInvestimentoMes, tr.ajustetabelaInvestimentoMes { 
+		display: block; 
+		text-align: left;
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility)  */
+	th.ajustetabelaInvestimentoMes { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr.ajustetabelaInvestimentoMes { border: 1px solid #000000; }
+	
+	td.ajustetabelaInvestimentoMes { 
+		/* Behave  like a "row" */
+		border: 1px solid #ccc;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	td.ajustetabelaInvestimentoMes:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*Label the data*/
+	
+	td.ajustetabelaInvestimentoMes:nth-of-type(1):before { content: "Nº Projeto:"; font-weight: bold; }
+	td.ajustetabelaInvestimentoMes:nth-of-type(2):before { content: "Nome:"; font-weight: bold; }
+	td.ajustetabelaInvestimentoMes:nth-of-type(3):before { content: "Depto.:"; font-weight: bold; }
+	td.ajustetabelaInvestimentoMes:nth-of-type(4):before { content: "Jul.:"; font-weight: bold; }
+	td.ajustetabelaInvestimentoMes:nth-of-type(5):before { content: "Ago.:"; font-weight: bold; }
+	td.ajustetabelaInvestimentoMes:nth-of-type(6):before { content: "Set.:"; font-weight: bold; }
+	td.ajustetabelaInvestimentoMes:nth-of-type(7):before { content: "Out.:"; font-weight: bold; }
+	td.ajustetabelaInvestimentoMes:nth-of-type(8):before { content: "Nov.:"; font-weight: bold; }
+	td.ajustetabelaInvestimentoMes:nth-of-type(9):before { content: "Dez.:"; font-weight: bold; }
+	td.ajustetabelaInvestimentoMes:nth-of-type(10):before { content: "Jan.:"; font-weight: bold; }
+	td.ajustetabelaInvestimentoMes:nth-of-type(11):before { content: "Fev.:"; font-weight: bold; }
+	td.ajustetabelaInvestimentoMes:nth-of-type(12):before { content: "Mar.:"; font-weight: bold; }
+	td.ajustetabelaInvestimentoMes:nth-of-type(13):before { content: "Abr.:"; font-weight: bold; }
+	td.ajustetabelaInvestimentoMes:nth-of-type(14):before { content: "Mai.:"; font-weight: bold; }
+	td.ajustetabelaInvestimentoMes:nth-of-type(15):before { content: "Jun.:"; font-weight: bold; }
+}
+
+/******* AJUSTE TABELA VISITAS - Sistema de Auditoria ********/
+	
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+/*only screen and (max-width: 50px),
+(min-device-width: 50px) and (max-device-width: 1024px)  { */
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)   {
+    
+    /* Force table to not be like tables anymore  */
+	table.ajustetabelaVisita, thead.ajustetabelaVisita, tbody.ajustetabelaVisita, 
+	    th.ajustetabelaVisita, td.ajustetabelaVisita, tr.ajustetabelaVisita { 
+		display: block; 
+		text-align: left;
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility)  */
+	th.ajustetabelaVisita { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr.ajustetabelaVisita { border: 1px solid #000000; }
+	
+	td.ajustetabelaVisita { 
+		/* Behave  like a "row" */
+		border: 1px solid #ccc;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	td.ajustetabelaVisita:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*Label the data*/
+	
+	td.ajustetabelaVisita:nth-of-type(1):before { content: "Data Visita:"; font-weight: bold; }
+	td.ajustetabelaVisita:nth-of-type(2):before { content: "Departamento:"; font-weight: bold; }
+	td.ajustetabelaVisita:nth-of-type(3):before { content: "Responsável:"; font-weight: bold; }
+	td.ajustetabelaVisita:nth-of-type(4):before { content: "Ações:"; font-weight: bold; }
+}
+
+/******* AJUSTE TABELA REQUISITOS DA VISITA - Sistema de Auditoria ********/
+	
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+/*only screen and (max-width: 50px),
+(min-device-width: 50px) and (max-device-width: 1024px)  { */
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)   {
+    
+    /* Force table to not be like tables anymore  */
+	table.ajustetabelaRequisitoVisita, thead.ajustetabelaRequisitoVisita, tbody.ajustetabelaRequisitoVisita, 
+	    th.ajustetabelaRequisitoVisita, td.ajustetabelaRequisitoVisita, tr.ajustetabelaRequisitoVisita { 
+		display: block; 
+		text-align: left;
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility)  */
+	th.ajustetabelaRequisitoVisita { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr.ajustetabelaRequisitoVisita { border: 1px solid #000000; }
+	
+	td.ajustetabelaRequisitoVisita { 
+		/* Behave  like a "row" */
+		border: 1px solid #ccc;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 25%; 
+	}
+	
+	td.ajustetabelaRequisitoVisita:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*Label the data*/
+	
+	td.ajustetabelaRequisitoVisita:nth-of-type(1):before { content: "Requisito:"; font-weight: bold; }
+	td.ajustetabelaRequisitoVisita:nth-of-type(2):before { content: "Avaliação:"; font-weight: bold; }
+}
+
+/******* AJUSTE TABELA REQUISITOS - Sistema de Auditoria ********/
+	
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+/*only screen and (max-width: 50px),
+(min-device-width: 50px) and (max-device-width: 1024px)  { */
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)   {
+    
+    /* Force table to not be like tables anymore  */
+	table.ajustetabelaRequisito, thead.ajustetabelaRequisito, tbody.ajustetabelaRequisito, 
+	    th.ajustetabelaRequisito, td.ajustetabelaRequisito, tr.ajustetabelaRequisito { 
+		display: block; 
+		text-align: left;
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility)  */
+	th.ajustetabelaRequisito { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr.ajustetabelaRequisito { border: 1px solid #000000; }
+	
+	td.ajustetabelaRequisito { 
+		/* Behave  like a "row" */
+		border: 1px solid #ccc;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 25%; 
+	}
+	
+	td.ajustetabelaRequisito:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*Label the data*/
+	
+	td.ajustetabelaRequisito:nth-of-type(1):before { content: "Tipo:"; font-weight: bold; }
+	td.ajustetabelaRequisito:nth-of-type(2):before { content: "Grupo:"; font-weight: bold; }
+	td.ajustetabelaRequisito:nth-of-type(3):before { content: "Requisito:"; font-weight: bold; }
+	td.ajustetabelaRequisito:nth-of-type(4):before { content: "Ações:"; font-weight: bold; }
+}
+
+/******* AJUSTE TABELA REQUISITOS NÃO CONFORME - Sistema de Auditoria ********/
+	
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+/*only screen and (max-width: 50px),
+(min-device-width: 50px) and (max-device-width: 1024px)  { */
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)   {
+    
+    /* Force table to not be like tables anymore  */
+	table.ajustetabelaRequisitoNaoConforme, thead.ajustetabelaRequisitoNaoConforme, tbody.ajustetabelaRequisitoNaoConforme, 
+	    th.ajustetabelaRequisitoNaoConforme, td.ajustetabelaRequisitoNaoConforme, tr.ajustetabelaRequisitoNaoConforme { 
+		display: block; 
+		text-align: left;
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility)  */
+	th.ajustetabelaRequisitoNaoConforme { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr.ajustetabelaRequisitoNaoConforme { border: 1px solid #000000; }
+	
+	td.ajustetabelaRequisitoNaoConforme { 
+		/* Behave  like a "row" */
+		border: 1px solid #ccc;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 25%; 
+	}
+	
+	td.ajustetabelaRequisitoNaoConforme:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*Label the data*/
+	
+	td.ajustetabelaRequisitoNaoConforme:nth-of-type(1):before { content: "Data:"; font-weight: bold; }
+	td.ajustetabelaRequisitoNaoConforme:nth-of-type(2):before { content: "Unidade:"; font-weight: bold; }
+	td.ajustetabelaRequisitoNaoConforme:nth-of-type(3):before { content: "Núcleo:"; font-weight: bold; }
+	td.ajustetabelaRequisitoNaoConforme:nth-of-type(4):before { content: "Grupo:"; font-weight: bold; }
+	td.ajustetabelaRequisitoNaoConforme:nth-of-type(5):before { content: "Requisito:"; font-weight: bold; }
+	td.ajustetabelaRequisitoNaoConforme:nth-of-type(6):before { content: "Avaliação:"; font-weight: bold; }
+	td.ajustetabelaRequisitoNaoConforme:nth-of-type(7):before { content: "Prazo:"; font-weight: bold; }
+}
+
+/******* AJUSTE TABELA DE HISTÓRICO DE REQUISITOS - Sistema de Auditoria ********/
+	
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+/*only screen and (max-width: 50px),
+(min-device-width: 50px) and (max-device-width: 1024px)  { */
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)   {
+    
+    /* Force table to not be like tables anymore  */
+	table.ajustetabelaLogRequisitoVisita, thead.ajustetabelaLogRequisitoVisita, tbody.ajustetabelaLogRequisitoVisita, 
+	    th.ajustetabelaLogRequisitoVisita, td.ajustetabelaLogRequisitoVisita, tr.ajustetabelaLogRequisitoVisita { 
+		display: block; 
+		text-align: left;
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility)  */
+	th.ajustetabelaLogRequisitoVisita { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr.ajustetabelaLogRequisitoVisita { border: 1px solid #000000; }
+	
+	td.ajustetabelaLogRequisitoVisita { 
+		/* Behave  like a "row" */
+		border: 1px solid #ccc;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 25%; 
+	}
+	
+	td.ajustetabelaLogRequisitoVisita:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*Label the data*/
+	
+	td.ajustetabelaLogRequisitoVisita:nth-of-type(1):before { content: "Data Hora:"; font-weight: bold; }
+	td.ajustetabelaLogRequisitoVisita:nth-of-type(2):before { content: "Usuário:"; font-weight: bold; }
+	td.ajustetabelaLogRequisitoVisita:nth-of-type(3):before { content: "Operação:"; font-weight: bold; }
+	td.ajustetabelaLogRequisitoVisita:nth-of-type(4):before { content: "Status Aval.:"; font-weight: bold; }
+	td.ajustetabelaLogRequisitoVisita:nth-of-type(5):before { content: "Prazo:"; font-weight: bold; }
+	td.ajustetabelaLogRequisitoVisita:nth-of-type(6):before { content: "Avaliação:"; font-weight: bold; }
+	td.ajustetabelaLogRequisitoVisita:nth-of-type(7):before { content: "Resolução:"; font-weight: bold; }
+	td.ajustetabelaLogRequisitoVisita:nth-of-type(8):before { content: "Status:"; font-weight: bold; }
+}
+
+/******* AJUSTE TABELA DE ITEM SOLICITACAO INVESTIMENTO - Sistema de Orçamentos ********/
+	
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+/*only screen and (max-width: 50px),
+(min-device-width: 50px) and (max-device-width: 1024px)  { */
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)   {
+    
+    /* Force table to not be like tables anymore  */
+	table.ajusteTabelaItensSolInv, thead.ajusteTabelaItensSolInv, tbody.ajusteTabelaItensSolInv, 
+	    th.ajusteTabelaItensSolInv, td.ajusteTabelaItensSolInv, tr.ajusteTabelaItensSolInv { 
+		display: block; 
+		text-align: left;
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility)  */
+	th.ajusteTabelaItensSolInv { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr.ajusteTabelaItensSolInv { border: 1px solid #000000; }
+	
+	td.ajusteTabelaItensSolInv { 
+		/* Behave  like a "row" */
+		border: 1px solid #ccc;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 25%; 
+	}
+	
+	td.ajusteTabelaItensSolInv:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*Label the data*/
+	
+	td.ajusteTabelaItensSolInv:nth-of-type(1):before { content: "Categoria:"; font-weight: bold; }
+	td.ajusteTabelaItensSolInv:nth-of-type(2):before { content: "Descrição:"; font-weight: bold; }
+	td.ajusteTabelaItensSolInv:nth-of-type(3):before { content: "#1 - Empresa:"; font-weight: bold; }
+	td.ajusteTabelaItensSolInv:nth-of-type(4):before { content: "#1 - Valor:"; font-weight: bold; }
+	td.ajusteTabelaItensSolInv:nth-of-type(5):before { content: "#2 - Empresa:"; font-weight: bold; }
+	td.ajusteTabelaItensSolInv:nth-of-type(6):before { content: "#2 - Valor:"; font-weight: bold; }
+	td.ajusteTabelaItensSolInv:nth-of-type(7):before { content: "#3 - Empresa:"; font-weight: bold; }
+	td.ajusteTabelaItensSolInv:nth-of-type(8):before { content: "#3 - Valor:"; font-weight: bold; }
+	td.ajusteTabelaItensSolInv:nth-of-type(9):before { content: "Escolhida:"; font-weight: bold; }
+	td.ajusteTabelaItensSolInv:nth-of-type(10):before { content: ""; font-weight: bold; }
+}
+
+/******* AJUSTE TABELA DE COTACAO ITEM SOLICITACAO INVESTIMENTO - Sistema de Orçamentos ********/
+	
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+/*only screen and (max-width: 50px),
+(min-device-width: 50px) and (max-device-width: 1024px)  { */
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)   {
+    
+    /* Force table to not be like tables anymore  */
+	table.ajustetabelaInvestimentoSolicitacaoItemCotacao, thead.ajustetabelaInvestimentoSolicitacaoItemCotacao, tbody.ajustetabelaInvestimentoSolicitacaoItemCotacao, 
+	    th.ajustetabelaInvestimentoSolicitacaoItemCotacao, td.ajustetabelaInvestimentoSolicitacaoItemCotacao, tr.ajustetabelaInvestimentoSolicitacaoItemCotacao { 
+		display: block; 
+		text-align: left;
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility)  */
+	th.ajustetabelaInvestimentoSolicitacaoItemCotacao { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr.ajustetabelaInvestimentoSolicitacaoItemCotacao { border: 1px solid #000000; }
+	
+	td.ajustetabelaInvestimentoSolicitacaoItemCotacao { 
+		/* Behave  like a "row" */
+		border: 1px solid #ccc;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 25%; 
+	}
+	
+	td.ajustetabelaInvestimentoSolicitacaoItemCotacao:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*Label the data*/
+	
+	td.ajustetabelaInvestimentoSolicitacaoItemCotacao:nth-of-type(1):before { content: "Cotação:"; font-weight: bold; }
+	td.ajustetabelaInvestimentoSolicitacaoItemCotacao:nth-of-type(2):before { content: "Fornec.:"; font-weight: bold; }
+	td.ajustetabelaInvestimentoSolicitacaoItemCotacao:nth-of-type(3):before { content: "Valor:"; font-weight: bold; }
+}
+
+/******* AJUSTE TABELA DE SOLICITACAO INVESTIMENTO - Sistema de Orçamentos ********/
+	
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+/*only screen and (max-width: 50px),
+(min-device-width: 50px) and (max-device-width: 1024px)  { */
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)   {
+    
+    /* Force table to not be like tables anymore  */
+	table.ajustetabelaSolicitacaoInvestimento, thead.ajustetabelaSolicitacaoInvestimento, tbody.ajustetabelaSolicitacaoInvestimento, 
+	    th.ajustetabelaSolicitacaoInvestimento, td.ajustetabelaSolicitacaoInvestimento, tr.ajustetabelaSolicitacaoInvestimento { 
+		display: block; 
+		text-align: left;
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility)  */
+	th.ajustetabelaSolicitacaoInvestimento { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr.ajustetabelaSolicitacaoInvestimento { border: 1px solid #000000; }
+	
+	td.ajustetabelaSolicitacaoInvestimento { 
+		/* Behave  like a "row" */
+		border: 1px solid #ccc;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 25%; 
+	}
+	
+	td.ajustetabelaSolicitacaoInvestimento:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*Label the data*/
+	
+	td.ajustetabelaSolicitacaoInvestimento:nth-of-type(1):before { content: "Depto.:"; font-weight: bold; }
+	td.ajustetabelaSolicitacaoInvestimento:nth-of-type(2):before { content: "Resp.:"; font-weight: bold; }
+	td.ajustetabelaSolicitacaoInvestimento:nth-of-type(3):before { content: "Inv.:"; font-weight: bold; }
+	td.ajustetabelaSolicitacaoInvestimento:nth-of-type(4):before { content: "Descrição:"; font-weight: bold; }
+	td.ajustetabelaSolicitacaoInvestimento:nth-of-type(5):before { content: "Data Início:"; font-weight: bold; }
+	td.ajustetabelaSolicitacaoInvestimento:nth-of-type(6):before { content: "Data Térm.:"; font-weight: bold; }
+	td.ajustetabelaSolicitacaoInvestimento:nth-of-type(7):before { content: "Valor:"; font-weight: bold; }
+	td.ajustetabelaSolicitacaoInvestimento:nth-of-type(8):before { content: "Status:"; font-weight: bold; }
+}
+
+/******* AJUSTE TABELA RRC - Sistema de Assitência Técnica ********/
+	
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+/*only screen and (max-width: 50px),
+(min-device-width: 50px) and (max-device-width: 1024px)  { */
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)   {
+    
+    /* Force table to not be like tables anymore  */
+	table.ajustetabelaRRC, thead.ajustetabelaRRC, tbody.ajustetabelaRRC, 
+	    th.ajustetabelaRRC, td.ajustetabelaRRC, tr.ajustetabelaRRC { 
+		display: block; 
+		text-align: left;
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility)  */
+	th.ajustetabelaRRC { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr.ajustetabelaRRC { border: 1px solid #000000; }
+	
+	td.ajustetabelaRRC { 
+		/* Behave  like a "row" */
+		border: 1px solid #ccc;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 25%; 
+	}
+	
+	td.ajustetabelaRRC:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*Label the data*/
+	
+	td.ajustetabelaRRC:nth-of-type(1):before { content: "Empresa:"; font-weight: bold; }
+	td.ajustetabelaRRC:nth-of-type(2):before { content: "Data RRC:"; font-weight: bold; }
+	td.ajustetabelaRRC:nth-of-type(3):before { content: "Data Nasc.:"; font-weight: bold; }
+	td.ajustetabelaRRC:nth-of-type(4):before { content: "Cliente:"; font-weight: bold; }
+	td.ajustetabelaRRC:nth-of-type(5):before { content: "Cid./UF:"; font-weight: bold; }
+	td.ajustetabelaRRC:nth-of-type(6):before { content: "Data Incl.:"; font-weight: bold; }
+	td.ajustetabelaRRC:nth-of-type(7):before { content: "Usuário:"; font-weight: bold; }
+	td.ajustetabelaRRC:nth-of-type(8):before { content: "Nº NF:"; font-weight: bold; }
+	td.ajustetabelaRRC:nth-of-type(9):before { content: "Reclamação:"; font-weight: bold; }
+	td.ajustetabelaRRC:nth-of-type(10):before { content: "Status:"; font-weight: bold; }
+}
+
+/******* AJUSTE TABELA AQO ********/
+	
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+/*only screen and (max-width: 50px),
+(min-device-width: 50px) and (max-device-width: 1024px)  { */
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)   {
+    
+    /* Force table to not be like tables anymore  */
+	table.ajustetabelaAQO, thead.ajustetabelaAQO, tbody.ajustetabelaAQO, 
+	    th.ajustetabelaAQO, td.ajustetabelaAQO, tr.ajustetabelaAQO { 
+		display: block; 
+		text-align: left;
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility)  */
+	th.ajustetabelaAQO { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr.ajustetabelaAQO { border: 1px solid #000000; }
+	
+	td.ajustetabelaAQO { 
+		/* Behave  like a "row" */
+		border: 1px solid #ccc;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 25%; 
+	}
+	
+	td.ajustetabelaAQO:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*Label the data*/
+	
+	td.ajustetabelaAQO:nth-of-type(1):before { content: "ID:"; font-weight: bold; }
+	td.ajustetabelaAQO:nth-of-type(2):before { content: "Incubatório:"; font-weight: bold; }
+	td.ajustetabelaAQO:nth-of-type(3):before { content: "Data AQO:"; font-weight: bold; }
+	td.ajustetabelaAQO:nth-of-type(4):before { content: "Lote:"; font-weight: bold; }
+	td.ajustetabelaAQO:nth-of-type(5):before { content: "Linhagem:"; font-weight: bold; }
+	td.ajustetabelaAQO:nth-of-type(6):before { content: "Data Prd.:"; font-weight: bold; }
+	td.ajustetabelaAQO:nth-of-type(7):before { content: "Resp. Coleta:"; font-weight: bold; }
+	td.ajustetabelaAQO:nth-of-type(8):before { content: "Amostra:"; font-weight: bold; }
+	td.ajustetabelaAQO:nth-of-type(9):before { content: "Sujo:"; font-weight: bold; }
+	td.ajustetabelaAQO:nth-of-type(10):before { content: "Trincado:"; font-weight: bold; }
+	td.ajustetabelaAQO:nth-of-type(11):before { content: "Virado:"; font-weight: bold; }
+	td.ajustetabelaAQO:nth-of-type(12):before { content: "Pequeno:"; font-weight: bold; }
+	td.ajustetabelaAQO:nth-of-type(13):before { content: "Grande:"; font-weight: bold; }
+}
+
+/* ACTION LINK WITH IMAGE
+----------------------------------------------------------*/
+a.edit
+{
+    background: url(../Content/icons/kjots.png) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.log
+{
+    background: url(../Content/icons/log.png) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.preco
+{
+    background: url(../Content/icons/cifrao.png) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.vacina
+{
+    background: url(../Content/icons/vaccine.png) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.duplicar
+{
+    background: url(../Content/icons/duplicar.png) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.confirmacao
+{
+    background: url(../Content/icons/confirmation_16.png) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.print
+{
+    background: url(../Content/icons/printer-icon.png) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.eggbox {
+	background: url(../Content/icons/egg_box_16px.png) no-repeat top left;
+	display: block;
+	width: 16px;
+	height: 16px;
+	text-indent: -9999px; /* hides the link text */
+}
+
+a.generate
+{
+    background: url(../Content/icons/generate.png) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.visualizar
+{
+    background: url(../Content/icons/visualizar.png) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.cancel
+{
+    background: url(../Content/icons/icn_cancelar.png) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.download
+{
+    background: url(../Content/icons/download.png) no-repeat top left;
+     display: block;
+     width: 18px;
+     height: 18px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.delete
+{
+    background: url(../Content/icons/button_cancel.png) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.warning
+{
+    background: url(../Content/icons/aviso.png) no-repeat top left;
+     display: block;
+     width: 18px;
+     height: 15px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.add
+{
+    background: url(../Content/images/add.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.addmany
+{
+    background: url(../Content/images/many_orders_32.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.link
+{
+    background: url(../Content/icons/link_32x32.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.importExcel
+{
+    background: url(../Content/icons/ImportExcel32.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.transferenciaLinhagens
+{
+    background: url(../Content/icons/transferencia_32x32.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.ajuste
+{
+    background: url(../Content/icons/reposicao_estoque_16x16.gif) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.apply
+{
+    background: url(../Content/icons/apply.png) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.back
+{
+    background: url(../Content/icons/Back_16x16.png) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.next
+{
+    background: url(../Content/icons/Next_16x16.png) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.back1
+{
+    background: url(../Content/icons/back.png) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.next1
+{
+    background: url(../Content/icons/next.png) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.lote
+{
+    background: url(../Content/icons/lotes_16x16.png) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.next32
+{
+    background: url(../Content/icons/Next-icon.png) no-repeat top left;
+     display: block;
+     width: 32px;
+     height: 32px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.prev32
+{
+    background: url(../Content/icons/Prev-icon.png) no-repeat top left;
+     display: block;
+     width: 32px;
+     height: 32px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+/* MENU */
+a.diarioexpedicao
+{
+    background: url(../Content/icons/diario_expedicao.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.home
+{
+    background: url(../Content/images/home.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px;     
+}
+
+a.checkdeo
+{
+    background: url(../Content/icons/checkDiarioProducao.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.android
+{
+    background: url(../Content/icons/android_32x32.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.graos
+{
+    background: url(../Content/icons/graos_32x32.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.rdv
+{
+    background: url(../Content/images/Amil-Reembolso-Icon.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.mail
+{
+    background: url(../Content/images/mail.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.budget
+{
+    background: url(../Content/icons/budget_32_x_32.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.navision
+{
+    background: url(../Content/icons/Navision_32_x_32.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.pedidovenda
+{
+    background: url(../Content/icons/pedidoVenda.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 80px; /* hides the link text */
+     background-position: 15px -13px
+}
+
+a.list32
+{
+    background: url(../Content/icons/list.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.calendar32
+{
+    background: url(../Content/icons/calendar.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.chart
+{
+    background: url(../Content/icons/chart.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+
+a.agenda32
+{
+    background: url(../Content/icons/agenda.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.details32
+{
+    background: url(../Content/icons/Data-View-Details-icon.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.delete32
+{
+    background: url(../Content/icons/button_cancel_32.png) no-repeat top left;
+     display: block;
+      width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.downloadMenu
+{
+    background: url(../Content/icons/download.png) no-repeat top left;
+     display: block;
+      width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.favicon
+{
+    background: url(../Content/icons/favicon.png) no-repeat top left;
+     display: block;
+      width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.table_invest
+{
+    background: url(../Content/icons/table_invest.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.pilar
+{
+    background: url(../Content/icons/pilar.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.alvo
+{
+    background: url(../Content/icons/alvo.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.acao
+{
+    background: url(../Content/icons/acao.jpg) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.gep
+{
+    background: url(../Content/icons/gep.jpg) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.acao_02
+{
+    background: url(../Content/icons/acao_02.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.check
+{
+    background: url(../Content/icons/check.png) no-repeat top left;
+     display: block;
+     width: 32px;
+     height: 32px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.uncheck
+{
+    background: url(../Content/icons/uncheck.png) no-repeat top left;
+     display: block;
+     width: 32px;
+     height: 32px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.fiscal_32
+{
+    background: url(../Content/icons/fiscal_32x32.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.recDoc_32
+{
+    background: url(../Content/icons/rec_doc_32x32.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.configDoc_32
+{
+    background: url(../Content/icons/config_doc_32x32.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.transfer_16
+{
+    background: url(../Content/icons/transferencia_16.png) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.check_button
+{
+    background: url(../Content/icons/check.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.uncheck_button
+{
+    background: url(../Content/icons/uncheck.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.auditoria
+{
+    background: url(../Content/icons/auditoria_32.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.requisito
+{
+    background: url(../Content/icons/requisito_32.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.visita
+{
+    background: url(../Content/icons/visita_32.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.na_button
+{
+    background: url(../Content/icons/na_32.png) no-repeat;
+     display: block;
+     width: 32px;
+     height: 32px;
+     text-indent: -9999px; /* hides the link text */
+     background-position: center;
+}
+
+a.na
+{
+    background: url(../Content/icons/na_32.png) no-repeat top left;
+     display: block;
+     width: 32px;
+     height: 32px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.auditoriaApp
+{
+    background: url(../Content/icons/auditoria.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.importar
+{
+    background: url(../Content/icons/importar.png) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.aprovar
+{
+    background: url(../Content/icons/curtir.png) no-repeat top left;
+     display: block;
+     width: 32px;
+     height: 32px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.reprovar
+{
+    background: url(../Content/icons/naocurtir.png) no-repeat top left;
+     display: block;
+     width: 32px;
+     height: 32px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.solInvestimento
+{
+    background: url(../Content/icons/sol_invest.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.reclamacao
+{
+    background: url(../Content/icons/reclamacao.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.assistencia_tecnica
+{
+    background: url(../Content/icons/assistencia_tecnica.png) no-repeat;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.relRastreabilidadePedido
+{
+    background: url(../Content/icons/auditoria.png) no-repeat top left;
+     display: block;
+     width: 32px;
+     height: 32px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.AQO
+{
+    background: url(../Content/icons/egg.png) no-repeat top left;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.cart
+{
+    background: url(../Content/icons/cart.png) no-repeat top left;
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+a.cart32
+{
+    background: url(../Content/icons/cart_32.png) no-repeat top left;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+a.listaNaoConforme
+{
+    background: url(../Content/icons/deo_nao_conforme.jpg) no-repeat top left;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+a.ajusteEstoque
+{
+    background: url(../Content/icons/box_32.png) no-repeat top left;
+     display: block;
+     width: 100%;
+     height: 100%;
+     text-indent: 40px; /* hides the link text */
+     background-position: 15px 5px
+}
+
+a.transferencia {
+    background: url(../Content/icons/transfer.png) no-repeat;
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-indent: 40px; /* hides the link text */
+    background-position: 15px 5px
+}
+
+a.itau {
+	background: url(../Content/icons/itau_32.png) no-repeat;
+	display: block;
+	width: 100%;
+	height: 100%;
+	text-indent: 40px; /* hides the link text */
+	background-position: 15px 5px
+}
+
+a.bb {
+	background: url(../Content/icons/bb_logo.jpg) no-repeat;
+	display: block;
+	width: 100%;
+	height: 100%;
+	text-indent: 40px; /* hides the link text */
+	background-position: 15px 5px
+}
+
+a.bradesco {
+	background: url(../Content/icons/logo-bradesco-32.png) no-repeat;
+	display: block;
+	width: 100%;
+	height: 100%;
+	text-indent: 40px; /* hides the link text */
+	background-position: 15px 5px
+}

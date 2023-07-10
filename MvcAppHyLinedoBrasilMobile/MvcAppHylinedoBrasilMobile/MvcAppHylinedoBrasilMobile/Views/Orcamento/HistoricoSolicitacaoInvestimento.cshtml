@@ -1,0 +1,76 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+
+    List<MvcAppHylinedoBrasilMobile.Models.LOG_Investimento_Solicitacao> lista =
+        (List<MvcAppHylinedoBrasilMobile.Models.LOG_Investimento_Solicitacao>)Session["ListaLOGSolicitacaoInvestimento"];
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+    MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities apolo = new MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities();
+
+    int id = lista.FirstOrDefault().IDInvestimentoSolicitacao;
+
+    MvcAppHylinedoBrasilMobile.Models.Investimento_Solicitacao invSol =
+        hlbapp.Investimento_Solicitacao.Where(w => w.ID == id).FirstOrDefault();
+}
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para a Lista de Solicitações de Investimento", "ListaSolicitacaoInvestimento", "Orcamento",
+                null,
+                new { @class = "solInvestimento", @title = "Clique aqui para voltar para a Lista de Solicitações de Investimento" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/sol_invest.png"), "Solicitação de Investimento")
+    <h2>Histórico da Solicitação de Investimento</h2>
+    <br />
+    <h3>@Html.Raw(invSol.Descricao.Replace("\r\n","<br />"))</h3>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+<div id="divTabelaRV">
+<table id="tabelaGrupoRequisito" class="ajustetabelaLogRequisitoVisita">
+    <tbody class="ajustetabelaLogRequisitoVisita">
+        <tr class="ajustetabelaLogRequisitoVisita">
+            <th class="ajustetabelaLogRequisitoVisita">
+                Data Hora
+            </th>
+            <th class="ajustetabelaLogRequisitoVisita">
+                Usuario
+            </th>
+            <th class="ajustetabelaLogRequisitoVisita">
+                Operação
+            </th>
+            <th class="ajustetabelaLogRequisitoVisita">
+                Status
+            </th>
+            <th class="ajustetabelaLogRequisitoVisita">
+                Motivo
+            </th>
+        </tr>
+        @foreach (var item in lista.OrderBy(o => o.DataHora).ToList())
+        {
+            MvcAppHylinedoBrasilMobile.Models.bdApolo2.USUARIO usuario =
+                apolo.USUARIO.Where(w => w.UsuCod == item.Usuario).FirstOrDefault();
+            
+            <tr class="ajustetabelaLogRequisitoVisita">
+                <td class="ajustetabelaLogRequisitoVisita">
+                    @(item.DataHora)
+                </td>
+                <td class="ajustetabelaLogRequisitoVisita">
+                    @(usuario.UsuNome)
+                </td>
+                <td class="ajustetabelaLogRequisitoVisita">
+                    @(item.Operacao)
+                </td>
+                <td class="ajustetabelaLogRequisitoVisita">
+                    @(item.Status)
+                </td>
+                <td class="ajustetabelaLogRequisitoVisita">
+                    @(item.Motivo)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>

@@ -1,0 +1,54 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+}
+
+<script src="../../Scripts/jquery.maskedinput.js" type="text/javascript"></script>
+
+<script language="javascript" type="text/javascript">
+//    window.onbeforeunload = function () {
+//        return "Não é possível atualizar a página porque os dados serão perdidos! Sendo assim, a página será fechada!";
+//    }
+
+    window.onkeydown = function (e) {
+        if (e.keyCode === 116) {
+            alert("Função não permitida");
+            e.keyCode = 0;
+            e.returnValue = false;
+            return false;
+        }
+    }
+</script>
+
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para a Lista de Pilares", "ListaPilares", "GEP", 
+                null, new { @title = "Clique aqui para voltar para a Lista de Pilares", @class = "pilar" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/pilar.png"), "Pilar")
+    <h2>Pilar</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+@using (Html.BeginForm("SavePilar", "GEP", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        <div class="editor-label">
+            <b>Descrição:</b>
+        </div>
+        <div class="editor-field">
+            <div class="editor-field">
+                @Html.TextBox("descricao", Session["descricaoPilar"],
+                new { @required = true, @onkeyup = "this.value = this.value.toUpperCase();" })
+            </div>
+        </div>
+        <p>
+            <input type="submit" value="Salvar Pilar" id="add" />
+        </p>
+    </fieldset>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,989 @@
+﻿@model IEnumerable<MvcAppHylinedoBrasilMobile.Models.LayoutDiarioExpedicaos>
+@using am = MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController;
+
+@{
+    ViewBag.Title = "";
+    string lg = Session["language"].ToString();
+    string empresa = Session["granjaSelecionada"].ToString();
+    string tipoDEO = Session["tipoDEOselecionado"].ToString();
+
+    DateTime dataHoraCarreg = Convert.ToDateTime(Session["dataHoraCarreg"]);
+    DateTime dataVerificaFechamento = Convert.ToDateTime(dataHoraCarreg.ToShortDateString());
+
+    bool existeFechamentoEstoque = MvcAppHylinedoBrasilMobile.Controllers.DiarioExpedicaoController
+        .ExisteFechamentoEstoque(dataVerificaFechamento, empresa);
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities apolo = new MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities();
+
+    bool isIncubatorio = MvcAppHylinedoBrasilMobile.Controllers.DiarioExpedicaoController.IsIncubatorio(empresa);
+    string tipoEmpresa = "Granja";
+    if (isIncubatorio)
+    {
+        tipoEmpresa = "Incubatório";
+    }
+    //MvcAppHylinedoBrasilMobile.Models.bdApolo.EMPRESA_FILIAL empFilial = apolo.EMPRESA_FILIAL
+    //    .Where(w => w.USERFLIPCod == empresa).FirstOrDefault();
+
+    //if (empFilial != null)
+    //{
+    //    tipoEmpresa = empFilial.USERTipoUnidadeFLIP;
+    //}
+
+    bool localOvosComercio = false;
+    if (empresa.Length == 3)
+    {
+        if (empresa.Substring(2, 1) == "C")
+        {
+            localOvosComercio = true;
+        }
+    }
+
+    int existeItemDivergente = Model.Where(w => w.Importado == "Divergência").Count();
+}
+
+<script type="text/javascript">
+    window.onbeforeunload = function () {
+        return "Se a página for atualizada, os dados alterados serão perdidos!";
+    }
+
+    setTimeout(function () { iniciarFormulario(); }, 1);
+
+    function converteQtde(obj) {
+        var value = obj.value;
+        $("table[id='tbListaItensDEO'] tbody tr")[0].cells[10].innerText
+            = "Granja - " + obj[obj.selectedIndex].text;
+        $("table[id='tbListaItensDEO'] tbody tr")[0].cells[11].innerText
+            = "Inc. - " + obj[obj.selectedIndex].text;
+        $("table[id='tbListaItensDEO'] tbody tr")[0].cells[12].innerText
+            = "Dif. - " + obj[obj.selectedIndex].text;
+        for (var i = 1; i < $("table[id='tbListaItensDEO'] tbody tr").length; i++) {
+            var row = $("table[id='tbListaItensDEO'] tbody tr")[i];
+            // Atualiza a qtde. da Granja
+            var originalValueGranja = row.cells[10].title;
+            var calculatedValueGranja = Math.round(originalValueGranja / value);
+            row.cells[10].innerText = calculatedValueGranja.toLocaleString('pt-BR');
+
+            // Atualiza a qtde. do Incubatório
+            var originalValueInc = row.cells[11].title;
+            var calculatedValueInc = Math.round(originalValueInc / value);
+            row.cells[11].innerText = calculatedValueInc.toLocaleString('pt-BR');
+
+            // Atualiza a diferença
+            var originalValueDif = row.cells[12].title;
+            var calculatedValueDif = Math.round(originalValueDif / value);
+            row.cells[12].innerText = calculatedValueDif.toLocaleString('pt-BR');
+        }
+    }
+
+    function iniciarFormulario() {
+        var tipoDeo = $('#dropBoxTipoDEO option:selected').text();
+        verificaTipoDEO(tipoDeo);
+    }
+
+    function verificaTipoDEO(tipoDeo) {
+        var tipoEmpresa = $('#hdTipoEmpresa').val();
+        var localOvosComercio = $('#hdLocalOvosComercio').val();
+        if ((tipoDeo == 'Ovos p/ Comércio' && tipoEmpresa == 'Granja') || (localOvosComercio == 'True')) {
+            $('#pnlDeoNormal').hide();
+            $('#pnlDadosGerais').hide();
+            $('#pnlDadosOvosComercio').show();
+            document.getElementById("qtdOvosOC").required = true;
+            document.getElementById("qtdOvosOC").min = 1;
+            document.getElementById("txtObsOC").required = true;
+            document.getElementById("radioQtOC").required = true;
+            if (localOvosComercio == 'True') {
+                $('#pnlDestino').hide();
+            } else {
+                $('#pnlDestino').show();
+            }
+        } else {
+            document.getElementById("qtdOvosOC").required = false;
+            document.getElementById("qtdOvosOC").min = 0;
+            document.getElementById("txtObsOC").required = false;
+            document.getElementById("radioQtOC").required = false;
+            if ((tipoEmpresa == 'Granja' && tipoDeo != 'Ovos Incubáveis')
+                || (tipoEmpresa == 'Incubatório' && tipoDeo != 'Transf. Ovos Incubáveis')) {
+                $('#pnlDestino').hide();
+            } else {
+                $('#pnlDestino').show();
+            }
+            $('#pnlDeoNormal').show();
+            $('#pnlDadosGerais').show();
+            $('#pnlDadosOvosComercio').hide();
+        }
+    }
+
+    function verificaNFNum(evento) {
+        var value = $('#txtNFNum').val();
+        var origem = 'OI';
+        if (value == '') {
+            origem = 'OC';
+            value = $('#txtNFNumOC').val();
+            document.getElementById('txtDataRecebInc').required = false;
+        } else {
+            document.getElementById('txtDataRecebInc').required = true;
+        }
+        var errorHolder = document.getElementById('errorNFNum');
+        var tipoDeo = $('#dropBoxTipoDEO option:selected').text();
+        var destinoDeo = $('#dropBoxIncubatorio option:selected').val();
+        $.ajax({
+            url: '/DiarioExpedicao/VerificaNFNum',
+            type: 'POST',
+            data: JSON.stringify({ valor: value, tipo: tipoDeo, destino: destinoDeo }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data != '') {
+                    errorHolder.innerHTML = data;
+                    if (origem == 'OI') {
+                        $('#txtNFNum').focus();
+                    } else {
+                        $('#txtNFNumOC').focus();
+                    }
+                    $('#saveDEO').button('disable');
+                    $('[type="submit"]').button('refresh');
+                    return true;
+                } else {
+                    errorHolder.innerHTML = '';
+                    $('#saveDEO').button('enable');
+                    $('[type="submit"]').button('refresh');
+                    return false;
+                }
+            }
+        });
+    }
+
+    function atualizaDataDEO() {
+        var lote = $('#dataDEO').val();
+        var errorHolder = document.getElementById('errorDataHoraDEO');
+        $.ajax({
+            url: '/DiarioExpedicao/AtualizaSessionDataDEO',
+            type: 'POST',
+            data: JSON.stringify({ id: lote }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                    errorHolder.innerHTML = '';
+                    $('#saveDEO').button('enable');
+                    $('[type="submit"]').button('refresh');
+                } else {
+                    errorHolder.innerHTML = data.toString();
+                    $('#dataDEO').focus();
+                    $('#saveDEO').button('disable');
+                    $('[type="submit"]').button('refresh');
+                }
+            }
+        });
+    }
+
+    function atualizaHoraDEO() {
+        var lote = $('#horaDEO').val();
+        var errorHolder = document.getElementById('errorDataHoraDEO');
+        $.ajax({
+            url: '/DiarioExpedicao/AtualizaSessionHoraDEO',
+            type: 'POST',
+            data: JSON.stringify({ id: lote }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                    errorHolder.innerHTML = '';
+                    $('#saveDEO').button('enable');
+                    $('[type="submit"]').button('refresh');
+                } else {
+                    errorHolder.innerHTML = data.toString();
+                    $('#horaDEO').focus();
+                    $('#saveDEO').button('disable');
+                    $('[type="submit"]').button('refresh');
+                }
+            }
+        });
+    }
+
+    function atualizaTipoDEO() {
+        var tipoDeo = $('#dropBoxTipoDEO option:selected').text();
+        var tipoEmpresa = $('#hdTipoEmpresa').val();
+        $.ajax({
+            url: '/DiarioExpedicao/SelecionaTipoDEO',
+            type: 'POST',
+            data: JSON.stringify({ id: tipoDeo, tipoEmp: tipoEmpresa }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                    verificaTipoDEO(tipoDeo);
+                    $('#dropBoxIncubatorio').show();
+                    $('#dropBoxIncubatorio').selectmenu('refresh');
+                } else {
+                    alert(data.toString());
+                }
+            }
+        });
+    }
+
+    function atualizaIncubatorio() {
+        var lote = $('#dropBoxIncubatorio option:selected').val();
+        $.ajax({
+            url: '/DiarioExpedicao/SelecionaIncubatorioDestino',
+            type: 'POST',
+            data: JSON.stringify({ id: lote }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                } else {
+                    alert(data.toString());
+                }
+            }
+        });
+    }
+
+    function atualizaLinhagemOrigem() {
+        var lote = $('#dropBoxLinhagemOrigem option:selected').text();
+        $.ajax({
+            url: '/DiarioExpedicao/SelecionaLinhagemOrigem',
+            type: 'POST',
+            data: JSON.stringify({ id: lote }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#dropBoxLinhagemDestino').empty();
+                $('select#dropBoxLinhagemDestino').append('<option value="0" selected="selected">(Selecione uma Linhagem de Destino)</option>');
+                $.each(data, function (key, SelectListItem) {
+                    $('select#dropBoxLinhagemDestino').append('<option value="' + SelectListItem.Text + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#dropBoxLinhagemDestino').selectmenu('refresh');
+            }
+        });
+    }
+
+    function atualizaLinhagemDestino() {
+        var lote = $('#dropBoxLinhagemDestino option:selected').text();
+        $.ajax({
+            url: '/DiarioExpedicao/SelecionaLinhagemDestino',
+            type: 'POST',
+            data: JSON.stringify({ id: lote }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (data == '') {
+                } else {
+                    alert(data.toString());
+                }
+            }
+        });
+    }
+
+    function verificaqtdOvosOC() {
+        var result = null;
+        var dataDEO = $('#dataDEO').val();
+        var radioQtde = $("input:radio[name='tipoQtde']:checked").val();
+        var qtdeOvos = 0;
+        var qtdeCaixas = 0;
+        if (radioQtde == 0) {
+            qtdeOvos = $('#qtdOvosOC').val();
+            qtdeCaixas = qtdeOvos / 360;
+        }
+        else {
+            qtdeOvos = $('#qtdOvosOC').val() * 360;
+            qtdeCaixas = qtdeOvos;
+        }
+        $.ajax({
+            url: 'VerificaEstoqueOC',
+            type: 'POST',
+            data: JSON.stringify({ qtde: qtdeOvos }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                if (qtdeOvos <= data) {
+                    $('#caixas').val(qtdeCaixas.toFixed(0));
+                    $('#saveDEO').button('enable');
+                    $('[type="submit"]').button('refresh');
+                } else {
+                    alert('Saldo Indisponível: (' + data.toString() + ' ovos)');
+                    $('#saveDEO').button('disable');
+                    $('[type="submit"]').button('refresh');
+                }
+            }
+        });
+    }
+</script>
+
+@using (Html.BeginForm("SaveDEO", "DiarioExpedicao", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div align="center">
+        @if (!Session["escondeLinkPrincipal"].ToString().Equals("Sim"))
+        {
+            <p>
+                @Html.ActionLink("Voltar p/ Lista de DEOs", "ListaDEOs", "DiarioExpedicao")
+            </p>
+        }
+        @if (Session["operacao"].ToString().Equals("Edit")
+            && Session["granjaSelecionada"].ToString() != "HL")
+        {
+            @Html.Image(@Url.Content("~/Content/icons/diario_expedicao.png"), "DEO")
+            <h2>Diário de Expedição: @Html.Label(Session["dataHoraCarreg"].ToString())</h2>
+        }
+        else
+        {
+            if (!Session["escondeAddItem"].ToString().Equals("Sim"))
+            {
+                @Html.Image(@Url.Content("~/Content/icons/diario_expedicao.png"), "DEO")
+                <h2>Diário de Expedição</h2>
+                <br />
+                <div class="editor-label">
+                    <b>Data do DEO:</b>
+                </div>
+                <div class="editor-field">
+                    @Html.TextBox("dataDEO", Convert.ToDateTime(Session["dataDEO"]).ToString("yyyy-MM-dd"),
+                        new { @type = "date", @onfocusout = "atualizaDataDEO()" })
+                </div>
+                <div class="editor-label">
+                    <b>Hora do DEO:</b>
+                </div>
+                <div class="editor-field">
+                    @Html.TextBox("horaDEO", Convert.ToDateTime(Session["horaDEO"]).ToString("HH:mm"),
+                        new { @type = "time", @onfocusout = "atualizaHoraDEO()" })
+                </div>
+                <div class="editor-label" id="errorDataHoraDEO" style="color: Red; font-weight:bold;"></div>
+            }
+            else
+            {
+                @Html.Image(@Url.Content("~/Content/icons/diario_expedicao.png"), "DEO")
+                <h2>Diário de Expedição: @Html.Label(Session["dataHoraCarreg"].ToString())</h2>
+            }
+        }
+        <br />
+        <h2>@am.GetTextOnLanguage("Granja / Incubatório de Origem", lg): @Html.Label(Session["incubatorioSelecionadoNome"].ToString())</h2>
+        <br />
+        @if (!Convert.ToBoolean(Session["TransferenciaLinhagens"]))
+        {
+            <div class="editor-label">
+                <b>Selecione o Tipo de DEO:</b>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList(
+                    "Text",
+                    (List<SelectListItem>)Session["ListaTiposDEO"],
+                    new { @id = "dropBoxTipoDEO", @onchange = "atualizaTipoDEO()" })
+            </div>
+        }
+        @*@if (!Session["granjaSelecionada"].ToString().Equals("PL"))
+            {*@
+        <br />
+        <div id="pnlDestino">
+            <div class="editor-label">
+                <b>Selecione o Incubatório de Destino:</b>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList(
+                    "Text",
+                    (List<SelectListItem>)Session["ListaIncubatoriosDestino"],
+                 new { @id = "dropBoxIncubatorio", @onchange = "atualizaIncubatorio()" })
+            </div>
+        </div>
+        @*}*@
+        @if (Convert.ToBoolean(Session["TransferenciaLinhagens"]))
+        {
+            <b>Transferir da Linhagem </b>
+            @Html.DropDownList(
+                "Text",
+                (List<SelectListItem>)Session["ListaLinhagemOrigem"],
+                "(Selecione uma Linhagem de Origem)",
+                new { @id = "dropBoxLinhagemOrigem", @onchange = "atualizaLinhagemOrigem()" })
+            <b> para </b>
+            @Html.DropDownList(
+                "Text",
+                (List<SelectListItem>)Session["ListaLinhagemDestino"],
+                     new { @id = "dropBoxLinhagemDestino", @onchange = "atualizaLinhagemDestino()" })
+        }
+    </div>
+    if (ViewBag.Erro != null)
+    {
+        <h4 id="lblMsgErro" class="msgErro ui-li ui-li-static">
+            @Html.Raw(ViewBag.Erro)
+        </h4>
+    }
+    <br />
+    <div id="pnlDeoNormal">
+        @*if (!localOvosComercio)
+            {*@
+        <h4 style="color:red;">
+            Os itens que estiverem destacados na coluna Lote Completo, significa que o Nº do Lote
+            está diferente do código completo do Lote que é utilizado no sistema!
+            Caso aconteça isso, delete e insira o item novamente!!!
+        </h4>
+        <br />
+        <h4 style="color:red;">
+            Os itens que estiverem destacados com o ícone
+            @Html.Image(@Url.Content("~/Content/icons/reposicao_estoque_16x16.gif"), "Existem Lançamentos Posteriores!"),
+            significa que existem Lançamentos Futuros (Transferência, Classificação, Incubações, etc.)
+            onde, caso seja Excluído esse Item, a quantidade ficará negativa.
+            Caso aconteça isso, clique no ícone para analisar os lotes que poderão ficar negativos
+            e sua rastreabilidade!!!
+        </h4>
+        <br />
+        <h4 style="color:red;">
+            Os itens onde a quantidade estiver marcado um asterisco vermelho (*) significa que houve correção pelo
+            módulo de Divergência.
+        </h4>
+        <ul data-role="listview" data-inset="true">
+            <li data-role="list-divider">Menu do Item do Diário de Expedição</li>
+            <li>
+                @(!Session["escondeAddItem"].ToString().Equals("Sim") ? Html.ActionLink("Adicionar Item no DEO", "Create",
+                            new { origem = "Cadastro" }, new { @class = "add" }) : Html.Label(""))
+            </li>
+        </ul>
+        <br />
+        @if (Session["granjaSelecionada"].ToString() == "HL")
+        {
+            <div class="editor-label">
+                <b>Selecione a visualização da quantidade na tabela abaixo:</b>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList(
+                    "TipoVisualizacaoQtde",
+                    (List<SelectListItem>)Session["ListaTipoVisualizacaoQtde"],
+                    new { @id = "dddlTipoVisualizacaoQtde", @onchange = "converteQtde(this)" })
+            </div>
+        }
+        @*<h3>Qtde. Total de Ovos: @Html.Label("qtdeTotal", String.Format("{0:N0}", Model.Sum(s => s.QtdeOvos + (s.QtdDiferenca == null ? 0 : s.QtdDiferenca))))</h3>*@
+        <h3>
+            Qtde. Total de Ovos: @Html.Label("qtdeTotal", String.Format("{0:N0}",
+Model.Sum(s => s.QtdeOvos)))
+        </h3>
+        <div style="overflow:auto;">
+            <table class="ajuste" id="tbListaItensDEO">
+                <tbody class="ajuste">
+                    <tr class="ajuste">
+                        @*<th class="ajuste"></th>*@
+                        <th class="ajuste"></th>
+                        <th class="ajuste">
+                            ID
+                        </th>
+                        <th class="ajuste">
+                            Núcleo
+                        </th>
+                        <th class="ajuste">
+                            Galpão
+                        </th>
+                        <th class="ajuste">
+                            Lote
+                        </th>
+                        <th class="ajuste">
+                            Lote Completo
+                        </th>
+                        <th class="ajuste">
+                            Idade
+                        </th>
+                        <th class="ajuste">
+                            Linhagem
+                        </th>
+                        <th class="ajuste">
+                            Data Produção
+                        </th>
+                        <th class="ajuste">
+                            N.Ref.
+                        </th>
+                        @if (empresa.Equals("PL") && tipoDEO.Equals("Transf. Ovos Incubáveis"))
+                        {
+                            <th class="ajuste">
+                                Class.
+                            </th>
+                        }
+                        <th class="ajuste">
+                            Granja - Ovos
+                        </th>
+                        @*<th class="ajuste">
+                                Band. - Granja
+                            </th>*@
+                        <th class="ajuste">
+                            Inc. - Ovos
+                        </th>
+                        <th class="ajuste">
+                            Dif. - Ovos
+                        </th>
+                        <th class="ajuste">
+                            Usuário
+                        </th>
+                        <th class="ajuste">
+                            Data / Hora Dig.
+                        </th>
+                        <th class="ajuste">
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        int qtdeVerificaSaldoLoteDataProducao = Convert.ToInt32(Model
+                            .Where(w => w.LoteCompleto == item.LoteCompleto
+                                && w.DataProducao == item.DataProducao
+                                && w.TipoOvo == item.TipoOvo)
+                            .Sum(m =>
+                                m.Importado == "Conferido" ?
+                                    m.QtdeOvos + (m.QtdDiferenca == null ? 0 : m.QtdDiferenca) :
+                                    0));
+
+                        <tr class="ajuste">
+                            @*<td class="ajuste">
+                                    <div align="center">
+                                        @((!item.Importado.Equals("Conferido") || item.Incubatorio == item.Granja) ? Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "edit" }) : Html.Label(""))
+                                    </div>
+                                </td>
+                            *@
+                            <td class="ajuste">
+                                <div align="center">
+                                    @if (item.TipoDEO.Equals("Ovos Incubáveis") || item.TipoDEO.Equals("Transf. Ovos Incubáveis"))
+                                    {
+                                        if (!item.Importado.Equals("Divergência"))
+                                        {
+                                            if (!item.Importado.Equals("Conferido") ||
+                                                (item.Importado.Equals("Conferido") && !item.TipoDEO.Equals("Ovos Incubáveis")))
+                                            {
+                                                string local = "";
+                                                if (item.TipoOvo == "")
+                                                {
+                                                    local = item.Incubatorio;
+                                                }
+                                                else
+                                                {
+                                                    local = item.TipoOvo;
+                                                }
+                                                if ((!MvcAppHylinedoBrasilMobile.Controllers.DiarioExpedicaoController
+                                                    .ExisteSaldo(local, item.DataHoraCarreg, item.LoteCompleto,
+                                                        item.DataProducao, qtdeVerificaSaldoLoteDataProducao)
+                                                    &&
+                                                    item.Importado == "Conferido" && item.TipoDEO.Equals("Ovos Incubáveis"))
+                                                    ||
+                                                    (!MvcAppHylinedoBrasilMobile.Controllers.DiarioExpedicaoController
+                                                    .ExisteSaldo(local, item.DataHoraCarreg, item.LoteCompleto,
+                                                        item.DataProducao, qtdeVerificaSaldoLoteDataProducao)
+                                                    &&
+                                                    !item.TipoDEO.Equals("Ovos Incubáveis")))
+                                                {
+                                                    @Html.ActionLink("Rastrear Lote", "RastreabilidadeLote",
+                                                        new { lote = item.LoteCompleto, dataProducao = item.DataProducao, chamada = "Index" },
+                                                        new { @class = "ajuste" })
+                                                }
+                                                else
+                                                {
+                                                    if (existeFechamentoEstoque)
+                                                    {
+                                                        @Html.ActionLink("Rastrear Lote", "RastreabilidadeLote",
+                                                           new
+                                                           {
+                                                               lote = item.LoteCompleto,
+                                                               dataProducao = item.DataProducao,
+                                                               chamada = "Index"
+                                                           },
+                                                           new { @class = "ajuste" })
+                                                    }
+                                                    else
+                                                    {
+                                                        @Html.ActionLink("Delete", "Delete", new { id = item.ID, origem = "Cadastro" },
+                                                            new { @class = "delete" });
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink("Rastrear Lote", "RastreabilidadeLote",
+                                                        new { lote = item.LoteCompleto, dataProducao = item.DataProducao, chamada = "Index" },
+                                                        new { @class = "ajuste" })
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if ((item.NumIdentificacao.Equals("")) || (item.NumIdentificacao == null))
+                                        {
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.ID, origem = "Cadastro" },
+                                                new { @class = "delete" })
+                                        }
+                                    }
+                                </div>
+                            </td>
+                            <td class="ajuste">
+                                @Html.DisplayFor(modelItem => item.ID)
+                            </td>
+                            <td class="ajuste">
+                                @Html.DisplayFor(modelItem => item.Nucleo)
+                            </td>
+                            <td class="ajuste">
+                                @Html.DisplayFor(modelItem => item.Galpao)
+                            </td>
+                            <td class="ajuste">
+                                @Html.DisplayFor(modelItem => item.Lote)
+                            </td>
+                            <td class="ajuste">
+                                @if (item.Lote != null && item.LoteCompleto != null)
+                                {
+                                    if (!item.LoteCompleto.Contains(item.Lote))
+                                    {
+                                        <b style="color: Red; background-color:Yellow;">@Html.DisplayFor(modelItem => item.LoteCompleto)</b>
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.LoteCompleto)
+                                    }
+                                }
+                            </td>
+                            <td class="ajuste">
+                                @Html.DisplayFor(modelItem => item.Idade)
+                            </td>
+                            <td class="ajuste">
+                                @Html.DisplayFor(modelItem => item.Linhagem)
+                            </td>
+                            <td class="ajuste">
+                                @String.Format("{0:dd/MM/yyyy}", item.DataProducao)
+                            </td>
+                            <td class="ajuste">
+                                @Html.DisplayFor(modelItem => item.NumeroReferencia)
+                            </td>
+                            @if (empresa.Equals("PL") && tipoDEO.Equals("Transf. Ovos Incubáveis"))
+                            {
+                                <td class="ajuste">
+                                    @Html.DisplayFor(modelItem => item.TipoOvo)
+                                </td>
+                            }
+                            <td class="ajuste" title="@item.QtdeOvos">
+                                @String.Format("{0:N0}", item.QtdeOvos)
+                                @*@String.Format("{0:N0}", item.QtdeOvos + (item.QtdDiferenca == null ? 0 : item.QtdDiferenca))
+                                    @if ((item.QtdDiferenca == null ? 0 : item.QtdDiferenca) > 0)
+                                    {
+                                    <b style="color:red; background-color:Yellow">
+                                        *
+                                    </b>
+                                    }*@
+                            </td>
+                            @*<td class="ajuste">
+                                    @String.Format("{0:N1}", (item.QtdeOvos) / 150.0m)
+                                    @String.Format("{0:N1}", (item.QtdeOvos + (item.QtdDiferenca == null ? 0 : item.QtdDiferenca)) / 150.0m)
+                                </td>*@
+                            <td class="ajuste" title="@(item.QtdeOvos + (item.QtdDiferenca == null ? 0 : item.QtdDiferenca))">
+                                @String.Format("{0:N0}", (item.QtdeOvos + (item.QtdDiferenca == null ? 0 : item.QtdDiferenca)))
+                            </td>
+                            <td style="color:red;" class="ajuste" title="@item.QtdDiferenca">
+                                @String.Format("{0:N0}", item.QtdDiferenca)
+                            </td>
+                            <td class="ajuste">
+                                @Html.DisplayFor(modelItem => item.Usuario)
+                            </td>
+                            <td class="ajuste">
+                                @String.Format("{0:dd/MM/yyyy hh:mm:ss}", item.DataHora)
+                            </td>
+                            <td class="ajuste">
+                                <div align="center">
+                                    @Html.ActionLink("Histórico de Eventos do DEO", "LogDEO",
+                                        new { lote = item.LoteCompleto, dataProducao = item.DataProducao },
+                                        new { @class = "log", @title = "Clique aqui para visualizar o Histórico de Eventos do DEO" })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <br />
+        <div align="center">
+            <h2>Total por Núcleo</h2>
+        </div>
+        <div style="overflow:auto;">
+            <table class="ajuste">
+                <tbody class="ajuste">
+                    <tr class="ajuste">
+                        <th class="ajuste">
+                            Núcleo
+                        </th>
+                        <th class="ajuste">
+                            Ovos
+                        </th>
+                        <th class="ajuste">
+                            Bandejas (150)
+                        </th>
+                        <th class="ajuste">
+                            Caixas
+                        </th>
+                    </tr>
+                    @foreach (var item in Model
+                        .GroupBy(l => new { l.Nucleo })
+                        .OrderBy(o => o.Key.Nucleo)
+                        .Select(s => new
+                        {
+                            s.Key,
+                //Ovos = s.Sum(t => t.QtdeOvos + (t.QtdDiferenca == null ? 0 : t.QtdDiferenca)),
+                //Bandejas = s.Sum(t => t.QtdeOvos + (t.QtdDiferenca == null ? 0 : t.QtdDiferenca)) / 150.0m }))
+                Ovos = s.Sum(t => t.QtdeOvos),
+                            Bandejas = s.Sum(t => t.QtdeOvos) / 150.0m,
+                            Caixas = s.Sum(t => t.QtdeOvos) / 360.0m
+                        }))
+                    {
+                        <tr class="ajuste">
+                            <td class="ajuste">
+                                @Html.DisplayFor(itemModel => item.Key.Nucleo)
+                            </td>
+                            <td class="ajuste">
+                                @String.Format("{0:N0}", item.Ovos)
+                            </td>
+                            <td class="ajuste">
+                                @String.Format("{0:N1}", item.Bandejas)
+                            </td>
+                            <td class="ajuste">
+                                @String.Format("{0:N1}", item.Caixas)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <br />
+        <div align="center">
+            <h2>Total por Linhagem</h2>
+        </div>
+        <div style="overflow:auto;">
+            <table class="ajuste">
+                <tbody class="ajuste">
+                    <tr class="ajuste">
+                        <th class="ajuste">
+                            Linhagem
+                        </th>
+                        <th class="ajuste">
+                            Ovos
+                        </th>
+                        <th class="ajuste">
+                            Bandejas (150)
+                        </th>
+                        <th class="ajuste">
+                            Caixas
+                        </th>
+                    </tr>
+                    @foreach (var item in Model
+                        .GroupBy(l => new { l.Linhagem })
+                        .Select(s => new
+                        {
+                            s.Key,
+                //Ovos = s.Sum(t => t.QtdeOvos + (t.QtdDiferenca == null ? 0 : t.QtdDiferenca)),
+                //Bandejas = s.Sum(t => t.QtdeOvos + (t.QtdDiferenca == null ? 0 : t.QtdDiferenca)) / 150.0m }))
+                Ovos = s.Sum(t => t.QtdeOvos),
+                            Bandejas = s.Sum(t => t.QtdeOvos) / 150.0m,
+                            Caixas = s.Sum(t => t.QtdeOvos) / 360.0m
+                        }))
+                    {
+                        <tr class="ajuste">
+                            <td class="ajuste">
+                                @Html.DisplayFor(itemModel => item.Key.Linhagem)
+                            </td>
+                            <td class="ajuste">
+                                @String.Format("{0:N0}", item.Ovos)
+                            </td>
+                            <td class="ajuste">
+                                @String.Format("{0:N1}", item.Bandejas)
+                            </td>
+                            <td class="ajuste">
+                                @String.Format("{0:N1}", item.Caixas)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <br />
+        <div align="center">
+            <h2>Total por Lote</h2>
+        </div>
+        <div style="overflow:auto;">
+            <table class="ajuste">
+                <tbody class="ajuste">
+                    <tr class="ajuste">
+                        <th class="ajuste">
+                            Lote
+                        </th>
+                        <th class="ajuste">
+                            Ovos
+                        </th>
+                        <th class="ajuste">
+                            Bandejas (150)
+                        </th>
+                        <th class="ajuste">
+                            Caixas
+                        </th>
+                    </tr>
+                    @foreach (var item in Model
+                        .GroupBy(l => new { l.Lote })
+                        .Select(s => new
+                        {
+                            s.Key,
+                //Ovos = s.Sum(t => t.QtdeOvos + (t.QtdDiferenca == null ? 0 : t.QtdDiferenca)),
+                //Bandejas = s.Sum(t => t.QtdeOvos + (t.QtdDiferenca == null ? 0 : t.QtdDiferenca)) / 150.0m }))
+                Ovos = s.Sum(t => t.QtdeOvos),
+                            Bandejas = s.Sum(t => t.QtdeOvos) / 150.0m,
+                            Caixas = s.Sum(t => t.QtdeOvos) / 360.0m
+                        }))
+                    {
+                        <tr class="ajuste">
+                            <td class="ajuste">
+                                @Html.DisplayFor(itemModel => item.Key.Lote)
+                            </td>
+                            <td class="ajuste">
+                                @String.Format("{0:N0}", item.Ovos)
+                            </td>
+                            <td class="ajuste">
+                                @String.Format("{0:N1}", item.Bandejas)
+                            </td>
+                            <td class="ajuste">
+                                @String.Format("{0:N1}", item.Caixas)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <br />
+        @*}*@
+    </div>
+    <div align="center">
+        <h2>Informe os parâmetros abaixo após a inclusão dos itens.</h2>
+    </div>
+    <br />
+    <br />
+    <fieldset>
+        @Html.Hidden("localOvosComercio", localOvosComercio, new { @id = "hdLocalOvosComercio" })
+        @Html.Hidden("tipoEmpresa", tipoEmpresa, new { @id = "hdTipoEmpresa" })
+        @*@if (!Convert.ToBoolean(Session["TransferenciaLinhagens"]) && !localOvosComercio)
+            {*@
+        <div id="pnlDadosGerais">
+            <div class="editor-label">
+                <b>Número da N.F.:</b>
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("nfNum", (string)Session["nfNum"],
+                    new
+                    {
+                        @type = "number",
+                        @id = "txtNFNum",
+                        @onchange = "verificaNFNum('campo')"
+                    })
+            </div>
+            @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                .GetGroup("HLBAPPM-DiarioExpedicaoRecebimentoIncubatorio",
+                (System.Collections.ArrayList)Session["Direitos"])
+                && (tipoDEO == "Ovos Incubáveis" || tipoDEO == "Transf. Ovos Incubáveis"))
+            {
+                <div class="editor-label">
+                    <b>Data do Recebimento no Incubatório:</b>
+                </div>
+                <div class="editor-field">
+                    @Html.TextBox("dataRecebInc",
+                        (Session["dataRecebInc"] != "" && Session["dataRecebInc"] != null ?
+                            Convert.ToDateTime(Session["dataRecebInc"]).ToString("yyyy-MM-dd") : ""),
+                        new
+                        {
+                            @type = "date",
+                            @required = "true",
+                            @id = "txtDataRecebInc"
+                        })
+                </div>
+            }
+            <div class="editor-label">
+                <b>GTA:</b>
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("GTA", (string)Session["GTA"], new { @type = "number" })
+            </div>
+            <div class="editor-label">
+                <b>Lacre:</b>
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("Lacre", (string)Session["Lacre"], new { @type = "number" })
+            </div>
+            <br />
+            <div class="editor-label">
+                <b>Observação:</b>
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("observacao", (string)Session["Observacao"], new { @id = "txtObs" })
+            </div>
+        </div>
+        @*}
+            @if (localOvosComercio)
+            {*@
+        <div id="pnlDadosOvosComercio">
+            <div class="editor-label">
+                <b style="color:Black;">Qtde.:</b>
+            </div>
+            <table style="width: 100%;">
+                <tr>
+                    <td>
+                        <label style="width: 50px">@Html.RadioButton("tipoQtde", "0", true, new { @name = "radioQtdeOC", @id = "radioQtOC" })</label>
+                    </td>
+                    <td>
+                        Ovos
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label style="width: 50px">@Html.RadioButton("tipoQtde", "1", false, new { @name = "radioQtdeOC", @id = "radioQtOC" })</label>
+                    </td>
+                    <td>
+                        Caixas
+                    </td>
+                </tr>
+            </table>
+            <div class="editor-field">
+                @Html.TextBox("qtdeOvos", Convert.ToInt32(Session["qtdeOvosComerciais"]), new
+           {
+               @type = "number",
+               @id = "qtdOvosOC",
+               @onchange = "verificaqtdOvosOC()"
+           })
+            </div>
+            <div class="editor-label">
+                <b>Número da N.F.:</b>
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("nfNumOC", (string)Session["nfNum"], new
+           {
+               @type = "number",
+               @id = "txtNFNumOC",
+               @onchange = "verificaNFNum('campo')"
+           })
+            </div>
+            @Html.Hidden("qtdeCaixas", "0", new { @id = "caixas" })
+            <div class="editor-label">
+                <b>Observação:</b>
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("observacaoOC", (string)Session["Observacao"], new { @id = "txtObsOC" })
+            </div>
+        </div>
+        @*}*@
+        @if (Session["operacao"].ToString().Equals("Edit")
+            &&
+            ((localOvosComercio == true || (tipoDEO == "Ovos p/ Comércio" && tipoEmpresa == "Granja"))
+             ||
+             (existeItemDivergente > 0)
+            ))
+        {
+            <br />
+        }
+        else
+        {
+            if (existeFechamentoEstoque)
+            {
+                <br />
+            }
+            else
+            {
+                <div class="editor-label" id="errorNFNum" style="color: Red; font-weight:bold;"></div>
+                <p>
+                    <input type="submit" value="Salvar" id="saveDEO" onclick="verificaNFNum('Click')" />
+                </p>
+            }
+        }
+    </fieldset>
+}

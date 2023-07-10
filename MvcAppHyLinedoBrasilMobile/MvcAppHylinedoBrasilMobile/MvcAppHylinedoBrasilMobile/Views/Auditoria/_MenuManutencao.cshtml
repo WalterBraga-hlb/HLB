@@ -1,0 +1,21 @@
+﻿<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">MANUTENÇÃO</li>
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+    .GetGroup("HLBAPPM-AuditoriaManutencaoVisita", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+    <li>
+        @Html.ActionLink("Visita", "ListaVisitas", "Auditoria",
+            null,
+            new { @class = "visita", @title = "Clique aqui para abrir a lista de visitas." })
+    </li>
+    }
+    @if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+    .GetGroup("HLBAPPM-AuditoriaManutencaoNaoConforme", (System.Collections.ArrayList)Session["Direitos"]))
+    {
+    <li>
+        @Html.ActionLink("Lista de Requisitos 'Não Conforme'", "ListaRequisitosNaoConforme", "Auditoria",
+            null,
+            new { @class = "uncheck_button", @title = "Clique aqui para abrir a Lista de Requisitos 'Não Conforme'." })
+    </li>
+    }
+</ul>

@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Peso do Ovo (gr) p/ Semana";
+}
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = new google.visualization.DataTable(@(Html.Raw(ViewBag.PesoOvoPorSemana)));
+
+            var options = {
+                title: 'Peso do Ovo (gr) p/ Semana',
+                hAxis: {gridlines: {count: @ViewBag.QtdeRegistrosEixoXPesoOvoSemana }},
+                height: 400,
+                chartArea: {width:'75%',height:'80%'},
+                legend: {position: 'bottom'},
+                trendlines: { 2: {} }
+            };
+
+            var chart = new google.visualization.LineChart(
+                document.getElementById('chartPesoOvoSemana'));
+            chart.draw(data, options);
+        }
+    </script>
+<div>
+    @if (ViewBag.QtdeRegistrosEixoXPesoOvoSemana != 0)
+    {
+    <div id="chartPesoOvoSemana" style="width: 100%; height: 100%;"></div>
+    }
+    else
+    {
+    <h3>
+        Peso do Ovo (gr) p/ Semana
+        <br />
+        Não existem dados para os parâmetros selecionados!
+    </h3>
+    }
+</div>

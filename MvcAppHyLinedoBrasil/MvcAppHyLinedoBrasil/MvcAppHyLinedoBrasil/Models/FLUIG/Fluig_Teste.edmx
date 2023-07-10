@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="fluigtesteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'fluigteste.dbo.VW_Manutencao_Preventiva' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_Manutencao_Preventiva">
+          <Key>
+            <PropertyRef Name="NUM_PROCES" />
+            <PropertyRef Name="EMAIL" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="NUM_PROCES" Type="int" Nullable="false" />
+          <Property Name="LoginSolicitante" Type="varchar" MaxLength="150" />
+          <Property Name="NomeSolicitante" Type="varchar" MaxLength="255" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="120" Nullable="false" />
+          <Property Name="DataSolicitacao" Type="datetime2" Precision="7" />
+          <Property Name="DataManutencao" Type="datetime" />
+          <Property Name="SemanaAnoManutencao" Type="int" />
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="companyid" Type="int" />
+          <Property Name="cardid" Type="int" />
+          <Property Name="documentid" Type="int" />
+          <Property Name="version" Type="int" />
+          <Property Name="tableid" Type="varchar(max)" />
+          <Property Name="equipamento" Type="varchar(max)" />
+          <Property Name="tag" Type="varchar(max)" />
+          <Property Name="localidade" Type="varchar(max)" />
+          <Property Name="periodicidade" Type="varchar(max)" />
+          <Property Name="data_manutencao" Type="varchar(max)" />
+          <Property Name="usuario_manutencao" Type="varchar(max)" />
+          <Property Name="existe_incubacao" Type="varchar(max)" />
+          <Property Name="data_calibracao" Type="varchar(max)" />
+          <Property Name="usuario_calibracao" Type="varchar(max)" />
+          <Property Name="periodo_manutencao" Type="varchar(max)" />
+          <Property Name="grupo_manutencao" Type="varchar(max)" />
+          <Property Name="grupo_gestor" Type="varchar(max)" />
+          <Property Name="planejamento" Type="varchar(max)" />
+          <Property Name="prazo_planejamento" Type="varchar(max)" />
+          <Property Name="pesquisa_equipamento" Type="varchar(max)" />
+        </EntityType>
+        <EntityContainer Name="fluigtesteModelStoreContainer">
+          <EntitySet Name="VW_Manutencao_Preventiva" EntityType="Self.VW_Manutencao_Preventiva" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[VW_Manutencao_Preventiva].[NUM_PROCES] AS [NUM_PROCES], 
+[VW_Manutencao_Preventiva].[LoginSolicitante] AS [LoginSolicitante], 
+[VW_Manutencao_Preventiva].[NomeSolicitante] AS [NomeSolicitante], 
+[VW_Manutencao_Preventiva].[EMAIL] AS [EMAIL], 
+[VW_Manutencao_Preventiva].[DataSolicitacao] AS [DataSolicitacao], 
+[VW_Manutencao_Preventiva].[DataManutencao] AS [DataManutencao], 
+[VW_Manutencao_Preventiva].[SemanaAnoManutencao] AS [SemanaAnoManutencao], 
+[VW_Manutencao_Preventiva].[ID] AS [ID], 
+[VW_Manutencao_Preventiva].[companyid] AS [companyid], 
+[VW_Manutencao_Preventiva].[cardid] AS [cardid], 
+[VW_Manutencao_Preventiva].[documentid] AS [documentid], 
+[VW_Manutencao_Preventiva].[version] AS [version], 
+[VW_Manutencao_Preventiva].[tableid] AS [tableid], 
+[VW_Manutencao_Preventiva].[equipamento] AS [equipamento], 
+[VW_Manutencao_Preventiva].[tag] AS [tag], 
+[VW_Manutencao_Preventiva].[localidade] AS [localidade], 
+[VW_Manutencao_Preventiva].[periodicidade] AS [periodicidade], 
+[VW_Manutencao_Preventiva].[data_manutencao] AS [data_manutencao], 
+[VW_Manutencao_Preventiva].[usuario_manutencao] AS [usuario_manutencao], 
+[VW_Manutencao_Preventiva].[existe_incubacao] AS [existe_incubacao], 
+[VW_Manutencao_Preventiva].[data_calibracao] AS [data_calibracao], 
+[VW_Manutencao_Preventiva].[usuario_calibracao] AS [usuario_calibracao], 
+[VW_Manutencao_Preventiva].[periodo_manutencao] AS [periodo_manutencao], 
+[VW_Manutencao_Preventiva].[grupo_manutencao] AS [grupo_manutencao], 
+[VW_Manutencao_Preventiva].[grupo_gestor] AS [grupo_gestor], 
+[VW_Manutencao_Preventiva].[planejamento] AS [planejamento], 
+[VW_Manutencao_Preventiva].[prazo_planejamento] AS [prazo_planejamento], 
+[VW_Manutencao_Preventiva].[pesquisa_equipamento] AS [pesquisa_equipamento]
+FROM [dbo].[VW_Manutencao_Preventiva] AS [VW_Manutencao_Preventiva]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="fluigtesteModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="fluigtesteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="VW_Manutencao_Preventiva" EntityType="fluigtesteModel.VW_Manutencao_Preventiva" />
+        </EntityContainer>
+        <EntityType Name="VW_Manutencao_Preventiva">
+          <Key>
+            <PropertyRef Name="NUM_PROCES" />
+            <PropertyRef Name="EMAIL" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="NUM_PROCES" Type="Int32" Nullable="false" />
+          <Property Name="LoginSolicitante" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="NomeSolicitante" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="DataSolicitacao" Type="DateTime" Precision="7" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="companyid" Type="Int32" />
+          <Property Name="cardid" Type="Int32" />
+          <Property Name="documentid" Type="Int32" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="tableid" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="equipamento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="tag" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="localidade" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="periodicidade" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="data_manutencao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="usuario_manutencao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="existe_incubacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="data_calibracao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="usuario_calibracao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="periodo_manutencao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="grupo_manutencao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="grupo_gestor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="planejamento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="prazo_planejamento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="pesquisa_equipamento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DataManutencao" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="SemanaAnoManutencao" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="fluigtesteModelStoreContainer" CdmEntityContainer="fluigtesteEntities">
+          <EntitySetMapping Name="VW_Manutencao_Preventiva">
+            <EntityTypeMapping TypeName="fluigtesteModel.VW_Manutencao_Preventiva">
+              <MappingFragment StoreEntitySet="VW_Manutencao_Preventiva">
+                <ScalarProperty Name="SemanaAnoManutencao" ColumnName="SemanaAnoManutencao" />
+                <ScalarProperty Name="DataManutencao" ColumnName="DataManutencao" />
+                <ScalarProperty Name="pesquisa_equipamento" ColumnName="pesquisa_equipamento" />
+                <ScalarProperty Name="prazo_planejamento" ColumnName="prazo_planejamento" />
+                <ScalarProperty Name="planejamento" ColumnName="planejamento" />
+                <ScalarProperty Name="grupo_gestor" ColumnName="grupo_gestor" />
+                <ScalarProperty Name="grupo_manutencao" ColumnName="grupo_manutencao" />
+                <ScalarProperty Name="periodo_manutencao" ColumnName="periodo_manutencao" />
+                <ScalarProperty Name="usuario_calibracao" ColumnName="usuario_calibracao" />
+                <ScalarProperty Name="data_calibracao" ColumnName="data_calibracao" />
+                <ScalarProperty Name="existe_incubacao" ColumnName="existe_incubacao" />
+                <ScalarProperty Name="usuario_manutencao" ColumnName="usuario_manutencao" />
+                <ScalarProperty Name="data_manutencao" ColumnName="data_manutencao" />
+                <ScalarProperty Name="periodicidade" ColumnName="periodicidade" />
+                <ScalarProperty Name="localidade" ColumnName="localidade" />
+                <ScalarProperty Name="tag" ColumnName="tag" />
+                <ScalarProperty Name="equipamento" ColumnName="equipamento" />
+                <ScalarProperty Name="tableid" ColumnName="tableid" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="documentid" ColumnName="documentid" />
+                <ScalarProperty Name="cardid" ColumnName="cardid" />
+                <ScalarProperty Name="companyid" ColumnName="companyid" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DataSolicitacao" ColumnName="DataSolicitacao" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="NomeSolicitante" ColumnName="NomeSolicitante" />
+                <ScalarProperty Name="LoginSolicitante" ColumnName="LoginSolicitante" />
+                <ScalarProperty Name="NUM_PROCES" ColumnName="NUM_PROCES" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

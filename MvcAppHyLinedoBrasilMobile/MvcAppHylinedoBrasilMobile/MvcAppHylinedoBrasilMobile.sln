@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcAppHylinedoBrasilMobile", "MvcAppHylinedoBrasilMobile\MvcAppHylinedoBrasilMobile.csproj", "{2DB8472E-9B12-4E59-9FDE-C27D0C011AAA}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://hlbapp.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = MvcAppHylinedoBrasilMobile\\MvcAppHylinedoBrasilMobile.csproj
+		SccProjectName1 = MvcAppHylinedoBrasilMobile
+		SccLocalPath1 = MvcAppHylinedoBrasilMobile
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2DB8472E-9B12-4E59-9FDE-C27D0C011AAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DB8472E-9B12-4E59-9FDE-C27D0C011AAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DB8472E-9B12-4E59-9FDE-C27D0C011AAA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2DB8472E-9B12-4E59-9FDE-C27D0C011AAA}.Debug|x86.Build.0 = Debug|Any CPU
+		{2DB8472E-9B12-4E59-9FDE-C27D0C011AAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DB8472E-9B12-4E59-9FDE-C27D0C011AAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DB8472E-9B12-4E59-9FDE-C27D0C011AAA}.Release|x86.ActiveCfg = Release|x86
+		{2DB8472E-9B12-4E59-9FDE-C27D0C011AAA}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

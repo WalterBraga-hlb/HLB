@@ -1,0 +1,314 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+
+    List<MvcAppHylinedoBrasilMobile.Models.RDV> listaRDV =
+        ((List<MvcAppHylinedoBrasilMobile.Models.RDV>)Session["ListaVisualizaRDV"])
+        .OrderBy(o => o.DataRDV).ToList();
+
+    int existeCartao = listaRDV
+        .Where(w => w.FormaPagamento == "Cartão Corp.").Count();
+
+    var listaTipoRDV = listaRDV
+        .GroupBy(g => new
+        {
+            g.IndEconNome,
+            g.FormaPagamento
+        })
+        .Select(s => new
+        {
+            s.Key.IndEconNome,
+            s.Key.FormaPagamento,
+            ValorReal = s.Sum(m => m.ValorDespesa),
+            ValorMoedaEstrangeira = s.Sum(m => m.ValorMoedaEstrangeira)
+        })
+        .OrderBy(o => o.IndEconNome).ThenBy(o => o.FormaPagamento)
+        .ToList();
+        
+    if (existeCartao > 0)
+    {
+        listaTipoRDV = listaRDV
+            .GroupBy(g => new
+            {
+                g.FormaPagamento
+            })
+            .Select(s => new
+            {
+                IndEconNome = "",
+                s.Key.FormaPagamento,
+                ValorReal = s.Sum(m => m.ValorDespesa),
+                ValorMoedaEstrangeira = s.Sum(m => m.ValorMoedaEstrangeira)
+            })
+            .OrderBy(o => o.IndEconNome).ThenBy(o => o.FormaPagamento)
+            .ToList();   
+    }    
+
+    int existeItensFechado = listaRDV
+        .Where(w => w.Status == "Fechado"
+            && w.NumeroFechamentoRDV != "" && w.NumeroFechamentoRDV != null).Count();
+
+    int existeItens = listaRDV.Count();
+
+    int existeItensAberto = listaRDV
+        .Where(w => w.Status == "Pendente"
+            && (w.NumeroFechamentoRDV == "" || w.NumeroFechamentoRDV == null)).Count();
+
+    string usuarioRDV = listaRDV.FirstOrDefault().Usuario.ToUpper();
+    string usuarioLogado = Session["login"].ToString().ToUpper();
+}
+<script language="JavaScript">
+    function mostrarElemento(id, visibilidade) {
+        document.getElementById(id).style.display = visibilidade;
+    }
+</script>
+<style type="text/css">
+    .prodImagem {
+	    background-color: black;
+	    display: none;
+	    color: white;
+	    padding: 5px;
+	    width:300px;
+	    height:300px;
+	    position:absolute;
+	    top:50%;
+	    left:25%;
+	    margin-top:-50px;
+	    margin-left:-50px;
+    }
+</style>
+<div align="center">
+    <p>
+        @if (ViewBag.Metodo == "FechamentoRDV")
+        {
+            @Html.ActionLink("Voltar p/ RDV - Lançamentos Pendentes", "ListaLancamentosPendentes", "RDV")
+        }
+        else if (ViewBag.Metodo == "VisualizaRDV" || ViewBag.Metodo == "DeleteRDVFechado")
+        {
+            @Html.ActionLink("Voltar p/ RDV - Fechados", "ListaRDVFechados", "RDV")
+        }
+        else if (ViewBag.Metodo == "AprovaRDV")
+        {
+            @Html.ActionLink("Voltar p/ RDVs para Aprovação", "ListaRDVParaAprovacao", "RDV")
+        }
+        else if (ViewBag.Metodo == "VisualizaRDVFechadoGeral" || ViewBag.Metodo == "RecebimentoRDV")
+        {
+            @Html.ActionLink("Voltar p/ RDVs Fechados Geral", "ListaRDVFechadosGeral", "RDV")
+        }
+    </p>
+    @Html.Image(@Url.Content("~/Content/images/Amil-Reembolso-Icon.png"), "RDV")
+    <h2>
+        @ViewBag.Titulo
+    </h2>
+</div>
+<br />
+
+<div align="center">
+    <h3>
+        @if (ViewBag.Metodo == "FechamentoRDV")
+        {
+            <b>Período: @Convert.ToDateTime(Session["dataInicialRDV"]).ToString("dd/MM/yyyy") a 
+                @Convert.ToDateTime(Session["dataFinalRDV"]).ToString("dd/MM/yyyy") - @ViewBag.NomeUsuario</b>
+        }
+        else if (ViewBag.Metodo == "VisualizaRDV" || ViewBag.Metodo == "DeleteRDVFechado"
+            || ViewBag.Metodo == "VisualizaRDVFechadoGeral" || ViewBag.Metodo == "RecebimentoRDV")
+        {
+            <b>Período: @listaRDV.Min(m => m.DataRDV).ToString("dd/MM/yyyy") a 
+                @listaRDV.Max(m => m.DataRDV).ToString("dd/MM/yyyy") - @ViewBag.NomeUsuario</b>
+            <br />
+            <b>@listaRDV.Min(m => m.FormaPagamento) - @listaRDV.Max(m => m.Banco)</b>
+        }
+    </h3>
+</div>
+
+<div align="center"><h3 style="color:red;background-color:Yellow">@Html.Raw(ViewBag.Erro)</h3></div>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+<br />
+@foreach (var tipoRDV in listaTipoRDV)
+{
+    string moeda = "";
+    string moedaExibeFinal = tipoRDV.IndEconNome;
+    if (tipoRDV.IndEconNome == null) { moeda = "EM REAIS"; }
+    else { if (tipoRDV.IndEconNome != "") { moeda = "EM " + tipoRDV.IndEconNome; } }
+    decimal valorReal = 0;
+    decimal? valorMoedaEstrangeira = 0;
+    <div align="center"><h4 style="color:White; background-color:Gray;">RDV @moeda - @tipoRDV.FormaPagamento</h4></div>
+    <div id="divTabelaIndexPV" style="overflow:auto" >
+    <table id="tabelaIndexPV" class="ajustetabelaIndexPV">
+        <tbody class="ajustetabelaIndexPV">
+        <tr class="ajustetabelaIndexPV">
+            <th class="ajustetabelaIndexPV">
+                ID
+            </th>
+            <th class="ajustetabelaIndexPV">
+                Data
+            </th>
+            <th class="ajustetabelaIndexPV">
+                Tipo Despesa
+            </th>
+            <th class="ajustetabelaIndexPV">
+                Descrição
+            </th>
+            <th class="ajustetabelaIndexPV">
+                Local
+            </th>
+            <th class="ajustetabelaIndexPV" colspan="2">
+                Valores
+            </th>
+        </tr>
+    @foreach (var item in listaRDV.Where(w => (w.IndEconNome == tipoRDV.IndEconNome || tipoRDV.IndEconNome == "")
+        && w.FormaPagamento == tipoRDV.FormaPagamento).ToList())
+    {
+        decimal limiteDespesa = MvcAppHylinedoBrasilMobile.Controllers.RDVController
+            .VerificaLimiteMetodo(item.TipoDespesa);        
+        if (item.TipoDespesa.Contains("(C"))
+        {
+            valorReal = valorReal + item.ValorDespesa;
+            valorMoedaEstrangeira = valorMoedaEstrangeira + item.ValorMoedaEstrangeira;
+        }
+        else
+        {
+            valorReal = valorReal - item.ValorDespesa;
+            valorMoedaEstrangeira = valorMoedaEstrangeira - item.ValorMoedaEstrangeira;
+        }
+        <tr class="ajustetabelaIndexPV">
+            <td class="ajustetabelaIndexPV">
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td class="ajustetabelaIndexPV">
+                @String.Format("{0:dd/MM/yy}", item.DataRDV)
+            </td>
+            <td class="ajustetabelaIndexPV">
+                @Html.DisplayFor(modelItem => item.TipoDespesa)
+            </td>
+            <td class="ajustetabelaIndexPV">
+                @Html.DisplayFor(modelItem => item.Descricao)
+                @if (item.Motivo != null && item.Motivo != "")
+                {
+                    if (limiteDespesa > 0)
+                    {
+                    <b>LIMITE ULTRAPASSADO: </b>@(String.Format("{0:N2}", limiteDespesa))
+                    }
+                    <br />
+                    <b>Motivo: </b>@(item.Motivo)
+                }
+                @if (item.QtdeDiarias != null && item.QtdeDiarias > 0)
+                {
+                    if (item.TipoDespesa.Contains("HOSPEDAGEM"))
+                    {
+                        <br />
+                        <b>Qtde Diárias: </b>@(String.Format("{0:N0}", item.QtdeDiarias))
+                    }
+                    else if (item.TipoDespesa.Contains("KILOMETRAGEM"))
+                    {
+                        <br />
+                        <b>Qtde KM: </b>@("" + String.Format("{0:N0}", item.QtdeDiarias))
+                    }
+                }
+                @if (item.ValorDiaria != null && item.ValorDiaria > 0)
+                {
+                    if (item.TipoDespesa.Contains("HOSPEDAGEM"))
+                    {
+                        <br />
+                        <b>Valor Diária: </b>@("" + String.Format("{0:N2}", item.ValorDiaria))
+                    }
+                }
+            </td>
+            <td class="ajustetabelaIndexPV">
+                @Html.DisplayFor(modelItem => item.NomeCidade)
+            </td>
+            <td class="ajustetabelaIndexPV">
+                @if (item.TipoDespesa.Contains("(D"))
+                {
+                     @String.Format("({0:C2})", item.ValorDespesa);
+                }
+                else
+                {
+                    @String.Format("{0:C2}", item.ValorDespesa);
+                }
+            </td>
+            <td class="ajustetabelaIndexPV">
+                @if (item.ValorMoedaEstrangeira > 0)
+                {
+                    if (item.TipoDespesa.Contains("(D"))
+                    {
+                         @String.Format("("
+                            + item.IndEconNome.Substring(item.IndEconNome.IndexOf("-") + 2, item.IndEconNome.Length - (item.IndEconNome.IndexOf("-") + 2))
+                            + " {0:N2})", item.ValorMoedaEstrangeira);
+                    }
+                    else
+                    {
+                        @String.Format(
+                            item.IndEconNome.Substring(item.IndEconNome.IndexOf("-") + 2, item.IndEconNome.Length - (item.IndEconNome.IndexOf("-") + 2))
+                            + " {0:N2}", item.ValorMoedaEstrangeira);
+                    }
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+    </table>
+    </div>
+    <div align="center"><h4 style="color:White; background-color:Gray">VALOR TOTAL EM REAIS: 
+        @if (valorReal < 0)
+        {
+            @String.Format("({0:C2})", valorReal * (-1));
+        }
+        else
+        {
+            @String.Format("{0:C2}", valorReal);
+        }
+        </h4>
+        @if (moeda != "REAIS")
+        {
+            if (moedaExibeFinal == "") { moedaExibeFinal = listaRDV.Max(m => m.IndEconNome); }
+
+            if (valorMoedaEstrangeira < 0)
+            {
+                <h4 style="color:White; background-color:Gray">(@moedaExibeFinal @String.Format("{0:N2}", valorMoedaEstrangeira * (-1)))</h4>
+            }
+            else
+            {
+                <h4 style="color:White; background-color:Gray">@moedaExibeFinal @String.Format("{0:N2}", valorMoedaEstrangeira)</h4>
+            }
+        }
+    </div>
+    <br />
+}
+
+@if (MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+        .GetGroup("HLBAPPM-RDVAprovar", (System.Collections.ArrayList)Session["Direitos"])
+        && existeItens == existeItensFechado
+        && MvcAppHylinedoBrasilMobile.Controllers.RDVController.VerificaGerencia(usuarioLogado, usuarioRDV))
+{
+    using (Html.BeginForm("AprovarRDVFechado", "RDV", FormMethod.Post))
+    {
+    <input type="submit" value="Aprovar RDV Fechado" />
+    }
+}
+
+@if (existeItensAberto > 0)
+{
+    using (Html.BeginForm("FechaRDVPendentes", "RDV", FormMethod.Post))
+    {
+    <input type="submit" value="Fechar Lançamentos Pendentes deste Período" />
+    }
+}
+
+@if (ViewBag.Metodo == "DeleteRDVFechado")
+{
+    using (Html.BeginForm("ConfirmaDeleteRDVFechado", "RDV", FormMethod.Post))
+    {
+    <input type="submit" value="Confirmar a Exclusão do Fechamento RDV" />
+    }
+}
+
+@if (ViewBag.Metodo == "RecebimentoRDV")
+{
+    using (Html.BeginForm("ConfirmaRecebimentoRDV", "RDV", FormMethod.Post))
+    {
+    <input type="submit" value="Confirmar o Recebimento do RDV" />
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

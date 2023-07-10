@@ -1,0 +1,242 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+
+    List<MvcAppHylinedoBrasilMobile.Models.Auditoria_Visita_Requisito> lista =
+        (List<MvcAppHylinedoBrasilMobile.Models.Auditoria_Visita_Requisito>)Session["ListaRequisitosNaoConforme"];
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities apolo = new MvcAppHylinedoBrasilMobile.Models.bdApolo2.Apolo10Entities();
+
+    //List<MvcAppHylinedoBrasilMobile.Models.Auditoria_Grupo> listaGrupo =
+    //    new List<MvcAppHylinedoBrasilMobile.Models.Auditoria_Grupo>();
+
+    //List<MvcAppHylinedoBrasilMobile.Models.Auditoria_Requisito> listaRequisito =
+    //    new List<MvcAppHylinedoBrasilMobile.Models.Auditoria_Requisito>();
+
+    //foreach (var item in lista)
+    //{
+    //    MvcAppHylinedoBrasilMobile.Models.Auditoria_Requisito requisito =
+    //        hlbapp.Auditoria_Requisito.Where(w => w.ID == item.IDRequisito)
+    //    .FirstOrDefault();
+
+    //    if (requisito != null)
+    //    {
+    //        listaRequisito.Add(requisito);
+
+    //        MvcAppHylinedoBrasilMobile.Models.Auditoria_Grupo grupo =
+    //            hlbapp.Auditoria_Grupo
+    //                .Where(w => w.Descricao == requisito.Grupo
+    //                    && w.TipoUnidade == requisito.TipoUnidade)
+    //            .FirstOrDefault();
+
+    //        if (grupo != null &&
+    //            listaGrupo.Where(w => w.ID == grupo.ID).Count() == 0)
+    //        {
+    //            listaGrupo.Add(grupo);
+    //        }
+    //    }
+    //}
+}
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para o Menu da Auditoria", "MenuAuditoria", "Auditoria",
+                null,
+                new { @title = "Clique aqui para voltar para o Menu da Auditoria", @class = "auditoria" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/uncheck.png"), "Requisitos Não Conforme")
+    <h2>Lista de Requisitos 'Não Conforme'</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+@using (Html.BeginForm("SearchRequisitosNaoConforme", "Auditoria"))
+{
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <b>Data da Visita Inicial:</b>
+            <div class="editor-label">
+                @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+                {
+                    @Html.TextBox("dataInicialVisita", Convert.ToDateTime(Session["dataInicialVisita"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+                }
+                else
+                {
+                    @Html.TextBox("dataInicialVisita", Convert.ToDateTime(Session["dataInicialVisita"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+                }
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Data da Visita Final:</b>
+            <div class="editor-label">
+                @if (browser.Browser.Equals("Chrome") || browser.Browser.Equals("Safari"))
+                {
+                    @Html.TextBox("dataFinalVisita", Convert.ToDateTime(Session["dataFinalVisita"]).ToString("yyyy-MM-dd"), new { @type = "date" })
+                }
+                else
+                {
+                    @Html.TextBox("dataFinalVisita", Convert.ToDateTime(Session["dataFinalVisita"]).ToString("dd/MM/yyyy"), new { @type = "date" })
+                }
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <b>Departamento:</b>
+            <div class="editor-field">
+                @Html.DropDownList(
+                "Departamento",
+                (List<SelectListItem>)Session["FiltroDDLListaDepartamentos"],
+                new { @id = "ddlDepartamento" })
+            </div>
+        </li>
+        <li data-role="fieldcontain">
+            <input type="submit" value="Pesquisar" />
+        </li>
+    </ul>
+}
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Requisitos Não Conforme</li>
+    <li>
+        @Html.ActionLink("Exportar Relatório de Requisitos Não Conforme", "GerarRelatorioRequisitosNaoConforme", "Auditoria", null,
+            new { @class = "importExcel", @target = "_blank", @title = "Clique aqui para Exportar o Relatório de Requisitos Não Conforme." })
+    </li>
+</ul>
+<br />
+<div id="divTabelaRV">
+<table id="tabelaGrupoRequisito" class="ajustetabelaRequisitoNaoConforme">
+    <tbody class="ajustetabelaRequisitoNaoConforme">
+        @*@foreach (var grupo in listaGrupo.OrderBy(o => o.ID).ToList())
+        {*@
+            @*<tr>
+                <th colspan="8">
+                    @grupo.Descricao
+                </th>
+            </tr>*@
+            
+            <tr class="ajustetabelaRequisitoNaoConforme">
+                <th class="ajustetabelaRequisitoNaoConforme">
+                    Data
+                </th>
+                <th class="ajustetabelaRequisitoNaoConforme">
+                    Unidade
+                </th>
+                <th class="ajustetabelaRequisitoNaoConforme">
+                    Núcleo
+                </th>
+                <th class="ajustetabelaRequisitoNaoConforme">
+                    Grupo
+                </th>
+                <th class="ajustetabelaRequisitoNaoConforme">
+                    Requisito
+                </th>
+                <th class="ajustetabelaRequisitoNaoConforme">
+                    Avaliação
+                </th>
+                <th class="ajustetabelaRequisitoNaoConforme">
+                    Prazo
+                </th>
+                <th class="ajustetabelaRequisitoNaoConforme">
+                    Reprovação
+                </th>
+                <th class="ajustetabelaRequisitoNaoConforme">
+                </th>
+            </tr>
+
+            @*foreach (var requisito in listaRequisito
+                .Where(w => w.Grupo == grupo.Descricao && w.TipoUnidade == grupo.TipoUnidade)
+                .OrderBy(o => o.Codigo).ToList())*@
+            @foreach (var item in lista)
+            {
+                //MvcAppHylinedoBrasilMobile.Models.Auditoria_Visita_Requisito requisitoVisita =
+                //    hlbapp.Auditoria_Visita_Requisito.Where(w => w.IDRequisito == requisito.ID).FirstOrDefault();
+
+                //MvcAppHylinedoBrasilMobile.Models.Auditoria_Visita_Requisito requisitoVisita =
+                //    lista.Where(w => w.IDRequisito == requisito.ID).FirstOrDefault();
+
+                MvcAppHylinedoBrasilMobile.Models.Auditoria_Visita visita =
+                    hlbapp.Auditoria_Visita.Where(w => w.ID == item.IDVisita).FirstOrDefault();
+
+                MvcAppHylinedoBrasilMobile.Models.Auditoria_Requisito requisito =
+                    hlbapp.Auditoria_Requisito.Where(w => w.ID == item.IDRequisito).FirstOrDefault();
+
+                MvcAppHylinedoBrasilMobile.Models.bdApolo2.FUNCIONARIO departamento = apolo.FUNCIONARIO
+                    .Where(w => w.FuncCod == visita.Departamento).FirstOrDefault();
+    
+                <tr class="ajustetabelaRequisitoNaoConforme">
+                    <td class="ajustetabelaRequisitoNaoConforme">
+                        @(visita.DataVisita.ToShortDateString())
+                    </td>
+                    <td class="ajustetabelaRequisitoNaoConforme">
+                        @(departamento.FuncNome)
+                    </td>
+                    <td class="ajustetabelaRequisitoNaoConforme">
+                        @(visita.Nucleo)
+                    </td>
+                    <td class="ajustetabelaRequisitoNaoConforme">
+                        @(requisito.Grupo)
+                    </td>
+                    <td class="ajustetabelaRequisitoNaoConforme">
+                        @Html.Hidden("id", item.ID)
+                        @(requisito.Codigo + " - " + requisito.Descricao)
+                    </td>
+                    <td class="ajustetabelaRequisitoNaoConforme">
+                        <table style="background-color:transparent; border:none">
+                            <tr style="background-color:transparent; border:none">
+                                <td style="background-color:transparent; border:none">
+                                    @if (item.Observacao != "" && item.Observacao != null)
+                                    {
+                                        @Html.Raw(item.Observacao.Replace("\r\n", "<br />"))
+                                    }
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td class="ajustetabelaRequisitoNaoConforme">
+                        @(item.SolucaoNaoConforme)
+                    </td>
+                    <td class="ajustetabelaRequisitoNaoConforme">
+                        @if (item.StatusResolucao == "Reprovado")
+                        {
+                            if (item.StatusResolucao == "Reprovado")
+                            {
+                                MvcAppHylinedoBrasilMobile.Models.LOG_Auditoria_Visita_Requisito log = hlbapp
+                                    .LOG_Auditoria_Visita_Requisito.Where(w => w.IDVisitaRequisito == item.ID)
+                                    .OrderByDescending(o => o.DataHora).FirstOrDefault();
+
+                                if (log != null)
+                                {
+                                    @Html.Label(log.DataHora.ToShortDateString() + " - " + log.Usuario)
+                                    <br />
+                                    @Html.Raw(log.ObservacaoResolucao)
+                                }
+                            }
+                        }
+                    </td>
+                    <td class="ajustetabelaRequisitoNaoConforme" align="center">
+                        <table style="background-color:transparent; border:none">
+                            <tr style="background-color:transparent; border:none">
+                                <td style="background-color:transparent; border:none" align="center">
+                                    <div class="tooltip">
+                                            @Html.ActionLink("Conforme", "ResolucaoNaoConforme",
+                                                new { id = item.ID },
+                                                new
+                                                {
+                                                    @class = "check"
+                                                })
+                                        <span class="tooltiptext">Clique aqui resolver o requisito.</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            }
+    </tbody>
+</table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

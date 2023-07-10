@@ -1,0 +1,324 @@
+﻿@{
+    ViewBag.Title = "";
+
+    var itensPVList = (List<MvcAppHylinedoBrasilMobile.Models.Item_Pedido_Venda>)Session["ItensPVList"];
+
+    string codigoCliente = Session["selectedCustomer"].ToString();
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities apoloStatic = new MvcAppHylinedoBrasilMobile.Models.bdApolo.bdApoloEntities();
+
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.ENTIDADE entidade = apoloStatic.ENTIDADE.Where(w => w.EntCod == codigoCliente).FirstOrDefault();
+    MvcAppHylinedoBrasilMobile.Models.bdApolo.CIDADE cidade = apoloStatic.CIDADE.Where(c => c.CidCod == entidade.CidCod).FirstOrDefault();
+}
+
+<div align="center">
+    <p>
+        @Html.ActionLink("Voltar p/ Lista de Pedidos de Venda", "Index", "PedidoVenda")
+        @if (!Convert.ToBoolean(Session["solicitaCancelarPV"]))
+        {
+        <br />
+        <br />
+        <b style="color:red; background-color:Yellow">
+            * CUIDADO!!! CASO CLIQUE NO LINK ACIMA, OS DADOS INFORMADOS DO PEDIDO
+            ANTES DA FINALIZAÇÃO SERÃO PERDIDOS!!!
+        </b>
+        }
+    </p>
+    @Html.Image(@Url.Content("~/Content/icons/pedidoVenda.png"), "Pedido de Venda")
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+
+@if (!Convert.ToBoolean(Session["solicitaCancelarPV"]))
+{
+<h2>Passo 02: Insira as Linhagens que vão ser utilizadas</h2>
+<br />
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Menu dos Itens do Pedido de Venda</li>
+    <li>
+        @Html.ActionLink("Adicionar Novo Item do Pedido de Venda", "AddItemPV", "PedidoVenda", null,
+            new { @class = "add", @title = "Clique aqui para Inserir novo Item do Pedido de Venda" })
+    </li>
+</ul>
+    if (!MvcAppHyLinedoBrasil.Controllers.AccountController
+        .GetGroup("HLBAPPM-PedidoVendaDadosExportacao",
+        (System.Collections.ArrayList)Session["Direitos"]))
+    {
+        <h3 style="color:red; background-color:Yellow">
+            * OS VALORES ABAIXOS ESTÃO SEM AS VACINAS E OVOS BRASIL INCLUÍDOS!!!
+            NOS PRÓXIMOS PASSOS ELES SERÃO SOMADOS!!!
+        </h3>
+    }
+}
+else
+{
+<h2>Selecione abaixo quais Itens deseja Cancelar:</h2>
+}
+
+<br />
+
+@using (Html.BeginForm("FinalizaSolicitacaoCancelamento", "PedidoVenda", FormMethod.Post))
+{
+<div id="tabelaItensPV" style="overflow:auto;">
+<table id="tabela" class="ajustetabelaItensFinalizaPV">
+    <thead class="ajustetabelaItensFinalizaPV">
+        <tr class="ajustetabelaItensFinalizaPV">
+            <th class="ajustetabelaItensFinalizaPV">
+                Seq.
+            </th>
+            <th class="ajustetabelaItensFinalizaPV">
+                DE
+            </th>
+            <th class="ajustetabelaItensFinalizaPV">
+                A
+            </th>
+            <th class="ajustetabelaItensFinalizaPV">
+                Linha
+            </th>
+            <th class="ajustetabelaItensFinalizaPV">
+                Qtde. Líquida
+            </th>
+            <th class="ajustetabelaItensFinalizaPV">
+                % Bonif.
+            </th>
+            <th class="ajustetabelaItensFinalizaPV">
+                Qt. Bon.
+            </th>
+            <th class="ajustetabelaItensFinalizaPV">
+                Qt. Rep.
+            </th>
+            <th class="ajustetabelaItensFinalizaPV">
+                Qt. Tot.
+            </th>
+            <th class="ajustetabelaItensFinalizaPV">
+                Pr. Pint. (Tab. Pr.):
+            </th>
+            <th class="ajustetabelaItensFinalizaPV">
+                Pr. Extras
+            </th>
+            <th class="ajustetabelaItensFinalizaPV">
+                Pr. Tot.
+            </th>
+            <th class="ajustetabelaItensFinalizaPV">
+                Val. Tot.
+            </th>
+            <th class="ajustetabelaItensFinalizaPV">
+                CHIC
+            </th>
+            <th class="ajustetabelaItensFinalizaPV">
+                CHIC Rep.
+            </th>
+            @if (!Convert.ToBoolean(Session["solicitaCancelarPV"]))
+            {
+                <th class="ajustetabelaItensFinalizaPV">
+                    Ações
+                </th>
+            }
+            </tr>
+    </thead>
+@foreach (var item in itensPVList)
+{
+    if (item.OrderNoCHIC == null) { item.OrderNoCHIC = ""; }
+    <tbody class="ajustetabelaItensFinalizaPV">
+        <tr class="ajustetabelaItensFinalizaPV">
+            <td class="ajustetabelaItensFinalizaPV">
+                @if (!Session["origemPV"].ToString().Equals("Inclusão"))
+                {
+                    @item.Sequencia
+                }
+            </td>
+            <td class="ajustetabelaItensFinalizaPV">
+                @String.Format("{0:dd/MM/yy}", item.DataEntregaInicial)
+            </td>
+            <td class="ajustetabelaItensFinalizaPV">
+                @String.Format("{0:dd/MM/yy}", item.DataEntregaFinal)
+            </td>
+            @*<td>
+            @Html.Display(MvcAppHylinedoBrasilMobile.Controllers.PedidoVendaController.apoloStatic
+                .PRODUTO.Where(w => w.ProdCodEstr == item.ProdCodEstr).FirstOrDefault().ProdNomeAlt2);
+        </td>*@
+            @{
+                MvcAppHylinedoBrasilMobile.Models.bdApolo.PRODUTO produto = apoloStatic.PRODUTO.Where(w => w.ProdCodEstr == item.ProdCodEstr).FirstOrDefault();
+            }
+            @if (produto == null)
+            {
+                <td class="ajustetabelaItensFinalizaPV">
+                    @item.ProdCodEstr
+                </td>
+            }
+            else
+            {
+                <td class="ajustetabelaItensFinalizaPV">
+                    @(item.ProdCodEstr + " - " + produto.ProdNome)
+                </td>
+            }
+            <td class="ajustetabelaItensFinalizaPV">
+                @String.Format("{0:N0}", item.QtdeLiquida)
+            </td>
+            <td class="ajustetabelaItensFinalizaPV">
+                @String.Format("{0:N2}", item.PercBonificacao) %
+            </td>
+            <td class="ajustetabelaItensFinalizaPV">
+                @String.Format("{0:N0}", item.QtdeBonificada)
+            </td>
+            <td class="ajustetabelaItensFinalizaPV">
+                @String.Format("{0:N0}", item.QtdeReposicao)
+            </td>
+            <td class="ajustetabelaItensFinalizaPV">
+                @String.Format("{0:N0}", (item.QtdeLiquida + item.QtdeBonificada))
+            </td>
+            <td class="ajustetabelaItensFinalizaPV">
+                @String.Format("{0:N6}", item.PrecoUnitario)
+            </td>
+            <td class="ajustetabelaItensFinalizaPV">
+            </td>
+            <td class="ajustetabelaItensFinalizaPV">
+                @String.Format("{0:N6}", item.PrecoUnitario)
+            </td>
+            <td class="ajustetabelaItensFinalizaPV">
+                @if (item.ValorTotal == 0)
+                {
+                    @String.Format("{0:N2}", (item.PrecoUnitario * item.QtdeLiquida))
+                }
+                else
+                {
+                    @String.Format("{0:N2}", item.ValorTotal)
+                }
+            </td>
+            <td class="ajustetabelaItensFinalizaPV">
+                @(item.OrderNoCHIC)
+                @if (Convert.ToBoolean(Session["solicitaCancelarPV"]) 
+                    && item.OrderNoCHIC != null && item.OrderNoCHIC != "" && item.OrderNoCHIC != "Cancelado")
+                {
+                    <div style="width: 100%;" align="center">
+                        <label style="width: 50px">@Html.CheckBox("cancela_normal")</label>
+                        @Html.Hidden("idCancela_normal", item.Sequencia)
+                    </div>
+                }
+            </td>
+            <td class="ajustetabelaItensFinalizaPV">
+                @(item.OrderNoCHICReposicao)
+                @if (Convert.ToBoolean(Session["solicitaCancelarPV"])
+                    && item.OrderNoCHICReposicao != null && item.OrderNoCHICReposicao != "" && item.OrderNoCHICReposicao != "Cancelado")
+                {
+                    <div style="width: 100%;" align="center">
+                        <label style="width: 50px">@Html.CheckBox("cancela_reposicao")</label>
+                        @Html.Hidden("idCancela_reposicao", item.Sequencia)
+                    </div>
+                }
+            </td>
+            @if (!Convert.ToBoolean(Session["solicitaCancelarPV"]))
+            {
+                <td class="ajustetabelaItensFinalizaPV">
+                    <table>
+                        <tr>
+                            @*@if (Convert.ToBoolean(Session["solicitaCancelarPV"]))
+                        {
+                            <td>
+                                <div style="width: 100%;">
+                                    <label style="width: 50px">@Html.CheckBox("cancela")</label>
+                                    @Html.Hidden("idCancela", item.Sequencia)
+                                </div>
+                            </td>
+                        }*@
+                            @if (!Convert.ToBoolean(Session["solicitaCancelarPV"]))
+                            {
+                                if (!item.OrderNoCHIC.Equals("Cancelado"))
+                                {
+                                    <td>
+                                        <div align="center">
+                                            @Html.ActionLink("Edit", "EditItemPV",
+                                 new { sequencia = item.Sequencia },
+                                 new { @class = "edit", @title = "Clique aqui para Alterar o item deste Pedido" })
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div align="center">
+                                            @Html.ActionLink("Delete", "DeleteItemPV",
+                                 new { sequencia = item.Sequencia },
+                                     new { @class = "delete", @title = "Clique aqui para Excluir o item deste Pedido" })
+                                        </div>
+                                    </td>
+                                }
+                            }
+                            @if (MvcAppHyLinedoBrasil.Controllers.AccountController
+                    .GetGroup("HLBAPPM-PedidoVendaDadosExportacao",
+                    (System.Collections.ArrayList)Session["Direitos"])
+                    && !cidade.PaisSigla.Equals("BRA"))
+                            {
+                                if (!item.OrderNoCHIC.Equals("Cancelado"))
+                                {
+                                    <td>
+                                        <div align="center">
+                                            @Html.ActionLink("Adicionar Lote", "ListLotesPV",
+                                 new { sequencia = item.Sequencia },
+                                  new { @class = "lote", @title = "Clique aqui para Inserir Lotes para esse item deste Pedido" })
+                                        </div>
+                                    </td>
+                                }
+                            }
+                        </tr>
+                    </table>
+                </td>
+            }
+            </tr>
+    </tbody>
+}
+</table>
+</div>
+
+<br />
+if (Convert.ToBoolean(Session["solicitaCancelarPV"]))
+{
+        <input type="submit" value="Próximo" />
+}
+}
+
+@if (!Convert.ToBoolean(Session["solicitaCancelarPV"]))
+{
+    if (Session["origemPV"].ToString().Equals("Alteração"))
+    {
+        using (Html.BeginForm("FinalizaPV", "PedidoVenda", FormMethod.Post))
+        {
+        <input type="submit" value="Voltar para a Visualização do Pedido" />
+        }
+    }
+    else
+    {
+        using (Html.BeginForm("VerificaVacina", "PedidoVenda", FormMethod.Post))
+        {
+        <input type="submit" value="Próximo" />
+        }
+
+        if (!MvcAppHyLinedoBrasil.Controllers.AccountController
+                .GetGroup("HLBAPPM-PedidoVendaDadosExportacao",
+                (System.Collections.ArrayList)Session["Direitos"]))
+        {
+            if (Session["selectedTypeAddress"].ToString().Equals("Outro"))
+            {
+                using (Html.BeginForm("SelectShipAddress", "PedidoVenda", FormMethod.Post))
+                {
+                    <input type="submit" value="Anterior" />
+                }
+            }
+            else
+            {
+                using (Html.BeginForm("AddClientePV", "PedidoVenda", FormMethod.Post))
+                {
+                    <input type="submit" value="Anterior" />
+                }
+            }
+        }
+        else
+        {
+            using (Html.BeginForm("DadosExportacaoReturn", "PedidoVenda", FormMethod.Post))
+            {
+                <input type="submit" value="Anterior" />
+            }
+        }
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

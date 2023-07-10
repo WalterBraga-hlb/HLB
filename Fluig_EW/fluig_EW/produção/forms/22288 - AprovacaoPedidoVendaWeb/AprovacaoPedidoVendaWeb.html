@@ -1,0 +1,413 @@
+<html>
+<head>
+	<link type="text/css" rel="stylesheet" href="/style-guide/css/fluig-style-guide.min.css"/>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+	<script type="text/javascript" src="/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+	
+	<!-- CUSTOM -->
+	<script type="text/javascript" src="/webdesk/vcXMLRPC-mobile.js"></script>
+<!-- 	<script src="https://d3js.org/d3.v5.min.js"></script> -->
+	<script src="http://fluig.hyline.com.br:8080/volume/stream/Rmx1aWc=/P3Q9MSZ2b2w9RGVmYXVsdCZpZD0zOTk2NSZ2ZXI9MTAwMCZmaWxlPWQzLnY1Lm1pbi5qcyZjcmM9MTYxNDk4MzU2MiZzaXplPTAuMjM2MzQ4JnVJZD0zJmZTSWQ9MSZ1U0lkPTEmZD1mYWxzZSZ0a249JnB1YmxpY1VybD10cnVl.js"></script>
+</head>
+	<body>
+		<div class="fluig-style-guide">
+			<form name="form" role="form">
+				<div id="pnlDadosDecisao">
+					<div align="center">
+						<h4 id="lblTitleDadosDecisao" class="title-form-application">Dados da Decisão</h4>
+					</div>
+					<div class="row">
+						<div class="col-md-3 col-sm-3 col-xs-12">
+							<div class="form-input">
+								<div class="form-group">
+									<label class="label-fields"><b>Data / Hora da Solicitação</b></label>
+									<input type="text" class="form-control" name="data_solicitacao" value=""
+										placeholder="" data-size="big" required="required"
+										id="txtDataSolicitacao" readonly analytics="true" gooddataid="1">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+							<div class="form-input">
+								<div class="form-group">
+									<label class="label-fields"><b>Solicitante</b></label>
+									<input type="text" class="form-control" name="solicitante" value=""
+										placeholder="" data-size="big" required="required"
+										id="txtSolicitante" readonly analytics="true" gooddataid="2">
+									<input type="hidden" class="form-control" id="hdCodigoSolicitante"
+										name="usuario_solicitante" value="" analytics="true" gooddataid="3">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 col-sm-3 col-xs-12">
+							<div class="form-input">
+								<div class="form-group">
+									<label class="label-fields"><b>Data / Hora da Decisão</b></label>
+									<input type="text" class="form-control" name="data_decisao" value=""
+										placeholder="" data-size="big" required="required"
+										id="txtDataDecisao" readonly analytics="true" gooddataid="4">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+							<div class="form-input">
+								<div class="form-group">
+									<label class="label-fields"><b>Decisor</b></label>
+									<input type="text" class="form-control" name="decisor" value=""
+										placeholder="" data-size="big" required="required"
+										id="txtDecisor" readonly analytics="true" gooddataid="5">
+									<input type="hidden" class="form-control" id="hdCodigoDecisor"
+										name="usuario_decisor" value="" analytics="true" gooddataid="6">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5 col-sm-5 col-xs-12">
+							<div class="form-input">
+								<div class="form-group">
+									<label class="label-fields"><b>Tipo Exceção</b></label>
+									<input type="text" class="form-control" name="tipo_excecao" value=""
+										placeholder="" data-size="big" required="required"
+										id="txtMensagem" readonly analytics="true" gooddataid="17">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-5 col-sm-5 col-xs-12">
+							<div class="form-input">
+								<div class="form-group">
+									<label class="label-fields"><b>Descrição Exceção</b></label>
+									<input type="text" class="form-control" name="mensagem" value=""
+										placeholder="" data-size="big" required="required"
+										id="txtMensagem" readonly analytics="true" gooddataid="8">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2 col-sm-2 col-xs-12">
+							<div class="form-input">
+								<div class="form-group">
+									<label class="label-fields"><b>Status</b></label>
+									<input type="text" class="form-control" name="status" value=""
+										placeholder="" data-size="big" required="required"
+										id="txtStatus" readonly analytics="true" gooddataid="7">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div align="center">
+					<h4 id="lblTitleDadosPedido" class="title-form-application">Dados do Pedido</h4>
+				</div>
+				<div class="row">
+					<div class="col-md-3 col-sm-3 col-xs-12">
+						<div class="form-input">
+							<div class="form-group">
+								<label class="label-fields"><b>ID Pedido Web</b></label>
+								<input type="text" class="form-control" name="id_web" value=""
+									placeholder="" data-size="small" required="required"
+									id="txtIdWeb" readonly analytics="true" gooddataid="9">
+								<input type="hidden" class="form-control" id="hdEmpresa"
+									name="empresa" value="" analytics="true" gooddataid="17">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-9 col-sm-9 col-xs-12">
+						<div class="form-input">
+							<div class="form-group">
+								<label class="label-fields"><b>Status Pedido</b></label>
+								<input type="text" class="form-control" name="status_pedido" value=""
+									placeholder="" data-size="small" required="required"
+									id="txtStatusPedido" readonly analytics="true" gooddataid="16">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3 col-sm-3 col-xs-12">
+						<div class="form-input">
+							<div class="form-group">
+								<label class="label-fields"><b>Cód. Cliente</b></label>
+								<input type="text" class="form-control" name="codigo_cliente" value=""
+									placeholder="" data-size="big" required="required"
+									id="txtCodigoCliente" readonly analytics="true" gooddataid="10">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-9 col-sm-9 col-xs-12">
+						<div class="form-input">
+							<div class="form-group">
+								<label class="label-fields"><b>Nome Cliente</b></label>
+								<input type="text" class="form-control" name="nome_cliente" value=""
+									placeholder="" data-size="big" required="required"
+									id="txtCodigoCliente" readonly analytics="true" gooddataid="11">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-9 col-sm-9 col-xs-12">
+						<div class="form-input">
+							<div class="form-group">
+								<label class="label-fields"><b>Cidade</b></label>
+								<input type="text" class="form-control" name="cidade" value=""
+									placeholder="" data-size="big" required="required"
+									id="txtCidade" readonly analytics="true" gooddataid="12">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-3 col-xs-12">
+						<div class="form-input">
+							<div class="form-group">
+								<label class="label-fields"><b>UF</b></label>
+								<input type="text" class="form-control" name="uf" value=""
+									placeholder="" data-size="big" required="required"
+									id="txtUF" readonly analytics="true" gooddataid="13">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-input">
+					<div class="form-group">
+						<label class="label-fields"><b>Endereço de Entrega</b></label>
+						<input type="text" class="form-control" name="endereco_entrega" value=""
+							placeholder="" data-size="big" required="required"
+							id="txtEnderecoEntrega" readonly analytics="true" gooddataid="18">
+					</div>
+				</div>
+				<hr>
+				<div id="pnlItens">
+					<div align="center">
+						<h4 id="lblTitleItens" class="title-form-application">Linhagens</h4>
+					</div>
+					<div class="form-field table-responsive" data-type="tabledetail"
+						data-show-properties="" data-field-name="tabledetail"
+						id="divTbItens">
+						<table class="table" cellspacing="0" tablename="itens_pedido_venda"
+							noaddbutton=true nodeletebutton=true id="tbItens">
+							<thead>
+								<tr class="tableHeadRow">
+									<th class="tableColumn">Seq.</th>
+									<th class="tableColumn">De</th>
+									<th class="tableColumn">A</th>
+									<th class="tableColumn">Linha</th>
+									<th class="tableColumn">Qt. Líq.</th>
+									<th class="tableColumn">% Bon.</th>
+									<th class="tableColumn">Qt. Total</th>
+									<th class="tableColumn">Pr. Tot.</th>
+									<th class="tableColumn">Val. Tot.</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<div class="form-input">
+											<div class="form-group">
+												<input type="text" class="form-control" name="sequencia_ipv" 
+													value="" data-size="big" readonly>
+											</div>
+										</div>
+									</td>
+									<td>
+										<div class="form-input">
+											<div class="form-group">
+												<input type="text" class="form-control" name="data_inicial_entrega_ipv" 
+													value="" data-size="big" readonly>
+											</div>
+										</div>
+									</td>
+									<td>
+										<div class="form-input">
+											<div class="form-group">
+												<input type="text" class="form-control" name="data_final_entrega_ipv" 
+													value="" data-size="big" readonly>
+											</div>
+										</div>
+									</td>
+									<td>
+										<div class="form-input">
+											<div class="form-group">
+												<input type="text" class="form-control" name="linha_ipv" 
+													value="" data-size="big" readonly>
+											</div>
+										</div>
+									</td>
+									<td>
+										<div class="form-input">
+											<div class="form-group">
+												<input type="text" class="form-control" name="qtde_liquida_ipv" 
+													value="" data-size="big" readonly>
+											</div>
+										</div>
+									</td>
+									<td class="col-md-1 col-sm-12">
+										<div class="form-input">
+											<div class="form-group">
+												<input type="text" class="form-control" name="perc_bonificada_ipv" 
+													value="" data-size="big" readonly>
+											</div>
+										</div>
+									</td>
+									<td>
+										<div class="form-input">
+											<div class="form-group">
+												<input type="text" class="form-control" name="qtde_total_ipv" 
+													value="" data-size="big" readonly>
+											</div>
+										</div>
+									</td>
+									<td>
+										<div class="form-input">
+											<div class="form-group">
+												<input type="text" class="form-control" name="preco_total_ipv" 
+													value="" data-size="big" readonly>
+											</div>
+										</div>
+									</td>
+									<td>
+										<div class="form-input">
+											<div class="form-group">
+												<input type="text" class="form-control" name="valor_total_ipv" 
+													value="" data-size="big" readonly>
+											</div>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<hr>
+				<div id="pnlTotais">
+					<div align="center">
+						<h4 id="lblTitleTotais" class="title-form-application">Totais</h4>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<label class="label-fields"><b>Qtde. Total</b></label>
+							<div id="divQtdeTotal"></div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<label class="label-fields"><b>Valor Total</b></label>
+							<div id="divTotalBonificado"></div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div align="center">
+					<h4 id="lblTitleVacinas" class="title-form-application">Vacinas</h4>
+				</div>
+				<div class="form-input">
+					<div class="form-group">
+						<label class="label-fields"><b>Vacina Primária</b></label>
+						<input type="text" class="form-control" name="vacina_primaria" value=""
+							placeholder="" data-size="big" required="required"
+							id="txtVacinaPrimaria" readonly analytics="true" gooddataid="19">
+					</div>
+				</div>
+				<div id="pnlVacinasSecundarias">
+					<div class="form-field table-responsive" data-type="tabledetail"
+						data-show-properties="" data-field-name="tabledetail"
+						id="divTbVacinasSecundarias">
+						<table class="table" cellspacing="0" tablename="vacinas_secundarias"
+							noaddbutton=true nodeletebutton=true id="tbVacinasSecundarias">
+							<thead>
+								<tr class="tableHeadRow">
+									<th class="tableColumn">Vacina Secundária</th>
+									<th class="tableColumn">Preço Unit.</th>
+									<th class="tableColumn">Tipo de Cobrança</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<div class="form-input">
+											<div class="form-group">
+												<input type="text" class="form-control" name="descricao_vs" 
+													value="" data-size="big" readonly>
+											</div>
+										</div>
+									</td>
+									<td>
+										<div class="form-input">
+											<div class="form-group">
+												<input type="text" class="form-control" name="preco_unit_vs" 
+													value="" data-size="big" readonly>
+											</div>
+										</div>
+									</td>
+									<td>
+										<div class="form-input">
+											<div class="form-group">
+												<input type="text" class="form-control" name="tipo_cobranca_vs" 
+													value="" data-size="big" readonly>
+											</div>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<hr>
+				<div align="center">
+					<h4 id="lblTitleDadosAdicionais" class="title-form-application">Dados Adicionais</h4>
+				</div>
+				<div class="form-input">
+					<div class="form-group">
+						<label class="label-fields"><b>Tratamento Infravermelho</b></label>
+						<input type="text" class="form-control" name="tratamento_infravermelho" value=""
+							placeholder="" data-size="big" required="required"
+							id="txtVacinaPrimaria" readonly analytics="true" gooddataid="20">
+					</div>
+				</div>
+				<div class="form-input">
+					<div class="form-group">
+						<label class="label-fields"><b>Condição de Pagamento</b></label>
+						<input type="text" class="form-control" name="condicao_pagamento" value=""
+							placeholder="" data-size="big" required="required"
+							id="txtVacinaPrimaria" readonly analytics="true" gooddataid="21">
+					</div>
+				</div>
+				<div class="form-input">
+					<div class="form-group">
+						<label class="label-fields"><b>Observações</b></label>
+						<textarea class="form-control" name="observacoes" value=""
+							placeholder="" data-size="big" required="required"
+							id="txtVacinaPrimaria" readonly analytics="true" gooddataid="22">
+						</textarea>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3 col-sm-3 col-xs-12">
+						<div class="form-input">
+							<div class="form-group">
+								<label class="label-fields"><b>Cód. Representante</b></label>
+								<input type="text" class="form-control" name="codigo_representante" value=""
+									placeholder="" data-size="big" required="required"
+									id="txtCodigoRepresentante" readonly analytics="true" gooddataid="14">
+								<input type="hidden" class="form-control" name="email_representante" value=""
+									placeholder="" data-size="big" required="required"
+									id="txtEmailRepresentante" readonly analytics="true" gooddataid="16">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-9 col-sm-9 col-xs-12">
+						<div class="form-input">
+							<div class="form-group">
+								<label class="label-fields"><b>Nome Representante</b></label>
+								<input type="text" class="form-control" name="nome_representante" value=""
+									placeholder="" data-size="big" required="required"
+									id="txtCodigoRepresentante" readonly analytics="true" gooddataid="15">
+							</div>
+						</div>
+					</div>
+				</div>				
+			</form>
+		</div>
+	</body>
+</html>

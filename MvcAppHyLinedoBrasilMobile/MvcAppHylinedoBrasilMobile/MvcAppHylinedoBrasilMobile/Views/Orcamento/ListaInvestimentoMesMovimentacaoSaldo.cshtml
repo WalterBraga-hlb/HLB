@@ -1,0 +1,117 @@
+﻿@{
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+
+    List<MvcAppHylinedoBrasilMobile.Models.Investimento_Mes_Movimentacao_Saldo> lista =
+        (List<MvcAppHylinedoBrasilMobile.Models.Investimento_Mes_Movimentacao_Saldo>)Session["ListaInvestimentoMesMovimentacaoSaldo"];
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities hlbapp = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+}
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink("Voltar para o Menu de Orçamentos", "MenuOrcamento", "Orcamento", 
+                null,
+                new { @title = "Clique aqui para voltar para o Menu de Orçamentos", @class = "budget" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/check.png"), "Investimento")
+    <h2>Lista de Transferências de Saldo p/ Aprovação</h2>
+</div>
+<br />
+<h4 style="color:red;">@Html.Raw(ViewBag.Erro)</h4>
+<h4 style="color:blue;">@Html.Raw(ViewBag.Mensagem)</h4>
+
+<div id="divTabelaIndexPV" style="overflow:auto" >
+<table id="tabelaIndexPV" class="ajustetabelaIndexPV">
+    <tbody class="ajustetabelaIndexPV">
+    <tr class="ajustetabelaIndexPV">
+        <th class="ajustetabelaIndexPV">
+            Solicitante
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Investimento Origem
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Ano Mês Origem
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Investimento Destino
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Ano Mês Destino
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Valor
+        </th>
+        <th class="ajustetabelaIndexPV">
+            Ações
+        </th>
+    </tr>
+@foreach (var item in lista)
+{
+    MvcAppHylinedoBrasilMobile.Models.Investimento invOrigem = hlbapp.Investimento.Where(w => hlbapp.Investimento_Mes.Any(a => a.IDInvestimento == w.ID
+        && a.ID == item.IDInvestimentoMesOrigem)).FirstOrDefault();
+    string origem = invOrigem.NumeroProjeto + " - " + invOrigem.NomeProjeto;
+
+    MvcAppHylinedoBrasilMobile.Models.Investimento invDestino = hlbapp.Investimento.Where(w => hlbapp.Investimento_Mes.Any(a => a.IDInvestimento == w.ID
+        && a.ID == item.IDInvestimentoMesDestino)).FirstOrDefault();
+    string destino = invDestino.NumeroProjeto + " - " + invDestino.NomeProjeto;
+
+    MvcAppHylinedoBrasilMobile.Models.Investimento_Mes invOrigemMes = hlbapp.Investimento_Mes.Where(a => a.ID == item.IDInvestimentoMesOrigem).FirstOrDefault();
+    MvcAppHylinedoBrasilMobile.Models.Investimento_Mes invDestinoMes = hlbapp.Investimento_Mes.Where(a => a.ID == item.IDInvestimentoMesDestino).FirstOrDefault();
+    
+    <tr class="ajustetabelaIndexPV">
+        <td class="ajustetabelaIndexPV">
+            @(item.Usuario)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(origem)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(invOrigemMes.AnoMes)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(destino)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(invDestinoMes.AnoMes)
+        </td>
+        <td class="ajustetabelaIndexPV">
+            @(String.Format("{0:C}", item.Valor))
+        </td>
+        <td>
+            <table>
+                <tr>
+                    @if (item.UsuarioAprovacao == null)
+                    {
+                    <td align="center">
+                        @Html.ActionLink("Aprovar", "AprovarTransferenciaSaldo",
+                            new { id = item.ID },
+                            new { @class = "check", @title = "Clique aqui para Aprovar Transferência." })
+                    </td>
+                    <td align="center">
+                        @Html.ActionLink("Reprovar", "DesaprovarTransferenciaSaldo",
+                            new { id = item.ID },
+                            new { @class = "uncheck", @title = "Clique aqui para Reprovar Transferência." })
+                    </td>
+                    }
+                    else
+                    {
+                    <td align="center">
+                        @Html.ActionLink("Desaprovar", "DesaprovarTransferenciaSaldo",
+                            new { id = item.ID },
+                            new { @class = "uncheck", @title = "Clique aqui para Desaprovar Transferência." })
+                    </td>
+                    }
+                </tr>
+            </table>
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

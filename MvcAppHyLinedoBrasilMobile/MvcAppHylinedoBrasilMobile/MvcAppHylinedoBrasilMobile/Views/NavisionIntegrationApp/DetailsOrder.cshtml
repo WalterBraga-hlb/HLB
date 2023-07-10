@@ -1,0 +1,125 @@
+﻿@model IEnumerable<MvcAppHylinedoBrasilMobile.Models.NavOrders>
+
+@{
+    ViewBag.Title = "";
+    MvcAppHylinedoBrasilMobile.Models.NavOrders navOrder = 
+        Model.FirstOrDefault();
+}
+
+<div align="center">
+    @*@Html.ActionLink(@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                        .GetTextOnLanguage("Link_Back_OrdersCalendar", Session["language"].ToString()),
+                "OrdersCalendar", "NavisionIntegrationApp",
+                        new { firstDate = Convert.ToDateTime(Session["CalendarFirstDateMonth"]), source = "" }, null)*@
+    @if (Session["origemDetailsOrder"].ToString().Equals("Calendar"))
+    {
+        @Html.ActionLink(@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                            .GetTextOnLanguage("Link_Back_OrdersCalendar", Session["language"].ToString()),
+                    "LoadNavOrdersCalendarView", "NavisionIntegrationApp",
+                            new { model = "" }, null)
+    }
+    else
+    {
+        @Html.ActionLink(@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController
+                             .GetTextOnLanguage("Link_Back_Agenda", Session["language"].ToString()),
+                     "LoadNavOrdersAgendaView", "NavisionIntegrationApp",
+                             new { initialDate = Convert.ToDateTime(Session["initialDateSearchNav"]),
+                                   finalDate = Convert.ToDateTime(Session["finalDateSearchNav"])
+                             }, null)
+    }
+</div>
+<br />
+<div align="center">
+    @Html.Image(@Url.Content("~/Content/icons/Data-View-Details-icon.png"), MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Title_DetailsOrder_NavisionIntegrationApp", Session["language"].ToString()))
+    <h2>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Title_DetailsOrder_NavisionIntegrationApp", Session["language"].ToString())</h2>
+</div>
+
+<ul data-role="listview" data-inset="true">
+    <li data-role="fieldcontain">
+        <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_CHIC_Order_No", Session["language"].ToString()):</b>
+        @if (navOrder.OrderNo == null)
+        {
+            <label></label>
+        }
+        else
+        {
+            <label>@navOrder.OrderNo</label>
+        }
+    </li>
+    <li data-role="fieldcontain">
+        <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_Nav_Order_No", Session["language"].ToString()):</b>
+        @if (navOrder.NavOrderNo == null)
+        {
+            <label></label>
+        }
+        else
+        {
+            <label>@navOrder.NavOrderNo</label>
+        }
+    </li>
+    <li data-role="fieldcontain">
+        <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_Location", Session["language"].ToString()):</b>
+        @navOrder.Location
+    </li>
+    <li data-role="fieldcontain">
+        <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_CustomerName", Session["language"].ToString()):</b>
+        @navOrder.CustomerName
+    </li>
+    <li data-role="fieldcontain">
+        <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_Country", Session["language"].ToString()):</b>
+        @navOrder.Country
+    </li>
+    <li data-role="fieldcontain">
+        <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_Hatch_Date", Session["language"].ToString()):</b>
+        @String.Format("{0:" + MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Format_Date", Session["language"].ToString()) + "}", navOrder.HatchDate)
+    </li>
+    <li data-role="fieldcontain">
+        <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_Set_Date", Session["language"].ToString()):</b>
+        @String.Format("{0:" + MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Format_Date", Session["language"].ToString()) + "}", navOrder.SetDate)
+    </li>
+    <li data-role="fieldcontain">
+        <b>@MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_Delivery_Date", Session["language"].ToString()):</b>
+        @String.Format("{0:" + MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Format_Date", Session["language"].ToString()) + "}", navOrder.DeliveryDate)
+    </li>
+    <li data-role="fieldcontain">
+        <table style="border-style:none">
+            <tr style="border-style:none">
+                <th style="background-color:#B3B2B2;border-style:none;">
+                    @MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_Line", Session["language"].ToString())
+                </th>
+                <th style="background-color:#B3B2B2;border-style:none;">
+                    @MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_Qty", Session["language"].ToString())
+                </th>
+            </tr>
+            @foreach (var itemOrder in Model.Where(w => w.Quantity > 0).ToList())
+            {
+            <tr style="border-style:none">
+                <td style="border-style:none;">
+                    @Html.DisplayFor(modelItem => itemOrder.Description)
+                </td>
+                <td align="right" style="border-style:none;">
+                    @String.Format("{0:N0}", itemOrder.Quantity)
+                </td>
+            </tr>
+            }
+        </table>
+        @if (Model.Where(w => w.Quantity == 0).Count() > 0)
+        {
+        <table style="border-style:none">
+            <tr style="border-style:none">
+                <th style="background-color:#B3B2B2;border-style:none;">
+                @MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController.GetTextOnLanguage("Tab_Nav_Order_List_Description", Session["language"].ToString())
+                </th>
+            </tr>
+            <tr style="border-style:none">
+                <td rowspan="100" style="border-style:none;">
+                    @foreach (var itemOrder02 in Model.Where(w => w.Quantity == 0).ToList())
+                    {
+                        @(Html.DisplayFor(modelItem => itemOrder02.Description) + " | ");
+                    }
+                </td>
+            </tr>
+        </table>
+        }
+    </li>
+</ul>

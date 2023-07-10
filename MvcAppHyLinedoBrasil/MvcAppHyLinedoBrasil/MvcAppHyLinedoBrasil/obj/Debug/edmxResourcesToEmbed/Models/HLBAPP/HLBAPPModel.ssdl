@@ -1,0 +1,716 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HLBAPPModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityType Name="Configuracao_Importa_NFe">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descricao" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="TipoLancCod" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="ClasFiscCod" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DataMovimento" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="NaturezaOperacao" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LocArmazCod" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="ContaDebito" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Dados_Assistencia_Tecnica">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodigoCliente" Type="varchar" MaxLength="7" />
+    <Property Name="NomeCliente" Type="varchar" MaxLength="100" />
+    <Property Name="Linhagem" Type="varchar" MaxLength="30" />
+    <Property Name="Lote" Type="varchar" MaxLength="200" />
+    <Property Name="DataAlojamento" Type="datetime" />
+    <Property Name="Semana" Type="datetime" />
+    <Property Name="Idade" Type="int" />
+    <Property Name="SaldoInicialAvesAlojadas" Type="int" />
+    <Property Name="NumeroAvesMortas" Type="int" />
+    <Property Name="QtdeOvosProduzidos" Type="int" />
+    <Property Name="DiaDoPrimeiroOvo" Type="datetime" />
+    <Property Name="PesoOvo" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="MassaOvo" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="NumeroOvosAproveitados" Type="int" />
+    <Property Name="OvosTrincados" Type="int" />
+    <Property Name="OvosQuebrados" Type="int" />
+    <Property Name="OvosSujos" Type="int" />
+    <Property Name="QtdeJumbo" Type="int" />
+    <Property Name="QtdeExtra" Type="int" />
+    <Property Name="QtdeGrande" Type="int" />
+    <Property Name="QtdeMedio" Type="int" />
+    <Property Name="QtdePequeno" Type="int" />
+    <Property Name="QtdeIndustrial" Type="int" />
+    <Property Name="ComsumoSemanal" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="RacaoKcal" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="RacaoPB" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="Metionina" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="Lisina" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="Premix" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PesoAve" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="Uniformidade" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="Criacao" Type="varchar" MaxLength="30" />
+    <Property Name="TipoGaiola" Type="varchar" MaxLength="50" />
+    <Property Name="NumeroGaiolas" Type="int" />
+    <Property Name="DimensaoGaiola" Type="varchar" MaxLength="30" />
+    <Property Name="QtdeAvesGaiola" Type="int" />
+    <Property Name="DensidadeCmAve" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ComedouroCmAve" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="Bebedouro" Type="varchar" MaxLength="30" />
+    <Property Name="TipoComedouro" Type="varchar" MaxLength="50" />
+    <Property Name="TipoBebedouro" Type="varchar" MaxLength="50" />
+    <Property Name="Ambiencia" Type="varchar" MaxLength="50" />
+    <Property Name="Telha" Type="varchar" MaxLength="50" />
+    <Property Name="Luz" Type="datetime" />
+    <Property Name="Lampadas" Type="varchar" MaxLength="50" />
+    <Property Name="PesoAlojamento" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="UnifAlojamento" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="MortalidadeTransporte" Type="int" />
+    <Property Name="DebicagemIncubatorio" Type="varchar" MaxLength="5" />
+    <Property Name="Incubatorio" Type="varchar" MaxLength="50" />
+    <Property Name="Estacao" Type="varchar" MaxLength="50" />
+    <Property Name="Composicao" Type="varchar" MaxLength="1" />
+    <Property Name="ResultadoLote" Type="varchar" MaxLength="30" />
+    <Property Name="Granja" Type="varchar" MaxLength="50" />
+    <Property Name="Galpao" Type="varchar" MaxLength="200" />
+    <Property Name="Observacao" Type="varchar(max)" />
+    <Property Name="Tipo" Type="varchar" MaxLength="30" />
+    <Property Name="Empresa" Type="varchar" MaxLength="10" />
+    <Property Name="PercViabilidadeStd" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PesoCorporalStd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ConsumoRacaoStd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PercOvosProduzidoStd" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="OvosPorAveAlojStd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PesoOvoStd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PercUniformStd" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="Temperatura" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ObservacaoGeral" Type="varchar(max)" />
+    <Property Name="ConsumoAgua" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="MortalidadeStd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="HorasProgramaLuz" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="TemperaturaMinima" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="TemperaturaMaxima" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="CoeficienteVariacao" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AvesDescartadas" Type="int" />
+    <Property Name="OvosSegunda" Type="int" />
+    <Property Name="TeorCalcio" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="TeorLisina" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="OvosPrimeira" Type="int" />
+    <Property Name="PercAveDiaStd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="AcumOvosAveDiaStd" Type="int" />
+    <Property Name="PercPrimeiraClass" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PercPrimeiraClassStd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PercSegundaClass" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="PercSegundaClassStd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="MassaOvoAcumStd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ConsumoAguaStd" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="Muda" Type="varchar" MaxLength="15" />
+    <Property Name="InventarioAves" Type="int" />
+    <Property Name="TotalOvos" Type="int" />
+    <Property Name="Usuario" Type="varchar" MaxLength="50" />
+    <Property Name="DataHoraImportacao" Type="datetime" />
+    <Property Name="NovaTech" Type="varchar" MaxLength="50" />
+    <Property Name="TipoDebicagem" Type="varchar" MaxLength="50" />
+    <Property Name="TipoAviario" Type="varchar" MaxLength="50" />
+    <Property Name="DataNascimento" Type="datetime" />
+    <Property Name="Login" Type="varchar" MaxLength="50" />
+    <Property Name="EmpresaImportacao" Type="varchar" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="Dados_Loggers">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DataEntrega" Type="datetime" />
+    <Property Name="PlacaVeiculo" Type="varchar" MaxLength="15" />
+    <Property Name="NumeroLogger" Type="varchar" MaxLength="20" />
+    <Property Name="DataHoraLogger" Type="datetime" />
+    <Property Name="Temperatura" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="Usuario" Type="varchar" MaxLength="100" />
+    <Property Name="DataHoraImportacao" Type="datetime" />
+    <Property Name="Umidade" Type="numeric" Precision="14" Scale="2" />
+  </EntityType>
+  <EntityType Name="Empresas">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodigoCHIC" Type="varchar" MaxLength="10" />
+    <Property Name="Descricaro" Type="varchar" MaxLength="100" />
+    <Property Name="AprovacaoGerencia" Type="varchar" MaxLength="10" />
+    <Property Name="DescricaoApoloVendedor" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Entity">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerCode" Type="varchar" MaxLength="20" />
+    <Property Name="Name" Type="varchar" MaxLength="200" />
+    <Property Name="Address" Type="varchar" MaxLength="200" />
+    <Property Name="City" Type="varchar" MaxLength="100" />
+    <Property Name="State" Type="varchar" MaxLength="100" />
+    <Property Name="IDCountry" Type="int" />
+    <Property Name="ZIPCode" Type="varchar" MaxLength="20" />
+    <Property Name="EntityType" Type="varchar" MaxLength="20" />
+    <Property Name="TypePeriodCollect" Type="varchar" MaxLength="20" />
+    <Property Name="Contact" Type="varchar" MaxLength="100" />
+    <Property Name="ContactEmail" Type="varchar" MaxLength="100" />
+    <Property Name="UserInsert" Type="varchar" MaxLength="100" />
+    <Property Name="DateTimeInsert" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Envio_Confirmacao">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Usuario" Type="varchar" MaxLength="100" />
+    <Property Name="DataHora" Type="datetime" />
+    <Property Name="TipoAgrupamento" Type="varchar" MaxLength="20" />
+    <Property Name="EnviarEmpresa" Type="int" />
+    <Property Name="EnviarVendedor" Type="int" />
+    <Property Name="DataInicial" Type="datetime" />
+    <Property Name="DataFinal" Type="datetime" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="DataHoraInicio" Type="datetime" />
+    <Property Name="DataHoraFim" Type="datetime" />
+    <Property Name="Mensagem" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Envio_Confirmacao_Email">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDEnvioConfirmacao" Type="int" />
+    <Property Name="TipoEnvio" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="Mensagem" Type="varchar(max)" />
+    <Property Name="WorkFlowEmailSeq" Type="int" />
+  </EntityType>
+  <EntityType Name="Envio_Confirmacao_PV">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDEnvioConfirmacao" Type="int" />
+    <Property Name="Empresa" Type="varchar" MaxLength="10" />
+    <Property Name="IDPedidoVenda" Type="int" />
+    <Property Name="Vendedor" Type="varchar" MaxLength="20" />
+    <Property Name="TipoPedido" Type="varchar" MaxLength="20" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="DataHoraInicio" Type="datetime" />
+    <Property Name="DataHoraFim" Type="datetime" />
+    <Property Name="Mensagem" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Lancamentos_Classificadora_Excel_02">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Lote" Type="float" />
+    <Property Name="Saída" Type="float" />
+    <Property Name="Tipo" Type="nvarchar" MaxLength="255" />
+    <Property Name="Data" Type="datetime" />
+    <Property Name="Balança" Type="nvarchar" MaxLength="255" />
+    <Property Name="C1|C2|C3" Type="float" />
+    <Property Name="C4|C5|C6" Type="float" />
+    <Property Name="C7|C8|C9" Type="float" />
+    <Property Name="C10|C11|C12" Type="float" />
+    <Property Name="C13|C14|C15" Type="float" />
+    <Property Name="C16|C17|C18" Type="float" />
+    <Property Name="C19|C20|C21" Type="float" />
+    <Property Name="C22|C23|C24" Type="float" />
+    <Property Name="Quantos Ovos Virados?" Type="float" />
+    <Property Name="LoteCompleto" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Languages">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Permission" Type="varchar" MaxLength="50" />
+    <Property Name="Language" Type="varchar" MaxLength="10" />
+    <Property Name="Caption" Type="varchar(max)" />
+    <Property Name="Text" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="LayoutDDASegmentoGs_EnvioEmailFiscal">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BancoCompensacao" Type="nvarchar(max)" />
+    <Property Name="Lote" Type="int" Nullable="false" />
+    <Property Name="Registro" Type="nvarchar(max)" />
+    <Property Name="NumeroRegistro" Type="int" Nullable="false" />
+    <Property Name="Segmento" Type="nvarchar(max)" />
+    <Property Name="CNAB" Type="nvarchar(max)" />
+    <Property Name="Movimento" Type="nvarchar(max)" />
+    <Property Name="BancoCedente" Type="nvarchar(max)" />
+    <Property Name="CodigoMoeda" Type="int" Nullable="false" />
+    <Property Name="DigitoVerificadorCodigoBarras" Type="int" Nullable="false" />
+    <Property Name="ValorImpressoCodigoBarras" Type="nvarchar(max)" />
+    <Property Name="CampoLivre" Type="nvarchar(max)" />
+    <Property Name="TipoInscricao" Type="int" Nullable="false" />
+    <Property Name="Inscricao" Type="nvarchar(max)" />
+    <Property Name="NomeCedente" Type="nvarchar(max)" />
+    <Property Name="DataVencimento" Type="datetime" Nullable="false" />
+    <Property Name="ValorTitulo" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="QuantidadeMoeda" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="NumeroDocumento" Type="nvarchar(max)" />
+    <Property Name="Filler" Type="nvarchar(max)" />
+    <Property Name="ValorAbatimento" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CodigoCarteira" Type="nvarchar(max)" />
+    <Property Name="EspecieTitulo" Type="int" Nullable="false" />
+    <Property Name="DataEmissaoTitulo" Type="datetime" Nullable="false" />
+    <Property Name="JurosMora" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CodigoDesconto1" Type="int" Nullable="false" />
+    <Property Name="DataDesconto1" Type="datetime" Nullable="false" />
+    <Property Name="Desconto1" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CodigoProtesto" Type="int" Nullable="false" />
+    <Property Name="PrazoProtesto" Type="int" Nullable="false" />
+    <Property Name="DataLimite" Type="datetime" Nullable="false" />
+    <Property Name="LinhaDigitavel" Type="nvarchar(max)" />
+    <Property Name="TituloNoApolo" Type="nvarchar(max)" />
+    <Property Name="ImportaNoApolo" Type="nvarchar(max)" />
+    <Property Name="Retorno" Type="nvarchar(max)" />
+    <Property Name="Empresa" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserSession" Type="varchar(max)" />
+    <Property Name="Sacador" Type="varchar" MaxLength="30" />
+    <Property Name="DataHora" Type="datetime" />
+    <Property Name="Usuario" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="LINHAGEM_CONCORRENTE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Empresa" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Linhagem" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LINHAGEM_GRUPO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Empresa" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="LinhagemComercial" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LinhagemFLIP" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cor" Type="varchar" MaxLength="20" />
+    <Property Name="LinhagemCHIC" Type="varchar" MaxLength="20" />
+    <Property Name="CorExibe" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="LOG_Atualizacao_CHIC_SQLServer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DataHoraInicio" Type="datetime" Nullable="false" />
+    <Property Name="DataHoraFim" Type="datetime" />
+    <Property Name="Usuario" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Periodo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Observacao" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="LOG_Importacao_Dados_Assist_Tec">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodigoCliente" Type="varchar" MaxLength="50" />
+    <Property Name="Linhagem" Type="varchar" MaxLength="50" />
+    <Property Name="Lote" Type="varchar" MaxLength="200" />
+    <Property Name="DataAlojamento" Type="datetime" />
+    <Property Name="Usuario" Type="varchar" MaxLength="100" />
+    <Property Name="DataHoraImportacao" Type="datetime" />
+    <Property Name="Operacao" Type="varchar" MaxLength="50" />
+    <Property Name="TipoPlanilha" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="LOG_Prog_Diaria_Transp_Pedidos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DataHora" Type="datetime" Nullable="false" />
+    <Property Name="Usuario" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Operacao" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ObsLog" Type="varchar(max)" />
+    <Property Name="DataProgramacao" Type="datetime" />
+    <Property Name="CodigoCliente" Type="varchar" MaxLength="20" />
+    <Property Name="NomeCliente" Type="varchar" MaxLength="500" />
+    <Property Name="NumVeiculo" Type="int" />
+    <Property Name="Quantidade" Type="int" />
+    <Property Name="LocalEntrega" Type="varchar" MaxLength="500" />
+    <Property Name="Produto" Type="varchar" MaxLength="100" />
+    <Property Name="Linhagem" Type="varchar" MaxLength="100" />
+    <Property Name="Embalagem" Type="varchar" MaxLength="100" />
+    <Property Name="ValorTotal" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFEspecie" Type="varchar" MaxLength="20" />
+    <Property Name="NFSerie" Type="varchar" MaxLength="10" />
+    <Property Name="NFNum" Type="varchar" MaxLength="20" />
+    <Property Name="CHICNum" Type="varchar" MaxLength="20" />
+    <Property Name="LocalNascimento" Type="varchar" MaxLength="500" />
+    <Property Name="TelefoneCliente" Type="varchar" MaxLength="100" />
+    <Property Name="InicioCarregamentoEsperado" Type="varchar" MaxLength="20" />
+    <Property Name="DataEntrega" Type="datetime" />
+    <Property Name="ChegadaClienteEsperado" Type="varchar" MaxLength="20" />
+    <Property Name="KM" Type="int" />
+    <Property Name="CodigoRepresentante" Type="varchar" MaxLength="10" />
+    <Property Name="NomeRepresentante" Type="varchar" MaxLength="200" />
+    <Property Name="InicioCarregamentoReal" Type="varchar" MaxLength="20" />
+    <Property Name="ChegadaClienteReal" Type="varchar" MaxLength="20" />
+    <Property Name="Observacao" Type="varchar(max)" />
+    <Property Name="Status" Type="varchar" MaxLength="30" />
+    <Property Name="ObservacaoCHIC" Type="varchar(max)" />
+    <Property Name="Debicagem" Type="varchar" MaxLength="1" />
+    <Property Name="Ordem" Type="int" />
+    <Property Name="EmpresaTranportador" Type="varchar" MaxLength="10" />
+    <Property Name="Empresa" Type="varchar" MaxLength="10" />
+    <Property Name="QuantidadeCaixa" Type="int" />
+    <Property Name="CHICOrigem" Type="varchar" MaxLength="20" />
+    <Property Name="NumRoteiroEntregaFluig" Type="varchar" MaxLength="30" />
+    <Property Name="DataChegadaClienteReal" Type="datetime" />
+    <Property Name="IDProgDiariaTranspPedidos" Type="int" Nullable="false" />
+    <Property Name="QtdeVendida" Type="int" />
+    <Property Name="QtdeBonificada" Type="int" />
+    <Property Name="QtdeReposicao" Type="int" />
+    <Property Name="QtdeSobra" Type="int" />
+    <Property Name="MotivoSobra" Type="varchar" MaxLength="50" />
+    <Property Name="CHICNumReposicao" Type="varchar" MaxLength="20" />
+    <Property Name="MotivoReposicao" Type="varchar" MaxLength="50" />
+    <Property Name="IDPedidoVenda" Type="int" />
+    <Property Name="EnderEntSeq" Type="int" />
+    <Property Name="PercBonificacao" Type="numeric" Precision="16" Scale="4" />
+    <Property Name="PrecoProduto" Type="numeric" Precision="24" Scale="9" />
+    <Property Name="ObsProgramacao" Type="varchar(max)" />
+    <Property Name="CondicaoPagamento" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="LOG_Prog_Diaria_Transp_Veiculos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDProgDiariaTranspVeiculos" Type="int" Nullable="false" />
+    <Property Name="DataHora" Type="datetime" Nullable="false" />
+    <Property Name="Operacao" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="IDCargaEmbarcador" Type="int" />
+    <Property Name="RetornoIntegracao" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="LOG_Prog_Diaria_Transp_Veiculos_TARGET">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDProgDiariaTranspVeiculos" Type="int" />
+    <Property Name="Metodo" Type="varchar" MaxLength="100" />
+    <Property Name="IdOperacaoTransporte" Type="int" />
+    <Property Name="DataHoraRegistro" Type="datetime" />
+    <Property Name="NumeroCIOT" Type="varchar" MaxLength="100" />
+    <Property Name="ProtocoloCIOT" Type="varchar" MaxLength="100" />
+    <Property Name="DispensadoPelaANTT" Type="int" />
+    <Property Name="ObservacoesANTT" Type="varchar(max)" />
+    <Property Name="IdCompraValePedagio" Type="int" />
+    <Property Name="ModoCompraValePedagio" Type="int" />
+    <Property Name="IdParcelasOperacaoTransporte" Type="int" />
+    <Property Name="Observacoes" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Lotes_Clientes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Chave" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="DataNascimento" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PAIS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Sigla" Type="varchar" MaxLength="2" />
+    <Property Name="Nome" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="PDI">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Ano Avaliação" Type="int" />
+    <Property Name="Usuario Colaborador" Type="varchar(max)" />
+    <Property Name="Colaborador" Type="varchar(max)" />
+    <Property Name="Usuario Lider" Type="varchar" MaxLength="255" />
+    <Property Name="Líder" Type="varchar" MaxLength="255" />
+    <Property Name="Comportamento" Type="varchar(max)" />
+    <Property Name="Competência" Type="varchar" MaxLength="255" />
+    <Property Name="Classificação" Type="varchar" MaxLength="255" />
+    <Property Name="Média Final" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="PLANO DE AÇÃO PARA MELHORAR O COMPORTAMENTO" Type="varchar(max)" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Prog_Diaria_Transp_Pedidos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DataProgramacao" Type="datetime" />
+    <Property Name="CodigoCliente" Type="varchar" MaxLength="20" />
+    <Property Name="NomeCliente" Type="varchar" MaxLength="500" />
+    <Property Name="NumVeiculo" Type="int" />
+    <Property Name="Quantidade" Type="int" />
+    <Property Name="LocalEntrega" Type="varchar" MaxLength="500" />
+    <Property Name="Produto" Type="varchar" MaxLength="100" />
+    <Property Name="Linhagem" Type="varchar" MaxLength="100" />
+    <Property Name="Embalagem" Type="varchar" MaxLength="100" />
+    <Property Name="ValorTotal" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="NFEspecie" Type="varchar" MaxLength="20" />
+    <Property Name="NFSerie" Type="varchar" MaxLength="10" />
+    <Property Name="NFNum" Type="varchar" MaxLength="20" />
+    <Property Name="CHICNum" Type="varchar" MaxLength="20" />
+    <Property Name="LocalNascimento" Type="varchar" MaxLength="500" />
+    <Property Name="TelefoneCliente" Type="varchar" MaxLength="100" />
+    <Property Name="InicioCarregamentoEsperado" Type="varchar" MaxLength="20" />
+    <Property Name="DataEntrega" Type="datetime" />
+    <Property Name="ChegadaClienteEsperado" Type="varchar" MaxLength="20" />
+    <Property Name="KM" Type="int" />
+    <Property Name="CodigoRepresentante" Type="varchar" MaxLength="10" />
+    <Property Name="NomeRepresentante" Type="varchar" MaxLength="200" />
+    <Property Name="InicioCarregamentoReal" Type="varchar" MaxLength="20" />
+    <Property Name="ChegadaClienteReal" Type="varchar" MaxLength="20" />
+    <Property Name="Observacao" Type="varchar(max)" />
+    <Property Name="Status" Type="varchar" MaxLength="30" />
+    <Property Name="ObservacaoCHIC" Type="varchar(max)" />
+    <Property Name="Debicagem" Type="varchar" MaxLength="1" />
+    <Property Name="Ordem" Type="int" />
+    <Property Name="EmpresaTranportador" Type="varchar" MaxLength="10" />
+    <Property Name="Empresa" Type="varchar" MaxLength="10" />
+    <Property Name="QuantidadeCaixa" Type="int" />
+    <Property Name="CHICOrigem" Type="varchar" MaxLength="20" />
+    <Property Name="NumRoteiroEntregaFluig" Type="varchar" MaxLength="30" />
+    <Property Name="DataChegadaClienteReal" Type="datetime" />
+    <Property Name="QtdeVendida" Type="int" Nullable="false" />
+    <Property Name="QtdeBonificada" Type="int" Nullable="false" />
+    <Property Name="QtdeReposicao" Type="int" Nullable="false" />
+    <Property Name="QtdeSobra" Type="int" Nullable="false" />
+    <Property Name="MotivoSobra" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CHICNumReposicao" Type="varchar" MaxLength="20" />
+    <Property Name="MotivoReposicao" Type="varchar" MaxLength="50" />
+    <Property Name="IDPedidoVenda" Type="int" />
+    <Property Name="EnderEntSeq" Type="int" Nullable="false" />
+    <Property Name="PercBonificacao" Type="numeric" Precision="16" Scale="4" Nullable="false" />
+    <Property Name="PrecoProduto" Type="numeric" Precision="24" Scale="9" Nullable="false" />
+    <Property Name="ObsProgramacao" Type="varchar(max)" />
+    <Property Name="ObsFaturamento" Type="varchar(max)" />
+    <Property Name="CondicaoPagamento" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Prog_Diaria_Transp_Veiculos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DataProgramacao" Type="datetime" />
+    <Property Name="NumVeiculo" Type="int" />
+    <Property Name="Placa" Type="varchar" MaxLength="20" />
+    <Property Name="Motorista01" Type="varchar" MaxLength="200" />
+    <Property Name="Motorista02" Type="varchar" MaxLength="200" />
+    <Property Name="QuantidadeTotal" Type="int" />
+    <Property Name="QuantidadePorCaixa" Type="int" />
+    <Property Name="QunatidadeCaixa" Type="int" />
+    <Property Name="ValorTotal" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="EmpresaTranportador" Type="varchar" MaxLength="10" />
+    <Property Name="InicioCarregamentoEsperado" Type="varchar" MaxLength="20" />
+    <Property Name="HorarioEntregaNF" Type="varchar" MaxLength="20" />
+    <Property Name="Tranportadora" Type="varchar" MaxLength="100" />
+    <Property Name="ValorKM" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="UnidadeBaseEmbarcador" Type="varchar" MaxLength="2" />
+    <Property Name="CargaLiberada" Type="int" />
+    <Property Name="DataEmbarque" Type="datetime" />
+    <Property Name="AeroportoOrigem" Type="varchar" MaxLength="100" />
+    <Property Name="HorarioChegadaAeroporto" Type="varchar" MaxLength="20" />
+    <Property Name="Despachante" Type="varchar" MaxLength="100" />
+    <Property Name="DataInicioVazio" Type="datetime" />
+    <Property Name="IDCargaEmbarcador" Type="int" />
+    <Property Name="InicioCarregamentoReal" Type="varchar" MaxLength="20" />
+    <Property Name="TerminoCarregamentoReal" Type="varchar" MaxLength="20" />
+    <Property Name="OdometroVeiculoDataEmbarque" Type="numeric" Precision="14" Scale="2" />
+    <Property Name="EntCod" Type="varchar" MaxLength="10" />
+    <Property Name="IdRoteiroTarget" Type="int" />
+    <Property Name="IdOperacaoTransporte" Type="int" />
+    <Property Name="EntCodMotorista01" Type="varchar" MaxLength="10" />
+    <Property Name="EntCodMotorista02" Type="varchar" MaxLength="10" />
+    <Property Name="EquipCodEstrVeiculo" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="Recebimento_Documento">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ChaveEletronica" Type="varchar" MaxLength="44" />
+    <Property Name="NumeroPedidoCompra" Type="varchar" MaxLength="7" />
+    <Property Name="DataEntrada" Type="datetime" />
+    <Property Name="IDConfigImportaNFe" Type="int" />
+    <Property Name="Usuario" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DataHoraCadastro" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tabela_Precos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Empresa" Type="varchar" MaxLength="2" />
+    <Property Name="Produto" Type="varchar" MaxLength="100" />
+    <Property Name="Tipo" Type="varchar" MaxLength="100" />
+    <Property Name="DataInicial" Type="datetime" />
+    <Property Name="DataFinal" Type="datetime" />
+    <Property Name="Regiao" Type="varchar" MaxLength="100" />
+    <Property Name="ValorMenor5000Aves" Type="numeric" Precision="16" Scale="4" />
+    <Property Name="ValorNormal" Type="numeric" Precision="16" Scale="4" />
+  </EntityType>
+  <EntityType Name="TIPO_CLASSFICACAO_OVO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Unidade" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="CodigoTipo" Type="varchar" MaxLength="50" />
+    <Property Name="DescricaoTipo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="AproveitamentoOvo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Origem" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HLBAPP.dbo.VU_Resumo_Dados_Lotes_Clientes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VU_Resumo_Dados_Lotes_Clientes">
+    <Key>
+      <PropertyRef Name="Chave" />
+    </Key>
+    <Property Name="Empresa" Type="varchar" MaxLength="10" />
+    <Property Name="CodigoCliente" Type="varchar" MaxLength="7" />
+    <Property Name="Nome" Type="varchar" MaxLength="100" />
+    <Property Name="Regiao" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Cidade" Type="varchar" MaxLength="60" />
+    <Property Name="UF" Type="varchar" MaxLength="2" />
+    <Property Name="TipoAviario" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TipoDebicagem" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Linhagem" Type="varchar" MaxLength="30" />
+    <Property Name="Lote" Type="varchar" MaxLength="200" />
+    <Property Name="DataAlojamento" Type="datetime" />
+    <Property Name="DataNascimento" Type="datetime" />
+    <Property Name="NumeroAvesAlojadas" Type="int" />
+    <Property Name="UltimaIdade" Type="int" />
+    <Property Name="Chave" Type="varchar" MaxLength="281" Nullable="false" />
+    <Property Name="EmpresaImportacao" Type="varchar" MaxLength="2" />
+  </EntityType>
+  <Association Name="FK__Entity__IDCountr__6CEE02BA">
+    <End Role="PAIS" Type="Self.PAIS" Multiplicity="0..1" />
+    <End Role="Entity" Type="Self.Entity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PAIS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Entity">
+        <PropertyRef Name="IDCountry" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Envio_Con__IDEnv__401B5C43">
+    <End Role="Envio_Confirmacao" Type="Self.Envio_Confirmacao" Multiplicity="0..1" />
+    <End Role="Envio_Confirmacao_PV" Type="Self.Envio_Confirmacao_PV" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Envio_Confirmacao">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Envio_Confirmacao_PV">
+        <PropertyRef Name="IDEnvioConfirmacao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Envio_Con__IDEnv__42F7C8EE">
+    <End Role="Envio_Confirmacao" Type="Self.Envio_Confirmacao" Multiplicity="0..1" />
+    <End Role="Envio_Confirmacao_Email" Type="Self.Envio_Confirmacao_Email" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Envio_Confirmacao">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Envio_Confirmacao_Email">
+        <PropertyRef Name="IDEnvioConfirmacao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_REC_DOC_Config_NF">
+    <End Role="Configuracao_Importa_NFe" Type="Self.Configuracao_Importa_NFe" Multiplicity="0..1" />
+    <End Role="Recebimento_Documento" Type="Self.Recebimento_Documento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Configuracao_Importa_NFe">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Recebimento_Documento">
+        <PropertyRef Name="IDConfigImportaNFe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="Integra_Baixa_Ordem_Producao" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pDataInicial" Type="datetime" Mode="In" />
+    <Parameter Name="pDataFinal" Type="datetime" Mode="In" />
+    <Parameter Name="pUsuario" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="HLBAPPModel1StoreContainer">
+    <EntitySet Name="Configuracao_Importa_NFe" EntityType="Self.Configuracao_Importa_NFe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dados_Assistencia_Tecnica" EntityType="Self.Dados_Assistencia_Tecnica" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dados_Loggers" EntityType="Self.Dados_Loggers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Empresas" EntityType="Self.Empresas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Entity" EntityType="Self.Entity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Envio_Confirmacao" EntityType="Self.Envio_Confirmacao" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Envio_Confirmacao_Email" EntityType="Self.Envio_Confirmacao_Email" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Envio_Confirmacao_PV" EntityType="Self.Envio_Confirmacao_PV" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Lancamentos_Classificadora_Excel_02" EntityType="Self.Lancamentos_Classificadora_Excel_02" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LayoutDDASegmentoGs_EnvioEmailFiscal" EntityType="Self.LayoutDDASegmentoGs_EnvioEmailFiscal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LINHAGEM_CONCORRENTE" EntityType="Self.LINHAGEM_CONCORRENTE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LINHAGEM_GRUPO" EntityType="Self.LINHAGEM_GRUPO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LOG_Atualizacao_CHIC_SQLServer" EntityType="Self.LOG_Atualizacao_CHIC_SQLServer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LOG_Importacao_Dados_Assist_Tec" EntityType="Self.LOG_Importacao_Dados_Assist_Tec" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LOG_Prog_Diaria_Transp_Pedidos" EntityType="Self.LOG_Prog_Diaria_Transp_Pedidos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LOG_Prog_Diaria_Transp_Veiculos" EntityType="Self.LOG_Prog_Diaria_Transp_Veiculos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LOG_Prog_Diaria_Transp_Veiculos_TARGET" EntityType="Self.LOG_Prog_Diaria_Transp_Veiculos_TARGET" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Lotes_Clientes" EntityType="Self.Lotes_Clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PDI" EntityType="Self.PDI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Prog_Diaria_Transp_Pedidos" EntityType="Self.Prog_Diaria_Transp_Pedidos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Prog_Diaria_Transp_Veiculos" EntityType="Self.Prog_Diaria_Transp_Veiculos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Recebimento_Documento" EntityType="Self.Recebimento_Documento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tabela_Precos" EntityType="Self.Tabela_Precos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TIPO_CLASSFICACAO_OVO" EntityType="Self.TIPO_CLASSFICACAO_OVO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VU_Resumo_Dados_Lotes_Clientes" EntityType="Self.VU_Resumo_Dados_Lotes_Clientes" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[VU_Resumo_Dados_Lotes_Clientes].[Empresa] AS [Empresa], 
+[VU_Resumo_Dados_Lotes_Clientes].[CodigoCliente] AS [CodigoCliente], 
+[VU_Resumo_Dados_Lotes_Clientes].[Nome] AS [Nome], 
+[VU_Resumo_Dados_Lotes_Clientes].[Regiao] AS [Regiao], 
+[VU_Resumo_Dados_Lotes_Clientes].[Cidade] AS [Cidade], 
+[VU_Resumo_Dados_Lotes_Clientes].[UF] AS [UF], 
+[VU_Resumo_Dados_Lotes_Clientes].[TipoAviario] AS [TipoAviario], 
+[VU_Resumo_Dados_Lotes_Clientes].[TipoDebicagem] AS [TipoDebicagem], 
+[VU_Resumo_Dados_Lotes_Clientes].[Linhagem] AS [Linhagem], 
+[VU_Resumo_Dados_Lotes_Clientes].[Lote] AS [Lote], 
+[VU_Resumo_Dados_Lotes_Clientes].[DataAlojamento] AS [DataAlojamento], 
+[VU_Resumo_Dados_Lotes_Clientes].[DataNascimento] AS [DataNascimento], 
+[VU_Resumo_Dados_Lotes_Clientes].[NumeroAvesAlojadas] AS [NumeroAvesAlojadas], 
+[VU_Resumo_Dados_Lotes_Clientes].[UltimaIdade] AS [UltimaIdade], 
+[VU_Resumo_Dados_Lotes_Clientes].[Chave] AS [Chave], 
+[VU_Resumo_Dados_Lotes_Clientes].[EmpresaImportacao] AS [EmpresaImportacao]
+FROM [dbo].[VU_Resumo_Dados_Lotes_Clientes] AS [VU_Resumo_Dados_Lotes_Clientes]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Entity__IDCountr__6CEE02BA" Association="Self.FK__Entity__IDCountr__6CEE02BA">
+      <End Role="PAIS" EntitySet="PAIS" />
+      <End Role="Entity" EntitySet="Entity" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Envio_Con__IDEnv__401B5C43" Association="Self.FK__Envio_Con__IDEnv__401B5C43">
+      <End Role="Envio_Confirmacao" EntitySet="Envio_Confirmacao" />
+      <End Role="Envio_Confirmacao_PV" EntitySet="Envio_Confirmacao_PV" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Envio_Con__IDEnv__42F7C8EE" Association="Self.FK__Envio_Con__IDEnv__42F7C8EE">
+      <End Role="Envio_Confirmacao" EntitySet="Envio_Confirmacao" />
+      <End Role="Envio_Confirmacao_Email" EntitySet="Envio_Confirmacao_Email" />
+    </AssociationSet>
+    <AssociationSet Name="FK_REC_DOC_Config_NF" Association="Self.FK_REC_DOC_Config_NF">
+      <End Role="Configuracao_Importa_NFe" EntitySet="Configuracao_Importa_NFe" />
+      <End Role="Recebimento_Documento" EntitySet="Recebimento_Documento" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

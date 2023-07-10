@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Importação de Dados da Assitência Técnica - Múltiplos Arquivos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    System.Web.HttpBrowserCapabilitiesBase browser = Request.Browser;
+}
+
+@Html.Partial("MenuDadosAssistenciaTecnica")
+
+<h2>Importação de Dados da Assitência Técnica - Múltiplos Arquivos</h2>
+
+<script type="text/javascript">
+    $(function () {
+        $('#pnlNovoClienteHLB').hide();
+        $('#btnCancelarNovoClienteHLB').prop('disabled', 'disabled');
+        $('#btnNovoClienteHLB').removeAttr('disabled');
+        var id = parseInt($('#hdID').val());
+        if (id > 0) {
+            $('#pnlNovoClienteHLB').show();
+            $('#btnNovoClienteHLB').prop('disabled', 'disabled');
+            $('#btnCancelarNovoClienteHLB').removeAttr('disabled');
+        }
+    });
+
+    function addNovoClienteHLB() {
+        $('#pnlNovoClienteHLB').show();
+        $('#btnNovoClienteHLB').prop('disabled', 'disabled');
+        $('#btnCancelarNovoClienteHLB').removeAttr('disabled');
+    }
+
+    function cancelNovoClienteHLB() {
+        $('#pnlNovoClienteHLB').hide();
+        $('#btnCancelarNovoClienteHLB').prop('disabled', 'disabled');
+        $('#btnNovoClienteHLB').removeAttr('disabled');
+    }
+</script>
+
+@using (Html.BeginForm("ListaClientesImportacaoMultiplosArquivos", "ImportaDadosAssistTecnica", FormMethod.Post, new { enctype = "multipart/form-data", }))
+{
+    <fieldset>
+        <p align="center">
+            <b>
+                Informe parte da Razão Social ou Nome Fantasia ou / e Estado que pertence o cliente.
+                Caso queira todos, deixa o campo em branco.
+            </b>
+            <br />
+            Razão Social / Nome Fantasia: @Html.TextBox("descricao", Session["descricao"].ToString())
+            U.F.: @Html.DropDownList("Text", (List<SelectListItem>)Session["ListaEstados"])
+            <input type="submit" value="Pesquisar" />
+        </p>
+    </fieldset>
+}
+
+@Html.Raw(ViewBag.msg)
+
+@if (MvcAppHyLinedoBrasil.Controllers.AccountController.GetGroup("HLBAPP-DAT_AcessoCadastroClientesHLB", (System.Collections.ArrayList)Session["Direitos"]))
+{
+    <p align="center">
+        <legend><u>Caso não exista o cliente cadastrado, clique no botão abaixo!</u></legend>
+    </p>
+    <table>
+        <tr>
+            <td align="center">
+                <input type="submit" value="Adicionar Novo Cliente" onclick="addNovoClienteHLB()" id="btnNovoClienteHLB" />
+            </td>
+            <td align="center">
+                <input type="submit" value="Cancelar Cadastro de Novo Cliente" onclick="cancelNovoClienteHLB()" id="btnCancelarNovoClienteHLB"
+                       disabled="disabled" />
+            </td>
+        </tr>
+    </table>
+    <br />
+    @Html.Partial("_NovoClienteHLB")
+}
+
+@using (Html.BeginForm("Upload", "ImportaDadosAssistTecnica", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_ListaClientes")
+
+    <fieldset>
+        <p align="center">
+            Data da Importação: @Html.TextBox("dataImportacao", Session["sDataInicial"], new { @type = "date", @required = true })
+            <br />
+            <input type="file" name="file_upload" multiple accept=".xls,.xlsx" required />
+            <br />
+            <input type="submit" value="Importar" />
+        </p>
+    </fieldset>
+}

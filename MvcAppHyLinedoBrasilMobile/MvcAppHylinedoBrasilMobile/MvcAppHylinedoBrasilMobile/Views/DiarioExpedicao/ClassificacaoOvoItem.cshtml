@@ -1,0 +1,299 @@
+﻿@using am = MvcAppHylinedoBrasilMobile.Controllers.AccountMobileController;
+@{
+    ViewBag.Title = "";
+    string lg = Session["language"].ToString();
+
+    MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities bd = new MvcAppHylinedoBrasilMobile.Models.HLBAPPEntities();
+    
+    string incubatorio = Session["incubatorioSelecionado"].ToString();
+
+    var listaTipoClassficacaoOvo = bd.TIPO_CLASSFICACAO_OVO
+        .Where(w => w.Unidade == incubatorio && w.Origem == "Interna")
+        .OrderBy(o => o.ID)
+        .ToList();
+}
+
+<script type='text/javascript'>
+    window.onbeforeunload = function () {
+        return "Se a página for atualizada, os dados alterados serão perdidos!";
+    }
+
+    function verificaQtdeDisponivel() {
+        var errorHolder = document.getElementById('errorHolder');
+        var qtdeTotal = $('#txtQtdeTotal').val();
+        if (qtdeTotal == 0) {
+            errorHolder.innerHTML = '@(am.GetTextOnLanguage("Não existe ovos disponíveis para serem classificados", lg))!'
+               + ' @(am.GetTextOnLanguage("Verifique!", lg))';
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+        } else {
+            errorHolder.innerHTML = '';
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+        }
+    }
+
+    function verificaQtdes() {
+        var qtdeClassificada = 0;
+        var qtdeTotal = $('#txtQtdeTotal').val();
+        var errorHolder = document.getElementById('errorHolder');
+        for (var i = 0; i < $("input[id^='tco']").length; i++) {
+            var tcoObj = $("input[id^='tco']")[i];
+            qtdeClassificada = qtdeClassificada + tcoObj.value;
+        }
+
+        if (qtdeClassificada == 0) {
+            errorHolder.innerHTML = '@(am.GetTextOnLanguage("Não foi realizada nenhuma classificação", lg))!'
+               + ' @(am.GetTextOnLanguage("Verifique!", lg))';
+            return true;
+        } else if (qtdeClassificada > qtdeTotal) {
+            errorHolder.innerHTML = '@(am.GetTextOnLanguage("A quantidade classificada é maior que a qtde disponível", lg))!'
+               + ' @(am.GetTextOnLanguage("Verifique!", lg))';
+            return true;
+        } else {
+            errorHolder.innerHTML = '';
+            return false;
+        }
+    }
+
+    function carregaLotes() {
+        var farm = $('#ddlNucleo').val();
+        $('#txtQtdeTotal').val(0);
+        $.ajax({
+            url: 'CarregaLotesJS',
+            type: 'POST',
+            data: JSON.stringify({ id: farm }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#ddlLote').empty();
+                $('select#ddlLote').append('<option value="0" selected="selected">(@am.GetTextOnLanguage("Selecione um Lote", lg))</option>');
+                $.each(data, function (key, SelectListItem) {
+                    $('select#ddlLote').append('<option value="' + SelectListItem.Text + '">' + SelectListItem.Text + '</option>');
+                });
+                $('select#ddlLote').selectmenu('refresh');
+            }
+        });
+    }
+
+    function carregaInformacoesLote() {
+        carregaGalpoes();
+        carregaSaldoLote();
+    }
+
+    function carregaGalpoes() {
+        var lote = $('#ddlLote option:selected').text();
+        $.ajax({
+            url: 'CarregaGalpoesJS',
+            type: 'POST',
+            data: JSON.stringify({ id: lote }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('select#ddlGalpao').empty();
+                $('select#ddlGalpao').append('<option value="0" selected="selected">(@am.GetTextOnLanguage("Selecione um Galpão", lg))</option>');
+                $.each(data, function (key, Lotes) {
+                    if (Lotes.Location == 'GP') {
+                        $('select#ddlGalpao').append('<option value="' + Lotes.Galpao + " - " + Lotes.Linhagem + '">' + Lotes.Galpao + " - " + Lotes.Linhagem + '</option>');
+                    }
+                    else {
+                        $('select#ddlGalpao').append('<option value="' + Lotes.Galpao + '">' + Lotes.Galpao + '</option>');
+                    }
+                    $('#hddLinhagem').val(Lotes.Linhagem);
+                });
+                $('select#ddlGalpao').selectmenu('refresh');
+            }
+        });
+    }
+
+    function carregaLoteCompleto() {
+        var lote = $('#ddlLote option:selected').val();
+        var galpao = $('#ddlGalpao option:selected').val();
+        $.ajax({
+            url: 'RetornaLoteCompletoJS',
+            type: 'POST',
+            data: JSON.stringify({ id: lote, id2: galpao }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('#loteCompleto').val(data.LoteCompleto);
+                $('#hddLinhagem').val(data.Linhagem);
+            }
+        });
+    }
+
+    function carregaSaldoLote() {
+        //var lote = $('#loteCompleto').val();
+        var lote = $('#ddlLote option:selected').val();
+        var data = $('#txtDataProducao').val();
+        $.ajax({
+            url: 'RetornaSaldoLoteJS',
+            type: 'POST',
+            data: JSON.stringify({ numeroLote: lote, dataProducao: data }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('#txtQtdeTotal').val(data[0]);
+                $('#hddIdade').val(data[1]);
+                verificaQtdeDisponivel();
+            }
+        });
+    }
+
+    function atualizaQtdDisponivel(obj) {
+        var errorHolder = document.getElementById('errorHolder');
+        var newValue = (obj.value * 1);
+        var oldValue = (obj.getAttribute("prevvalue") * 1);
+        var qtdeTotal = ($('#txtQtdeTotal').val() * 1);
+        
+        if (((qtdeTotal + oldValue) - newValue) < 0) {
+            errorHolder.innerHTML = '@(am.GetTextOnLanguage("Não existe ovos disponíveis para serem classificados", lg))!'
+               + ' @(am.GetTextOnLanguage("Verifique!", lg))';
+            obj.value = oldValue;
+            obj.focus();
+            $('#add').button('disable');
+            $('[type="submit"]').button('refresh');
+        } else {
+            $('#txtQtdeTotal').val((qtdeTotal + oldValue) - newValue);
+            obj.setAttribute("prevvalue", newValue);
+            errorHolder.innerHTML = '';
+            $('#add').button('enable');
+            $('[type="submit"]').button('refresh');
+        }
+    }
+
+    function verificaCampos() {
+        if (verificaQtdes()) { return false; }
+    }
+</script>
+
+<div align="center">
+    <ul data-role="listview" data-inset="true">
+        <li>
+            @Html.ActionLink(am.GetTextOnLanguage("Voltar para a Lista de Lotes da Classificação de Ovos", lg), "ReturnClassificacaoOvo", "DiarioExpedicao", 
+                null,
+                new { @class = "AQO" })
+        </li>
+    </ul>
+    @Html.Image(@Url.Content("~/Content/icons/egg.png"), "AQO")
+    <h2>@am.GetTextOnLanguage("Lote da Classificação de Ovos",lg)</h2>
+</div>
+@if (ViewBag.Erro != null)
+{
+<br />
+<h4 id="lblMsgErro" class="@(ViewBag.ClasseMsg) ui-li ui-li-static">
+    @Html.Raw(ViewBag.Erro)
+</h4>
+<br />
+}
+@using (Html.BeginForm("SaveClassificacaoOvoItem", "DiarioExpedicao", FormMethod.Post, new { enctype = "multipart/form-data", @onsubmit = "verificaCampos()" }))
+{
+    <fieldset>
+        <div class="editor-label">
+            <b>Núcleo:</b>
+        </div>        
+        <div class="editor-field">
+            @Html.DropDownList(
+            "Nucleo",
+            (List<SelectListItem>)Session["DDLNucleo"],
+            "(" + am.GetTextOnLanguage("Selecione um Núcleo", lg) + ")",
+            new { @id = "ddlNucleo", @required = "true", @onchange = "carregaLotes()" })
+        </div>
+        <div class="editor-label">
+            <b>@am.GetTextOnLanguage("Lote", lg):</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList(
+            "Lote",
+            (List<SelectListItem>)Session["DDLLotes"],
+        //new { @id = "ddlLote", @required = "true", @onchange = "carregaGalpoes()" })
+            new { @id = "ddlLote", @required = "true", @onchange = "carregaInformacoesLote()" })
+        </div>
+        @if (Session["tipoClassificacaoOvos"] == "SHD")
+        {
+        <div class="editor-label">
+            <b>@am.GetTextOnLanguage("Galpão", lg):</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList(
+            "Galpao",
+            (List<SelectListItem>)Session["DDLGalpoes"],
+            new { @id = "ddlGalpao", @required = "true", @onchange = "carregaLoteCompleto()" })
+        </div>
+        }
+
+        @Html.Hidden("linhagem", "", new { @id = "hddLinhagem" })
+        @Html.Hidden("loteCompleto", Session["loteCompleto"].ToString(), new { @id = "loteCompleto" })
+        @Html.Hidden("idade", Session["idadeLote"].ToString(), new { @id = "hddIdade" })
+        
+        <div class="editor-label">
+            <b>@am.GetTextOnLanguage("Data de Produção", lg):</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("dataProducaoCO", Convert.ToDateTime(Session["DataProducao"]).ToString("yyyy-MM-dd", System.Globalization.CultureInfo.GetCultureInfo("pt-BR")),
+             new { @id = "txtDataProducao", @type = "date", @required = "true", @onchange = "carregaSaldoLote()" })
+        </div>
+        <div class="editor-label">
+            <b>@am.GetTextOnLanguage("Quantidade a ser classificada", lg):</b>
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("QtdeTotal", Convert.ToInt32(Session["QtdeTotal"]), new { @type = "number", @id = "txtQtdeTotal", @readonly = "true", @min = "1" })
+        </div>
+        @foreach (var item in listaTipoClassficacaoOvo)
+        {
+            bool readOnly = false;
+            if (item.Ativo == 0) { readOnly = true; }
+            int saldo = MvcAppHylinedoBrasilMobile.Controllers.DiarioExpedicaoController.RetornaSaldo(item.CodigoTipo,
+                Session["loteCompleto"].ToString(), Convert.ToDateTime(Session["DataProducao"]));
+            int qtdeMin = 0;
+            if (saldo < Convert.ToInt32(Session[item.CodigoTipo]))
+            {
+                qtdeMin = (Convert.ToInt32(Session[item.CodigoTipo]) - saldo);
+            }
+
+            <div class="editor-label">
+            <b>@item.DescricaoTipo:</b>
+            </div>
+            <div class="editor-field">
+                @if (readOnly)
+                {
+                    @Html.TextBox(item.CodigoTipo, Convert.ToInt32(Session[item.CodigoTipo]),
+                             new
+                             {
+                                 @type = "number",
+                                 @id = "tco" + item.CodigoTipo,
+                                 @required = "true",
+                                 @onchange = "atualizaQtdDisponivel(this)",
+                                 @prevvalue = Convert.ToInt32(Session[item.CodigoTipo]),
+                                 @min = qtdeMin,
+                                 @readonly = readOnly
+                                 //@disabled = Convert.ToBoolean(Session["existeSaldo" + item.CodigoTipo])
+                             })
+                }
+                else
+                {
+                    @Html.TextBox(item.CodigoTipo, Convert.ToInt32(Session[item.CodigoTipo]),
+                            new
+                            {
+                                @type = "number",
+                                @id = "tco" + item.CodigoTipo,
+                                @required = "true",
+                                @onchange = "atualizaQtdDisponivel(this)",
+                                @prevvalue = Convert.ToInt32(Session[item.CodigoTipo]),
+                                @min = qtdeMin
+                                //@disabled = Convert.ToBoolean(Session["existeSaldo" + item.CodigoTipo])
+                            })
+                }
+            </div>
+        }
+
+        <div class="editor-label" id="errorHolder" style="color: Red; font-weight:bold;"></div>
+        <p>
+            <input type="submit" value="@am.GetTextOnLanguage("Salvar Classificação de Ovos do Lote", lg)" id="add" />
+        </p>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
