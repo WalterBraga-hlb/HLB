@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -1068,51 +1068,37 @@ namespace MvcAppHylinedoBrasilMobile.Controllers
                 }
             }
 
-            try
+            string caminho = @"\\srv-riosoft-01\W\RDVs\RDV_" + Session["login"].ToString() + "_"
+                + DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss") + ".pdf";
+
+            Session["numRDVSelecionado"] = numRDV;
+
+            CrystalDecisions.CrystalReports.Engine.ReportDocument MyReport =
+                new CrystalDecisions.CrystalReports.Engine.ReportDocument();
+            MyReport.Load(Server.MapPath("~/Reports/RDV.rpt"));
+
+            MyReport.ParameterFields["NumeroFechamentoRDV"].CurrentValues.AddValue(numRDV);
+
+            if (download)
             {
-                string caminho = @"\\srv-riosoft-01\W\RDVs\RDV_" + Session["login"].ToString() + "_"
-                    + DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss") + ".pdf";
-
-                Session["numRDVSelecionado"] = numRDV;
-
-                CrystalDecisions.CrystalReports.Engine.ReportDocument MyReport =
-                    new CrystalDecisions.CrystalReports.Engine.ReportDocument();
-                MyReport.Load(Server.MapPath("~/Reports/RDV.rpt"));
-
-                MyReport.ParameterFields["NumeroFechamentoRDV"].CurrentValues.AddValue(numRDV);
-
-                MyReport.SetDatabaseLogon("sa", "");
-
-                if (download)
-                {
-                    Stream stream = MyReport.ExportToStream(CrystalDecisions.Shared.ExportFormatType
-                        .PortableDocFormat);
-                    return File(stream, "application/pdf", "RDV_" + numRDV + ".pdf");
-                }
-                else
-                {
-                    var response = System.Web.HttpContext.Current.Response;
-                    MyReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat,
-                        response, false, "RDV_" + numRDV);
-                    return new EmptyResult();
-                }
-
-                MyReport.Close();
-                MyReport.Dispose();
-
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                GC.Collect();
+                Stream stream = MyReport.ExportToStream(CrystalDecisions.Shared.ExportFormatType
+                    .PortableDocFormat);
+                return File(stream, "application/pdf", "RDV_" + numRDV + ".pdf");
             }
-            catch (Exception e)
+            else
             {
-                int linenum = Convert.ToInt32(e.StackTrace.Substring(e.StackTrace.LastIndexOf(' ')));
-
-                ViewBag.fileName = "";
-                ViewBag.erro = "Erro ao gerar relatório: " + e.Message
-                    + " | Linha de Erro no Código: " + linenum.ToString();
-                return View("ListaRDVFechados");
+                var response = System.Web.HttpContext.Current.Response;
+                MyReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat,
+                    response, false, "RDV_" + numRDV);
+                return new EmptyResult();
             }
+
+            MyReport.Close();
+            MyReport.Dispose();
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
         }
 
         #endregion
@@ -1418,7 +1404,8 @@ namespace MvcAppHylinedoBrasilMobile.Controllers
                     else if (rdv.Empresa == "LB") empresaApolo = "7";
                     else if (rdv.Empresa == "HN") empresaApolo = "14";
                     else if (rdv.Empresa == "PL") empresaApolo = "20";
-
+                    else if (rdv.Empresa == "LG") empresaApolo = "32";
+                    else if (rdv.Empresa == "NG") empresaApolo = "40";
                     string porta = "";
                     //if (Request.Url.Port != 80)
                         //porta = ":" + Request.Url.Port.ToString();
@@ -1467,6 +1454,8 @@ namespace MvcAppHylinedoBrasilMobile.Controllers
                         else if (rdv.Empresa == "LB") empresaApolo = "7";
                         else if (rdv.Empresa == "HN") empresaApolo = "14";
                         else if (rdv.Empresa == "PL") empresaApolo = "20";
+                        else if (rdv.Empresa == "LG") empresaApolo = "32";
+                        else if (rdv.Empresa == "NG") empresaApolo = "40";
 
                         string porta = "";
                         //if (Request.Url.Port != 80)
@@ -1830,7 +1819,8 @@ namespace MvcAppHylinedoBrasilMobile.Controllers
                 else if (rdv.Empresa == "LB") empresaApolo = "7";
                 else if (rdv.Empresa == "HN") empresaApolo = "14";
                 else if (rdv.Empresa == "PL") empresaApolo = "20";
-
+                else if (rdv.Empresa == "LG") empresaApolo = "32";
+                else if (rdv.Empresa == "NG") empresaApolo = "40";
                 //string porta = "";
                 //if (Request.Url.Port != 80)
                     //porta = ":" + Request.Url.Port.ToString();
@@ -2759,7 +2749,8 @@ namespace MvcAppHylinedoBrasilMobile.Controllers
                 else if (rdv.Empresa == "LB") empresaApolo = "7";
                 else if (rdv.Empresa == "HN") empresaApolo = "14";
                 else if (rdv.Empresa == "PL") empresaApolo = "20";
-
+                else if (rdv.Empresa == "LG") empresaApolo = "32";
+                else if (rdv.Empresa == "NG") empresaApolo = "40";
                 //string porta = "";
                 //if (Request.Url.Port != 80)
                     //porta = ":" + Request.Url.Port.ToString();
@@ -2816,7 +2807,8 @@ namespace MvcAppHylinedoBrasilMobile.Controllers
                     else if (rdv.Empresa == "LB") empresaApolo = "7";
                     else if (rdv.Empresa == "HN") empresaApolo = "14";
                     else if (rdv.Empresa == "PL") empresaApolo = "20";
-
+                    else if (rdv.Empresa == "LG") empresaApolo = "32";
+                    else if (rdv.Empresa == "NG") empresaApolo = "40";
                     string porta = "";
                     //if (Request.Url.Port != 80)
                         //porta = ":" + Request.Url.Port.ToString();
@@ -3327,7 +3319,8 @@ namespace MvcAppHylinedoBrasilMobile.Controllers
                 else if (empresa == "LB") empresaApolo = "7";
                 else if (empresa == "HN") empresaApolo = "14";
                 else if (empresa == "PL") empresaApolo = "20";
-
+                else if (rdv.Empresa == "LG") empresaApolo = "32";
+                else if (rdv.Empresa == "NG") empresaApolo = "40";
                 string porta = "";
                 //if (Request.Url.Port != 80) porta = ":" + Request.Url.Port.ToString();
 
@@ -4019,6 +4012,16 @@ namespace MvcAppHylinedoBrasilMobile.Controllers
                     empresaApolo = "20";
                     site = "m.app.planaltopostura.com.br";
                 }
+                else if(item.Key.Empresa == "NG")
+                {
+                    empresaApolo = "40";
+                    site = "m.hlbapp.hyline.com.br";
+                }
+                else if(item.Key.Empresa == "LG")
+                {
+                    empresaApolo = "32";
+                    site = "m.hlbapp.hyline.com.br";
+                }
 
                 string porta = "";
                 //if (Request.Url.Port != 80) porta = ":" + Request.Url.Port.ToString();
@@ -4372,11 +4375,6 @@ namespace MvcAppHylinedoBrasilMobile.Controllers
                         empresaApolo = "5";
                         site = "m.hlbapp.hyline.com.br";
                     }
-                    if (item.Key.Empresa == "LG")
-                    {
-                        empresaApolo = "32";
-                        site = "m.hlbapp.hyline.com.br";
-                    }
                     else if (item.Key.Empresa == "LB")
                     {
                         empresaApolo = "7";
@@ -4392,9 +4390,14 @@ namespace MvcAppHylinedoBrasilMobile.Controllers
                         empresaApolo = "20";
                         site = "m.app.planaltopostura.com.br";
                     }
-                    else if (item.Key.Empresa == "NG")
+                    else if(item.Key.Empresa == "NG")
                     {
                         empresaApolo = "40";
+                        site = "m.hlbapp.hyline.com.br";
+                    }
+                    else if(item.Key.Empresa == "LG")
+                    {
+                        empresaApolo = "32";
                         site = "m.hlbapp.hyline.com.br";
                     }
 
@@ -4918,7 +4921,8 @@ namespace MvcAppHylinedoBrasilMobile.Controllers
                         else if (rdv.Empresa == "LB") empresaApolo = "7";
                         else if (rdv.Empresa == "HN") empresaApolo = "14";
                         else if (rdv.Empresa == "PL") empresaApolo = "20";
-
+                        else if (rdv.Empresa == "LG") empresaApolo = "32";
+                        else if (rdv.Empresa == "NG") empresaApolo = "40";
                         string porta = "";
                         if (Request.Url.Port != 80)
                             porta = ":" + Request.Url.Port.ToString();
